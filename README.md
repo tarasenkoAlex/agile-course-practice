@@ -1,27 +1,25 @@
 # Спецкурс "Agile Development"
 
 [![Join the chat at https://gitter.im/agile-course-practice/Lobby](https://badges.gitter.im/agile-course-practice/Lobby.svg)](https://gitter.im/agile-course-practice/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Build Status][travis-badge]][travis]
 [![Coverage Status][coveralls-badge]][coveralls]
 
- - Нижегородский Государственный Университет им. Н.И. Лобачевского
- - Институт ИТММ (ранее ф-т ВМК), каф. МО ЭВМ
- - __License__: Creative Commons Attribution-Share Alike 3.0 ([CC BY-SA 3.0][cc3])
+  - Нижегородский Государственный Университет им. Н.И. Лобачевского
+  - Институт ИТММ (ранее ф-т ВМК), каф. МОСТ
+  - __License__: Creative Commons Attribution-Share Alike 3.0 ([CC BY-SA 3.0][cc3])
 
 ## Ресурсы
 
- - [Google-группа][list] — просьба по всем вопросам обращаться сюда
- - [Таблица успеваемости][hall-of-fame]
- - Учебные материалы
-   - [Описания лабораторных работ][labs]
-   - [Контрольные вопросы][control-questions], [колхозная шпаргалка][cheatsheet] к ним
-   - [Экзаменационные вопросы][exam-questions]
- - Литература
-   - Мика Мартин, Роберт Мартин "Принципы, паттерны и методики гибкой разработки
-     на языке C#" ([pdf][book-agile])
-   - Мартин Фаулер, Кент Бек и др. "Рефакторинг: улучшение существующего кода"
-     ([pdf][book-refactoring])
+  - [Таблица успеваемости][hall-of-fame]
+  - Учебные материалы
+    - [Описания лабораторных работ][labs]
+    - [Контрольные вопросы][control-questions], [колхозная шпаргалка][cheatsheet] к ним
+    - [Экзаменационные вопросы][exam-questions]
+  - Литература
+    - Мика Мартин, Роберт Мартин "Принципы, паттерны и методики гибкой разработки
+      на языке C#" ([pdf][book-agile])
+    - Мартин Фаулер, Кент Бек и др. "Рефакторинг: улучшение существующего кода"
+      ([pdf][book-refactoring])
 
 <!-- LINKS -->
 
@@ -30,8 +28,7 @@
 [coveralls]:        https://coveralls.io/r/UNN-VMK-Software/agile-course-practice
 [coveralls-badge]:  https://img.shields.io/coveralls/UNN-VMK-Software/agile-course-practice.svg
 [cc3]:              http://creativecommons.org/licenses/by-sa/3.0/
-[list]:             https://groups.google.com/forum/?hl=ru#!forum/agile-development-course
-[hall-of-fame]:     https://docs.google.com/spreadsheets/d/1JXyJBOlLZ8yvMGVVAJ6U3uiH10mMzcm-6n77SWg3p9Q/edit?authkey=CNXx0YMC&authkey=CNXx0YMC#gid=823569082
+[hall-of-fame]:     https://docs.google.com/spreadsheets/d/1JXyJBOlLZ8yvMGVVAJ6U3uiH10mMzcm-6n77SWg3p9Q/edit?authkey=CNXx0YMC&authkey=CNXx0YMC#gid=1667214991
 [labs]:             https://github.com/UNN-VMK-Software/agile-course-practice/tree/master/docs
 [control-questions]: https://github.com/UNN-VMK-Software/agile-course-theory/blob/master/slides/control-questions.md
 [cheatsheet]:       https://docs.google.com/document/d/1QhdJOnSw-Gn_-WM9RWLzmxZMrWTB4EbyTkaNBWMGA3Y/edit
