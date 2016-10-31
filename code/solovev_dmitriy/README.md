@@ -23,4 +23,4 @@ TBD
 
 <!-- LINKS -->
 
-[fraction]: https://en.wikipedia.org/wiki/Дробь_(математика)
+[fraction]: https://ru.wikipedia.org/wiki/Дробь_(математика)
