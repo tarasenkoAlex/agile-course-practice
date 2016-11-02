@@ -1,4 +1,4 @@
-package ru.unn.agile.ComplexNumber.core;
+package ru.unn.agile.ComplexNumber.Model;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
