@@ -43,6 +43,10 @@ include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
 
+include 'code:dobroliubova-evgeniia'
+findProject(':code:dobroliubova-evgeniia')?.name = 'dobroliubova-evgeniia-Model'
+include 'dobroliubova-evgeniia'
+
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
