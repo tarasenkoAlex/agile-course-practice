@@ -1,7 +1,5 @@
 package ru.unn.agile.CurrencyConverter;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Jane on 03.11.2016.
@@ -14,10 +12,10 @@ public class Converter {
     static final double YEN = 60.4592;
     static final double FRANC = 63.5256;
 
-    public double execute(double amount, double fromCurrency, double toCurrency) {
+    public double execute(final double amount, final double fromCurrency, final double toCurrency) {
         if (amount < 0) {
             throw new IllegalArgumentException("Amount must be positive number");
         }
-        return amount*fromCurrency/toCurrency;
+        return amount * fromCurrency / toCurrency;
     }
 }
