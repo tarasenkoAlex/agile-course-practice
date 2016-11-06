@@ -127,3 +127,5 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Шишкин Владислав
 // Шочин Александр
 // Шургалин Петр
+include "code/shurgalin-pyotr"
+project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
