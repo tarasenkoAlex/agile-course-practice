@@ -42,6 +42,7 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
+
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
@@ -51,6 +52,9 @@ project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-l
 // Волков Денис
 // Воронин Дмитрий
 // Грошева Людмила
+include "code/grosheva-ludmila"
+project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
+
 // Добролюбова Евгения
 // Евтюшин Валерий
 // Еланов Артем
@@ -100,3 +104,4 @@ project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-l
 // Шишкин Владислав
 // Шочин Александр
 // Шургалин Петр
+
