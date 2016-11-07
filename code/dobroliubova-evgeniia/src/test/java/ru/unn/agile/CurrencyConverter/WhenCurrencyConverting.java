@@ -5,8 +5,6 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-import java.util.Collection;
-
 /**
  * Created by Jane on 03.11.2016.
  */
@@ -30,11 +28,10 @@ public class WhenCurrencyConverting {
     }
 
     @Test
-    public void IsCorrectExceptionMessageForExecute() {
+    public void isCorrectExceptionMessageForExecute() {
         try {
             converter.execute(-1, Converter.RUBLE, Converter.RUBLE);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertThat(e.getMessage(), is("Amount must be positive number"));
         }
     }
@@ -61,7 +58,7 @@ public class WhenCurrencyConverting {
 
     @Test
     public void rubleToFranc() {
-        assertEquals(1,converter.execute(63.5256, Converter.RUBLE, Converter.FRANC),delta);
+        assertEquals(1, converter.execute(63.5256, Converter.RUBLE, Converter.FRANC), delta);
     }
 
     @Test
@@ -116,7 +113,7 @@ public class WhenCurrencyConverting {
 
     @Test
     public void yenToDollar() {
-        assertEquals(1, converter.execute(1.0357, Converter.YEN ,Converter.DOLLAR), delta);
+        assertEquals(1, converter.execute(1.0357, Converter.YEN , Converter.DOLLAR), delta);
     }
 
     @Test
