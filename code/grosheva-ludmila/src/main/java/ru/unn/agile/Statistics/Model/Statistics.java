@@ -9,11 +9,14 @@ import static java.lang.Math.pow;
 public class Statistics {
     private final double[] x;
     private final double[] p;
-    public static final double DELTA = 0.00001;
+    private static double delta = Double.POSITIVE_INFINITY;
 
     Statistics(final double[] x, final double[] p) {
 
         double sum = 0;
+        if (x.length == 0 || p.length == 0) {
+            throw new InvalidParameterException("Possibilities and Values must have elements");
+        }
         if (x.length != p.length) {
             throw new InvalidParameterException("Possibilities and Values must have same sizes");
         }
@@ -23,12 +26,16 @@ public class Statistics {
                 throw new InvalidParameterException("Possibility must be from 0 to 1");
             }
         }
-        if (abs(sum - 1) > DELTA) {
+        if (abs(sum - 1) > delta) {
             throw new InvalidParameterException("PossibilitySum must equals to 1");
         }
         this.x = x;
         this.p = p;
 
+    }
+
+    public static void setDelta(final double delta) {
+        Statistics.delta = delta;
     }
 
     double computeInitialMoment(final int k) {

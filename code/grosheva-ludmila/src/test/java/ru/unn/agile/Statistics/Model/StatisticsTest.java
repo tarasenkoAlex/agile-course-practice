@@ -1,6 +1,7 @@
 
 package ru.unn.agile.Statistics.Model;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.security.InvalidParameterException;
@@ -20,6 +21,18 @@ public class StatisticsTest {
         double[] x = new double[]{-1, -2, -3};
         double[] p = new double[]{0.1, 0.5, 0.4};
         return new Statistics(x, p);
+    }
+
+    @Before
+    public void before() {
+        Statistics.setDelta(DELTA);
+    }
+
+    @Test(expected = InvalidParameterException.class)
+    public void cannotCreateEmptyStatisticValueAndPossibility() {
+        double[] x = new double[]{};
+        double[] p = new double[]{};
+        Statistics stat = new Statistics(x, p);
     }
 
     @Test
@@ -51,9 +64,16 @@ public class StatisticsTest {
 
 
     @Test(expected = InvalidParameterException.class)
-    public void cannotCreateWrongPossibility() {
+    public void cannotCreateNegativeMoreThanOnePossibility() {
         double[] x = new double[]{1, 2, 3};
         double[] p = new double[]{0.1, -0.5, 0.4};
+        Statistics stat = new Statistics(x, p);
+    }
+
+    @Test(expected = InvalidParameterException.class)
+    public void cannotCreateNegativePossibility() {
+        double[] x = new double[]{1, 2, 3};
+        double[] p = new double[]{1.1, -0.5, 0.4};
         Statistics stat = new Statistics(x, p);
     }
 
