@@ -21,4 +21,15 @@ public class WhenAddingTransactionToAccount {
 
         assertEquals(125, account.getBalance());
     }
+
+    @Test
+    public void andItIsTransferAccountsBalancesAdjust() {
+        Account cash = new Account(75);
+        Account debitCard = new Account(250);
+
+        debitCard.transferTo(cash, 50);
+
+        assertEquals(125, cash.getBalance());
+        assertEquals(200, debitCard.getBalance());
+    }
 }

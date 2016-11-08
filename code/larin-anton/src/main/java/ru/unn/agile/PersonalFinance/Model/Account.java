@@ -20,5 +20,10 @@ public class Account {
         this.balance += amount;
     }
 
+    public void transferTo(Account other, int amount) {
+        this.balance -= amount;
+        other.balance += amount;
+    }
+
     private int balance;
 }
