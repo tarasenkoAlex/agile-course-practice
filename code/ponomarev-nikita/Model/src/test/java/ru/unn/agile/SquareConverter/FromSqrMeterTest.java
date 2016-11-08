@@ -222,4 +222,43 @@ public class FromSqrMeterTest {
         }
     }
 
+    @Test
+    public void isExceptionMessageCorrectWhenSecondArgumentIllegalForToDistanationUnit() {
+        try {
+            converter.toDistanationUnit(1, -1);
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("distanationMultiplier must be positive number"));
+        }
+    }
+
+    @Test
+    public void whenLegalArgumentsForToDistanationUnit() {
+        double result = converter.toDistanationUnit(1, 1);
+        assertEquals(1, result, delta);
+    }
+
+    @Test(expected  = IllegalArgumentException.class)
+    public void whenIllegalFirstArgumentForToDistanationUnit() {
+        converter.toDistanationUnit(-1, 1);
+    }
+
+    @Test(expected  = IllegalArgumentException.class)
+    public void WhenIllegalSecondArgumentForToDistanationUnit() {
+        converter.toDistanationUnit(1, -1);
+    }
+
+    @Test(expected  = IllegalArgumentException.class)
+    public void whenIllegalBothArgumentsForToDistanationUnit() {
+        converter.toDistanationUnit(-1, -1);
+    }
+
+    @Test
+    public void isExceptionMessageCorrectWhenFirstArgumentIllegalForToDistanationUnit() {
+        try {
+            converter.toDistanationUnit(-1, 1);
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Square must be positive number"));
+        }
+    }
+
 }
