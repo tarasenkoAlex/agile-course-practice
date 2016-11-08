@@ -12,4 +12,13 @@ public class WhenAddingTransactionToAccount {
 
         assertEquals(50, account.getBalance());
     }
+
+    @Test
+    public void andItIsIncomeBalanceShouldIncrease() {
+        Account account = new Account(75);
+
+        account.addIncomeTransaction(50);
+
+        assertEquals(125, account.getBalance());
+    }
 }
