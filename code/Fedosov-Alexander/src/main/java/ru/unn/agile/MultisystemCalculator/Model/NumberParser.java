@@ -56,13 +56,13 @@ public final class NumberParser {
                     + " 0b[-]{0,1} | 0o[-]{0-7} | 0x[-]{0-9,A,B,C,D,E,F}");
         }
         switch (s.substring(0, 2)) {
-            case ("0b"):
+            case "0b":
                 return parseBin(s.substring(2));
 
-            case ("0o"):
+            case "0o":
                 return parseOct(s.substring(2));
 
-            case ("0x"):
+            case "0x":
                 return parseHex(s.substring(2));
 
             default:
@@ -137,7 +137,7 @@ public final class NumberParser {
     private static void validateBin(final String binary) {
         char[] chars = binary.toCharArray();
         for (int i = 0; i < chars.length; i++) {
-            if ((chars[i] != '1') && (chars[i] != '0')) {
+            if (chars[i] != '1' && chars[i] != '0') {
                 throw new IllegalArgumentException("Illegal number argument. "
                         + "Please, follow convention of arguments representation:"
                         + " 0b[-]{0,1} | 0o[-]{0-7} | 0x[-]{0-9,A,B,C,D,E,F}");
