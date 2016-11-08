@@ -1,5 +1,6 @@
 
 package ru.unn.agile.Statistics.Model;
+
 import org.junit.Test;
 
 import java.security.InvalidParameterException;
@@ -7,19 +8,20 @@ import java.security.InvalidParameterException;
 import static org.junit.Assert.*;
 
 public class StatisticsTest {
-private static final double DELTA = 0.00001;
+    private static final double DELTA = 0.00001;
 
     public Statistics testingValues() {
-        double []x = new double[]{1, 2, 3};
-        double []p = new double[]{0.1, 0.5, 0.4};
-            return new Statistics(x, p);
+        double[] x = new double[]{1, 2, 3};
+        double[] p = new double[]{0.1, 0.5, 0.4};
+        return new Statistics(x, p);
     }
 
     public Statistics testingNegativeValues() {
-        double []x = new double[]{-1, -2, -3};
-        double []p = new double[]{0.1, 0.5, 0.4};
+        double[] x = new double[]{-1, -2, -3};
+        double[] p = new double[]{0.1, 0.5, 0.4};
         return new Statistics(x, p);
     }
+
     @Test
     public void canCreateStatisticValueAndPossibility() {
         Statistics stat = testingValues();
@@ -29,7 +31,7 @@ private static final double DELTA = 0.00001;
     @Test
     public void canComputeExpectedValue() {
         Statistics stat = testingValues();
-double expectedValue = stat.computeExpectedValue();
+        double expectedValue = stat.computeExpectedValue();
         assertEquals(2.3, expectedValue, DELTA);
     }
 
@@ -39,6 +41,7 @@ double expectedValue = stat.computeExpectedValue();
         double secondMoment = stat.computeInitialMoment(2);
         assertEquals(5.7, secondMoment, DELTA);
     }
+
     @Test
     public void canComputeDispersion() {
         Statistics stat = testingValues();
@@ -49,14 +52,15 @@ double expectedValue = stat.computeExpectedValue();
 
     @Test(expected = InvalidParameterException.class)
     public void cannotCreateWrongPossibility() {
-        double []x = new double[]{1, 2, 3};
-        double []p = new double[]{0.1, -0.5, 0.4};
+        double[] x = new double[]{1, 2, 3};
+        double[] p = new double[]{0.1, -0.5, 0.4};
         Statistics stat = new Statistics(x, p);
     }
+
     @Test(expected = InvalidParameterException.class)
     public void cannotCreateWrongPossibilitySum() {
-        double []x = new double[]{1, 2, 3};
-        double []p = new double[]{0.1, 0.5, 0.9};
+        double[] x = new double[]{1, 2, 3};
+        double[] p = new double[]{0.1, 0.5, 0.9};
         Statistics stat = new Statistics(x, p);
     }
 
@@ -86,12 +90,14 @@ double expectedValue = stat.computeExpectedValue();
         double centralMoment = stat.computeCentralMoment(4);
         assertEquals(0.3857, centralMoment, DELTA);
     }
+
     @Test
     public void canComputeThirdCentralMoment() {
         Statistics stat = testingValues();
         double centralMoment = stat.computeCentralMoment(3);
         assertEquals(-0.096, centralMoment, DELTA);
     }
+
     @Test
     public void canComputeAbsoluteInitialMoment() {
         Statistics stat = testingValues();
@@ -119,6 +125,7 @@ double expectedValue = stat.computeExpectedValue();
         double absoluteCentralMoment = stat.computeAbsoluteCentralMoment(3);
         assertEquals(0.3704, absoluteCentralMoment, DELTA);
     }
+
     @Test
     public void canComputeFirstFactorialMoment() {
         Statistics stat = testingValues();

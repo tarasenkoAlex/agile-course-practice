@@ -1,16 +1,17 @@
 package ru.unn.agile.Statistics.Model;
 
 import java.security.InvalidParameterException;
+
 import static java.lang.Math.abs;
 import static java.lang.Math.pow;
 
 
 public class Statistics {
-   private final double []x;
-   private final double []p;
-   public static final double DELTA = 0.00001;
+    private final double[] x;
+    private final double[] p;
+    public static final double DELTA = 0.00001;
 
-    Statistics(final double []x, final double []p) {
+    Statistics(final double[] x, final double[] p) {
 
         double sum = 0;
         if (x.length != p.length) {
@@ -30,20 +31,20 @@ public class Statistics {
 
     }
 
-   double computeInitialMoment(final int k) {
-       double initialMoment = 0;
-       for (int i = 0; i < x.length; i++) {
-           initialMoment += pow(x[i], k) * p[i];
-       }
-       return initialMoment;
-   }
-
-
-  double  computeExpectedValue() {
-      return computeInitialMoment(1);
+    double computeInitialMoment(final int k) {
+        double initialMoment = 0;
+        for (int i = 0; i < x.length; i++) {
+            initialMoment += pow(x[i], k) * p[i];
+        }
+        return initialMoment;
     }
 
-   double computeDispersion() {
+
+    double computeExpectedValue() {
+        return computeInitialMoment(1);
+    }
+
+    double computeDispersion() {
         return computeCentralMoment(2);
     }
 
@@ -75,13 +76,14 @@ public class Statistics {
         }
         return absoluteCentralMoment;
     }
-double factorial(final double x, final int k) {
-    double res = 1;
-    for (int i = 0; i < k; ++i) {
-        res *= x - i;
+
+    double factorial(final double x, final int k) {
+        double res = 1;
+        for (int i = 0; i < k; ++i) {
+            res *= x - i;
+        }
+        return res;
     }
-    return res;
-}
 
     public double computeFactorialMoment(final int k) {
         double factorialMoment = 0;
