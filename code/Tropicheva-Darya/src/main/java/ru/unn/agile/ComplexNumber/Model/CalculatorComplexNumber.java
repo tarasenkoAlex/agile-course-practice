@@ -27,14 +27,14 @@ public final class CalculatorComplexNumber {
 
 
     public static ComplexNumber div(final ComplexNumber complexA, final ComplexNumber complexB) {
-        if ((Float.compare(complexB.getReal(), 0.f) == 0)
-                && (Float.compare(complexB.getImaginary(), 0.f)) == 0) {
+        if (Float.compare(complexB.getReal(), 0.f) == 0
+                && Float.compare(complexB.getImaginary(), 0.f) == 0) {
             throw new ArithmeticException("Argument 'divisor' is 0");
         } else {
             float factor = complexB.getReal() * complexB.getReal()
                     + complexB.getImaginary() * complexB.getImaginary();
-            ComplexNumber representComplexB = new ComplexNumber((complexB.getReal() / factor),
-                    -(complexB.getImaginary() / factor));
+            ComplexNumber representComplexB = new ComplexNumber(complexB.getReal() / factor,
+                    -complexB.getImaginary() / factor);
             return mult(complexA, representComplexB);
         }
     }
