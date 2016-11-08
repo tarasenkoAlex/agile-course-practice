@@ -88,6 +88,9 @@ project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-l
 // Скребков Артём
 // Соврасов Владислав
 // Соловьев Дмитрий
+include "code/solovev-dmitriy"
+project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
+
 // Старлытов Евгений
 // Степыкин Илья
 // Тарасенко Алексей
