@@ -42,6 +42,7 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
+<<<<<<< c1c05b64b3bd12b658ef6f624f1f2343473a5e26
 
 // Kamtiko Sam
 // Masunda Nyararai
@@ -109,6 +110,9 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Тарасенко Алексей
 // Тропичева Дарья
 // Федосов Александр
+include "code/Fedosov-Alexander"
+project(":code/Fedosov-Alexander").name = "Fedosov-Alexander"
+
 // Цыганов Алексей
 // Чугунов Евгений
 // Шадрунов Артем
@@ -117,3 +121,8 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Шочин Александр
 // Шургалин Петр
 
+=======
+// Fedosov Alexander
+include "code/Fedosov-Alexander"
+project(":code/Fedosov-Alexander").name = "Fedosov-Alexander"
+>>>>>>> Added implementation for 1st lab
