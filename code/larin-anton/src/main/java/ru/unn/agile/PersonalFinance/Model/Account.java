@@ -6,6 +6,7 @@ import java.util.List;
 public class Account {
     public Account(int startingBalance) {
         this.balance = startingBalance;
+        this.transactions = new ArrayList<>();
     }
 
     public int getBalance() {
@@ -13,17 +14,24 @@ public class Account {
     }
 
     public void addExpenseTransaction(int amount) {
-        this.balance -= amount;
+        balance -= amount;
+        transactions.add(-amount);
     }
 
     public void addIncomeTransaction(int amount) {
-        this.balance += amount;
+        balance += amount;
+        transactions.add(amount);
     }
 
     public void transferTo(Account other, int amount) {
-        this.balance -= amount;
+        balance -= amount;
         other.balance += amount;
     }
 
+    public List<Integer> getTransactions() {
+        return transactions;
+    }
+
     private int balance;
+    private List<Integer> transactions;
 }
