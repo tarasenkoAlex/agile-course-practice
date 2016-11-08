@@ -19,6 +19,10 @@ public class FromSqrMeter {
             throw new IllegalArgumentException("Square must be positive number");
         }
 
+        if (distanationMultiplier < 0) {
+            throw new IllegalArgumentException("distanationMultiplier must be positive number");
+        }
+
         return distanationMultiplier * sourceUnit;
     }
 
