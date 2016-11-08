@@ -1,60 +1,54 @@
-package main;
-
-/**
- * Created by dkolistr on 08.11.2016.
- */
+package ru.unn.agile.Stack.Model;
 
 public class Stack {
     private Integer[] array;
-    private int cap = 2;
-    private int len = -1;
+    private int capacity = 2;
+    private int stackPointer = -1;
 
-    public Stack(){
-        array = new Integer[cap];
+    public Stack() {
+        array = new Integer[capacity];
     }
 
-    private void resize(){
-        cap *= 2;
-        Integer[] arrayCopy = new Integer[cap];
-        System.arraycopy(array, 0, arrayCopy, 0, len + 1);
+    private void resize() {
+        capacity *= 2;
+        final Integer[] arrayCopy = new Integer[capacity];
+        System.arraycopy(array, 0, arrayCopy, 0, stackPointer + 1);
         array = arrayCopy;
     }
 
-    public void push(Integer number) {
-        if (len + 1 >= cap) {
+    public void push(final Integer number) {
+        if ((stackPointer + 1) >= capacity) {
             resize();
         }
-        array[++len] = number;
+        array[++stackPointer] = number;
     }
 
     public Integer pop() {
         if (isEmpty()) {
             return null;
         }
-        return array[len--];
+        return array[stackPointer--];
     }
 
     public boolean isEmpty() {
-        return len < 0;
+        return stackPointer < 0;
     }
 
     public Integer top() {
         if (isEmpty()) {
             return null;
         }
-        return array[len];
+        return array[stackPointer];
     }
 
     public void print() {
         if (isEmpty()) {
             System.out.print("");
-        }
-        else if (len == 0) {
-            System.out.print(array[len]);
-        }
-        else {
-            StringBuilder str = new StringBuilder();
-            for (int i = 0; i <= len; i++) {
+        } else if (stackPointer == 0) {
+            System.out.print(array[stackPointer]);
+        } else {
+            final StringBuilder str = new StringBuilder();
+            for (int i = 0; i <= stackPointer; i++) {
                 str.append(array[i] + " ");
             }
             System.out.print(str);
