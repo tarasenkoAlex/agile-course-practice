@@ -243,7 +243,7 @@ public class FromSqrMeterTest {
     }
 
     @Test(expected  = IllegalArgumentException.class)
-    public void WhenIllegalSecondArgumentForToDistanationUnit() {
+    public void whenIllegalSecondArgumentForToDistanationUnit() {
         converter.toDistanationUnit(1, -1);
     }
 
