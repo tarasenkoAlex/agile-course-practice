@@ -85,6 +85,6 @@ public class ComplexNumber {
             return name;
         }
 
-        public abstract ComplexNumber apply(final ComplexNumber l, final ComplexNumber r);
+        public abstract ComplexNumber apply(ComplexNumber l, ComplexNumber r);
     }
 }

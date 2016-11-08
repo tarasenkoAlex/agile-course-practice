@@ -230,7 +230,7 @@ public class ViewModel {
         MULTIPLY("Mul");
         private final String name;
 
-        private Operation(final String name) {
+        Operation(final String name) {
             this.name = name;
         }
 
