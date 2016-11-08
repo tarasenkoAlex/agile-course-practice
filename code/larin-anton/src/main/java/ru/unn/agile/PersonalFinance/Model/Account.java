@@ -26,6 +26,8 @@ public class Account {
     public void transferTo(Account other, int amount) {
         balance -= amount;
         other.balance += amount;
+        transactions.add(-amount);
+        other.transactions.add(amount);
     }
 
     public List<Integer> getTransactions() {

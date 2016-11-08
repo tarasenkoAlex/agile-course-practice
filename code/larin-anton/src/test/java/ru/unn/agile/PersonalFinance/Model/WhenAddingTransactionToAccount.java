@@ -56,4 +56,19 @@ public class WhenAddingTransactionToAccount {
 
         assertEquals(50, last);
     }
+
+    @Test
+    public void andItIsTransferItIsSavedToBothAccountsLists() {
+        Account cash = new Account(75);
+        Account debitCard = new Account(250);
+
+        debitCard.transferTo(cash, 50);
+        int cashLast = cash.getTransactions().get(
+                cash.getTransactions().size() - 1);
+        int debitCardLast = debitCard.getTransactions().get(
+                debitCard.getTransactions().size() - 1);
+
+        assertEquals(50, cashLast);
+        assertEquals(-50, debitCardLast);
+    }
 }
