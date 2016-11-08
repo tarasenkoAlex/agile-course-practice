@@ -13,27 +13,27 @@ public class Account {
         return balance;
     }
 
-    public void addExpenseTransaction(int amount) {
+    public void addExpenseTransaction(int amount, String description) {
         balance -= amount;
-        transactions.add(-amount);
+        transactions.add(new Transaction(-amount, description));
     }
 
-    public void addIncomeTransaction(int amount) {
+    public void addIncomeTransaction(int amount, String description) {
         balance += amount;
-        transactions.add(amount);
+        transactions.add(new Transaction(amount, description));
     }
 
     public void transferTo(Account other, int amount) {
         balance -= amount;
         other.balance += amount;
-        transactions.add(-amount);
-        other.transactions.add(amount);
+        transactions.add(new Transaction(-amount, ""));
+        other.transactions.add(new Transaction(amount, ""));
     }
 
-    public List<Integer> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 
     private int balance;
-    private List<Integer> transactions;
+    private List<Transaction> transactions;
 }
