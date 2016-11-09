@@ -105,8 +105,8 @@ public class Account {
             final Transaction replacement) {
 
         int insertionIndex = transactions.size() - 1;
-        while ((insertionIndex >= 0)
-                && (transactions.get(insertionIndex).compareTo(replacement) == 1)) {
+        while (insertionIndex >= 0
+                && transactions.get(insertionIndex).compareTo(replacement) == 1) {
             insertionIndex--;
         }
 
