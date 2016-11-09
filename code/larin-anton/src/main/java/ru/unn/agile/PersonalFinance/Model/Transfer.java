@@ -30,6 +30,14 @@ public class Transfer implements Transaction {
         return true;
     }
 
+    public void setSource(Account source) {
+        this.source = source;
+    }
+
+    public void setTarget(Account target) {
+        this.target = target;
+    }
+
     private int amount;
     private Account source;
     private Account target;

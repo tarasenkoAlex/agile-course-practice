@@ -61,6 +61,10 @@ public class Account {
         }
     }
 
+    public void changeName(String name) {
+        this.name = name;
+    }
+
     private int balance;
     private String name;
     private List<Transaction> transactions;
