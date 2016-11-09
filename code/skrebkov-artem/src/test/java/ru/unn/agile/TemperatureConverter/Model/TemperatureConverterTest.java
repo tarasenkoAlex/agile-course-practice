@@ -10,7 +10,7 @@ public class TemperatureConverterTest {
     public void convertCelsius_0_To_Kelvin() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double kelvin = converter.celsiusToKelvin(0.0);
+        double kelvin = converter.fromCelsius(0.0, TemperatureScale.KELVIN);
 
         assertEquals(273.15, kelvin, DELTA);
     }
@@ -19,7 +19,7 @@ public class TemperatureConverterTest {
     public void convertCelsius_100_To_Kelvin() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double kelvin = converter.celsiusToKelvin(100.0);
+        double kelvin = converter.fromCelsius(100.0, TemperatureScale.KELVIN);
 
         assertEquals(373.15, kelvin, DELTA);
     }
@@ -28,7 +28,7 @@ public class TemperatureConverterTest {
     public void convertCelsius_0_To_Fahrenheit() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double fahrenheit = converter.celsiusToFahrenheit(0.0);
+        double fahrenheit = converter.fromCelsius(0, TemperatureScale.FAHRENHEIT);
 
         assertEquals(32.0, fahrenheit, DELTA);
     }
@@ -37,7 +37,7 @@ public class TemperatureConverterTest {
     public void convertCelsius_100_To_Fahrenheit() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double fahrenheit = converter.celsiusToFahrenheit(100.0);
+        double fahrenheit = converter.fromCelsius(100.0, TemperatureScale.FAHRENHEIT);
 
         assertEquals(212.0, fahrenheit, DELTA);
     }
@@ -46,7 +46,7 @@ public class TemperatureConverterTest {
     public void convertCelsius_0_To_Newton() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double newton = converter.celsiusToNewton(0.0);
+        double newton = converter.fromCelsius(0.0, TemperatureScale.NEWTON);
 
         assertEquals(0.0, newton, DELTA);
     }
@@ -55,7 +55,7 @@ public class TemperatureConverterTest {
     public void convertCelsius_100_To_Newton() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double newton = converter.celsiusToNewton(100.0);
+        double newton = converter.fromCelsius(100.0, TemperatureScale.NEWTON);
 
         assertEquals(33.0, newton, DELTA);
     }
