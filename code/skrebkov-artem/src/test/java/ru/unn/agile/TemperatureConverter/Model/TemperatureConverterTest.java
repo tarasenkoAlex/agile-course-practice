@@ -23,4 +23,41 @@ public class TemperatureConverterTest {
 
         assertEquals(373.15, kelvin, DELTA);
     }
+
+    @Test
+    public void convertCelsius_0_To_Fahrenheit() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double fahrenheit = converter.celsiusToFahrenheit(0.0);
+
+        assertEquals(32.0, fahrenheit, DELTA);
+    }
+
+    @Test
+    public void convertCelsius_100_To_Fahrenheit() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double fahrenheit = converter.celsiusToFahrenheit(100.0);
+
+        assertEquals(212.0, fahrenheit, DELTA);
+    }
+
+    @Test
+    public void convertCelsius_0_To_Newton() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double newton = converter.celsiusToNewton(0.0);
+
+        assertEquals(0.0, newton, DELTA);
+    }
+
+    @Test
+    public void convertCelsius_100_To_Newton() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double newton = converter.celsiusToNewton(100.0);
+
+        assertEquals(33.0, newton, DELTA);
+    }
+
 }
