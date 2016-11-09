@@ -5,10 +5,10 @@ import static org.junit.Assert.*;
 
 public class TemperatureConverterTest {
 
-    @Test
-    public void failingTest() {
-        fail();
-    }
+    //@Test
+    //public void failingTest() {
+    //    fail();
+    //}
 
     @Test
     public void convertCelsius_0_To_Kelvin() {
