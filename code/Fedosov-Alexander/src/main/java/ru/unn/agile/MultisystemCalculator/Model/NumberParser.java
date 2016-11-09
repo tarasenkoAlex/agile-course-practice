@@ -1,6 +1,5 @@
 package ru.unn.agile.MultisystemCalculator.Model;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -10,38 +9,6 @@ public final class NumberParser {
     private static final int MIN_NUMBER_ARG_LENGTH = 3;
     private static final int MIN_REPRESENTATION_LENGTH = 1;
     private static final int MAX_REPRESENTATION_LENGTH = 31;
-    private static final Map<Character, String> HEX_TO_BINARY_MAPPING =
-            new HashMap<>();
-    private static final Map<Character, String> OCT_TO_BINARY_MAPPING =
-            new HashMap<>();
-
-    static {
-        HEX_TO_BINARY_MAPPING.put(new Character('0'), "0000");
-        HEX_TO_BINARY_MAPPING.put(new Character('1'), "0001");
-        HEX_TO_BINARY_MAPPING.put(new Character('2'), "0010");
-        HEX_TO_BINARY_MAPPING.put(new Character('3'), "0011");
-        HEX_TO_BINARY_MAPPING.put(new Character('4'), "0100");
-        HEX_TO_BINARY_MAPPING.put(new Character('5'), "0101");
-        HEX_TO_BINARY_MAPPING.put(new Character('6'), "0110");
-        HEX_TO_BINARY_MAPPING.put(new Character('7'), "0111");
-        HEX_TO_BINARY_MAPPING.put(new Character('8'), "1000");
-        HEX_TO_BINARY_MAPPING.put(new Character('9'), "1001");
-        HEX_TO_BINARY_MAPPING.put(new Character('A'), "1010");
-        HEX_TO_BINARY_MAPPING.put(new Character('B'), "1011");
-        HEX_TO_BINARY_MAPPING.put(new Character('C'), "1100");
-        HEX_TO_BINARY_MAPPING.put(new Character('D'), "1101");
-        HEX_TO_BINARY_MAPPING.put(new Character('E'), "1110");
-        HEX_TO_BINARY_MAPPING.put(new Character('F'), "1111");
-
-        OCT_TO_BINARY_MAPPING.put(new Character('0'), "000");
-        OCT_TO_BINARY_MAPPING.put(new Character('1'), "001");
-        OCT_TO_BINARY_MAPPING.put(new Character('2'), "010");
-        OCT_TO_BINARY_MAPPING.put(new Character('3'), "011");
-        OCT_TO_BINARY_MAPPING.put(new Character('4'), "100");
-        OCT_TO_BINARY_MAPPING.put(new Character('5'), "101");
-        OCT_TO_BINARY_MAPPING.put(new Character('6'), "110");
-        OCT_TO_BINARY_MAPPING.put(new Character('7'), "111");
-    }
 
     private NumberParser() {
     }
@@ -77,7 +44,7 @@ public final class NumberParser {
     }
 
     private static String convertHexToBin(final String hex) {
-        return toBin(hex, HEX_TO_BINARY_MAPPING);
+        return toBin(hex, NumeralSystemsData.HEX_TO_BINARY_MAPPING);
     }
 
     private static String toBin(final String representation, final Map toBinaryMapping) {
@@ -105,7 +72,7 @@ public final class NumberParser {
     }
 
     private static String convertOctToBin(final String oct) {
-        return toBin(oct, OCT_TO_BINARY_MAPPING);
+        return toBin(oct, NumeralSystemsData.OCT_TO_BINARY_MAPPING);
     }
 
 
