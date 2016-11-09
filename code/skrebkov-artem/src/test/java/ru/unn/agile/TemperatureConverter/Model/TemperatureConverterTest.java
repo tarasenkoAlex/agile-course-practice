@@ -9,4 +9,13 @@ public class TemperatureConverterTest {
     public void failingTest() {
         fail();
     }
+
+    @Test
+    public void convertCelsius_0_To_Kelvin() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double kelvin = converter.celsiusToKelvin(0.0);
+
+        assertEquals(273.15, kelvin, 0.000001);
+    }
 }
