@@ -23,4 +23,16 @@ public class WhenDeletingTransactionFromAccount {
 
         assertTrue(cash.getTransactions().isEmpty());
     }
+
+    @Test
+    public void andItIsTransferBothAccountsBalancesShouldBeRestored() {
+        Account cash = new Account(75);
+        Account debitCard = new Account(150);
+        debitCard.transferTo(cash, 50);
+
+        debitCard.deleteTransaction(debitCard.getTransactions().get(0));
+
+        assertEquals(75, cash.getBalance());
+        assertEquals(150, debitCard.getBalance());
+    }
 }

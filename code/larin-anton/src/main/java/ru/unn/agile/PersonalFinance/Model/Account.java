@@ -15,19 +15,19 @@ public class Account {
 
     public void addExpenseTransaction(int amount, String description) {
         balance -= amount;
-        transactions.add(new Transaction(-amount, description));
+        transactions.add(new Transaction(-amount, description, null));
     }
 
     public void addIncomeTransaction(int amount, String description) {
         balance += amount;
-        transactions.add(new Transaction(amount, description));
+        transactions.add(new Transaction(amount, description, null));
     }
 
     public void transferTo(Account other, int amount) {
         balance -= amount;
         other.balance += amount;
-        transactions.add(new Transaction(-amount, ""));
-        other.transactions.add(new Transaction(amount, ""));
+        transactions.add(new Transaction(-amount, "", other));
+        other.transactions.add(new Transaction(amount, "", this));
     }
 
     public List<Transaction> getTransactions() {
@@ -37,6 +37,10 @@ public class Account {
     public void deleteTransaction(Transaction transaction) {
         balance -= transaction.getAmount();
         transactions.remove(transaction);
+
+        if (transaction.otherAccount() != null) {
+            transaction.otherAccount().balance += transaction.getAmount();
+        }
     }
 
     private int balance;
