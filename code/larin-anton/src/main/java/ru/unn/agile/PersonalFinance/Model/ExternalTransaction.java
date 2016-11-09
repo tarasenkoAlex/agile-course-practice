@@ -5,6 +5,7 @@ import java.util.GregorianCalendar;
 public class ExternalTransaction implements Transaction {
     private final String description;
     private final int amount;
+    private final String counterparty;
     private Category category;
     private final GregorianCalendar date;
 
@@ -12,12 +13,14 @@ public class ExternalTransaction implements Transaction {
             final int amount,
             final String description,
             final Category category,
-            final GregorianCalendar date) {
+            final GregorianCalendar date,
+            final String counterparty) {
 
         this.amount = amount;
         this.description = description;
         this.category = category;
         this.date = date;
+        this.counterparty = counterparty;
     }
 
     public String getDescription() {
@@ -49,6 +52,10 @@ public class ExternalTransaction implements Transaction {
 
     public GregorianCalendar getDate() {
         return date;
+    }
+
+    public String getCounterparty() {
+        return counterparty;
     }
 
     @Override
@@ -89,6 +96,7 @@ public class ExternalTransaction implements Transaction {
         private String transactionDescription;
         private Category transactionCategory;
         private GregorianCalendar transactionDate;
+        private String transactionCounterparty;
 
         public Builder(final int amount) {
             this.transactionAmount = amount;
@@ -109,12 +117,18 @@ public class ExternalTransaction implements Transaction {
             return this;
         }
 
+        public Builder counterparty(final String counterparty) {
+            this.transactionCounterparty = counterparty;
+            return this;
+        }
+
         public ExternalTransaction build() {
             return new ExternalTransaction(
                     transactionAmount,
                     transactionDescription,
                     transactionCategory,
-                    transactionDate);
+                    transactionDate,
+                    transactionCounterparty);
         }
     }
 }

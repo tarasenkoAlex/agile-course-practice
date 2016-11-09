@@ -139,4 +139,18 @@ public class WhenEditingTransaction {
 
         assertEquals(newDate, ((ExternalTransaction) cash.getTransactions().get(0)).getDate());
     }
+
+    @Test
+    public void counterpartyAndItIsExternalCounterpartyShouldChange() {
+        ExternalTransaction oldIncome = ExternalTransaction.incomeBuilder(25)
+                .counterparty("Itseez").build();
+        cash.addExternalTransaction(oldIncome);
+
+        ExternalTransaction newIncome = ExternalTransaction.incomeBuilder(25)
+                .counterparty("Intel").build();
+        cash.replaceExternalTransaction(oldIncome, newIncome);
+
+        assertEquals("Intel",
+                ((ExternalTransaction) cash.getTransactions().get(0)).getCounterparty());
+    }
 }

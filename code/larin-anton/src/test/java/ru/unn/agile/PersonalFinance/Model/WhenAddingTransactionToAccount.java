@@ -136,4 +136,15 @@ public class WhenAddingTransactionToAccount {
 
         assertEquals(date, lastTransfer.getDate());
     }
+
+    @Test
+    public void andItIsExternalCounterPartyIsSaved() {
+        cash.addExternalTransaction(ExternalTransaction.expenseBuilder(25)
+                .description("M&M's")
+                .counterparty("Auchan")
+                .build());
+        ExternalTransaction lastExpense = (ExternalTransaction) cash.getTransactions().get(0);
+
+        assertEquals("Auchan", lastExpense.getCounterparty());
+    }
 }
