@@ -6,39 +6,33 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class WhenAddingTransactionToAccount {
+    Account cash = new Account(75, "Cash");
+    Account debitCard = new Account(150, "Debit card");
+
     @Test
     public void andItIsExpenseBalanceShouldDecrease() {
-        Account account = new Account(75);
+        cash.addExpense(ExternalTransaction.expenseBuilder(25).build());
 
-        account.addExpense(ExternalTransaction.expenseBuilder(25).build());
-
-        assertEquals(50, account.getBalance());
+        assertEquals(50, cash.getBalance());
     }
 
     @Test
     public void andItIsIncomeBalanceShouldIncrease() {
-        Account account = new Account(75);
+        cash.addIncome(ExternalTransaction.incomeBuilder(50).build());
 
-        account.addIncome(ExternalTransaction.incomeBuilder(50).build());
-
-        assertEquals(125, account.getBalance());
+        assertEquals(125, cash.getBalance());
     }
 
     @Test
     public void andItIsTransferAccountsBalancesAdjust() {
-        Account cash = new Account(75);
-        Account debitCard = new Account(250);
-
         debitCard.transferTo(cash, 50);
 
         assertEquals(125, cash.getBalance());
-        assertEquals(200, debitCard.getBalance());
+        assertEquals(100, debitCard.getBalance());
     }
 
     @Test
     public void andItIsExpenseItIsSavedToTransactionList() {
-        Account cash = new Account(75);
-
         cash.addExpense(ExternalTransaction.expenseBuilder(25).build());
         List<Transaction> transactions = cash.getTransactions();
         Transaction last = transactions.get(transactions.size() - 1);
@@ -48,8 +42,6 @@ public class WhenAddingTransactionToAccount {
 
     @Test
     public void andItIsIncomeItIsSavedToTransactionList() {
-        Account debitCard = new Account(75);
-
         debitCard.addIncome(ExternalTransaction.incomeBuilder(50).build());
         List<Transaction> transactions = debitCard.getTransactions();
         Transaction last = transactions.get(transactions.size() - 1);
@@ -59,9 +51,6 @@ public class WhenAddingTransactionToAccount {
 
     @Test
     public void andItIsTransferItIsSavedToBothAccountsLists() {
-        Account cash = new Account(75);
-        Account debitCard = new Account(250);
-
         debitCard.transferTo(cash, 50);
         Transaction cashLast = cash.getTransactions().get(
                 cash.getTransactions().size() - 1);
@@ -74,8 +63,6 @@ public class WhenAddingTransactionToAccount {
 
     @Test
     public void andItIsExpenseDescriptionIsSaved() {
-        Account cash = new Account(75);
-
         cash.addExpense(ExternalTransaction.expenseBuilder(25)
                 .description("Candy")
                 .build());
@@ -87,8 +74,6 @@ public class WhenAddingTransactionToAccount {
 
     @Test
     public void andItIsIncomeDescriptionIsSaved() {
-        Account debitCard = new Account(75);
-
         debitCard.addIncome(ExternalTransaction.incomeBuilder(50)
                 .description("Salary")
                 .build());
@@ -100,8 +85,6 @@ public class WhenAddingTransactionToAccount {
 
     @Test
     public void andItIsExpenseCategoryIsSaved() {
-        Account cash = new Account(75);
-
         Category food = new Category("Food");
         cash.addExpense(ExternalTransaction.expenseBuilder(25)
                 .category(food)
@@ -113,8 +96,6 @@ public class WhenAddingTransactionToAccount {
 
     @Test
     public void andItIsIncomeCategoryIsSaved() {
-        Account cash = new Account(75);
-
         Category taxReturn = new Category("Tax return");
         cash.addIncome(ExternalTransaction.incomeBuilder(50)
                 .category(taxReturn)
@@ -126,9 +107,6 @@ public class WhenAddingTransactionToAccount {
 
     @Test(expected=IllegalArgumentException.class)
     public void andItIsTransferNegativeAmountShouldCauseFailure() {
-        Account cash = new Account(75);
-        Account debitCard = new Account(150);
-
         debitCard.transferTo(cash, -20);
     }
 }

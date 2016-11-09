@@ -4,13 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
-    public Account(int startingBalance) {
+    public Account(int startingBalance, String name) {
         this.balance = startingBalance;
+        this.name = name;
         this.transactions = new ArrayList<>();
     }
 
     public int getBalance() {
         return balance;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
     public void addExpense(ExternalTransaction expense) {
@@ -35,10 +44,6 @@ public class Account {
         other.transactions.add(transfer);
     }
 
-    public List<Transaction> getTransactions() {
-        return transactions;
-    }
-
     public void deleteTransaction(Transaction transaction) {
         if (transaction.isExternal()) {
             balance -= transaction.getAmount();
@@ -57,5 +62,6 @@ public class Account {
     }
 
     private int balance;
+    private String name;
     private List<Transaction> transactions;
 }

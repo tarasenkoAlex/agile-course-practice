@@ -15,8 +15,19 @@ public class WhenManagingAccounts {
     public void andAccountIsAddedLedgerIsNotEmptyAnymore() {
         Ledger ledger = new Ledger();
 
-        ledger.addAccount(new Account(0));
+        ledger.addAccount(new Account(0, ""));
 
         assertFalse(ledger.getAccounts().isEmpty());
+    }
+
+    @Test
+    public void andAccountIsAddedItIsLastInLedgersAccountsList() {
+        Ledger ledger = new Ledger();
+        Account cash = new Account(75, "Cash");
+
+        ledger.addAccount(cash);
+
+        assertEquals(75, ledger.getAccounts().get(0).getBalance());
+        assertEquals("Cash", ledger.getAccounts().get(0).getName());
     }
 }
