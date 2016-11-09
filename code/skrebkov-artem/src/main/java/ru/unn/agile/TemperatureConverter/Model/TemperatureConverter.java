@@ -8,7 +8,7 @@ public class TemperatureConverter {
     }
 
     public double fromKelvin(double kelvin, TemperatureScale scale) {
-        return kelvin / TemperatureScale.KELVIN.factor * scale.factor
-                - TemperatureScale.KELVIN.shift + scale.shift;
+        return (kelvin / TemperatureScale.KELVIN.factor - TemperatureScale.KELVIN.shift)
+                * scale.factor + scale.shift;
     }
 }
