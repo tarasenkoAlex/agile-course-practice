@@ -2,12 +2,10 @@ package ru.unn.agile.PersonalFinance.Model;
 
 import java.util.GregorianCalendar;
 
-public class ExternalTransaction implements Transaction {
+public class ExternalTransaction extends Transaction {
     private final String description;
-    private final int amount;
     private final String counterparty;
     private Category category;
-    private final GregorianCalendar date;
 
     public ExternalTransaction(
             final int amount,
@@ -16,20 +14,14 @@ public class ExternalTransaction implements Transaction {
             final GregorianCalendar date,
             final String counterparty) {
 
-        this.amount = amount;
+        super(amount, date);
         this.description = description;
         this.category = category;
-        this.date = date;
         this.counterparty = counterparty;
     }
 
     public String getDescription() {
         return description;
-    }
-
-    @Override
-    public int getAmount() {
-        return amount;
     }
 
     @Override
@@ -50,25 +42,8 @@ public class ExternalTransaction implements Transaction {
         this.category = category;
     }
 
-    public GregorianCalendar getDate() {
-        return date;
-    }
-
     public String getCounterparty() {
         return counterparty;
-    }
-
-    @Override
-    public int compareTo(final Transaction o) {
-        if (date == null) {
-            return 1;
-        }
-
-        if (o.getDate() == null) {
-            return -1;
-        }
-
-        return -date.compareTo(o.getDate());
     }
 
 

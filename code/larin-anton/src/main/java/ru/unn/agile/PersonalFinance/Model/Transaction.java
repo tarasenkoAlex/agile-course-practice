@@ -2,10 +2,36 @@ package ru.unn.agile.PersonalFinance.Model;
 
 import java.util.GregorianCalendar;
 
-public interface Transaction extends Comparable<Transaction> {
-    int getAmount();
-    GregorianCalendar getDate();
+public abstract class Transaction implements Comparable<Transaction> {
+    private final int amount;
+    private final GregorianCalendar date;
 
-    boolean isExternal();
-    boolean isTransfer();
+    protected Transaction(int amount, GregorianCalendar date) {
+        this.amount = amount;
+        this.date = date;
+    }
+
+    int getAmount() {
+        return amount;
+    }
+
+    GregorianCalendar getDate() {
+        return date;
+    }
+
+    @Override
+    public int compareTo(final Transaction o) {
+        if (date == null) {
+            return 1;
+        }
+
+        if (o.getDate() == null) {
+            return -1;
+        }
+
+        return -date.compareTo(o.getDate());
+    }
+
+    abstract boolean isExternal();
+    abstract boolean isTransfer();
 }
