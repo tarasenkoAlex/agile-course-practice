@@ -8,7 +8,7 @@ public final class FromDecimalConverter {
         String result = "";
         int decimal = number;
         do {
-            result = result + (decimal & Constants.BINARY_MULT);
+            result = result + (int) (decimal & Constants.BINARY_MULT);
             decimal >>>= 1;
         } while (decimal != 0);
         return new StringBuilder(result).reverse().toString();
