@@ -1,25 +1,12 @@
 package ru.unn.agile.PersonalFinance.Model;
 
-public class Transaction {
-    public Transaction(int amount, String description, Account otherAccount) {
-        this.amount = amount;
-        this.description = description;
-        this.otherAccount = otherAccount;
-    }
+public interface Transaction {
+    public String getDescription();
 
-    public String getDescription() {
-        return description;
-    }
+    public int getAmount();
 
-    public int getAmount() {
-        return amount;
-    }
+    public Account otherAccount();
 
-    public Account otherAccount() {
-        return otherAccount;
-    }
-
-    private String description;
-    private int amount;
-    private Account otherAccount;
+    public boolean isExternal();
+    public boolean isTransfer();
 }

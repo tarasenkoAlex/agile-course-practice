@@ -15,19 +15,19 @@ public class Account {
 
     public void addExpenseTransaction(int amount, String description) {
         balance -= amount;
-        transactions.add(new Transaction(-amount, description, null));
+        transactions.add(new ExternalTransaction(-amount, description));
     }
 
     public void addIncomeTransaction(int amount, String description) {
         balance += amount;
-        transactions.add(new Transaction(amount, description, null));
+        transactions.add(new ExternalTransaction(amount, description));
     }
 
     public void transferTo(Account other, int amount) {
         balance -= amount;
         other.balance += amount;
-        transactions.add(new Transaction(-amount, "", other));
-        other.transactions.add(new Transaction(amount, "", this));
+        transactions.add(new Transfer(-amount, other));
+        other.transactions.add(new Transfer(amount, this));
     }
 
     public List<Transaction> getTransactions() {
