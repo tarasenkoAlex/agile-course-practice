@@ -43,3 +43,7 @@ include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
 //
+
+// Rybin Valentine
+include "code/rybin-valentine"
+project(":code/rybin-valentine").name = "rybin-valentine-polynomial"
