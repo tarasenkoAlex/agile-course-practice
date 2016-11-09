@@ -10,7 +10,7 @@ public class TemperatureConverterTest {
     public void convertCelsius_0_To_Kelvin() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double kelvin = converter.fromCelsius(0.0, TemperatureScale.KELVIN);
+        double kelvin = converter.convert(0.0, TemperatureScale.CELSIUS, TemperatureScale.KELVIN);
 
         assertEquals(273.15, kelvin, DELTA);
     }
@@ -19,7 +19,7 @@ public class TemperatureConverterTest {
     public void convertCelsius_100_To_Kelvin() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double kelvin = converter.fromCelsius(100.0, TemperatureScale.KELVIN);
+        double kelvin = converter.convert(100.0, TemperatureScale.CELSIUS, TemperatureScale.KELVIN);
 
         assertEquals(373.15, kelvin, DELTA);
     }
@@ -28,7 +28,7 @@ public class TemperatureConverterTest {
     public void convertCelsius_0_To_Fahrenheit() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double fahrenheit = converter.fromCelsius(0, TemperatureScale.FAHRENHEIT);
+        double fahrenheit = converter.convert(0, TemperatureScale.CELSIUS, TemperatureScale.FAHRENHEIT);
 
         assertEquals(32.0, fahrenheit, DELTA);
     }
@@ -37,7 +37,7 @@ public class TemperatureConverterTest {
     public void convertCelsius_100_To_Fahrenheit() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double fahrenheit = converter.fromCelsius(100.0, TemperatureScale.FAHRENHEIT);
+        double fahrenheit = converter.convert(100.0, TemperatureScale.CELSIUS, TemperatureScale.FAHRENHEIT);
 
         assertEquals(212.0, fahrenheit, DELTA);
     }
@@ -46,7 +46,7 @@ public class TemperatureConverterTest {
     public void convertCelsius_0_To_Newton() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double newton = converter.fromCelsius(0.0, TemperatureScale.NEWTON);
+        double newton = converter.convert(0.0, TemperatureScale.CELSIUS, TemperatureScale.NEWTON);
 
         assertEquals(0.0, newton, DELTA);
     }
@@ -55,7 +55,7 @@ public class TemperatureConverterTest {
     public void convertCelsius_100_To_Newton() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double newton = converter.fromCelsius(100.0, TemperatureScale.NEWTON);
+        double newton = converter.convert(100.0, TemperatureScale.CELSIUS, TemperatureScale.NEWTON);
 
         assertEquals(33.0, newton, DELTA);
     }
@@ -64,7 +64,7 @@ public class TemperatureConverterTest {
     public void convertKelvin_0_To_Celsius() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double celsius = converter.fromKelvin(0.0, TemperatureScale.CELSIUS);
+        double celsius = converter.convert(0.0, TemperatureScale.KELVIN, TemperatureScale.CELSIUS);
 
         assertEquals(-273.15, celsius, DELTA);
     }
@@ -73,7 +73,7 @@ public class TemperatureConverterTest {
     public void convertKelvin_100_To_Celsius() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double celsius = converter.fromKelvin(100.0, TemperatureScale.CELSIUS);
+        double celsius = converter.convert(100.0, TemperatureScale.KELVIN, TemperatureScale.CELSIUS);
 
         assertEquals(-173.15, celsius, DELTA);
     }
@@ -82,7 +82,7 @@ public class TemperatureConverterTest {
     public void convertKelvin_0_To_Newton() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double kelvin = converter.fromKelvin(0.0, TemperatureScale.NEWTON);
+        double kelvin = converter.convert(0.0, TemperatureScale.KELVIN, TemperatureScale.NEWTON);
 
         assertEquals(-90.1395, kelvin, DELTA);
     }
@@ -91,7 +91,7 @@ public class TemperatureConverterTest {
     public void convertKelvin_0_To_Fahrenheit() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double fahrenheit = converter.fromKelvin(0.0, TemperatureScale.FAHRENHEIT);
+        double fahrenheit = converter.convert(0.0, TemperatureScale.KELVIN, TemperatureScale.FAHRENHEIT);
 
         assertEquals(-459.67, fahrenheit, DELTA);
     }
@@ -100,7 +100,7 @@ public class TemperatureConverterTest {
     public void convertKelvin_100_To_Fahrenheit() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double fahrenheit = converter.fromKelvin(100.0, TemperatureScale.FAHRENHEIT);
+        double fahrenheit = converter.convert(100.0, TemperatureScale.KELVIN, TemperatureScale.FAHRENHEIT);
 
         assertEquals(-279.67, fahrenheit, DELTA);
     }
