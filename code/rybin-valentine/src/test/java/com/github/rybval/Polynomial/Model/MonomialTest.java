@@ -4,7 +4,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MonomialTest {
-    public static final double EPSILON = 0.00001;
+    private static final int POWER = 5;
+    private static final double COEFFICIENT = 5.4;
+    private static final double EPSILON = 0.00001;
 
     @Test
     public void canCreateMonomial() {
@@ -24,56 +26,45 @@ public class MonomialTest {
 
     @Test
     public void canGetPower() {
-        int power = 5;
-        double coefficient = 5.4;
-        Monomial monomial = new Monomial(power, coefficient);
-
-        assertEquals(power, monomial.getPower());
+        Monomial monomial = new Monomial(POWER, COEFFICIENT);
+        assertEquals(POWER, monomial.getPower());
     }
 
     @Test
     public void canGetCoefficient() {
-        int power = 5;
-        double coefficient = 5.4;
-        Monomial monomial = new Monomial(power, coefficient);
-
-        assertEquals(coefficient, monomial.getCoefficient(), EPSILON);
+        Monomial monomial = new Monomial(POWER, COEFFICIENT);
+        assertEquals(COEFFICIENT, monomial.getCoefficient(), EPSILON);
     }
 
     @Test
     public void canAddMonomialWithSamePower() {
-        int power = 5;
-        Monomial monomial1 = new Monomial(power, 5.4);
-        Monomial monomial2 = new Monomial(power, 3.2);
+        Monomial monomial1 = new Monomial(POWER, 5.4);
+        Monomial monomial2 = new Monomial(POWER, 3.2);
 
-        Monomial monomialsumm = monomial1.add(monomial2);
+        Monomial summ = monomial1.add(monomial2);
 
-        assertEquals(5.4 + 3.2, monomialsumm.getCoefficient(), EPSILON);
+        assertEquals(5.4 + 3.2, summ.getCoefficient(), EPSILON);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void cantAddMonomialWithDifferentPower() {
-        Monomial monomial1 = new Monomial(1, 1);
-        Monomial monomial2 = new Monomial(2, 1);
+        Monomial monomial1 = new Monomial(1, COEFFICIENT);
+        Monomial monomial2 = new Monomial(2, COEFFICIENT);
 
-        Monomial monomialsumm = monomial1.add(monomial2);
+        Monomial summ = monomial1.add(monomial2);
     }
 
     @Test
     public void canNegateMonomial() {
-        int power = 5;
-        double coefficient = 5.4;
-        Monomial monomial = new Monomial(power, coefficient);
-
-        assertEquals(-coefficient, monomial.negate().getCoefficient(),
+        Monomial monomial = new Monomial(POWER, COEFFICIENT);
+        assertEquals(-COEFFICIENT, monomial.negate().getCoefficient(),
                      EPSILON);
     }
 
     @Test
     public void canSubtractMonomialWithSamePower() {
-        int power = 5;
-        Monomial minuend = new Monomial(power, 5.4);
-        Monomial subtrahend = new Monomial(power, 3.2);
+        Monomial minuend = new Monomial(POWER, 5.4);
+        Monomial subtrahend = new Monomial(POWER, 3.2);
 
         Monomial diff = minuend.subtract(subtrahend);
 
@@ -82,31 +73,30 @@ public class MonomialTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void cantSubtractMonomialWithDifferentPower() {
-        Monomial minuend = new Monomial(1, 1);
-        Monomial subtrahend = new Monomial(2, 1);
+        Monomial minuend = new Monomial(1, COEFFICIENT);
+        Monomial subtrahend = new Monomial(2, COEFFICIENT);
 
         Monomial diff = minuend.add(subtrahend);
     }
 
     @Test
-    public void canMultiplyWithMonomial() {
+    public void canMultiplyByMonomial() {
         Monomial multiplicand = new Monomial(5, 5.4);
-        Monomial multiplier = new Monomial(3, 2);
+        Monomial multiplier = new Monomial(3, 2.1);
 
         Monomial product = multiplicand.multiply(multiplier);
 
         assertEquals(product.getPower(), 5 + 3);
-        assertEquals(product.getCoefficient(), 5.4 * 2, EPSILON);
+        assertEquals(product.getCoefficient(), 5.4 * 2.1, EPSILON);
     }
 
     @Test
-    public void canMultiplyWithDouble() {
-        int power = 5;
-        Monomial multiplicand = new Monomial(power, 5.4);
-        double multiplier = 2.0;
+    public void canMultiplyByDouble() {
+        Monomial multiplicand = new Monomial(5, 5.4);
+        double multiplier = 2.1;
 
         Monomial product = multiplicand.multiply(multiplier);
 
-        assertEquals(5.4 * 2.0, product.getCoefficient(), EPSILON);
+        assertEquals(5.4 * 2.1, product.getCoefficient(), EPSILON);
     }
 }
