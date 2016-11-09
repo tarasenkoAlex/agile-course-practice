@@ -3,6 +3,6 @@ package ru.unn.agile.TemperatureConverter.Model;
 public class TemperatureConverter {
 
     public double celsiusToKelvin(double celsius) {
-        return 273.15;
+        return celsius + 273.15;
     }
 }
