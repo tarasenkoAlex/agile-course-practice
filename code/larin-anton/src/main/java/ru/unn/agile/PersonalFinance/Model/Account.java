@@ -24,6 +24,10 @@ public class Account {
     }
 
     public void transferTo(Account other, int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Consider adding a transfer in opposite direction");
+        }
+
         balance -= amount;
         other.balance += amount;
         Transfer transfer = new Transfer(amount, this, other);

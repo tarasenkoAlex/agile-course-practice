@@ -31,10 +31,20 @@ public class ExternalTransaction implements Transaction {
     }
 
     public static Builder expenseBuilder(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException(
+                    "Consider using opposite transaction type");
+        }
+
         return new Builder(-amount);
     }
 
     public static Builder incomeBuilder(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException(
+                    "Consider using opposite transaction type");
+        }
+
         return new Builder(amount);
     }
 

@@ -123,4 +123,12 @@ public class WhenAddingTransactionToAccount {
 
         assertEquals(taxReturn, ((ExternalTransaction) lastIncome).getCategory());
     }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void andItIsTransferNegativeAmountShouldCauseFailure() {
+        Account cash = new Account(75);
+        Account debitCard = new Account(150);
+
+        debitCard.transferTo(cash, -20);
+    }
 }
