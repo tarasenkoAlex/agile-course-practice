@@ -6,7 +6,7 @@ public abstract class Transaction implements Comparable<Transaction> {
     private final int amount;
     private final GregorianCalendar date;
 
-    protected Transaction(int amount, GregorianCalendar date) {
+    protected Transaction(final int amount, final GregorianCalendar date) {
         this.amount = amount;
         this.date = date;
     }
