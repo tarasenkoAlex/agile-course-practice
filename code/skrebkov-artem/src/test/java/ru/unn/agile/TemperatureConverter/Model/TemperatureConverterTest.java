@@ -69,4 +69,13 @@ public class TemperatureConverterTest {
         assertEquals(-273.15, celsius, DELTA);
     }
 
+    @Test
+    public void convertKelvin_100_To_Celsius() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double celsius = converter.fromKelvin(100.0, TemperatureScale.CELSIUS);
+
+        assertEquals(-173.15, celsius, DELTA);
+    }
+
 }
