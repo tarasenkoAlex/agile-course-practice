@@ -18,4 +18,13 @@ public class TemperatureConverterTest {
 
         assertEquals(273.15, kelvin, 0.000001);
     }
+
+    @Test
+    public void convertCelsius_100_To_Kelvin() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double kelvin = converter.celsiusToKelvin(100.0);
+
+        assertEquals(373.15, kelvin, 0.000001);
+    }
 }
