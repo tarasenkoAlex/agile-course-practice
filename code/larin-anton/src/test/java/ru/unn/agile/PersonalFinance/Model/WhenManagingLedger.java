@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class WhenManagingLedger {
-    Ledger ledger = new Ledger();
+    private Ledger ledger = new Ledger();
 
     @Test
     public void ledgerIsEmptyUponCreation() {
@@ -86,7 +86,7 @@ public class WhenManagingLedger {
         ledger.addCategory(groceries);
         Account cash = new Account(75, "Cash");
         ledger.addAccount(cash);
-        cash.addExpense(ExternalTransaction.expenseBuilder(5)
+        cash.addExternalTransaction(ExternalTransaction.expenseBuilder(5)
                 .description("Bread")
                 .category(groceries)
                 .build());

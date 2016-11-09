@@ -7,15 +7,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class WhenEditingTransaction {
-    Account cash = new Account(75, "Cash");
-    Account debitCard = new Account(150, "Debit card");
-    GregorianCalendar oldDate = new GregorianCalendar(2015, Calendar.JULY, 4);
-    GregorianCalendar newDate = new GregorianCalendar(2015, Calendar.MAY, 9);
+    private Account cash = new Account(75, "Cash");
+    private Account debitCard = new Account(150, "Debit card");
+    private GregorianCalendar oldDate = new GregorianCalendar(2015, Calendar.JULY, 4);
+    private GregorianCalendar newDate = new GregorianCalendar(2015, Calendar.MAY, 9);
 
     @Test
     public void amountAndItIsExpenseAccountsBalanceShouldBeAdjusted() {
         ExternalTransaction expense = ExternalTransaction.expenseBuilder(25).build();
-        cash.addExpense(expense);
+        cash.addExternalTransaction(expense);
         ExternalTransaction editedExpense = ExternalTransaction.expenseBuilder(20).build();
 
         cash.replaceExternalTransaction(expense, editedExpense);
@@ -26,7 +26,7 @@ public class WhenEditingTransaction {
     @Test
     public void amountAndItIsIncomeAccountsBalanceShouldBeAdjusted() {
         ExternalTransaction income = ExternalTransaction.incomeBuilder(25).build();
-        cash.addIncome(income);
+        cash.addExternalTransaction(income);
         ExternalTransaction editedIncome = ExternalTransaction.incomeBuilder(20).build();
 
         cash.replaceExternalTransaction(income, editedIncome);
@@ -49,7 +49,7 @@ public class WhenEditingTransaction {
     public void descriptionAndItIsExpenseDescriptionShouldChange() {
         ExternalTransaction expense = ExternalTransaction.expenseBuilder(25)
                 .description("Water").build();
-        cash.addExpense(expense);
+        cash.addExternalTransaction(expense);
 
         ExternalTransaction newExpense = ExternalTransaction.expenseBuilder(25)
                 .description("Mineral water").build();
@@ -63,7 +63,7 @@ public class WhenEditingTransaction {
     public void descriptionAndItIsIncomeDescriptionShouldChange() {
         ExternalTransaction income = ExternalTransaction.incomeBuilder(50)
                 .description("Salary").build();
-        debitCard.addIncome(income);
+        debitCard.addExternalTransaction(income);
 
         ExternalTransaction newIncome = ExternalTransaction.incomeBuilder(50)
                 .description("2nd job salary").build();
@@ -77,7 +77,7 @@ public class WhenEditingTransaction {
     public void categoryAndItIsExpenseCategoryShouldChange() {
         ExternalTransaction expense = ExternalTransaction.expenseBuilder(25)
                 .category(new Category("Groceries")).build();
-        cash.addExpense(expense);
+        cash.addExternalTransaction(expense);
 
         Category newCategory = new Category("Restaurants");
         ExternalTransaction newExpense = ExternalTransaction.expenseBuilder(25)
@@ -92,7 +92,7 @@ public class WhenEditingTransaction {
     public void categoryAndItIsIncomeCategoryShouldChange() {
         ExternalTransaction income = ExternalTransaction.incomeBuilder(25)
                 .category(new Category("Groceries")).build();
-        cash.addIncome(income);
+        cash.addExternalTransaction(income);
 
         Category newCategory = new Category("Restaurants");
         ExternalTransaction newIncome = ExternalTransaction.incomeBuilder(25)
@@ -118,7 +118,7 @@ public class WhenEditingTransaction {
     public void dateAndItIsExpenseDateShouldChange() {
         ExternalTransaction oldExpense = ExternalTransaction.expenseBuilder(25)
                 .date(oldDate).build();
-        cash.addExpense(oldExpense);
+        cash.addExternalTransaction(oldExpense);
 
         ExternalTransaction newExpense = ExternalTransaction.expenseBuilder(25)
                 .date(newDate).build();
@@ -131,7 +131,7 @@ public class WhenEditingTransaction {
     public void dateAndItIsIncomeDateShouldChange() {
         ExternalTransaction oldIncome = ExternalTransaction.incomeBuilder(25)
                 .date(oldDate).build();
-        cash.addExpense(oldIncome);
+        cash.addExternalTransaction(oldIncome);
 
         ExternalTransaction newIncome = ExternalTransaction.incomeBuilder(25)
                 .date(newDate).build();

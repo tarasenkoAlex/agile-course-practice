@@ -5,7 +5,11 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Account {
-    public Account(int startingBalance, String name) {
+    private int balance;
+    private String name;
+    private final List<Transaction> transactions;
+
+    public Account(final int startingBalance, final String name) {
         this.balance = startingBalance;
         this.name = name;
         this.transactions = new ArrayList<>();
@@ -23,19 +27,16 @@ public class Account {
         return transactions;
     }
 
-    public void addExpense(ExternalTransaction expense) {
+    public void addExternalTransaction(final ExternalTransaction expense) {
         balance += expense.getAmount();
         transactions.add(expense);
     }
 
-    public void addIncome(ExternalTransaction income) {
-        balance += income.getAmount();
-        transactions.add(income);
-    }
-
-    public void transferTo(Account other, int amount, GregorianCalendar date) {
+    public void transferTo(final Account other, final int amount,
+                           final GregorianCalendar date) {
         if (amount < 0) {
-            throw new IllegalArgumentException("Consider adding a transfer in opposite direction");
+            throw new IllegalArgumentException(
+                    "Consider adding a transfer in opposite direction");
         }
 
         balance -= amount;
@@ -45,11 +46,11 @@ public class Account {
         other.transactions.add(transfer);
     }
 
-    public void transferTo(Account other, int amount) {
+    public void transferTo(final Account other, final int amount) {
         transferTo(other, amount, null);
     }
 
-    public void deleteTransaction(Transaction transaction) {
+    public void deleteTransaction(final Transaction transaction) {
         if (transaction.isExternal()) {
             balance -= transaction.getAmount();
             transactions.remove(transaction);
@@ -67,14 +68,14 @@ public class Account {
     }
 
     public void replaceExternalTransaction(
-            ExternalTransaction oldTransaction,
-            ExternalTransaction newTransaction) {
+            final ExternalTransaction oldTransaction,
+            final ExternalTransaction newTransaction) {
 
         transactions.set(transactions.indexOf(oldTransaction), newTransaction);
         balance -= oldTransaction.getAmount() - newTransaction.getAmount();
     }
 
-    public void replaceTransfer(Transfer oldTransfer, Transfer newTransfer) {
+    public void replaceTransfer(final Transfer oldTransfer, final Transfer newTransfer) {
         int amountDelta = newTransfer.getAmount() - oldTransfer.getAmount();
 
         Account otherAccount;
@@ -94,11 +95,7 @@ public class Account {
                 newTransfer);
     }
 
-    public void changeName(String name) {
+    public void changeName(final String name) {
         this.name = name;
     }
-
-    private int balance;
-    private String name;
-    private List<Transaction> transactions;
 }

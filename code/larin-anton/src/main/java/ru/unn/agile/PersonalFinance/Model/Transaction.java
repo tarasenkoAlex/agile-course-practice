@@ -1,8 +1,8 @@
 package ru.unn.agile.PersonalFinance.Model;
 
 public interface Transaction {
-    public int getAmount();
+    int getAmount();
 
-    public boolean isExternal();
-    public boolean isTransfer();
+    boolean isExternal();
+    boolean isTransfer();
 }

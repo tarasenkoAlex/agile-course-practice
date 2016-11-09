@@ -8,19 +8,20 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class WhenAddingTransactionToAccount {
-    Account cash = new Account(75, "Cash");
-    Account debitCard = new Account(150, "Debit card");
+    private Account cash = new Account(75, "Cash");
+    private Account debitCard = new Account(150, "Debit card");
+    private GregorianCalendar date = new GregorianCalendar(2015, Calendar.MAY, 9);
 
     @Test
     public void andItIsExpenseBalanceShouldDecrease() {
-        cash.addExpense(ExternalTransaction.expenseBuilder(25).build());
+        cash.addExternalTransaction(ExternalTransaction.expenseBuilder(25).build());
 
         assertEquals(50, cash.getBalance());
     }
 
     @Test
     public void andItIsIncomeBalanceShouldIncrease() {
-        cash.addIncome(ExternalTransaction.incomeBuilder(50).build());
+        cash.addExternalTransaction(ExternalTransaction.incomeBuilder(50).build());
 
         assertEquals(125, cash.getBalance());
     }
@@ -35,7 +36,7 @@ public class WhenAddingTransactionToAccount {
 
     @Test
     public void andItIsExpenseItIsSavedToTransactionList() {
-        cash.addExpense(ExternalTransaction.expenseBuilder(25).build());
+        cash.addExternalTransaction(ExternalTransaction.expenseBuilder(25).build());
         List<Transaction> transactions = cash.getTransactions();
         Transaction last = transactions.get(transactions.size() - 1);
 
@@ -44,7 +45,7 @@ public class WhenAddingTransactionToAccount {
 
     @Test
     public void andItIsIncomeItIsSavedToTransactionList() {
-        debitCard.addIncome(ExternalTransaction.incomeBuilder(50).build());
+        debitCard.addExternalTransaction(ExternalTransaction.incomeBuilder(50).build());
         List<Transaction> transactions = debitCard.getTransactions();
         Transaction last = transactions.get(transactions.size() - 1);
 
@@ -65,7 +66,7 @@ public class WhenAddingTransactionToAccount {
 
     @Test
     public void andItIsExpenseDescriptionIsSaved() {
-        cash.addExpense(ExternalTransaction.expenseBuilder(25)
+        cash.addExternalTransaction(ExternalTransaction.expenseBuilder(25)
                 .description("Candy")
                 .build());
         Transaction lastExpense = cash.getTransactions().get(
@@ -76,7 +77,7 @@ public class WhenAddingTransactionToAccount {
 
     @Test
     public void andItIsIncomeDescriptionIsSaved() {
-        debitCard.addIncome(ExternalTransaction.incomeBuilder(50)
+        debitCard.addExternalTransaction(ExternalTransaction.incomeBuilder(50)
                 .description("Salary")
                 .build());
         Transaction lastIncome = debitCard.getTransactions().get(
@@ -88,7 +89,7 @@ public class WhenAddingTransactionToAccount {
     @Test
     public void andItIsExpenseCategoryIsSaved() {
         Category food = new Category("Food");
-        cash.addExpense(ExternalTransaction.expenseBuilder(25)
+        cash.addExternalTransaction(ExternalTransaction.expenseBuilder(25)
                 .category(food)
                 .build());
         Transaction lastExpense = cash.getTransactions().get(0);
@@ -99,7 +100,7 @@ public class WhenAddingTransactionToAccount {
     @Test
     public void andItIsIncomeCategoryIsSaved() {
         Category taxReturn = new Category("Tax return");
-        cash.addIncome(ExternalTransaction.incomeBuilder(50)
+        cash.addExternalTransaction(ExternalTransaction.incomeBuilder(50)
                 .category(taxReturn)
                 .build());
         Transaction lastIncome = cash.getTransactions().get(0);
@@ -107,15 +108,14 @@ public class WhenAddingTransactionToAccount {
         assertEquals(taxReturn, ((ExternalTransaction) lastIncome).getCategory());
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void andItIsTransferNegativeAmountShouldCauseFailure() {
         debitCard.transferTo(cash, -20);
     }
 
     @Test
     public void andItIsExpenseDateIsSaved() {
-        GregorianCalendar date = new GregorianCalendar(2015, Calendar.MAY, 9);
-        cash.addExpense(ExternalTransaction.expenseBuilder(25).date(date).build());
+        cash.addExternalTransaction(ExternalTransaction.expenseBuilder(25).date(date).build());
         ExternalTransaction lastExpense = (ExternalTransaction) cash.getTransactions().get(0);
 
         assertEquals(date, lastExpense.getDate());
@@ -123,8 +123,7 @@ public class WhenAddingTransactionToAccount {
 
     @Test
     public void andItIsIncomeDateIsSaved() {
-        GregorianCalendar date = new GregorianCalendar(2015, Calendar.MAY, 9);
-        cash.addIncome(ExternalTransaction.incomeBuilder(25).date(date).build());
+        cash.addExternalTransaction(ExternalTransaction.incomeBuilder(25).date(date).build());
         ExternalTransaction lastIncome = (ExternalTransaction) cash.getTransactions().get(0);
 
         assertEquals(date, lastIncome.getDate());
@@ -132,7 +131,6 @@ public class WhenAddingTransactionToAccount {
 
     @Test
     public void andItIsTransferDateIsSaved() {
-        GregorianCalendar date = new GregorianCalendar(2015, Calendar.MAY, 9);
         debitCard.transferTo(cash, 25, date);
         Transfer lastTransfer = (Transfer) cash.getTransactions().get(0);
 

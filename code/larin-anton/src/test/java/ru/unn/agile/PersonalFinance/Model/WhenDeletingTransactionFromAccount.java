@@ -4,12 +4,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class WhenDeletingTransactionFromAccount {
-    Account cash = new Account(75, "Cash");
-    Account debitCard = new Account(150, "Debit card");
+    private Account cash = new Account(75, "Cash");
+    private Account debitCard = new Account(150, "Debit card");
 
     @Test
     public void balanceShouldBeUpdated() {
-        cash.addExpense(ExternalTransaction.expenseBuilder(25).build());
+        cash.addExternalTransaction(ExternalTransaction.expenseBuilder(25).build());
 
         cash.deleteTransaction(cash.getTransactions().get(0));
 
@@ -18,7 +18,7 @@ public class WhenDeletingTransactionFromAccount {
 
     @Test
     public void andItIsTheOnlyOneTransactionListShouldBeEmpty() {
-        cash.addExpense(ExternalTransaction.expenseBuilder(25).build());
+        cash.addExternalTransaction(ExternalTransaction.expenseBuilder(25).build());
 
         cash.deleteTransaction(cash.getTransactions().get(0));
 

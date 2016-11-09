@@ -3,8 +3,17 @@ package ru.unn.agile.PersonalFinance.Model;
 import java.util.GregorianCalendar;
 
 public class ExternalTransaction implements Transaction {
-    public ExternalTransaction(int amount, String description, Category category,
-                               GregorianCalendar date) {
+    private final String description;
+    private final int amount;
+    private Category category;
+    private final GregorianCalendar date;
+
+    public ExternalTransaction(
+            final int amount,
+            final String description,
+            final Category category,
+            final GregorianCalendar date) {
+
         this.amount = amount;
         this.description = description;
         this.category = category;
@@ -34,7 +43,7 @@ public class ExternalTransaction implements Transaction {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(final Category category) {
         this.category = category;
     }
 
@@ -43,7 +52,7 @@ public class ExternalTransaction implements Transaction {
     }
 
 
-    public static Builder expenseBuilder(int amount) {
+    public static Builder expenseBuilder(final int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException(
                     "Consider using opposite transaction type");
@@ -52,7 +61,7 @@ public class ExternalTransaction implements Transaction {
         return new Builder(-amount);
     }
 
-    public static Builder incomeBuilder(int amount) {
+    public static Builder incomeBuilder(final int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException(
                     "Consider using opposite transaction type");
@@ -63,21 +72,26 @@ public class ExternalTransaction implements Transaction {
 
 
     public static class Builder {
-        public Builder(int amount) {
+        private final int transactionAmount;
+        private String transactionDescription;
+        private Category transactionCategory;
+        private GregorianCalendar transactionDate;
+
+        public Builder(final int amount) {
             this.transactionAmount = amount;
         }
 
-        public Builder description(String description) {
+        public Builder description(final String description) {
             this.transactionDescription = description;
             return this;
         }
 
-        public Builder category(Category category) {
+        public Builder category(final Category category) {
             this.transactionCategory = category;
             return this;
         }
 
-        public Builder date(GregorianCalendar date) {
+        public Builder date(final GregorianCalendar date) {
             this.transactionDate = date;
             return this;
         }
@@ -89,15 +103,5 @@ public class ExternalTransaction implements Transaction {
                     transactionCategory,
                     transactionDate);
         }
-
-        private int transactionAmount;
-        private String transactionDescription;
-        private Category transactionCategory;
-        private GregorianCalendar transactionDate;
     }
-
-    private String description;
-    private int amount;
-    private Category category;
-    private GregorianCalendar date;
 }

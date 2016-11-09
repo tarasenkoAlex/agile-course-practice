@@ -3,15 +3,26 @@ package ru.unn.agile.PersonalFinance.Model;
 import java.util.GregorianCalendar;
 
 public class Transfer implements Transaction {
-    public Transfer(int amount, Account source, Account target,
-                    GregorianCalendar date) {
+    private int amount;
+    private Account source;
+    private Account target;
+    private GregorianCalendar date;
+
+    public Transfer(final int amount,
+                    final Account source,
+                    final Account target,
+                    final GregorianCalendar date) {
+
         this.amount = amount;
         this.source = source;
         this.target = target;
         this.date = date;
     }
 
-    public Transfer(int amount, Account source, Account target) {
+    public Transfer(
+            final int amount,
+            final Account source,
+            final Account target) {
         this(amount, source, target, null);
     }
 
@@ -38,20 +49,15 @@ public class Transfer implements Transaction {
         return true;
     }
 
-    public void setSource(Account source) {
+    public void setSource(final Account source) {
         this.source = source;
     }
 
-    public void setTarget(Account target) {
+    public void setTarget(final Account target) {
         this.target = target;
     }
 
     public GregorianCalendar getDate() {
         return date;
     }
-
-    private int amount;
-    private Account source;
-    private Account target;
-    private GregorianCalendar date;
 }

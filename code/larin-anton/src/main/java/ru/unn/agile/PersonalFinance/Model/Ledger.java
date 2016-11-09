@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ledger {
+    private final List<Account> accounts;
+    private final List<Category> categories;
+
     public static final Account DELETED_ACCOUNT = new Account(0, "<Deleted account>");
 
     public Ledger() {
@@ -15,11 +18,11 @@ public class Ledger {
         return accounts;
     }
 
-    public void addAccount(Account account) {
+    public void addAccount(final Account account) {
         accounts.add(account);
     }
 
-    public void deleteAccount(Account account) {
+    public void deleteAccount(final Account account) {
         accounts.remove(account);
 
         for (Account oneOfTheRest : accounts) {
@@ -37,7 +40,7 @@ public class Ledger {
         }
     }
 
-    public void addCategory(Category category) {
+    public void addCategory(final Category category) {
         categories.add(category);
     }
 
@@ -45,7 +48,7 @@ public class Ledger {
         return categories;
     }
 
-    public void deleteCategory(Category category) {
+    public void deleteCategory(final Category category) {
         categories.remove(category);
 
         for (Account account : accounts) {
@@ -60,7 +63,4 @@ public class Ledger {
             }
         }
     }
-
-    private List<Account> accounts;
-    private List<Category> categories;
 }
