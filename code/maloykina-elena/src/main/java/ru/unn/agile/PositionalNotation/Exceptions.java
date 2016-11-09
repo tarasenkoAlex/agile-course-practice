@@ -22,8 +22,8 @@ public class Exceptions {
     }
     public void checkHexValue(final StringBuilder hex) {
         for (int i = 0; i < hex.length(); i++) {
-            if (!((hex.charAt(i) <= '9' && hex.charAt(i) >= '0')
-                    || (hex.charAt(i) <= 'f' && hex.charAt(i) >= 'a'))) {
+            if (!(hex.charAt(i) <= '9' && hex.charAt(i) >= '0'
+                    || hex.charAt(i) <= 'f' && hex.charAt(i) >= 'a')) {
                 throw new IllegalArgumentException("Incorrect hex number");
             }
         }

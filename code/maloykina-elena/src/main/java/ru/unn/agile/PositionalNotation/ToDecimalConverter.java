@@ -12,7 +12,7 @@ public class ToDecimalConverter {
         StringBuilder binary = number.reverse();
         for (int i = 0; i < binary.length(); i++) {
             char elem = binary.charAt(i);
-            result += ((elem - '0') << iter++);
+            result += (elem - '0') << iter++;
         }
         return result;
     }
@@ -22,7 +22,7 @@ public class ToDecimalConverter {
         StringBuilder octal = number.reverse();
         for (int i = 0; i < octal.length(); i++) {
             char elem = octal.charAt(i);
-            int val = ((elem - '0') << iter);
+            int val = (elem - '0') << iter;
             iter += Constatants.OCTAL_ITER;
             result += val;
         }
@@ -40,7 +40,7 @@ public class ToDecimalConverter {
             } else if (elem > 'a') {
                 val = (Constatants.HEX_A + elem - 'a') << iter;
             } else {
-                val = ((elem - '0') << iter);
+                val = (elem - '0') << iter;
             }
             iter += Constatants.HEX_ITER;
             result += val;
