@@ -87,4 +87,22 @@ public class TemperatureConverterTest {
         assertEquals(-90.1395, kelvin, DELTA);
     }
 
+    @Test
+    public void convertKelvin_0_To_Fahrenheit() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double fahrenheit = converter.fromKelvin(0.0, TemperatureScale.FAHRENHEIT);
+
+        assertEquals(-459.67, fahrenheit, DELTA);
+    }
+
+    @Test
+    public void convertKelvin_100_To_Fahrenheit() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double fahrenheit = converter.fromKelvin(100.0, TemperatureScale.FAHRENHEIT);
+
+        assertEquals(-279.67, fahrenheit, DELTA);
+    }
+
 }
