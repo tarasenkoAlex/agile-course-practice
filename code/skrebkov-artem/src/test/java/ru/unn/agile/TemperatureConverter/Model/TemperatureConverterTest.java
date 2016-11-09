@@ -60,4 +60,13 @@ public class TemperatureConverterTest {
         assertEquals(33.0, newton, DELTA);
     }
 
+    @Test
+    public void convertKelvin_0_To_Celsius() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double celsius = converter.fromKelvin(0.0, TemperatureScale.CELSIUS);
+
+        assertEquals(-273.15, celsius, DELTA);
+    }
+
 }
