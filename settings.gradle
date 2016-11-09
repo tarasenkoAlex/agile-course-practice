@@ -42,6 +42,9 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
+// Tarasenko Alex
+include "code/tarasenko-alex"
+project(":code/tarasenko-alex").name = "tarasenko-alex"
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
