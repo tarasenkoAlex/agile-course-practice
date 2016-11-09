@@ -51,6 +51,19 @@ public class ExternalTransaction implements Transaction {
         return date;
     }
 
+    @Override
+    public int compareTo(final Transaction o) {
+        if (date == null) {
+            return 1;
+        }
+
+        if (o.getDate() == null) {
+            return -1;
+        }
+
+        return -date.compareTo(o.getDate());
+    }
+
 
     public static Builder expenseBuilder(final int amount) {
         if (amount < 0) {

@@ -3,6 +3,7 @@ package ru.unn.agile.PersonalFinance.Model;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import static java.util.Collections.sort;
 
 public class Account {
     private int balance;
@@ -30,6 +31,7 @@ public class Account {
     public void addExternalTransaction(final ExternalTransaction expense) {
         balance += expense.getAmount();
         transactions.add(expense);
+        sort(transactions);
     }
 
     public void transferTo(final Account other, final int amount,
@@ -44,6 +46,9 @@ public class Account {
         Transfer transfer = new Transfer(amount, this, other, date);
         transactions.add(transfer);
         other.transactions.add(transfer);
+
+        sort(transactions);
+        sort(other.transactions);
     }
 
     public void transferTo(final Account other, final int amount) {
@@ -73,6 +78,7 @@ public class Account {
 
         transactions.set(transactions.indexOf(oldTransaction), newTransaction);
         balance -= oldTransaction.getAmount() - newTransaction.getAmount();
+        sort(transactions);
     }
 
     public void replaceTransfer(final Transfer oldTransfer, final Transfer newTransfer) {
@@ -89,10 +95,12 @@ public class Account {
             otherAccount.balance -= amountDelta;
         }
         List<Transaction> otherAccountTransactions = otherAccount.getTransactions();
-        this.getTransactions().set(this.getTransactions().indexOf(oldTransfer),
+        transactions.set(this.getTransactions().indexOf(oldTransfer),
                 newTransfer);
         otherAccountTransactions.set(otherAccountTransactions.indexOf(oldTransfer),
                 newTransfer);
+        sort(transactions);
+        sort(otherAccountTransactions);
     }
 
     public void changeName(final String name) {
