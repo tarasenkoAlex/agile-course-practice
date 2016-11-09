@@ -158,4 +158,31 @@ public class TemperatureConverterTest {
 
         assertEquals(100.0, celsius, DELTA);
     }
+
+    @Test
+    public void convertFahrenheit_8_33_To_Kelvin() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double kelvin = converter.convert(8.33, TemperatureScale.FAHRENHEIT, TemperatureScale.KELVIN);
+
+        assertEquals(260.0, kelvin, DELTA);
+    }
+
+    @Test
+    public void convertFahrenheit_5_To_Celsius() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double celsius = converter.convert(5.0, TemperatureScale.FAHRENHEIT, TemperatureScale.CELSIUS);
+
+        assertEquals(-15, celsius, DELTA);
+    }
+
+    @Test
+    public void convertFahrenheit_2_To_Newton() {
+        TemperatureConverter converter = new TemperatureConverter();
+
+        double newton = converter.convert(2.0, TemperatureScale.FAHRENHEIT, TemperatureScale.NEWTON);
+
+        assertEquals(-5.5, newton, DELTA);
+    }
 }
