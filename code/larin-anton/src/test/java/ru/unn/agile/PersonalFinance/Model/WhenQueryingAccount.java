@@ -34,11 +34,11 @@ public class WhenQueryingAccount {
     public void datelessTransactionsShouldBeAtTheEndOfTheList() {
         cash.addExternalTransaction(cinemaTicket);
         cash.addExternalTransaction(friendlyLoan);
-        debitCard.transferTo(cash, 40, new GregorianCalendar(2015, Calendar.JULY, 31));
+        debitCard.transferTo(cash, 40, new GregorianCalendar(2015, Calendar.AUGUST, 30));
         Transfer cashWithdrawal = (Transfer) debitCard.getTransactions().get(0);
 
-        assertEquals(friendlyLoan, cash.getTransactions().get(0));
-        assertEquals(cashWithdrawal, cash.getTransactions().get(1));
+        assertEquals(cashWithdrawal, cash.getTransactions().get(0));
+        assertEquals(friendlyLoan, cash.getTransactions().get(1));
         assertEquals(cinemaTicket, cash.getTransactions().get(2));
     }
 
