@@ -34,6 +34,11 @@ public class Account {
         return transactions;
     }
 
+    public void deleteTransaction(Transaction transaction) {
+        balance -= transaction.getAmount();
+        transactions.remove(transaction);
+    }
+
     private int balance;
     private List<Transaction> transactions;
 }
