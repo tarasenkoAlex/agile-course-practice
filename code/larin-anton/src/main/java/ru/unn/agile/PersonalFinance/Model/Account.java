@@ -3,7 +3,6 @@ package ru.unn.agile.PersonalFinance.Model;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-import static java.util.Collections.sort;
 
 public class Account {
     private int balance;
@@ -30,8 +29,7 @@ public class Account {
 
     public void addExternalTransaction(final ExternalTransaction expense) {
         balance += expense.getAmount();
-        transactions.add(expense);
-        sort(transactions);
+        addTransactionKeepingOrder(transactions, expense);
     }
 
     public void transferTo(final Account other, final int amount,
@@ -44,11 +42,8 @@ public class Account {
         balance -= amount;
         other.balance += amount;
         Transfer transfer = new Transfer(amount, this, other, date);
-        transactions.add(transfer);
-        other.transactions.add(transfer);
-
-        sort(transactions);
-        sort(other.transactions);
+        addTransactionKeepingOrder(transactions, transfer);
+        addTransactionKeepingOrder(other.transactions, transfer);
     }
 
     public void transferTo(final Account other, final int amount) {
@@ -76,9 +71,9 @@ public class Account {
             final ExternalTransaction oldTransaction,
             final ExternalTransaction newTransaction) {
 
-        transactions.set(transactions.indexOf(oldTransaction), newTransaction);
         balance -= oldTransaction.getAmount() - newTransaction.getAmount();
-        sort(transactions);
+        transactions.remove(transactions.indexOf(oldTransaction));
+        addTransactionKeepingOrder(transactions, newTransaction);
     }
 
     public void replaceTransfer(final Transfer oldTransfer, final Transfer newTransfer) {
@@ -95,15 +90,26 @@ public class Account {
             otherAccount.balance -= amountDelta;
         }
         List<Transaction> otherAccountTransactions = otherAccount.getTransactions();
-        transactions.set(this.getTransactions().indexOf(oldTransfer),
-                newTransfer);
-        otherAccountTransactions.set(otherAccountTransactions.indexOf(oldTransfer),
-                newTransfer);
-        sort(transactions);
-        sort(otherAccountTransactions);
+        transactions.remove(this.getTransactions().indexOf(oldTransfer));
+        addTransactionKeepingOrder(transactions, newTransfer);
+        otherAccountTransactions.remove(otherAccountTransactions.indexOf(oldTransfer));
+        addTransactionKeepingOrder(otherAccountTransactions, newTransfer);
     }
 
     public void changeName(final String name) {
         this.name = name;
+    }
+
+    private void addTransactionKeepingOrder(
+            final List<Transaction> transactions,
+            final Transaction replacement) {
+
+        int insertionIndex = transactions.size() - 1;
+        while ((insertionIndex >= 0)
+                && (transactions.get(insertionIndex).compareTo(replacement) == 1)) {
+            insertionIndex--;
+        }
+
+        transactions.add(insertionIndex + 1, replacement);
     }
 }
