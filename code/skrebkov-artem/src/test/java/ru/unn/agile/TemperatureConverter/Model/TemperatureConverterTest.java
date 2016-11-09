@@ -4,11 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TemperatureConverterTest {
-
-    //@Test
-    //public void failingTest() {
-    //    fail();
-    //}
+    private static final double DELTA = 0.000001;
 
     @Test
     public void convertCelsius_0_To_Kelvin() {
@@ -16,7 +12,7 @@ public class TemperatureConverterTest {
 
         double kelvin = converter.celsiusToKelvin(0.0);
 
-        assertEquals(273.15, kelvin, 0.000001);
+        assertEquals(273.15, kelvin, DELTA);
     }
 
     @Test
@@ -25,6 +21,6 @@ public class TemperatureConverterTest {
 
         double kelvin = converter.celsiusToKelvin(100.0);
 
-        assertEquals(373.15, kelvin, 0.000001);
+        assertEquals(373.15, kelvin, DELTA);
     }
 }
