@@ -1,9 +1,11 @@
 package ru.unn.agile.TemperatureConverter.Model;
 
 public class TemperatureConverter {
-    public double compute(double degrees, TemperatureScale sourceScale, TemperatureScale destinationScale) {
-        double sourceDegrees = (degrees - sourceScale.shift) / sourceScale.factor;
+    public double compute(final double degrees,
+                          final TemperatureScale sourceScale,
+                          final TemperatureScale destinationScale) {
+        double sourceDegrees = (degrees - sourceScale.getShift()) / sourceScale.getFactor();
 
-        return sourceDegrees * destinationScale.factor + destinationScale.shift;
+        return sourceDegrees * destinationScale.getFactor() + destinationScale.getShift();
     }
 }

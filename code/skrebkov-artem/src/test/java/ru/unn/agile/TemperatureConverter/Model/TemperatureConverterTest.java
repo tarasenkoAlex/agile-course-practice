@@ -31,14 +31,15 @@ public class TemperatureConverterTest {
         });
     }
 
-    private double sourceDegree;
-    private double destinationDegree;
-    private TemperatureScale sourceScale;
-    private TemperatureScale destinationScale;
+    private final double sourceDegree;
+    private final double destinationDegree;
+    private final TemperatureScale sourceScale;
+    private final TemperatureScale destinationScale;
 
-    public TemperatureConverterTest(double sourceDegree, double destinationDegree,
-                             TemperatureScale sourceScale, TemperatureScale destinationScale)
-    {
+    public TemperatureConverterTest(final double sourceDegree,
+                                    final double destinationDegree,
+                                    final TemperatureScale sourceScale,
+                                    final TemperatureScale destinationScale) {
         this.sourceDegree = sourceDegree;
         this.destinationDegree = destinationDegree;
         this.sourceScale = sourceScale;
@@ -49,6 +50,8 @@ public class TemperatureConverterTest {
     @Test
     public void testTemperatureConverter() {
         TemperatureConverter converter = new TemperatureConverter();
-        assertEquals(destinationDegree, converter.compute(sourceDegree, sourceScale, destinationScale), DELTA);
+        assertEquals(destinationDegree,
+                converter.compute(sourceDegree, sourceScale, destinationScale),
+                DELTA);
     }
 }
