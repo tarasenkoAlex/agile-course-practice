@@ -20,9 +20,13 @@
 
 ["RGB <-> HSV"][RGBtoHSV]
 
-["RGB <-> XYZ"][RGBtoXYZ]
+["RGB -> XYZ"][RGBtoXYZ]
 
-["RGB <-> LAB"][XYZtoLAB]
+["XYZ -> RGB"][XYZtoRGB]
+
+["XYZ -> LAB"][XYZtoLAB]
+
+["LAB -> XYZ"][LABtoXYZ]
 
 ## Документация разработчика
 
@@ -32,4 +36,7 @@ TBD
 
 [RGBtoHSV]: https://ru.wikipedia.org/wiki/HSV_(цветовая_модель)
 [RGBtoXYZ]: http://www.brucelindbloom.com/index.html?Eqn_RGB_to_XYZ.html
+[XYZtoRGB]: http://www.brucelindbloom.com/index.html?Eqn_XYZ_to_RGB.html
 [XYZtoLAB]: http://www.brucelindbloom.com/index.html?Eqn_XYZ_to_Lab.html
+[LABtoXYZ]: http://www.brucelindbloom.com/index.html?Eqn_Lab_to_XYZ.html
+
