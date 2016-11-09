@@ -1,46 +1,49 @@
 package ru.unn.agile.PositionalNotation;
 
-public class Converter {
-    public StringBuilder binaryToOctal(final StringBuilder binary) {
-        int decimal = new ToDecimalConverter(binary).convertBinaryToDecimal();
-        return new FromDecimalConverter(decimal).convertToOctal();
+public final class Converter {
+    private Converter() {
     }
-    public int binaryToDecimal(final StringBuilder binary) {
-        return new ToDecimalConverter(binary).convertBinaryToDecimal();
+
+    public static String binaryToOctal(final String binary) {
+        int decimal = ToDecimalConverter.convertBinaryToDecimal(binary);
+        return  FromDecimalConverter.convertToOctal(decimal);
     }
-    public StringBuilder binaryToHex(final StringBuilder binary) {
-        int decimal = new ToDecimalConverter(binary).convertBinaryToDecimal();
-        return new FromDecimalConverter(decimal).convertToHex();
+    public static int binaryToDecimal(final String binary) {
+        return ToDecimalConverter.convertBinaryToDecimal(binary);
     }
-    public StringBuilder octalToBinary(final StringBuilder octal) {
-        int decimal = new ToDecimalConverter(octal).convertOctalToDecimal();
-        return  new FromDecimalConverter(decimal).convertToBinary();
+    public static String binaryToHex(final String binary) {
+        int decimal = ToDecimalConverter.convertBinaryToDecimal(binary);
+        return FromDecimalConverter.convertToHex(decimal);
     }
-    public int octalToDecimal(final StringBuilder octal) {
-        return new ToDecimalConverter(octal).convertOctalToDecimal();
+    public static String octalToBinary(final String octal) {
+        int decimal = ToDecimalConverter.convertOctalToDecimal(octal);
+        return FromDecimalConverter.convertToBinary(decimal);
     }
-    public StringBuilder octalToHex(final StringBuilder octal) {
-        int decimal = new ToDecimalConverter(octal).convertOctalToDecimal();
-        return  new FromDecimalConverter(decimal).convertToHex();
+    public static int octalToDecimal(final String octal) {
+        return ToDecimalConverter.convertOctalToDecimal(octal);
     }
-    public StringBuilder decimalToBinary(final int decimal) {
-        return new FromDecimalConverter(decimal).convertToBinary();
+    public static String octalToHex(final String octal) {
+        int decimal = ToDecimalConverter.convertOctalToDecimal(octal);
+        return FromDecimalConverter.convertToHex(decimal);
     }
-    public StringBuilder decimalToOctal(final int decimal) {
-        return new FromDecimalConverter(decimal).convertToOctal();
+    public static String decimalToBinary(final int decimal) {
+        return FromDecimalConverter.convertToBinary(decimal);
     }
-    public StringBuilder decimalToHex(final int decimal) {
-        return new FromDecimalConverter(decimal).convertToHex();
+    public static String decimalToOctal(final int decimal) {
+        return FromDecimalConverter.convertToOctal(decimal);
     }
-    public StringBuilder hexToBinary(final StringBuilder hex) {
-        int decimal = new ToDecimalConverter(hex).convertHexToDecimal();
-        return new FromDecimalConverter(decimal).convertToBinary();
+    public static String decimalToHex(final int decimal) {
+        return FromDecimalConverter.convertToHex(decimal);
     }
-    public StringBuilder hexToOctal(final StringBuilder hex) {
-        int decimal = new ToDecimalConverter(hex).convertHexToDecimal();
-        return new FromDecimalConverter(decimal).convertToOctal();
+    public static String hexToBinary(final String hex) {
+        int decimal = ToDecimalConverter.convertHexToDecimal(hex);
+        return FromDecimalConverter.convertToBinary(decimal);
     }
-    public int hexToDecimal(final StringBuilder hex) {
-        return new ToDecimalConverter(hex).convertHexToDecimal();
+    public static String hexToOctal(final String hex) {
+        int decimal = ToDecimalConverter.convertHexToDecimal(hex);
+        return FromDecimalConverter.convertToOctal(decimal);
+    }
+    public static int hexToDecimal(final String hex) {
+        return ToDecimalConverter.convertHexToDecimal(hex);
     }
 }

@@ -6,62 +6,62 @@ import static org.junit.Assert.*;
 public class ToDecimalConverterTest {
     @Test
     public void convert0FromBinaryToDecimal() {
-        StringBuilder binary = new StringBuilder("0");
-        int decimal = new ToDecimalConverter(binary).convertBinaryToDecimal();
+        String binary = "0";
+        int decimal = ToDecimalConverter.convertBinaryToDecimal(binary);
         assertEquals(decimal, 0);
     }
     @Test
     public void convert10FromBinaryToDecimal() {
-        StringBuilder binary = new StringBuilder("10");
-        int decimal = new ToDecimalConverter(binary).convertBinaryToDecimal();
+        String binary = "10";
+        int decimal = ToDecimalConverter.convertBinaryToDecimal(binary);
         assertEquals(decimal, 2);
     }
     @Test
     public void convert1101FromBinaryToDecimal() {
-        StringBuilder binary = new StringBuilder("1101");
-        int decimal = new ToDecimalConverter(binary).convertBinaryToDecimal();
+        String binary = "1101";
+        int decimal = ToDecimalConverter.convertBinaryToDecimal(binary);
         assertEquals(decimal, 13);
     }
     @Test
     public void convert0FromOctalToDecimal() {
-        StringBuilder octal = new StringBuilder("0");
-        int decimal = new ToDecimalConverter(octal).convertOctalToDecimal();
+        String octal = "0";
+        int decimal = ToDecimalConverter.convertOctalToDecimal(octal);
         assertEquals(decimal, 0);
     }
     @Test
     public void convert3FromOctalToDecimal() {
-        StringBuilder octal = new StringBuilder("3");
-        int decimal = new ToDecimalConverter(octal).convertOctalToDecimal();
+        String octal = "3";
+        int decimal = ToDecimalConverter.convertOctalToDecimal(octal);
         assertEquals(decimal, 3);
     }
     @Test
     public void convert17FromOctalToDecimal() {
-        StringBuilder octal = new StringBuilder("17");
-        int decimal = new ToDecimalConverter(octal).convertOctalToDecimal();
+        String octal = "17";
+        int decimal = ToDecimalConverter.convertOctalToDecimal(octal);
         assertEquals(decimal, 15);
     }
     @Test
     public void convert25FromOctalToDecimal() {
-        StringBuilder octal = new StringBuilder("25");
-        int decimal = new ToDecimalConverter(octal).convertOctalToDecimal();
+        String octal = "25";
+        int decimal = ToDecimalConverter.convertOctalToDecimal(octal);
         assertEquals(decimal, 21);
     }
     @Test
     public void converter0FromHexToDecimal() {
-        StringBuilder hex = new StringBuilder("0");
-        int decimal = new ToDecimalConverter(hex).convertHexToDecimal();
+        String hex = "0";
+        int decimal = ToDecimalConverter.convertHexToDecimal(hex);
         assertEquals(decimal, 0);
     }
     @Test
     public void converterAFromHexToDecimal() {
-        StringBuilder hex = new StringBuilder("a");
-        int decimal = new ToDecimalConverter(hex).convertHexToDecimal();
+        String hex = "a";
+        int decimal = ToDecimalConverter.convertHexToDecimal(hex);
         assertEquals(decimal, 10);
     }
     @Test
     public void converter1bFromHexToDecimal() {
-        StringBuilder hex = new StringBuilder("1b");
-        int decimal = new ToDecimalConverter(hex).convertHexToDecimal();
+        String hex = "1b";
+        int decimal = ToDecimalConverter.convertHexToDecimal(hex);
         assertEquals(decimal, 27);
     }
 }

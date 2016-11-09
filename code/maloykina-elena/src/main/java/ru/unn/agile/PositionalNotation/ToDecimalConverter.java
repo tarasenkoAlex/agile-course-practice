@@ -1,48 +1,46 @@
 package ru.unn.agile.PositionalNotation;
 
-public class ToDecimalConverter {
-    private final StringBuilder number;
-    public ToDecimalConverter(final StringBuilder number) {
-        this.number = number;
+public final class ToDecimalConverter {
+    private ToDecimalConverter() {
     }
 
-    public int convertBinaryToDecimal() {
+    public static int convertBinaryToDecimal(final String number) {
         int result = 0;
         int iter = 0;
-        StringBuilder binary = number.reverse();
-        for (int i = 0; i < binary.length(); i++) {
-            char elem = binary.charAt(i);
+        String binary = new StringBuilder(number).reverse().toString();
+        for (char elem: binary.toCharArray()
+             ) {
             result += (elem - '0') << iter++;
         }
         return result;
     }
-    public int convertOctalToDecimal() {
+    public static int convertOctalToDecimal(final String number) {
         int result = 0;
         int iter = 0;
-        StringBuilder octal = number.reverse();
-        for (int i = 0; i < octal.length(); i++) {
-            char elem = octal.charAt(i);
+        String octal = new StringBuilder(number).reverse().toString();
+        for (char elem: octal.toCharArray()
+                ) {
             int val = (elem - '0') << iter;
-            iter += Constatants.OCTAL_ITER;
+            iter += Constants.OCTAL_ITER;
             result += val;
         }
         return result;
     }
-    public int convertHexToDecimal() {
+    public static int convertHexToDecimal(final String number) {
         int result = 0;
         int iter = 0;
         int val;
-        StringBuilder hex = number.reverse();
-        for (int i = 0; i < hex.length(); i++) {
-            char elem = hex.charAt(i);
+        String hex = new StringBuilder(number).reverse().toString();
+        for (char elem: hex.toCharArray()
+                ) {
             if (elem == 'a') {
-                val = Constatants.HEX_A << iter;
+                val = Constants.HEX_A << iter;
             } else if (elem > 'a') {
-                val = (Constatants.HEX_A + elem - 'a') << iter;
+                val = (Constants.HEX_A + elem - 'a') << iter;
             } else {
                 val = (elem - '0') << iter;
             }
-            iter += Constatants.HEX_ITER;
+            iter += Constants.HEX_ITER;
             result += val;
         }
         return result;

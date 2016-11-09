@@ -2,34 +2,39 @@ package ru.unn.agile.PositionalNotation;
 
 import org.junit.Test;
 
-public class ExceptionsTest {
+public class ValidatorTest {
     @Test(expected = IllegalArgumentException.class)
     public void checkBinary1201() {
-        StringBuilder binary = new StringBuilder("1201");
-        new Exceptions().checkBinaryValue(binary);
+        String binary = "1201";
+        Validator.checkBinaryValue(binary);
     }
     @Test(expected = IllegalArgumentException.class)
     public void checkBinary1a01() {
-        StringBuilder binary = new StringBuilder("1a01");
-        new Exceptions().checkBinaryValue(binary);
+        String binary = "1a01";
+        Validator.checkBinaryValue(binary);
     }
     @Test(expected = IllegalArgumentException.class)
     public void checkOctal19() {
-        StringBuilder octal = new StringBuilder("19");
-        new Exceptions().checkOctalValue(octal);
+        String octal = "19";
+        Validator.checkOctalValue(octal);
     }
     @Test(expected = IllegalArgumentException.class)
     public void checkOctal10a() {
-        StringBuilder octal = new StringBuilder("10a");
-        new Exceptions().checkOctalValue(octal);
+        String octal = "10a";
+        Validator.checkOctalValue(octal);
     }
     @Test(expected = IllegalArgumentException.class)
     public void checkDecimal() {
-        new Exceptions().checkDecimalValue(-2);
+        Validator.checkDecimalValue(-2);
     }
     @Test(expected = IllegalArgumentException.class)
     public void checkHex() {
-        StringBuilder hex = new StringBuilder("1r");
-        new Exceptions().checkHexValue(hex);
+        String hex = "1r";
+        Validator.checkHexValue(hex);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void checkEmptyValue() {
+        String value = "";
+        Validator.valueIsEmpty(value);
     }
 }

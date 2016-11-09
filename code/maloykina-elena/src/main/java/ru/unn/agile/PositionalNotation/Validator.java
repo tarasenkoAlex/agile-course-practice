@@ -1,31 +1,39 @@
 package ru.unn.agile.PositionalNotation;
 
-public class Exceptions {
-    public void checkBinaryValue(final StringBuilder binary) {
+public final class Validator {
+    private Validator() {
+    }
+
+    public static void checkBinaryValue(final String binary) {
         for (int i = 0; i < binary.length(); i++) {
             if (binary.charAt(i) > '1' || binary.charAt(i) < '0') {
                 throw new IllegalArgumentException("Incorrect binary number");
             }
         }
     }
-    public void checkOctalValue(final StringBuilder octal) {
+    public static void checkOctalValue(final String octal) {
         for (int i = 0; i < octal.length(); i++) {
             if (octal.charAt(i) > '7' || octal.charAt(i) < '0') {
                 throw new IllegalArgumentException("Incorrect octal number");
             }
         }
     }
-    public void checkDecimalValue(final int decimal) {
+    public static void checkDecimalValue(final int decimal) {
         if (decimal < 0) {
             throw new IllegalArgumentException("Enter positive number");
         }
     }
-    public void checkHexValue(final StringBuilder hex) {
+    public static void checkHexValue(final String hex) {
         for (int i = 0; i < hex.length(); i++) {
             if (!(hex.charAt(i) <= '9' && hex.charAt(i) >= '0'
                     || hex.charAt(i) <= 'f' && hex.charAt(i) >= 'a')) {
                 throw new IllegalArgumentException("Incorrect hex number");
             }
+        }
+    }
+    public static void valueIsEmpty(final String value) {
+        if ("".equals(value)) {
+            throw new IllegalArgumentException("Value is empty");
         }
     }
 }
