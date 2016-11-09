@@ -62,6 +62,8 @@ project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-l
 // Кокошников Алексей
 // Колистратова Дарья
 // Кочетов Павел
+include "code/kochetov-pavel"
+project(":code/kochetov-pavel").name = "kochetov-pavel-Model"
 // Кудрявцев Никита
 // Кукушкин Даниил
 // Ларин Антон
@@ -100,3 +102,5 @@ project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-l
 // Шишкин Владислав
 // Шочин Александр
 // Шургалин Петр
+
+
