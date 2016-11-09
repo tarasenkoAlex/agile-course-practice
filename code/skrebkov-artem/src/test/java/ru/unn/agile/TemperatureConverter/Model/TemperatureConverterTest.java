@@ -82,9 +82,9 @@ public class TemperatureConverterTest {
     public void convertKelvin_0_To_Newton() {
         TemperatureConverter converter = new TemperatureConverter();
 
-        double celsius = converter.fromKelvin(0.0, TemperatureScale.NEWTON);
+        double kelvin = converter.fromKelvin(0.0, TemperatureScale.NEWTON);
 
-        assertEquals(-90.1395, celsius, DELTA);
+        assertEquals(-90.1395, kelvin, DELTA);
     }
 
 }

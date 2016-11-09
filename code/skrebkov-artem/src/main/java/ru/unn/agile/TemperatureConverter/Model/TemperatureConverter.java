@@ -3,12 +3,13 @@ package ru.unn.agile.TemperatureConverter.Model;
 public class TemperatureConverter {
 
     public double fromCelsius(double celsius, TemperatureScale scale) {
-        return celsius / TemperatureScale.CELSIUS.factor * scale.factor
-                + TemperatureScale.CELSIUS.shift + scale.shift;
+        double sourceValue = celsius / TemperatureScale.CELSIUS.factor - TemperatureScale.CELSIUS.shift;
+        return sourceValue * scale.factor + scale.shift;
     }
 
     public double fromKelvin(double kelvin, TemperatureScale scale) {
-        return (kelvin / TemperatureScale.KELVIN.factor - TemperatureScale.KELVIN.shift)
-                * scale.factor + scale.shift;
+        double sourceValue = kelvin / TemperatureScale.KELVIN.factor - TemperatureScale.KELVIN.shift;
+
+        return sourceValue * scale.factor + scale.shift;
     }
 }
