@@ -8,7 +8,7 @@ public class WhenManagingAccounts {
     public void ledgerIsEmptyUponCreation() {
         Ledger ledger = new Ledger();
 
-        assertTrue(ledger.isEmpty());
+        assertTrue(ledger.getAccounts().isEmpty());
     }
 
     @Test
@@ -17,6 +17,6 @@ public class WhenManagingAccounts {
 
         ledger.addAccount(new Account(0));
 
-        assertFalse(ledger.isEmpty());
+        assertFalse(ledger.getAccounts().isEmpty());
     }
 }
