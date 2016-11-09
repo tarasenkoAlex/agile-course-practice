@@ -8,6 +8,7 @@ public class Ledger {
 
     public Ledger() {
         this.accounts = new ArrayList<>();
+        this.categories = new ArrayList<>();
     }
 
     public List<Account> getAccounts() {
@@ -36,5 +37,30 @@ public class Ledger {
         }
     }
 
+    public void addCategory(Category category) {
+        categories.add(category);
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void deleteCategory(Category category) {
+        categories.remove(category);
+
+        for (Account account : accounts) {
+            for (Transaction transaction : account.getTransactions()) {
+                if (transaction.isExternal()) {
+                    ExternalTransaction externalTransaction =
+                            (ExternalTransaction) transaction;
+                    if (externalTransaction.getCategory().equals(category)) {
+                        externalTransaction.setCategory(null);
+                    }
+                }
+            }
+        }
+    }
+
     private List<Account> accounts;
+    private List<Category> categories;
 }

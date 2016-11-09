@@ -30,6 +30,10 @@ public class ExternalTransaction implements Transaction {
         return category;
     }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public static Builder expenseBuilder(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException(

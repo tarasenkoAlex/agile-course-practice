@@ -3,18 +3,16 @@ package ru.unn.agile.PersonalFinance.Model;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class WhenManagingAccounts {
+public class WhenManagingLedger {
+    Ledger ledger = new Ledger();
+
     @Test
     public void ledgerIsEmptyUponCreation() {
-        Ledger ledger = new Ledger();
-
         assertTrue(ledger.getAccounts().isEmpty());
     }
 
     @Test
     public void andAccountIsAddedLedgerIsNotEmptyAnymore() {
-        Ledger ledger = new Ledger();
-
         ledger.addAccount(new Account(0, ""));
 
         assertFalse(ledger.getAccounts().isEmpty());
@@ -22,7 +20,6 @@ public class WhenManagingAccounts {
 
     @Test
     public void andAccountIsAddedItIsLastInLedgersAccountsList() {
-        Ledger ledger = new Ledger();
         Account cash = new Account(75, "Cash");
 
         ledger.addAccount(cash);
@@ -42,7 +39,6 @@ public class WhenManagingAccounts {
 
     @Test
     public void andAccountIsDeletedItIsNoLongerInLedger() {
-        Ledger ledger = new Ledger();
         Account cash = new Account(75, "Cash");
         ledger.addAccount(cash);
 
@@ -53,7 +49,6 @@ public class WhenManagingAccounts {
 
     @Test
     public void andAccountIsDeletedTransferInAnotherAccountIsUpdated() {
-        Ledger ledger = new Ledger();
         Account cash = new Account(75, "Cash");
         Account debitCard = new Account(150, "Debit card");
         ledger.addAccount(cash);
@@ -64,5 +59,40 @@ public class WhenManagingAccounts {
 
         assertEquals(Ledger.DELETED_ACCOUNT,
                 ((Transfer) debitCard.getTransactions().get(0)).getTarget());
+    }
+
+    @Test
+    public void andCategoryIsAddedLedgerContainsIt() {
+        Category groceries = new Category("Groceries");
+
+        ledger.addCategory(groceries);
+
+        assertTrue(ledger.getCategories().contains(groceries));
+    }
+
+    @Test
+    public void andCategoryIsDeletedItIsNoLongerInLedger() {
+        Category groceries = new Category("Groceries");
+        ledger.addCategory(groceries);
+
+        ledger.deleteCategory(groceries);
+
+        assertFalse(ledger.getCategories().contains(groceries));
+    }
+
+    @Test
+    public void andCategoryIsDeletedTransferWithThisCategoryIsUpdated() {
+        Category groceries = new Category("Groceries");
+        ledger.addCategory(groceries);
+        Account cash = new Account(75, "Cash");
+        ledger.addAccount(cash);
+        cash.addExpense(ExternalTransaction.expenseBuilder(5)
+                .description("Bread")
+                .category(groceries)
+                .build());
+
+        ledger.deleteCategory(groceries);
+
+        assertEquals(null, ((ExternalTransaction) cash.getTransactions().get(0)).getCategory());
     }
 }
