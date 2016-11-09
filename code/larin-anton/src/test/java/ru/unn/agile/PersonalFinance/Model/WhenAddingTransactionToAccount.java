@@ -1,5 +1,7 @@
 package ru.unn.agile.PersonalFinance.Model;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.Test;
@@ -108,5 +110,32 @@ public class WhenAddingTransactionToAccount {
     @Test(expected=IllegalArgumentException.class)
     public void andItIsTransferNegativeAmountShouldCauseFailure() {
         debitCard.transferTo(cash, -20);
+    }
+
+    @Test
+    public void andItIsExpenseDateIsSaved() {
+        GregorianCalendar date = new GregorianCalendar(2015, Calendar.MAY, 9);
+        cash.addExpense(ExternalTransaction.expenseBuilder(25).date(date).build());
+        ExternalTransaction lastExpense = (ExternalTransaction) cash.getTransactions().get(0);
+
+        assertEquals(date, lastExpense.getDate());
+    }
+
+    @Test
+    public void andItIsIncomeDateIsSaved() {
+        GregorianCalendar date = new GregorianCalendar(2015, Calendar.MAY, 9);
+        cash.addIncome(ExternalTransaction.incomeBuilder(25).date(date).build());
+        ExternalTransaction lastIncome = (ExternalTransaction) cash.getTransactions().get(0);
+
+        assertEquals(date, lastIncome.getDate());
+    }
+
+    @Test
+    public void andItIsTransferDateIsSaved() {
+        GregorianCalendar date = new GregorianCalendar(2015, Calendar.MAY, 9);
+        debitCard.transferTo(cash, 25, date);
+        Transfer lastTransfer = (Transfer) cash.getTransactions().get(0);
+
+        assertEquals(date, lastTransfer.getDate());
     }
 }

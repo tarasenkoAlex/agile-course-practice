@@ -1,10 +1,14 @@
 package ru.unn.agile.PersonalFinance.Model;
 
+import java.util.GregorianCalendar;
+
 public class ExternalTransaction implements Transaction {
-    public ExternalTransaction(int amount, String description, Category category) {
+    public ExternalTransaction(int amount, String description, Category category,
+                               GregorianCalendar date) {
         this.amount = amount;
         this.description = description;
         this.category = category;
+        this.date = date;
     }
 
     public String getDescription() {
@@ -34,6 +38,11 @@ public class ExternalTransaction implements Transaction {
         this.category = category;
     }
 
+    public GregorianCalendar getDate() {
+        return date;
+    }
+
+
     public static Builder expenseBuilder(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException(
@@ -52,6 +61,7 @@ public class ExternalTransaction implements Transaction {
         return new Builder(amount);
     }
 
+
     public static class Builder {
         public Builder(int amount) {
             this.transactionAmount = amount;
@@ -67,19 +77,27 @@ public class ExternalTransaction implements Transaction {
             return this;
         }
 
+        public Builder date(GregorianCalendar date) {
+            this.transactionDate = date;
+            return this;
+        }
+
         public ExternalTransaction build() {
             return new ExternalTransaction(
                     transactionAmount,
                     transactionDescription,
-                    transactionCategory);
+                    transactionCategory,
+                    transactionDate);
         }
 
         private int transactionAmount;
         private String transactionDescription;
         private Category transactionCategory;
+        private GregorianCalendar transactionDate;
     }
 
     private String description;
     private int amount;
     private Category category;
+    private GregorianCalendar date;
 }

@@ -53,7 +53,7 @@ public class WhenManagingLedger {
         Account debitCard = new Account(150, "Debit card");
         ledger.addAccount(cash);
         ledger.addAccount(debitCard);
-        debitCard.transferTo(cash, 10);
+        debitCard.transferTo(cash, 10, null);
 
         ledger.deleteAccount(cash);
 

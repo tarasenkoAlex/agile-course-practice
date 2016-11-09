@@ -1,6 +1,7 @@
 package ru.unn.agile.PersonalFinance.Model;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Account {
@@ -32,16 +33,20 @@ public class Account {
         transactions.add(income);
     }
 
-    public void transferTo(Account other, int amount) {
+    public void transferTo(Account other, int amount, GregorianCalendar date) {
         if (amount < 0) {
             throw new IllegalArgumentException("Consider adding a transfer in opposite direction");
         }
 
         balance -= amount;
         other.balance += amount;
-        Transfer transfer = new Transfer(amount, this, other);
+        Transfer transfer = new Transfer(amount, this, other, date);
         transactions.add(transfer);
         other.transactions.add(transfer);
+    }
+
+    public void transferTo(Account other, int amount) {
+        transferTo(other, amount, null);
     }
 
     public void deleteTransaction(Transaction transaction) {
@@ -69,9 +74,7 @@ public class Account {
         balance -= oldTransaction.getAmount() - newTransaction.getAmount();
     }
 
-    public void changeTransferAmount(Transfer oldTransfer, int newAmount) {
-        Transfer newTransfer = new Transfer(newAmount, oldTransfer.getSource(),
-                oldTransfer.getTarget());
+    public void replaceTransfer(Transfer oldTransfer, Transfer newTransfer) {
         int amountDelta = newTransfer.getAmount() - oldTransfer.getAmount();
 
         Account otherAccount;
