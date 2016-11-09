@@ -48,4 +48,13 @@ public class Monomial {
     Monomial multiply(final double multiplier) {
         return new Monomial(power, coefficient * multiplier);
     }
+
+    Monomial divide(final double divider) {
+        return new Monomial(power, coefficient / divider);
+    }
+
+    Monomial divide(final Monomial divider) {
+        return new Monomial(power - divider.power,
+                           coefficient / divider.coefficient);
+    }
 }

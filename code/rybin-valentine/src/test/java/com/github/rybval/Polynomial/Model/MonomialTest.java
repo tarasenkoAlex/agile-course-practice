@@ -92,11 +92,40 @@ public class MonomialTest {
 
     @Test
     public void canMultiplyByDouble() {
-        Monomial multiplicand = new Monomial(5, 5.4);
+        Monomial multiplicand = new Monomial(POWER, 5.4);
         double multiplier = 2.1;
 
         Monomial product = multiplicand.multiply(multiplier);
 
         assertEquals(5.4 * 2.1, product.getCoefficient(), EPSILON);
+    }
+
+    @Test
+    public void canDivideByDouble() {
+        Monomial dividend = new Monomial(POWER, 5.4);
+        double divider = 2.1;
+
+        Monomial quotient = dividend.divide(divider);
+
+        assertEquals(5.4 / 2.1, quotient.getCoefficient(), EPSILON);
+    }
+
+    @Test
+    public void canDivideByMonomial() {
+        Monomial dividend = new Monomial(5, 5.4);
+        Monomial divider = new Monomial(3, 2.1);
+
+        Monomial quotient = dividend.divide(divider);
+
+        assertEquals(5 - 3, quotient.getPower());
+        assertEquals(5.4 / 2.1, quotient.getCoefficient(), EPSILON);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cantDivideByMonomialWithBiggerPower() {
+        Monomial dividend = new Monomial(5, COEFFICIENT);
+        Monomial divider = new Monomial(7, COEFFICIENT);
+
+        Monomial quotient = dividend.divide(divider);
     }
 }
