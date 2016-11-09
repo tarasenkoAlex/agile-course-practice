@@ -59,7 +59,7 @@ public class ComplexNumberCalculatorTest {
     }
 
     @Test(expected = ArithmeticException.class)
-    public void testCanDivisionByZero() {
+    public void testCanNotDivisionByZero() {
         ComplexNumber complexNumberA = new ComplexNumber(2, 1);
         ComplexNumber complexNumberB = new ComplexNumber(0, 0);
         CalculatorComplexNumber.div(complexNumberA, complexNumberB);
