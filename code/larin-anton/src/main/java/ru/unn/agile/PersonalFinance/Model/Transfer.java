@@ -1,14 +1,10 @@
 package ru.unn.agile.PersonalFinance.Model;
 
 public class Transfer implements Transaction {
-    public Transfer(int amount, Account otherAccount) {
+    public Transfer(int amount, Account source, Account target) {
         this.amount = amount;
-        this.otherAccount = otherAccount;
-    }
-
-    @Override
-    public String getDescription() {
-        return null;
+        this.source = source;
+        this.target = target;
     }
 
     @Override
@@ -16,9 +12,12 @@ public class Transfer implements Transaction {
         return amount;
     }
 
-    @Override
-    public Account otherAccount() {
-        return otherAccount;
+    public Account getSource() {
+        return source;
+    }
+
+    public Account getTarget() {
+        return target;
     }
 
     @Override
@@ -32,5 +31,6 @@ public class Transfer implements Transaction {
     }
 
     private int amount;
-    private Account otherAccount;
+    private Account source;
+    private Account target;
 }

@@ -26,8 +26,9 @@ public class Account {
     public void transferTo(Account other, int amount) {
         balance -= amount;
         other.balance += amount;
-        transactions.add(new Transfer(-amount, other));
-        other.transactions.add(new Transfer(amount, this));
+        Transfer transfer = new Transfer(amount, this, other);
+        transactions.add(transfer);
+        other.transactions.add(transfer);
     }
 
     public List<Transaction> getTransactions() {
@@ -35,11 +36,19 @@ public class Account {
     }
 
     public void deleteTransaction(Transaction transaction) {
-        balance -= transaction.getAmount();
-        transactions.remove(transaction);
-
-        if (transaction.otherAccount() != null) {
-            transaction.otherAccount().balance += transaction.getAmount();
+        if (transaction.isExternal()) {
+            balance -= transaction.getAmount();
+            transactions.remove(transaction);
+        } else {
+            Transfer transfer = (Transfer) transaction;
+            transfer.getSource().balance += transfer.getAmount();
+            transfer.getTarget().balance -= transfer.getAmount();
+            transactions.remove(transfer);
+            if (transfer.getSource() == this) {
+                transfer.getTarget().getTransactions().remove(transfer);
+            } else {
+                transfer.getSource().getTransactions().remove(transfer);
+            }
         }
     }
 

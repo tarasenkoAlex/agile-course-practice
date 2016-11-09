@@ -69,7 +69,7 @@ public class WhenAddingTransactionToAccount {
                 debitCard.getTransactions().size() - 1);
 
         assertEquals(50, cashLast.getAmount());
-        assertEquals(-50, debitCardLast.getAmount());
+        assertEquals(50, debitCardLast.getAmount());
     }
 
     @Test
@@ -80,7 +80,7 @@ public class WhenAddingTransactionToAccount {
         Transaction lastExpense = cash.getTransactions().get(
                 cash.getTransactions().size() - 1);
 
-        assertEquals("Candy", lastExpense.getDescription());
+        assertEquals("Candy", ((ExternalTransaction) lastExpense).getDescription());
     }
 
     @Test
@@ -91,6 +91,6 @@ public class WhenAddingTransactionToAccount {
         Transaction lastIncome = debitCard.getTransactions().get(
                 debitCard.getTransactions().size() - 1);
 
-        assertEquals("Salary", lastIncome.getDescription());
+        assertEquals("Salary", ((ExternalTransaction) lastIncome).getDescription());
     }
 }

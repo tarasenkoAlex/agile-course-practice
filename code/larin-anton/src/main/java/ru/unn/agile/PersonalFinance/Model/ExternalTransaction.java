@@ -6,7 +6,6 @@ public class ExternalTransaction implements Transaction {
         this.description = description;
     }
 
-    @Override
     public String getDescription() {
         return description;
     }
@@ -14,11 +13,6 @@ public class ExternalTransaction implements Transaction {
     @Override
     public int getAmount() {
         return amount;
-    }
-
-    @Override
-    public Account otherAccount() {
-        return null;
     }
 
     @Override
