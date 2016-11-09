@@ -61,6 +61,36 @@ public class Account {
         }
     }
 
+    public void replaceExternalTransaction(
+            ExternalTransaction oldTransaction,
+            ExternalTransaction newTransaction) {
+
+        transactions.set(transactions.indexOf(oldTransaction), newTransaction);
+        balance -= oldTransaction.getAmount() - newTransaction.getAmount();
+    }
+
+    public void changeTransferAmount(Transfer oldTransfer, int newAmount) {
+        Transfer newTransfer = new Transfer(newAmount, oldTransfer.getSource(),
+                oldTransfer.getTarget());
+        int amountDelta = newTransfer.getAmount() - oldTransfer.getAmount();
+
+        Account otherAccount;
+        if (oldTransfer.getSource().equals(this)) {
+            otherAccount = oldTransfer.getTarget();
+            this.balance -= amountDelta;
+            otherAccount.balance += amountDelta;
+        } else {
+            otherAccount = oldTransfer.getSource();
+            this.balance += amountDelta;
+            otherAccount.balance -= amountDelta;
+        }
+        List<Transaction> otherAccountTransactions = otherAccount.getTransactions();
+        this.getTransactions().set(this.getTransactions().indexOf(oldTransfer),
+                newTransfer);
+        otherAccountTransactions.set(otherAccountTransactions.indexOf(oldTransfer),
+                newTransfer);
+    }
+
     public void changeName(String name) {
         this.name = name;
     }
