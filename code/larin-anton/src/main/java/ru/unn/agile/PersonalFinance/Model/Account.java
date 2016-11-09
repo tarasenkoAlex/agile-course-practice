@@ -13,14 +13,14 @@ public class Account {
         return balance;
     }
 
-    public void addExpense(int amount, String description) {
+    public void addExpense(int amount, String description, Category category) {
         balance -= amount;
-        transactions.add(new ExternalTransaction(-amount, description));
+        transactions.add(new ExternalTransaction(-amount, description, category));
     }
 
-    public void addIncome(int amount, String description) {
+    public void addIncome(int amount, String description, Category category) {
         balance += amount;
-        transactions.add(new ExternalTransaction(amount, description));
+        transactions.add(new ExternalTransaction(amount, description, category));
     }
 
     public void transferTo(Account other, int amount) {

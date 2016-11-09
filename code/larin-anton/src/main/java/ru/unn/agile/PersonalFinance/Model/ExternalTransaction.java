@@ -1,9 +1,10 @@
 package ru.unn.agile.PersonalFinance.Model;
 
 public class ExternalTransaction implements Transaction {
-    public ExternalTransaction(int amount, String description) {
+    public ExternalTransaction(int amount, String description, Category category) {
         this.amount = amount;
         this.description = description;
+        this.category = category;
     }
 
     public String getDescription() {
@@ -25,6 +26,11 @@ public class ExternalTransaction implements Transaction {
         return false;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
     private String description;
     private int amount;
+    private Category category;
 }
