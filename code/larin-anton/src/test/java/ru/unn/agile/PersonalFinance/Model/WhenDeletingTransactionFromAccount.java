@@ -7,7 +7,7 @@ public class WhenDeletingTransactionFromAccount {
     @Test
     public void balanceShouldBeUpdated() {
         Account cash = new Account(75);
-        cash.addExpense(25, "Candy", null);
+        cash.addExpense(ExternalTransaction.expenseBuilder(25).build());
 
         cash.deleteTransaction(cash.getTransactions().get(0));
 
@@ -17,7 +17,7 @@ public class WhenDeletingTransactionFromAccount {
     @Test
     public void andItIsTheOnlyOneTransactionListShouldBeEmpty() {
         Account cash = new Account(75);
-        cash.addExpense(25, "Candy", null);
+        cash.addExpense(ExternalTransaction.expenseBuilder(25).build());
 
         cash.deleteTransaction(cash.getTransactions().get(0));
 

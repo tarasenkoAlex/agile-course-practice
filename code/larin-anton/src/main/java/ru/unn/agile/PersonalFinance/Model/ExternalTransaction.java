@@ -30,6 +30,41 @@ public class ExternalTransaction implements Transaction {
         return category;
     }
 
+    public static Builder expenseBuilder(int amount) {
+        return new Builder(-amount);
+    }
+
+    public static Builder incomeBuilder(int amount) {
+        return new Builder(amount);
+    }
+
+    public static class Builder {
+        public Builder(int amount) {
+            this.transactionAmount = amount;
+        }
+
+        public Builder description(String description) {
+            this.transactionDescription = description;
+            return this;
+        }
+
+        public Builder category(Category category) {
+            this.transactionCategory = category;
+            return this;
+        }
+
+        public ExternalTransaction build() {
+            return new ExternalTransaction(
+                    transactionAmount,
+                    transactionDescription,
+                    transactionCategory);
+        }
+
+        private int transactionAmount;
+        private String transactionDescription;
+        private Category transactionCategory;
+    }
+
     private String description;
     private int amount;
     private Category category;

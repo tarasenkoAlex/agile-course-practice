@@ -10,7 +10,7 @@ public class WhenAddingTransactionToAccount {
     public void andItIsExpenseBalanceShouldDecrease() {
         Account account = new Account(75);
 
-        account.addExpense(25, "Candy", null);
+        account.addExpense(ExternalTransaction.expenseBuilder(25).build());
 
         assertEquals(50, account.getBalance());
     }
@@ -19,7 +19,7 @@ public class WhenAddingTransactionToAccount {
     public void andItIsIncomeBalanceShouldIncrease() {
         Account account = new Account(75);
 
-        account.addIncome(50, "Salary", null);
+        account.addIncome(ExternalTransaction.incomeBuilder(50).build());
 
         assertEquals(125, account.getBalance());
     }
@@ -39,7 +39,7 @@ public class WhenAddingTransactionToAccount {
     public void andItIsExpenseItIsSavedToTransactionList() {
         Account cash = new Account(75);
 
-        cash.addExpense(25, "Candy", null);
+        cash.addExpense(ExternalTransaction.expenseBuilder(25).build());
         List<Transaction> transactions = cash.getTransactions();
         Transaction last = transactions.get(transactions.size() - 1);
 
@@ -50,7 +50,7 @@ public class WhenAddingTransactionToAccount {
     public void andItIsIncomeItIsSavedToTransactionList() {
         Account debitCard = new Account(75);
 
-        debitCard.addIncome(50, "Salary", null);
+        debitCard.addIncome(ExternalTransaction.incomeBuilder(50).build());
         List<Transaction> transactions = debitCard.getTransactions();
         Transaction last = transactions.get(transactions.size() - 1);
 
@@ -76,7 +76,9 @@ public class WhenAddingTransactionToAccount {
     public void andItIsExpenseDescriptionIsSaved() {
         Account cash = new Account(75);
 
-        cash.addExpense(25, "Candy", null);
+        cash.addExpense(ExternalTransaction.expenseBuilder(25)
+                .description("Candy")
+                .build());
         Transaction lastExpense = cash.getTransactions().get(
                 cash.getTransactions().size() - 1);
 
@@ -87,7 +89,9 @@ public class WhenAddingTransactionToAccount {
     public void andItIsIncomeDescriptionIsSaved() {
         Account debitCard = new Account(75);
 
-        debitCard.addIncome(50, "Salary", null);
+        debitCard.addIncome(ExternalTransaction.incomeBuilder(50)
+                .description("Salary")
+                .build());
         Transaction lastIncome = debitCard.getTransactions().get(
                 debitCard.getTransactions().size() - 1);
 
@@ -99,7 +103,9 @@ public class WhenAddingTransactionToAccount {
         Account cash = new Account(75);
 
         Category food = new Category("Food");
-        cash.addExpense(25, "Candy", food);
+        cash.addExpense(ExternalTransaction.expenseBuilder(25)
+                .category(food)
+                .build());
         Transaction lastExpense = cash.getTransactions().get(0);
 
         assertEquals(food, ((ExternalTransaction) lastExpense).getCategory());
@@ -110,7 +116,9 @@ public class WhenAddingTransactionToAccount {
         Account cash = new Account(75);
 
         Category taxReturn = new Category("Tax return");
-        cash.addIncome(50, "Property tax return", taxReturn);
+        cash.addIncome(ExternalTransaction.incomeBuilder(50)
+                .category(taxReturn)
+                .build());
         Transaction lastIncome = cash.getTransactions().get(0);
 
         assertEquals(taxReturn, ((ExternalTransaction) lastIncome).getCategory());
