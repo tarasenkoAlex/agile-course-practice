@@ -49,6 +49,6 @@ public class TemperatureConverterTest {
     @Test
     public void testTemperatureConverter() {
         TemperatureConverter converter = new TemperatureConverter();
-        assertEquals(destinationDegree, converter.convert(sourceDegree, sourceScale, destinationScale), DELTA);
+        assertEquals(destinationDegree, converter.compute(sourceDegree, sourceScale, destinationScale), DELTA);
     }
 }
