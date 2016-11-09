@@ -87,4 +87,26 @@ public class MonomialTest {
 
         Monomial diff = minuend.add(subtrahend);
     }
+
+    @Test
+    public void canMultiplyWithMonomial() {
+        Monomial multiplicand = new Monomial(5, 5.4);
+        Monomial multiplier = new Monomial(3, 2);
+
+        Monomial product = multiplicand.multiply(multiplier);
+
+        assertEquals(product.getPower(), 5 + 3);
+        assertEquals(product.getCoefficient(), 5.4 * 2, EPSILON);
+    }
+
+    @Test
+    public void canMultiplyWithDouble() {
+        int power = 5;
+        Monomial multiplicand = new Monomial(power, 5.4);
+        double multiplier = 2.0;
+
+        Monomial product = multiplicand.multiply(multiplier);
+
+        assertEquals(5.4 * 2.0, product.getCoefficient(), EPSILON);
+    }
 }

@@ -39,4 +39,13 @@ public class Monomial {
     Monomial subtract(final Monomial subtrahend) {
         return this.add(subtrahend.negate());
     }
+
+    Monomial multiply(final Monomial multiplier) {
+        return new Monomial(power + multiplier.power,
+                            coefficient * multiplier.coefficient);
+    }
+
+    Monomial multiply(final double multiplier) {
+        return new Monomial(power, coefficient * multiplier);
+    }
 }
