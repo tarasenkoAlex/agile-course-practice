@@ -10,7 +10,7 @@ public class WhenAddingTransactionToAccount {
     public void andItIsExpenseBalanceShouldDecrease() {
         Account account = new Account(75);
 
-        account.addExpenseTransaction(25, "Candy");
+        account.addExpense(25, "Candy");
 
         assertEquals(50, account.getBalance());
     }
@@ -19,7 +19,7 @@ public class WhenAddingTransactionToAccount {
     public void andItIsIncomeBalanceShouldIncrease() {
         Account account = new Account(75);
 
-        account.addIncomeTransaction(50, "Salary");
+        account.addIncome(50, "Salary");
 
         assertEquals(125, account.getBalance());
     }
@@ -39,7 +39,7 @@ public class WhenAddingTransactionToAccount {
     public void andItIsExpenseItIsSavedToTransactionList() {
         Account cash = new Account(75);
 
-        cash.addExpenseTransaction(25, "Candy");
+        cash.addExpense(25, "Candy");
         List<Transaction> transactions = cash.getTransactions();
         Transaction last = transactions.get(transactions.size() - 1);
 
@@ -50,7 +50,7 @@ public class WhenAddingTransactionToAccount {
     public void andItIsIncomeItIsSavedToTransactionList() {
         Account debitCard = new Account(75);
 
-        debitCard.addIncomeTransaction(50, "Salary");
+        debitCard.addIncome(50, "Salary");
         List<Transaction> transactions = debitCard.getTransactions();
         Transaction last = transactions.get(transactions.size() - 1);
 
@@ -76,7 +76,7 @@ public class WhenAddingTransactionToAccount {
     public void andItIsExpenseDescriptionIsSaved() {
         Account cash = new Account(75);
 
-        cash.addExpenseTransaction(25, "Candy");
+        cash.addExpense(25, "Candy");
         Transaction lastExpense = cash.getTransactions().get(
                 cash.getTransactions().size() - 1);
 
@@ -87,7 +87,7 @@ public class WhenAddingTransactionToAccount {
     public void andItIsIncomeDescriptionIsSaved() {
         Account debitCard = new Account(75);
 
-        debitCard.addIncomeTransaction(50, "Salary");
+        debitCard.addIncome(50, "Salary");
         Transaction lastIncome = debitCard.getTransactions().get(
                 debitCard.getTransactions().size() - 1);
 
