@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 public class MonomialTest {
     private static final int POWER = 5;
     private static final double COEFFICIENT = 5.4;
-    private static final double EPSILON = 0.00001;
 
     @Test
     public void canCreateMonomial() {
@@ -33,7 +32,7 @@ public class MonomialTest {
     @Test
     public void canGetCoefficient() {
         Monomial monomial = new Monomial(POWER, COEFFICIENT);
-        assertEquals(COEFFICIENT, monomial.getCoefficient(), EPSILON);
+        assertEquals(COEFFICIENT, monomial.getCoefficient(), Double.MIN_VALUE);
     }
 
     @Test
@@ -43,7 +42,7 @@ public class MonomialTest {
 
         Monomial summ = monomial1.add(monomial2);
 
-        assertEquals(5.4 + 3.2, summ.getCoefficient(), EPSILON);
+        assertEquals(5.4 + 3.2, summ.getCoefficient(), Double.MIN_VALUE);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -58,7 +57,7 @@ public class MonomialTest {
     public void canNegateMonomial() {
         Monomial monomial = new Monomial(POWER, COEFFICIENT);
         assertEquals(-COEFFICIENT, monomial.negate().getCoefficient(),
-                     EPSILON);
+                     Double.MIN_VALUE);
     }
 
     @Test
@@ -68,7 +67,7 @@ public class MonomialTest {
 
         Monomial diff = minuend.subtract(subtrahend);
 
-        assertEquals(5.4 - 3.2, diff.getCoefficient(), EPSILON);
+        assertEquals(5.4 - 3.2, diff.getCoefficient(), Double.MIN_VALUE);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -87,7 +86,7 @@ public class MonomialTest {
         Monomial product = multiplicand.multiply(multiplier);
 
         assertEquals(product.getPower(), 5 + 3);
-        assertEquals(product.getCoefficient(), 5.4 * 2.1, EPSILON);
+        assertEquals(product.getCoefficient(), 5.4 * 2.1, Double.MIN_VALUE);
     }
 
     @Test
@@ -97,7 +96,7 @@ public class MonomialTest {
 
         Monomial product = multiplicand.multiply(multiplier);
 
-        assertEquals(5.4 * 2.1, product.getCoefficient(), EPSILON);
+        assertEquals(5.4 * 2.1, product.getCoefficient(), Double.MIN_VALUE);
     }
 
     @Test
@@ -107,7 +106,7 @@ public class MonomialTest {
 
         Monomial quotient = dividend.divide(divider);
 
-        assertEquals(5.4 / 2.1, quotient.getCoefficient(), EPSILON);
+        assertEquals(5.4 / 2.1, quotient.getCoefficient(), Double.MIN_VALUE);
     }
 
     @Test
@@ -118,7 +117,7 @@ public class MonomialTest {
         Monomial quotient = dividend.divide(divider);
 
         assertEquals(5 - 3, quotient.getPower());
-        assertEquals(5.4 / 2.1, quotient.getCoefficient(), EPSILON);
+        assertEquals(5.4 / 2.1, quotient.getCoefficient(), Double.MIN_VALUE);
     }
 
     @Test(expected = IllegalArgumentException.class)
