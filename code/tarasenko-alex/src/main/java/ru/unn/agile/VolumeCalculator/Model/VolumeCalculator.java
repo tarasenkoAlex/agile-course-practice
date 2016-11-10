@@ -5,58 +5,61 @@ package ru.unn.agile.VolumeCalculator.Model;
  */
 public class VolumeCalculator {
 
-    private static final double PI = 3.14159265359;
-    private static final double SPHERE_VOLUME_MULTIPLIER = 1.33333333333;
-    private static final double CONE_VOLUME_MULTIPLIER = 0.33333333333;
-    private static final double PYRAMID_VOLUME_MULTIPLIER = 0.33333333333;
-    private static final double TETRAHENDRON_VOLUME_MULTIPLIER = 0.11785113019;
-
-
-    public double getSphereValue(final double radius) {
-        if (radius < 0) {
+    public double getSphereVolume(final double radius) {
+        if (!isCheckParams(radius)) {
             throw new IllegalArgumentException("Radius must not be negative!");
         }
 
-        return SPHERE_VOLUME_MULTIPLIER * PI * radius * radius * radius;
+        return VolumeMultiplier.SPHERE * Math.PI * radius * radius * radius;
     }
 
-    public double getCubeValue(final double edge) {
-        if (edge < 0) {
+    public double getCubeVolume(final double edge) {
+        if (!isCheckParams(edge)) {
             throw new IllegalArgumentException("Edge must not be negative!");
         }
 
         return edge * edge * edge;
     }
 
-    public double getConeValue(final double radius, final double height) {
-        if (radius < 0 || height < 0) {
+    public double getConeVolume(final double radius, final double height) {
+        if (!isCheckParams(radius, height)) {
             throw new IllegalArgumentException("Raduis and height must not be negative!");
         }
 
-        return CONE_VOLUME_MULTIPLIER * PI * radius * radius * height;
+        return VolumeMultiplier.CONE * Math.PI * radius * radius * height;
     }
 
-    public double getCylinderValue(final double radius, final double height) {
-        if (radius < 0 || height < 0) {
+    public double getCylinderVolume(final double radius, final double height) {
+        if (!isCheckParams(radius, height)) {
             throw new IllegalArgumentException("Raduis and height must not be negative!");
         }
 
-        return PI * radius * radius * height;
+        return Math.PI * radius * radius * height;
     }
 
-    public double getPyramidValue(final double area, final double height) {
-        if (area < 0 || height < 0) {
+    public double getPyramidVolume(final double area, final double height) {
+        if (!isCheckParams(area, height)) {
             throw new IllegalArgumentException("Area and height must not be negative!");
         }
 
-        return PYRAMID_VOLUME_MULTIPLIER * area * height;
+        return VolumeMultiplier.PYRAMID * area * height;
     }
 
-    public double getTetrahedronValue(final double edge) {
-        if (edge < 0) {
+    public double getTetrahedronVolume(final double edge) {
+        if (!isCheckParams(edge)) {
             throw new IllegalArgumentException("Edge must not be negative!");
         }
 
-        return TETRAHENDRON_VOLUME_MULTIPLIER * edge * edge * edge;
+        return VolumeMultiplier.TETRAHENDRON * edge * edge * edge;
+    }
+
+    private boolean isCheckParams(final double... params) {
+        for (double param : params) {
+            if (param < 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
