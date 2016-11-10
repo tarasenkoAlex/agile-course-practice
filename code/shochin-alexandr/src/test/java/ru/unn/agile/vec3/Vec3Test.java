@@ -153,7 +153,7 @@ public class Vec3Test {
     }
 
     @Test
-    public void isCorrectToStringForVector () {
+    public void isCorrectToStringForVector() {
         firstVec  = new Vector3(6.0, 6.0, 6.0);
 
         String actual = firstVec.toString();
