@@ -3,12 +3,12 @@ package ru.unn.agile.PositionalNotation;
 public final class Validator {
     private Validator() {
     }
-    public static void valueIsNull(final String value) {
+    public static void checkValueToNull(final String value) {
         if (value == null) {
             throw new IllegalArgumentException("Value is null");
         }
     }
-    public static void valueIsEmpty(final String value) {
+    public static void checkValueToEmpty(final String value) {
         if ("".equals(value)) {
             throw new IllegalArgumentException("Value is empty");
         }

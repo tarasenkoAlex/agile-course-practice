@@ -5,12 +5,12 @@ import org.junit.Test;
 public class ValidatorTest {
     @Test(expected = IllegalArgumentException.class)
     public void checkOnNull() {
-        Validator.valueIsNull(null);
+        Validator.checkValueToNull(null);
     }
     @Test(expected = IllegalArgumentException.class)
     public void checkOnEmpty() {
         String value = "";
-        Validator.valueIsEmpty(value);
+        Validator.checkValueToEmpty(value);
     }
     @Test(expected = IllegalArgumentException.class)
     public void checkBinary1201() {

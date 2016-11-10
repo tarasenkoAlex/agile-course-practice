@@ -5,8 +5,8 @@ public final class ToDecimalConverter {
     }
 
     public static int convertBinaryToDecimal(final String number) {
-        Validator.valueIsNull(number);
-        Validator.valueIsEmpty(number);
+        Validator.checkValueToNull(number);
+        Validator.checkValueToEmpty(number);
         Validator.checkBinaryValue(number);
         int result = 0;
         int iter = 0;
@@ -18,8 +18,8 @@ public final class ToDecimalConverter {
         return result;
     }
     public static int convertOctalToDecimal(final String number) {
-        Validator.valueIsNull(number);
-        Validator.valueIsEmpty(number);
+        Validator.checkValueToNull(number);
+        Validator.checkValueToEmpty(number);
         Validator.checkOctalValue(number);
         int result = 0;
         int iter = 0;
@@ -33,8 +33,8 @@ public final class ToDecimalConverter {
         return result;
     }
     public static int convertHexToDecimal(final String number) {
-        Validator.valueIsNull(number);
-        Validator.valueIsEmpty(number);
+        Validator.checkValueToNull(number);
+        Validator.checkValueToEmpty(number);
         Validator.checkHexValue(number);
         int result = 0;
         int iter = 0;
