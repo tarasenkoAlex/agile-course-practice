@@ -3,9 +3,9 @@ package ru.unn.agile.Credit.Model;
 import java.security.InvalidParameterException;
 
 public class Credit {
-    private final double SUM;
-    private final double MONTHS;
-    private final double PERCENT;
+    private final double sum;
+    private final double months;
+    private final double percent;
     private static final double PERCENT_MAX_VALUE = 100;
     private static final double MONTHS_IN_THE_YEAR = 12;
 
@@ -25,24 +25,24 @@ public class Credit {
         if (sum == 0 && months == 0 && percent == 0) {
             throw new InvalidParameterException("Parameters are wrong!");
         }
-        this.SUM = sum;
-        this.MONTHS = months;
-        this.PERCENT = percent;
+        this.sum = sum;
+        this.months = months;
+        this.percent = percent;
     }
 
     public double countPayment() {
-        double normalPercent = (PERCENT / PERCENT_MAX_VALUE) / MONTHS_IN_THE_YEAR;
-        double fractionCountPay = normalPercent / (Math.pow(1 + normalPercent, MONTHS) - 1);
-        return SUM * (normalPercent + fractionCountPay);
+        double normalPercent = (percent / PERCENT_MAX_VALUE) / MONTHS_IN_THE_YEAR;
+        double fractionCountPay = normalPercent / (Math.pow(1 + normalPercent, months) - 1);
+        return sum * (normalPercent + fractionCountPay);
     }
 
     public double countTotalSum() {
         double payment = countPayment();
-        return payment * MONTHS;
+        return payment * months;
     }
 
     public double countOverpayment() {
         double totalSum = countTotalSum();
-        return totalSum - SUM;
+        return totalSum - sum;
     }
 }
