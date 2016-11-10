@@ -5,6 +5,7 @@ public final class FromDecimalConverter {
     }
 
     public static String convertToBinary(final int number) {
+        Validator.checkDecimalValue(number);
         String result = "";
         int decimal = number;
         do {
@@ -14,6 +15,7 @@ public final class FromDecimalConverter {
         return new StringBuilder(result).reverse().toString();
     }
     public static String convertToOctal(final int number) {
+        Validator.checkDecimalValue(number);
         String result = "";
         int decimal = number;
         do {
@@ -23,6 +25,7 @@ public final class FromDecimalConverter {
         return new StringBuilder(result).reverse().toString();
     }
     public static String convertToHex(final int number) {
+        Validator.checkDecimalValue(number);
         String result = "";
         int decimal = number;
         int iter = 0;

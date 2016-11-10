@@ -4,6 +4,15 @@ import org.junit.Test;
 
 public class ValidatorTest {
     @Test(expected = IllegalArgumentException.class)
+    public void checkOnNull() {
+        Validator.valueIsNull(null);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void checkOnEmpty() {
+        String value = "";
+        Validator.valueIsEmpty(value);
+    }
+    @Test(expected = IllegalArgumentException.class)
     public void checkBinary1201() {
         String binary = "1201";
         Validator.checkBinaryValue(binary);
@@ -28,13 +37,13 @@ public class ValidatorTest {
         Validator.checkDecimalValue(-2);
     }
     @Test(expected = IllegalArgumentException.class)
-    public void checkHex() {
+    public void checkHex1r() {
         String hex = "1r";
         Validator.checkHexValue(hex);
     }
     @Test(expected = IllegalArgumentException.class)
-    public void checkEmptyValue() {
-        String value = "";
-        Validator.valueIsEmpty(value);
+    public void checkHex1T() {
+        String hex = "1T";
+        Validator.checkHexValue(hex);
     }
 }

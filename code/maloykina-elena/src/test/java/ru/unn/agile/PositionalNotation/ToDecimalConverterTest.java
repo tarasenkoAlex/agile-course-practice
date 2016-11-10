@@ -59,8 +59,20 @@ public class ToDecimalConverterTest {
         assertEquals(decimal, 10);
     }
     @Test
+    public void converterFFromHexToDecimal() {
+        String hex = "F";
+        int decimal = ToDecimalConverter.convertHexToDecimal(hex);
+        assertEquals(decimal, 15);
+    }
+    @Test
     public void converter1bFromHexToDecimal() {
         String hex = "1b";
+        int decimal = ToDecimalConverter.convertHexToDecimal(hex);
+        assertEquals(decimal, 27);
+    }
+    @Test
+    public void converter1BFromHexToDecimal() {
+        String hex = "1B";
         int decimal = ToDecimalConverter.convertHexToDecimal(hex);
         assertEquals(decimal, 27);
     }

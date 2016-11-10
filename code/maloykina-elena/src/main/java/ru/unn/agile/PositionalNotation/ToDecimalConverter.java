@@ -5,6 +5,9 @@ public final class ToDecimalConverter {
     }
 
     public static int convertBinaryToDecimal(final String number) {
+        Validator.valueIsNull(number);
+        Validator.valueIsEmpty(number);
+        Validator.checkBinaryValue(number);
         int result = 0;
         int iter = 0;
         String binary = new StringBuilder(number).reverse().toString();
@@ -15,6 +18,9 @@ public final class ToDecimalConverter {
         return result;
     }
     public static int convertOctalToDecimal(final String number) {
+        Validator.valueIsNull(number);
+        Validator.valueIsEmpty(number);
+        Validator.checkOctalValue(number);
         int result = 0;
         int iter = 0;
         String octal = new StringBuilder(number).reverse().toString();
@@ -27,16 +33,18 @@ public final class ToDecimalConverter {
         return result;
     }
     public static int convertHexToDecimal(final String number) {
+        Validator.valueIsNull(number);
+        Validator.valueIsEmpty(number);
+        Validator.checkHexValue(number);
         int result = 0;
         int iter = 0;
         int val;
         String hex = new StringBuilder(number).reverse().toString();
         for (char elem: hex.toCharArray()
                 ) {
-            if (elem == 'a') {
-                val = Constants.HEX_A << iter;
-            } else if (elem > 'a') {
-                val = (Constants.HEX_A + elem - 'a') << iter;
+            if (elem >= 'A') {
+                val = (Constants.HEX_A
+                        + String.valueOf(elem).toUpperCase().charAt(0) - 'A') << iter;
             } else {
                 val = (elem - '0') << iter;
             }

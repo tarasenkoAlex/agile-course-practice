@@ -3,7 +3,16 @@ package ru.unn.agile.PositionalNotation;
 public final class Validator {
     private Validator() {
     }
-
+    public static void valueIsNull(final String value) {
+        if (value == null) {
+            throw new IllegalArgumentException("Value is null");
+        }
+    }
+    public static void valueIsEmpty(final String value) {
+        if ("".equals(value)) {
+            throw new IllegalArgumentException("Value is empty");
+        }
+    }
     public static void checkBinaryValue(final String binary) {
         for (int i = 0; i < binary.length(); i++) {
             if (binary.charAt(i) > '1' || binary.charAt(i) < '0') {
@@ -26,14 +35,10 @@ public final class Validator {
     public static void checkHexValue(final String hex) {
         for (int i = 0; i < hex.length(); i++) {
             if (!(hex.charAt(i) <= '9' && hex.charAt(i) >= '0'
-                    || hex.charAt(i) <= 'f' && hex.charAt(i) >= 'a')) {
+                    || hex.charAt(i) <= 'f' && hex.charAt(i) >= 'a'
+                    || hex.charAt(i) <= 'F' && hex.charAt(i) >= 'A')) {
                 throw new IllegalArgumentException("Incorrect hex number");
             }
-        }
-    }
-    public static void valueIsEmpty(final String value) {
-        if ("".equals(value)) {
-            throw new IllegalArgumentException("Value is empty");
         }
     }
 }
