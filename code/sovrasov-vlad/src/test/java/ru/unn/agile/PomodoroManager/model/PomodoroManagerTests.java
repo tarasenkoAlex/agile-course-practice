@@ -17,5 +17,23 @@ public class PomodoroManagerTests {
         PomodoroManager manager = new PomodoroManager();
         manager.resetState();
         assertEquals(manager.getState(), PomodoroState.Off);
+        assertEquals(manager.getCheckmarksCounter(), 0);
+    }
+
+    @Test
+    public void startCycle()  {
+        PomodoroManager manager = new PomodoroManager();
+        manager.startCycle();
+        assertEquals(manager.getState(), PomodoroState.Pomodoro);
+        assertEquals(manager.getCheckmarksCounter(), 1);
+    }
+
+    @Test
+    public void switchToBreak()  {
+        PomodoroManager manager = new PomodoroManager();
+        manager.startCycle();
+        manager.nextState();
+        assertEquals(manager.getState(), PomodoroState.ShortBreak);
+        assertEquals(manager.getCheckmarksCounter(), 1);
     }
 }
