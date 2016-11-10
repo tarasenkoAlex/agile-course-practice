@@ -20,22 +20,24 @@ public class PomodoroManager {
 
     public void startCycle()  {
         state = PomodoroState.Pomodoro;
-        checkmarksCounter = 1;
+        checkmarksCounter = 0;
     }
 
     public void nextState()  {
         final int pomodorosPerCycle = 4;
         switch (state)  {
             case Pomodoro:
-                if (checkmarksCounter < pomodorosPerCycle)  {
+                if (checkmarksCounter < pomodorosPerCycle - 1)  {
                     state = PomodoroState.ShortBreak;
-                }  else if (checkmarksCounter == pomodorosPerCycle)  {
+                }  else if (checkmarksCounter == pomodorosPerCycle - 1)  {
                     state = PomodoroState.LongBreak;
                 }
+                checkmarksCounter++;
                 break;
             case LongBreak:
                 break;
             case ShortBreak:
+                state = PomodoroState.Pomodoro;
                 break;
             default:
                 break;
