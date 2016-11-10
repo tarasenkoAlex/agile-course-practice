@@ -7,35 +7,35 @@ import java.security.InvalidParameterException;
 import static org.junit.Assert.*;
 
 public class CreditTest {
-    private final double delta = 0.4;
-    private final double sum = 10000;
-    private final double months = 12;
-    private final double percent = 20;
+    private final double DELTA = 0.4;
+    private final double SUM = 10000;
+    private final double MONTHS = 12;
+    private final double PERCENT = 20;
 
     @Test
     public void canCreateCredit() {
-        Credit credit = new Credit(sum, months, percent);
+        Credit credit = new Credit(SUM, MONTHS, PERCENT);
         assertNotNull(credit);
     }
 
     @Test(expected = InvalidParameterException.class)
     public void canCountNegativeSum() {
-        Credit credit = new Credit(-sum, months, percent);
+        Credit credit = new Credit(-SUM, MONTHS, PERCENT);
     }
 
     @Test(expected = InvalidParameterException.class)
     public void canCountNegativeMonths() {
-        Credit credit = new Credit(sum, -months, percent);
+        Credit credit = new Credit(SUM, -MONTHS, PERCENT);
     }
 
     @Test(expected = InvalidParameterException.class)
     public void canCountWrongPercents() {
-        Credit credit = new Credit(sum, months, -percent);
+        Credit credit = new Credit(SUM, MONTHS, -PERCENT);
     }
 
     @Test(expected = InvalidParameterException.class)
     public void canCountCreditWhenMonthsAreNull() {
-        Credit credit = new Credit(sum, 0, percent);
+        Credit credit = new Credit(SUM, 0, PERCENT);
     }
 
     @Test(expected = InvalidParameterException.class)
@@ -45,22 +45,22 @@ public class CreditTest {
 
     @Test
     public void canCountPayment() {
-        Credit credit = new Credit(sum, months, percent);
+        Credit credit = new Credit(SUM, MONTHS, PERCENT);
         double payment = credit.countPayment();
-        assertEquals(926, payment, delta);
+        assertEquals(926, payment, DELTA);
     }
 
     @Test
     public void canCountTotalSum() {
-        Credit credit = new Credit(sum, months, percent);
+        Credit credit = new Credit(SUM, MONTHS, PERCENT);
         double totalSum = credit.countTotalSum();
-        assertEquals(11116, totalSum, delta);
+        assertEquals(11116, totalSum, DELTA);
     }
 
     @Test
     public void canCountOverpayment() {
-        Credit credit = new Credit(sum, months, percent);
+        Credit credit = new Credit(SUM, MONTHS, PERCENT);
         double overpayment = credit.countOverpayment();
-        assertEquals(1116, overpayment, delta);
+        assertEquals(1116, overpayment, DELTA);
     }
 }
