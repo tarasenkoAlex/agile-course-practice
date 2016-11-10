@@ -1,4 +1,4 @@
-package ru.unn.agile.vec3;
+package ru.unn.agile.Vec3;
 
 import org.junit.Test;
 
@@ -86,9 +86,9 @@ public class Vec3Test {
 
         final Vector3 vector = firstVec.cross(secondVec);
 
-        assertTrue(Double.isNaN(vector.x()));
-        assertTrue(Double.isNaN(vector.y()));
-        assertTrue(Double.isNaN(vector.z()));
+        assertTrue(Double.isNaN(vector.getX()));
+        assertTrue(Double.isNaN(vector.getY()));
+        assertTrue(Double.isNaN(vector.getZ()));
     }
 
     @Test (expected = NullPointerException.class)
@@ -129,7 +129,7 @@ public class Vec3Test {
         firstVec = new Vector3();
         firstVec.setX(value);
 
-        assertEquals(firstVec.x(), value, Double.MIN_VALUE);
+        assertEquals(firstVec.getX(), value, Double.MIN_VALUE);
     }
 
     @Test
@@ -139,7 +139,7 @@ public class Vec3Test {
         firstVec = new Vector3();
         firstVec.setY(value);
 
-        assertEquals(firstVec.y(), value, Double.MIN_VALUE);
+        assertEquals(firstVec.getY(), value, Double.MIN_VALUE);
     }
 
     @Test
@@ -149,7 +149,7 @@ public class Vec3Test {
         firstVec = new Vector3();
         firstVec.setZ(value);
 
-        assertEquals(firstVec.z(), value, Double.MIN_VALUE);
+        assertEquals(firstVec.getZ(), value, Double.MIN_VALUE);
     }
 
     @Test
@@ -161,4 +161,4 @@ public class Vec3Test {
 
         assertEquals(expected, actual);
     }
-
+}
