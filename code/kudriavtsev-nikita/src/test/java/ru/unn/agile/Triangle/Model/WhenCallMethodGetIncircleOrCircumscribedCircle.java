@@ -4,37 +4,75 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
 public class WhenCallMethodGetIncircleOrCircumscribedCircle {
     private final double delta = 0.001;
+    private static final double NAN = Double.NaN;
+    private static final Triangle SIMPLE_TRIANGLE = new Triangle(new Point2D(0, 0),
+                new Point2D(0, 1),
+                new Point2D(1, 0));
+    private static final Triangle DIFFICULT_TRIANGLE = new Triangle(new Point2D(2, 0),
+            new Point2D(-0.5, 0.4),
+            new Point2D(0, -4));
+    private static final Triangle DEGENERACY_TRIANGLE = new Triangle(new Point2D(2, 0),
+            new Point2D(2, 0),
+            new Point2D(0, 0));
 
     @Parameterized.Parameters
-    public static Collection<Object[]> data() {
-        Triangle simpleTriangle = new Triangle(new Point2D(0, 0),
-                                               new Point2D(0, 1),
-                                               new Point2D(1, 0));
+    public static Iterable<Object[]> data() {
+        List<Object[][]> list = Arrays.asList(
+                getTestDataCircumscribedCircle(),
+                getTestDataInscribedCircle()
+        );
 
-        Triangle difficultTriangle = new Triangle(new Point2D(2, 0),
-                                                  new Point2D(-0.5, 0.4),
-                                                  new Point2D(0, -4));
+        List<Object[]> dataSet = new ArrayList<Object[]>();
 
-        Triangle degeneracyTriangle = new Triangle(new Point2D(2, 0),
-                                                   new Point2D(2, 0),
-                                                   new Point2D(0, 0));
+        for (int i = 0; i < list.size(); i++) {
+            Object[][] objects = list.get(0);
+            for (int j = 0; j < objects[0].length; j++) {
+                dataSet.add(objects[j]);
+            }
+        }
 
-        return Arrays.asList(new Object[][] {
-                { new Point2D(0.5, 0.5), 0.70710678, simpleTriangle.getCircCircle()},
-                { new Point2D(0.44259259, -1.7212963), 2.32128817, difficultTriangle.getCircCircle() },
-                { new Point2D(Double.NaN, Double.NaN), Double.NaN, degeneracyTriangle.getCircCircle() },
-                { new Point2D(0.29289321, 0.29289321), 0.29289321, simpleTriangle.getIncircleCircle() },
-                { new Point2D(0.57911321, -0.72936959), 0.94469579, difficultTriangle.getIncircleCircle() },
-                { new Point2D(2, 0), 0, degeneracyTriangle.getIncircleCircle() }
-        });
+        return dataSet;
+    }
+
+    private static Object[][] getTestDataInscribedCircle() {
+        return new Object[][]{
+                {
+                        getPoint(0.292, 0.292), 0.292, SIMPLE_TRIANGLE.getIncircleCircle()
+                },
+                {
+                        getPoint(0.579, -0.729), 0.944, DIFFICULT_TRIANGLE.getIncircleCircle()
+                },
+                {
+                        getPoint(2, 0), 0, DEGENERACY_TRIANGLE.getIncircleCircle()
+                }
+        };
+    }
+
+    private static Object[][] getTestDataCircumscribedCircle() {
+        return new Object[][]{
+                {
+                        getPoint(0.5, 0.5), 0.707, SIMPLE_TRIANGLE.getCircCircle()
+                },
+                {
+                        getPoint(0.442, -1.721), 2.321, DIFFICULT_TRIANGLE.getCircCircle()
+                },
+                {
+                        getPoint(NAN, NAN), NAN, DEGENERACY_TRIANGLE.getCircCircle()
+                }
+        };
+    }
+
+    private static Point2D getPoint(final double x, final double y) {
+        return new Point2D(x, y);
     }
 
     private Point2D expectCenter;
