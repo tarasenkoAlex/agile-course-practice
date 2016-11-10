@@ -1,4 +1,4 @@
-package ru.unn.agile.Vec3;
+package ru.unn.agile.vec3;
 
 import org.junit.Test;
 
