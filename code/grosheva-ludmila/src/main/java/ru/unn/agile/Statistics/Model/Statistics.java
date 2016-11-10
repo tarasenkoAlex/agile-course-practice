@@ -63,9 +63,6 @@ public class Statistics {
         return centralMoment;
     }
 
-    private static double sqr(final double x) {
-        return x * x;
-    }
 
     public double computeAbsoluteInitialMoment(final int k) {
         double absoluteInitialMoment = 0;
@@ -84,7 +81,7 @@ public class Statistics {
         return absoluteCentralMoment;
     }
 
-    double factorial(final double x, final int k) {
+    private static double factorial(final double x, final int k) {
         double res = 1;
         for (int i = 0; i < k; ++i) {
             res *= x - i;
