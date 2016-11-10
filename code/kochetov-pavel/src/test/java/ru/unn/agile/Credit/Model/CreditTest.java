@@ -1,4 +1,3 @@
-
 package ru.unn.agile.Credit.Model;
 
 import org.junit.Test;
@@ -9,79 +8,59 @@ import static org.junit.Assert.*;
 
 public class CreditTest {
     private final double delta = 0.4;
-
-    public Credit inputValues(){
-        double s = 10000;
-        double m = 12;
-        double p = 20;
-
-        return new Credit(s, m, p);
-    }
+    private final double sum = 10000;
+    private final double months = 12;
+    private final double percent = 20;
 
     @Test
     public void canCreateCredit() {
-        Credit cred = inputValues();
-        assertNotNull(cred);
+        Credit credit = new Credit(sum, months, percent);
+        assertNotNull(credit);
     }
 
     @Test(expected = InvalidParameterException.class)
-    public void canCountNegativeSum(){
-        double s = -10000;
-        double m = 12;
-        double p = 20;
-        Credit cred = new Credit(s, m, p);
+    public void canCountNegativeSum() {
+        Credit credit = new Credit(-sum, months, percent);
     }
 
     @Test(expected = InvalidParameterException.class)
-    public void canCountNegativeMonths(){
-        double s = 10000;
-        double m = -12;
-        double p = 20;
-        Credit cred = new Credit(s, m, p);
+    public void canCountNegativeMonths() {
+        Credit credit = new Credit(sum, -months, percent);
     }
 
     @Test(expected = InvalidParameterException.class)
-    public void canCountWrongPercents(){
-        double s = 10000;
-        double m = 12;
-        double p = -20;
-        Credit cred = new Credit(s, m, p);
+    public void canCountWrongPercents() {
+        Credit credit = new Credit(sum, months, -percent);
     }
 
     @Test(expected = InvalidParameterException.class)
-    public void canCountCreditWhenMonthsAreNull(){
-        double s = 10000;
-        double m = 0;
-        double p = 20;
-        Credit cred = new Credit(s, m, p);
+    public void canCountCreditWhenMonthsAreNull() {
+        Credit credit = new Credit(sum, 0, percent);
     }
 
     @Test(expected = InvalidParameterException.class)
     public void canCountCreditWhenParametersAreUndefined() {
-        double s = 0;
-        double m = 0;
-        double p = 0;
-        Credit cred = new Credit(s, m, p);
+        Credit credit = new Credit(0, 0, 0);
     }
 
     @Test
     public void canCountPayment() {
-        Credit cred = inputValues();
-        double payment = cred.countPayment();
+        Credit credit = new Credit(sum, months, percent);
+        double payment = credit.countPayment();
         assertEquals(926, payment, delta);
     }
 
     @Test
     public void canCountTotalSum() {
-        Credit cred = inputValues();
-        double total_sum = cred.countTotalSum();
+        Credit credit = new Credit(sum, months, percent);
+        double total_sum = credit.countTotalSum();
         assertEquals(11116, total_sum, delta);
     }
 
     @Test
-    public void canCountOverPayment() {
-        Credit cred = inputValues();
-        double overpayment = cred.countOverPayment();
+    public void canCountOverpayment() {
+        Credit credit = new Credit(sum, months, percent);
+        double overpayment = credit.countOverpayment();
         assertEquals(1116, overpayment, delta);
     }
 }
