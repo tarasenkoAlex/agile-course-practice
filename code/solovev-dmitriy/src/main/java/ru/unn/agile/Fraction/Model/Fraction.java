@@ -48,7 +48,7 @@ public class Fraction {
     }
 
     public static Fraction sum(final Fraction a, final Fraction b) {
-        int lcm = lcm(a.denominator, b.denominator);
+        int lcm = leastCommonMultiple(a.denominator, b.denominator);
         return new Fraction(
                 a.numerator * (lcm / a.denominator) + b.numerator * (lcm / b.denominator),
                 lcm
@@ -56,16 +56,12 @@ public class Fraction {
     }
 
     public static Fraction subtract(final Fraction a, final Fraction b) {
-        int lcm = lcm(a.denominator, b.denominator);
+        int lcm = leastCommonMultiple(a.denominator, b.denominator);
         return new Fraction(
                 a.numerator * (lcm / a.denominator) - b.numerator * (lcm / b.denominator),
                 lcm
         );
     }
-
-
-
-
 
     @Override
     public boolean equals(final Object obj) {
@@ -86,16 +82,6 @@ public class Fraction {
         return numerator ^ denominator;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(numerator) + '/' + String.valueOf(denominator);
-    }
-
-
-
-
-
-
     private void correctSign() {
         if (denominator < 0) {
             numerator = -numerator;
@@ -104,13 +90,12 @@ public class Fraction {
     }
 
     private void reduce() {
-        int d = gcd(abs(numerator), denominator);
-        numerator /= d;
-        denominator /= d;
+        int gcd = greatestCommonDivisor(abs(numerator), denominator);
+        numerator /= gcd;
+        denominator /= gcd;
     }
 
-
-    private static int gcd(final int number1, final int number2) {
+    private static int greatestCommonDivisor(final int number1, final int number2) {
         int tmp, a = number1, b = number2;
         while (a != 0) {
             tmp = a;
@@ -120,7 +105,7 @@ public class Fraction {
         return b;
     }
 
-    private static int lcm(final int number1, final int number2) {
-        return number1 / gcd(number1, number2) * number2;
+    private static int leastCommonMultiple(final int number1, final int number2) {
+        return number1 / greatestCommonDivisor(number1, number2) * number2;
     }
 }
