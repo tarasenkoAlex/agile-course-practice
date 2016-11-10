@@ -6,6 +6,12 @@ import static org.junit.Assert.*;
 public class PomodoroManagerTests {
     private final double delta = 0.001;
 
+    private void skipState(final PomodoroManager manager, final int times)  {
+        for (int i = 0; i < times; i++)  {
+            manager.nextState();
+        }
+    }
+
     @Test
     public void defaultState()  {
         PomodoroManager manager = new PomodoroManager();
@@ -41,8 +47,7 @@ public class PomodoroManagerTests {
     public void switchToNextPomodoro()  {
         PomodoroManager manager = new PomodoroManager();
         manager.startCycle();
-        manager.nextState();
-        manager.nextState();
+        skipState(manager, 2);
         assertEquals(manager.getState(), PomodoroState.Pomodoro);
         assertEquals(manager.getCheckmarksCounter(), 1);
     }
@@ -51,16 +56,7 @@ public class PomodoroManagerTests {
     public void switchToLongBreak()  {
         PomodoroManager manager = new PomodoroManager();
         manager.startCycle();
-        manager.nextState();
-
-        manager.nextState();
-        manager.nextState();
-
-        manager.nextState();
-        manager.nextState();
-
-        manager.nextState();
-        manager.nextState();
+        skipState(manager, 7);
         assertEquals(manager.getState(), PomodoroState.LongBreak);
         assertEquals(manager.getCheckmarksCounter(), 4);
     }
