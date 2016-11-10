@@ -15,7 +15,7 @@
  - Определение суммы ежемесячной переплаты (процентов)
 
 Все необходимые математические сведения можно найти в статье
-["Ипотечный калькулятор"] на сайте calculator-ipoteka.ru.
+["Ипотечный калькулятор"][calc] на сайте calculator-ipoteka.ru.
 
 ## Документация разработчика
 
@@ -23,4 +23,4 @@ TBD
 
 <!-- LINKS -->
 
- http://calculator-ipoteka.ru/articles/ipoteka-calculator.html
+ [calc]:http://calculator-ipoteka.ru/articles/ipoteka-calculator.html
