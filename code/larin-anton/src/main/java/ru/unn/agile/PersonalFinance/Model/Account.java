@@ -39,11 +39,7 @@ public class Account {
                     "Consider adding a transfer in opposite direction");
         }
 
-        balance -= amount;
-        other.balance += amount;
-        Transfer transfer = new Transfer(amount, this, other, date);
-        addTransactionKeepingOrder(transactions, transfer);
-        addTransactionKeepingOrder(other.transactions, transfer);
+        addTransfer(new Transfer(amount, this, other, date));
     }
 
     public void transferTo(final Account other, final int amount) {
@@ -71,36 +67,20 @@ public class Account {
             final ExternalTransaction oldTransaction,
             final ExternalTransaction newTransaction) {
 
-        balance -= oldTransaction.getAmount() - newTransaction.getAmount();
-        transactions.remove(transactions.indexOf(oldTransaction));
-        addTransactionKeepingOrder(transactions, newTransaction);
+        deleteTransaction(oldTransaction);
+        addExternalTransaction(newTransaction);
     }
 
     public void replaceTransfer(final Transfer oldTransfer, final Transfer newTransfer) {
-        int amountDelta = newTransfer.getAmount() - oldTransfer.getAmount();
-
-        Account otherAccount;
-        if (oldTransfer.getSource().equals(this)) {
-            otherAccount = oldTransfer.getTarget();
-            this.balance -= amountDelta;
-            otherAccount.balance += amountDelta;
-        } else {
-            otherAccount = oldTransfer.getSource();
-            this.balance += amountDelta;
-            otherAccount.balance -= amountDelta;
-        }
-        List<Transaction> otherAccountTransactions = otherAccount.getTransactions();
-        transactions.remove(this.getTransactions().indexOf(oldTransfer));
-        addTransactionKeepingOrder(transactions, newTransfer);
-        otherAccountTransactions.remove(otherAccountTransactions.indexOf(oldTransfer));
-        addTransactionKeepingOrder(otherAccountTransactions, newTransfer);
+        deleteTransaction(oldTransfer);
+        addTransfer(newTransfer);
     }
 
     public void changeName(final String name) {
         this.name = name;
     }
 
-    private void addTransactionKeepingOrder(
+    private static void addTransactionKeepingOrder(
             final List<Transaction> transactions,
             final Transaction replacement) {
 
@@ -111,5 +91,12 @@ public class Account {
         }
 
         transactions.add(insertionIndex + 1, replacement);
+    }
+
+    private static void addTransfer(final Transfer transfer) {
+        transfer.getSource().balance -= transfer.getAmount();
+        transfer.getTarget().balance += transfer.getAmount();
+        addTransactionKeepingOrder(transfer.getSource().transactions, transfer);
+        addTransactionKeepingOrder(transfer.getTarget().transactions, transfer);
     }
 }
