@@ -21,178 +21,178 @@ public class VolumeCalculatorTest {
 
     @Test
     public void calculateVolumeSphereWhenRadius0() {
-        double result = calculator.getSphereValue(0);
+        double result = calculator.getSphereVolume(0);
 
         assertEquals(0, result, DELTA);
     }
 
     @Test
     public void calculateVolumeSphereWhenRadius2() {
-        double result = calculator.getSphereValue(2);
+        double result = calculator.getSphereVolume(2);
 
         assertEquals(33.510321638291, result, DELTA);
     }
 
     @Test(expected  = IllegalArgumentException.class)
     public void calculateVolumeSphereWhenRadiusNegative() {
-        calculator.getSphereValue(-2);
+        calculator.getSphereVolume(-2);
     }
 
     @Test
     public void calculateVolumeCubeWhenEdge0() {
-        double result = calculator.getCubeValue(0);
+        double result = calculator.getCubeVolume(0);
 
         assertEquals(0, result, DELTA);
     }
 
     @Test
     public void calculateVolumeCubeWhenEdge3() {
-        double result = calculator.getCubeValue(3);
+        double result = calculator.getCubeVolume(3);
 
         assertEquals(27, result, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculateVolumeCubeWhenEdgeNegative() {
-        calculator.getCubeValue(-3);
+        calculator.getCubeVolume(-3);
     }
 
     @Test
     public void calculateVolumeConeWhenRadius0AndHeight2() {
-        double result = calculator.getConeValue(0, 2);
+        double result = calculator.getConeVolume(0, 2);
 
         assertEquals(0, result, DELTA);
     }
 
     @Test
     public void calculateVolumeConeWhenRadius2AndHeight0() {
-        double result = calculator.getConeValue(2, 0);
+        double result = calculator.getConeVolume(2, 0);
 
         assertEquals(0, result, DELTA);
     }
 
     @Test
     public void calculateVolumeConeWhenRadius0AndHeight0() {
-        double result = calculator.getConeValue(0, 0);
+        double result = calculator.getConeVolume(0, 0);
 
         assertEquals(0, result, DELTA);
     }
 
     @Test
     public void calculateVolumeConeWhenRadius2AndHeight2() {
-        double result = calculator.getConeValue(2, 2);
+        double result = calculator.getConeVolume(2, 2);
 
         assertEquals(8.3775804095728, result, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculateVolumeConeWhenRadiusNegativeAndHeight2() {
-        calculator.getConeValue(-3, 2);
+        calculator.getConeVolume(-3, 2);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculateVolumeConeWhenRadius2AndHeightNegative() {
-        calculator.getConeValue(2, -2);
+        calculator.getConeVolume(2, -2);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculateVolumeConeWhenRadiusNegativeAndHeightNegative() {
-        calculator.getConeValue(-5, -2);
+        calculator.getConeVolume(-5, -2);
     }
 
     @Test
     public void calculateVolumeCylinderWhenRadius0AndHeight5() {
-        double result = calculator.getCylinderValue(0, 5);
+        double result = calculator.getCylinderVolume(0, 5);
 
         assertEquals(0, result, DELTA);
     }
 
     @Test
     public void calculateVolumeCylinderWhenRadius5AndHeight0() {
-        double result = calculator.getCylinderValue(5, 0);
+        double result = calculator.getCylinderVolume(5, 0);
 
         assertEquals(0, result, DELTA);
     }
 
     @Test
     public void calculateVolumeCylinderWhenRadius0AndHeight0() {
-        double result = calculator.getCylinderValue(0, 0);
+        double result = calculator.getCylinderVolume(0, 0);
         assertEquals(0, result, DELTA);
     }
 
     @Test
     public void calculateVolumeCylinderWhenRadius2AndHeight5() {
-        double result = calculator.getCylinderValue(2, 5);
+        double result = calculator.getCylinderVolume(2, 5);
 
         assertEquals(62.831853071796, result, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculateVolumeCylinderWhenRadiusNegativeAndHeight2() {
-        calculator.getCylinderValue(-3, 2);
+        calculator.getCylinderVolume(-3, 2);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculateVolumeCylinderWhenRadius2AndHeightNegative() {
-        calculator.getCylinderValue(2, -2);
+        calculator.getCylinderVolume(2, -2);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculateVolumeCylinderWhenRadiusNegativeAndHeightNegative() {
-        calculator.getCylinderValue(-5, -2);
+        calculator.getCylinderVolume(-5, -2);
     }
 
     @Test
     public void calculateVolumePyramidWhenArea0AndHeight4() {
-        double result = calculator.getPyramidValue(0, 4);
+        double result = calculator.getPyramidVolume(0, 4);
 
         assertEquals(0, result, DELTA);
     }
 
     @Test
     public void calculateVolumePyramidWhenArea5AndHeight0() {
-        double result = calculator.getPyramidValue(5, 0);
+        double result = calculator.getPyramidVolume(5, 0);
 
         assertEquals(0, result, DELTA);
     }
 
     @Test
     public void calculateVolumePyramidWhenArea2AndHeight8() {
-        double result = calculator.getPyramidValue(2, 8);
+        double result = calculator.getPyramidVolume(2, 8);
         assertEquals(5.3333333333333, result, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculateVolumePyramidWhenAreaNegativeAndHeight2() {
-        calculator.getPyramidValue(-3, 2);
+        calculator.getPyramidVolume(-3, 2);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculateVolumePyramidWhenArea2AndHeightNegative() {
-        calculator.getPyramidValue(2, -2);
+        calculator.getPyramidVolume(2, -2);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculateVolumePyramidWhenAreaNegativeAndHeightNegative() {
-        calculator.getPyramidValue(-5, -2);
+        calculator.getPyramidVolume(-5, -2);
     }
 
     @Test
     public void calculateVolumeTetrahedronWhenEdge0() {
-        double result = calculator.getTetrahedronValue(0);
+        double result = calculator.getTetrahedronVolume(0);
 
         assertEquals(0, result, DELTA);
     }
 
     @Test
     public void calculateVolumeTetrahedronWhenEdge4() {
-        double result = calculator.getTetrahedronValue(4);
+        double result = calculator.getTetrahedronVolume(4);
 
         assertEquals(7.5424723326565, result, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculateVolumeTetrahedronWhenEdgeNegative() {
-        calculator.getTetrahedronValue(-4);
+        calculator.getTetrahedronVolume(-4);
     }
 }
