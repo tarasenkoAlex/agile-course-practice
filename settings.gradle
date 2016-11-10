@@ -97,6 +97,9 @@ project(":code/larin-anton").name = "larin-anton-Model"
 // Сиротин Никита
 // Скребков Артём
 // Соврасов Владислав
+include "code/sovrasov-vlad"
+project(":code/sovrasov-vlad").name = "sovrasov-vlad"
+
 // Соловьев Дмитрий
 include "code/solovev-dmitriy"
 project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
@@ -113,4 +116,3 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Шишкин Владислав
 // Шочин Александр
 // Шургалин Петр
-
