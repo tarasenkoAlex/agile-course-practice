@@ -25,18 +25,21 @@ public final class CalculatorComplexNumber {
         return new ComplexNumber(real, im);
     }
 
+    private static void validateComplexNumber(final ComplexNumber complexNumber) {
+        if (Float.compare(complexNumber.getReal(), 0.f) == 0
+                && Float.compare(complexNumber.getImaginary(), 0.f) == 0) {
+            throw new ArithmeticException("Parameter can't be null");
+        }
+    }
+
 
     public static ComplexNumber div(final ComplexNumber complexA, final ComplexNumber complexB) {
-        if (Float.compare(complexB.getReal(), 0.f) == 0
-                && Float.compare(complexB.getImaginary(), 0.f) == 0) {
-            throw new ArithmeticException("Argument 'divisor' is 0");
-        } else {
-            float factor = complexB.getReal() * complexB.getReal()
-                    + complexB.getImaginary() * complexB.getImaginary();
-            ComplexNumber representComplexB = new ComplexNumber(complexB.getReal() / factor,
-                    -complexB.getImaginary() / factor);
-            return mult(complexA, representComplexB);
-        }
+        validateComplexNumber(complexB);
+        float factor = complexB.getReal() * complexB.getReal()
+                + complexB.getImaginary() * complexB.getImaginary();
+        ComplexNumber representComplexB = new ComplexNumber(complexB.getReal() / factor,
+                -complexB.getImaginary() / factor);
+        return mult(complexA, representComplexB);
     }
 
     public static float abs(final ComplexNumber complexNumberA) {
