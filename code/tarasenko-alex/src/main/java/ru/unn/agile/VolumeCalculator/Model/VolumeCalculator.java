@@ -6,60 +6,46 @@ package ru.unn.agile.VolumeCalculator.Model;
 public class VolumeCalculator {
 
     public double getSphereVolume(final double radius) {
-        if (!isCheckParams(radius)) {
-            throw new IllegalArgumentException("Radius must not be negative!");
-        }
+        checkParams("Radius must not be negative!", radius);
 
         return VolumeMultiplier.SPHERE * Math.PI * radius * radius * radius;
     }
 
     public double getCubeVolume(final double edge) {
-        if (!isCheckParams(edge)) {
-            throw new IllegalArgumentException("Edge must not be negative!");
-        }
+        checkParams("Edge must not be negative!", edge);
 
         return edge * edge * edge;
     }
 
     public double getConeVolume(final double radius, final double height) {
-        if (!isCheckParams(radius, height)) {
-            throw new IllegalArgumentException("Raduis and height must not be negative!");
-        }
+        checkParams("Raduis and height must not be negative!", radius, height);
 
         return VolumeMultiplier.CONE * Math.PI * radius * radius * height;
     }
 
     public double getCylinderVolume(final double radius, final double height) {
-        if (!isCheckParams(radius, height)) {
-            throw new IllegalArgumentException("Raduis and height must not be negative!");
-        }
+        checkParams("Raduis and height must not be negative!", radius, height);
 
         return Math.PI * radius * radius * height;
     }
 
     public double getPyramidVolume(final double area, final double height) {
-        if (!isCheckParams(area, height)) {
-            throw new IllegalArgumentException("Area and height must not be negative!");
-        }
+        checkParams("Area and height must not be negative!", area, height);
 
         return VolumeMultiplier.PYRAMID * area * height;
     }
 
     public double getTetrahedronVolume(final double edge) {
-        if (!isCheckParams(edge)) {
-            throw new IllegalArgumentException("Edge must not be negative!");
-        }
+        checkParams("Edge must not be negative!", edge);
 
         return VolumeMultiplier.TETRAHENDRON * edge * edge * edge;
     }
 
-    private boolean isCheckParams(final double... params) {
+    private void checkParams(final String message, final double... params) {
         for (double param : params) {
             if (param < 0) {
-                return false;
+                throw new IllegalArgumentException(message);
             }
         }
-
-        return true;
     }
 }
