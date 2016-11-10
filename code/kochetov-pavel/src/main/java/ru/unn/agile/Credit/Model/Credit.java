@@ -6,8 +6,8 @@ public class Credit {
     private final double sum;
     private final double months;
     private final double percent;
-    private static final double percentMaxValue = 100;
-    private static final double monthsInTheYear = 12;
+    private static final double PercentMaxValue = 100;
+    private static final double MonthsInTheYear = 12;
 
     Credit(final double sum, final double months, final double percent) {
         if (sum < 0) {
@@ -16,7 +16,7 @@ public class Credit {
         if (months < 0) {
             throw new InvalidParameterException("Months must be positive!");
         }
-        if (percent < 0 || percent > percentMaxValue) {
+        if (percent < 0 || percent > PercentMaxValue) {
             throw new InvalidParameterException("Percents must be from 0 to 100!");
         }
         if (months == 0) {
@@ -31,7 +31,7 @@ public class Credit {
     }
 
     public double countPayment() {
-        double normalPercent = (percent / percentMaxValue) / monthsInTheYear;
+        double normalPercent = (percent / PercentMaxValue) / MonthsInTheYear;
         double fractionCountPay = normalPercent / (Math.pow(1 + normalPercent, months) - 1);
         return sum * (normalPercent + fractionCountPay);
     }
