@@ -24,22 +24,22 @@ public class CreditTest {
     }
 
     @Test(expected = InvalidParameterException.class)
-    public void canCountNegativeMonths() {
+    public void canCreateNegativeMonths() {
         Credit credit = new Credit(sum, -months, percent);
     }
 
     @Test(expected = InvalidParameterException.class)
-    public void canCountWrongPercents() {
+    public void canCreateCreditWhenWrongPercents() {
         Credit credit = new Credit(sum, months, -percent);
     }
 
     @Test(expected = InvalidParameterException.class)
-    public void canCountCreditWhenMonthsAreNull() {
+    public void canCreateCreditWhenMonthsAreNull() {
         Credit credit = new Credit(sum, 0, percent);
     }
 
     @Test(expected = InvalidParameterException.class)
-    public void canCountCreditWhenParametersAreUndefined() {
+    public void canCreateCreditWhenParamsEmpty() {
         Credit credit = new Credit(0, 0, 0);
     }
 
