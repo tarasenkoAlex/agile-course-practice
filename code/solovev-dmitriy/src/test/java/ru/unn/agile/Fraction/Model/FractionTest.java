@@ -30,8 +30,29 @@ public class FractionTest {
         assertNotNull(number);
     }
 
+    @Test
+    public void canCreateFractionWithNegativeInteger() {
+        Fraction number = new Fraction(-10);
+        assertNotNull(number);
+    }
 
+    @Test
+    public void canCreateFractionWithNegativesNumAndDenom() {
+        Fraction number = new Fraction(-310, -890);
+        assertNotNull(number);
+    }
 
+    @Test
+    public void canCreateFractionWithNegativeNum() {
+        Fraction number = new Fraction(-310, 890);
+        assertNotNull(number);
+    }
+
+    @Test
+    public void canCreateFractionWithNegativeDenom() {
+        Fraction number = new Fraction(310, -890);
+        assertNotNull(number);
+    }
 
     @Test
     public void isFractionWithDefaultValueEqualsZero() {
@@ -41,7 +62,6 @@ public class FractionTest {
         assertEquals(number.getDenominator(), 1);
     }
 
-
     @Test
     public void canSetInitialIntegerValue() {
         Fraction number = new Fraction(123);
@@ -50,14 +70,12 @@ public class FractionTest {
         assertEquals(number.getDenominator(), 1);
     }
 
-
     @Test
     public void canSetInitialIrreducibleFraction1div2() {
         Fraction number = new Fraction(1, 2);
         assertEquals(number.getNumerator(), 1);
         assertEquals(number.getDenominator(), 2);
     }
-
 
     @Test
     public void canSetInitialReducibleFraction2div4() {
@@ -72,7 +90,6 @@ public class FractionTest {
         assertEquals(number.getNumerator(), 2);
         assertEquals(number.getDenominator(), 1);
     }
-
 
     @Test
     public void isEqualFractionsEqual() {
@@ -126,8 +143,6 @@ public class FractionTest {
         Fraction r = subtract(a, b);
         assertEquals(new Fraction(-1811, 65), r);
     }
-
-
 
     @Test(expected = ArithmeticException.class)
     public void canNotCreateDenominatorEqualZero() {
