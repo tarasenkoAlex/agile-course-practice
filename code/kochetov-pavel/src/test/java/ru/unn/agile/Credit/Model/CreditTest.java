@@ -53,8 +53,8 @@ public class CreditTest {
     @Test
     public void canCountTotalSum() {
         Credit credit = new Credit(sum, months, percent);
-        double total_sum = credit.countTotalSum();
-        assertEquals(11116, total_sum, delta);
+        double totalSum = credit.countTotalSum();
+        assertEquals(11116, totalSum, delta);
     }
 
     @Test
