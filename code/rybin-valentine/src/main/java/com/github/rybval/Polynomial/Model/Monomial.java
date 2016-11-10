@@ -57,4 +57,21 @@ public class Monomial {
         return new Monomial(power - divider.power,
                            coefficient / divider.coefficient);
     }
+
+    @Override
+    public int hashCode() {
+        return new Integer(power).hashCode()
+             ^ new Double(coefficient).hashCode();
+    }
+
+    @Override
+    public boolean equals(final Object object) {
+        if (object instanceof Monomial) {
+            Monomial monomial = (Monomial) object;
+            return monomial.power == power
+                && monomial.coefficient == coefficient;
+        } else {
+            return false;
+        }
+    }
 }

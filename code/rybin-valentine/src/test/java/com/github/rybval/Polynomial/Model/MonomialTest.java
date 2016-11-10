@@ -127,4 +127,44 @@ public class MonomialTest {
 
         Monomial quotient = dividend.divide(divider);
     }
+
+    @Test
+    public void isEqualMonomialsCompareCorrect() {
+        Monomial monomial1 = new Monomial(POWER, COEFFICIENT);
+        Monomial monomial2 = new Monomial(POWER, COEFFICIENT);
+
+        assertEquals(monomial1, monomial2);
+    }
+
+    @Test
+    public void isDifferentMonomialsCompareCorrect() {
+        Monomial monomial1 = new Monomial(5, 5.4);
+        Monomial monomial2 = new Monomial(3, 3.2);
+
+        assertNotEquals(monomial1, monomial2);
+    }
+
+    @Test
+    public void isCompareMonomialWithNullCorrect() {
+        Monomial monomial1 = new Monomial(POWER, COEFFICIENT);
+        Monomial monomial2 = null;
+
+        assertNotEquals(monomial1, monomial2);
+    }
+
+    @Test
+    public void areHashesSameForEqualMonomials() {
+        Monomial monomial1 = new Monomial(POWER, COEFFICIENT);
+        Monomial monomial2 = new Monomial(POWER, COEFFICIENT);
+
+        assertEquals(monomial1.hashCode(), monomial2.hashCode());
+    }
+
+    @Test
+    public void areHashesDifferentForDifferentMonomials() {
+        Monomial monomial1 = new Monomial(5, 5.4);
+        Monomial monomial2 = new Monomial(3, 3.2);
+
+        assertNotEquals(monomial1.hashCode(), monomial2.hashCode());
+    }
 }
