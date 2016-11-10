@@ -121,5 +121,5 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Шишкин Владислав
 // Шочин Александр
 include "code/shochin-alexandr"
-project(":code/shochin-alexandr").name = "shochin-alexandr"
+project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
 // Шургалин Петр
