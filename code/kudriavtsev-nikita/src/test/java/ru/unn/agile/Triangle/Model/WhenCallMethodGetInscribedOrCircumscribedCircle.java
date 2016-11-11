@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class WhenCallMethodGetIncircleOrCircumscribedCircle {
+public class WhenCallMethodGetInscribedOrCircumscribedCircle {
     private final double delta = 0.001;
     private static final double NAN = Double.NaN;
     private static final Triangle SIMPLE_TRIANGLE = new Triangle(new Point2D(0, 0),
@@ -46,13 +46,13 @@ public class WhenCallMethodGetIncircleOrCircumscribedCircle {
     private static Object[][] getTestDataInscribedCircle() {
         return new Object[][]{
                 {
-                        getPoint(0.292, 0.292), 0.292, SIMPLE_TRIANGLE.getIncircleCircle()
+                        getPoint(0.292, 0.292), 0.292, SIMPLE_TRIANGLE.getInscCircle()
                 },
                 {
-                        getPoint(0.579, -0.729), 0.944, DIFFICULT_TRIANGLE.getIncircleCircle()
+                        getPoint(0.579, -0.729), 0.944, DIFFICULT_TRIANGLE.getInscCircle()
                 },
                 {
-                        getPoint(2, 0), 0, DEGENERACY_TRIANGLE.getIncircleCircle()
+                        getPoint(2, 0), 0, DEGENERACY_TRIANGLE.getInscCircle()
                 }
         };
     }
@@ -79,9 +79,9 @@ public class WhenCallMethodGetIncircleOrCircumscribedCircle {
     private double expectRadius;
     private Circle actualCircle;
 
-    public WhenCallMethodGetIncircleOrCircumscribedCircle(final Point2D expectCenter,
-                                                          final double expectRadius,
-                                                          final Circle actualCircle) {
+    public WhenCallMethodGetInscribedOrCircumscribedCircle(final Point2D expectCenter,
+                                                           final double expectRadius,
+                                                           final Circle actualCircle) {
         this.expectCenter = expectCenter;
         this.expectRadius = expectRadius;
         this.actualCircle = actualCircle;

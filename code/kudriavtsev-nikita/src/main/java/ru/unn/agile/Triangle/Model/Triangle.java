@@ -53,7 +53,7 @@ public class Triangle {
         return lenghtAC + lenghtBC + lenghtAB;
     }
 
-    public Circle getIncircleCircle() {
+    public Circle getInscCircle() {
         double x0, y0, radius;
         double p = perimeter() / 2;
 
