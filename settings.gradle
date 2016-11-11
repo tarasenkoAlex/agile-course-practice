@@ -42,4 +42,8 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
+// Sirotin Nikita
+include "code/sirotin-nikita"
+project(":code/sirotin-nikita").name = "sirotin-nikita-Model"
+
 //
