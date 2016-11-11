@@ -26,7 +26,8 @@ public class PolynomialTest {
     @Test
     public void canCreatePolynomialWithArrayOfMonomials() {
         Monomial[] monomialsArray = {new Monomial(5, 5.4),
-                                     new Monomial(3, 2.1)};
+                                     new Monomial(3, 2.1),
+                                     new Monomial(3, -5)};
 
         Polynomial polynomial = new Polynomial(monomialsArray);
 
