@@ -55,9 +55,10 @@ public class MonomialTest {
 
     @Test
     public void canNegateMonomial() {
-        Monomial monomial = new Monomial(POWER, COEFFICIENT);
-        assertEquals(-COEFFICIENT, monomial.negate().getCoefficient(),
-                     Double.MIN_VALUE);
+        Monomial positivemonomial = new Monomial(POWER, COEFFICIENT);
+        Monomial negativeMonomial = new Monomial(POWER, -COEFFICIENT);
+
+        assertEquals(negativeMonomial, positivemonomial.negate());
     }
 
     @Test
