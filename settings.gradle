@@ -60,6 +60,9 @@ include "code/veselov-ilya"
 project(":code/veselov-ilya").name = "veselov-ilya-Model"
 
 // Волков Денис
+include "code/volkov-denis"
+project(":code/volkov-denis").name = "volkov-denis-Model"
+
 // Воронин Дмитрий
 // Грошева Людмила
 include "code/grosheva-ludmila"
@@ -158,4 +161,3 @@ project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
 // Шургалин Петр
 include "code/shurgalin-pyotr"
 project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
-
