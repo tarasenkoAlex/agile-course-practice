@@ -13,8 +13,20 @@ public class Monomial {
     }
 
     Monomial() {
-        power = 0;
-        coefficient = 0;
+        this(0, 0);
+    }
+
+    Monomial(final String string) {
+        String[] parts = string.split("\\*x\\^");
+        // Want like this:
+        //this(Integer.parseInt(parts[1]), Double.parseDouble(parts[0]));
+
+        // But now this:
+        if (Integer.parseInt(parts[1]) < 0) {
+            throw new IllegalArgumentException();
+        }
+        power = Integer.parseInt(parts[1]);
+        coefficient = Double.parseDouble(parts[0]);
     }
 
     int getPower() {
@@ -73,5 +85,10 @@ public class Monomial {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+         return String.format("%s*x^%d", coefficient, power);
     }
 }
