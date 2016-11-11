@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class Point2DTest {
-    private final double delta = 0.001;
+    private static final double DELTA = 0.001;
 
     @Test
     public void canCreatePoint2DWithInitialValues() {
@@ -21,7 +21,7 @@ public class Point2DTest {
         double expectY = 7.1;
         Point2D point = new Point2D(expectX, expectY);
 
-        assertEquals(expectX, point.getX(), delta);
-        assertEquals(expectY, point.getY(), delta);
+        assertEquals(expectX, point.getX(), DELTA);
+        assertEquals(expectY, point.getY(), DELTA);
     }
 }

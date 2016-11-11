@@ -18,27 +18,27 @@ public class Triangle {
         lenghtAC = getDistanceBtwTwoPoints(pointA, pointC);
     }
 
-    public Point2D getA() {
+    public Point2D getPointA() {
         return pointA;
     }
 
-    public Point2D getB() {
+    public Point2D getPointB() {
         return pointB;
     }
 
-    public Point2D getC() {
+    public Point2D getPointC() {
         return pointC;
     }
 
-    public double getAB() {
+    public double getLenghtAB() {
         return lenghtAB;
     }
 
-    public double getBC() {
+    public double getLenghtBC() {
         return lenghtBC;
     }
 
-    public double getAC() {
+    public double getLenghtAC() {
         return lenghtAC;
     }
 

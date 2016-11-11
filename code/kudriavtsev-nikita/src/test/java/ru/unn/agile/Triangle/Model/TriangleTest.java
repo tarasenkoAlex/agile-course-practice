@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TriangleTest {
-    private final double delta = 0.001;
+    private static final double DELTA = 0.001;
     private Point2D simpleA;
     private Point2D simpleB;
     private Point2D simpleC;
@@ -36,9 +36,9 @@ public class TriangleTest {
 
     @Test
     public void canSetInitialValueOfTrianglePoints() {
-        assertEquals(simpleA, simpleTriangle.getA());
-        assertEquals(simpleB, simpleTriangle.getB());
-        assertEquals(simpleC, simpleTriangle.getC());
+        assertEquals(simpleA, simpleTriangle.getPointA());
+        assertEquals(simpleB, simpleTriangle.getPointB());
+        assertEquals(simpleC, simpleTriangle.getPointC());
     }
 
     @Test
@@ -47,9 +47,9 @@ public class TriangleTest {
         double expectBC = 1.414;
         double expectAC = 1;
 
-        assertEquals(expectAB, simpleTriangle.getAB(), delta);
-        assertEquals(expectBC, simpleTriangle.getBC(), delta);
-        assertEquals(expectAC, simpleTriangle.getAC(), delta);
+        assertEquals(expectAB, simpleTriangle.getLenghtAB(), DELTA);
+        assertEquals(expectBC, simpleTriangle.getLenghtBC(), DELTA);
+        assertEquals(expectAC, simpleTriangle.getLenghtAC(), DELTA);
     }
 
     @Test
@@ -58,9 +58,9 @@ public class TriangleTest {
         double expectBC = 2;
         double expectAC = 2;
 
-        assertEquals(expectAB, degenerateTriangle.getAB(), delta);
-        assertEquals(expectBC, degenerateTriangle.getBC(), delta);
-        assertEquals(expectAC, degenerateTriangle.getAC(), delta);
+        assertEquals(expectAB, degenerateTriangle.getLenghtAB(), DELTA);
+        assertEquals(expectBC, degenerateTriangle.getLenghtBC(), DELTA);
+        assertEquals(expectAC, degenerateTriangle.getLenghtAC(), DELTA);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class TriangleTest {
 
         double actual = simpleTriangle.perimeter();
 
-        assertEquals(expected, actual, delta);
+        assertEquals(expected, actual, DELTA);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class TriangleTest {
 
         double actual = difficultTriangle.perimeter();
 
-        assertEquals(expected, actual, delta);
+        assertEquals(expected, actual, DELTA);
     }
 
     @Test
@@ -87,7 +87,7 @@ public class TriangleTest {
 
         double actual = degenerateTriangle.perimeter();
 
-        assertEquals(expected, actual, delta);
+        assertEquals(expected, actual, DELTA);
     }
 
     @Test
@@ -96,7 +96,7 @@ public class TriangleTest {
 
         double actual = simpleTriangle.area();
 
-        assertEquals(expected, actual, delta);
+        assertEquals(expected, actual, DELTA);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class TriangleTest {
 
         double actual = difficultTriangle.area();
 
-        assertEquals(expected, actual, delta);
+        assertEquals(expected, actual, DELTA);
     }
 
     @Test
@@ -114,6 +114,6 @@ public class TriangleTest {
 
         double actual = degenerateTriangle.area();
 
-        assertEquals(expected, actual, delta);
+        assertEquals(expected, actual, DELTA);
     }
 }

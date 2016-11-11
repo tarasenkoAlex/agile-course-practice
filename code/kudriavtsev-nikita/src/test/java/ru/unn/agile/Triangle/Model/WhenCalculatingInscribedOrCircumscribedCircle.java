@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
 public class WhenCalculatingInscribedOrCircumscribedCircle {
-    private final double delta = 0.001;
+    private static final double DELTA = 0.001;
     private static final double NAN = Double.NaN;
     private static final Triangle SIMPLE_TRIANGLE = new Triangle(new Point2D(0, 0),
                 new Point2D(0, 1),
@@ -94,8 +94,8 @@ public class WhenCalculatingInscribedOrCircumscribedCircle {
 
         Point2D actualCenter = actualCircle.getCenter();
 
-        assertEquals(expectX, actualCenter.getX(), delta);
-        assertEquals(expectY, actualCenter.getY(), delta);
-        assertEquals(expectRadius, actualCircle.getRadius(), delta);
+        assertEquals(expectX, actualCenter.getX(), DELTA);
+        assertEquals(expectY, actualCenter.getY(), DELTA);
+        assertEquals(expectRadius, actualCircle.getRadius(), DELTA);
     }
 }

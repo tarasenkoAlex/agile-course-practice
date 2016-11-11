@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class CircleTest {
-    private final double delta = 0.001;
+    private static final double DELTA = 0.001;
 
     @Test
     public void canCreateCircleWithInitialValues() {
@@ -24,7 +24,7 @@ public class CircleTest {
         Point2D expectPoint = new Point2D(x, y);
         Circle circle = new Circle(expectPoint, expectRadius);
 
-        assertEquals(expectRadius, circle.getRadius(), delta);
+        assertEquals(expectRadius, circle.getRadius(), DELTA);
         assertEquals(expectPoint, circle.getCenter());
     }
 }
