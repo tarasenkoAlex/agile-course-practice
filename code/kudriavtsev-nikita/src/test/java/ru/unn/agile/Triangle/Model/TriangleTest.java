@@ -12,7 +12,7 @@ public class TriangleTest {
     private Point2D simpleC;
     private Triangle simpleTriangle;
     private Triangle difficultTriangle;
-    private Triangle degeneracyTriangle;
+    private Triangle degenerateTriangle;
 
     @Before
     public void initializeSimpleTriangle() {
@@ -25,7 +25,7 @@ public class TriangleTest {
                                          new Point2D(-0.5, 0.4),
                                          new Point2D(0, -4));
 
-        degeneracyTriangle = new Triangle(new Point2D(2, 0),
+        degenerateTriangle = new Triangle(new Point2D(2, 0),
                                           new Point2D(2, 0),
                                           new Point2D(0, 0));
     }
@@ -42,9 +42,9 @@ public class TriangleTest {
     }
 
     @Test
-    public void canSetInitialValueOfLeghtOfSidesForSimpleTriangle() {
+    public void canSetInitialValueOfLenghtOfSidesForSimpleTriangle() {
         double expectAB = 1;
-        double expectBC = 1.41421356237;
+        double expectBC = 1.414;
         double expectAC = 1;
 
         assertEquals(expectAB, simpleTriangle.getAB(), delta);
@@ -53,19 +53,19 @@ public class TriangleTest {
     }
 
     @Test
-    public void canSetInitialValueOfLeghtOfSidesForDegeneracyTriangle() {
+    public void canSetInitialValueOfLenghtOfSidesForDegenerateTriangle() {
         double expectAB = 0;
         double expectBC = 2;
         double expectAC = 2;
 
-        assertEquals(expectAB, degeneracyTriangle.getAB(), delta);
-        assertEquals(expectBC, degeneracyTriangle.getBC(), delta);
-        assertEquals(expectAC, degeneracyTriangle.getAC(), delta);
+        assertEquals(expectAB, degenerateTriangle.getAB(), delta);
+        assertEquals(expectBC, degenerateTriangle.getBC(), delta);
+        assertEquals(expectAC, degenerateTriangle.getAC(), delta);
     }
 
     @Test
     public void canReturnValueOfPerimeterForSimpleTriangle() {
-        double expected = 3.41421356237;
+        double expected = 3.414;
 
         double actual = simpleTriangle.perimeter();
 
@@ -74,7 +74,7 @@ public class TriangleTest {
 
     @Test
     public void canReturnValueOfPerimeterForDifficultTriangle() {
-        double expected = 11.4322517003309187;
+        double expected = 11.432;
 
         double actual = difficultTriangle.perimeter();
 
@@ -82,10 +82,10 @@ public class TriangleTest {
     }
 
     @Test
-    public void canReturnValueOfPerimeterForDegeneracyTriangle() {
+    public void canReturnValueOfPerimeterForDegenerateTriangle() {
         double expected = 4;
 
-        double actual = degeneracyTriangle.perimeter();
+        double actual = degenerateTriangle.perimeter();
 
         assertEquals(expected, actual, delta);
     }
@@ -101,7 +101,7 @@ public class TriangleTest {
 
     @Test
     public void canReturnValueOfAreaForDifficultTriangle() {
-        double expected = 5.4000000000000008655148303848697;
+        double expected = 5.400;
 
         double actual = difficultTriangle.area();
 
@@ -109,10 +109,10 @@ public class TriangleTest {
     }
 
     @Test
-    public void canReurnValueOfAreaForDegeneracyTriangle() {
+    public void canReurnValueOfAreaForDegenerateTriangle() {
         double expected = 0;
 
-        double actual = degeneracyTriangle.area();
+        double actual = degenerateTriangle.area();
 
         assertEquals(expected, actual, delta);
     }

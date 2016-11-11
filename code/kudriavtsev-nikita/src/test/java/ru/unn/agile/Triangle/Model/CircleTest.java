@@ -17,7 +17,7 @@ public class CircleTest {
     }
 
     @Test
-    public void canSetInitialValueOfTrianglePoints() {
+    public void canSetInitialValueOfCircleFilds() {
         double x = 0.3;
         double y = 7.1;
         double expectRadius = 5.5;

@@ -7,16 +7,15 @@ public class Triangle {
     private final double lenghtAB;
     private final double lenghtBC;
     private final double lenghtAC;
-    private static final int COEF_RADIUS = 4;
 
     public Triangle(final Point2D pointA, final Point2D pointB, final Point2D pointC) {
         this.pointA = pointA;
         this.pointB = pointB;
         this.pointC = pointC;
 
-        lenghtAB = getLenghtBtwTwoPoint(pointA, pointB);
-        lenghtBC = getLenghtBtwTwoPoint(pointB, pointC);
-        lenghtAC = getLenghtBtwTwoPoint(pointA, pointC);
+        lenghtAB = getDistanceBtwTwoPoints(pointA, pointB);
+        lenghtBC = getDistanceBtwTwoPoints(pointB, pointC);
+        lenghtAC = getDistanceBtwTwoPoints(pointA, pointC);
     }
 
     public Point2D getA() {
@@ -44,7 +43,7 @@ public class Triangle {
     }
 
     public double area() {
-        double p = (lenghtAB + lenghtBC + lenghtAC) / 2;
+        double p = perimeter() / 2;
 
         return Math.sqrt(p * (p - lenghtAB) * (p - lenghtBC) * (p - lenghtAC));
     }
@@ -53,27 +52,29 @@ public class Triangle {
         return lenghtAC + lenghtBC + lenghtAB;
     }
 
-    public Circle getInscCircle() {
+    public Circle getIncircle() {
         double x0, y0, radius;
+        double perimeter = perimeter();
         double p = perimeter() / 2;
 
         y0 = (lenghtBC * pointA.getY()
               + lenghtAC * pointB.getY()
               + lenghtAB * pointC.getY())
-              / (lenghtBC + lenghtAC + lenghtAB);
+              / perimeter;
 
         x0 = (lenghtBC * pointA.getX()
               + lenghtAC * pointB.getX()
               + lenghtAB * pointC.getX())
-              / (lenghtBC + lenghtAC + lenghtAB);
+              / perimeter;
 
         radius = Math.sqrt((p - lenghtAB) * (p - lenghtBC) * (p - lenghtAC) / p);
 
         return new Circle(new Point2D(x0, y0), radius);
     }
 
-    public Circle getCircCircle() {
+    public Circle getCircumcircle() {
         double x0, y0, radius;
+        final int circumradiusCoeff = 4;
 
         double d = 2 * (pointA.getX() * (pointB.getY() - pointC.getY())
                         + pointB.getX() * (pointC.getY() - pointA.getY())
@@ -85,9 +86,9 @@ public class Triangle {
             return new Circle(new Point2D(Double.NaN, Double.NaN), Double.NaN);
         }
 
-        double aA = sumOfSquareNumber(pointA.getX(), pointA.getY());
-        double bB = sumOfSquareNumber(pointB.getX(), pointB.getY());
-        double cC = sumOfSquareNumber(pointC.getX(), pointC.getY());
+        double aA = sumOfSquares(pointA.getX(), pointA.getY());
+        double bB = sumOfSquares(pointB.getX(), pointB.getY());
+        double cC = sumOfSquares(pointC.getX(), pointC.getY());
 
         x0 = (aA * (pointB.getY() - pointC.getY())
               + bB * (pointC.getY() - pointA.getY())
@@ -97,18 +98,18 @@ public class Triangle {
               + bB * (pointA.getX() - pointC.getX())
               + cC * (pointB.getX() - pointA.getX())) / d;
 
-        radius = lenghtAB * lenghtAC * lenghtBC / (COEF_RADIUS * area);
+        radius = lenghtAB * lenghtAC * lenghtBC / (circumradiusCoeff * area);
 
         return new Circle(new Point2D(x0, y0), radius);
     }
 
-    private double sumOfSquareNumber(final double x, final double y) {
+    private double sumOfSquares(final double x, final double y) {
         return Math.pow(x, 2) + Math.pow(y, 2);
     }
 
-    private double getLenghtBtwTwoPoint(final Point2D pointOne, final Point2D pointSec) {
-        double a = Math.pow(pointOne.getX() - pointSec.getX(), 2);
-        double b = Math.pow(pointOne.getY() - pointSec.getY(), 2);
+    private double getDistanceBtwTwoPoints(final Point2D pointOne, final Point2D pointTwo) {
+        double a = Math.pow(pointOne.getX() - pointTwo.getX(), 2);
+        double b = Math.pow(pointOne.getY() - pointTwo.getY(), 2);
 
         return Math.sqrt(a + b);
     }
