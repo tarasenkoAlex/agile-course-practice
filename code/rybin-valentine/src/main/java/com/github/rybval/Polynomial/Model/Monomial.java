@@ -60,8 +60,7 @@ public class Monomial {
 
     @Override
     public int hashCode() {
-        return new Integer(power).hashCode()
-             ^ new Double(coefficient).hashCode();
+        return power ^ new Double(coefficient).hashCode();
     }
 
     @Override
