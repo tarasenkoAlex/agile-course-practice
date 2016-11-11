@@ -242,4 +242,9 @@ public class MonomialTest {
     public void cantCreateMonomialWithNegativePowerFromString() {
         Monomial.fromString("5.4*x^-5");
     }
+
+    @Test
+    public void canCreateMonomialFromStringWithoutPower() {
+        assertEquals(new Monomial(1, 5.4), Monomial.fromString("5.4*x"));
+    }
 }

@@ -39,6 +39,8 @@ public class Monomial {
                 monomial = monomial.negate();
             }
             return monomial;
+        } else if (Pattern.matches("^" + coefficientPattern + "\\*x$", string)) {
+            return new Monomial(1, Double.parseDouble(string.replaceAll("\\*x", "")));
         } else if (Pattern.matches("^" + coefficientPattern + "$", string)) {
             return new Monomial(0, Double.parseDouble(string));
         } else {
