@@ -8,10 +8,10 @@ public final class CalcOperationMatrix {
     private CalcOperationMatrix() { }
 
     public static boolean checkDimensionsForSum(final Matrix first, final Matrix second) {
-        return (first.getColumns() == second.getColumns()) && (first.getRows() == second.getRows());
+        return first.getColumns() == second.getColumns() && first.getRows() == second.getRows();
     }
     public static boolean checkDimensinsForMulty(final Matrix first, final Matrix second) {
-        return (first.getColumns() == second.getRows());
+        return first.getColumns() == second.getRows();
     }
     public static Matrix sumTwoMatrix(final Matrix first, final Matrix second) {
         if (checkDimensionsForSum(first, second)) {
