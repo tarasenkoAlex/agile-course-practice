@@ -13,8 +13,13 @@ public class Monomial {
     }
 
     Monomial() {
-        power = 0;
-        coefficient = 0;
+        this(0, 0);
+    }
+
+    public static Monomial fromString(final String string) {
+        String[] parts = string.split("\\*x\\^");
+        return new Monomial(Integer.parseInt(parts[1]),
+                            Double.parseDouble(parts[0]));
     }
 
     int getPower() {
@@ -72,5 +77,10 @@ public class Monomial {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+         return String.format("%s*x^%d", coefficient, power);
     }
 }

@@ -167,4 +167,24 @@ public class MonomialTest {
 
         assertNotEquals(monomial1.hashCode(), monomial2.hashCode());
     }
+
+    @Test
+    public void canConvertToString() {
+        Monomial monomial = new Monomial(5, 5.4);
+        assertEquals("5.4*x^5", monomial.toString());
+    }
+
+    @Test
+    public void canCreateMonomialFromString() {
+        Monomial monomial = Monomial.fromString("5.4*x^5");
+        assertEquals("5.4*x^5", monomial.toString());
+    }
+
+    @Test
+    public void isDefaultInitCorrect() {
+        Monomial defaultMonomial = new Monomial();
+        Monomial monomial = new Monomial(0, 0);
+
+        assertEquals(defaultMonomial, monomial);
+    }
 }
