@@ -33,17 +33,8 @@ public final class CalcOperationMatrix {
             float [] multyArray = new float[getDimensinsForMulty(first, second)];
             multArrProc(first, second, multyArray);
             return new Matrix(first.getRows(), second.getColumns(), multyArray);
-        } else {
-            return null;
         }
-    }
-
-    public static String arryeToString(final float[] arrayOfElements) {
-        String arrayText = "";
-        for (int numberElement = 0; numberElement < arrayOfElements.length; numberElement++) {
-            arrayText += Float.toString(arrayOfElements[numberElement]) + ",";
-        }
-        return arrayText;
+        return null;
     }
 
     public static void multArrProc(final Matrix first, final Matrix second, final float [] mulAr) {
@@ -56,11 +47,5 @@ public final class CalcOperationMatrix {
                 }
             }
         }
-    }
-
-    public static String multyTwoArray(final Matrix first, final Matrix second) {
-        float [] multyArray = new float[getDimensinsForMulty(first, second)];
-        multArrProc(first, second, multyArray);
-        return arryeToString(multyArray);
     }
 }

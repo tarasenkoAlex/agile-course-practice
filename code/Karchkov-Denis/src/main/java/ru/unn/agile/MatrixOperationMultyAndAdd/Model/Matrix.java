@@ -24,17 +24,11 @@ public class Matrix {
     public int getColumns() {
         return columns;
     }
-    public float[] getElementsOfMatrix() {
-        return this.elementsOfMatrix;
-    }
     public int getLengthMatrix() {
         return lengthMatrix;
     }
     public float getElementMatrix(final int numberOfElement) {
         return this.elementsOfMatrix[numberOfElement];
-    }
-    public void setElementsOfMatrix(final float[] matrixElements) {
-        this.elementsOfMatrix = matrixElements;
     }
     @Override
     public String toString() {
