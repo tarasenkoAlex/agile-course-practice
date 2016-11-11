@@ -176,8 +176,7 @@ public class MonomialTest {
 
     @Test
     public void canCreateMonomialFromString() {
-        Monomial monomial = Monomial.fromString("5.4*x^5");
-        assertEquals("5.4*x^5", monomial.toString());
+        assertEquals(new Monomial(5, 5.4), Monomial.fromString("5.4*x^5"));
     }
 
     @Test
@@ -186,5 +185,60 @@ public class MonomialTest {
         Monomial monomial = new Monomial(0, 0);
 
         assertEquals(defaultMonomial, monomial);
+    }
+
+    @Test
+    public void canCreateMonomialFromDouble() {
+        assertNotNull(new Monomial(COEFFICIENT));
+    }
+
+    @Test
+    public void canCreateMonomialFromStringWithoutVariable() {
+        assertEquals(new Monomial(0, 5.4), Monomial.fromString("5.4"));
+    }
+
+    @Test
+    public void canCreateMonomialFromStringWithoutCoefficient() {
+        assertEquals(new Monomial(5, 1), Monomial.fromString("x^5"));
+    }
+
+    @Test
+    public void canCreateNegativeMonomialFromString() {
+        assertEquals(new Monomial(5, -5.4), Monomial.fromString("-5.4*x^5"));
+    }
+
+    @Test
+    public void canCreateNegativeMonomialFromStringWithoutCoefficient() {
+        assertEquals(new Monomial(5, -1), Monomial.fromString("-x^5"));
+    }
+
+    @Test
+    public void canCreateNegativeMonomialFromStringWithoutVariable() {
+        assertEquals(new Monomial(0, -5), Monomial.fromString("-5"));
+    }
+
+    @Test
+    public void canCreatePositiveMonomialFromString() {
+        assertEquals(new Monomial(5, 54), Monomial.fromString("+54*x^5"));
+    }
+
+    @Test
+    public void canCreatePositiveMonomialFromStringWithoutCoefficient() {
+        assertEquals(new Monomial(5, 1), Monomial.fromString("+x^5"));
+    }
+
+    @Test
+    public void canCreatePositiveMonomialFromStringWithoutVariable() {
+        assertEquals(new Monomial(0, 5), Monomial.fromString("+5"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cantCreateMonomialWithWrongFormat() {
+        Monomial.fromString("-+x^5");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cantCreateMonomialWithNegativePowerFromString() {
+        Monomial.fromString("5.4*x^-5");
     }
 }

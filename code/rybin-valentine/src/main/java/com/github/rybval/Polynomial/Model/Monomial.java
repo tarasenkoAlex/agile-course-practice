@@ -1,5 +1,7 @@
 package com.github.rybval.Polynomial.Model;
 
+import java.util.regex.Pattern;
+
 public class Monomial {
     private final int power;
     private final double coefficient;
@@ -12,14 +14,36 @@ public class Monomial {
         this.coefficient = coefficient;
     }
 
+    Monomial(final double coefficient) {
+        this(0, coefficient);
+    }
+
     Monomial() {
         this(0, 0);
     }
 
     public static Monomial fromString(final String string) {
-        String[] parts = string.split("\\*x\\^");
-        return new Monomial(Integer.parseInt(parts[1]),
-                            Double.parseDouble(parts[0]));
+        String coefficientPattern = "[\\+-]?[0-9]+(\\.[0-9]+)?";
+        String powerPattern = "[0-9]+";
+
+        if (Pattern.matches("^" + coefficientPattern + "\\*x\\^" + powerPattern + "$",
+            string)) {
+
+            String[] parts = string.split("\\*x\\^");
+            return new Monomial(Integer.parseInt(parts[1]),
+                                Double.parseDouble(parts[0]));
+        } else if (Pattern.matches("^[\\+-]?x\\^" + powerPattern + "$", string)) {
+            String[] parts = string.split("x\\^");
+            Monomial monomial = new Monomial(Integer.parseInt(parts[1]), 1);
+            if (parts[0].startsWith("-")) {
+                monomial = monomial.negate();
+            }
+            return monomial;
+        } else if (Pattern.matches("^" + coefficientPattern + "$", string)) {
+            return new Monomial(0, Double.parseDouble(string));
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     int getPower() {
