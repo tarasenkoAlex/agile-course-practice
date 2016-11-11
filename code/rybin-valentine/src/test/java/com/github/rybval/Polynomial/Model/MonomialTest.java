@@ -247,4 +247,19 @@ public class MonomialTest {
     public void canCreateMonomialFromStringWithoutPower() {
         assertEquals(new Monomial(1, 5.4), Monomial.fromString("5.4*x"));
     }
+
+    @Test
+    public void canCreateMonomialFromStringWithOnlyVariable() {
+        assertEquals(new Monomial(1, 1), Monomial.fromString("x"));
+    }
+
+    @Test
+    public void canCreateMonomialFromStringWithOnlyNegativeVariable() {
+        assertEquals(new Monomial(1, -1), Monomial.fromString("-x"));
+    }
+
+    @Test
+    public void canCreateMonomialFromStringWithOnlyPositiveVariable() {
+        assertEquals(new Monomial(1, 1), Monomial.fromString("+x"));
+    }
 }

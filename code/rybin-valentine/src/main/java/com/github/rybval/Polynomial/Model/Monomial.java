@@ -34,13 +34,17 @@ public class Monomial {
                                 Double.parseDouble(parts[0]));
         } else if (Pattern.matches("^[\\+-]?x\\^" + powerPattern + "$", string)) {
             String[] parts = string.split("x\\^");
-            Monomial monomial = new Monomial(Integer.parseInt(parts[1]), 1);
+            Monomial monomial = new Monomial(Integer.parseInt(parts[1]), 1.0);
             if (parts[0].startsWith("-")) {
                 monomial = monomial.negate();
             }
             return monomial;
         } else if (Pattern.matches("^" + coefficientPattern + "\\*x$", string)) {
             return new Monomial(1, Double.parseDouble(string.replaceAll("\\*x", "")));
+        } else if (string == "x" || string == "+x") {
+            return new Monomial(1, 1.0);
+        } else if (string == "-x") {
+            return new Monomial(1, -1.0);
         } else if (Pattern.matches("^" + coefficientPattern + "$", string)) {
             return new Monomial(0, Double.parseDouble(string));
         } else {
