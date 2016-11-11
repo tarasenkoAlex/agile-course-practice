@@ -2,6 +2,7 @@ package com.github.rybval.Polynomial.Model;
 
 import java.util.Map;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Arrays;
 
@@ -30,4 +31,14 @@ public class Polynomial {
         this(Arrays.asList(monomials));
     }
 
+    public static Polynomial fromString(final String string) {
+        String[] monomialStrings = string.replaceAll(" *- *", " -")
+                                         .replaceAll(" *\\+ *", " +")
+                                         .split(" +");
+        List<Monomial> monomials = new ArrayList<Monomial>();
+        for (String monomialString : monomialStrings) {
+            monomials.add(Monomial.fromString(monomialString));
+        }
+        return new Polynomial(monomials);
+    }
 }

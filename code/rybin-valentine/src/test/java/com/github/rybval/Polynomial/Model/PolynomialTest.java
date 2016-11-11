@@ -32,4 +32,10 @@ public class PolynomialTest {
 
         assertNotNull(polynomial);
     }
+
+    @Test
+    public void canCreatePolynomialFromString() {
+        Polynomial polynomial = Polynomial.fromString("32 +5.4*x - 21*x^2+x^3");
+        assertNotNull(polynomial);
+    }
 }
