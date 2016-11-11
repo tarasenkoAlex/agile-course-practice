@@ -21,10 +21,8 @@ public final class CalcOperationMatrix {
                         + second.getElementMatrix(numberElement);
             }
             return new Matrix(first.getRows(), first.getColumns(), resultSum);
-
-        } else {
-            return null;
         }
+        return null;
     }
     public static int getDimensinsForMulty(final Matrix first, final Matrix second) {
         return first.getRows() * second.getColumns();

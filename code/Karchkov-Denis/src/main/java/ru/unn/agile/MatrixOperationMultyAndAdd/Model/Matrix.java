@@ -6,21 +6,16 @@ import java.util.Arrays;
  * Created by Denis on 10.11.2016.
  */
 public class Matrix {
-    private final int rows;
-    private final int columns;
+    private int rows;
+    private int columns;
     private float[] elementsOfMatrix;
-    private final int lengthMatrix;
+    private int lengthMatrix;
     public Matrix(final int rowsMatrix, final int columnsMatrix, final float[] matrixElements) {
         if (rowsMatrix > 0 && columnsMatrix > 0) {
             this.rows = rowsMatrix;
             this.columns = columnsMatrix;
             this.elementsOfMatrix = Arrays.copyOf(matrixElements, matrixElements.length);
             this.lengthMatrix = matrixElements.length;
-        } else {
-            this.rows = 1;
-            this.columns = 1;
-            this.elementsOfMatrix = null;
-            this.lengthMatrix = 1;
         }
     }
     public int getRows() {
@@ -30,16 +25,16 @@ public class Matrix {
         return columns;
     }
     public float[] getElementsOfMatrix() {
-        return elementsOfMatrix;
+        return this.elementsOfMatrix;
     }
     public int getLengthMatrix() {
         return lengthMatrix;
     }
     public float getElementMatrix(final int numberOfElement) {
-        return elementsOfMatrix[numberOfElement];
+        return this.elementsOfMatrix[numberOfElement];
     }
     public void setElementsOfMatrix(final float[] matrixElements) {
-        this.elementsOfMatrix = Arrays.copyOf(matrixElements, matrixElements.length);
+        this.elementsOfMatrix = matrixElements;
     }
     @Override
     public String toString() {
