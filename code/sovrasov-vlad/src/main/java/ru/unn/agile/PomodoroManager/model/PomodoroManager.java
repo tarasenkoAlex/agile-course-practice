@@ -5,6 +5,7 @@ import javax.management.RuntimeErrorException;
 public class PomodoroManager {
     private PomodoroState state;
     private int checkmarksCounter;
+    private static final int POMODOROS_PER_CYCLE = 4;
 
     public PomodoroManager() {
         state = PomodoroState.Off;
@@ -29,19 +30,17 @@ public class PomodoroManager {
     }
 
     public void nextState()  {
-        final int pomodorosPerCycle = 4;
         switch (state)  {
             case Pomodoro:
-                if (checkmarksCounter < pomodorosPerCycle - 1)  {
+                checkmarksCounter++;
+                if (checkmarksCounter < POMODOROS_PER_CYCLE)  {
                     state = PomodoroState.ShortBreak;
-                }  else if (checkmarksCounter == pomodorosPerCycle - 1)  {
+                }  else if (checkmarksCounter == POMODOROS_PER_CYCLE)  {
                     state = PomodoroState.LongBreak;
                 }
-                checkmarksCounter++;
                 break;
             case LongBreak:
-                state = PomodoroState.Off;
-                checkmarksCounter = 0;
+                resetState();
                 break;
             case ShortBreak:
                 state = PomodoroState.Pomodoro;

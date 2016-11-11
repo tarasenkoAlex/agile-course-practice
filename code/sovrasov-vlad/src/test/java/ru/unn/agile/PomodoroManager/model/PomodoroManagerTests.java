@@ -1,13 +1,11 @@
 package ru.unn.agile.PomodoroManager.model;
 
 import org.junit.Test;
-
 import javax.management.RuntimeErrorException;
 
 import static org.junit.Assert.*;
 
 public class PomodoroManagerTests {
-    private final double delta = 0.001;
 
     private void skipState(final PomodoroManager manager, final int times)  {
         for (int i = 0; i < times; i++)  {
@@ -38,7 +36,7 @@ public class PomodoroManagerTests {
     }
 
     @Test(expected = RuntimeErrorException.class)
-    public void doubleStartCycle()  {
+    public void throwWhenDoubleStartCycle()  {
         PomodoroManager manager = new PomodoroManager();
         manager.startCycle();
         manager.startCycle();
@@ -71,12 +69,19 @@ public class PomodoroManagerTests {
         assertEquals(manager.getCheckmarksCounter(), 4);
     }
 
+    @Test
+    public void switchToOffAfterCycle()  {
+        PomodoroManager manager = new PomodoroManager();
+        manager.startCycle();
+        skipState(manager, 8);
+        assertEquals(manager.getState(), PomodoroState.Off);
+        assertEquals(manager.getCheckmarksCounter(), 0);
+    }
+
     @Test(expected = RuntimeErrorException.class)
-    public void throwThen()  {
+    public void throwThenStateOutOfRange()  {
         PomodoroManager manager = new PomodoroManager();
         manager.startCycle();
         skipState(manager, 9);
-        assertEquals(manager.getState(), PomodoroState.Off);
-        assertEquals(manager.getCheckmarksCounter(), 0);
     }
 }
