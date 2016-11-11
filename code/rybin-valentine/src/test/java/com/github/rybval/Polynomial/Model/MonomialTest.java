@@ -176,7 +176,7 @@ public class MonomialTest {
 
     @Test
     public void canCreateMonomialFromString() {
-        Monomial monomial = new Monomial("5.4*x^5");
+        Monomial monomial = Monomial.fromString("5.4*x^5");
         assertEquals("5.4*x^5", monomial.toString());
     }
 
