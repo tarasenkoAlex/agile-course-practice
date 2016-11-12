@@ -88,4 +88,33 @@ public class PolynomialTest {
         Polynomial polynomial2 = Polynomial.fromString("26.8*x^5");
         assertEquals(polynomial1, polynomial2);
     }
+
+    @Test
+    public void isAdditionCorrect() {
+        Polynomial polynomial1 = Polynomial.fromString("1 + x + 5*x^2");
+        Polynomial polynomial2 = Polynomial.fromString("x - 3*x^2 - 5.4*x^3");
+
+        Polynomial summ = polynomial1.add(polynomial2);
+
+        assertEquals(Polynomial.fromString("1 + 2*x + 2*x^2 - 5.4*x^3"), summ);
+    }
+
+    public void isSubtractionCorrect() {
+        Polynomial minuend = Polynomial.fromString("1 + x + 5*x^2");
+        Polynomial subtrahend = Polynomial.fromString("x - 3*x^2 - 5.4*x^3");
+
+        Polynomial diff = minuend.subtract(subtrahend);
+
+        assertEquals(Polynomial.fromString("1 + 8*x^2 + 5.4*x^3"), diff);
+    }
+
+    public void isMultiplicationByPolynomialCorrect() {
+        Polynomial multiplicand = Polynomial.fromString("1 + x + 5*x^2");
+        Polynomial multiplier = Polynomial.fromString("x - 3*x^2 - 5.4*x^3");
+
+        Polynomial product = multiplicand.multiply(multiplier);
+
+        assertEquals(Polynomial.fromString("x - 2*x^2 - 3.4*x^3 - 20.4*x^4 - 27*x^5"),
+                                           product);
+    }
 }

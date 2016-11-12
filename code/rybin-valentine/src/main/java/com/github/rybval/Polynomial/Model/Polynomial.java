@@ -1,7 +1,7 @@
 package com.github.rybval.Polynomial.Model;
 
 import java.util.Map;
-import java.util.List;
+import java.util.Collection;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Arrays;
@@ -13,9 +13,9 @@ public class Polynomial {
         monomials = new TreeMap<Integer, Monomial>();
     }
 
-    Polynomial(final List<Monomial> monomialsList) {
+    Polynomial(final Collection<Monomial> monomialsCollection) {
         monomials = new TreeMap<Integer, Monomial>();
-        for (Monomial monomialIn : monomialsList) {
+        for (Monomial monomialIn : monomialsCollection) {
             int power = monomialIn.getPower();
             Monomial monomialToPut;
             if (monomials.containsKey(power)) {
@@ -35,7 +35,7 @@ public class Polynomial {
         String[] monomialStrings = string.replaceAll(" *- *", " -")
                                          .replaceAll(" *\\+ *", " +")
                                          .split(" +");
-        List<Monomial> monomials = new ArrayList<Monomial>();
+        Collection<Monomial> monomials = new ArrayList<Monomial>();
         for (String monomialString : monomialStrings) {
             if (!monomialString.isEmpty()) {
                 monomials.add(Monomial.fromString(monomialString));
@@ -76,5 +76,32 @@ public class Polynomial {
         } else {
             return false;
         }
+    }
+
+    public Polynomial add(final Polynomial another) {
+        Collection<Monomial> summMonomials = new ArrayList<Monomial>();
+        summMonomials.addAll(this.monomials.values());
+        summMonomials.addAll(another.monomials.values());
+        return new Polynomial(summMonomials);
+    }
+
+    public Polynomial subtract(final Polynomial subtrahend) {
+        Collection<Monomial> diffMonomials = new ArrayList<Monomial>();
+        diffMonomials.addAll(this.monomials.values());
+        for (Monomial monomial : subtrahend.monomials.values()) {
+            diffMonomials.add(monomial.negate());
+        }
+        return new Polynomial(diffMonomials);
+    }
+
+    public Polynomial multiply(final Polynomial multiplier) {
+        ArrayList<Monomial> multMonomials = new ArrayList<Monomial>();
+        multMonomials.addAll(this.monomials.values());
+        for (Monomial multiplierMonomial : multiplier.monomials.values()) {
+            for (int i = 0; i < multMonomials.size(); i++) {
+                multMonomials.set(i, multMonomials.get(i).multiply(multiplierMonomial));
+            }
+        }
+        return new Polynomial(multMonomials);
     }
 }
