@@ -41,4 +41,13 @@ public class TaskTest {
     public void failToCreateWithNullExpirationDate() throws Exception {
         new Task("Work lunch with the dudes", null);
     }
+
+    @Test
+    public void isAbleToMarkTaskAsDone() throws Exception {
+        Task task = new Task("Meeting with the customers", makeDate("03/15/2016"));
+
+        task.markAdDone();
+
+        assertTrue(task.isDone());
+    }
 }

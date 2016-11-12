@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Task {
     private final String description;
     private final Date expirationDate;
+    private boolean isDoneFlag = false;
 
     public Task(final String description, final Date expirationDate)
             throws NullPointerException, IllegalArgumentException {
@@ -25,5 +26,13 @@ public class Task {
 
     public final Date getExpirationDate() {
         return expirationDate;
+    }
+
+    public final boolean isDone() {
+        return isDoneFlag;
+    }
+
+    public void markAdDone() {
+        // TODO
     }
 }
