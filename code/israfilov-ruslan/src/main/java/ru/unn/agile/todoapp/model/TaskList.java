@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
+    private final ArrayList<Task> tasks = new ArrayList<>();
+
     public List<Task> getAll() {
-        return new ArrayList<Task>();
+        return tasks;
+    }
+
+    public void add(final Task task) {
+        tasks.add(task);
     }
 }
