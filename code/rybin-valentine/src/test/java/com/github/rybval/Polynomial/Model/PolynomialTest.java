@@ -138,4 +138,12 @@ public class PolynomialTest {
 
         assertEquals(cleanPolynomial, polynomial);
     }
+
+    @Test
+    public void canNegatePolynomial() {
+        Polynomial positive = Polynomial.fromString("+x - 3*x^2 + 5*x^3");
+        Polynomial negative = Polynomial.fromString("-x + 3*x^2 - 5*x^3");
+
+        assertEquals(negative, positive.negate());
+    }
 }

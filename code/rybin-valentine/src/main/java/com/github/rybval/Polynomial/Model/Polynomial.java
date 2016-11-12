@@ -99,12 +99,7 @@ public class Polynomial {
     }
 
     public Polynomial subtract(final Polynomial subtrahend) {
-        Collection<Monomial> diffMonomials = new ArrayList<Monomial>();
-        diffMonomials.addAll(this.monomials.values());
-        for (Monomial monomial : subtrahend.monomials.values()) {
-            diffMonomials.add(monomial.negate());
-        }
-        return new Polynomial(diffMonomials);
+        return this.add(subtrahend.negate());
     }
 
     public Polynomial multiply(final Monomial multiplier) {
@@ -121,5 +116,13 @@ public class Polynomial {
             product = product.add(this.multiply(multiplierMonomial));
         }
         return product;
+    }
+
+    public Polynomial negate() {
+        Collection<Monomial> negatedMonomials = new ArrayList<Monomial>();
+        for (Monomial monomial : monomials.values()) {
+           negatedMonomials.add(monomial.negate());
+        }
+        return new Polynomial(negatedMonomials);
     }
 }
