@@ -65,6 +65,9 @@ project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-l
 // Кудрявцев Никита
 // Кукушкин Даниил
 // Ларин Антон
+include "code/larin-anton"
+project(":code/larin-anton").name = "larin-anton-Model"
+
 // Лачинов Дмитрий
 // Луковников Илья
 // Максимов Максим
@@ -103,3 +106,4 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Шишкин Владислав
 // Шочин Александр
 // Шургалин Петр
+
