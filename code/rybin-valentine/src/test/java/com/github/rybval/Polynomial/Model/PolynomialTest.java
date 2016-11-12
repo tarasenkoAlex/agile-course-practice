@@ -81,4 +81,11 @@ public class PolynomialTest {
 
         assertNotEquals(polynomial1.hashCode(), polynomial2.hashCode());
     }
+
+    @Test
+    public void isReductionCorrect() {
+        Polynomial polynomial1 = Polynomial.fromString("25*x^5 + 6*x^5 - 4.2*x^5");
+        Polynomial polynomial2 = Polynomial.fromString("26.8*x^5");
+        assertEquals(polynomial1, polynomial2);
+    }
 }
