@@ -3,18 +3,18 @@ package com.github.rybval.Polynomial.Model;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Arrays;
 
 public class Polynomial {
     private final Map<Integer, Monomial> monomials;
 
     Polynomial() {
-        monomials = new HashMap<Integer, Monomial>();
+        monomials = new TreeMap<Integer, Monomial>();
     }
 
     Polynomial(final List<Monomial> monomialsList) {
-        monomials = new HashMap<Integer, Monomial>();
+        monomials = new TreeMap<Integer, Monomial>();
         for (Monomial monomialIn : monomialsList) {
             int power = monomialIn.getPower();
             Monomial monomialToPut;
@@ -37,8 +37,29 @@ public class Polynomial {
                                          .split(" +");
         List<Monomial> monomials = new ArrayList<Monomial>();
         for (String monomialString : monomialStrings) {
-            monomials.add(Monomial.fromString(monomialString));
+            if (!monomialString.isEmpty()) {
+                monomials.add(Monomial.fromString(monomialString));
+            }
         }
         return new Polynomial(monomials);
+    }
+
+    @Override
+    public String toString() {
+        String string = "";
+        for (Map.Entry<Integer, Monomial> entry : monomials.entrySet()) {
+            String monomialStr = entry.getValue().toString();
+            if (monomialStr.startsWith("-")) {
+                string += " - " + monomialStr.substring("-".length());
+            } else {
+                string += " + " + monomialStr;
+            }
+        }
+        if (string.startsWith(" + ")) {
+            string = string.substring(" + ".length());
+        } else {
+            string = "-" + string.substring(" - ".length());
+        }
+        return string;
     }
 }

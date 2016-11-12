@@ -39,4 +39,12 @@ public class PolynomialTest {
         Polynomial polynomial = Polynomial.fromString("32 +5.4*x - 21*x^2+x^3");
         assertNotNull(polynomial);
     }
+
+    @Test
+    public void canPresentPolynomialAsString() {
+        String polynomialString = "-50.0*x^0 + 1.0*x^1 - 1.0*x^2 + 5.78*x^10";
+        Polynomial polynomial = Polynomial.fromString(polynomialString);
+
+        assertEquals(polynomialString, polynomial.toString());
+    }
 }
