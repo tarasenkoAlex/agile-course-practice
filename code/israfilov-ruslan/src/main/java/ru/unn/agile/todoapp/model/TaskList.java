@@ -12,8 +12,12 @@ public class TaskList {
         return Collections.unmodifiableList(tasks);
     }
 
-    public void add(final Task task) {
+    public void add(final Task task) throws IllegalArgumentException {
         Objects.requireNonNull(task, "task is not able to be null");
+        if (tasks.contains(task)) {
+            String message = "Same task already exists in the list";
+            throw new IllegalArgumentException(message);
+        }
         tasks.add(task);
     }
 
