@@ -64,4 +64,13 @@ public class TaskListTest {
         assertEquals(allTasks.size(), 1);
         assertContains(allTasks, taskListItem);
     }
+
+
+    @Test
+    public void hasLinkBetweenGetAllCollectionAndSourceList() throws Exception {
+        List<Task> allTasks = taskList.getAll();
+        taskList.add(new Task("New event", makeDate("19/04/2017")));
+
+        assertListEquals(allTasks, taskList.getAll());
+    }
 }

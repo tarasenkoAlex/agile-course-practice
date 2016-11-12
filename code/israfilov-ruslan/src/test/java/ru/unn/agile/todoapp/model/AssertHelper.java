@@ -13,4 +13,14 @@ class AssertHelper {
     public static <T> void assertNotContains(final List<T> collection, final T object) {
         Assert.assertFalse(collection.contains(object));
     }
+
+    public static <T> void assertListEquals(final List<T> lhs, final List<T> rhs) {
+        for (int i = 0; i < lhs.size(); i++) {
+            T lhsItem = lhs.get(i);
+            T rhsItem = rhs.get(i);
+            if (!lhsItem.equals(rhsItem)) {
+                Assert.fail();
+            }
+        }
+    }
 }
