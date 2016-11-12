@@ -22,7 +22,6 @@ public class TaskList {
     }
 
     public final int getSize() {
-        // TODO
-        return 0;
+        return tasks.size();
     }
 }
