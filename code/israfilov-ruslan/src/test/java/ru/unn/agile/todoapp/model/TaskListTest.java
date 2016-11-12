@@ -66,23 +66,23 @@ public class TaskListTest {
     @Test
     public void hasLinkBetweenGetAllCollectionAndSourceList() throws Exception {
         List<Task> allTasks = taskList.getAll();
-        taskList.add(new Task("New event", makeDate("19/04/2017")));
+        taskList.add(taskListItem);
 
         assertListEquals(allTasks, taskList.getAll());
     }
 
-    @Test(expected = NullPointerException.class)
-    public void failToAddNullTask() throws Exception {
-        taskList.add(null);
-    }
-
     @Test
-    public void isSizeCorrect() throws Exception {
+    public void isSizeEqualsTo1After2AddAnd1Remove() throws Exception {
         taskList.add(taskListItem);
         taskList.add(new Task("New event", makeDate("19/04/2017")));
         taskList.remove(taskListItem);
 
         assertEquals(taskList.getSize(), 1);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void failToAddNullTask() throws Exception {
+        taskList.add(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
