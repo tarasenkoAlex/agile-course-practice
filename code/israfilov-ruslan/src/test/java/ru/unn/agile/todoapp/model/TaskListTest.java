@@ -65,12 +65,16 @@ public class TaskListTest {
         assertContains(allTasks, taskListItem);
     }
 
-
     @Test
     public void hasLinkBetweenGetAllCollectionAndSourceList() throws Exception {
         List<Task> allTasks = taskList.getAll();
         taskList.add(new Task("New event", makeDate("19/04/2017")));
 
         assertListEquals(allTasks, taskList.getAll());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void failToAddNullTask() throws Exception {
+        taskList.add(null);
     }
 }
