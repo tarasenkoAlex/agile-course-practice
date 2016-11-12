@@ -10,6 +10,7 @@ import static ru.unn.agile.todoapp.model.DateHelper.*;
 
 public class TaskListTest {
     private Task taskListItem;
+    private TaskList taskList;
 
     @Before
     public void instanceTask() throws Exception {
@@ -17,17 +18,11 @@ public class TaskListTest {
             "Work lunch with the dudes",
             makeDate("04/08/2016")
         );
-    }
-
-    @After
-    public void clearTask() {
-        taskListItem = null;
+        taskList = new TaskList();
     }
 
     @Test
     public void canAddNewTask() throws Exception {
-        TaskList taskList = new TaskList();
-
         taskList.add(taskListItem);
 
         assertContains(taskList.getAll(), taskListItem);
@@ -35,7 +30,6 @@ public class TaskListTest {
 
     @Test
     public void canRemoveExistingTask() throws Exception {
-        TaskList taskList = new TaskList();
         taskList.add(taskListItem);
 
         boolean isFound = taskList.remove(taskListItem);
@@ -46,8 +40,6 @@ public class TaskListTest {
 
     @Test
     public void cantRemoveNotExistingTask() throws Exception {
-        TaskList taskList = new TaskList();
-
         boolean isFound = taskList.remove(taskListItem);
 
         assertFalse(isFound);
