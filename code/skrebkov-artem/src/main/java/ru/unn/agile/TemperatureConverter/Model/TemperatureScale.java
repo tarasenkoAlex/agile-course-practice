@@ -9,7 +9,7 @@ public enum TemperatureScale {
     private final double factor;
     private final double shift;
 
-    private TemperatureScale(final double factor, final double shift) {
+    TemperatureScale(final double factor, final double shift) {
         this.factor = factor;
         this.shift = shift;
     }
@@ -18,6 +18,7 @@ public enum TemperatureScale {
         return factor;
     }
     public double getShift() {
+
         return shift;
     }
 }
