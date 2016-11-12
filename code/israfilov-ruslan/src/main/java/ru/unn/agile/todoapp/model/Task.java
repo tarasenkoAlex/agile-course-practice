@@ -8,8 +8,7 @@ public class Task {
     private final Date expirationDate;
     private boolean isDoneFlag = false;
 
-    public Task(final String description, final Date expirationDate)
-            throws NullPointerException, IllegalArgumentException {
+    public Task(final String description, final Date expirationDate) {
         Objects.requireNonNull(description, "description is not able to be null");
         Objects.requireNonNull(expirationDate, "expirationDate is not able to be null");
         if (description.trim().length() == 0) {
