@@ -84,4 +84,10 @@ public class TaskListTest {
 
         assertEquals(taskList.getSize(), 1);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void failToAddDuplication() throws Exception {
+        taskList.add(taskListItem);
+        taskList.add(taskListItem);
+    }
 }
