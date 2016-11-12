@@ -62,4 +62,19 @@ public class Polynomial {
         }
         return string;
     }
+
+    @Override
+    public int hashCode() {
+        return monomials.hashCode();
+    }
+
+    @Override
+    public boolean equals(final Object object) {
+        if (object instanceof Polynomial) {
+            Polynomial polynomial = (Polynomial) object;
+            return this.monomials.equals(polynomial.monomials);
+        } else {
+            return false;
+        }
+    }
 }

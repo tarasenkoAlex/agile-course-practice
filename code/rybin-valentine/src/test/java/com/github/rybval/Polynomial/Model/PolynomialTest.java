@@ -47,4 +47,38 @@ public class PolynomialTest {
 
         assertEquals(polynomialString, polynomial.toString());
     }
+
+    @Test
+    public void isSamePolynomialsCompareCorrect() {
+        String polynomialString = "-50.0*x^0 + 1.0*x^1 - 1.0*x^2 + 5.78*x^10";
+        Polynomial polynomial1 = Polynomial.fromString(polynomialString);
+        Polynomial polynomial2 = Polynomial.fromString(polynomialString);
+
+        assertTrue(polynomial1.equals(polynomial2));
+    }
+
+    @Test
+    public void isDifferentPolynomialsCompareCorrect() {
+        Polynomial polynomial1 = Polynomial.fromString("x + 5*x^2");
+        Polynomial polynomial2 = Polynomial.fromString("20 - 1.2*x^5 + x^10");
+
+        assertFalse(polynomial1.equals(polynomial2));
+    }
+
+    @Test
+    public void isSamePolynomialsHashCodesEqual() {
+        String polynomialString = "-50.0*x^0 + 1.0*x^1 - 1.0*x^2 + 5.78*x^10";
+        Polynomial polynomial1 = Polynomial.fromString(polynomialString);
+        Polynomial polynomial2 = Polynomial.fromString(polynomialString);
+
+        assertEquals(polynomial1.hashCode(), polynomial2.hashCode());
+    }
+
+    @Test
+    public void isDifferentPolynomialsHashCodesDifferent() {
+        Polynomial polynomial1 = Polynomial.fromString("x + 5*x^2");
+        Polynomial polynomial2 = Polynomial.fromString("20 - 1.2*x^5 + x^10");
+
+        assertNotEquals(polynomial1.hashCode(), polynomial2.hashCode());
+    }
 }
