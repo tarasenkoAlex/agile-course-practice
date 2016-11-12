@@ -67,6 +67,9 @@ project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 // Колистратова Дарья
 // Кочетов Павел
 // Кудрявцев Никита
+include "code/kudriavtsev-nikita"
+project(":code/kudriavtsev-nikita").name = "kudriavtsev-nikita-lab1-Model"
+
 // Кукушкин Даниил
 // Ларин Антон
 include "code/larin-anton"
