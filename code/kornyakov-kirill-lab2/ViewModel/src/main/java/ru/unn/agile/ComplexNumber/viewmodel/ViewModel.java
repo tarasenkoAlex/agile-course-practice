@@ -159,7 +159,7 @@ enum Status {
     SUCCESS("Success");
 
     private final String name;
-    private Status(final String name) {
+    Status(final String name) {
         this.name = name;
     }
     public String toString() {
