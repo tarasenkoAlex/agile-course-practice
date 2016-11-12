@@ -169,4 +169,20 @@ public class PolynomialTest {
 
         assertEquals(negative, positive.negate());
     }
+
+    @Test
+    public void canGetPolynomialDegree() {
+        Polynomial polynomial = Polynomial.fromString("x - 3*x^2 - 5*x^3");
+        assertEquals(3, polynomial.getDegree());
+    }
+
+    @Test
+    public void isExponentiationCorrect() {
+        Polynomial polynomial = Polynomial.fromString("x - 3*x^2 - 5*x^3");
+
+        Polynomial exponented = polynomial.exponentiate(2);
+
+        assertEquals(Polynomial.fromString("1*x^2 - 6*x^3 - 1*x^4 + 30*x^5 + 25*x^6"),
+                     exponented);
+    }
 }

@@ -2,6 +2,7 @@ package com.github.rybval.Polynomial.Model;
 
 import java.util.Map;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Arrays;
@@ -124,5 +125,17 @@ public class Polynomial {
            negatedMonomials.add(monomial.negate());
         }
         return new Polynomial(negatedMonomials);
+    }
+
+    public int getDegree() {
+        return Collections.max(monomials.keySet());
+    }
+
+    public Polynomial exponentiate(final int power) {
+        Polynomial result = this;
+        for (int i = 1; i < power; i++) {
+            result = result.multiply(result);
+        }
+        return result;
     }
 }
