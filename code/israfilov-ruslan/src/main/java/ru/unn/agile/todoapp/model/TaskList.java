@@ -15,7 +15,6 @@ public class TaskList {
     }
 
     public boolean remove(final Task task) {
-        // TODO
-        return true;
+        return tasks.remove(task);
     }
 }
