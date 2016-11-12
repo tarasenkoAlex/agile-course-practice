@@ -42,6 +42,23 @@ public class PolynomialTest {
 
     @Test
     public void canPresentPolynomialAsString() {
+        String polynomialString = "50.0*x^0 + 1.0*x^1 - 1.0*x^2 + 5.78*x^10";
+        Polynomial polynomial = Polynomial.fromString(polynomialString);
+
+        assertEquals(polynomialString, polynomial.toString());
+    }
+
+    @Test
+    public void canPresentPositivePolynomialAsString() {
+        String polynomialString = "+50.0*x^0 + 1.0*x^1 - 1.0*x^2 + 5.78*x^10";
+        Polynomial polynomial = Polynomial.fromString(polynomialString);
+
+        assertEquals("50.0*x^0 + 1.0*x^1 - 1.0*x^2 + 5.78*x^10",
+                     polynomial.toString());
+    }
+
+    @Test
+    public void canPresentNegativePolynomialAsString() {
         String polynomialString = "-50.0*x^0 + 1.0*x^1 - 1.0*x^2 + 5.78*x^10";
         Polynomial polynomial = Polynomial.fromString(polynomialString);
 
@@ -63,6 +80,12 @@ public class PolynomialTest {
         Polynomial polynomial2 = Polynomial.fromString("20 - 1.2*x^5 + x^10");
 
         assertFalse(polynomial1.equals(polynomial2));
+    }
+
+    @Test
+    public void isCompareWithNullCorrect() {
+        Polynomial polynomial = Polynomial.fromString("x + 5*x^2");
+        assertFalse(polynomial.equals(null));
     }
 
     @Test
