@@ -13,4 +13,9 @@ public class TaskList {
     public void add(final Task task) {
         tasks.add(task);
     }
+
+    public boolean remove(final Task task) {
+        // TODO
+        return true;
+    }
 }

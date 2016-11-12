@@ -9,4 +9,8 @@ class AssertHelper {
     public static <T> void assertContains(final List<T> collection, final T object) {
         Assert.assertTrue(collection.contains(object));
     }
+
+    public static <T> void assertNotContains(final List<T> collection, final T object) {
+        Assert.assertFalse(collection.contains(object));
+    }
 }

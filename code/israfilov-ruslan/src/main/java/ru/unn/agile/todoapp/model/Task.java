@@ -33,6 +33,6 @@ public class Task {
     }
 
     public void markAdDone() {
-        // TODO
+        isDoneFlag = true;
     }
 }
