@@ -20,4 +20,9 @@ public class TaskList {
     public boolean remove(final Task task) {
         return tasks.remove(task);
     }
+
+    public final int getSize() {
+        // TODO
+        return 0;
+    }
 }

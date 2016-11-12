@@ -75,4 +75,13 @@ public class TaskListTest {
     public void failToAddNullTask() throws Exception {
         taskList.add(null);
     }
+
+    @Test
+    public void isSizeCorrect() throws Exception {
+        taskList.add(taskListItem);
+        taskList.add(new Task("New event", makeDate("19/04/2017")));
+        taskList.remove(taskListItem);
+
+        assertEquals(taskList.getSize(), 1);
+    }
 }
