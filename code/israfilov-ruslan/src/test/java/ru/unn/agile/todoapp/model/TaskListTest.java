@@ -4,8 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import static ru.unn.agile.todoapp.model.AssertHelper.*;
+import static ru.unn.agile.todoapp.model.DateHelper.*;
 
 public class TaskListTest {
     private Task taskListItem;
@@ -14,7 +14,7 @@ public class TaskListTest {
     public void instanceTask() throws Exception {
         taskListItem = new Task(
             "Work lunch with the dudes",
-            DateUtils.make("04/08/2016")
+            makeDate("04/08/2016")
         );
     }
 

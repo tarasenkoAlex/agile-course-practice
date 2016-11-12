@@ -4,10 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateUtils {
-    private DateUtils() { }
+class DateHelper {
+    private DateHelper() { }
 
-    public static Date make(final String date) throws ParseException {
+    public static Date makeDate(final String date) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.parse(date);
     }
