@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Arrays;
-import java.util.function.BiConsumer;
 
 public class Polynomial {
     private final Map<Integer, Monomial> monomials;
@@ -26,6 +25,7 @@ public class Polynomial {
             }
             monomials.put(power, monomialToPut);
         }
+        cleanZeroMonomials();
     }
 
     Polynomial(final Monomial[] monomials) {
@@ -45,11 +45,23 @@ public class Polynomial {
         return new Polynomial(monomials);
     }
 
+    private void cleanZeroMonomials() {
+        Collection<Integer> toRemove = new ArrayList<Integer>();
+        for (Monomial monomial : monomials.values()) {
+            if (monomial.getCoefficient() == 0) {
+                toRemove.add(monomial.getPower());
+            }
+        }
+        for (Integer power : toRemove) {
+            monomials.remove(power);
+        }
+    }
+
     @Override
     public String toString() {
         String string = "";
-        for (Map.Entry<Integer, Monomial> entry : monomials.entrySet()) {
-            String monomialStr = entry.getValue().toString();
+        for (Monomial monomial : monomials.values()) {
+            String monomialStr = monomial.toString();
             if (monomialStr.startsWith("-")) {
                 string += " - " + monomialStr.substring("-".length());
             } else {
@@ -79,37 +91,35 @@ public class Polynomial {
         }
     }
 
-    private Collection<Monomial> opWithPolynomial(
-                       final Polynomial another,
-                       final BiConsumer<ArrayList<Monomial>, Monomial> work) {
-        ArrayList<Monomial> newMonomials = new ArrayList<Monomial>();
-        newMonomials.addAll(this.monomials.values());
-        for (Monomial monomial : another.monomials.values()) {
-            work.accept(newMonomials, monomial);
-        }
-        return newMonomials;
-    }
-
     public Polynomial add(final Polynomial another) {
-        return new Polynomial(opWithPolynomial(another,
-                   (ArrayList<Monomial> summMonomials, Monomial addMonomial) -> {
-                                               summMonomials.add(addMonomial);
-                                            }));
+        Collection<Monomial> summMonomials = new ArrayList<Monomial>();
+        summMonomials.addAll(this.monomials.values());
+        summMonomials.addAll(another.monomials.values());
+        return new Polynomial(summMonomials);
     }
 
     public Polynomial subtract(final Polynomial subtrahend) {
-        return new Polynomial(opWithPolynomial(subtrahend,
-                    (ArrayList<Monomial> diffMonomials, Monomial subtMonomial) -> {
-                                        diffMonomials.add(subtMonomial.negate());
-                                    }));
+        Collection<Monomial> diffMonomials = new ArrayList<Monomial>();
+        diffMonomials.addAll(this.monomials.values());
+        for (Monomial monomial : subtrahend.monomials.values()) {
+            diffMonomials.add(monomial.negate());
+        }
+        return new Polynomial(diffMonomials);
+    }
+
+    public Polynomial multiply(final Monomial multiplier) {
+        ArrayList<Monomial> multMonomials = new ArrayList<Monomial>();
+        for (Monomial multiplicand : this.monomials.values()) {
+            multMonomials.add(multiplicand.multiply(multiplier));
+        }
+        return new Polynomial(multMonomials);
     }
 
     public Polynomial multiply(final Polynomial multiplier) {
-        return new Polynomial(opWithPolynomial(multiplier,
-            (ArrayList<Monomial> multMonomials, Monomial multMonomial) -> {
-                for (int i = 0; i < multMonomials.size(); i++) {
-                    multMonomials.set(i, multMonomials.get(i).multiply(multMonomial));
-                }
-            }));
+        Polynomial product = new Polynomial();
+        for (Monomial multiplierMonomial : multiplier.monomials.values()) {
+            product = product.add(this.multiply(multiplierMonomial));
+        }
+        return product;
     }
 }

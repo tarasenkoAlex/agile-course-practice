@@ -99,6 +99,7 @@ public class PolynomialTest {
         assertEquals(Polynomial.fromString("1 + 2*x + 2*x^2 - 5.4*x^3"), summ);
     }
 
+    @Test
     public void isSubtractionCorrect() {
         Polynomial minuend = Polynomial.fromString("1 + x + 5*x^2");
         Polynomial subtrahend = Polynomial.fromString("x - 3*x^2 - 5.4*x^3");
@@ -108,13 +109,33 @@ public class PolynomialTest {
         assertEquals(Polynomial.fromString("1 + 8*x^2 + 5.4*x^3"), diff);
     }
 
-    public void isMultiplicationByPolynomialCorrect() {
-        Polynomial multiplicand = Polynomial.fromString("1 + x + 5*x^2");
-        Polynomial multiplier = Polynomial.fromString("x - 3*x^2 - 5.4*x^3");
+    @Test
+    public void isMultiplicationByMonomialCorrect() {
+        Polynomial multiplicand = Polynomial.fromString("1 + x - 5*x^2");
+        Monomial multiplier = Monomial.fromString("2.5*x^3");
 
         Polynomial product = multiplicand.multiply(multiplier);
 
-        assertEquals(Polynomial.fromString("x - 2*x^2 - 3.4*x^3 - 20.4*x^4 - 27*x^5"),
+        assertEquals(Polynomial.fromString("2.5*x^3 + 2.5*x^4 - 12.5*x^5"),
+                     product);
+    }
+
+    @Test
+    public void isMultiplicationByPolynomialCorrect() {
+        Polynomial multiplicand = Polynomial.fromString("1 + x + 5*x^2");
+        Polynomial multiplier = Polynomial.fromString("x - 3*x^2 - 5*x^3");
+
+        Polynomial product = multiplicand.multiply(multiplier);
+
+        assertEquals(Polynomial.fromString("x - 2*x^2 - 3*x^3 - 20*x^4 - 25*x^5"),
                                            product);
+    }
+
+    @Test
+    public void areZeroMonomialsNotStored() {
+        Polynomial polynomial = Polynomial.fromString("0 + x - 0*x^2 + 5.4*x^3");
+        Polynomial cleanPolynomial =  Polynomial.fromString("x + 5.4*x^3");
+
+        assertEquals(cleanPolynomial, polynomial);
     }
 }
