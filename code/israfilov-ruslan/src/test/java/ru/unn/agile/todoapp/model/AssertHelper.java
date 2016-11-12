@@ -1,23 +1,25 @@
 package ru.unn.agile.todoapp.model;
 
 import java.util.List;
+import java.util.Objects;
+
 import org.junit.Assert;
 
 class AssertHelper {
     private AssertHelper() { }
 
-    public static <T> void assertContains(final List<T> collection, final T object) {
+    public static void assertContains(final List collection, final Object object) {
         Assert.assertTrue(collection.contains(object));
     }
 
-    public static <T> void assertNotContains(final List<T> collection, final T object) {
+    public static void assertNotContains(final List collection, final Object object) {
         Assert.assertFalse(collection.contains(object));
     }
 
-    public static <T> void assertListEquals(final List<T> lhs, final List<T> rhs) {
+    public static void assertListEquals(final List lhs, final List rhs) {
         for (int i = 0; i < lhs.size(); i++) {
-            T lhsItem = lhs.get(i);
-            T rhsItem = rhs.get(i);
+            Object lhsItem = lhs.get(i);
+            Object rhsItem = rhs.get(i);
             if (!lhsItem.equals(rhsItem)) {
                 Assert.fail();
             }
