@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 import static ru.unn.agile.todoapp.model.AssertHelper.*;
 import static ru.unn.agile.todoapp.model.DateHelper.*;
@@ -44,5 +46,19 @@ public class TaskListTest {
 
         assertFalse(isFound);
         assertNotContains(taskList.getAll(), taskListItem);
+    }
+
+    @Test
+    public void cantModifyGetAllCollection() throws Exception {
+        taskList.add(taskListItem);
+        List<Task> allTasks = taskList.getAll();
+
+        allTasks.clear();
+        allTasks.add(taskListItem);
+        allTasks.add(new Task("New event", makeDate("19/04/2017")));
+        allTasks.remove(taskListItem);
+
+        assertEquals(allTasks.size(), 1);
+        assertContains(allTasks, taskListItem);
     }
 }
