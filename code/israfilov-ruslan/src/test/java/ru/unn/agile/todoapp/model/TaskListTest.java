@@ -46,21 +46,28 @@ public class TaskListTest {
         assertNotContains(taskList.getAll(), taskListItem);
     }
 
-    @Test
-    public void cantModifyGetAllCollection() throws Exception {
+    @Test(expected = UnsupportedOperationException.class)
+    public void cantClearGetAllCollection() throws Exception {
         taskList.add(taskListItem);
         List<Task> allTasks = taskList.getAll();
 
-        try {
-            allTasks.clear();
-            allTasks.add(taskListItem);
-            allTasks.add(new Task("New event", makeDate("19/04/2017")));
-            allTasks.remove(taskListItem);
-        }
-        catch (Exception ex) { }
+        allTasks.clear();
+    }
 
-        assertEquals(allTasks.size(), 1);
-        assertContains(allTasks, taskListItem);
+    @Test(expected = UnsupportedOperationException.class)
+    public void cantAddGetAllCollection() throws Exception {
+        taskList.add(taskListItem);
+        List<Task> allTasks = taskList.getAll();
+
+        allTasks.add(new Task("New event", makeDate("19/04/2017")));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void cantRemoveGetAllCollection() throws Exception {
+        taskList.add(taskListItem);
+        List<Task> allTasks = taskList.getAll();
+
+        allTasks.remove(taskListItem);
     }
 
     @Test
