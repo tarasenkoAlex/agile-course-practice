@@ -53,10 +53,13 @@ public class TaskListTest {
         taskList.add(taskListItem);
         List<Task> allTasks = taskList.getAll();
 
-        allTasks.clear();
-        allTasks.add(taskListItem);
-        allTasks.add(new Task("New event", makeDate("19/04/2017")));
-        allTasks.remove(taskListItem);
+        try {
+            allTasks.clear();
+            allTasks.add(taskListItem);
+            allTasks.add(new Task("New event", makeDate("19/04/2017")));
+            allTasks.remove(taskListItem);
+        }
+        catch (Exception ex) { }
 
         assertEquals(allTasks.size(), 1);
         assertContains(allTasks, taskListItem);
