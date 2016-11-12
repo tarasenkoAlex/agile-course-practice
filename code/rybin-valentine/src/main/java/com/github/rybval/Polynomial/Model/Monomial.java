@@ -41,9 +41,9 @@ public class Monomial {
             return monomial;
         } else if (Pattern.matches("^" + coefficientPattern + "\\*x$", string)) {
             return new Monomial(1, Double.parseDouble(string.replaceAll("\\*x", "")));
-        } else if (string == "x" || string == "+x") {
+        } else if ("x".equals(string) || "+x".equals(string)) {
             return new Monomial(1, 1.0);
-        } else if (string == "-x") {
+        } else if ("-x".equals(string)) {
             return new Monomial(1, -1.0);
         } else if (Pattern.matches("^" + coefficientPattern + "$", string)) {
             return new Monomial(0, Double.parseDouble(string));
