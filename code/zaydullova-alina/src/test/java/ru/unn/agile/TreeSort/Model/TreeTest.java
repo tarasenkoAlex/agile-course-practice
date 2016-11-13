@@ -26,4 +26,19 @@ public class TreeTest {
         assertNotNull("Left tree must be not null", tree.getLeft());
         assertEquals("Key in left tree must be equals to original value testKey1", testKey1, tree.getLeft().getKey());
     }
+
+    @Test
+    public void testRightTree() {
+        Integer testKey0 = 10;
+        Integer testKey1 = 15;
+
+        Tree tree = new Tree(testKey0);
+        assertEquals("Key in Tree must be equals to original value", testKey0, tree.getKey());
+
+        assertNull("Left tree must be null", tree.getRight());
+
+        tree.insert(testKey1);
+        assertNotNull("Left tree must be not null", tree.getRight());
+        assertEquals("Key in right tree must be equals to original value testKey1", testKey1, tree.getRight().getKey());
+    }
 }

@@ -10,4 +10,8 @@ public class Tree {
     public Integer getKey() {
         return null;
     }
+
+    public Tree getLeft() {
+        return null;
+    }
 }
