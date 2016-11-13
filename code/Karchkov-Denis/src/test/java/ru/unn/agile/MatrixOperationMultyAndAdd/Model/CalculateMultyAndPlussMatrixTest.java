@@ -44,7 +44,7 @@ public class CalculateMultyAndPlussMatrixTest {
         first = new Matrix(2, 2, new float[]{1, 3, 4, 2});
         second = new Matrix(2, 2, new float[]{1, 2, 1, 3});
         String result = "4.0,11.0,6.0,14.0,";
-        assertEquals(result, CalcOperationMatrix.multyTwoMutrix(first, second).toString());
+        assertEquals(result, CalcOperationMatrix.multiplyMutrix(first, second).toString());
     }
 
 
