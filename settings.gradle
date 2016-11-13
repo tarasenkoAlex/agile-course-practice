@@ -42,8 +42,6 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
-<<<<<<< HEAD
-
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
@@ -57,6 +55,8 @@ include "code/grosheva-ludmila"
 project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 
 // Добролюбова Евгения
+include "code/dobroliubova-evgeniia"
+project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
 // Евтюшин Валерий
 // Еланов Артем
 // Зайдуллова Алина
@@ -95,6 +95,8 @@ project(":code/maloykina-elena").name = "maloykina-elena-Model"
 // Поздеев Антон
 // Пономарев Георгий
 // Пономарев Никита
+include "code/ponomarev-nikita/Model"
+project(":code/ponomarev-nikita/Model").name = "ponomarev-nikita-Model"
 // Редькин Михаил
 // Рыбаков Антон
 // Рыбин Валентин
@@ -117,8 +119,6 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Степыкин Илья
 // Тарасенко Алексей
 // Тропичева Дарья
-include "code/Tropicheva-Darya"
-project(":code/Tropicheva-Darya").name = "Tropicheva-Darya"
 // Федосов Александр
 // Цыганов Алексей
 // Чугунов Евгений
@@ -127,8 +127,3 @@ project(":code/Tropicheva-Darya").name = "Tropicheva-Darya"
 // Шишкин Владислав
 // Шочин Александр
 // Шургалин Петр
-=======
-//Tropicheva Darya
-include "code/Tropicheva-Darya"
-project(":code/Tropicheva-Darya").name = "Tropicheva-Darya"
->>>>>>> cfcd3c4941dd5addf2c9001104ab76c6b05e2753
