@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 
 public class ConverterMassTest {
-    private final double delta = 0.00000001;
+    private static final double DELTA = 0.00000001;
     private MassConverter converter;
 
     @Before
@@ -16,11 +16,10 @@ public class ConverterMassTest {
         converter = new MassConverter();
     }
 
-    //////////////////////////////////////////////////////////////////////
     @Test
     public void convertKgToGr() {
         double kilogram = converter.convertToGram(1);
-        assertEquals(kilogram, 1000, delta);
+        assertEquals(kilogram, 1000, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -37,12 +36,10 @@ public class ConverterMassTest {
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
     @Test
     public void convertKgToTon() {
         double kilogram = converter.convertToTon(1);
-        assertEquals(kilogram, 0.001, delta);
+        assertEquals(kilogram, 0.001, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -59,12 +56,10 @@ public class ConverterMassTest {
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
     @Test
     public void convertKgToCentner() {
         double kilogram = converter.convertToCentner(1);
-        assertEquals(kilogram, 0.01, delta);
+        assertEquals(kilogram, 0.01, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -81,12 +76,10 @@ public class ConverterMassTest {
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
     @Test
     public void convertKgToPound() {
         double kilogram = converter.convertToPound(1);
-        assertEquals(kilogram, 2.679, delta);
+        assertEquals(kilogram, 2.679, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -103,12 +96,10 @@ public class ConverterMassTest {
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
     @Test
     public void convertKgToMilligram() {
         double kilogram = converter.convertToMilligram(1);
-        assertEquals(kilogram, 1000000, delta);
+        assertEquals(kilogram, 1000000, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -125,12 +116,10 @@ public class ConverterMassTest {
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
     @Test
     public void convertKgToMicrogram() {
         double kilogram = converter.convertToMicrogram(1);
-        assertEquals(kilogram, 1000000000, delta);
+        assertEquals(kilogram, 1000000000, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -146,5 +135,4 @@ public class ConverterMassTest {
             assertThat(e.getMessage(), is("Kilogram must be positive"));
         }
     }
-    ///////////////////////////////////////////////////////////////////////
-}
+  }
