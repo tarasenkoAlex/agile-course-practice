@@ -42,9 +42,6 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
-// Dobroliubova Evgeniia
-include "code/dobroliubova-evgeniia"
-project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
 
 // Kamtiko Sam
 // Masunda Nyararai
@@ -59,6 +56,8 @@ include "code/grosheva-ludmila"
 project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 
 // Добролюбова Евгения
+include "code/dobroliubova-evgeniia"
+project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
 // Евтюшин Валерий
 // Еланов Артем
 // Зайдуллова Алина
