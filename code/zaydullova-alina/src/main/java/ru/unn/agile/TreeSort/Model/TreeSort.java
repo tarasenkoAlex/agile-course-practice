@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class TreeSort {
-    public Collection<Integer> sort(Collection<Integer> inputCollection) {
+    public Collection<Integer> sort(final Collection<Integer> inputCollection) {
         Tree sortingTree = null;
         for (Integer val : inputCollection) {
             if (sortingTree == null) {

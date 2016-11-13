@@ -7,11 +7,11 @@ import java.util.LinkedList;
  * Created by Pavel on 13.11.16.
  */
 public class Tree {
-    private Integer keyValue;
+    private final Integer keyValue;
     private Tree leftTree;
     private Tree rightTree;
 
-    public Tree(Integer key) {
+    public Tree(final Integer key) {
         keyValue = key;
     }
 
@@ -27,7 +27,7 @@ public class Tree {
         return rightTree;
     }
 
-    public void insert(Integer key) {
+    public void insert(final Integer key) {
         int cmpResult = keyValue.compareTo(key);
 
         if (cmpResult <= 0) {
@@ -46,21 +46,19 @@ public class Tree {
     }
 
     public Collection<Integer> extractValues() {
-        Collection<Integer> extractedValues = new LinkedList<Integer>();
-        extractedValues = extractValues(extractedValues);
+        final Collection<Integer> extractedValues = new LinkedList<Integer>();
+        extractValues(extractedValues);
         return extractedValues;
     }
 
-    private Collection<Integer> extractValues(Collection<Integer> values) {
+    private void extractValues(final Collection<Integer> values) {
         if (leftTree != null) {
-            values = leftTree.extractValues(values);
+            leftTree.extractValues(values);
         }
         values.add(keyValue);
 
         if (rightTree != null) {
-            values = rightTree.extractValues(values);
+            rightTree.extractValues(values);
         }
-
-        return values;
     }
 }
