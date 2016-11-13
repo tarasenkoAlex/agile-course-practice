@@ -46,7 +46,7 @@ public class TaskTest {
     public void isAbleToMarkTaskAsDone() throws Exception {
         Task task = new Task("Meeting with the customers", makeDate("03/15/2016"));
 
-        task.markAdDone();
+        task.markAsDone();
 
         assertTrue(task.isDone());
     }

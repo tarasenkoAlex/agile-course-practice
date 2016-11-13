@@ -31,7 +31,7 @@ public class Task {
         return isDoneFlag;
     }
 
-    public void markAdDone() {
+    public void markAsDone() {
         isDoneFlag = true;
     }
 }
