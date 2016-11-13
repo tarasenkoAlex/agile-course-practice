@@ -93,6 +93,8 @@ project(":code/larin-anton").name = "larin-anton-Model"
 // Пономарев Георгий
 // Пономарев Никита
 // Редькин Михаил
+include "code/Redkin-Michail"
+project(":code/Redkin-Michail").name = "Redkin-Michail-Model"
 // Рыбаков Антон
 // Рыбин Валентин
 // Рябинкин Евгений
