@@ -46,4 +46,83 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
-//
+
+// Kamtiko Sam
+// Masunda Nyararai
+// Александров Дмитрий
+// Бабинцева Анна
+// Быкадоров Роман
+// Веселов Илья
+// Волков Денис
+// Воронин Дмитрий
+// Грошева Людмила
+include "code/grosheva-ludmila"
+project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
+
+// Добролюбова Евгения
+// Евтюшин Валерий
+// Еланов Артем
+// Зайдуллова Алина
+// Зырин Илья
+// Ильин Иван
+// Исрафилов Руслан
+// Карчков Денис
+// Кокошников Алексей
+// Колистратова Дарья
+// Кочетов Павел
+include "code/kochetov-pavel"
+project(":code/kochetov-pavel").name = "kochetov-pavel-Model"
+
+// Кудрявцев Никита
+include "code/kudriavtsev-nikita"
+project(":code/kudriavtsev-nikita").name = "kudriavtsev-nikita-lab1-Model"
+
+// Кукушкин Даниил
+// Ларин Антон
+include "code/larin-anton"
+project(":code/larin-anton").name = "larin-anton-Model"
+
+// Лачинов Дмитрий
+// Луковников Илья
+// Максимов Максим
+// Малойкина Елена
+// Матвеева Светлана
+// Метелёв Евгений
+// Михейкина Алёна
+// Нистратов Андрей
+// Нистратова Елена
+// Пауль Эдуард
+// Песков Дмитрий
+// Поздеев Антон
+// Пономарев Георгий
+// Пономарев Никита
+// Редькин Михаил
+// Рыбаков Антон
+// Рыбин Валентин
+// Рябинкин Евгений
+include "code/ryabinkin-evgeni"
+project(":code/ryabinkin-evgeni").name = "ryabinkin-evgeni-Model"
+
+// Сахаров Алексей
+// Сиротин Никита
+// Скребков Артём
+// Соврасов Владислав
+include "code/sovrasov-vlad"
+project(":code/sovrasov-vlad").name = "sovrasov-vlad"
+
+// Соловьев Дмитрий
+include "code/solovev-dmitriy"
+project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
+
+// Старлытов Евгений
+// Степыкин Илья
+// Тарасенко Алексей
+// Тропичева Дарья
+// Федосов Александр
+// Цыганов Алексей
+// Чугунов Евгений
+// Шадрунов Артем
+// Ширяева Вера
+// Шишкин Владислав
+// Шочин Александр
+// Шургалин Петр
