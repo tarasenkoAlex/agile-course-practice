@@ -2,6 +2,7 @@ package ru.unn.agile.todoapp.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Task {
@@ -38,7 +39,7 @@ public class Task {
 
     @Override
     public String toString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
         return description + ", " + dateFormat.format(dueDate);
     }
 }
