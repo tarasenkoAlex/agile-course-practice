@@ -36,7 +36,7 @@ public class WhenAddDeleteElementToDeque {
     public void popHeadIntElement() {
         deque.pushHeadElement(5);
         int element =  deque.popHeadElement();
-        assertEquals(element, 5);
+        assertEquals(5, element);
     }
 
     @Test
