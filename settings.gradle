@@ -2,6 +2,11 @@
 include "code/bevzuk-anton"
 project(":code/bevzuk-anton").name = "bevzuk-anton-Model"
 
+// Kolistratova Daria
+include "code/kolistratova-daria"
+project(":code/kolistratova-daria").name = "kolistratova-daria-Model"
+
+
 // Kornyakov Kirill, lab1
 include "code/kornyakov-kirill-lab1"
 project(":code/kornyakov-kirill-lab1").name = "kornyakov-kirill-lab1-Model"
@@ -55,6 +60,8 @@ include "code/grosheva-ludmila"
 project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 
 // Добролюбова Евгения
+include "code/dobroliubova-evgeniia"
+project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
 // Евтюшин Валерий
 // Еланов Артем
 // Зайдуллова Алина
@@ -81,6 +88,8 @@ project(":code/larin-anton").name = "larin-anton-Model"
 // Луковников Илья
 // Максимов Максим
 // Малойкина Елена
+include "code/maloykina-elena"
+project(":code/maloykina-elena").name = "maloykina-elena-Model"
 // Матвеева Светлана
 // Метелёв Евгений
 // Михейкина Алёна
@@ -91,14 +100,26 @@ project(":code/larin-anton").name = "larin-anton-Model"
 // Поздеев Антон
 // Пономарев Георгий
 // Пономарев Никита
+include "code/ponomarev-nikita/Model"
+project(":code/ponomarev-nikita/Model").name = "ponomarev-nikita-Model"
 // Редькин Михаил
+include "code/Redkin-Michail"
+project(":code/Redkin-Michail").name = "Redkin-Michail-Model"
 // Рыбаков Антон
 // Рыбин Валентин
 // Рябинкин Евгений
+include "code/ryabinkin-evgeni"
+project(":code/ryabinkin-evgeni").name = "ryabinkin-evgeni-Model"
+
 // Сахаров Алексей
 // Сиротин Никита
+include "code/sirotin-nikita"
+project(":code/sirotin-nikita").name = "sirotin-nikita-Model"
 // Скребков Артём
 // Соврасов Владислав
+include "code/sovrasov-vlad"
+project(":code/sovrasov-vlad").name = "sovrasov-vlad"
+
 // Соловьев Дмитрий
 include "code/solovev-dmitriy"
 project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
@@ -107,9 +128,10 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Степыкин Илья
 // Тарасенко Алексей
 // Тропичева Дарья
+
 // Федосов Александр
 include "code/Fedosov-Alexander"
-project(":code/Fedosov-Alexander").name = "Fedosov-Alexander"
+project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
 
 // Цыганов Алексей
 // Чугунов Евгений
@@ -117,4 +139,8 @@ project(":code/Fedosov-Alexander").name = "Fedosov-Alexander"
 // Ширяева Вера
 // Шишкин Владислав
 // Шочин Александр
+include "code/shochin-alexandr"
+project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
 // Шургалин Петр
+include "code/shurgalin-pyotr"
+project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
