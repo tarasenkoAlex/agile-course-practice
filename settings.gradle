@@ -42,7 +42,6 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
-
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
@@ -98,6 +97,8 @@ project(":code/larin-anton").name = "larin-anton-Model"
 // Рябинкин Евгений
 // Сахаров Алексей
 // Сиротин Никита
+include "code/sirotin-nikita"
+project(":code/sirotin-nikita").name = "sirotin-nikita-Model"
 // Скребков Артём
 // Соврасов Владислав
 // Соловьев Дмитрий
@@ -116,4 +117,3 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Шишкин Владислав
 // Шочин Александр
 // Шургалин Петр
-
