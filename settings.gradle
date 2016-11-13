@@ -1,4 +1,4 @@
-//// Bevzuk Anton
+// Bevzuk Anton
 include "code/bevzuk-anton"
 project(":code/bevzuk-anton").name = "bevzuk-anton-Model"
 // Kornyakov Kirill, lab1
