@@ -32,7 +32,7 @@ public class TaskTest {
         Date initialDate = makeDate("05/05/2016");
         Task task = new Task("Work lunch with the dudes", initialDate);
 
-        Date actualDate = task.getExpirationDate();
+        Date actualDate = task.getDueDate();
 
         assertEquals(initialDate.getTime(), actualDate.getTime());
     }

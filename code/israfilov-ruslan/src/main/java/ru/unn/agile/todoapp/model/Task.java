@@ -5,26 +5,26 @@ import java.util.Objects;
 
 public class Task {
     private final String description;
-    private final Date expirationDate;
+    private final Date dueDate;
     private boolean isDoneFlag = false;
 
-    public Task(final String description, final Date expirationDate) {
+    public Task(final String description, final Date dueDate) {
         Objects.requireNonNull(description, "description is not able to be null");
-        Objects.requireNonNull(expirationDate, "expirationDate is not able to be null");
+        Objects.requireNonNull(dueDate, "dueDate is not able to be null");
         if (description.trim().length() == 0) {
             String message = "description is not able to be whitespaces string";
             throw new IllegalArgumentException(message);
         }
         this.description = description;
-        this.expirationDate = expirationDate;
+        this.dueDate = dueDate;
     }
 
     public final String getDescription() {
         return description;
     }
 
-    public final Date getExpirationDate() {
-        return expirationDate;
+    public final Date getDueDate() {
+        return dueDate;
     }
 
     public final boolean isDone() {
