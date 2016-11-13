@@ -82,6 +82,8 @@ project(":code/larin-anton").name = "larin-anton-Model"
 // Луковников Илья
 // Максимов Максим
 // Малойкина Елена
+include "code/maloykina-elena"
+project(":code/maloykina-elena").name = "maloykina-elena-Model"
 // Матвеева Светлана
 // Метелёв Евгений
 // Михейкина Алёна
@@ -116,4 +118,3 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Шишкин Владислав
 // Шочин Александр
 // Шургалин Петр
-
