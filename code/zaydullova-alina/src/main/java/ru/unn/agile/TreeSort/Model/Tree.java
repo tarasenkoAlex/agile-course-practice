@@ -1,6 +1,7 @@
 package ru.unn.agile.TreeSort.Model;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 /**
  * Created by Pavel on 13.11.16.
@@ -45,6 +46,7 @@ public class Tree {
     }
 
     public Collection<Integer> extractValues() {
-        return null;
+        Collection<Integer> extractedValues = new LinkedList<Integer>();
+        return extractedValues;
     }
 }
