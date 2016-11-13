@@ -7,7 +7,7 @@ import java.security.InvalidParameterException;
 import static org.junit.Assert.*;
 
 public class CreditTest {
-    private final double delta = 0.4;
+    private static final double DELTA = 0.4;
     private final double sum = 10000;
     private final double months = 12;
     private final double percent = 20;
@@ -47,20 +47,20 @@ public class CreditTest {
     public void canCountPayment() {
         Credit credit = new Credit(sum, months, percent);
         double payment = credit.countPayment();
-        assertEquals(926, payment, delta);
+        assertEquals(926, payment, DELTA);
     }
 
     @Test
     public void canCountTotalSum() {
         Credit credit = new Credit(sum, months, percent);
         double totalSum = credit.countTotalSum();
-        assertEquals(11116, totalSum, delta);
+        assertEquals(11116, totalSum, DELTA);
     }
 
     @Test
     public void canCountOverpayment() {
         Credit credit = new Credit(sum, months, percent);
         double overpayment = credit.countOverpayment();
-        assertEquals(1116, overpayment, delta);
+        assertEquals(1116, overpayment, DELTA);
     }
 }
