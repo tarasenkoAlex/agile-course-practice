@@ -108,6 +108,8 @@ project(":code/ryabinkin-evgeni").name = "ryabinkin-evgeni-Model"
 
 // Сахаров Алексей
 // Сиротин Никита
+include "code/sirotin-nikita"
+project(":code/sirotin-nikita").name = "sirotin-nikita-Model"
 // Скребков Артём
 // Соврасов Владислав
 include "code/sovrasov-vlad"
