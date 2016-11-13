@@ -15,7 +15,7 @@ public class ConverterMassTest {
     @Test
     public void convertKgToGr() {
         double kilogram = convertToGram(1);
-        assertEquals(kilogram, 1000, DELTA);
+        assertEquals( 1000, kilogram, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -35,7 +35,7 @@ public class ConverterMassTest {
     @Test
     public void convertKgToTon() {
         double kilogram = convertToTon(1);
-        assertEquals(kilogram, 0.001, DELTA);
+        assertEquals(0.001, kilogram, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -55,7 +55,7 @@ public class ConverterMassTest {
     @Test
     public void convertKgToCentner() {
         double kilogram = convertToCentner(1);
-        assertEquals(kilogram, 0.01, DELTA);
+        assertEquals(0.01, kilogram, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -75,7 +75,7 @@ public class ConverterMassTest {
     @Test
     public void convertKgToPound() {
         double kilogram = convertToPound(1);
-        assertEquals(kilogram, 2.679, DELTA);
+        assertEquals(2.679, kilogram, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -95,7 +95,7 @@ public class ConverterMassTest {
     @Test
     public void convertKgToMilligram() {
         double kilogram = convertToMilligram(1);
-        assertEquals(kilogram, 1000000, DELTA);
+        assertEquals(1000000, kilogram, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -115,7 +115,7 @@ public class ConverterMassTest {
     @Test
     public void convertKgToMicrogram() {
         double kilogram = convertToMicrogram(1);
-        assertEquals(kilogram, 1000000000, DELTA);
+        assertEquals(1000000000, kilogram, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
