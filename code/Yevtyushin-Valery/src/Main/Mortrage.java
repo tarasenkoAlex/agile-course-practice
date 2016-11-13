@@ -5,13 +5,13 @@
 import java.security.InvalidParameterException;
 
 public class Mortrage {
-    private double month;
-    private double percents;
-    private double summ;
+    private final double month;
+    private final double percents;
+    private final double summ;
     private static final double PERCENT_MAX_VALUE = 100;
     private static final double MONTH_IN_THE_YEAR = 12;
 
-    public Mortrage(double summ, double month, double percents) {
+    public Mortrage(final double summ, final double month, final double percents) {
 
         if (month <= 0) {
             throw new InvalidParameterException("WRONG INPUT DATA!");

@@ -22,43 +22,43 @@ public class WhenCalculatingMortrage {
 
     @Test
             (expected = InvalidParameterException.class)
-    public void CreateBadEqualOfDays() {
+    public void createBadEqualOfDays() {
         Mortrage mortrage = new Mortrage(summ, -month, percents);
     }
 
     @Test
             (expected = InvalidParameterException.class)
-    public void NegativeSummCount() {
+    public void negativeSummCount() {
         Mortrage mortrage = new Mortrage(-summ, month, percents);
     }
 
     @Test
             (expected = InvalidParameterException.class)
-    public void NegativePercentsCount() {
+    public void negativePercentsCount() {
         Mortrage mortrage = new Mortrage(summ, month, -percents);
     }
 
     @Test
             (expected = InvalidParameterException.class)
-    public void ZeroDaysMortrageCreate() {
+    public void zeroDaysMortrageCreate() {
         Mortrage mortrage = new Mortrage(summ, 0, percents);
     }
 
     @Test
             (expected = InvalidParameterException.class)
-    public void EmptyParametersMortrageCreate() {
+    public void emptyParametersMortrageCreate() {
         Mortrage mortrage = new Mortrage(0, 0, 0);
     }
 
     @Test
-    public void PossibilityOfCountingDeal() {
+    public void possibilityOfCountingDeal() {
         Mortrage mortrage = new Mortrage(summ, month, percents);
         double payment = mortrage.countPayment();
         assertEquals(926, payment, difference);
     }
 
     @Test
-    public void DealSumCountingPossibility() {
+    public void dealSumCountingPossibility() {
         Mortrage mortrage = new Mortrage(summ, month, percents);
         double totalSum = mortrage.countTotalSum();
         assertEquals(11116, totalSum, difference);

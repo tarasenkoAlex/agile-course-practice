@@ -1,4 +1,4 @@
-﻿// Bevzuk Anton
+// Bevzuk Anton
 include "code/bevzuk-anton"
 project(":code/bevzuk-anton").name = "bevzuk-anton-Model"
 
@@ -117,9 +117,6 @@ project(":code/Redkin-Michail").name = "Redkin-Michail-Model"
 // Рыбаков Антон
 // Рыбин Валентин
 // Рябинкин Евгений
-include "code/ryabinkin-evgeni"
-project(":code/ryabinkin-evgeni").name = "ryabinkin-evgeni-Model"
-
 // Сахаров Алексей
 // Сиротин Никита
 include "code/sirotin-nikita"
@@ -129,9 +126,6 @@ include "code/skrebkov-artem"
 project(":code/skrebkov-artem").name = "skrebkov-artem-Model"
 
 // Соврасов Владислав
-include "code/sovrasov-vlad"
-project(":code/sovrasov-vlad").name = "sovrasov-vlad"
-
 // Соловьев Дмитрий
 include "code/solovev-dmitriy"
 project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
@@ -158,4 +152,3 @@ project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
 // Шургалин Петр
 include "code/shurgalin-pyotr"
 project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
-
