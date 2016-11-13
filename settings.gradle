@@ -128,6 +128,8 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Степыкин Илья
 // Тарасенко Алексей
 // Тропичева Дарья
+include "code/Tropicheva-Darya"
+project(":code/Tropicheva-Darya").name = "Tropicheva-Darya"
 
 // Федосов Александр
 include "code/Fedosov-Alexander"
