@@ -62,6 +62,9 @@ project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 // Зырин Илья
 // Ильин Иван
 // Исрафилов Руслан
+include "code/israfilov-ruslan"
+project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
+
 // Карчков Денис
 // Кокошников Алексей
 // Колистратова Дарья
