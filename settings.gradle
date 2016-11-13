@@ -42,7 +42,6 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
-
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
@@ -94,6 +93,8 @@ project(":code/maloykina-elena").name = "maloykina-elena-Model"
 // Поздеев Антон
 // Пономарев Георгий
 // Пономарев Никита
+include "code/ponomarev-nikita/Model"
+project(":code/ponomarev-nikita/Model").name = "ponomarev-nikita-Model"
 // Редькин Михаил
 // Рыбаков Антон
 // Рыбин Валентин
