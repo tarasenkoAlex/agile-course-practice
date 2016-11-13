@@ -5,6 +5,8 @@ package ru.unn.agile.TreeSort.Model;
  */
 public class Tree {
     private Integer keyValue;
+    private Tree leftTree;
+    private Tree rightTree;
 
     public Tree(Integer key) {
         keyValue = key;
@@ -15,14 +17,28 @@ public class Tree {
     }
 
     public Tree getLeft() {
-        return null;
+        return leftTree;
     }
 
     public Tree getRight() {
-        return null;
+        return rightTree;
     }
 
     public void insert(Integer key) {
+        int cmpResult = keyValue.compareTo(key);
 
+        if (cmpResult <= 0) {
+            if (rightTree == null) {
+                rightTree = new Tree(key);
+            } else {
+                rightTree.insert(key);
+            }
+        } else if (cmpResult > 0) {
+            if (leftTree == null) {
+                leftTree = new Tree(key);
+            } else {
+                leftTree.insert(key);
+            }
+        }
     }
 }
