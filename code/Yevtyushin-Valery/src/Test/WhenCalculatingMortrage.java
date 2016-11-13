@@ -3,7 +3,9 @@
  */
 
 import org.junit.Test;
+
 import java.security.InvalidParameterException;
+
 import static org.junit.Assert.*;
 
 
@@ -16,36 +18,31 @@ public class WhenCalculatingMortrage {
 
     @Test
     public void reallyCreateMortrageDeal() {
-       Mortrage mortrage = new Mortrage(summ, month, percents);
+        Mortrage mortrage = new Mortrage(summ, month, percents);
         assertNotNull(mortrage);
     }
 
-    @Test
-            (expected = InvalidParameterException.class)
+    @Test(expected = InvalidParameterException.class)
     public void createBadEqualOfDays() {
         Mortrage mortrage = new Mortrage(summ, -month, percents);
     }
 
-    @Test
-            (expected = InvalidParameterException.class)
+    @Test(expected = InvalidParameterException.class)
     public void negativeSummCount() {
         Mortrage mortrage = new Mortrage(-summ, month, percents);
     }
 
-    @Test
-            (expected = InvalidParameterException.class)
+    @Test(expected = InvalidParameterException.class)
     public void negativePercentsCount() {
         Mortrage mortrage = new Mortrage(summ, month, -percents);
     }
 
-    @Test
-            (expected = InvalidParameterException.class)
+    @Test(expected = InvalidParameterException.class)
     public void zeroDaysMortrageCreate() {
         Mortrage mortrage = new Mortrage(summ, 0, percents);
     }
 
-    @Test
-            (expected = InvalidParameterException.class)
+    @Test(expected = InvalidParameterException.class)
     public void emptyParametersMortrageCreate() {
         Mortrage mortrage = new Mortrage(0, 0, 0);
     }
