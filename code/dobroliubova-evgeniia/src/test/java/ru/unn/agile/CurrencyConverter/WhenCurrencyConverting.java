@@ -113,7 +113,7 @@ public class WhenCurrencyConverting {
 
     @Test
     public void yenToDollar() {
-        assertEquals(1, converter.execute(1.0357, Constants.YEN , Constants.DOLLAR), delta);
+        assertEquals(1, converter.execute(1.0357, Constants.YEN, Constants.DOLLAR), delta);
     }
 
     @Test
