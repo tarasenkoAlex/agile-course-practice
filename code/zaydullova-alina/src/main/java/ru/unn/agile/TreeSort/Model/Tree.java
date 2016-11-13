@@ -47,6 +47,20 @@ public class Tree {
 
     public Collection<Integer> extractValues() {
         Collection<Integer> extractedValues = new LinkedList<Integer>();
+        extractedValues = extractValues(extractedValues);
         return extractedValues;
+    }
+
+    private Collection<Integer> extractValues(Collection<Integer> values) {
+        if (leftTree != null) {
+            values = leftTree.extractValues(values);
+        }
+        values.add(keyValue);
+
+        if (rightTree != null) {
+            values = rightTree.extractValues(values);
+        }
+
+        return values;
     }
 }
