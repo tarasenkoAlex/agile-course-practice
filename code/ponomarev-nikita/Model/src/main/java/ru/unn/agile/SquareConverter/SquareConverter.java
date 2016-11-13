@@ -2,8 +2,7 @@ package ru.unn.agile.SquareConverter;
 
 public class SquareConverter {
 
-    public double toDistanationUnit(final double sourceUnit, final double distanationMultiplier)
-    {
+    public double toDistanationUnit(final double sourceUnit, final double distanationMultiplier) {
         if (sourceUnit < 0) {
             throw new IllegalArgumentException("Square must be positive number");
         }
