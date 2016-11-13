@@ -1,9 +1,11 @@
 ﻿// Bevzuk Anton
 include "code/bevzuk-anton"
 project(":code/bevzuk-anton").name = "bevzuk-anton-Model"
+
 // Kornyakov Kirill, lab1
 include "code/kornyakov-kirill-lab1"
 project(":code/kornyakov-kirill-lab1").name = "kornyakov-kirill-lab1-Model"
+
 // Kornyakov Kirill, lab2-legacy
 include "code/kornyakov-kirill-lab2-legacy/Model"
 project(":code/kornyakov-kirill-lab2-legacy/Model").name = "kornyakov-kirill-lab2-Model-legacy"
@@ -11,6 +13,7 @@ include "code/kornyakov-kirill-lab2-legacy/ViewModel"
 project(":code/kornyakov-kirill-lab2-legacy/ViewModel").name = "kornyakov-kirill-lab2-ViewModel-legacy"
 include "code/kornyakov-kirill-lab2-legacy/View"
 project(":code/kornyakov-kirill-lab2-legacy/View").name = "kornyakov-kirill-lab2-View-legacy"
+
 // Kornyakov Kirill, lab2
 include "code/kornyakov-kirill-lab2/Model"
 project(":code/kornyakov-kirill-lab2/Model").name = "kornyakov-kirill-lab2-Model"
@@ -18,6 +21,7 @@ include "code/kornyakov-kirill-lab2/ViewModel"
 project(":code/kornyakov-kirill-lab2/ViewModel").name = "kornyakov-kirill-lab2-ViewModel"
 include "code/kornyakov-kirill-lab2/View"
 project(":code/kornyakov-kirill-lab2/View").name = "kornyakov-kirill-lab2-View"
+
 // Kornyakov Kirill, lab3-legacy
 include "code/kornyakov-kirill-lab3-legacy/Model"
 project(":code/kornyakov-kirill-lab3-legacy/Model").name = "kornyakov-kirill-lab3-Model-legacy"
@@ -27,6 +31,7 @@ include "code/kornyakov-kirill-lab3-legacy/View"
 project(":code/kornyakov-kirill-lab3-legacy/View").name = "kornyakov-kirill-lab3-View-legacy"
 include "code/kornyakov-kirill-lab3-legacy/Infrastructure"
 project(":code/kornyakov-kirill-lab3-legacy/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure-legacy"
+
 // Kornyakov Kirill, lab3
 include "code/kornyakov-kirill-lab3/Model"
 project(":code/kornyakov-kirill-lab3/Model").name = "kornyakov-kirill-lab3-Model"
@@ -36,6 +41,8 @@ include "code/kornyakov-kirill-lab3/View"
 project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
+
+
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
@@ -47,6 +54,7 @@ project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-l
 // Грошева Людмила
 include "code/grosheva-ludmila"
 project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
+
 // Добролюбова Евгения
 // Евтюшин Валерий
 // Еланов Артем
@@ -55,25 +63,30 @@ project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 // Ильин Иван
 // Исрафилов Руслан
 // Карчков Денис
+//
 include "code/Karchkov-Denis"
 project(":code/Karchkov-Denis").name = "Karchkov-Denis-Model"
-// Кокошников Алексей
+Кокошников Алексей
 // Колистратова Дарья
 // Кочетов Павел
 include "code/kochetov-pavel"
 project(":code/kochetov-pavel").name = "kochetov-pavel-Model"
+
 // Кудрявцев Никита
 include "code/kudriavtsev-nikita"
 project(":code/kudriavtsev-nikita").name = "kudriavtsev-nikita-lab1-Model"
+
 // Кукушкин Даниил
 // Ларин Антон
 include "code/larin-anton"
 project(":code/larin-anton").name = "larin-anton-Model"
-<<<<<<< HEAD
+
 // Лачинов Дмитрий
 // Луковников Илья
 // Максимов Максим
 // Малойкина Елена
+include "code/maloykina-elena"
+project(":code/maloykina-elena").name = "maloykina-elena-Model"
 // Матвеева Светлана
 // Метелёв Евгений
 // Михейкина Алёна
@@ -88,40 +101,20 @@ project(":code/larin-anton").name = "larin-anton-Model"
 // Рыбаков Антон
 // Рыбин Валентин
 // Рябинкин Евгений
-=======
-
-// Р›Р°С‡РёРЅРѕРІ Р”РјРёС‚СЂРёР№
-// Р›СѓРєРѕРІРЅРёРєРѕРІ РР»СЊСЏ
-// РњР°РєСЃРёРјРѕРІ РњР°РєСЃРёРј
-// РњР°Р»РѕР№РєРёРЅР° Р•Р»РµРЅР°
-include "code/maloykina-elena"
-project(":code/maloykina-elena").name = "maloykina-elena-Model"
-// РњР°С‚РІРµРµРІР° РЎРІРµС‚Р»Р°РЅР°
-// РњРµС‚РµР»С‘РІ Р•РІРіРµРЅРёР№
-// РњРёС…РµР№РєРёРЅР° РђР»С‘РЅР°
-// РќРёСЃС‚СЂР°С‚РѕРІ РђРЅРґСЂРµР№
-// РќРёСЃС‚СЂР°С‚РѕРІР° Р•Р»РµРЅР°
-// РџР°СѓР»СЊ Р­РґСѓР°СЂРґ
-// РџРµСЃРєРѕРІ Р”РјРёС‚СЂРёР№
-// РџРѕР·РґРµРµРІ РђРЅС‚РѕРЅ
-// РџРѕРЅРѕРјР°СЂРµРІ Р“РµРѕСЂРіРёР№
-// РџРѕРЅРѕРјР°СЂРµРІ РќРёРєРёС‚Р°
-// Р РµРґСЊРєРёРЅ РњРёС…Р°РёР»
-// Р С‹Р±Р°РєРѕРІ РђРЅС‚РѕРЅ
-// Р С‹Р±РёРЅ Р’Р°Р»РµРЅС‚РёРЅ
-// Р СЏР±РёРЅРєРёРЅ Р•РІРіРµРЅРёР№
->>>>>>> master
 include "code/ryabinkin-evgeni"
 project(":code/ryabinkin-evgeni").name = "ryabinkin-evgeni-Model"
+
 // Сахаров Алексей
 // Сиротин Никита
 // Скребков Артём
 // Соврасов Владислав
 include "code/sovrasov-vlad"
 project(":code/sovrasov-vlad").name = "sovrasov-vlad"
+
 // Соловьев Дмитрий
 include "code/solovev-dmitriy"
 project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
+
 // Старлытов Евгений
 // Степыкин Илья
 // Тарасенко Алексей
