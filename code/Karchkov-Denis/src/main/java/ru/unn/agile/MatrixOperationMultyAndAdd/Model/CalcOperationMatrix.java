@@ -15,7 +15,7 @@ public final class CalcOperationMatrix {
     }
     public static Matrix sumTwoMatrix(final Matrix first, final Matrix second) {
         if (checkDimensionsForSum(first, second)) {
-            float [] resultSum = new float[first.getLengthMatrix()];
+            float[] resultSum = new float[first.getLengthMatrix()];
             for (int numberElement = 0; numberElement < first.getLengthMatrix(); numberElement++) {
                 resultSum[numberElement] = first.getElementMatrix(numberElement)
                         + second.getElementMatrix(numberElement);
@@ -30,14 +30,14 @@ public final class CalcOperationMatrix {
 
     public static Matrix multyTwoMutrix(final Matrix first, final Matrix second) {
         if (checkDimensinsForMulty(first, second)) {
-            float [] multyArray = new float[getDimensinsForMulty(first, second)];
+            float[] multyArray = new float[getDimensinsForMulty(first, second)];
             multArrProc(first, second, multyArray);
             return new Matrix(first.getRows(), second.getColumns(), multyArray);
         }
         return null;
     }
 
-    public static void multArrProc(final Matrix first, final Matrix second, final float [] mulAr) {
+    public static void multArrProc(final Matrix first, final Matrix second, final float[] mulAr) {
         for (int numberRow = 0; numberRow < first.getRows(); numberRow++) {
             for (int numCol = 0; numCol < second.getColumns(); numCol++) {
                 for (int k = 0; k < first.getColumns(); k++) {
