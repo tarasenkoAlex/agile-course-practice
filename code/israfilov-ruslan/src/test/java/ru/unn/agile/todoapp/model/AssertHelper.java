@@ -1,8 +1,6 @@
 package ru.unn.agile.todoapp.model;
 
 import java.util.List;
-import java.util.StringJoiner;
-
 import org.junit.Assert;
 
 class AssertHelper {
