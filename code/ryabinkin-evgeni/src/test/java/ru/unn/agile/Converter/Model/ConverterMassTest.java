@@ -15,7 +15,7 @@ public class ConverterMassTest {
     @Test
     public void convertKgToGr() {
         double kilogram = convertToGram(1);
-        assertEquals( 1000, kilogram, DELTA);
+        assertEquals(1000, kilogram, DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
