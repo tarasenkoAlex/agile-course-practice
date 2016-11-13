@@ -11,21 +11,21 @@ public class CalculateMultyAndPlussMatrixTest {
         first = new Matrix(2, 2, new float[]{1, 1, 1, 1});
         second = new Matrix(2, 2, new float[]{2, 2, 2, 2});
         String testM = "3.0,3.0,3.0,3.0,";
-        assertEquals(testM, CalcOperationMatrix.sumTwoMatrix(first, second).toString());
+        assertEquals(testM, CalcOperationMatrix.sumMatrix(first, second).toString());
     }
     @Test
     public void canSumTwoMatrixWithDifferentNumberOfRows() {
         first = new Matrix(3, 2, testArray);
         second = new Matrix(2, 2, new float[]{2, 2, 2, 2});
         String testM = "3.0,3.0,3.0,3.0,";
-        assertEquals(null, CalcOperationMatrix.sumTwoMatrix(first, second));
+        assertEquals(null, CalcOperationMatrix.sumMatrix(first, second));
     }
     @Test
     public void canSumTwoMatrixWithDifferentNumberOfColumnsAndRows() {
         first = new Matrix(3, 3, new float[]{1, 1, 1, 1, 2, 2, 1, 1, 2});
         second = new Matrix(2, 2, new float[]{2, 2, 2, 2});
         String testM = "3.0,3.0,3.0,3.0,";
-        assertEquals(null, CalcOperationMatrix.sumTwoMatrix(first, second));
+        assertEquals(null, CalcOperationMatrix.sumMatrix(first, second));
     }
     @Test
     public void canGetSizeArrayOfMatrix() {
@@ -44,7 +44,7 @@ public class CalculateMultyAndPlussMatrixTest {
         first = new Matrix(2, 2, new float[]{1, 3, 4, 2});
         second = new Matrix(2, 2, new float[]{1, 2, 1, 3});
         String result = "4.0,11.0,6.0,14.0,";
-        assertEquals(result, CalcOperationMatrix.multiplyMutrix(first, second).toString());
+        assertEquals(result, CalcOperationMatrix.multiplyMatrix(first, second).toString());
     }
 
 

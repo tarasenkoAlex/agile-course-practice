@@ -29,11 +29,11 @@ public class MatrixMultyAndAddTest {
     @Test
     public void canSetNumberOfRows() {
         matrix = new Matrix(5, columns, testArray);
-        assertEquals(5, matrix.getNumberRows());
+        assertEquals(5, matrix.getNumR());
     }
     @Test
     public void canSetNumberOfColumns() {
         matrix = new Matrix(rows, 7, testArray);
-        assertEquals(7, matrix.getNumberColumns());
+        assertEquals(7, matrix.getNumCol());
     }
 }

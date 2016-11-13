@@ -18,10 +18,10 @@ public class Matrix {
             this.lengthMatrix = matrixElements.length;
         }
     }
-    public int getNumberRows() {
+    public int getNumR() {
         return rows;
     }
-    public int getNumberColumns() {
+    public int getNumCol() {
         return columns;
     }
     public int getLengthMatrix() {
