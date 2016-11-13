@@ -49,7 +49,7 @@ public class PomodoroManager {
                 state = PomodoroState.Pomodoro;
                 break;
             default:
-                throw new RuntimeErrorException(new Error(""));
+                throw new RuntimeErrorException(new Error("Manager is in Off state"));
         }
     }
 

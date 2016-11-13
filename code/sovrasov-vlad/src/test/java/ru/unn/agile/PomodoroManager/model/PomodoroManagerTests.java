@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class PomodoroManagerTests {
     private PomodoroManager manager = new PomodoroManager();
 
-    private void skipState(final PomodoroManager manager, final int times)  {
+    private void skipState(final int times)  {
         for (int i = 0; i < times; i++)  {
             manager.nextState();
         }
@@ -50,7 +50,7 @@ public class PomodoroManagerTests {
     @Test
     public void switchToNextPomodoro()  {
         manager.startCycle();
-        skipState(manager, 2);
+        skipState(2);
         assertEquals(manager.getState(), PomodoroState.Pomodoro);
         assertEquals(manager.getCheckmarksCounter(), 1);
     }
@@ -58,7 +58,7 @@ public class PomodoroManagerTests {
     @Test
     public void switchToLongBreak()  {
         manager.startCycle();
-        skipState(manager, 7);
+        skipState(7);
         assertEquals(manager.getState(), PomodoroState.LongBreak);
         assertEquals(manager.getCheckmarksCounter(), 4);
     }
@@ -66,7 +66,7 @@ public class PomodoroManagerTests {
     @Test
     public void switchToOffAfterCycle()  {
         manager.startCycle();
-        skipState(manager, 8);
+        skipState(8);
         assertEquals(manager.getState(), PomodoroState.Off);
         assertEquals(manager.getCheckmarksCounter(), 0);
     }
@@ -74,13 +74,13 @@ public class PomodoroManagerTests {
     @Test(expected = RuntimeErrorException.class)
     public void throwThenStateOutOfRange()  {
         manager.startCycle();
-        skipState(manager, 9);
+        skipState(9);
     }
 
     @Test
     public void cyclesCounterIncreasedAfterCycle() {
         manager.startCycle();
-        skipState(manager, 8);
+        skipState(8);
         assertEquals(manager.getFinishedCyclesCounter(), 1);
     }
 }
