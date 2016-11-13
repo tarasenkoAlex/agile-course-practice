@@ -16,21 +16,21 @@ public class PomodoroManagerTests {
 
     @Test
     public void defaultState()  {
-        assertEquals(manager.getState(), PomodoroState.Off);
+        assertEquals(PomodoroState.Off, manager.getState());
     }
 
     @Test
     public void resetState()  {
         manager.resetState();
-        assertEquals(manager.getState(), PomodoroState.Off);
-        assertEquals(manager.getCheckmarksCounter(), 0);
+        assertEquals(PomodoroState.Off, manager.getState());
+        assertEquals(0, manager.getCheckmarksCounter());
     }
 
     @Test
     public void startCycle()  {
         manager.startCycle();
-        assertEquals(manager.getState(), PomodoroState.Pomodoro);
-        assertEquals(manager.getCheckmarksCounter(), 0);
+        assertEquals(PomodoroState.Pomodoro, manager.getState());
+        assertEquals(0, manager.getCheckmarksCounter());
     }
 
     @Test(expected = RuntimeErrorException.class)
@@ -43,36 +43,36 @@ public class PomodoroManagerTests {
     public void switchToShortBreak()  {
         manager.startCycle();
         manager.nextState();
-        assertEquals(manager.getState(), PomodoroState.ShortBreak);
-        assertEquals(manager.getCheckmarksCounter(), 1);
+        assertEquals(PomodoroState.ShortBreak, manager.getState());
+        assertEquals(1, manager.getCheckmarksCounter());
     }
 
     @Test
     public void switchToNextPomodoro()  {
         manager.startCycle();
         skipState(2);
-        assertEquals(manager.getState(), PomodoroState.Pomodoro);
-        assertEquals(manager.getCheckmarksCounter(), 1);
+        assertEquals(PomodoroState.Pomodoro, manager.getState());
+        assertEquals(1, manager.getCheckmarksCounter());
     }
 
     @Test
     public void switchToLongBreak()  {
         manager.startCycle();
         skipState(7);
-        assertEquals(manager.getState(), PomodoroState.LongBreak);
-        assertEquals(manager.getCheckmarksCounter(), 4);
+        assertEquals(PomodoroState.LongBreak, manager.getState());
+        assertEquals(4, manager.getCheckmarksCounter());
     }
 
     @Test
     public void switchToOffAfterCycle()  {
         manager.startCycle();
         skipState(8);
-        assertEquals(manager.getState(), PomodoroState.Off);
-        assertEquals(manager.getCheckmarksCounter(), 0);
+        assertEquals(PomodoroState.Off, manager.getState());
+        assertEquals(0, manager.getCheckmarksCounter());
     }
 
     @Test(expected = RuntimeErrorException.class)
-    public void throwThenStateOutOfRange()  {
+    public void throwWhenStateOutOfRange()  {
         manager.startCycle();
         skipState(9);
     }
@@ -81,6 +81,6 @@ public class PomodoroManagerTests {
     public void cyclesCounterIncreasedAfterCycle() {
         manager.startCycle();
         skipState(8);
-        assertEquals(manager.getFinishedCyclesCounter(), 1);
+        assertEquals(1, manager.getFinishedCyclesCounter());
     }
 }
