@@ -1,4 +1,4 @@
-﻿// Bevzuk Anton
+// Bevzuk Anton
 include "code/bevzuk-anton"
 project(":code/bevzuk-anton").name = "bevzuk-anton-Model"
 
@@ -42,7 +42,6 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
-
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
@@ -63,10 +62,9 @@ project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 // Ильин Иван
 // Исрафилов Руслан
 // Карчков Денис
-
 include "code/Karchkov-Denis"
 project(":code/Karchkov-Denis").name = "Karchkov-Denis-Model"
-//Кокошников Алексей
+// Кокошников Алексей
 // Колистратова Дарья
 // Кочетов Павел
 include "code/kochetov-pavel"
@@ -97,6 +95,8 @@ project(":code/maloykina-elena").name = "maloykina-elena-Model"
 // Поздеев Антон
 // Пономарев Георгий
 // Пономарев Никита
+include "code/ponomarev-nikita/Model"
+project(":code/ponomarev-nikita/Model").name = "ponomarev-nikita-Model"
 // Редькин Михаил
 // Рыбаков Антон
 // Рыбин Валентин
