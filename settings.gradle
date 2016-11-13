@@ -98,6 +98,8 @@ project(":code/maloykina-elena").name = "maloykina-elena-Model"
 include "code/ponomarev-nikita/Model"
 project(":code/ponomarev-nikita/Model").name = "ponomarev-nikita-Model"
 // Редькин Михаил
+include "code/Redkin-Michail"
+project(":code/Redkin-Michail").name = "Redkin-Michail-Model"
 // Рыбаков Антон
 // Рыбин Валентин
 // Рябинкин Евгений
