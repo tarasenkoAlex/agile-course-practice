@@ -128,7 +128,11 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Степыкин Илья
 // Тарасенко Алексей
 // Тропичева Дарья
+
 // Федосов Александр
+include "code/Fedosov-Alexander"
+project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
+
 // Цыганов Алексей
 // Чугунов Евгений
 // Шадрунов Артем
