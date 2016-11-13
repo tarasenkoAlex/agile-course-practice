@@ -2,14 +2,11 @@ language: java
 sudo: false
 jdk:
   - oraclejdk8
-<<<<<<< 6ba5883bb5731d8bf07c59b451adbcd66808ff74
 before_script:
   - wget http://services.gradle.org/distributions/gradle-3.1-bin.zip
   - unzip gradle-3.1-bin.zip
   - export GRADLE_HOME=$PWD/gradle-3.1
   - export PATH=$GRADLE_HOME/bin:$PATH
-=======
->>>>>>> Added previously removed .travis.yml
 script:
   - TERM=dumb
   - gradle -v
@@ -17,8 +14,4 @@ script:
 after_success:
   - gradle jacocoRootReport coveralls
 notifications:
-<<<<<<< 6ba5883bb5731d8bf07c59b451adbcd66808ff74
   email: false
-=======
-  email: false
->>>>>>> Added previously removed .travis.yml
