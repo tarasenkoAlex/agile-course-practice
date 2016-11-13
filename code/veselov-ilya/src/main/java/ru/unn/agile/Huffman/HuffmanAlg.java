@@ -18,13 +18,9 @@ public class HuffmanAlg {
             return frequency;
         }
 
-        public HTree(final int frequency, final String symbolsInTree) {
+        private HTree(final int frequency, final String symbolsInTree) {
             this.frequency = frequency;
             this.symbolsInTree = symbolsInTree;
-        }
-
-        public String getNodeSymbols() {
-            return symbolsInTree;
         }
 
         public int compareTo(final HTree comparableTree) {
@@ -32,11 +28,11 @@ public class HuffmanAlg {
         }
     }
 
-    private class HNode extends HTree {
+    private final class HNode extends HTree {
         private final HTree left;
         private final HTree right;
 
-        public HNode(final HTree l, final HTree r) {
+        private HNode(final HTree l, final HTree r) {
             super(l.getFrequency() + r.getFrequency(), l.getSymbolsInTree() + r.getSymbolsInTree());
             left = l;
             right = r;
@@ -51,8 +47,8 @@ public class HuffmanAlg {
         }
     }
 
-    private class HLeaf extends HTree {
-        public HLeaf(final int frequency, final char c) {
+    private final class HLeaf extends HTree {
+        private HLeaf(final int frequency, final char c) {
             super(frequency, String.valueOf(c));
         }
     }
@@ -66,19 +62,16 @@ public class HuffmanAlg {
                 nodesMaker.offer(new HLeaf(frequenciesOfSymbols[i], (char) i));
             }
         }
-
         while (nodesMaker.size() > 1) {
             HTree l = nodesMaker.poll();
             HTree r = nodesMaker.poll();
             nodesMaker.offer(new HNode(l, r));
         }
-
         hTree = nodesMaker.poll();
     }
 
     private int[] countingFrequencies(final char[] charArray) {
         int[] frequenciesOfSymbols = new int[ASCII_SIZE];
-
         for (char c : charArray) {
             frequenciesOfSymbols[c]++;
         }
@@ -91,10 +84,15 @@ public class HuffmanAlg {
         }
     }
 
-    public String encodeStringByCurrentHTree(final String stringForEncoding) {
-        if ("".equals(stringForEncoding)) {
-            return "";
+    private void nullInputCheck(final String stringForCheck) {
+        if (stringForCheck == null) {
+            throw new IllegalArgumentException("NULL input! "
+                    + "Use encode/decode methods for string arguments.");
         }
+    }
+
+    public String encodeStringByCurrentHTree(final String stringForEncoding) {
+        nullInputCheck(stringForEncoding);
         builtHTreeCheck();
         String codedString = "";
         char currentCharacterInInputString;
@@ -102,22 +100,19 @@ public class HuffmanAlg {
         for (int i = 0; i < stringForEncoding.length(); ++i) {
             currentCharacterInInputString = stringForEncoding.charAt(i);
             HTree currentNode = hTree;
-
-            if (!currentNode.getNodeSymbols()
+            if (!currentNode.getSymbolsInTree()
                     .contains(String.valueOf(currentCharacterInInputString))) {
                 throw new IllegalArgumentException("Any characters "
                         + "in input string"
                         + " hasn't been used for HTree building!");
             }
-
             if (hTree instanceof HLeaf) {
                 codedString += '1';
             }
-
             while (currentNode instanceof HNode) {
                 if (((HNode) currentNode)
                         .getLeftTree()
-                        .getNodeSymbols()
+                        .getSymbolsInTree()
                         .contains(String.valueOf(currentCharacterInInputString))) {
                     currentNode = ((HNode) currentNode).getLeftTree();
                     codedString += '0';
@@ -131,20 +126,13 @@ public class HuffmanAlg {
     }
 
     public String encodeString(final String stringForEncoding) {
-        if (stringForEncoding == null) {
-            return null;
-        }
+        nullInputCheck(stringForEncoding);
         buildTree(stringForEncoding);
         return encodeStringByCurrentHTree(stringForEncoding);
     }
 
     public String decodeBinarySequenceByCurrentHTree(final String stringForDecoding) {
-        if (stringForDecoding == null) {
-            return null;
-        }
-        if ("".equals(stringForDecoding)) {
-            return "";
-        }
+        nullInputCheck(stringForDecoding);
         builtHTreeCheck();
         String decodedString = "";
         HTree currentNode = hTree;
@@ -154,31 +142,25 @@ public class HuffmanAlg {
             currentCharacterInInputString = stringForDecoding.charAt(i);
 
             if (currentNode instanceof  HTree) {
-
                 if (currentCharacterInInputString == '0') {
                     currentNode = ((HNode) currentNode).getLeftTree();
                 }
-
                 if (currentCharacterInInputString == '1') {
                     currentNode = ((HNode) currentNode).getRightTree();
                 }
-
                 if (currentCharacterInInputString != '0' && currentCharacterInInputString != '1') {
                     throw new IllegalArgumentException("Decoding input string must contain"
                             + " only '1' or '0' symbols!");
                 }
             }
-
             if (currentNode instanceof  HLeaf) {
-                decodedString += currentNode.getNodeSymbols();
+                decodedString += currentNode.getSymbolsInTree();
                 currentNode = hTree;
             }
         }
-
         if (!currentNode.equals(hTree)) {
             throw new IllegalArgumentException("Incorrect binary sequence for current HTree!");
         }
-
         return decodedString;
     }
 }

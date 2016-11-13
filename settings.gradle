@@ -47,15 +47,25 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
+<<<<<<< HEAD
 // Tarasenko Alex
 include "code/tarasenko-alex"
 project(":code/tarasenko-alex").name = "tarasenko-alex"
+=======
+
+>>>>>>> Commit uncommited
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
 // Бабинцева Анна
 // Быкадоров Роман
 // Веселов Илья
+<<<<<<< HEAD
+=======
+include "code/veselov-ilya"
+project(":code/veselov-ilya").name = "veselov-ilya-lab1-Model"
+
+>>>>>>> Commit uncommited
 // Волков Денис
 // Воронин Дмитрий
 // Грошева Людмила
@@ -63,17 +73,23 @@ include "code/grosheva-ludmila"
 project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 
 // Добролюбова Евгения
+<<<<<<< HEAD
 include "code/dobroliubova-evgeniia"
 project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
+=======
+>>>>>>> Commit uncommited
 // Евтюшин Валерий
 // Еланов Артем
 // Зайдуллова Алина
 // Зырин Илья
 // Ильин Иван
 // Исрафилов Руслан
+<<<<<<< HEAD
 include "code/israfilov-ruslan"
 project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
 
+=======
+>>>>>>> Commit uncommited
 // Карчков Денис
 // Кокошников Алексей
 // Колистратова Дарья
@@ -89,6 +105,7 @@ project(":code/kudriavtsev-nikita").name = "kudriavtsev-nikita-lab1-Model"
 // Ларин Антон
 include "code/larin-anton"
 project(":code/larin-anton").name = "larin-anton-Model"
+<<<<<<< HEAD
 
 // Лачинов Дмитрий
 // Луковников Илья
@@ -124,6 +141,8 @@ project(":code/sirotin-nikita").name = "sirotin-nikita-Model"
 // Скребков Артём
 include "code/skrebkov-artem"
 project(":code/skrebkov-artem").name = "skrebkov-artem-Model"
+=======
+>>>>>>> Commit uncommited
 
 // Соврасов Владислав
 include "code/sovrasov-vlad"
@@ -150,9 +169,13 @@ project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
 // Ширяева Вера
 // Шишкин Владислав
 // Шочин Александр
+<<<<<<< HEAD
 include "code/shochin-alexandr"
 project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
 // Шургалин Петр
 include "code/shurgalin-pyotr"
 project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
 
+=======
+// Шургалин Петр
+>>>>>>> Commit uncommited
