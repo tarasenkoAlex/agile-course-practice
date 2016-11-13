@@ -42,8 +42,6 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
-<<<<<<< c1c05b64b3bd12b658ef6f624f1f2343473a5e26
-
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
@@ -120,9 +118,3 @@ project(":code/Fedosov-Alexander").name = "Fedosov-Alexander"
 // Шишкин Владислав
 // Шочин Александр
 // Шургалин Петр
-
-=======
-// Fedosov Alexander
-include "code/Fedosov-Alexander"
-project(":code/Fedosov-Alexander").name = "Fedosov-Alexander"
->>>>>>> Added implementation for 1st lab
