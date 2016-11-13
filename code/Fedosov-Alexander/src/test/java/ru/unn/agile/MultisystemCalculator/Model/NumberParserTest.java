@@ -12,61 +12,61 @@ public class NumberParserTest {
     @Test
     public void testThatCanParsePositiveBinary() {
         int number = NumberParser.parseNumber("0b1111");
-        assertEquals(number, 15);
+        assertEquals(15, number);
     }
 
     @Test
     public void testThatCanParseNegativeBinary() {
         int number = NumberParser.parseNumber("0b-1111");
-        assertEquals(number, -15);
+        assertEquals(-15, number);
     }
 
     @Test
     public void testThatCanParsePositiveOctal() {
         int number = NumberParser.parseNumber("0o10");
-        assertEquals(number, 8);
+        assertEquals(8, number);
     }
 
     @Test
     public void testThatCanParseNegativeOctal() {
         int number = NumberParser.parseNumber("0o-10");
-        assertEquals(number, -8);
+        assertEquals(-8, number);
     }
 
     @Test
     public void testThatCanParsePositiveHexadecimal() {
         int number = NumberParser.parseNumber("0xABCDEF");
-        assertEquals(number, 11259375);
+        assertEquals(11259375, number);
     }
 
     @Test
     public void testThatCanParseNegativeHexadecimal() {
         int number = NumberParser.parseNumber("0x-ABCDEF");
-        assertEquals(number, -11259375);
+        assertEquals(-11259375, number);
     }
 
     @Test
     public void testThatCanParseMinimalNegativeHexadecimal() {
         int number = NumberParser.parseNumber("0x-7FFFFFFF");
-        assertEquals(number, -Integer.MAX_VALUE);
+        assertEquals(-Integer.MAX_VALUE, number);
     }
 
     @Test
     public void testThatCanParseMaximalPositiveHexadecimal() {
         int number = NumberParser.parseNumber("0x7FFFFFFF");
-        assertEquals(number, Integer.MAX_VALUE);
+        assertEquals(Integer.MAX_VALUE, number);
     }
 
     @Test
     public void testThatCanParseMinimalNegativeOctal() {
         int number = NumberParser.parseNumber("0o-17777777777");
-        assertEquals(number, -Integer.MAX_VALUE);
+        assertEquals(-Integer.MAX_VALUE, number);
     }
 
     @Test
     public void testThatCanParseMaximalPositiveOctal() {
         int number = NumberParser.parseNumber("0o17777777777");
-        assertEquals(number, Integer.MAX_VALUE);
+        assertEquals(Integer.MAX_VALUE, number);
     }
 
     @Test(expected = IllegalArgumentException.class)
