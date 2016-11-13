@@ -63,10 +63,10 @@ project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 // Ильин Иван
 // Исрафилов Руслан
 // Карчков Денис
-//
+
 include "code/Karchkov-Denis"
 project(":code/Karchkov-Denis").name = "Karchkov-Denis-Model"
-Кокошников Алексей
+//Кокошников Алексей
 // Колистратова Дарья
 // Кочетов Павел
 include "code/kochetov-pavel"
