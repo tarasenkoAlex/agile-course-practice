@@ -1,5 +1,6 @@
 package ru.unn.agile.todoapp.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -33,5 +34,11 @@ public class Task {
 
     public void markAsDone() {
         isDoneFlag = true;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return description + ", " + dateFormat.format(dueDate);
     }
 }
