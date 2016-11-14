@@ -1,7 +1,3 @@
-/**
- * Created by Yevtyushin Valery on 13.11.2016.
- */
-
 import java.security.InvalidParameterException;
 
 public class Mortrage {
