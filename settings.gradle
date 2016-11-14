@@ -122,6 +122,9 @@ project(":code/ryabinkin-evgeni").name = "ryabinkin-evgeni-Model"
 include "code/sirotin-nikita"
 project(":code/sirotin-nikita").name = "sirotin-nikita-Model"
 // Скребков Артём
+include "code/skrebkov-artem"
+project(":code/skrebkov-artem").name = "skrebkov-artem-Model"
+
 // Соврасов Владислав
 include "code/sovrasov-vlad"
 project(":code/sovrasov-vlad").name = "sovrasov-vlad"
@@ -152,3 +155,4 @@ project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
 // Шургалин Петр
 include "code/shurgalin-pyotr"
 project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
+
