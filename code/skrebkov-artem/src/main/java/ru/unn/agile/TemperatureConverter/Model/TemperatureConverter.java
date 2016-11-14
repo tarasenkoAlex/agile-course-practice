@@ -4,11 +4,41 @@ public final class TemperatureConverter {
     public static double convert(final double degrees,
                                  final TemperatureScale sourceScale,
                                  final TemperatureScale destinationScale) {
-        double sourceDegrees = (degrees - sourceScale.getCelsiusShift()) / sourceScale.getFactor();
+        if (isLowerThanAbsoluteZero(degrees, sourceScale)) {
+            String message = "Cannot convert temperature lower than absolute zero!";
+            throw new IllegalArgumentException(message);
+        }
+        double source = (degrees - sourceScale.getCelsiusShift()) / sourceScale.getFactor();
 
-        return sourceDegrees * destinationScale.getFactor() + destinationScale.getCelsiusShift();
+        return source * destinationScale.getFactor() + destinationScale.getCelsiusShift();
     }
 
     private TemperatureConverter() {
     }
+
+    private static boolean isLowerThanAbsoluteZero(double degrees, TemperatureScale scale) {
+        switch (scale) {
+            case CELSIUS:
+                if (degrees < AbsoluteZero.CELSIUS) {
+                    return true;
+                }
+                break;
+            case KELVIN:
+                if (degrees < AbsoluteZero.KELVIN) {
+                    return true;
+                }
+                break;
+            case FAHRENHEIT:
+                if (degrees < AbsoluteZero.FAHRENHEIT) {
+                    return true;
+                }
+            case NEWTON:
+                if (degrees < AbsoluteZero.NEWTON) {
+                    return true;
+                }
+        }
+
+        return false;
+    }
 }
+

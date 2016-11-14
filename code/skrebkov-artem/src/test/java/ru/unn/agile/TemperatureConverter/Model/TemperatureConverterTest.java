@@ -44,7 +44,6 @@ public class TemperatureConverterTest {
         this.destination = destination;
         this.sourceScale = sourceScale;
         this.destinationScale = destinationScale;
-
     }
 
     @Test
