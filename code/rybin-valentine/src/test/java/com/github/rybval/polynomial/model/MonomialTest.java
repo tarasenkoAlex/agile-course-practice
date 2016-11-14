@@ -146,6 +146,14 @@ public class MonomialTest {
     }
 
     @Test
+    public void isDifferentMonomialsWithSamePowerCompareCorrect() {
+        Monomial monomial1 = new Monomial(POWER, 5.4);
+        Monomial monomial2 = new Monomial(POWER, 3.2);
+
+        assertNotEquals(monomial1, monomial2);
+    }
+
+    @Test
     public void isCompareMonomialWithNullCorrect() {
         Monomial monomial1 = new Monomial(POWER, COEFFICIENT);
         Monomial monomial2 = null;
