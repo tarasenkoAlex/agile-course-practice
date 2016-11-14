@@ -14,7 +14,7 @@ public class WhenCalculatingMortrage {
     private final double summ = 10000;
     private final double month = 12;
     private final double percents = 20;
-    private final double difference = 0.4;
+    private final double difference = 0.5;
 
     @Test
     public void reallyCreateMortrageDeal() {
@@ -23,7 +23,7 @@ public class WhenCalculatingMortrage {
     }
 
     @Test(expected = InvalidParameterException.class)
-    public void createBadEqualOfDays() {
+    public void createBadEqualOfMonth() {
         Mortrage mortrage = new Mortrage(summ, -month, percents);
     }
 
