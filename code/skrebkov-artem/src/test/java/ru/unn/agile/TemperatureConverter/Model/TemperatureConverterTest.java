@@ -53,3 +53,4 @@ public class TemperatureConverterTest {
         assertEquals(destination, converted, DELTA);
     }
 }
+
