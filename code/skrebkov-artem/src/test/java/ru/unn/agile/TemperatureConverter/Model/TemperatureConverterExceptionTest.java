@@ -26,7 +26,7 @@ public class TemperatureConverterExceptionTest {
     private final TemperatureScale sourceScale;
 
     public TemperatureConverterExceptionTest(final double source,
-                                    final TemperatureScale sourceScale) {
+                                             final TemperatureScale sourceScale) {
         this.source = source;
         this.sourceScale = sourceScale;
     }

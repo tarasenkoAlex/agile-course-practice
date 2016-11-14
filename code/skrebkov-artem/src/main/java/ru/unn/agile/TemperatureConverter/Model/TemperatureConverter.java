@@ -16,7 +16,8 @@ public final class TemperatureConverter {
     private TemperatureConverter() {
     }
 
-    private static boolean isLowerThanAbsoluteZero(double degrees, TemperatureScale scale) {
+    private static boolean isLowerThanAbsoluteZero(final double degrees,
+                                                   final TemperatureScale scale) {
         switch (scale) {
             case CELSIUS:
                 if (degrees < AbsoluteZero.CELSIUS) {
@@ -36,6 +37,8 @@ public final class TemperatureConverter {
                 if (degrees < AbsoluteZero.NEWTON) {
                     return true;
                 }
+            default:
+                return false;
         }
 
         return false;
