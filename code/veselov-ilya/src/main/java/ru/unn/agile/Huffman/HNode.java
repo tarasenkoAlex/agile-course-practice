@@ -17,4 +17,8 @@ public final class HNode extends HTree {
     public HTree getRightTree() {
         return right;
     }
+
+    public boolean leftTreeContains(final char c) {
+        return left.contains(c);
+    }
 }

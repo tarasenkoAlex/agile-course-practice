@@ -18,7 +18,7 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
     @Test
     public void emptyStrEncodeGivesEmptyStrWithCurrentTree() {
         huffmanAlg.encodeString(INIT_STR);
-        assertAddReturnsEncode("", "");
+        assertEncodeOutput("", "");
     }
 
     @Test
@@ -35,13 +35,13 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
     @Test
     public void symbolAGivesCorrectCodeWithCurrentTree() {
         huffmanAlg.encodeString(INIT_STR);
-        assertAddReturnsEncode("010", "a");
+        assertEncodeOutput("010", "a");
     }
 
     @Test
     public void encodeStrAndEncodeStrByCurrentTreeGiveSameResults() {
         huffmanAlg.encodeString(INIT_STR);
-        assertAddReturnsEncode(huffmanAlg.encodeString(INIT_STR), INIT_STR);
+        assertEncodeOutput(huffmanAlg.encodeString(INIT_STR), INIT_STR);
     }
 
     @Test
@@ -76,22 +76,23 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
                     + " hasn't been used for HTree building!"));
         }
     }
+
     @Test
     public void emptyStrDecodeGivesEmptyWithCurrentTree() {
         huffmanAlg.encodeString(INIT_STR);
-        assertAddReturnsDecode("", "");
+        assertDecodeOutput("", "");
     }
 
     @Test
     public void codeForBGivesBWithCurrentTree() {
         huffmanAlg.encodeString(INIT_STR);
-        assertAddReturnsDecode("b", "011");
+        assertDecodeOutput("b", "011");
     }
 
     @Test
     public void codeForAllCharsGivesCorrectCharsWithCurrentTree() {
         huffmanAlg.encodeString(INIT_STR);
-        assertAddReturnsDecode("abcde", "010011001011");
+        assertDecodeOutput("abcde", "010011001011");
     }
 
     @Test
@@ -108,7 +109,7 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
     @Test
     public void decodeCodeOfInitStrGivesInitStrWithCurrentTree() {
         huffmanAlg.encodeString(INIT_STR);
-        assertAddReturnsDecode(INIT_STR, huffmanAlg.encodeString(INIT_STR));
+        assertDecodeOutput(INIT_STR, huffmanAlg.encodeString(INIT_STR));
     }
 
     @Test
@@ -142,11 +143,11 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
         }
     }
 
-    private void assertAddReturnsEncode(final String expected, final String input) {
+    private void assertEncodeOutput(final String expected, final String input) {
         assertEquals(expected, huffmanAlg.encodeStringByCurrentHTree(input));
     }
 
-    private void assertAddReturnsDecode(final String expected, final String input) {
+    private void assertDecodeOutput(final String expected, final String input) {
         assertEquals(expected, huffmanAlg.decodeBinarySequenceByCurrentHTree(input));
     }
 }

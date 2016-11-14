@@ -15,6 +15,7 @@ public class WhenEncodeString {
     }
 
     @Test
+<<<<<<< HEAD
     public void emptyStringGivesEmpty() {
         assertAddReturns("", "");
     }
@@ -32,6 +33,25 @@ public class WhenEncodeString {
     @Test
     public void fiveSymbolsStringWithDifferentFrequenciesGivesCheckedByMyselfResult() {
         assertAddReturns("010011011000000101010101111111111", "abbcccddddeeeee");
+=======
+    public void emptyStrGivesEmpty() {
+        assertEncodeOutput("", "");
+    }
+
+    @Test
+    public void oneSymbolStrGivesZero() {
+        assertEncodeOutput("1", "a");
+    }
+
+    @Test
+    public void twoSymbolsStrGivesOneBitSymbolCode() {
+        assertEncodeOutput("01101", "abbab");
+    }
+
+    @Test
+    public void fiveCharsStrWithDifferentFreqsGivesCorrectResult() {
+        assertEncodeOutput("010011011000000101010101111111111", "abbcccddddeeeee");
+>>>>>>> Fixed mistakes for qwert182
     }
 
     @Test
@@ -44,7 +64,7 @@ public class WhenEncodeString {
         }
     }
 
-    private void assertAddReturns(final String expected, final String input) {
+    private void assertEncodeOutput(final String expected, final String input) {
         assertEquals(expected, huffmanAlg.encodeString(input));
     }
 }

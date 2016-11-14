@@ -17,6 +17,10 @@ public class HTree implements Comparable<HTree> {
         this.symbolsInTree = symbolsInTree;
     }
 
+    public boolean contains(final char c) {
+        return symbolsInTree.contains(String.valueOf(c));
+    }
+
     public int compareTo(final HTree comparableTree) {
         return frequency - comparableTree.frequency;
     }

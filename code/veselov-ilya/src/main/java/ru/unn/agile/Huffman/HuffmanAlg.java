@@ -23,6 +23,7 @@ public class HuffmanAlg {
         hTree = nodesMaker.poll();
     }
 
+
     private int[] countingFrequencies(final char[] charArray) {
         int[] frequenciesOfSymbols = new int[ASCII_SIZE];
         for (char c : charArray) {
@@ -53,8 +54,7 @@ public class HuffmanAlg {
         for (int i = 0; i < stringForEncoding.length(); ++i) {
             currentCharacterInInputString = stringForEncoding.charAt(i);
             HTree currentNode = hTree;
-            if (!currentNode.getSymbolsInTree()
-                    .contains(String.valueOf(currentCharacterInInputString))) {
+            if (!currentNode.contains(currentCharacterInInputString)) {
                 throw new IllegalArgumentException("Any characters "
                         + "in input string"
                         + " hasn't been used for HTree building!");
@@ -63,10 +63,7 @@ public class HuffmanAlg {
                 codedString += '1';
             }
             while (currentNode instanceof HNode) {
-                if (((HNode) currentNode)
-                        .getLeftTree()
-                        .getSymbolsInTree()
-                        .contains(String.valueOf(currentCharacterInInputString))) {
+                if (((HNode) currentNode).leftTreeContains(currentCharacterInInputString)) {
                     currentNode = ((HNode) currentNode).getLeftTree();
                     codedString += '0';
                 } else {
@@ -96,19 +93,17 @@ public class HuffmanAlg {
 
         for (int i = 0; i < stringForDecoding.length(); ++i) {
             currentCharacterInInputString = stringForDecoding.charAt(i);
-
-            if (currentNode instanceof  HTree) {
-                if (currentCharacterInInputString == '0') {
-                    currentNode = ((HNode) currentNode).getLeftTree();
+                switch (currentCharacterInInputString) {
+                    case '0':
+                        currentNode = ((HNode) currentNode).getLeftTree();
+                        break;
+                    case '1':
+                        currentNode = ((HNode) currentNode).getRightTree();
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Decoding input string must contain"
+                                + " only '1' or '0' symbols!");
                 }
-                if (currentCharacterInInputString == '1') {
-                    currentNode = ((HNode) currentNode).getRightTree();
-                }
-                if (currentCharacterInInputString != '0' && currentCharacterInInputString != '1') {
-                    throw new IllegalArgumentException("Decoding input string must contain"
-                            + " only '1' or '0' symbols!");
-                }
-            }
             if (currentNode instanceof  HLeaf) {
                 decodedString += currentNode.getSymbolsInTree();
                 currentNode = hTree;
