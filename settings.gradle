@@ -99,6 +99,7 @@ project(":code/maloykina-elena").name = "maloykina-elena-Model"
 // Рыбин Валентин
 include "code/rybin-valentine"
 project(":code/rybin-valentine").name = "rybin-valentine-polynomial"
+
 // Рябинкин Евгений
 include "code/ryabinkin-evgeni"
 project(":code/ryabinkin-evgeni").name = "ryabinkin-evgeni-Model"
