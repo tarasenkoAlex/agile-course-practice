@@ -2,7 +2,7 @@ package ru.unn.agile.SolvingQuadraticEquation.Model;
 
 public class SolvingQuadraticEquation {
     private static final double EPS = 0.001;
-    private static final double DETERMINANT_COEFFICIENT = 4;
+    private static final double DISCRIMINANT_COEFFICIENT = 4;
 
     private double[] notQuadratic(final double b, final double c) {
         double[] result = new double[0];
@@ -27,19 +27,17 @@ public class SolvingQuadraticEquation {
             return result;
         }
 
-        double d = b * b - DETERMINANT_COEFFICIENT * a * c;
+        double discriminant = b * b - DISCRIMINANT_COEFFICIENT * a * c;
 
-        if (Math.abs(d) < EPS) {
+        if (Math.abs(discriminant) < EPS) {
             result = new double[]{-b / (2 * a)};
         }
 
-        if (d > EPS) {
+        if (discriminant > EPS) {
             result = new double[2];
 
-            d = Math.sqrt(d);
-
-            result[0] = (-b + d) / (2 * a);
-            result[1] = (-b - d) / (2 * a);
+            result[0] = (-b + Math.sqrt(discriminant)) / (2 * a);
+            result[1] = (-b - Math.sqrt(discriminant)) / (2 * a);
         }
 
         return result;
