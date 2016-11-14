@@ -3,9 +3,6 @@ package ru.unn.agile.TreeSort.Model;
 import java.util.Collection;
 import java.util.LinkedList;
 
-/**
- * Created by Pavel on 13.11.16.
- */
 public class Tree {
     private final Integer keyValue;
     private Tree leftTree;

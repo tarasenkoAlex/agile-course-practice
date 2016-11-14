@@ -13,41 +13,36 @@ public class TreeSortTest {
         TreeSort sort = new TreeSort();
         Collection<Integer> inputCollection = new ArrayList<Integer>();
         Collection<Integer> outputCollection = sort.sort(inputCollection);
-        assertNotNull("Output collection is null", outputCollection);
-        assertEquals("Output collection should be empty", 0, outputCollection.size());
+        assertNotNull(outputCollection);
+        assertEquals(0, outputCollection.size());
     }
 
     @Test
     public void testSortCollectionWithSingleElement() {
         TreeSort sort = new TreeSort();
         Collection<Integer> inputCollection = new ArrayList<Integer>();
-        Integer testValue0 = 1;
-        inputCollection.add(testValue0);
+        inputCollection.add(1);
 
         Collection<Integer> outputCollection = sort.sort(inputCollection);
 
-        assertNotNull("Output collection is null", outputCollection);
-        assertEquals("Output collection should have size equals to input collection",
-                inputCollection.size(), outputCollection.size());
-        assertEquals("Output collection should have the same element as in input collection",
-                testValue0, outputCollection.iterator().next());
+        assertNotNull(outputCollection);
+        assertEquals(inputCollection.size(), outputCollection.size());
+        assertEquals(Integer.valueOf(1), outputCollection.iterator().next());
     }
 
     @Test
     public void testSortCollectionWithEqualsElements() {
         TreeSort sort = new TreeSort();
         Collection<Integer> inputCollection = new ArrayList<Integer>();
-        Integer testValue0 = 1;
-        inputCollection.add(testValue0);
-        inputCollection.add(testValue0);
-        inputCollection.add(testValue0);
+        inputCollection.add(10);
+        inputCollection.add(10);
+        inputCollection.add(10);
 
         Collection<Integer> outputCollection = sort.sort(inputCollection);
-        assertNotNull("Output collection is null", outputCollection);
-        assertEquals("Output collection should have size equals to input collection",
-                inputCollection.size(), outputCollection.size());
+        assertNotNull(outputCollection);
+        assertEquals(inputCollection.size(), outputCollection.size());
         for (Integer val : outputCollection) {
-            assertEquals("Output collection should not change values", testValue0, val);
+            assertEquals(Integer.valueOf(10), val);
         }
     }
 
@@ -62,14 +57,13 @@ public class TreeSortTest {
 
         Collection<Integer> outputCollection = sort.sort(inputCollection);
 
-        assertNotNull("Output collection is null", outputCollection);
-        assertEquals("Output collection should have size equals to input collection",
-                inputCollection.size(), outputCollection.size());
+        assertNotNull(outputCollection);
+        assertEquals(inputCollection.size(), outputCollection.size());
 
         Iterator<Integer> it = outputCollection.iterator();
-        assertEquals("Element 0 must be equal to (0)", Integer.valueOf(0), it.next());
-        assertEquals("Element 1 must be equal to (10)", Integer.valueOf(10), it.next());
-        assertEquals("Element 2 must be equal to (20)", Integer.valueOf(20), it.next());
-        assertEquals("Element 3 must be equal to (30)", Integer.valueOf(30), it.next());
+        assertEquals(Integer.valueOf(0), it.next());
+        assertEquals(Integer.valueOf(10), it.next());
+        assertEquals(Integer.valueOf(20), it.next());
+        assertEquals(Integer.valueOf(30), it.next());
     }
 }
