@@ -1,4 +1,4 @@
-package ru.unn.agile.TreeSort.Model;
+package ru.unn.agile.treesort.model;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

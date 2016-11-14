@@ -1,4 +1,4 @@
-package ru.unn.agile.TreeSort.Model;
+package ru.unn.agile.treesort.model;
 
 import java.util.Collection;
 import java.util.LinkedList;
