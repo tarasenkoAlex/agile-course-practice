@@ -7,18 +7,18 @@ public enum TemperatureScale {
     NEWTON(0.33, 0.0);
 
     private final double factor;
-    private final double shift;
+    private final double celsiusShift;
 
-    TemperatureScale(final double factor, final double shift) {
+    TemperatureScale(final double factor, final double celsiusShift) {
         this.factor = factor;
-        this.shift = shift;
+        this.celsiusShift = celsiusShift;
     }
 
     public double getFactor() {
         return factor;
     }
-    public double getShift() {
 
-        return shift;
+    public double getCelsiusShift() {
+        return celsiusShift;
     }
 }
