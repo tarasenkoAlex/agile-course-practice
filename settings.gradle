@@ -47,12 +47,9 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
-<<<<<<< HEAD
 // Tarasenko Alex
 include "code/tarasenko-alex"
 project(":code/tarasenko-alex").name = "tarasenko-alex"
-=======
->>>>>>> Correcting settings.gradle file
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
@@ -71,7 +68,6 @@ project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
 // Евтюшин Валерий
 include "code/Yevtyushin-Valery"
 project(":code/Yevtyushin-Valery").name = "YevtyushinValery-tdd-lab1"
-
 // Еланов Артем
 // Зайдуллова Алина
 // Зырин Илья
@@ -145,11 +141,6 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 include "code/tarasenko-alex"
 project(":code/tarasenko-alex").name = "tarasenko-alex"
 // Тропичева Дарья
-<<<<<<< HEAD
-=======
-include "code/Tropicheva-Darya"
-project(":code/Tropicheva-Darya").name = "Tropicheva-Darya"
->>>>>>> Correcting settings.gradle file #2
 
 // Федосов Александр
 include "code/Fedosov-Alexander"
@@ -165,12 +156,4 @@ include "code/shochin-alexandr"
 project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
 // Шургалин Петр
 include "code/shurgalin-pyotr"
-<<<<<<< HEAD
 project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
-<<<<<<< HEAD
-=======
-
->>>>>>> Correcting settings.gradle file
-=======
-project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
->>>>>>> Correcting settings.gradle file #2
