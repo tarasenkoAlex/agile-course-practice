@@ -6,53 +6,6 @@ public class HuffmanAlg {
     private HTree hTree = null;
     private static final int ASCII_SIZE = 256;
 
-    private class HTree implements Comparable<HTree> {
-        private final String symbolsInTree;
-        private final int frequency;
-
-        protected String getSymbolsInTree() {
-            return symbolsInTree;
-        }
-
-        protected int getFrequency() {
-            return frequency;
-        }
-
-        private HTree(final int frequency, final String symbolsInTree) {
-            this.frequency = frequency;
-            this.symbolsInTree = symbolsInTree;
-        }
-
-        public int compareTo(final HTree comparableTree) {
-            return frequency - comparableTree.frequency;
-        }
-    }
-
-    private final class HNode extends HTree {
-        private final HTree left;
-        private final HTree right;
-
-        private HNode(final HTree l, final HTree r) {
-            super(l.getFrequency() + r.getFrequency(), l.getSymbolsInTree() + r.getSymbolsInTree());
-            left = l;
-            right = r;
-        }
-
-        public HTree getLeftTree() {
-            return left;
-        }
-
-        public HTree getRightTree() {
-            return right;
-        }
-    }
-
-    private final class HLeaf extends HTree {
-        private HLeaf(final int frequency, final char c) {
-            super(frequency, String.valueOf(c));
-        }
-    }
-
     private void buildTree(final String stringForBuilding) {
         PriorityQueue<HTree> nodesMaker = new PriorityQueue<HTree>();
         int[] frequenciesOfSymbols = countingFrequencies(stringForBuilding.toCharArray());
@@ -127,6 +80,9 @@ public class HuffmanAlg {
 
     public String encodeString(final String stringForEncoding) {
         nullInputCheck(stringForEncoding);
+        if (stringForEncoding == "") {
+            return "";
+        }
         buildTree(stringForEncoding);
         return encodeStringByCurrentHTree(stringForEncoding);
     }

@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
 
 public class WhenEncodeString {
     private HuffmanAlg huffmanAlg;
@@ -33,11 +35,14 @@ public class WhenEncodeString {
     }
 
     @Test
-    public void nullInputGivesNull() {
-        assertAddReturns(null, null);
+    public void nullInputGivesException() {
+        try {
+            huffmanAlg.encodeString(null);
+        } catch (IllegalArgumentException caughtException) {
+            assertThat(caughtException.getMessage(), is("NULL input! "
+                    + "Use encode/decode methods for string arguments."));
+        }
     }
-
-
 
     private void assertAddReturns(final String expected, final String input) {
         assertEquals(expected, huffmanAlg.encodeString(input));
