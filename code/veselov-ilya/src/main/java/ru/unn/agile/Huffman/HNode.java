@@ -1,24 +1,25 @@
 package ru.unn.agile.Huffman;
 
 public final class HNode extends HTree {
-    private final HTree left;
-    private final HTree right;
+    private final HTree leftNode;
+    private final HTree rightNode;
 
-    public HNode(final HTree l, final HTree r) {
-        super(l.getFrequency() + r.getFrequency(), l.getSymbolsInTree() + r.getSymbolsInTree());
-        left = l;
-        right = r;
+    public HNode(final HTree lNode, final HTree rNode) {
+        super(lNode.getFrequency() + rNode.getFrequency(),
+                lNode.getSymbolsInTree() + rNode.getSymbolsInTree());
+        leftNode = lNode;
+        rightNode = rNode;
     }
 
     public HTree getLeftTree() {
-        return left;
+        return leftNode;
     }
 
     public HTree getRightTree() {
-        return right;
+        return rightNode;
     }
 
     public boolean leftTreeContains(final char c) {
-        return left.contains(c);
+        return leftNode.contains(c);
     }
 }

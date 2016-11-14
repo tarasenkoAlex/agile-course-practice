@@ -85,11 +85,17 @@ project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
 // Ильин Иван
 // Исрафилов Руслан
 <<<<<<< HEAD
+<<<<<<< HEAD
 include "code/israfilov-ruslan"
 project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
 
 =======
 >>>>>>> Commit uncommited
+=======
+include "code/israfilov-ruslan"
+project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
+
+>>>>>>> No single symbol variables
 // Карчков Денис
 // Кокошников Алексей
 // Колистратова Дарья
@@ -141,8 +147,11 @@ project(":code/sirotin-nikita").name = "sirotin-nikita-Model"
 // Скребков Артём
 include "code/skrebkov-artem"
 project(":code/skrebkov-artem").name = "skrebkov-artem-Model"
+<<<<<<< HEAD
 =======
 >>>>>>> Commit uncommited
+=======
+>>>>>>> No single symbol variables
 
 // Соврасов Владислав
 include "code/sovrasov-vlad"
@@ -176,6 +185,9 @@ project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
 include "code/shurgalin-pyotr"
 project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
 
+<<<<<<< HEAD
 =======
 // Шургалин Петр
 >>>>>>> Commit uncommited
+=======
+>>>>>>> No single symbol variables
