@@ -171,4 +171,23 @@ public class Polynomial {
     public Monomial getMonomialWithMaxDegree() {
         return monomials.get(this.getDegree());
     }
+
+    public Polynomial div(final Polynomial divider) {
+        if (divider.monomials.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (divider.getDegree() > this.getDegree()) {
+            return new Polynomial();
+        } else {
+            Polynomial quotient = new Polynomial();
+            Polynomial divident = this.clone();
+            Monomial quotientPart;
+            while (divider.getDegree() <= divident.getDegree()) {
+                quotientPart = divident.getMonomialWithMaxDegree()
+                                   .divide(divider.getMonomialWithMaxDegree());
+                quotient = quotient.add(quotientPart);
+                divident = divident.subtract(divider.multiply(quotientPart));
+            }
+            return quotient;
+        }
+    }
 }

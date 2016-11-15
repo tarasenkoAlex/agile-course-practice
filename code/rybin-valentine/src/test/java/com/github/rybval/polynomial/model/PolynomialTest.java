@@ -196,6 +196,44 @@ public class PolynomialTest {
         assertEquals(30, value, Double.MIN_VALUE);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void cantDivideByZeroPolynomial() {
+        Polynomial divident = Polynomial.fromString("x - 3*x^2 - 5*x^3");
+        Polynomial zeroPolynomial = Polynomial.fromString("0");
+
+        Polynomial quotient = divident.div(zeroPolynomial);
+    }
+
+    @Test
+    public void isDivisionByPolynomialWithUpperDegreeCorrect() {
+        Polynomial divident = Polynomial.fromString("1 + x - 5*x^2");
+        Polynomial divider = Polynomial.fromString("x - 3*x^2 - 5*x^3");
+
+        Polynomial quotient = divident.div(divider);
+
+        assertEquals(Polynomial.fromString("0"), quotient);
+    }
+
+    @Test
+    public void isDivisionByPolynomialWithSameDegreeCorrect() {
+        Polynomial divident = Polynomial.fromString("4*x^2 + 2*x - 2");
+        Polynomial divider = Polynomial.fromString("2*x^2 + x - 1");
+
+        Polynomial quotient = divident.div(divider);
+
+        assertEquals(Polynomial.fromString("2"), quotient);
+    }
+
+    @Test
+    public void isDivisionByPolynomialWithLowerDegreeCorrect() {
+        Polynomial divident = Polynomial.fromString("4*x^4 + 4*x^3 - 3*x^2 - 2*x + 1");
+        Polynomial divider = Polynomial.fromString("2*x^2 + x - 1");
+
+        Polynomial quotient = divident.div(divider);
+
+        assertEquals(Polynomial.fromString("2*x^2 + x - 1"), quotient);
+    }
+
     @Test
     public void canPresentZeroPolynomialAsString() {
         assertEquals("0", Polynomial.fromString("0").toString());
