@@ -36,10 +36,6 @@ public class TreeTest {
     @Test
     public void testInsertLessAndGreat() {
         Tree tree = new Tree(20);
-        assertEquals(Integer.valueOf(20), tree.getKey());
-
-        assertNull(tree.getLeft());
-        assertNull(tree.getRight());
 
         tree.insert(10);
         tree.insert(30);
