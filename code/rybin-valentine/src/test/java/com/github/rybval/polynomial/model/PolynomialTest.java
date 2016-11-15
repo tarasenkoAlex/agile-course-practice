@@ -227,4 +227,10 @@ public class PolynomialTest {
 
         assertEquals(Polynomial.fromString("2*x^2 - 1.5*x - 1"), diff);
     }
+
+    @Test
+    public void canGetDegreeOfZeroPolynomial() {
+        Polynomial polynomial = new Polynomial();
+        assertEquals(0, polynomial.getDegree());
+    }
 }

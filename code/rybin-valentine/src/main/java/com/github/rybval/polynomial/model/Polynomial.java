@@ -130,7 +130,11 @@ public class Polynomial {
     }
 
     public int getDegree() {
-        return Collections.max(monomials.keySet());
+        if (monomials.isEmpty()) {
+            return 0;
+        } else {
+            return Collections.max(monomials.keySet());
+        }
     }
 
     public Polynomial exponentiate(final int power) {
