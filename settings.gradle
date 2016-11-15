@@ -56,6 +56,9 @@ project(":code/tarasenko-alex").name = "tarasenko-alex"
 // Бабинцева Анна
 // Быкадоров Роман
 // Веселов Илья
+include "code/veselov-ilya"
+project(":code/veselov-ilya").name = "veselov-ilya-Model"
+
 // Волков Денис
 // Воронин Дмитрий
 // Грошева Людмила
