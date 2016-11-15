@@ -47,12 +47,18 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
+// Tarasenko Alex
+include "code/tarasenko-alex"
+project(":code/tarasenko-alex").name = "tarasenko-alex"
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
 // Бабинцева Анна
 // Быкадоров Роман
 // Веселов Илья
+include "code/veselov-ilya"
+project(":code/veselov-ilya").name = "veselov-ilya-Model"
+
 // Волков Денис
 // Воронин Дмитрий
 // Грошева Людмила
@@ -68,6 +74,9 @@ project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
 // Зырин Илья
 // Ильин Иван
 // Исрафилов Руслан
+include "code/israfilov-ruslan"
+project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
+
 // Карчков Денис
 // Кокошников Алексей
 // Колистратова Дарья
@@ -119,6 +128,9 @@ project(":code/ryabinkin-evgeni").name = "ryabinkin-evgeni-Model"
 include "code/sirotin-nikita"
 project(":code/sirotin-nikita").name = "sirotin-nikita-Model"
 // Скребков Артём
+include "code/skrebkov-artem"
+project(":code/skrebkov-artem").name = "skrebkov-artem-Model"
+
 // Соврасов Владислав
 include "code/sovrasov-vlad"
 project(":code/sovrasov-vlad").name = "sovrasov-vlad"
@@ -130,9 +142,9 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 // Старлытов Евгений
 // Степыкин Илья
 // Тарасенко Алексей
+include "code/tarasenko-alex"
+project(":code/tarasenko-alex").name = "tarasenko-alex"
 // Тропичева Дарья
-include "code/Tropicheva-Darya"
-project(":code/Tropicheva-Darya").name = "Tropicheva-Darya"
 
 // Федосов Александр
 include "code/Fedosov-Alexander"
@@ -149,3 +161,4 @@ project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
 // Шургалин Петр
 include "code/shurgalin-pyotr"
 project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
+
