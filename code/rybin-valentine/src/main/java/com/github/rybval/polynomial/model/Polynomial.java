@@ -69,7 +69,9 @@ public class Polynomial {
                 string += " + " + monomialStr;
             }
         }
-        if (string.startsWith(" + ")) {
+        if ("".equals(string)) {
+            string = "0";
+        } else if (string.startsWith(" + ")) {
             string = string.substring(" + ".length());
         } else {
             string = "-" + string.substring(" - ".length());

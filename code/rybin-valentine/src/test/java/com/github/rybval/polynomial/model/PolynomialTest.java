@@ -195,4 +195,9 @@ public class PolynomialTest {
 
         assertEquals(30, value, Double.MIN_VALUE);
     }
+
+    @Test
+    public void canPresentZeroPolynomialAsString() {
+        assertEquals("0", Polynomial.fromString("0").toString());
+    }
 }
