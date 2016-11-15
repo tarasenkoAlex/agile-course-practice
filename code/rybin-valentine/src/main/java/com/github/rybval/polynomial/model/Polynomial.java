@@ -148,4 +148,14 @@ public class Polynomial {
         }
         return summ;
     }
+
+    public Polynomial add(final Monomial monomial) {
+        ArrayList<Monomial> newMonomials = new ArrayList<Monomial>(monomials.values());
+        newMonomials.add(monomial);
+        return new Polynomial(newMonomials);
+    }
+
+    public Polynomial subtract(final Monomial monomial) {
+        return add(monomial.negate());
+    }
 }

@@ -207,4 +207,24 @@ public class PolynomialTest {
 
         assertEquals(Polynomial.fromString("5*x^2 + 2*x^3"), polynomial);
     }
+
+    @Test
+    public void canAddMonomial() {
+        Polynomial polynomial = Polynomial.fromString("2*x^2 + x - 1");
+        Monomial monomial = new Monomial(1, 2.5);
+
+        Polynomial summ = polynomial.add(monomial);
+
+        assertEquals(Polynomial.fromString("2*x^2 + 3.5*x - 1"), summ);
+    }
+
+    @Test
+    public void canSubtractMonomial() {
+        Polynomial polynomial = Polynomial.fromString("2*x^2 + x - 1");
+        Monomial monomial = new Monomial(1, 2.5);
+
+        Polynomial diff = polynomial.subtract(monomial);
+
+        assertEquals(Polynomial.fromString("2*x^2 - 1.5*x - 1"), diff);
+    }
 }
