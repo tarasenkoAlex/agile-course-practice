@@ -17,7 +17,7 @@ public class MortrageCalculatorTest {
     private final double delta = 0.0001;
 
 
-    MortrageData mortrageData = MortrageDataFactory.getMortrageData(debt, years, percents);
+    private MortrageData mortrageData = MortrageDataFactory.getMortrageData(debt, years, percents);
 
     @Test
     public void testThatCalculateCountOverpayment() {

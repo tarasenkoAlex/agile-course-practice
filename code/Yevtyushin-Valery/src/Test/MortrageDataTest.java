@@ -13,17 +13,17 @@ public class MortrageDataTest {
     private final double years = 10;
     private final double percents = 20;
 
-    @Test(expected = InvalidParameterException.class)
+    @Test (expected = InvalidParameterException.class)
     public void testThatCheckInvalidParameterDebt() {
         MortrageDataFactory.getMortrageData(-debt, years, percents);
     }
 
-    @Test(expected = InvalidParameterException.class)
+    @Test (expected = InvalidParameterException.class)
     public void testThatCheckInvalidParameterYears() {
         MortrageDataFactory.getMortrageData(debt, -years, percents);
     }
 
-    @Test(expected = InvalidParameterException.class)
+    @Test (expected = InvalidParameterException.class)
     public void testThatCheckInvalidParameterPercents() {
         MortrageDataFactory.getMortrageData(debt, years, -percents);
     }
