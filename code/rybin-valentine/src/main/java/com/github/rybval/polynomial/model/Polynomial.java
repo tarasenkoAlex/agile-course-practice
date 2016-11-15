@@ -162,4 +162,13 @@ public class Polynomial {
     public Polynomial subtract(final Monomial monomial) {
         return add(monomial.negate());
     }
+
+    @Override
+    public Polynomial clone() {
+        return new Polynomial(monomials.values());
+    }
+
+    public Monomial getMonomialWithMaxDegree() {
+        return monomials.get(this.getDegree());
+    }
 }

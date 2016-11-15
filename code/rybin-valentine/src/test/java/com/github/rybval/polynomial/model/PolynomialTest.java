@@ -229,6 +229,24 @@ public class PolynomialTest {
     }
 
     @Test
+    public void canClonePolynomial() {
+        Polynomial original = Polynomial.fromString("2*x^2 + x - 1");
+
+        Polynomial clone = original.clone();
+
+        assertEquals(original, clone);
+    }
+
+    @Test
+    public void canGetMonomialWithHighestDegree() {
+        Polynomial polynomial = Polynomial.fromString("3*x^2 + x - 1");
+
+        Monomial monomial = polynomial.getMonomialWithMaxDegree();
+
+        assertEquals(new Monomial(2, 3), monomial);
+    }
+
+    @Test
     public void canGetDegreeOfZeroPolynomial() {
         Polynomial polynomial = new Polynomial();
         assertEquals(0, polynomial.getDegree());
