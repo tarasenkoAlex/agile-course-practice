@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
-public class WhenEncodeString {
+public class EncodingStringTest {
     private HuffmanAlg huffmanAlg;
     @Before
     public void setUp() {
@@ -15,25 +15,6 @@ public class WhenEncodeString {
     }
 
     @Test
-<<<<<<< HEAD
-    public void emptyStringGivesEmpty() {
-        assertAddReturns("", "");
-    }
-
-    @Test
-    public void oneSymbolStringGivesZero() {
-        assertAddReturns("1", "a");
-    }
-
-    @Test
-    public void twoSymbolsStringGivesOneBitSymbolCode() {
-        assertAddReturns("01101", "abbab");
-    }
-
-    @Test
-    public void fiveSymbolsStringWithDifferentFrequenciesGivesCheckedByMyselfResult() {
-        assertAddReturns("010011011000000101010101111111111", "abbcccddddeeeee");
-=======
     public void emptyStrGivesEmpty() {
         assertEncodeOutput("", "");
     }
@@ -51,7 +32,6 @@ public class WhenEncodeString {
     @Test
     public void fiveCharsStrWithDifferentFreqsGivesCorrectResult() {
         assertEncodeOutput("010011011000000101010101111111111", "abbcccddddeeeee");
->>>>>>> Fixed mistakes for qwert182
     }
 
     @Test

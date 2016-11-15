@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
-public class WhenEncodeOrDecodeStringByCurrentHTree {
+public class EncodingDecodingTest {
     private static final String INIT_STR = "abbcccddddeeeee";
     private HuffmanAlg huffmanAlg;
     @Before
@@ -16,13 +16,13 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
     }
 
     @Test
-    public void emptyStrEncodeGivesEmptyStrWithCurrentTree() {
+    public void emptyStrEncodeGivesEmptyStr() {
         huffmanAlg.encodeString(INIT_STR);
         assertEncodeOutput("", "");
     }
 
     @Test
-    public void nullInputForEncodeGivesExceptionWithCurrentTree() {
+    public void nullInputForEncodeGivesException() {
         huffmanAlg.encodeString(INIT_STR);
         try {
             huffmanAlg.encodeStringByCurrentHTree(null);
@@ -33,19 +33,19 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
     }
 
     @Test
-    public void symbolAGivesCorrectCodeWithCurrentTree() {
+    public void symbolAGivesCorrectCode() {
         huffmanAlg.encodeString(INIT_STR);
         assertEncodeOutput("010", "a");
     }
 
     @Test
-    public void encodeStrAndEncodeStrByCurrentTreeGiveSameResults() {
+    public void encodeStrAndEncodeStrGiveSameResults() {
         huffmanAlg.encodeString(INIT_STR);
         assertEncodeOutput(huffmanAlg.encodeString(INIT_STR), INIT_STR);
     }
 
     @Test
-    public void encodeStrByCurrentTreeWithNoTreeInObjectGivesException() {
+    public void encodeStrWithNoTreeInObjectGivesException() {
         try {
             huffmanAlg.encodeStringByCurrentHTree(INIT_STR);
         } catch (IllegalArgumentException caughtException) {
@@ -54,7 +54,7 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
     }
 
     @Test
-    public void encodeStrByCurrentTreeWithMissingCharsInTreeGivesException() {
+    public void encodeStrWithMissingCharsInTreeGivesException() {
         huffmanAlg.encodeString(INIT_STR);
         try {
             huffmanAlg.encodeStringByCurrentHTree("Pro");
@@ -66,7 +66,7 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
     }
 
     @Test
-    public void encodeStrByCurrentTreeWithMissingAndExistingCharsInTree() {
+    public void encodeStrWithMissingAndExistingCharsInTree() {
         huffmanAlg.encodeString(INIT_STR);
         try {
             huffmanAlg.encodeStringByCurrentHTree("abcPde");
@@ -78,25 +78,25 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
     }
 
     @Test
-    public void emptyStrDecodeGivesEmptyWithCurrentTree() {
+    public void emptyStrDecodeGivesEmptyStr() {
         huffmanAlg.encodeString(INIT_STR);
         assertDecodeOutput("", "");
     }
 
     @Test
-    public void codeForBGivesBWithCurrentTree() {
+    public void codeForBGivesB() {
         huffmanAlg.encodeString(INIT_STR);
         assertDecodeOutput("b", "011");
     }
 
     @Test
-    public void codeForAllCharsGivesCorrectCharsWithCurrentTree() {
+    public void codeForAllCharsGivesCorrectChars() {
         huffmanAlg.encodeString(INIT_STR);
         assertDecodeOutput("abcde", "010011001011");
     }
 
     @Test
-    public void nullInputForDecodeGivesExceptionWithCurrentTree() {
+    public void nullInputForDecodeGivesException() {
         huffmanAlg.encodeString(INIT_STR);
         try {
             huffmanAlg.encodeStringByCurrentHTree(null);
@@ -107,7 +107,7 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
     }
 
     @Test
-    public void decodeCodeOfInitStrGivesInitStrWithCurrentTree() {
+    public void decodeCodeOfInitStrGivesInitStr() {
         huffmanAlg.encodeString(INIT_STR);
         assertDecodeOutput(INIT_STR, huffmanAlg.encodeString(INIT_STR));
     }
@@ -122,7 +122,7 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
     }
 
     @Test
-    public void decodeNonBinSequenceWithCurrentTreeInObjectGivesException() {
+    public void decodeNonBinSequenceInObjectGivesException() {
         huffmanAlg.encodeString(INIT_STR);
         try {
             huffmanAlg.decodeBinarySequenceByCurrentHTree("10001P");
@@ -133,7 +133,7 @@ public class WhenEncodeOrDecodeStringByCurrentHTree {
     }
 
     @Test
-    public void decodeWrongBinSequenceForCurrentTreeInObjectGivesException() {
+    public void decodeWrongBinSequenceInObjectGivesException() {
         huffmanAlg.encodeString(INIT_STR);
         try {
             huffmanAlg.decodeBinarySequenceByCurrentHTree("0100110010110");
