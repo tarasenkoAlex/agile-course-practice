@@ -270,4 +270,14 @@ public class MonomialTest {
     public void canCreateMonomialFromStringWithOnlyPositiveVariable() {
         assertEquals(new Monomial(1, 1), Monomial.fromString("+x"));
     }
+
+    @Test
+    public void canEvaluateMonomial() {
+        Monomial monomial = Monomial.fromString("5.4*x^5");
+        int variable = 2;
+
+        double value = monomial.eval(2);
+
+        assertEquals(172.8, value, Double.MIN_VALUE);
+    }
 }

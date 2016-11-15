@@ -185,4 +185,14 @@ public class PolynomialTest {
         assertEquals(Polynomial.fromString("1*x^2 - 6*x^3 - 1*x^4 + 30*x^5 + 25*x^6"),
                      exponented);
     }
+
+    @Test
+    public void canEvaluatePolynomial() {
+        Polynomial polynomial = Polynomial.fromString("x - 3*x^2 + 5*x^3");
+        int variable = 2;
+
+        double value = polynomial.eval(2);
+
+        assertEquals(30, value, Double.MIN_VALUE);
+    }
 }

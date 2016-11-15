@@ -113,4 +113,8 @@ public class Monomial {
     public String toString() {
          return String.format("%s*x^%d", coefficient, power);
     }
+
+    public double eval(final double variableValue) {
+        return coefficient * Math.pow(variableValue, power);
+    }
 }

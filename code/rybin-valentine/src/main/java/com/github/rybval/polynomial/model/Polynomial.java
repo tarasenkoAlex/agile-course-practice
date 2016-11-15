@@ -138,4 +138,12 @@ public class Polynomial {
         }
         return result;
     }
+
+    public double eval(final double variableValue) {
+        double summ = 0;
+        for (Monomial monomial : monomials.values()) {
+            summ += monomial.eval(variableValue);
+        }
+        return summ;
+    }
 }
