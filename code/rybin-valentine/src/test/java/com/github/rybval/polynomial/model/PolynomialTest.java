@@ -200,4 +200,11 @@ public class PolynomialTest {
     public void canPresentZeroPolynomialAsString() {
         assertEquals("0", Polynomial.fromString("0").toString());
     }
+
+    @Test
+    public void canCreatePolynomialWithMonomialsAsArgs() {
+        Polynomial polynomial = new Polynomial(new Monomial(2, 5), new Monomial(3, 2));
+
+        assertEquals(Polynomial.fromString("5*x^2 + 2*x^3"), polynomial);
+    }
 }

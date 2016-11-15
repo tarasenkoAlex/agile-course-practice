@@ -14,6 +14,10 @@ public class Polynomial {
         monomials = new TreeMap<Integer, Monomial>();
     }
 
+    Polynomial(final Monomial... monomials) {
+        this(Arrays.asList(monomials));
+    }
+
     Polynomial(final Collection<Monomial> monomialsCollection) {
         monomials = new TreeMap<Integer, Monomial>();
         for (Monomial monomialIn : monomialsCollection) {
@@ -27,10 +31,6 @@ public class Polynomial {
             monomials.put(power, monomialToPut);
         }
         cleanZeroMonomials();
-    }
-
-    Polynomial(final Monomial[] monomials) {
-        this(Arrays.asList(monomials));
     }
 
     public static Polynomial fromString(final String string) {
