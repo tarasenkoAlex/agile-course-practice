@@ -4,16 +4,16 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 public class Tree {
-    private final Integer keyValue;
+    private final Integer key;
     private Tree leftTree;
     private Tree rightTree;
 
     public Tree(final Integer key) {
-        keyValue = key;
+        this.key = key;
     }
 
     public Integer getKey() {
-        return keyValue;
+        return key;
     }
 
     public Tree getLeft() {
@@ -25,7 +25,7 @@ public class Tree {
     }
 
     public void insert(final Integer key) {
-        int cmpResult = keyValue.compareTo(key);
+        int cmpResult = this.key.compareTo(key);
 
         if (cmpResult <= 0) {
             if (rightTree == null) {
@@ -52,7 +52,7 @@ public class Tree {
         if (leftTree != null) {
             leftTree.extractValues(values);
         }
-        values.add(keyValue);
+        values.add(key);
 
         if (rightTree != null) {
             rightTree.extractValues(values);
