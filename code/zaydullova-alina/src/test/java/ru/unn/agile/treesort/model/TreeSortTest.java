@@ -2,32 +2,58 @@ package ru.unn.agile.treesort.model;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+
+import java.util.*;
 
 public class TreeSortTest {
 
     @Test
-    public void testSortEmptyCollection() {
+    public void testSortedCollectionIsNotNull() {
         TreeSort sort = new TreeSort();
-        Collection<Integer> inputCollection = new ArrayList<Integer>();
-        Collection<Integer> outputCollection = sort.sort(inputCollection);
-        assertNotNull(outputCollection);
-        assertEquals(0, outputCollection.size());
+        assertNotNull(sort.sort(new ArrayList<Integer>()));
     }
 
     @Test
-    public void testSortCollectionWithSingleElement() {
+    public void testSortEmptyCollection() {
+        TreeSort sort = new TreeSort();
+        Collection<Integer> outputCollection = sort.sort(new ArrayList<Integer>());
+        assertTrue(outputCollection.isEmpty());
+    }
+
+    @Test
+    public void testSizeOfSortCollectionWithSingleElement() {
         TreeSort sort = new TreeSort();
         Collection<Integer> inputCollection = new ArrayList<Integer>();
         inputCollection.add(1);
 
         Collection<Integer> outputCollection = sort.sort(inputCollection);
-
-        assertNotNull(outputCollection);
         assertEquals(inputCollection.size(), outputCollection.size());
-        assertEquals(Integer.valueOf(1), outputCollection.iterator().next());
+    }
+
+    @Test
+    public void testSizeOfSortCollectionWithEqualsElements() {
+        TreeSort sort = new TreeSort();
+        Collection<Integer> inputCollection = new ArrayList<Integer>();
+        inputCollection.add(2);
+        inputCollection.add(2);
+        inputCollection.add(2);
+        inputCollection.add(2);
+
+        Collection<Integer> outputCollection = sort.sort(inputCollection);
+        assertEquals(inputCollection.size(), outputCollection.size());
+    }
+
+    @Test
+    public void testSizeOfSortCollectionWithDiferentsElements() {
+        TreeSort sort = new TreeSort();
+        Collection<Integer> inputCollection = new ArrayList<Integer>();
+        inputCollection.add(4);
+        inputCollection.add(2);
+        inputCollection.add(5);
+        inputCollection.add(1);
+
+        Collection<Integer> outputCollection = sort.sort(inputCollection);
+        assertEquals(inputCollection.size(), outputCollection.size());
     }
 
     @Test
@@ -39,8 +65,6 @@ public class TreeSortTest {
         inputCollection.add(10);
 
         Collection<Integer> outputCollection = sort.sort(inputCollection);
-        assertNotNull(outputCollection);
-        assertEquals(inputCollection.size(), outputCollection.size());
         for (Integer val : outputCollection) {
             assertEquals(Integer.valueOf(10), val);
         }
@@ -49,21 +73,13 @@ public class TreeSortTest {
     @Test
     public void testSortCollectionWithMultipleElements() {
         TreeSort sort = new TreeSort();
-        Collection<Integer> inputCollection = new ArrayList<Integer>();
-        inputCollection.add(20);
-        inputCollection.add(30);
-        inputCollection.add(10);
-        inputCollection.add(0);
+        Integer[] inputData = {20, 30, 10, 0};
+        Integer[] sortedData = {0, 10, 20, 30};
 
-        Collection<Integer> outputCollection = sort.sort(inputCollection);
-
-        assertNotNull(outputCollection);
-        assertEquals(inputCollection.size(), outputCollection.size());
-
-        Iterator<Integer> it = outputCollection.iterator();
-        assertEquals(Integer.valueOf(0), it.next());
-        assertEquals(Integer.valueOf(10), it.next());
-        assertEquals(Integer.valueOf(20), it.next());
-        assertEquals(Integer.valueOf(30), it.next());
+        Collection<Integer> outputCollection = sort.sort(Arrays.asList(inputData));
+        Integer[] outputArray = outputCollection.toArray(new Integer[outputCollection.size()]);
+        for (int i = 0; i < outputArray.length; i++) {
+            assertEquals(sortedData[i], outputArray[i]);
+        }
     }
 }

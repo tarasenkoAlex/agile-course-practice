@@ -4,87 +4,72 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import java.util.Collection;
-import java.util.Iterator;
 
 public class TreeTest {
     @Test
-    public void testTreeCreate() {
-        Tree tree = new Tree(10);
-        assertEquals(Integer.valueOf(10), tree.getKey());
+    public void testCreateTreeNotNullCollection() {
+        Tree tree = new Tree();
+        assertNotNull(tree.extractValues());
     }
 
     @Test
-    public void testInsertLess() {
-        Tree tree = new Tree(10);
-        assertNull(tree.getLeft());
-
-        tree.insert(5);
-        assertNotNull(tree.getLeft());
-        assertEquals(Integer.valueOf(5), tree.getLeft().getKey());
-    }
-
-    @Test
-    public void testInsertGreat() {
-        Tree tree = new Tree(20);
-        assertNull(tree.getRight());
-
-        tree.insert(30);
-        assertNotNull(tree.getRight());
-        assertEquals(Integer.valueOf(30), tree.getRight().getKey());
-    }
-
-    @Test
-    public void testInsertLessAndGreat() {
-        Tree tree = new Tree(20);
-
-        tree.insert(10);
-        tree.insert(30);
-
-        assertNotNull(tree.getLeft());
-        assertNotNull(tree.getRight());
-
-        assertEquals(Integer.valueOf(10), tree.getLeft().getKey());
-        assertEquals(Integer.valueOf(30), tree.getRight().getKey());
-    }
-
-    @Test
-    public void testExtractCollectionWithSingleElement() {
-        Tree tree = new Tree(10);
-
+    public void testCreateEmptyTree() {
+        Tree tree = new Tree();
         Collection<Integer> extractedValues = tree.extractValues();
-        assertNotNull(extractedValues);
-        assertEquals(1, extractedValues.size());
-        assertEquals(Integer.valueOf(10), extractedValues.iterator().next());
+        assertTrue(extractedValues.isEmpty());
     }
 
     @Test
-    public void testExtractCollectionWithEqualsElements() {
+    public void testTreeWithSingleElement() {
         Tree tree = new Tree(10);
-        tree.insert(10);
-        tree.insert(10);
-        tree.insert(10);
+        assertEquals(1, tree.extractValues().size());
+    }
 
+    @Test
+    public void testTreeSizeWithEqualsElement() {
+        Tree tree = new Tree(10);
+        Integer[] vals = {10, 10, 10};
+        for (Integer v : vals) {
+            tree.insert(v);
+        }
+        assertEquals(4, tree.extractValues().size());
+    }
+
+    @Test
+    public void testTreeSizeWithDifferentElement() {
+        Tree tree = new Tree(10);
+        Integer[] vals = {40, 5, 20, 3};
+        for (Integer v : vals) {
+            tree.insert(v);
+        }
+        assertEquals(5, tree.extractValues().size());
+    }
+
+    @Test
+    public void testSortingWithEqualsElement() {
+        Tree tree = new Tree(10);
+        Integer[] vals = {10, 10, 10};
+        for (Integer v : vals) {
+            tree.insert(v);
+        }
         Collection<Integer> extractedValues = tree.extractValues();
-        assertNotNull(extractedValues);
-        assertEquals(4, extractedValues.size());
-
-        for (Integer val : extractedValues) {
-            assertEquals(Integer.valueOf(10), val);
+        for (Integer v : extractedValues) {
+            assertEquals(Integer.valueOf(10), v);
         }
     }
 
     @Test
-    public void testExtractCollectionWithMultipleElements() {
-        Tree tree = new Tree(20);
-        tree.insert(30);
-        tree.insert(10);
-
+    public void testSortingWithDifferentsElement() {
+        Tree tree = new Tree(10);
+        final Integer[] vals = {40, 5, 20, 3};
+        final Integer[] cmpVals = {3, 5, 10, 20, 40};
+        for (Integer v : vals) {
+            tree.insert(v);
+        }
         Collection<Integer> extractedValues = tree.extractValues();
-        assertNotNull(extractedValues);
-        assertEquals(3, extractedValues.size());
-        Iterator<Integer> it = extractedValues.iterator();
-        assertEquals(Integer.valueOf(10), it.next());
-        assertEquals(Integer.valueOf(20), it.next());
-        assertEquals(Integer.valueOf(30), it.next());
+        final Integer[] extrVals = extractedValues.toArray(new Integer[extractedValues.size()]);
+        for (int i = 0; i < extractedValues.size(); i++) {
+            assertEquals(cmpVals[i], extrVals[i]);
+        }
     }
 }

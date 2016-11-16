@@ -20,28 +20,15 @@ public class TreeNode {
         return leftTreeNode;
     }
 
+    public void setLeftNode(final TreeNode node) {
+        leftTreeNode = node;
+    }
+
     public TreeNode getRightNode() {
         return rightTreeNode;
     }
 
-    public void insertNode(final TreeNode node) {
-        if (node == null) {
-            throw new IllegalArgumentException("NULL not supported for TreeNode node value");
-        }
-
-        int cmpResult = node.getKey().compareTo(key);
-        if (cmpResult < 0) { // node.key < key
-            if (leftTreeNode == null) {
-                leftTreeNode = node;
-            } else {
-                leftTreeNode.insertNode(node);
-            }
-        } else {
-            if (rightTreeNode == null) {
-                rightTreeNode = node;
-            } else {
-                rightTreeNode.insertNode(node);
-            }
-        }
+    public void setRightNode(final TreeNode node) {
+        rightTreeNode = node;
     }
 }

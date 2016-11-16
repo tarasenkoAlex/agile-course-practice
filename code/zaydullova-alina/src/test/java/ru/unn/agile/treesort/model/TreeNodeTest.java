@@ -24,48 +24,21 @@ public class TreeNodeTest {
     }
 
     @Test
-    public void testInsertLessValueAndNotNullLeftNode() {
-        TreeNode rootNode = new TreeNode(10);
-        TreeNode lessNode = new TreeNode(5);
+    public void testLeftNode() {
+        TreeNode node = new TreeNode(20);
+        TreeNode leftNode = new TreeNode(10);
+        node.setLeftNode(leftNode);
 
-        rootNode.insertNode(lessNode);
-        assertNotNull(rootNode.getLeftNode());
+        assertEquals(leftNode.getKey(), node.getLeftNode().getKey());
     }
 
     @Test
-    public void testInsertLessValue() {
-        TreeNode rootNode = new TreeNode(10);
-        TreeNode lessNode = new TreeNode(5);
+    public void testRightNode() {
+        TreeNode node = new TreeNode(20);
+        TreeNode rightNode = new TreeNode(30);
+        node.setRightNode(rightNode);
 
-        rootNode.insertNode(lessNode);
-        assertEquals(lessNode.getKey(), rootNode.getLeftNode().getKey());
-    }
-
-    @Test
-    public void testInsertGreateValueAndNotNullRightNode() {
-        TreeNode rootNode = new TreeNode(10);
-        TreeNode greateNode = new TreeNode(20);
-
-        rootNode.insertNode(greateNode);
-        assertNotNull(rootNode.getRightNode());
-    }
-
-    @Test
-    public void testInsertGreateValue() {
-        TreeNode rootNode = new TreeNode(10);
-        TreeNode greateNode = new TreeNode(20);
-
-        rootNode.insertNode(greateNode);
-        assertEquals(greateNode.getKey(), rootNode.getRightNode().getKey());
-    }
-
-    @Test
-    public void testInsertEqualValue() {
-        TreeNode rootNode = new TreeNode(10);
-        TreeNode equalNode = new TreeNode(10);
-
-        rootNode.insertNode(equalNode);
-        assertEquals(equalNode.getKey(), rootNode.getRightNode().getKey());
+        assertEquals(rightNode.getKey(), node.getRightNode().getKey());
     }
 
     @Test
@@ -73,21 +46,6 @@ public class TreeNodeTest {
         boolean exceptionTrowed = false;
         try {
             TreeNode rootNode = new TreeNode(null);
-        } catch (IllegalArgumentException e) {
-            exceptionTrowed = true;
-        } finally {
-            assertTrue(exceptionTrowed);
-        }
-    }
-
-    @Test
-    public void testInsertNullNode() {
-        TreeNode rootNode = new TreeNode(10);
-
-        boolean exceptionTrowed = false;
-        try {
-            rootNode.insertNode(null);
-
         } catch (IllegalArgumentException e) {
             exceptionTrowed = true;
         } finally {
