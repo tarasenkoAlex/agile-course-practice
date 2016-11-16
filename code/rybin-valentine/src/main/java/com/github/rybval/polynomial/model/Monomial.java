@@ -52,6 +52,11 @@ public class Monomial {
         }
     }
 
+    @Override
+    public String toString() {
+         return String.format("%s*x^%d", coefficient, power);
+    }
+
     int getPower() {
         return power;
     }
@@ -60,15 +65,15 @@ public class Monomial {
         return coefficient;
     }
 
+    Monomial negate() {
+        return new Monomial(power, -coefficient);
+    }
+
     Monomial add(final Monomial another) {
         if (another.power != power) {
             throw new IllegalArgumentException();
         }
         return new Monomial(power, another.coefficient + coefficient);
-    }
-
-    Monomial negate() {
-        return new Monomial(power, -coefficient);
     }
 
     Monomial subtract(final Monomial subtrahend) {
@@ -93,6 +98,10 @@ public class Monomial {
                            coefficient / divider.coefficient);
     }
 
+    public double eval(final double variableValue) {
+        return coefficient * Math.pow(variableValue, power);
+    }
+
     @Override
     public int hashCode() {
         return power ^ new Double(coefficient).hashCode();
@@ -107,14 +116,5 @@ public class Monomial {
         } else {
             return false;
         }
-    }
-
-    @Override
-    public String toString() {
-         return String.format("%s*x^%d", coefficient, power);
-    }
-
-    public double eval(final double variableValue) {
-        return coefficient * Math.pow(variableValue, power);
     }
 }

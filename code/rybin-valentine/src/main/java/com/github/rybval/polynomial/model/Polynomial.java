@@ -33,6 +33,18 @@ public class Polynomial {
         cleanZeroMonomials();
     }
 
+    private void cleanZeroMonomials() {
+        Collection<Integer> toRemove = new ArrayList<Integer>();
+        for (Monomial monomial : monomials.values()) {
+            if (monomial.getCoefficient() == 0) {
+                toRemove.add(monomial.getPower());
+            }
+        }
+        for (Integer power : toRemove) {
+            monomials.remove(power);
+        }
+    }
+
     public static Polynomial fromString(final String string) {
         String[] monomialStrings = string.replaceAll(" *- *", " -")
                                          .replaceAll(" *\\+ *", " +")
@@ -44,18 +56,6 @@ public class Polynomial {
             }
         }
         return new Polynomial(monomials);
-    }
-
-    private void cleanZeroMonomials() {
-        Collection<Integer> toRemove = new ArrayList<Integer>();
-        for (Monomial monomial : monomials.values()) {
-            if (monomial.getCoefficient() == 0) {
-                toRemove.add(monomial.getPower());
-            }
-        }
-        for (Integer power : toRemove) {
-            monomials.remove(power);
-        }
     }
 
     @Override
@@ -79,19 +79,30 @@ public class Polynomial {
         return string;
     }
 
-    @Override
-    public int hashCode() {
-        return monomials.hashCode();
+    public int getDegree() {
+        if (monomials.isEmpty()) {
+            return -1;
+        } else {
+            return Collections.max(monomials.keySet());
+        }
     }
 
-    @Override
-    public boolean equals(final Object object) {
-        if (object instanceof Polynomial) {
-            Polynomial polynomial = (Polynomial) object;
-            return this.monomials.equals(polynomial.monomials);
-        } else {
-            return false;
+    public Monomial getMonomialWithMaxPower() {
+        return monomials.get(this.getDegree());
+    }
+
+    public Polynomial negate() {
+        Collection<Monomial> negatedMonomials = new ArrayList<Monomial>();
+        for (Monomial monomial : monomials.values()) {
+           negatedMonomials.add(monomial.negate());
         }
+        return new Polynomial(negatedMonomials);
+    }
+
+    public Polynomial add(final Monomial monomial) {
+        ArrayList<Monomial> newMonomials = new ArrayList<Monomial>(monomials.values());
+        newMonomials.add(monomial);
+        return new Polynomial(newMonomials);
     }
 
     public Polynomial add(final Polynomial another) {
@@ -103,6 +114,10 @@ public class Polynomial {
 
     public Polynomial subtract(final Polynomial subtrahend) {
         return this.add(subtrahend.negate());
+    }
+
+    public Polynomial subtract(final Monomial monomial) {
+        return add(monomial.negate());
     }
 
     public Polynomial multiply(final Monomial multiplier) {
@@ -121,19 +136,20 @@ public class Polynomial {
         return product;
     }
 
-    public Polynomial negate() {
-        Collection<Monomial> negatedMonomials = new ArrayList<Monomial>();
-        for (Monomial monomial : monomials.values()) {
-           negatedMonomials.add(monomial.negate());
-        }
-        return new Polynomial(negatedMonomials);
-    }
-
-    public int getDegree() {
-        if (monomials.isEmpty()) {
-            return -1;
+    public Polynomial divide(final Polynomial divider) {
+        if (divider.monomials.isEmpty()) {
+            throw new IllegalArgumentException();
         } else {
-            return Collections.max(monomials.keySet());
+            Polynomial quotient = new Polynomial();
+            Polynomial divident = this.clone();
+            Monomial quotientPart;
+            while (divider.getDegree() <= divident.getDegree()) {
+                quotientPart = divident.getMonomialWithMaxPower()
+                                   .divide(divider.getMonomialWithMaxPower());
+                quotient = quotient.add(quotientPart);
+                divident = divident.subtract(divider.multiply(quotientPart));
+            }
+            return quotient;
         }
     }
 
@@ -153,39 +169,23 @@ public class Polynomial {
         return summ;
     }
 
-    public Polynomial add(final Monomial monomial) {
-        ArrayList<Monomial> newMonomials = new ArrayList<Monomial>(monomials.values());
-        newMonomials.add(monomial);
-        return new Polynomial(newMonomials);
-    }
-
-    public Polynomial subtract(final Monomial monomial) {
-        return add(monomial.negate());
-    }
-
     @Override
     public Polynomial clone() {
         return new Polynomial(monomials.values());
     }
 
-    public Monomial getMonomialWithMaxPower() {
-        return monomials.get(this.getDegree());
+    @Override
+    public int hashCode() {
+        return monomials.hashCode();
     }
 
-    public Polynomial divide(final Polynomial divider) {
-        if (divider.monomials.isEmpty()) {
-            throw new IllegalArgumentException();
+    @Override
+    public boolean equals(final Object object) {
+        if (object instanceof Polynomial) {
+            Polynomial polynomial = (Polynomial) object;
+            return this.monomials.equals(polynomial.monomials);
         } else {
-            Polynomial quotient = new Polynomial();
-            Polynomial divident = this.clone();
-            Monomial quotientPart;
-            while (divider.getDegree() <= divident.getDegree()) {
-                quotientPart = divident.getMonomialWithMaxPower()
-                                   .divide(divider.getMonomialWithMaxPower());
-                quotient = quotient.add(quotientPart);
-                divident = divident.subtract(divider.multiply(quotientPart));
-            }
-            return quotient;
+            return false;
         }
     }
 }
