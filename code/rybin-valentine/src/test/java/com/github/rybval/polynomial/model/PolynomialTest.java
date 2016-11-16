@@ -201,7 +201,7 @@ public class PolynomialTest {
         Polynomial divident = Polynomial.fromString("x - 3*x^2 - 5*x^3");
         Polynomial zeroPolynomial = Polynomial.fromString("0");
 
-        Polynomial quotient = divident.div(zeroPolynomial);
+        Polynomial quotient = divident.division(zeroPolynomial);
     }
 
     @Test
@@ -209,7 +209,7 @@ public class PolynomialTest {
         Polynomial divident = Polynomial.fromString("1 + x - 5*x^2");
         Polynomial divider = Polynomial.fromString("x - 3*x^2 - 5*x^3");
 
-        Polynomial quotient = divident.div(divider);
+        Polynomial quotient = divident.division(divider);
 
         assertEquals(Polynomial.fromString("0"), quotient);
     }
@@ -219,7 +219,7 @@ public class PolynomialTest {
         Polynomial divident = Polynomial.fromString("4*x^2 + 2*x - 2");
         Polynomial divider = Polynomial.fromString("2*x^2 + x - 1");
 
-        Polynomial quotient = divident.div(divider);
+        Polynomial quotient = divident.division(divider);
 
         assertEquals(Polynomial.fromString("2"), quotient);
     }
@@ -229,7 +229,7 @@ public class PolynomialTest {
         Polynomial divident = Polynomial.fromString("4*x^4 + 4*x^3 - 3*x^2 - 2*x + 1");
         Polynomial divider = Polynomial.fromString("2*x^2 + x - 1");
 
-        Polynomial quotient = divident.div(divider);
+        Polynomial quotient = divident.division(divider);
 
         assertEquals(Polynomial.fromString("2*x^2 + x - 1"), quotient);
     }

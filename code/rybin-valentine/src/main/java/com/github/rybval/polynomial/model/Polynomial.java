@@ -172,11 +172,9 @@ public class Polynomial {
         return monomials.get(this.getDegree());
     }
 
-    public Polynomial div(final Polynomial divider) {
+    public Polynomial division(final Polynomial divider) {
         if (divider.monomials.isEmpty()) {
             throw new IllegalArgumentException();
-        } else if (divider.getDegree() > this.getDegree()) {
-            return new Polynomial();
         } else {
             Polynomial quotient = new Polynomial();
             Polynomial divident = this.clone();
