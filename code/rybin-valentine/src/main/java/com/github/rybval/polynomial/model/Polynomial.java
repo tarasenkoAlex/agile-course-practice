@@ -10,15 +10,15 @@ import java.util.Arrays;
 public class Polynomial {
     private final Map<Integer, Monomial> monomials;
 
-    Polynomial() {
+    public Polynomial() {
         monomials = new TreeMap<Integer, Monomial>();
     }
 
-    Polynomial(final Monomial... monomials) {
+    public Polynomial(final Monomial... monomials) {
         this(Arrays.asList(monomials));
     }
 
-    Polynomial(final Collection<Monomial> monomialsCollection) {
+    public Polynomial(final Collection<Monomial> monomialsCollection) {
         monomials = new TreeMap<Integer, Monomial>();
         for (Monomial monomialIn : monomialsCollection) {
             int power = monomialIn.getPower();

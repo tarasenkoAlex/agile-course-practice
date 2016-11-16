@@ -6,7 +6,7 @@ public class Monomial {
     private final int power;
     private final double coefficient;
 
-    Monomial(final int power, final double coefficient) {
+    public Monomial(final int power, final double coefficient) {
         if (power < 0) {
             throw new IllegalArgumentException();
         }
@@ -14,11 +14,11 @@ public class Monomial {
         this.coefficient = coefficient;
     }
 
-    Monomial(final double coefficient) {
+    public Monomial(final double coefficient) {
         this(0, coefficient);
     }
 
-    Monomial() {
+    public Monomial() {
         this(0, 0);
     }
 
