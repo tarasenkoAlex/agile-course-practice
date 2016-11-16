@@ -131,7 +131,7 @@ public class Polynomial {
 
     public int getDegree() {
         if (monomials.isEmpty()) {
-            return 0;
+            return -1;
         } else {
             return Collections.max(monomials.keySet());
         }

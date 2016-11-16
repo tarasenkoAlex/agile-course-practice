@@ -287,6 +287,6 @@ public class PolynomialTest {
     @Test
     public void canGetDegreeOfZeroPolynomial() {
         Polynomial polynomial = new Polynomial();
-        assertEquals(0, polynomial.getDegree());
+        assertEquals(-1, polynomial.getDegree());
     }
 }
