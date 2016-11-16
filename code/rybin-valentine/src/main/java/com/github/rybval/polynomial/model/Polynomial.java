@@ -168,11 +168,11 @@ public class Polynomial {
         return new Polynomial(monomials.values());
     }
 
-    public Monomial getMonomialWithMaxDegree() {
+    public Monomial getMonomialWithMaxPower() {
         return monomials.get(this.getDegree());
     }
 
-    public Polynomial division(final Polynomial divider) {
+    public Polynomial divide(final Polynomial divider) {
         if (divider.monomials.isEmpty()) {
             throw new IllegalArgumentException();
         } else {
@@ -180,8 +180,8 @@ public class Polynomial {
             Polynomial divident = this.clone();
             Monomial quotientPart;
             while (divider.getDegree() <= divident.getDegree()) {
-                quotientPart = divident.getMonomialWithMaxDegree()
-                                   .divide(divider.getMonomialWithMaxDegree());
+                quotientPart = divident.getMonomialWithMaxPower()
+                                   .divide(divider.getMonomialWithMaxPower());
                 quotient = quotient.add(quotientPart);
                 divident = divident.subtract(divider.multiply(quotientPart));
             }
