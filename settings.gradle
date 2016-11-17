@@ -71,6 +71,9 @@ project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
 // Евтюшин Валерий
 // Еланов Артем
 // Зайдуллова Алина
+include "code/zaydullova-alina"
+project(":code/zaydullova-alina").name = "zaydullova-alina-Model"
+
 // Зырин Илья
 // Ильин Иван
 // Исрафилов Руслан
