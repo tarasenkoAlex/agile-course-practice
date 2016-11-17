@@ -87,6 +87,8 @@ project(":code/zaydullova-alina").name = "zaydullova-alina-Model"
 include "code/israfilov-ruslan"
 project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
 // Карчков Денис
+include "code/Karchkov-Denis"
+project(":code/Karchkov-Denis").name = "Karchkov-Denis-model"
 // Кокошников Алексей
 // Колистратова Дарья
 // Кочетов Павел
