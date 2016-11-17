@@ -1,10 +1,10 @@
 package ru.unn.agile.SolvingQuadraticEquation.Model;
 
-public class SolvingQuadraticEquation {
+public final class SolvingQuadraticEquation {
     private static final double EPS = 0.001;
     private static final double DISCRIMINANT_COEFFICIENT = 4;
 
-    private double[] notQuadratic(final double b, final double c) {
+    private static double[] notQuadratic(final double b, final double c) {
         double[] result = new double[0];
 
         if (b == 0) {
@@ -19,7 +19,7 @@ public class SolvingQuadraticEquation {
         return result;
     }
 
-    public double[] calc(final double a, final double b, final double c) {
+    public static double[] calc(final double a, final double b, final double c) {
         double[] result = new double[0];
 
         if (a == 0) {
@@ -41,5 +41,8 @@ public class SolvingQuadraticEquation {
         }
 
         return result;
+    }
+
+    private SolvingQuadraticEquation() {
     }
 }

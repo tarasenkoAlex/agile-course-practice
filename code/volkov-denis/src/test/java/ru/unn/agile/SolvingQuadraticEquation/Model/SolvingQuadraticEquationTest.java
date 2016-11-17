@@ -2,6 +2,7 @@ package ru.unn.agile.SolvingQuadraticEquation.Model;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static ru.unn.agile.SolvingQuadraticEquation.Model.SolvingQuadraticEquation.*;
 
 public class SolvingQuadraticEquationTest {
 
@@ -56,7 +57,7 @@ public class SolvingQuadraticEquationTest {
     public void noRootTest() {
         initialization(1, 4, 5);
 
-        this.actual = new SolvingQuadraticEquation().calc(a, b, c);
+        this.actual = calc(a, b, c);
 
         assertArrayEquals(expected, actual, 0);
     }
@@ -65,7 +66,7 @@ public class SolvingQuadraticEquationTest {
     public void oneRootTest() {
         initialization(1, -4, 4, 2);
 
-        this.actual = new SolvingQuadraticEquation().calc(a, b, c);
+        this.actual = calc(a, b, c);
 
         assertArrayEquals(expected, actual, 0);
     }
@@ -74,7 +75,7 @@ public class SolvingQuadraticEquationTest {
     public void twoRootsTest() {
         initialization(1, -5, 4, 4, 1);
 
-        this.actual = new SolvingQuadraticEquation().calc(a, b, c);
+        this.actual = calc(a, b, c);
 
         assertArrayEquals(expected, actual, 0);
     }
@@ -83,7 +84,7 @@ public class SolvingQuadraticEquationTest {
     public void aIsZero() {
         initialization(0, 4, 8, -2);
 
-        this.actual = new SolvingQuadraticEquation().calc(a, b, c);
+        this.actual = calc(a, b, c);
 
         assertArrayEquals(expected, actual, 0);
     }
@@ -92,7 +93,7 @@ public class SolvingQuadraticEquationTest {
     public void bIsZeroTwoRoots() {
         initialization(2, 0, -8, 2, -2);
 
-        this.actual = new SolvingQuadraticEquation().calc(a, b, c);
+        this.actual = calc(a, b, c);
 
         assertArrayEquals(expected, actual, 0);
     }
@@ -101,7 +102,7 @@ public class SolvingQuadraticEquationTest {
     public void bIsZeroNoRoot() {
         initialization(2, 0, 8);
 
-        this.actual = new SolvingQuadraticEquation().calc(a, b, c);
+        this.actual = calc(a, b, c);
 
         assertArrayEquals(expected, actual, 0);
     }
@@ -110,7 +111,7 @@ public class SolvingQuadraticEquationTest {
     public void cIsZero() {
         initialization(3, 6, 0, 0, -2);
 
-        this.actual = new SolvingQuadraticEquation().calc(a, b, c);
+        this.actual = calc(a, b, c);
 
         assertArrayEquals(expected, actual, 0);
     }
@@ -119,7 +120,7 @@ public class SolvingQuadraticEquationTest {
     public void aIsZeroBIsZero() {
         initialization(0, 0, 8);
 
-        this.actual = new SolvingQuadraticEquation().calc(a, b, c);
+        this.actual = calc(a, b, c);
 
         assertArrayEquals(expected, actual, 0);
     }
@@ -128,7 +129,7 @@ public class SolvingQuadraticEquationTest {
     public void aIsZeroCIsZero() {
         initialization(0, 6, 0, 0);
 
-        this.actual = new SolvingQuadraticEquation().calc(a, b, c);
+        this.actual = calc(a, b, c);
 
         assertArrayEquals(expected, actual, 0);
     }
@@ -137,7 +138,7 @@ public class SolvingQuadraticEquationTest {
     public void bIsZeroCIsZero() {
         initialization(4, 0, 0, 0);
 
-        this.actual = new SolvingQuadraticEquation().calc(a, b, c);
+        this.actual = calc(a, b, c);
 
         assertArrayEquals(expected, actual, 0);
     }
@@ -146,7 +147,7 @@ public class SolvingQuadraticEquationTest {
     public void allAreZero() {
         initialization(0, 0, 0, 0, 0, 0);
 
-        this.actual = new SolvingQuadraticEquation().calc(a, b, c);
+        this.actual = calc(a, b, c);
 
         assertArrayEquals(expected, actual, 0);
     }
