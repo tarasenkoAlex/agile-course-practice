@@ -172,10 +172,3 @@ project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
 // Шургалин Петр
 include "code/shurgalin-pyotr"
 project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> master
-=======
->>>>>>> 5d6646c0a3236707ab6bb1f719481aa3203c18e2
