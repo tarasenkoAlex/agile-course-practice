@@ -11,6 +11,10 @@ project(":code/kolistratova-daria").name = "kolistratova-daria-Model"
 include "code/kornyakov-kirill-lab1"
 project(":code/kornyakov-kirill-lab1").name = "kornyakov-kirill-lab1-Model"
 
+// Karchkov Denis, lab1
+include "code/Karchkov-Denis"
+project(":code/Karchkov-Denis").name = "Karchkov-Denis-Model"
+
 // Kornyakov Kirill, lab2-legacy
 include "code/kornyakov-kirill-lab2-legacy/Model"
 project(":code/kornyakov-kirill-lab2-legacy/Model").name = "kornyakov-kirill-lab2-Model-legacy"
@@ -82,10 +86,9 @@ project(":code/zaydullova-alina").name = "zaydullova-alina-Model"
 // Исрафилов Руслан
 include "code/israfilov-ruslan"
 project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
-
 // Карчков Денис
 include "code/Karchkov-Denis"
-project(":code/Karchkov-Denis").name = "Karchkov-Denis-Model"
+project(":code/Karchkov-Denis").name = "Karchkov-Denis-model"
 // Кокошников Алексей
 // Колистратова Дарья
 // Кочетов Павел
@@ -170,6 +173,9 @@ project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
 include "code/shurgalin-pyotr"
 project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> master
+=======
+>>>>>>> 5d6646c0a3236707ab6bb1f719481aa3203c18e2
