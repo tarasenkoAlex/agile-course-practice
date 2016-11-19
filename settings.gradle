@@ -164,8 +164,8 @@ project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
 // Ширяева Вера
 // Шишкин Владислав
 // Шочин Александр
-include "code/Vector3D"
-project(":code/Vector3D").name = "Vector3D-Model"
+include "code/Vector3D/Model"
+project(":code/Vector3D/Model").name = "Vector3D-Model"
 
 // Шургалин Петр
 include "code/shurgalin-pyotr"
