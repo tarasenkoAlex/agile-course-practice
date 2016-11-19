@@ -12,7 +12,6 @@ final class Constants {
     static final double TWOHUNDREDFF = 255;
     static final double ZEROPZERO5 = 0.055;
     static final double TPF = 2.4;
-    static final double ONEHUND = 100;
     static final double ONETHOUSAND = 1000.0;
     static final double SIXTEEN = 16.0;
     static final double ONEHUNDREED16 = 116.0;

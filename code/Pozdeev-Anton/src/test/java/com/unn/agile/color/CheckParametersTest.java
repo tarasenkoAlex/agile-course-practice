@@ -2,9 +2,8 @@ package com.unn.agile.color;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
 import static com.unn.agile.color.CheckParameters.*;
+import static org.junit.Assert.assertTrue;
 
 public class CheckParametersTest {
 
@@ -20,7 +19,7 @@ public class CheckParametersTest {
 
     @Test()
     public void testCheckNumberParameters() {
-        assertEquals(true, checkNumberParameters(new double[]{1, 2, 3}));
+        assertTrue(checkNumberParameters(new double[]{1, 2, 3}));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -28,12 +27,12 @@ public class CheckParametersTest {
         checkParametersRGB(new double[]{-1, 100, 100, 100});
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersRGB1() {
         checkParametersRGB(new double[]{-1, 100, 100});
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersRGB2() {
         checkParametersRGB(new double[]{100, 100, 256});
     }
@@ -48,22 +47,22 @@ public class CheckParametersTest {
         checkParametersLAB(new double[]{-1, 100, 100, 200});
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersLAB1() {
         checkParametersLAB(new double[]{-1, 100, 100});
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersLAB2() {
         checkParametersLAB(new double[]{99, 100, -256});
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersLAB3() {
         checkParametersLAB(new double[]{0, -128, 129});
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersLAB4() {
         checkParametersLAB(new double[]{0, -129, 128});
     }
@@ -73,12 +72,12 @@ public class CheckParametersTest {
         checkParametersHSV(new double[]{-1, 100, 100, 100});
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersHSV1() {
         checkParametersHSV(new double[]{-1, 100, 100});
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersHSV2() {
         checkParametersHSV(new double[]{100, 100, 361});
     }
@@ -88,7 +87,7 @@ public class CheckParametersTest {
         checkParametersHSV(new double[]{1.2, 255, 1});
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersHSV4() {
         checkParametersHSV(new double[]{10, 255, 1});
     }

@@ -50,14 +50,14 @@ final class FromRGBSpace {
         double max = Math.max(Math.max(r, g), b);
         double min = Math.min(Math.min(r, g), b);
 
-        paramsOfHSV[2] = max * ONEHUND;
+        paramsOfHSV[2] = max * ONEHUNDRED;
 
         double delta = max - min;
         if (delta == 0) {
             paramsOfHSV[0] = 0;
             paramsOfHSV[1] = 0;
         } else {
-            paramsOfHSV[1] = (delta / max) * ONEHUND;
+            paramsOfHSV[1] = (delta / max) * ONEHUNDRED;
             double delR = (((max - r) / SIX) + (delta / TWO)) / delta;
             double delG = (((max - g) / SIX) + (delta / TWO)) / delta;
             double delB = (((max - b) / SIX) + (delta / TWO)) / delta;
@@ -110,9 +110,9 @@ final class FromRGBSpace {
             b = b / TWELVEPNT;
         }
 
-        r = r * ONEHUND;
-        g = g * ONEHUND;
-        b = b * ONEHUND;
+        r = r * ONEHUNDRED;
+        g = g * ONEHUNDRED;
+        b = b * ONEHUNDRED;
 
         xyzParameters[0] = r * ZPFOTF + g * ZPTFSS + b * ZPOEZF;
         xyzParameters[1] = r * ZPT1TS + g * ZPSOFT + b * ZPZSTT;

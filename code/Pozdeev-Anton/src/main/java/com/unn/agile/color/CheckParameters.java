@@ -12,7 +12,7 @@ final class CheckParameters {
         }
         for (int i = 0; i < params.length; i++) {
             if (params[i] < 0 || params[i] > TWOHUNDREDFF) {
-                throw new NumberFormatException();
+                throw new IllegalArgumentException();
             }
             if (params[i] % ONE != 0) {
                 throw new NumberFormatException();
@@ -25,16 +25,16 @@ final class CheckParameters {
             return;
         }
         if (params[0] < 0 || params[0] > THS) {
-            throw new NumberFormatException();
+            throw new IllegalArgumentException();
         }
         if (params[0] % ONE != 0) {
             throw new NumberFormatException();
         }
         if (params[1] < 0 || params[1] > ONEHUNDRED) {
-                throw new NumberFormatException();
+                throw new IllegalArgumentException();
         }
         if (params[2] < 0 || params[2] > ONEHUNDRED) {
-            throw new NumberFormatException();
+            throw new IllegalArgumentException();
         }
     }
 
@@ -43,17 +43,17 @@ final class CheckParameters {
             return;
         }
         if (params[0] < 0 || params[0] > ONEHUNDRED) {
-            throw new NumberFormatException();
+            throw new IllegalArgumentException();
         }
         if (params[1] < -OHTE || params[1] > OHTE) {
-            throw new NumberFormatException();
+            throw new IllegalArgumentException();
         }
         if (params[2] < -OHTE || params[2] > OHTE) {
-            throw new NumberFormatException();
+            throw new IllegalArgumentException();
         }
     }
     static boolean checkNumberParameters(final double[] params) {
-        if (params != null && params.length != 0 && params.length == THREEPZ) {
+        if (params != null && params.length == THREEPZ) {
             return true;
         } else {
             throw new IllegalArgumentException();
