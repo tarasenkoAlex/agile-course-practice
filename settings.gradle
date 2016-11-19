@@ -72,6 +72,8 @@ project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 include "code/dobroliubova-evgeniia"
 project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
 // Евтюшин Валерий
+include "code/Yevtyushin-Valery"
+project(":code/Yevtyushin-Valery").name = "YevtyushinValery-tdd-lab1"
 // Еланов Артем
 // Зайдуллова Алина
 include "code/zaydullova-alina"
