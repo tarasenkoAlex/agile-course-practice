@@ -1,6 +1,6 @@
 package ru.unn.agile.Converter.Model;
 
-import static ru.unn.agile.Converter.Model.Constants.*;
+import static ru.unn.agile.Converter.Model.MapData.*;
 
 public class RomanNumberValidator {
     public void validate(final String romanNumber) {

@@ -2,7 +2,7 @@ package ru.unn.agile.Converter.Model;
 
 import java.util.TreeMap;
 
-public final class Constants {
+public final class MapData {
     public static final int MAX_NUMBER = 3999;
 
     private static final int ONE = 1;
@@ -53,6 +53,6 @@ public final class Constants {
         ROMAN_TO_ARABIC_MAP.put("M", THOUSAND);
     }
 
-    private Constants() {
+    private MapData() {
     }
 }
