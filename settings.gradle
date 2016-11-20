@@ -115,6 +115,8 @@ project(":code/maloykina-elena").name = "maloykina-elena-Model"
 // Пауль Эдуард
 // Песков Дмитрий
 // Поздеев Антон
+include "code/Pozdeev-Anton"
+project(":code/Pozdeev-Anton").name = "pozdeev-anton-model"
 // Пономарев Георгий
 // Пономарев Никита
 include "code/ponomarev-nikita/Model"
