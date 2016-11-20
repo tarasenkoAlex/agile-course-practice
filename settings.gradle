@@ -86,8 +86,10 @@ project(":code/zaydullova-alina").name = "zaydullova-alina-Model"
 // Зырин Илья
 // Ильин Иван
 // Исрафилов Руслан
-include "code/israfilov-ruslan"
-project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
+include "code/todo-list/Model"
+project(":code/todo-list/Model").name = "todo-list-model"
+include "code/todo-list/View"
+project(":code/todo-list/View").name = "todo-list-view"
 
 // Карчков Денис
 include "code/Karchkov-Denis"
