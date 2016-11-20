@@ -161,7 +161,11 @@ project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
 // Цыганов Алексей
 // Чугунов Евгений
 // Шадрунов Артем
+
 // Ширяева Вера
+include "code/shiryaeva-vera"
+project(":code/shiryaeva-vera").name = "shiryaeva-vera-Model"
+
 // Шишкин Владислав
 // Шочин Александр
 include "code/shochin-alexandr"
