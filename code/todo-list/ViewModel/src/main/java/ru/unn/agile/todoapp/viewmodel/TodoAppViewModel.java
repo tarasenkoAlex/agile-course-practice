@@ -3,12 +3,12 @@ package ru.unn.agile.todoapp.viewmodel;
 import java.time.LocalDate;
 
 public class TodoAppViewModel {
-    private LocalDate newTaskDate = LocalDate.now();
+    private LocalDate newTaskDueDate = LocalDate.now();
     private String newTaskDescription = "";
     private boolean addNewTaskButtonEnabled = false;
 
-    public LocalDate getNewTaskDate() {
-        return newTaskDate;
+    public LocalDate getNewTaskDueDate() {
+        return newTaskDueDate;
     }
 
     public String getNewTaskDescription() {
@@ -23,5 +23,14 @@ public class TodoAppViewModel {
         this.newTaskDescription = newTaskDescription;
 
         this.addNewTaskButtonEnabled = !newTaskDescription.isEmpty();
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.newTaskDueDate = dueDate;
+    }
+
+    public void pressAddNewTaskButton() {
+        this.newTaskDescription = "";
+        this.newTaskDueDate = LocalDate.now();
     }
 }

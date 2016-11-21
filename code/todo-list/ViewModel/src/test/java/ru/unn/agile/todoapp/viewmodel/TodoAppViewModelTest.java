@@ -11,6 +11,9 @@ import static org.junit.Assert.assertTrue;
 
 public class TodoAppViewModelTest {
     private TodoAppViewModel viewModel;
+    private final LocalDate TODAY = LocalDate.now();
+    private final LocalDate DAY_AFTER_TOMORROW = TODAY.plusDays(2);
+    private static final String NEW_TASK_DESCRIPTION = "Wash the car";
 
     @Before
     public void setUp() {
@@ -19,7 +22,7 @@ public class TodoAppViewModelTest {
 
     @Test
     public void byDefaultNewTaskDateIsToday() {
-        assertEquals(LocalDate.now(), viewModel.getNewTaskDate());
+        assertEquals(TODAY, viewModel.getNewTaskDueDate());
     }
 
     @Test
@@ -34,16 +37,36 @@ public class TodoAppViewModelTest {
 
     @Test
     public void whenDescriptionIsNonEmptyAddNewTaskButtonIsEnabled() {
-        viewModel.setNewTaskDescription("Wash the car");
+        viewModel.setNewTaskDescription(NEW_TASK_DESCRIPTION);
 
         assertTrue(viewModel.isAddNewTaskButtonEnabled());
     }
 
     @Test
     public void whenDescriptionIsClearedAddNewTaskButtonIsDisabled() {
-        viewModel.setNewTaskDescription("Wash the car");
+        viewModel.setNewTaskDescription(NEW_TASK_DESCRIPTION);
+
         viewModel.setNewTaskDescription("");
 
         assertFalse(viewModel.isAddNewTaskButtonEnabled());
+    }
+
+    @Test
+    public void whenAddingNewTaskDescriptionFieldShouldClear() {
+        viewModel.setNewTaskDescription(NEW_TASK_DESCRIPTION);
+
+        viewModel.pressAddNewTaskButton();
+
+        assertEquals("", viewModel.getNewTaskDescription());
+    }
+
+    @Test
+    public void whenAddingNewTaskDueDateShouldJumpBackToToday() {
+        viewModel.setNewTaskDescription(NEW_TASK_DESCRIPTION);
+        viewModel.setDueDate(DAY_AFTER_TOMORROW);
+
+        viewModel.pressAddNewTaskButton();
+
+        assertEquals(TODAY, viewModel.getNewTaskDueDate());
     }
 }
