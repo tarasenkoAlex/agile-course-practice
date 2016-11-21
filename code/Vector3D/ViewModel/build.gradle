@@ -1,0 +1,9 @@
+apply from:   rootDir.getAbsolutePath() + '/code/config/scripts/javafx.plugin'
+
+javafx {
+    mainClass 'com.github.rybval.vector3d.viewmodel.Vector3DViewModel'
+}
+
+dependencies {
+    compile project(':Vector3D-Model')
+}

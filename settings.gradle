@@ -126,6 +126,10 @@ project(":code/Redkin-Michail").name = "Redkin-Michail-Model"
 // Рыбин Валентин
 include "code/rybin-valentine"
 project(":code/rybin-valentine").name = "rybin-valentine-polynomial"
+include "code/Vector3D/ViewModel"
+project(":code/Vector3D/ViewModel").name = "Vector3D-ViewModel"
+include "code/Vector3D/View"
+project(":code/Vector3D/View").name = "Vector3D-View"
 
 // Рябинкин Евгений
 include "code/ryabinkin-evgeni"
