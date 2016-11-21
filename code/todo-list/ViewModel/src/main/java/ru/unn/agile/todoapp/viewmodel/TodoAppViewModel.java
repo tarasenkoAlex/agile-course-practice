@@ -1,11 +1,17 @@
 package ru.unn.agile.todoapp.viewmodel;
 
+import com.sun.corba.se.impl.logging.ActivationSystemException;
+import ru.unn.agile.todoapp.model.Task;
+import ru.unn.agile.todoapp.model.TaskList;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class TodoAppViewModel {
     private LocalDate newTaskDueDate = LocalDate.now();
     private String newTaskDescription = "";
     private boolean addNewTaskButtonEnabled = false;
+    private TaskList tasks = new TaskList();
 
     public LocalDate getNewTaskDueDate() {
         return newTaskDueDate;
@@ -30,7 +36,12 @@ public class TodoAppViewModel {
     }
 
     public void pressAddNewTaskButton() {
+        tasks.add(new Task(this.newTaskDescription, this.newTaskDueDate));
         this.newTaskDescription = "";
         this.newTaskDueDate = LocalDate.now();
+    }
+
+    public List<Task> getTasks() {
+        return tasks.getAll();
     }
 }

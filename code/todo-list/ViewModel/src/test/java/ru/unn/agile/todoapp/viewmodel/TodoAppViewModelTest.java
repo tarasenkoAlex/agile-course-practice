@@ -2,8 +2,10 @@ package ru.unn.agile.todoapp.viewmodel;
 
 import java.time.LocalDate;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.junit.Before;
 import org.junit.Test;
+import ru.unn.agile.todoapp.model.Task;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -68,5 +70,18 @@ public class TodoAppViewModelTest {
         viewModel.pressAddNewTaskButton();
 
         assertEquals(TODAY, viewModel.getNewTaskDueDate());
+    }
+
+    @Test
+    public void whenAddingNewTaskItAppearsInTheList() {
+        viewModel.setNewTaskDescription(NEW_TASK_DESCRIPTION);
+        viewModel.setDueDate(DAY_AFTER_TOMORROW);
+
+        viewModel.pressAddNewTaskButton();
+        Task lastTask = viewModel.getTasks().get(0);
+
+        assertEquals(NEW_TASK_DESCRIPTION, lastTask.getDescription());
+        assertEquals(DAY_AFTER_TOMORROW, lastTask.getDueDate());
+        assertFalse(lastTask.isDone());
     }
 }
