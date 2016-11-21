@@ -9,14 +9,11 @@ public class Vector3 {
 
     private static final int HASH_FACTOR = 31;
 
-
     public Vector3() {
-        //
+        this(0, 0, 0);
     }
 
-    public Vector3(final double x,
-                   final double y,
-                   final double z) {
+    public Vector3(final double x, final double y, final double z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -68,7 +65,6 @@ public class Vector3 {
         if (obj instanceof Vector3) {
             return equals((Vector3) obj);
         }
-
         return false;
     }
 
@@ -77,9 +73,7 @@ public class Vector3 {
         return String.format(Locale.US, "(%.4f, %.4f, %.4f)", this.x, this.y, this.z);
     }
 
-    public boolean equals(final double x,
-                          final double y,
-                          final double z) {
+    public boolean equals(final double x, final double y, final double z) {
         return Math.abs(this.x - x) < Double.MIN_VALUE
             && Math.abs(this.y - y) < Double.MIN_VALUE
             && Math.abs(this.z - z) < Double.MIN_VALUE;
