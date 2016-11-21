@@ -80,7 +80,7 @@ public class Vec3Test {
     }
 
     @Test
-    public void crossProductOfCoplanarVectorsReturnNaNVector() {
+    public void crossProductOfCollinearVectorsReturnNaNVector() {
         firstVec = new Vector3(1.0, 0.0, 0.0);
         secondVec = new Vector3(0.1, 0.0, 0.0);
 
