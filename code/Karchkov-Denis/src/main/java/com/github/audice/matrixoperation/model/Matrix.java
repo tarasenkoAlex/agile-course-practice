@@ -1,9 +1,7 @@
-package main.java.com.github.audice.matrixoperation.model;
+package com.github.audice.matrixoperation.model;
 
 import java.util.Arrays;
-/**
- * Created by Denis on 10.11.2016.
- */
+
 public class Matrix {
     private int rows;
     private int columns;
@@ -19,12 +17,15 @@ public class Matrix {
     public int getNumR() {
         return this.rows;
     }
-    public int getNumCol() {
+
+    public int getNumC() {
         return this.columns;
     }
+
     public float getElementMatrix(final int numberOfElement) {
         return this.elementsOfMatrix[numberOfElement];
     }
+
     @Override
     public String toString() {
         String arrayText = "";
@@ -37,35 +38,35 @@ public class Matrix {
         return null;
     }
 
-    public static Matrix sumMatrix(final Matrix first, final Matrix second) {
-        if (first.getNumCol() == second.getNumCol()
+    public static Matrix sum(final Matrix first, final Matrix second) {
+        if (first.getNumC() == second.getNumC()
                 && first.getNumR() == second.getNumR()) {
             float[] resultSum = new float[first.elementsOfMatrix.length];
             for (int numEl = 0; numEl < first.elementsOfMatrix.length; numEl++) {
                 resultSum[numEl] = first.getElementMatrix(numEl)
                         + second.getElementMatrix(numEl);
             }
-            return new Matrix(first.getNumR(), first.getNumCol(), resultSum);
+            return new Matrix(first.getNumR(), first.getNumC(), resultSum);
         }
         return null;
     }
 
-    public static Matrix multiplyMatrix(final Matrix first, final Matrix second) {
-        if (first.getNumCol() == second.getNumR()) {
-            float[] multyArray = new float[first.getNumR() * second.getNumCol()];
+    public static Matrix multiply(final Matrix first, final Matrix second) {
+        if (first.getNumC() == second.getNumR()) {
+            float[] multyArray = new float[first.getNumR() * second.getNumC()];
             multArrProc(first, second, multyArray);
-            return new Matrix(first.getNumR(), second.getNumCol(), multyArray);
+            return new Matrix(first.getNumR(), second.getNumC(), multyArray);
         }
         return null;
     }
 
-    public static void multArrProc(final Matrix first, final Matrix second, final float[] mulAr) {
+    private static void multArrProc(final Matrix first, final Matrix second, final float[] mulAr) {
         for (int numberRow = 0; numberRow < first.getNumR(); numberRow++) {
-            for (int numCol = 0; numCol < second.getNumCol(); numCol++) {
-                for (int k = 0; k < first.getNumCol(); k++) {
-                    mulAr[numberRow * second.getNumCol() + numCol] +=
-                            first.getElementMatrix(numberRow * first.getNumCol() + k)
-                                    * second.getElementMatrix(numCol + k * second.getNumCol());
+            for (int numCol = 0; numCol < second.getNumC(); numCol++) {
+                for (int k = 0; k < first.getNumC(); k++) {
+                    mulAr[numberRow * second.getNumC() + numCol] +=
+                            first.getElementMatrix(numberRow * first.getNumC() + k)
+                                    * second.getElementMatrix(numCol + k * second.getNumC());
                 }
             }
         }

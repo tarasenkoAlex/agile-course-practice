@@ -1,6 +1,6 @@
-package test.java.com.github.audice.matrixoperation.model;
+package com.github.audice.matrixoperation.model;
 
-import main.java.com.github.audice.matrixoperation.model.Matrix;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -32,12 +32,12 @@ public class CalculateMultyAndPlussMatrixTest {
     @Test
     public void compareMatrixAndTestArrayInTextImage() {
         matrix = new Matrix(rows, columns, new float[]{1, 2, 3, 4, 5, 6});
-        assertEquals(arryeToString(new float[]{1, 2, 3, 4, 5, 6}), matrix.toString());
+        Assert.assertEquals(arryeToString(new float[]{1, 2, 3, 4, 5, 6}), matrix.toString());
     }
     @Test
     public void compareMatrixAndTestArrayInTextImageOnNotEquals() {
         matrix = new Matrix(rows, columns, new float[]{1, 2, 3, 4, 5, 7});
-        assertNotEquals(arryeToString(new float[]{1, 2, 3, 4, 5, 6}), matrix.toString());
+        Assert.assertNotEquals(arryeToString(new float[]{1, 2, 3, 4, 5, 6}), matrix.toString());
     }
     @Test
     public void arrayInTextImageOnNotEmpty() {
@@ -52,22 +52,22 @@ public class CalculateMultyAndPlussMatrixTest {
     @Test
     public void canGetNumberOfRows() {
         matrix = new Matrix(5, columns, testArray);
-        assertEquals(5, matrix.getNumR());
+        Assert.assertEquals(5, matrix.getNumR());
     }
     @Test
     public void canGetNumberOfColumns() {
         matrix = new Matrix(rows, 7, testArray);
-        assertEquals(7, matrix.getNumCol());
+        Assert.assertEquals(7, matrix.getNumC());
     }
     @Test
     public void getElementOfIndex() {
         matrix = new Matrix(rows, columns, testArray);
-        assertEquals(testArray[3], matrix.getElementMatrix(3), delta);
+        Assert.assertEquals(testArray[3], matrix.getElementMatrix(3), delta);
     }
     @Test
     public void getIsNotElementOfIndex() {
         matrix = new Matrix(rows, columns, testArray);
-        assertNotEquals(100f, matrix.getElementMatrix(3), delta);
+        Assert.assertNotEquals(100f, matrix.getElementMatrix(3), delta);
     }
 
     @Test
@@ -75,33 +75,33 @@ public class CalculateMultyAndPlussMatrixTest {
         first = new Matrix(2, 2, new float[]{1, 1, 1, 1});
         second = new Matrix(2, 2, new float[]{2, 2, 2, 2});
         String testM = "3.0,3.0,3.0,3.0,";
-        assertEquals(testM, Matrix.sumMatrix(first, second).toString());
+        Assert.assertEquals(testM, Matrix.sum(first, second).toString());
     }
     @Test
     public void canSumTwoMatrixWithDifferentNumberOfRows() {
         first = new Matrix(3, 2, testArray);
         second = new Matrix(2, 2, new float[]{2, 2, 2, 2});
         String testM = "3.0,3.0,3.0,3.0,";
-        assertEquals(null, Matrix.sumMatrix(first, second));
+        Assert.assertEquals(null, Matrix.sum(first, second));
     }
     @Test
     public void canSumTwoMatrixWithDifferentNumberOfColumnsAndRows() {
         first = new Matrix(3, 3, new float[]{1, 1, 1, 1, 2, 2, 1, 1, 2});
         second = new Matrix(2, 2, new float[]{2, 2, 2, 2});
         String testM = "3.0,3.0,3.0,3.0,";
-        assertEquals(null, Matrix.sumMatrix(first, second));
+        Assert.assertEquals(null, Matrix.sum(first, second));
     }
     @Test
     public void canMultyTwoMatrix() {
         first = new Matrix(2, 2, new float[]{1, 3, 4, 2});
         second = new Matrix(2, 2, new float[]{1, 2, 1, 3});
         String result = "4.0,11.0,6.0,14.0,";
-        assertEquals(result, Matrix.multiplyMatrix(first, second).toString());
+        Assert.assertEquals(result, Matrix.multiply(first, second).toString());
     }
     @Test
     public void canMultyTwoMatrixWithDifferentNumbersOfColumnsAndRows() {
         first = new Matrix(2, 3, new float[]{1, 3, 4, 2, 3, 4});
         second = new Matrix(2, 2, new float[]{1, 2, 1, 3});
-        assertNull(Matrix.multiplyMatrix(first, second));
+        assertNull(Matrix.multiply(first, second));
     }
 }
