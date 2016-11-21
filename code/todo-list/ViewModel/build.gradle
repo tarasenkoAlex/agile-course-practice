@@ -1,0 +1,8 @@
+dependencies {
+    compile project(':todo-list-model')
+}
+
+sourceSets {
+    main.java.srcDir 'src/main/java'
+    main.java.srcDir 'src/test/java'
+}
