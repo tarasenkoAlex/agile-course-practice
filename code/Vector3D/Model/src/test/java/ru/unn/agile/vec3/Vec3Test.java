@@ -57,9 +57,9 @@ public class Vec3Test {
         firstVec             = new Vector3(1.0, 2.0, 3.0);
         secondVec            = new Vector3(1.0 * invNorm, 2.0 * invNorm, 3.0 * invNorm);
 
-        firstVec.normalize();
+        Vector3 normalized = firstVec.normalize();
 
-        assertEquals(firstVec, secondVec);
+        assertEquals(normalized, secondVec);
     }
 
     @Test
@@ -120,36 +120,6 @@ public class Vec3Test {
         secondVec = new Vector3(6.0, 6.0, 6.0);
 
         assertEquals(firstVec.hashCode(), secondVec.hashCode());
-    }
-
-    @Test
-    public void isCorrectFirstComponentOfVector() {
-        final double value = 666.0;
-
-        firstVec = new Vector3();
-        firstVec.setX(value);
-
-        assertEquals(firstVec.getX(), value, Double.MIN_VALUE);
-    }
-
-    @Test
-    public void isCorrectSecondComponentOfVector() {
-        final double value = 999.0;
-
-        firstVec = new Vector3();
-        firstVec.setY(value);
-
-        assertEquals(firstVec.getY(), value, Double.MIN_VALUE);
-    }
-
-    @Test
-    public void isCorrectThirdComponentOfVector() {
-        final double value = 13.0;
-
-        firstVec = new Vector3();
-        firstVec.setZ(value);
-
-        assertEquals(firstVec.getZ(), value, Double.MIN_VALUE);
     }
 
     @Test

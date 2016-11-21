@@ -3,9 +3,9 @@ package ru.unn.agile.vec3;
 import java.util.Locale;
 
 public class Vector3 {
-    private double x;
-    private double y;
-    private double z;
+    private final double x;
+    private final double y;
+    private final double z;
 
     private static final int HASH_FACTOR = 31;
 
@@ -23,18 +23,6 @@ public class Vector3 {
         x = array[0];
         y = array[1];
         z = array[2];
-    }
-
-    public void setX(final double x) {
-        this.x = x;
-    }
-
-    public void setY(final double y) {
-        this.y = y;
-    }
-
-    public void setZ(final double z) {
-        this.z = z;
     }
 
     public double getX() {
@@ -87,17 +75,13 @@ public class Vector3 {
         return Math.sqrt(dot(this));
     }
 
-    public void normalize() {
+    public Vector3 normalize() {
         final double norm = getNorm();
 
         if (norm < Double.MIN_VALUE) {
-            x = 0;
-            y = 0;
-            z = 0;
+            return new Vector3(0, 0, 0);
         } else {
-            x /= norm;
-            y /= norm;
-            z /= norm;
+            return new Vector3(x / norm, y / norm, z / norm);
         }
     }
 
