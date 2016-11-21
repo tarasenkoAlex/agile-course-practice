@@ -7,14 +7,6 @@ public class Vector3 {
     private double y;
     private double z;
 
-    private enum Vector3Status {
-        ERROR_NORMALIZE {
-            public String toString() {
-                return "Norm of vector is small";
-            }
-        }
-    }
-
     private static final int HASH_FACTOR = 31;
 
 
@@ -105,12 +97,14 @@ public class Vector3 {
         final double norm = getNorm();
 
         if (norm < Double.MIN_VALUE) {
-            throw new ArithmeticException(Vector3Status.ERROR_NORMALIZE.toString());
+            x = 0;
+            y = 0;
+            z = 0;
+        } else {
+            x /= norm;
+            y /= norm;
+            z /= norm;
         }
-
-        x /= norm;
-        y /= norm;
-        z /= norm;
     }
 
     public double dot(final Vector3 vec) {
@@ -122,16 +116,8 @@ public class Vector3 {
                                      z * vec.x - x * vec.z,
                                      x * vec.y - y * vec.x);
 
-        try {
-            vector.normalize();
-        } catch (Throwable t) {
-            vector = new Vector3(Double.NaN, Double.NaN, Double.NaN);
-        }
+        vector.normalize();
 
         return vector;
-    }
-
-    public boolean isNaN() {
-        return Double.isNaN(x) || Double.isNaN(y) || Double.isNaN(z);
     }
 }

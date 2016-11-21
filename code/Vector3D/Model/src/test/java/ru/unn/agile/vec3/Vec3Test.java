@@ -62,11 +62,13 @@ public class Vec3Test {
         assertEquals(firstVec, secondVec);
     }
 
-    @Test (expected = ArithmeticException.class)
+    @Test
     public void normIsEqualZero() {
         firstVec = new Vector3(0.0, 0.0, 0.0);
 
         firstVec.normalize();
+
+        assertEquals(firstVec, new Vector3(0.0, 0.0, 0.0));
     }
 
     @Test
@@ -80,13 +82,13 @@ public class Vec3Test {
     }
 
     @Test
-    public void crossProductOfCollinearVectorsReturnNaNVector() {
+    public void crossProductOfCollinearVectorsReturnZeroVector() {
         firstVec = new Vector3(1.0, 0.0, 0.0);
         secondVec = new Vector3(0.1, 0.0, 0.0);
 
         final Vector3 vector = firstVec.cross(secondVec);
 
-        assertTrue(vector.isNaN());
+        assertEquals(vector, new Vector3(0.0, 0.0, 0.0));
     }
 
     @Test (expected = NullPointerException.class)
