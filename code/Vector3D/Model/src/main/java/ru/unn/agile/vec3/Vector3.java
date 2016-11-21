@@ -67,8 +67,8 @@ public class Vector3 {
         final long hashZ = Double.doubleToLongBits(z);
 
         return HASH_FACTOR * Long.hashCode(hashX)
-                + HASH_FACTOR * Long.hashCode(hashY)
-                + HASH_FACTOR * Long.hashCode(hashZ);
+             + HASH_FACTOR * Long.hashCode(hashY)
+             + HASH_FACTOR * Long.hashCode(hashZ);
     }
 
     @Override
@@ -89,12 +89,12 @@ public class Vector3 {
                           final double y,
                           final double z) {
         return Math.abs(this.x - x) < Double.MIN_VALUE
-                && Math.abs(this.y - y) < Double.MIN_VALUE
-                && Math.abs(this.z - z) < Double.MIN_VALUE;
+            && Math.abs(this.y - y) < Double.MIN_VALUE
+            && Math.abs(this.z - z) < Double.MIN_VALUE;
     }
 
     public boolean equals(final Vector3 vec) {
-        return equals(vec.getX(), vec.getY(), vec.getZ());
+        return equals(vec.x, vec.y, vec.z);
     }
 
     public double getNorm() {
@@ -114,13 +114,13 @@ public class Vector3 {
     }
 
     public double dot(final Vector3 vec) {
-        return x * vec.getX() + y * vec.getY() + z * vec.getZ();
+        return x * vec.x + y * vec.y + z * vec.z;
     }
 
     public Vector3 cross(final Vector3 vec) {
-        Vector3 vector = new Vector3(y * vec.getZ() - z * vec.getY(),
-                z * vec.getX() - x * vec.getZ(),
-                x * vec.getY() - y * vec.getX());
+        Vector3 vector = new Vector3(y * vec.z - z * vec.y,
+                                     z * vec.x - x * vec.z,
+                                     x * vec.y - y * vec.x);
 
         try {
             vector.normalize();
