@@ -86,9 +86,7 @@ public class Vec3Test {
 
         final Vector3 vector = firstVec.cross(secondVec);
 
-        assertTrue(Double.isNaN(vector.getX()));
-        assertTrue(Double.isNaN(vector.getY()));
-        assertTrue(Double.isNaN(vector.getZ()));
+        assertTrue(vector.isNaN());
     }
 
     @Test (expected = NullPointerException.class)

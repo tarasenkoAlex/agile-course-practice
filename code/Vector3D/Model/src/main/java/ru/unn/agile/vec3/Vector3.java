@@ -130,4 +130,8 @@ public class Vector3 {
 
         return vector;
     }
+
+    public boolean isNaN() {
+        return Double.isNaN(x) || Double.isNaN(y) || Double.isNaN(z);
+    }
 }
