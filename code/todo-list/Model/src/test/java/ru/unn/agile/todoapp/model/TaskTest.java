@@ -1,7 +1,7 @@
 package ru.unn.agile.todoapp.model;
 
 import org.junit.Test;
-import java.util.Date;
+import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 import static ru.unn.agile.todoapp.model.DateHelper.*;
@@ -28,13 +28,13 @@ public class TaskTest {
     }
 
     @Test
-    public void doesExpirationDateEqualToTheInitial() throws Exception {
-        Date initialDate = makeDate("05/05/2016");
+    public void doesDueDateEqualToTheInitial() throws Exception {
+        LocalDate initialDate = makeDate("05/05/2016");
         Task task = new Task("Work lunch with the dudes", initialDate);
 
-        Date actualDate = task.getDueDate();
+        LocalDate actualDate = task.getDueDate();
 
-        assertEquals(initialDate.getTime(), actualDate.getTime());
+        assertEquals(initialDate, actualDate);
     }
 
     @Test(expected = NullPointerException.class)
@@ -44,7 +44,7 @@ public class TaskTest {
 
     @Test
     public void isAbleToMarkTaskAsDone() throws Exception {
-        Task task = new Task("Meeting with the customers", makeDate("03/15/2016"));
+        Task task = new Task("Meeting with the customers", makeDate("15/03/2016"));
 
         task.markAsDone();
 

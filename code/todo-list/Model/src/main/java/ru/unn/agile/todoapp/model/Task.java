@@ -1,16 +1,16 @@
 package ru.unn.agile.todoapp.model;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Objects;
 
 public class Task {
     private final String description;
-    private final Date dueDate;
+    private final LocalDate dueDate;
     private boolean isDoneFlag = false;
 
-    public Task(final String description, final Date dueDate) {
+    public Task(final String description, final LocalDate dueDate) {
         Objects.requireNonNull(description, "description is not able to be null");
         Objects.requireNonNull(dueDate, "dueDate is not able to be null");
         if (description.trim().length() == 0) {
@@ -25,7 +25,7 @@ public class Task {
         return description;
     }
 
-    public final Date getDueDate() {
+    public final LocalDate getDueDate() {
         return dueDate;
     }
 

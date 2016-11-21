@@ -1,14 +1,14 @@
 package ru.unn.agile.todoapp.model;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 class DateHelper {
     private DateHelper() { }
 
-    public static Date makeDate(final String date) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return sdf.parse(date);
+    public static LocalDate makeDate(final String date) throws ParseException {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(date, df);
     }
 }
