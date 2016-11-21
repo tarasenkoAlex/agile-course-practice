@@ -18,4 +18,10 @@ public class TodoAppViewModel {
     public boolean isAddNewTaskButtonEnabled() {
         return addNewTaskButtonEnabled;
     }
+
+    public void setNewTaskDescription(String newTaskDescription) {
+        this.newTaskDescription = newTaskDescription;
+
+        this.addNewTaskButtonEnabled = !newTaskDescription.isEmpty();
+    }
 }

@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TodoAppViewModelTest {
     private TodoAppViewModel viewModel;
@@ -27,6 +29,21 @@ public class TodoAppViewModelTest {
 
     @Test
     public void byDefaultAddNewTaskButtonIsDisabled() {
-        assertEquals(false, viewModel.isAddNewTaskButtonEnabled());
+        assertFalse(viewModel.isAddNewTaskButtonEnabled());
+    }
+
+    @Test
+    public void whenDescriptionIsNonEmptyAddNewTaskButtonIsEnabled() {
+        viewModel.setNewTaskDescription("Wash the car");
+
+        assertTrue(viewModel.isAddNewTaskButtonEnabled());
+    }
+
+    @Test
+    public void whenDescriptionIsClearedAddNewTaskButtonIsDisabled() {
+        viewModel.setNewTaskDescription("Wash the car");
+        viewModel.setNewTaskDescription("");
+
+        assertFalse(viewModel.isAddNewTaskButtonEnabled());
     }
 }
