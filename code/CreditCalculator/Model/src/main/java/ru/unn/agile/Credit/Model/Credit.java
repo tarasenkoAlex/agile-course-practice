@@ -9,7 +9,7 @@ public class Credit {
     private static final double PERCENT_MAX_VALUE = 100;
     private static final double MONTHS_IN_THE_YEAR = 12;
 
-    Credit(final double sum, final double months, final double percent) {
+    public Credit(final double sum, final double months, final double percent) {
         if (sum <= 0) {
             throw new InvalidParameterException("Wrong input data!");
         }
