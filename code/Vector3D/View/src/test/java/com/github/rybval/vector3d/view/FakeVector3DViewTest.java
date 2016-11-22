@@ -1,4 +1,4 @@
-package ru.unn.agile.ComplexNumber.view;
+package com.github.rybval.vector3d.view;
 
 import org.junit.Ignore;
 import org.junit.Test;
