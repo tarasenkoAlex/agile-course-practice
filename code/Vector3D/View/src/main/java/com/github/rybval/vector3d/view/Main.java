@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(final Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Vector3D.fxml"));
-        primaryStage.setTitle("3D Vector Operations");
+        primaryStage.setTitle("Операции над трёхмерными векторами");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

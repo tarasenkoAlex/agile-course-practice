@@ -1,5 +1,7 @@
 apply from:   rootDir.getAbsolutePath() + '/code/config/scripts/javafx.plugin'
 
+compileJava.options.encoding = 'UTF-8'
+
 dependencies {
     compile project(':Vector3D-ViewModel')
 }
