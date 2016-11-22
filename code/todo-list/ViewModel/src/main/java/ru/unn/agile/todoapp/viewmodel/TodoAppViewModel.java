@@ -8,10 +8,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class TodoAppViewModel {
-    private ObjectProperty<LocalDate> newTaskDueDate = new SimpleObjectProperty<>(LocalDate.now());
-    private StringProperty newTaskDescription = new SimpleStringProperty("");
-    private BooleanProperty addNewTaskButtonDisable = new SimpleBooleanProperty(true);
-    private TaskList tasks = new TaskList();
+    private final StringProperty newTaskDescription =
+            new SimpleStringProperty("");
+    private final ObjectProperty<LocalDate> newTaskDueDate =
+            new SimpleObjectProperty<>(LocalDate.now());
+    private final BooleanProperty addNewTaskButtonDisable =
+            new SimpleBooleanProperty(true);
+    private final TaskList tasks = new TaskList();
 
     public TodoAppViewModel() {
         newTaskDescription.addListener((observable, oldValue, newValue) ->
@@ -34,7 +37,7 @@ public class TodoAppViewModel {
         return addNewTaskButtonDisable.get();
     }
 
-    public void updateAddNewTaskButtonStatus(String newTaskDescription) {
+    public final void updateAddNewTaskButtonStatus(final String newTaskDescription) {
         this.addNewTaskButtonDisable.setValue(newTaskDescription.isEmpty());
     }
 

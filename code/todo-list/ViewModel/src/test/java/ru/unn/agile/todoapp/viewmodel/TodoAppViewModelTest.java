@@ -12,8 +12,8 @@ import static org.junit.Assert.assertTrue;
 
 public class TodoAppViewModelTest {
     private TodoAppViewModel viewModel;
-    private final LocalDate TODAY = LocalDate.now();
-    private final LocalDate DAY_AFTER_TOMORROW = TODAY.plusDays(2);
+    private static final LocalDate TODAY = LocalDate.now();
+    private static final LocalDate DAY_AFTER_TOMORROW = TODAY.plusDays(2);
     private static final String NEW_TASK_DESCRIPTION = "Wash the car";
 
     @Before
