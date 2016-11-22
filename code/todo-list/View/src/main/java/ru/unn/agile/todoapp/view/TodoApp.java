@@ -21,5 +21,6 @@ public class TodoApp {
         taskDescriptionTextField.textProperty().bindBidirectional(
                 viewModel.newTaskDescriptionProperty());
         taskDueDatePicker.valueProperty().bindBidirectional(viewModel.newTaskDueDateProperty());
+        addTaskButton.setOnAction(value -> viewModel.pressAddNewTaskButton());
     }
 }
