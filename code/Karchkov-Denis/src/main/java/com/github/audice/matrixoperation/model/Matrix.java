@@ -14,6 +14,7 @@ public class Matrix {
             this.elementsOfMatrix = Arrays.copyOf(matrixElements, matrixElements.length);
         }
     }
+
     public int getNumR() {
         return this.rows;
     }
