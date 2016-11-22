@@ -5,23 +5,27 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
+<?import ru.unn.agile.todoapp.viewmodel.TodoAppViewModel?>
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="451.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.agile.todoapp.view.TodoApp">
+    <fx:define>
+       <TodoAppViewModel fx:id="viewModel"/>
+    </fx:define>
    <children>
       <VBox prefHeight="451.0" prefWidth="403.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="403.0" spacing="4.0" style="-fx-background-color: green;" VBox.vgrow="NEVER">
                <children>
-                  <TextField id="taskDescriptionTextField" prefHeight="27.0" prefWidth="184.0" promptText="What would you like to do?" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="taskDescriptionTextField" prefHeight="27.0" prefWidth="184.0" promptText="What would you like to do?" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </TextField>
-                  <DatePicker id="taskDueDatePicker" prefHeight="27.0" prefWidth="112.0" HBox.hgrow="NEVER">
+                  <DatePicker fx:id="taskDueDatePicker" editable="false" prefHeight="27.0" prefWidth="112.0" HBox.hgrow="NEVER">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </DatePicker>
-                  <Button id="addTaskButton" mnemonicParsing="false" text="New task" HBox.hgrow="NEVER">
+                  <Button fx:id="addTaskButton" mnemonicParsing="false" text="New task" HBox.hgrow="NEVER" disable="${viewModel.addNewTaskButtonDisable}">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

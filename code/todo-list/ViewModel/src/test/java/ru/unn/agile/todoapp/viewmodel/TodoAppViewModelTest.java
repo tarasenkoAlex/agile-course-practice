@@ -2,7 +2,6 @@ package ru.unn.agile.todoapp.viewmodel;
 
 import java.time.LocalDate;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.junit.Before;
 import org.junit.Test;
 import ru.unn.agile.todoapp.model.Task;
@@ -24,58 +23,58 @@ public class TodoAppViewModelTest {
 
     @Test
     public void byDefaultNewTaskDateIsToday() {
-        assertEquals(TODAY, viewModel.getNewTaskDueDate());
+        assertEquals(TODAY, viewModel.newTaskDueDateProperty().getValue());
     }
 
     @Test
     public void byDefaultNewTaskDescriptionIsEmpty() {
-        assertEquals("", viewModel.getNewTaskDescription());
+        assertEquals("", viewModel.newTaskDescriptionProperty().getValue());
     }
 
     @Test
     public void byDefaultAddNewTaskButtonIsDisabled() {
-        assertFalse(viewModel.isAddNewTaskButtonEnabled());
+        assertTrue(viewModel.addNewTaskButtonDisableProperty().get());
     }
 
     @Test
     public void whenDescriptionIsNonEmptyAddNewTaskButtonIsEnabled() {
-        viewModel.setNewTaskDescription(NEW_TASK_DESCRIPTION);
+        viewModel.newTaskDescriptionProperty().set(NEW_TASK_DESCRIPTION);
 
-        assertTrue(viewModel.isAddNewTaskButtonEnabled());
+        assertFalse(viewModel.addNewTaskButtonDisableProperty().get());
     }
 
     @Test
     public void whenDescriptionIsClearedAddNewTaskButtonIsDisabled() {
-        viewModel.setNewTaskDescription(NEW_TASK_DESCRIPTION);
+        viewModel.newTaskDescriptionProperty().set(NEW_TASK_DESCRIPTION);
 
-        viewModel.setNewTaskDescription("");
+        viewModel.newTaskDescriptionProperty().set("");
 
-        assertFalse(viewModel.isAddNewTaskButtonEnabled());
+        assertTrue(viewModel.addNewTaskButtonDisableProperty().get());
     }
 
     @Test
     public void whenAddingNewTaskDescriptionFieldShouldClear() {
-        viewModel.setNewTaskDescription(NEW_TASK_DESCRIPTION);
+        viewModel.newTaskDescriptionProperty().set(NEW_TASK_DESCRIPTION);
 
         viewModel.pressAddNewTaskButton();
 
-        assertEquals("", viewModel.getNewTaskDescription());
+        assertEquals("", viewModel.newTaskDescriptionProperty().get());
     }
 
     @Test
     public void whenAddingNewTaskDueDateShouldJumpBackToToday() {
-        viewModel.setNewTaskDescription(NEW_TASK_DESCRIPTION);
-        viewModel.setDueDate(DAY_AFTER_TOMORROW);
+        viewModel.newTaskDescriptionProperty().set(NEW_TASK_DESCRIPTION);
+        viewModel.newTaskDueDateProperty().set(DAY_AFTER_TOMORROW);
 
         viewModel.pressAddNewTaskButton();
 
-        assertEquals(TODAY, viewModel.getNewTaskDueDate());
+        assertEquals(TODAY, viewModel.newTaskDueDateProperty().get());
     }
 
     @Test
     public void whenAddingNewTaskItAppearsInTheList() {
-        viewModel.setNewTaskDescription(NEW_TASK_DESCRIPTION);
-        viewModel.setDueDate(DAY_AFTER_TOMORROW);
+        viewModel.newTaskDescriptionProperty().set(NEW_TASK_DESCRIPTION);
+        viewModel.newTaskDueDateProperty().set(DAY_AFTER_TOMORROW);
 
         viewModel.pressAddNewTaskButton();
         Task lastTask = viewModel.getTasks().get(0);
