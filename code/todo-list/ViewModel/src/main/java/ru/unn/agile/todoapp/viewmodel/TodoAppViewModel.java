@@ -1,6 +1,5 @@
 package ru.unn.agile.todoapp.viewmodel;
 
-import com.sun.corba.se.impl.logging.ActivationSystemException;
 import ru.unn.agile.todoapp.model.Task;
 import ru.unn.agile.todoapp.model.TaskList;
 
