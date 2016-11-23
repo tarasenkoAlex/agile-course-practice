@@ -5,16 +5,15 @@ import static java.lang.Double.isNaN;
 import static org.junit.Assert.*;
 
 public class NewtonRootsTests {
-    private NewtonMethod newtonMethod;
     private double intervalStart = 0;
     private double intervalEnd = 2;
     private double initialPoint = 1.5;
     private double eps = 1e-8;
     private double derivativeStep = 1e-3;
+    private NewtonMethod newtonMethod = new NewtonMethod(eps, derivativeStep);
 
     @Test
     public void findRootIfExistInIntervalWithFunctionModuleStopping() {
-        newtonMethod = new NewtonMethod(eps, derivativeStep);
         newtonMethod.setStoppingCriterion(NewtonMethod.StoppingCriterion.FunctionModule);
         FunctionInterface func = (x) -> (x - 1);
 
@@ -25,7 +24,6 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootIfExistInIntervalWithDifferenceBetweenApproxStopping() {
-        newtonMethod = new NewtonMethod(eps, derivativeStep);
         newtonMethod.setStoppingCriterion(
                 NewtonMethod.StoppingCriterion.DifferenceBetweenApproximates);
         FunctionInterface func = (x) -> (x - 1);
@@ -37,7 +35,6 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootOnTheLeftBorder() {
-        newtonMethod = new NewtonMethod(eps, derivativeStep);
         FunctionInterface func = (x) -> (x);
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
@@ -47,7 +44,6 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootOnTheRightBorder() {
-        newtonMethod = new NewtonMethod(eps, derivativeStep);
         FunctionInterface func = (x) -> (2 - x);
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
@@ -57,7 +53,6 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootIfNotExistInInterval() {
-        newtonMethod = new NewtonMethod(eps, derivativeStep);
         FunctionInterface func = (x) -> (x + 1);
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
@@ -67,7 +62,6 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootIfIncorrectIntervalBoundaries() {
-        newtonMethod = new NewtonMethod(eps, derivativeStep);
         FunctionInterface func = (x) -> (x + 1);
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalEnd, intervalStart);
@@ -78,7 +72,6 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootIfInitialPointOutsideInterval() {
-        newtonMethod = new NewtonMethod(eps, derivativeStep);
         FunctionInterface func = (x) -> (x + 1);
 
         double root = newtonMethod.findRoot(func, -10, intervalStart, intervalEnd);
@@ -89,7 +82,6 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootIfNonmonotonicFunction() {
-        newtonMethod = new NewtonMethod(eps, derivativeStep);
         FunctionInterface func = (x) -> (x - 1) * (x - 1);
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
@@ -100,8 +92,6 @@ public class NewtonRootsTests {
 
     @Test
     public void setStoppingCriterionAsFunctionModule() {
-        newtonMethod = new NewtonMethod();
-
         newtonMethod.setStoppingCriterion(NewtonMethod.StoppingCriterion.FunctionModule);
 
         assertEquals(newtonMethod.getStoppingCriterion(),
@@ -110,8 +100,6 @@ public class NewtonRootsTests {
 
     @Test
     public void setStoppingCriterionAsDifferenceBetweenApproximates() {
-        newtonMethod = new NewtonMethod();
-
         newtonMethod.setStoppingCriterion(
                 NewtonMethod.StoppingCriterion.DifferenceBetweenApproximates);
 
@@ -120,57 +108,36 @@ public class NewtonRootsTests {
     }
 
     @Test
-    public void setCorrectAccuracyEps() {
-        newtonMethod = new NewtonMethod();
-
+    public void setCorrectAccuracyEps() throws Exception {
         newtonMethod.setAccuracyEps(1e-4);
 
         assertTrue(newtonMethod.getAccuracyEps() == 1e-4);
     }
 
-    @Test
-    public void setZeroAccuracyEps() {
-        newtonMethod = new NewtonMethod();
-
+    @Test(expected = Exception.class)
+    public void setZeroAccuracyEps() throws Exception {
         newtonMethod.setAccuracyEps(0);
-
-        assertTrue(newtonMethod.getAccuracyEps() == NewtonMethod.DEFAULT_EPS);
     }
 
-    @Test
-    public void setNegativeAccuracyEps() {
-        newtonMethod = new NewtonMethod();
-
+    @Test(expected = Exception.class)
+    public void setNegativeAccuracyEps() throws Exception {
         newtonMethod.setAccuracyEps(-1);
-
-        assertTrue(newtonMethod.getAccuracyEps() == NewtonMethod.DEFAULT_EPS);
     }
 
-
     @Test
-    public void setCorrectDerivativeStep() {
-        newtonMethod = new NewtonMethod();
-
+    public void setCorrectDerivativeStep() throws Exception {
         newtonMethod.setDerivativeStep(1e-2);
 
         assertTrue(newtonMethod.getDerivativeStep() == 1e-2);
     }
 
-    @Test
-    public void setZeroDerivativeStep() {
-        newtonMethod = new NewtonMethod();
-
+    @Test(expected = Exception.class)
+    public void setZeroDerivativeStep() throws Exception {
         newtonMethod.setDerivativeStep(0);
-
-        assertTrue(newtonMethod.getDerivativeStep() == NewtonMethod.DEFAULT_DERIVATIVE_STEP);
     }
 
-    @Test
-    public void setNegativeDerivativeStep() {
-        newtonMethod = new NewtonMethod();
-
+    @Test(expected = Exception.class)
+    public void setNegativeDerivativeStep() throws Exception {
         newtonMethod.setDerivativeStep(-1e-2);
-
-        assertTrue(newtonMethod.getDerivativeStep() == NewtonMethod.DEFAULT_DERIVATIVE_STEP);
     }
 }

@@ -29,12 +29,6 @@ class NewtonMethod {
         boolean check(FunctionInterface func, double x, double xPrev, double accuracy);
     }
 
-    NewtonMethod() {
-        accuracyEps = DEFAULT_EPS;
-        derivativeStep = DEFAULT_DERIVATIVE_STEP;
-        currentStoppingCriterionFunction = stoppingCriterionAsFunctionModule;
-    }
-
     NewtonMethod(final double accuracy, final double derivativeComputeStep) {
         accuracyEps = accuracy;
         derivativeStep = derivativeComputeStep;
@@ -128,11 +122,11 @@ class NewtonMethod {
         return stoppingCriterion;
     }
 
-    public void setAccuracyEps(final double accuracy) {
+    public void setAccuracyEps(final double accuracy) throws Exception {
         if (accuracy > 0) {
             accuracyEps = accuracy;
         } else {
-            accuracyEps = DEFAULT_EPS;
+            throw new Exception("Accuracy is incorrect");
         }
     }
 
@@ -140,11 +134,11 @@ class NewtonMethod {
         return accuracyEps;
     }
 
-    public void setDerivativeStep(final double derivativeComputeStep) {
+    public void setDerivativeStep(final double derivativeComputeStep) throws Exception {
         if (derivativeComputeStep > 0) {
             derivativeStep = derivativeComputeStep;
         } else {
-            derivativeStep = DEFAULT_DERIVATIVE_STEP;
+            throw new Exception("Derivative step is incorrect");
         }
     }
 
