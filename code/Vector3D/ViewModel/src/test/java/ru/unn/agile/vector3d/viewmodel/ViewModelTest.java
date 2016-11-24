@@ -9,6 +9,8 @@ import static org.junit.Assert.*;
 
 public class ViewModelTest {
     private ViewModel viewModel;
+    private final String validVectorString = "-5.6, 8, +0.003";
+    private final String invalidVectorString = "-5.6, 8, 5dcfd";
 
     @Before
     public void setUp() {
@@ -18,6 +20,17 @@ public class ViewModelTest {
     @After
     public void tearDown() {
         viewModel = null;
+    }
+
+    @Test
+    public void canGetActiveTab() {
+        assertNotNull(viewModel.getActiveTab());
+    }
+
+    @Test
+    public void canSetActiveTab() {
+        viewModel.setActiveTab(OperationTab.DOTPRODUCT);
+        assertEquals(OperationTab.DOTPRODUCT, viewModel.getActiveTab());
     }
 
     @Test
@@ -33,7 +46,6 @@ public class ViewModelTest {
 
     @Test
     public void isButtonDisabledOnStart() {
-        ViewModel viewModel = new ViewModel();
         assertEquals(false, viewModel.isButtonEnabled());
     }
 
@@ -58,87 +70,74 @@ public class ViewModelTest {
 
     @Test
     public void canSetVectorText() {
-        String text = "some text";
-        viewModel.setVectorText(text);
-        assertEquals(text, viewModel.getVectorText());
+        viewModel.setVectorText(validVectorString);
+        assertEquals(validVectorString, viewModel.getVectorText());
     }
 
     @Test
     public void canGetDotProductOperandText() {
-        String text = viewModel.getDotProductOperandText();
-        assertNotNull(text);
+        assertNotNull(viewModel.getDotProductOperandText());
     }
 
     @Test
     public void canSetDotProductOperandText() {
-        String text = "some text";
-        viewModel.setDotProductOperandText(text);
-        assertEquals(text, viewModel.getDotProductOperandText());
+        viewModel.setDotProductOperandText(validVectorString);
+        assertEquals(validVectorString, viewModel.getDotProductOperandText());
     }
 
     @Test
     public void canGetCrossProductOperandText() {
-        String text = viewModel.getCrossProductOperandText();
-        assertNotNull(text);
+        assertNotNull(viewModel.getCrossProductOperandText());
     }
 
     @Test
     public void canSetCrossProductOperandText() {
-        String text = "some text";
-        viewModel.setCrossProductOperandText(text);
-        assertEquals(text, viewModel.getCrossProductOperandText());
+        viewModel.setCrossProductOperandText(validVectorString);
+        assertEquals(validVectorString, viewModel.getCrossProductOperandText());
     }
 
     @Test
     public void canGetNormResultText() {
-        String text = viewModel.getNormResultText();
-        assertNotNull(text);
+        assertNotNull(viewModel.getNormResultText());
     }
 
     @Test
     public void canSetNormResultText() {
-        String text = "some text";
-        viewModel.setNormResultText(text);
-        assertEquals(text, viewModel.getNormResultText());
+        viewModel.setNormResultText(validVectorString);
+        assertEquals(validVectorString, viewModel.getNormResultText());
     }
 
     @Test
     public void canGetNormalizationResultText() {
-        String text = viewModel.getNormalizationResultText();
-        assertNotNull(text);
+        assertNotNull(viewModel.getNormalizationResultText());
     }
 
     @Test
     public void canSetNormalizationResultText() {
-        String text = "some text";
-        viewModel.setNormalizationResultText(text);
-        assertEquals(text, viewModel.getNormalizationResultText());
+        viewModel.setNormalizationResultText(validVectorString);
+        assertEquals(validVectorString, viewModel.getNormalizationResultText());
     }
 
     @Test
     public void canGetDotProductResultText() {
-        String text = viewModel.getDotProductResultText();
-        assertNotNull(text);
+        assertNotNull(viewModel.getDotProductResultText());
     }
 
     @Test
     public void canSetDotProductResultText() {
-        String text = "some text";
-        viewModel.setDotProductResultText(text);
-        assertEquals(text, viewModel.getDotProductResultText());
+        viewModel.setDotProductResultText(validVectorString);
+        assertEquals(validVectorString, viewModel.getDotProductResultText());
     }
 
     @Test
     public void canGetCrossProductResultText() {
-        String text = viewModel.getCrossProductResultText();
-        assertNotNull(text);
+        assertNotNull(viewModel.getCrossProductResultText());
     }
 
     @Test
     public void canSetCrossProductResultText() {
-        String text = "some text";
-        viewModel.setCrossProductResultText(text);
-        assertEquals(text, viewModel.getCrossProductResultText());
+        viewModel.setCrossProductResultText(validVectorString);
+        assertEquals(validVectorString, viewModel.getCrossProductResultText());
     }
 
     @Test
@@ -154,26 +153,27 @@ public class ViewModelTest {
 
     @Test
     public void isValidationCorrectForValidText() {
-        String text = "5.6, 8, 9.000";
-        assertTrue(viewModel.validate(text));
+        assertTrue(viewModel.validate(validVectorString));
     }
 
     @Test
     public void isValidationCorrectForInvalidText() {
-        String text = "asdfv";
-        assertFalse(viewModel.validate(text));
+        assertFalse(viewModel.validate(invalidVectorString));
     }
 
     @Test
     public void isValidationCorrectForValidTextInParentheses() {
-        String text = "(5.6, 8, 9.000)";
-        assertTrue(viewModel.validate(text));
+        assertTrue(viewModel.validate("(" + validVectorString + ")"));
     }
 
     @Test
-    public void isValidationCorrectForValidTextWithOneBracket() {
-        String text = "(5.6, 8, 9.000";
-        assertFalse(viewModel.validate(text));
+    public void isValidationCorrectForValidTextWithOneOpenBracket() {
+        assertFalse(viewModel.validate("(" + validVectorString));
+    }
+
+    @Test
+    public void isValidationCorrectForValidTextWithOneCloseBracket() {
+        assertFalse(viewModel.validate(validVectorString + ")"));
     }
 
     @Test
@@ -185,7 +185,6 @@ public class ViewModelTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void cantConvertInvalidStringToVector() {
-        String text = "(5.6, 8, 9.000";
-        Vector3D vector = viewModel.vectorFromString(text);
+        Vector3D vector = viewModel.vectorFromString(invalidVectorString);
     }
 }
