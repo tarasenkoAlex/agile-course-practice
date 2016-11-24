@@ -1,4 +1,4 @@
-package com.github.rybval.vector3d.view;
+package ru.unn.agile.vector3d.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
