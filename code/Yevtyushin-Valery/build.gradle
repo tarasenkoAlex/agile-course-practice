@@ -1,0 +1,4 @@
+sourceSets {
+ main.java.srcDir 'src/Main'
+ test.java.srcDir 'src/Test'
+}

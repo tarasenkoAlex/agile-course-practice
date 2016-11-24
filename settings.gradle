@@ -2,6 +2,11 @@
 include "code/bevzuk-anton"
 project(":code/bevzuk-anton").name = "bevzuk-anton-Model"
 
+// Kolistratova Daria
+include "code/kolistratova-daria"
+project(":code/kolistratova-daria").name = "kolistratova-daria-Model"
+
+
 // Kornyakov Kirill, lab1
 include "code/kornyakov-kirill-lab1"
 project(":code/kornyakov-kirill-lab1").name = "kornyakov-kirill-lab1-Model"
@@ -42,4 +47,134 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
-//
+// Tarasenko Alex
+include "code/tarasenko-alex"
+project(":code/tarasenko-alex").name = "tarasenko-alex"
+// Kamtiko Sam
+// Masunda Nyararai
+// Александров Дмитрий
+// Бабинцева Анна
+// Быкадоров Роман
+// Веселов Илья
+include "code/veselov-ilya"
+project(":code/veselov-ilya").name = "veselov-ilya-Model"
+
+// Волков Денис
+include "code/volkov-denis"
+project(":code/volkov-denis").name = "volkov-denis-Model"
+
+// Воронин Дмитрий
+// Грошева Людмила
+include "code/grosheva-ludmila"
+project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
+
+// Добролюбова Евгения
+include "code/dobroliubova-evgeniia"
+project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
+// Евтюшин Валерий
+include "code/Yevtyushin-Valery"
+project(":code/Yevtyushin-Valery").name = "YevtyushinValery-tdd-lab1"
+// Еланов Артем
+// Зайдуллова Алина
+include "code/zaydullova-alina"
+project(":code/zaydullova-alina").name = "zaydullova-alina-Model"
+
+// Зырин Илья
+// Ильин Иван
+// Исрафилов Руслан
+include "code/israfilov-ruslan"
+project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
+
+// Карчков Денис
+include "code/Karchkov-Denis"
+project(":code/Karchkov-Denis").name = "Karchkov-Denis-Model"
+// Кокошников Алексей
+// Колистратова Дарья
+// Кочетов Павел
+include "code/kochetov-pavel"
+project(":code/kochetov-pavel").name = "kochetov-pavel-Model"
+
+// Кудрявцев Никита
+include "code/kudriavtsev-nikita"
+project(":code/kudriavtsev-nikita").name = "kudriavtsev-nikita-lab1-Model"
+
+// Кукушкин Даниил
+// Ларин Антон
+include "code/larin-anton"
+project(":code/larin-anton").name = "larin-anton-Model"
+
+// Лачинов Дмитрий
+// Луковников Илья
+// Максимов Максим
+// Малойкина Елена
+include "code/maloykina-elena"
+project(":code/maloykina-elena").name = "maloykina-elena-Model"
+// Матвеева Светлана
+// Метелёв Евгений
+// Михейкина Алёна
+// Нистратов Андрей
+// Нистратова Елена
+// Пауль Эдуард
+// Песков Дмитрий
+// Поздеев Антон
+include "code/Pozdeev-Anton"
+project(":code/Pozdeev-Anton").name = "pozdeev-anton-model"
+// Пономарев Георгий
+// Пономарев Никита
+include "code/ponomarev-nikita/Model"
+project(":code/ponomarev-nikita/Model").name = "ponomarev-nikita-Model"
+// Редькин Михаил
+include "code/Redkin-Michail"
+project(":code/Redkin-Michail").name = "Redkin-Michail-Model"
+// Рыбаков Антон
+// Рыбин Валентин
+include "code/rybin-valentine"
+project(":code/rybin-valentine").name = "rybin-valentine-polynomial"
+
+// Рябинкин Евгений
+include "code/ryabinkin-evgeni"
+project(":code/ryabinkin-evgeni").name = "ryabinkin-evgeni-Model"
+
+// Сахаров Алексей
+// Сиротин Никита
+include "code/sirotin-nikita"
+project(":code/sirotin-nikita").name = "sirotin-nikita-Model"
+// Скребков Артём
+include "code/skrebkov-artem"
+project(":code/skrebkov-artem").name = "skrebkov-artem-Model"
+
+// Соврасов Владислав
+include "code/sovrasov-vlad"
+project(":code/sovrasov-vlad").name = "sovrasov-vlad"
+
+// Соловьев Дмитрий
+include "code/solovev-dmitriy"
+project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
+
+// Старлытов Евгений
+// Степыкин Илья
+// Тарасенко Алексей
+include "code/tarasenko-alex"
+project(":code/tarasenko-alex").name = "tarasenko-alex"
+// Тропичева Дарья
+include "code/Tropicheva-Darya"
+project(":code/Tropicheva-Darya").name = "Tropicheva-Darya"
+// Федосов Александр
+include "code/Fedosov-Alexander"
+project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
+
+// Цыганов Алексей
+// Чугунов Евгений
+// Шадрунов Артем
+
+// Ширяева Вера
+include "code/shiryaeva-vera"
+project(":code/shiryaeva-vera").name = "shiryaeva-vera-Model"
+
+// Шишкин Владислав
+// Шочин Александр
+include "code/shochin-alexandr"
+project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
+// Шургалин Петр
+include "code/shurgalin-pyotr"
+project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
