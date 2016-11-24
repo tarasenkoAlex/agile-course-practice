@@ -1,9 +1,9 @@
-package com.github.rybval.vector3d.viewmodel;
+package ru.unn.agile.vector3d.viewmodel;
 
 import java.util.regex.Pattern;
 import ru.unn.agile.vector3d.model.Vector3D;
 
-public class Vector3DViewModel {
+public class ViewModel {
     private OperationTab activeTab;
     private String vectorText = "";
     private String dotProductOperandText = "";
@@ -17,7 +17,7 @@ public class Vector3DViewModel {
     private Vector3D crossProductOperand;
     private boolean buttonEnabled = false;
 
-    public Vector3DViewModel() {
+    public ViewModel() {
         activeTab = OperationTab.NORM;
     }
 

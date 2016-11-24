@@ -1,4 +1,4 @@
-package com.github.rybval.vector3d.viewmodel;
+package ru.unn.agile.vector3d.viewmodel;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -7,12 +7,12 @@ import ru.unn.agile.vector3d.model.Vector3D;
 
 import static org.junit.Assert.*;
 
-public class Vector3DViewModelTest {
-    private Vector3DViewModel viewModel;
+public class ViewModelTest {
+    private ViewModel viewModel;
 
     @Before
     public void setUp() {
-        viewModel = new Vector3DViewModel();
+        viewModel = new ViewModel();
     }
 
     @After
@@ -33,7 +33,7 @@ public class Vector3DViewModelTest {
 
     @Test
     public void isButtonDisabledOnStart() {
-        Vector3DViewModel viewModel = new Vector3DViewModel();
+        ViewModel viewModel = new ViewModel();
         assertEquals(false, viewModel.isButtonEnabled());
     }
 
