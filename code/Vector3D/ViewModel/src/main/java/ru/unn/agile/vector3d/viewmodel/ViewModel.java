@@ -57,7 +57,7 @@ public class ViewModel {
 
     public void setVectorText(final String text) {
         vectorText = text;
-        validateVectorText();
+        vectorTextValid = validate(vectorText);
     }
 
     public String getDotProductOperandText() {
@@ -66,7 +66,7 @@ public class ViewModel {
 
     public void setDotProductOperandText(final String text) {
         dotProductOperandText = text;
-        validateDotProductOperandText();
+        dotProductOperandTextValid = validate(dotProductOperandText);
     }
 
     public String getCrossProductOperandText() {
@@ -75,7 +75,7 @@ public class ViewModel {
 
     public void setCrossProductOperandText(final String text) {
         crossProductOperandText = text;
-        validateCrossProductOperandText();
+        crossProductOperandTextValid = validate(crossProductOperandText);
     }
 
     public String getNormResultText() {
@@ -132,24 +132,12 @@ public class ViewModel {
         return new Vector3D(coords);
     }
 
-    public void validateVectorText() {
-        vectorTextValid = validate(vectorText);
-    }
-
     public boolean isVectorTextValid() {
         return vectorTextValid;
     }
 
-    public void validateDotProductOperandText() {
-        dotProductOperandTextValid = validate(dotProductOperandText);
-    }
-
     public boolean isDotProductOperandTextValid() {
         return dotProductOperandTextValid;
-    }
-
-    public void validateCrossProductOperandText() {
-        crossProductOperandTextValid = validate(crossProductOperandText);
     }
 
     public boolean isCrossProductOperandTextValid() {
