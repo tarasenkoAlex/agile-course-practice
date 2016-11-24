@@ -223,4 +223,96 @@ public class ViewModelTest {
         viewModel.setCrossProductOperandText(invalidVectorString);
         assertFalse(viewModel.isCrossProductOperandTextValid());
     }
+
+    @Test
+    public void isCanCalculateCheckCorrectWithValidVectorTextAndNormOp() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setActiveTab(OperationTab.NORM);
+        assertTrue(viewModel.canCalculate());
+    }
+
+    @Test
+    public void isCanCalculateCheckCorrectWithInvalidVectorTextAndNormOp() {
+        viewModel.setVectorText(invalidVectorString);
+        viewModel.setActiveTab(OperationTab.NORM);
+        assertFalse(viewModel.canCalculate());
+    }
+
+    @Test
+    public void isCanCalculateCheckCorrectWithValidVectorTextAndNormalizationOp() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setActiveTab(OperationTab.NORMALIZATION);
+        assertTrue(viewModel.canCalculate());
+    }
+
+    @Test
+    public void isCanCalculateCheckCorrectWithInvalidVectorTextAndNormalizationOp() {
+        viewModel.setVectorText(invalidVectorString);
+        viewModel.setActiveTab(OperationTab.NORMALIZATION);
+        assertFalse(viewModel.canCalculate());
+    }
+
+    @Test
+    public void isCanCalculateCheckCorrectWithValidVectorAndOperandTextsAndDotProductOp() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setDotProductOperandText(validVectorString);
+        viewModel.setActiveTab(OperationTab.DOTPRODUCT);
+        assertTrue(viewModel.canCalculate());
+    }
+
+    @Test
+    public void isCanCalculateCheckCorrectWithInvalidVectorAndOperandTextsAndDotProductOp() {
+        viewModel.setVectorText(invalidVectorString);
+        viewModel.setDotProductOperandText(invalidVectorString);
+        viewModel.setActiveTab(OperationTab.DOTPRODUCT);
+        assertFalse(viewModel.canCalculate());
+    }
+
+    @Test
+    public void isCanCalculateCheckCorrectWithInvalidVectorAndValidOperandTextsAndDotProductOp() {
+        viewModel.setVectorText(invalidVectorString);
+        viewModel.setDotProductOperandText(validVectorString);
+        viewModel.setActiveTab(OperationTab.DOTPRODUCT);
+        assertFalse(viewModel.canCalculate());
+    }
+
+    @Test
+    public void isCanCalculateCheckCorrectWithValidVectorAndInvalidOperandTextsAndDotProductOp() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setDotProductOperandText(invalidVectorString);
+        viewModel.setActiveTab(OperationTab.DOTPRODUCT);
+        assertFalse(viewModel.canCalculate());
+    }
+
+    @Test
+    public void isCanCalculateCheckCorrectWithValidVectorAndOperandTextsAndCrossProductOp() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setCrossProductOperandText(validVectorString);
+        viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
+        assertTrue(viewModel.canCalculate());
+    }
+
+    @Test
+    public void isCanCalculateCheckCorrectWithInvalidVectorAndOperandTextsAndCrossProductOp() {
+        viewModel.setVectorText(invalidVectorString);
+        viewModel.setCrossProductOperandText(invalidVectorString);
+        viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
+        assertFalse(viewModel.canCalculate());
+    }
+
+    @Test
+    public void isCanCalculateCheckCorrectWithInvalidVectorAndValidOperandTextsAndCrossProductOp() {
+        viewModel.setVectorText(invalidVectorString);
+        viewModel.setCrossProductOperandText(validVectorString);
+        viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
+        assertFalse(viewModel.canCalculate());
+    }
+
+    @Test
+    public void isCanCalculateCheckCorrectWithValidVectorAndInvalidOperandTextsAndCrossProductOp() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setCrossProductOperandText(invalidVectorString);
+        viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
+        assertFalse(viewModel.canCalculate());
+    }
 }

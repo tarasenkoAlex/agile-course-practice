@@ -143,6 +143,20 @@ public class ViewModel {
     public boolean isCrossProductOperandTextValid() {
         return crossProductOperandTextValid;
     }
+
+    public boolean canCalculate() {
+        if (!isVectorTextValid()) {
+            return false;
+        }
+        switch (getActiveTab()) {
+            case DOTPRODUCT:
+                return isDotProductOperandTextValid();
+            case CROSSPRODUCT:
+                return isCrossProductOperandTextValid();
+            default:
+                return true;
+        }
+    }
 }
 
 enum OperationTab {
