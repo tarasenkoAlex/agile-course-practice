@@ -16,9 +16,6 @@ public class ViewModel {
     private Vector3D dotProductOperand;
     private Vector3D crossProductOperand;
     private boolean buttonEnabled = false;
-    private boolean vectorTextValid;
-    private boolean dotProductOperandTextValid;
-    private boolean crossProductOperandTextValid;
 
     public ViewModel() {
         setVectorText("");
@@ -57,7 +54,6 @@ public class ViewModel {
 
     public void setVectorText(final String text) {
         vectorText = text;
-        vectorTextValid = validate(vectorText);
     }
 
     public String getDotProductOperandText() {
@@ -66,7 +62,6 @@ public class ViewModel {
 
     public void setDotProductOperandText(final String text) {
         dotProductOperandText = text;
-        dotProductOperandTextValid = validate(dotProductOperandText);
     }
 
     public String getCrossProductOperandText() {
@@ -75,7 +70,6 @@ public class ViewModel {
 
     public void setCrossProductOperandText(final String text) {
         crossProductOperandText = text;
-        crossProductOperandTextValid = validate(crossProductOperandText);
     }
 
     public String getNormResultText() {
@@ -132,27 +126,15 @@ public class ViewModel {
         return new Vector3D(coords);
     }
 
-    public boolean isVectorTextValid() {
-        return vectorTextValid;
-    }
-
-    public boolean isDotProductOperandTextValid() {
-        return dotProductOperandTextValid;
-    }
-
-    public boolean isCrossProductOperandTextValid() {
-        return crossProductOperandTextValid;
-    }
-
     public boolean canCalculate() {
-        if (!isVectorTextValid()) {
+        if (!validate(vectorText)) {
             return false;
         }
         switch (getActiveTab()) {
             case DOTPRODUCT:
-                return isDotProductOperandTextValid();
+                return validate(dotProductOperandText);
             case CROSSPRODUCT:
-                return isCrossProductOperandTextValid();
+                return validate(crossProductOperandText);
             default:
                 return true;
         }
