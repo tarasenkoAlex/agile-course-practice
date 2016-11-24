@@ -69,7 +69,7 @@ public class ViewModel {
         return normResultText;
     }
 
-    public void setNormResultText(final String text) {
+    void setNormResultText(final String text) {
         normResultText = text;
     }
 
@@ -77,7 +77,7 @@ public class ViewModel {
         return normalizationResultText;
     }
 
-    public void setNormalizationResultText(final String text) {
+    void setNormalizationResultText(final String text) {
         normalizationResultText = text;
     }
 
@@ -85,7 +85,7 @@ public class ViewModel {
         return dotProductResultText;
     }
 
-    public void setDotProductResultText(final String text) {
+    void setDotProductResultText(final String text) {
         dotProductResultText = text;
     }
 
@@ -93,7 +93,7 @@ public class ViewModel {
         return crossProductResultText;
     }
 
-    public void setCrossProductResultText(final String text) {
+    void setCrossProductResultText(final String text) {
         crossProductResultText = text;
     }
 
