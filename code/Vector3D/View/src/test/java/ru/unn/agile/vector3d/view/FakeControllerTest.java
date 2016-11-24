@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.fail;
 
-public class FakeVector3DViewTest {
+public class FakeControllerTest {
     @Ignore @Test
     public void fakeTest() {
         fail("No tests for view");
