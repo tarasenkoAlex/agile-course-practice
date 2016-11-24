@@ -5,27 +5,37 @@ import ru.unn.agile.vector3d.model.Vector3D;
 
 public class ViewModel {
     private OperationTab activeTab;
-    private String vectorText = "";
-    private String dotProductOperandText = "";
-    private String crossProductOperandText = "";
-    private String normResultText = "";
-    private String normalizationResultText = "";
-    private String dotProductResultText = "";
-    private String crossProductResultText = "";
+    private String vectorText;
+    private String dotProductOperandText;
+    private String crossProductOperandText;
+    private String normResultText;
+    private String normalizationResultText;
+    private String dotProductResultText;
+    private String crossProductResultText;
     private Vector3D vector;
     private Vector3D dotProductOperand;
     private Vector3D crossProductOperand;
     private boolean buttonEnabled = false;
+    private boolean vectorTextValid;
+    private boolean dotProductOperandTextValid;
+    private boolean crossProductOperandTextValid;
 
     public ViewModel() {
-        activeTab = OperationTab.NORM;
+        setVectorText("");
+        setDotProductOperandText("");
+        setCrossProductOperandText("");
+        setNormResultText("");
+        setNormalizationResultText("");
+        setDotProductResultText("");
+        setCrossProductResultText("");
+        setActiveTab(OperationTab.NORM);
     }
 
     public OperationTab getActiveTab() {
         return activeTab;
     }
 
-    public void setActiveTab(final OperationTab newActiveTab) {
+    public final void setActiveTab(final OperationTab newActiveTab) {
         activeTab = newActiveTab;
     }
 
@@ -47,6 +57,7 @@ public class ViewModel {
 
     public void setVectorText(final String text) {
         vectorText = text;
+        validateVectorText();
     }
 
     public String getDotProductOperandText() {
@@ -55,6 +66,7 @@ public class ViewModel {
 
     public void setDotProductOperandText(final String text) {
         dotProductOperandText = text;
+        validateDotProductOperandText();
     }
 
     public String getCrossProductOperandText() {
@@ -63,6 +75,7 @@ public class ViewModel {
 
     public void setCrossProductOperandText(final String text) {
         crossProductOperandText = text;
+        validateCrossProductOperandText();
     }
 
     public String getNormResultText() {
@@ -119,7 +132,29 @@ public class ViewModel {
         return new Vector3D(coords);
     }
 
+    public void validateVectorText() {
+        vectorTextValid = validate(vectorText);
+    }
 
+    public boolean isVectorTextValid() {
+        return vectorTextValid;
+    }
+
+    public void validateDotProductOperandText() {
+        dotProductOperandTextValid = validate(dotProductOperandText);
+    }
+
+    public boolean isDotProductOperandTextValid() {
+        return dotProductOperandTextValid;
+    }
+
+    public void validateCrossProductOperandText() {
+        crossProductOperandTextValid = validate(crossProductOperandText);
+    }
+
+    public boolean isCrossProductOperandTextValid() {
+        return crossProductOperandTextValid;
+    }
 }
 
 enum OperationTab {

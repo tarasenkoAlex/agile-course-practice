@@ -187,4 +187,40 @@ public class ViewModelTest {
     public void cantConvertInvalidStringToVector() {
         Vector3D vector = viewModel.vectorFromString(invalidVectorString);
     }
+
+    @Test
+    public void isVectorTextOnSettingValidationCorrectForValidText() {
+        viewModel.setVectorText(validVectorString);
+        assertTrue(viewModel.isVectorTextValid());
+    }
+
+    @Test
+    public void isVectorTextOnSettingValidationCorrectForInvalidText() {
+        viewModel.setVectorText(invalidVectorString);
+        assertFalse(viewModel.isVectorTextValid());
+    }
+
+    @Test
+    public void isDotProductOperandTextOnSettingValidationCorrectForValidText() {
+        viewModel.setDotProductOperandText(validVectorString);
+        assertTrue(viewModel.isDotProductOperandTextValid());
+    }
+
+    @Test
+    public void isDotProductOperandTextOnSettingValidationCorrectForInvalidText() {
+        viewModel.setDotProductOperandText(invalidVectorString);
+        assertFalse(viewModel.isDotProductOperandTextValid());
+    }
+
+    @Test
+    public void isCrossProductOperandTextOnSettingValidationCorrectForValidText() {
+        viewModel.setCrossProductOperandText(validVectorString);
+        assertTrue(viewModel.isCrossProductOperandTextValid());
+    }
+
+    @Test
+    public void isCrossProductOperandTextOnSettingValidationCorrectForInvalidText() {
+        viewModel.setCrossProductOperandText(invalidVectorString);
+        assertFalse(viewModel.isCrossProductOperandTextValid());
+    }
 }
