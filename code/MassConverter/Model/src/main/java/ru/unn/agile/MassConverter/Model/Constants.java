@@ -1,8 +1,5 @@
-package ru.unn.agile.Converter.Model;
+package ru.unn.agile.MassConverter.Model;
 
-/**
- * Created by Евгений on 11.11.2016.
- */
 public final class Constants {
     public static final double TO_TON_MULTIPLIER = 0.001;
     public static final double TO_CENTNER_MULTIPLIER = 0.01;

@@ -132,9 +132,6 @@ include "code/rybin-valentine"
 project(":code/rybin-valentine").name = "rybin-valentine-polynomial"
 
 // Рябинкин Евгений
-include "code/ryabinkin-evgeni"
-project(":code/ryabinkin-evgeni").name = "ryabinkin-evgeni-Model"
-
 // Сахаров Алексей
 // Сиротин Никита
 include "code/sirotin-nikita"
@@ -170,6 +167,12 @@ project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
 // Ширяева Вера
 include "code/shiryaeva-vera"
 project(":code/shiryaeva-vera").name = "shiryaeva-vera-Model"
+include "code/MassConverter/Model"
+project(":code/MassConverter/Model").name = "shiryaeva-vera-lab2-Model"
+include "code/MassConverter/ViewModel"
+project(":code/MassConverter/ViewModel").name = "shiryaeva-vera-lab2-ViewModel"
+include "code/MassConverter/View"
+project(":code/MassConverter/View").name = "shiryaeva-vera-lab2-View"
 
 // Шишкин Владислав
 // Шочин Александр

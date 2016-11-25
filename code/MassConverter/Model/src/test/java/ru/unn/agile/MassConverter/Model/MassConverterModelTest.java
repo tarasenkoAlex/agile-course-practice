@@ -1,15 +1,12 @@
-package ru.unn.agile.Converter.Model;
-
+package ru.unn.agile.MassConverter.Model;
 
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
-import static ru.unn.agile.Converter.Model.MassConverter.*;
+import static ru.unn.agile.MassConverter.Model.MassConverter.*;
 
-
-
-public class ConverterMassTest {
+public class MassConverterModelTest {
     private static final double DELTA = 0.00000001;
 
     @Test
@@ -131,4 +128,4 @@ public class ConverterMassTest {
             assertThat(e.getMessage(), is("Kilogram must be positive"));
         }
     }
-  }
+}
