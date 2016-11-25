@@ -100,4 +100,20 @@ public class ViewModelTest {
                 = FXCollections.observableArrayList(SystemToConvert.values());
         assertEquals(observableList, viewModel.getSystemsToConvert());
     }
+
+    @Test
+    public void emptyResultWhenInvalidInput() {
+        viewModel.kilogramProperty().set("1");
+        assertEquals("1000.0", viewModel.resultProperty().get());
+        viewModel.kilogramProperty().set("a");
+        assertEquals("", viewModel.resultProperty().get());
+    }
+
+    @Test
+    public void emptyResultWhenEmptyInput() {
+        viewModel.kilogramProperty().set("1");
+        assertEquals("1000.0", viewModel.resultProperty().get());
+        viewModel.kilogramProperty().set("");
+        assertEquals("", viewModel.resultProperty().get());
+    }
 }

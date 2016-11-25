@@ -64,12 +64,14 @@ public class ViewModel {
         status.set(Status.SUCCESS.toString());
         if (kilogram.get().isEmpty()) {
             status.set(Status.WAITING.toString());
+            result.set("");
         } else {
             try {
                 result.set(String.valueOf(systemToConvert.get()
                         .convert(Double.parseDouble(kilogram.get()))));
             } catch (NumberFormatException exception) {
                 status.set(Status.WRONG_INPUT.toString());
+                result.set("");
             }
         }
     }
