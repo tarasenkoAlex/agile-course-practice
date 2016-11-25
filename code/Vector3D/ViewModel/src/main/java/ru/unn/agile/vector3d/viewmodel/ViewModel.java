@@ -35,6 +35,7 @@ public class ViewModel {
 
     public void setActiveTab(final OperationTab newActiveTab) {
         activeTab = newActiveTab;
+        refreshButtonState();
     }
 
     public boolean isButtonEnabled() {
@@ -47,6 +48,7 @@ public class ViewModel {
 
     public void setVectorText(final String text) {
         vectorText = text;
+        refreshButtonState();
     }
 
     public String getDotProductOperandText() {
@@ -55,6 +57,7 @@ public class ViewModel {
 
     public void setDotProductOperandText(final String text) {
         dotProductOperandText = text;
+        refreshButtonState();
     }
 
     public String getCrossProductOperandText() {
@@ -63,6 +66,7 @@ public class ViewModel {
 
     public void setCrossProductOperandText(final String text) {
         crossProductOperandText = text;
+        refreshButtonState();
     }
 
     public String getNormResultText() {
@@ -107,6 +111,10 @@ public class ViewModel {
         return validate(vectorText)
             && (activeTab != OperationTab.DOTPRODUCT || validate(dotProductOperandText))
             && (activeTab != OperationTab.CROSSPRODUCT || validate(crossProductOperandText));
+    }
+
+    void refreshButtonState() {
+        buttonEnabled = canCalculate();
     }
 }
 

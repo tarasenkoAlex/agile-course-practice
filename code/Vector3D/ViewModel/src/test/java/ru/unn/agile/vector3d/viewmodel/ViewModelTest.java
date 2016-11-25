@@ -242,4 +242,32 @@ public class ViewModelTest {
         viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
         assertFalse(viewModel.canCalculate());
     }
+
+    @Test
+    public void isButtonEnabledWhenVectorTextValidAndNormOp() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setActiveTab(OperationTab.NORM);
+        assertTrue(viewModel.isButtonEnabled());
+    }
+
+    @Test
+    public void isButtonDisabledWhenVectorTextInvalidAndNormOp() {
+        viewModel.setVectorText(invalidVectorString);
+        viewModel.setActiveTab(OperationTab.NORM);
+        assertFalse(viewModel.isButtonEnabled());
+    }
+
+    @Test
+    public void isButtonEnabledWhenVectorTextValidAndNormalizationOp() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setActiveTab(OperationTab.NORMALIZATION);
+        assertTrue(viewModel.isButtonEnabled());
+    }
+
+    @Test
+    public void isButtonDisabledWhenVectorTextInvalidAndNormalizationOp() {
+        viewModel.setVectorText(invalidVectorString);
+        viewModel.setActiveTab(OperationTab.NORMALIZATION);
+        assertFalse(viewModel.isButtonEnabled());
+    }
 }
