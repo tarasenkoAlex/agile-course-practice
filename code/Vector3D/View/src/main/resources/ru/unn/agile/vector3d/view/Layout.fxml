@@ -11,45 +11,45 @@
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.agile.vector3d.view.Controller">
     <HBox>
         <Label text="Введите вектор:"/>
-        <TextField fx:id="VectorTextField"/>
+        <TextField fx:id="vectorTextField"/>
     </HBox>
-    <TabPane TabClosingPolicy="UNAVAILABLE">
-        <Tab fx:id="NormTab" text="Норма">
+    <TabPane fx:id="opsTabPane" TabClosingPolicy="UNAVAILABLE">
+        <Tab fx:id="normTab" text="Норма">
             <HBox>
                 <Label text="Норма вектора:"/>
-                <TextField fx:id="NormResultTextField" editable="false"/>
+                <TextField fx:id="normResultTextField" editable="false"/>
             </HBox>
         </Tab>
-        <Tab fx:id="NormalisationTab" text="Нормализация">
+        <Tab fx:id="normalizationTab" text="Нормализация">
             <HBox>
                 <Label text="Нормализованный вектор:"/>
-                <TextField fx:id="NormalizationResultTextField" editable="false"/>
+                <TextField fx:id="normalizationResultTextField" editable="false"/>
             </HBox>
         </Tab>
-        <Tab fx:id="DotProductTab" text="Скалярное произведение">
+        <Tab fx:id="dotProductTab" text="Скалярное произведение">
             <VBox>
                 <HBox>
                     <Label text="Введите второй вектор:"/>
-                    <TextField fx:id="DotProductOperandTextField"/>
+                    <TextField fx:id="dotProductOperandTextField"/>
                 </HBox>
                 <HBox>
                     <Label text="Результат скалярного произведения:"/>
-                    <TextField fx:id="DotProductResultTextField" editable="false"/>
+                    <TextField fx:id="dotProductResultTextField" editable="false"/>
                 </HBox>
             </VBox>
         </Tab>
-        <Tab fx:id="CrossProductTab" text="Векторное произведение">
+        <Tab fx:id="crossProductTab" text="Векторное произведение">
             <VBox>
                 <HBox>
                     <Label text="Введите второй вектор:"/>
-                    <TextField fx:id="CrossProductOperandTextField"/>
+                    <TextField fx:id="crossProductOperandTextField"/>
                 </HBox>
                 <HBox>
                     <Label text="Результат векторного произведения:"/>
-                    <TextField fx:id="CrossProductResultTextField" editable="false"/>
+                    <TextField fx:id="crossProductResultTextField" editable="false"/>
                 </HBox>
             </VBox>
         </Tab>
     </TabPane>
-    <Button fx:id="CalculateButton" text="Рассчитать"/>
+    <Button fx:id="calculateButton" text="Рассчитать"/>
 </VBox>
