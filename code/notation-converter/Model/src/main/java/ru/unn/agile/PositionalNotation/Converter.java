@@ -5,7 +5,7 @@ public final class Converter {
     }
     public static String convert(final String number,
                                  final String fromNotation, final String toNotation) {
-        Integer decimal = 0;
+        Integer decimal = null;
         String result = new String("");
         switch (fromNotation) {
             case Notations.BINARY: decimal = ToDecimalConverter.convertBinaryToDecimal(number);
@@ -18,6 +18,7 @@ public final class Converter {
                 break;
             default: break;
         }
+        if(decimal != null)
         switch (toNotation) {
             case Notations.BINARY: result = FromDecimalConverter.convertToBinary(decimal);
                 break;

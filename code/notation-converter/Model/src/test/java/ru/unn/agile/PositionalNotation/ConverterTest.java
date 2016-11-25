@@ -169,5 +169,13 @@ public class ConverterTest {
         String binary2 = Converter.convert(binary, Notations.BINARY, Notations.BINARY);
         assertEquals("10", binary2);
     }
+    @Test
+    public void converterIfFromConverterIsDefault() {
+        assertEquals("", Converter.convert("1", "default", Notations.BINARY));
+    }
+    @Test
+    public void converterIfToConverterIsDefault() {
+        assertEquals("", Converter.convert("1", Notations.BINARY, "default"));
+    }
 
 }
