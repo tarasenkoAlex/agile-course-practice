@@ -1,5 +1,7 @@
 package ru.unn.agile.MassConverter.ViewModel;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -79,5 +81,23 @@ public class ViewModelTest {
         viewModel.kilogramProperty().set("a");
         viewModel.systemToConvertProperty().set(SystemToConvert.TONNE);
         assertEquals(WRONG_INPUT.toString(), viewModel.statusProperty().get());
+    }
+
+    @Test
+    public void testGetStringResult() {
+        viewModel.kilogramProperty().set("1");
+        assertEquals("1000.0", viewModel.getResult());
+    }
+
+    @Test
+    public void testGetStringStatus() {
+        assertEquals(WAITING.toString(), viewModel.getStatus());
+    }
+
+    @Test
+    public void testGetSystemsToConvert() {
+        ObservableList<SystemToConvert> observableList
+                = FXCollections.observableArrayList(SystemToConvert.values());
+        assertEquals(observableList, viewModel.getSystemsToConvert());
     }
 }
