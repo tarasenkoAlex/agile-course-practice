@@ -8,17 +8,18 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import ru.unn.agile.MassConverter.Model.MassConverter.SystemToConvert;
+import ru.unn.agile.MassConverter.Model.MassConverter.ConversionSystem;
 
 public class ViewModel {
 
-    private final StringProperty kilogram = new SimpleStringProperty();
+    private final StringProperty input = new SimpleStringProperty();
     private final StringProperty result = new SimpleStringProperty();
     private final StringProperty status = new SimpleStringProperty();
-    private final ObjectProperty<SystemToConvert> systemToConvert = new SimpleObjectProperty<>();
-    private final ObjectProperty<ObservableList<SystemToConvert>> systemsToConvert
+    private final ObjectProperty<ConversionSystem> systemToConvert = new SimpleObjectProperty<>();
+    private final ObjectProperty<ObservableList<ConversionSystem>> conversionSystems
             = new SimpleObjectProperty<>(FXCollections
-            .observableArrayList(SystemToConvert.values()));
+            .observableArrayList(ConversionSystem.values()));
+    private final ObjectProperty<ConversionSystem> systemFromConvert = new SimpleObjectProperty<>();
 
     enum Status {
         WAITING("Waiting for data input"),
@@ -37,12 +38,13 @@ public class ViewModel {
     }
 
     public ViewModel() {
-        kilogram.set("");
+        input.set("");
         result.set("");
         status.set(Status.WAITING.toString());
-        systemToConvert.set(SystemToConvert.GRAM);
+        systemToConvert.set(ConversionSystem.GRAM);
+        systemFromConvert.set(ConversionSystem.KILOGRAM);
 
-        kilogram.addListener(new ChangeListener<String>() {
+        input.addListener(new ChangeListener<String>() {
             @Override
             public void changed(final ObservableValue<? extends String> observable,
                                 final String oldValue, final String newValue) {
@@ -50,11 +52,20 @@ public class ViewModel {
             }
         });
 
-        systemToConvert.addListener(new ChangeListener<SystemToConvert>() {
+        systemToConvert.addListener(new ChangeListener<ConversionSystem>() {
             @Override
-            public void changed(final ObservableValue<? extends SystemToConvert> observable,
-                                final SystemToConvert oldValue,
-                                final SystemToConvert newValue) {
+            public void changed(final ObservableValue<? extends ConversionSystem> observable,
+                                final ConversionSystem oldValue,
+                                final ConversionSystem newValue) {
+                changedValue();
+            }
+        });
+
+        systemFromConvert.addListener(new ChangeListener<ConversionSystem>() {
+            @Override
+            public void changed(final ObservableValue<? extends ConversionSystem> observable,
+                                final ConversionSystem oldValue,
+                                final ConversionSystem newValue) {
                 changedValue();
             }
         });
@@ -62,22 +73,26 @@ public class ViewModel {
 
     private void changedValue() {
         status.set(Status.SUCCESS.toString());
-        if (kilogram.get().isEmpty()) {
+        if (input.get().isEmpty()) {
             status.set(Status.WAITING.toString());
             result.set("");
         } else {
             try {
                 result.set(String.valueOf(systemToConvert.get()
-                        .convert(Double.parseDouble(kilogram.get()))));
+                        .convertTo(systemFromConvert.get()
+                                .convertFrom(Double.parseDouble(input.get())))));
             } catch (NumberFormatException exception) {
+                status.set(Status.WRONG_INPUT.toString());
+                result.set("");
+            } catch (IllegalArgumentException esception) {
                 status.set(Status.WRONG_INPUT.toString());
                 result.set("");
             }
         }
     }
 
-    public StringProperty kilogramProperty() {
-        return kilogram;
+    public StringProperty inputProperty() {
+        return input;
     }
 
     public StringProperty resultProperty() {
@@ -88,8 +103,12 @@ public class ViewModel {
         return status;
     }
 
-    public ObjectProperty<SystemToConvert> systemToConvertProperty() {
+    public ObjectProperty<ConversionSystem> systemToConvertProperty() {
         return systemToConvert;
+    }
+
+    public ObjectProperty<ConversionSystem> systemFromConvertProperty() {
+        return systemFromConvert;
     }
 
     public final String getResult() {
@@ -100,7 +119,7 @@ public class ViewModel {
         return status.get();
     }
 
-    public final ObservableList<SystemToConvert> getSystemsToConvert() {
-        return systemsToConvert.get();
+    public final ObservableList<ConversionSystem> getConversionSystems() {
+        return conversionSystems.get();
     }
 }

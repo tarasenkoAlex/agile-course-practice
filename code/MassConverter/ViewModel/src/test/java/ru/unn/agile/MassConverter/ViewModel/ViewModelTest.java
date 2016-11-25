@@ -25,67 +25,67 @@ public class ViewModelTest {
 
     @Test
     public void setDefaultValues() {
-        assertEquals("", viewModel.kilogramProperty().get());
+        assertEquals("", viewModel.inputProperty().get());
         assertEquals("", viewModel.resultProperty().get());
         assertEquals(WAITING.toString(), viewModel.statusProperty().get());
-        assertEquals(SystemToConvert.GRAM.toString(),
+        assertEquals(ConversionSystem.GRAM.toString(),
                 viewModel.systemToConvertProperty().get().toString());
     }
 
     @Test
     public void invalidInput() {
-        viewModel.kilogramProperty().set("a");
+        viewModel.inputProperty().set("a");
         assertEquals(WRONG_INPUT.toString(), viewModel.statusProperty().get());
     }
 
     @Test
     public void emptyInput() {
-        viewModel.kilogramProperty().set("");
+        viewModel.inputProperty().set("");
         assertEquals(WAITING.toString(), viewModel.statusProperty().get());
     }
 
     @Test
     public void validInput() {
-        viewModel.kilogramProperty().set("1");
+        viewModel.inputProperty().set("1");
         assertEquals(SUCCESS.toString(), viewModel.statusProperty().get());
     }
 
     @Test
     public void convert1kgTo1000Gram() {
-        viewModel.kilogramProperty().set("1");
+        viewModel.inputProperty().set("1");
         assertEquals("1000.0", viewModel.resultProperty().get());
     }
 
     @Test
     public void convert1kgToTonne() {
-        viewModel.systemToConvertProperty().set(SystemToConvert.TONNE);
-        viewModel.kilogramProperty().set("1");
+        viewModel.systemToConvertProperty().set(ConversionSystem.TONNE);
+        viewModel.inputProperty().set("1");
         assertEquals("0.001", viewModel.resultProperty().get());
     }
 
     @Test
     public void convert1kgToTonneAfterChangeSystem() {
-        viewModel.kilogramProperty().set("1");
-        viewModel.systemToConvertProperty().set(SystemToConvert.TONNE);
+        viewModel.inputProperty().set("1");
+        viewModel.systemToConvertProperty().set(ConversionSystem.TONNE);
         assertEquals("0.001", viewModel.resultProperty().get());
     }
 
     @Test
     public void convertEmptyInputAfterChangeSystem() {
-        viewModel.systemToConvertProperty().set(SystemToConvert.TONNE);
+        viewModel.systemToConvertProperty().set(ConversionSystem.TONNE);
         assertEquals(WAITING.toString(), viewModel.statusProperty().get());
     }
 
     @Test
     public void convertInvalidInputAfterChangeSystem() {
-        viewModel.kilogramProperty().set("a");
-        viewModel.systemToConvertProperty().set(SystemToConvert.TONNE);
+        viewModel.inputProperty().set("a");
+        viewModel.systemToConvertProperty().set(ConversionSystem.TONNE);
         assertEquals(WRONG_INPUT.toString(), viewModel.statusProperty().get());
     }
 
     @Test
     public void testGetStringResult() {
-        viewModel.kilogramProperty().set("1");
+        viewModel.inputProperty().set("1");
         assertEquals("1000.0", viewModel.getResult());
     }
 
@@ -95,25 +95,38 @@ public class ViewModelTest {
     }
 
     @Test
-    public void testGetSystemsToConvert() {
-        ObservableList<SystemToConvert> observableList
-                = FXCollections.observableArrayList(SystemToConvert.values());
-        assertEquals(observableList, viewModel.getSystemsToConvert());
+    public void testGetConversionSystems() {
+        ObservableList<ConversionSystem> observableList
+                = FXCollections.observableArrayList(ConversionSystem.values());
+        assertEquals(observableList, viewModel.getConversionSystems());
     }
 
     @Test
     public void emptyResultWhenInvalidInput() {
-        viewModel.kilogramProperty().set("1");
+        viewModel.inputProperty().set("1");
         assertEquals("1000.0", viewModel.resultProperty().get());
-        viewModel.kilogramProperty().set("a");
+        viewModel.inputProperty().set("a");
         assertEquals("", viewModel.resultProperty().get());
     }
 
     @Test
     public void emptyResultWhenEmptyInput() {
-        viewModel.kilogramProperty().set("1");
+        viewModel.inputProperty().set("1");
         assertEquals("1000.0", viewModel.resultProperty().get());
-        viewModel.kilogramProperty().set("");
+        viewModel.inputProperty().set("");
         assertEquals("", viewModel.resultProperty().get());
+    }
+
+    @Test
+    public void convert1CentnerTo100000Gram() {
+        viewModel.inputProperty().set("1");
+        viewModel.systemFromConvertProperty().set(ConversionSystem.CENTNER);
+        assertEquals("100000.0", viewModel.resultProperty().get());
+    }
+
+    @Test
+    public void convertNegative() {
+        viewModel.inputProperty().set("-1");
+        assertEquals(WRONG_INPUT.toString(), viewModel.statusProperty().get());
     }
 }
