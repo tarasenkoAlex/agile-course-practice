@@ -18,17 +18,22 @@ public final class Converter {
                 break;
             default: break;
         }
-        if(decimal != null)
-        switch (toNotation) {
-            case Notations.BINARY: result = FromDecimalConverter.convertToBinary(decimal);
-                break;
-            case Notations.DECIMAL: result = FromDecimalConverter.convertToDecimal(decimal);
-                break;
-            case Notations.HEX: result = FromDecimalConverter.convertToHex(decimal);
-                break;
-            case Notations.OCTAL: result = FromDecimalConverter.convertToOctal(decimal);
-                break;
-            default: break;
+        if (decimal != null) {
+            switch (toNotation) {
+                case Notations.BINARY:
+                    result = FromDecimalConverter.convertToBinary(decimal);
+                    break;
+                case Notations.DECIMAL:
+                    result = FromDecimalConverter.convertToDecimal(decimal);
+                    break;
+                case Notations.HEX:
+                    result = FromDecimalConverter.convertToHex(decimal);
+                    break;
+                case Notations.OCTAL:
+                    result = FromDecimalConverter.convertToOctal(decimal);
+                    break;
+                default: break;
+            }
         }
         return result;
     }
