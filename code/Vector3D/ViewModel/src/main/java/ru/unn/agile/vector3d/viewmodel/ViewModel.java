@@ -82,7 +82,7 @@ public class ViewModel {
         return crossProductResultText;
     }
 
-    public boolean validate(final String text) {
+    boolean validate(final String text) {
         String coordPattern = "[\\+-]?[0-9]+(\\.[0-9]+)?";
         String vectorPattern = " *" + coordPattern + ", *"
                                     + coordPattern + ", *"
@@ -92,7 +92,7 @@ public class ViewModel {
             || Pattern.matches("^" + vectorInBracketsPattern + "$", text);
     }
 
-    public Vector3D vectorFromString(final String text) {
+    Vector3D vectorFromString(final String text) {
         if (!validate(text)) {
             throw new IllegalArgumentException();
         }
@@ -104,7 +104,7 @@ public class ViewModel {
         return new Vector3D(coords);
     }
 
-    public boolean canCalculate() {
+    boolean canCalculate() {
         return validate(vectorText)
             && (activeTab != OperationTab.DOTPRODUCT || validate(dotProductOperandText))
             && (activeTab != OperationTab.CROSSPRODUCT || validate(crossProductOperandText));
