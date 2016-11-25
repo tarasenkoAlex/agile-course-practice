@@ -5,3 +5,8 @@ compileJava.options.encoding = 'UTF-8'
 dependencies {
     compile project(':Vector3D-ViewModel')
 }
+
+// For validation of FXML
+sourceSets.test {
+    resources.srcDirs = ["src/main/resources"]
+}
