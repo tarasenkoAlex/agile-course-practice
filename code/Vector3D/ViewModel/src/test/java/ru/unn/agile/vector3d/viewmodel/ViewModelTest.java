@@ -270,4 +270,76 @@ public class ViewModelTest {
         viewModel.setActiveTab(OperationTab.NORMALIZATION);
         assertFalse(viewModel.isButtonEnabled());
     }
+
+    @Test
+    public void canCalculateNormIfInputValid() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setActiveTab(OperationTab.NORM);
+
+        viewModel.calculate();
+
+        assertNotNull(viewModel.getNormResultText());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cantCalculateNormIfInputInvalid() {
+        viewModel.setVectorText(invalidVectorString);
+        viewModel.setActiveTab(OperationTab.NORM);
+        viewModel.calculate();
+    }
+
+    @Test
+    public void canCalculateNormalizationIfInputValid() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setActiveTab(OperationTab.NORMALIZATION);
+
+        viewModel.calculate();
+
+        assertNotNull(viewModel.getNormalizationResultText());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void canCalculateNormalizationIfInputInvalid() {
+        viewModel.setVectorText(invalidVectorString);
+        viewModel.setActiveTab(OperationTab.NORMALIZATION);
+        viewModel.calculate();
+    }
+
+    @Test
+    public void canCalculateDotProductIfInputValid() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setDotProductOperandText(validVectorString);
+        viewModel.setActiveTab(OperationTab.DOTPRODUCT);
+
+        viewModel.calculate();
+
+        assertNotNull(viewModel.getDotProductResultText());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void canCalculateDotProductIfInputInvalid() {
+        viewModel.setVectorText(invalidVectorString);
+        viewModel.setDotProductOperandText(invalidVectorString);
+        viewModel.setActiveTab(OperationTab.DOTPRODUCT);
+        viewModel.calculate();
+    }
+
+    @Test
+    public void canCalculateCrossProductIfInputValid() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setCrossProductOperandText(validVectorString);
+        viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
+
+        viewModel.calculate();
+
+        assertNotNull(viewModel.getNormResultText());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void canCalculateCrossProductIfInputInvalid() {
+        viewModel.setVectorText(invalidVectorString);
+        viewModel.setCrossProductOperandText(invalidVectorString);
+        viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
+        viewModel.calculate();
+    }
 }

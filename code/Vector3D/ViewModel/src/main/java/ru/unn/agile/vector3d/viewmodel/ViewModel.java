@@ -113,6 +113,31 @@ public class ViewModel {
     void refreshButtonState() {
         buttonEnabled = canCalculate();
     }
+
+    public void calculate() {
+        Vector3D vector = vectorFromString(vectorText);
+
+        switch (activeTab) {
+            case NORM:
+                normResultText = new Double(vector.getNorm()).toString();
+                break;
+            case NORMALIZATION:
+                normalizationResultText = vector.normalize().toString();
+                break;
+            case DOTPRODUCT:
+                Vector3D dotProductOperand = vectorFromString(dotProductOperandText);
+                Double dotProductResult = vector.dot(dotProductOperand);
+                dotProductResultText = dotProductResult.toString();
+                break;
+            case CROSSPRODUCT:
+                Vector3D crossProductOperand = vectorFromString(crossProductOperandText);
+                Vector3D crossProductResult = vector.cross(crossProductOperand);
+                crossProductResultText = crossProductResult.toString();
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 enum OperationTab {
