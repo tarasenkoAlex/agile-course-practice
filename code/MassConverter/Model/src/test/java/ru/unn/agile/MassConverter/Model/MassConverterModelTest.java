@@ -2,130 +2,79 @@ package ru.unn.agile.MassConverter.Model;
 
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static ru.unn.agile.MassConverter.Model.MassConverter.*;
 
 public class MassConverterModelTest {
-    private static final double DELTA = 0.00000001;
+    private static final double DELTA = 0.001;
 
     @Test
-    public void convertKgToGr() {
-        double kilogram = convertToGram(1);
-        assertEquals(1000, kilogram, DELTA);
+    public void convert0kgTo0Gram() {
+        assertEquals(0, convertToSystem(Multipliers.TO_GRAM_MULTIPLIER, 0), DELTA);
+    }
+
+    @Test
+    public void convert1kgTo1000Gram() {
+        assertEquals(1000, convertToSystem(Multipliers.TO_GRAM_MULTIPLIER, 1), DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void convertNegativeKgToGr() {
-        convertToGram(-1);
+    public void convertNegativeToGram() {
+        convertToSystem(Multipliers.TO_GRAM_MULTIPLIER, -1);
     }
 
     @Test
-    public void isCorrectExceptionMessageForConvertNegativeKgToGr() {
-        try {
-            convertToGram(-1);
-        } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Kilogram must be positive"));
-        }
-    }
-
-    @Test
-    public void convertKgToTon() {
-        double kilogram = convertToTon(1);
-        assertEquals(0.001, kilogram, DELTA);
+    public void convert0kgTo0Tonne() {
+        assertEquals(0, convertToSystem(Multipliers.TO_TONNE_MULTIPLIER, 0), DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void convertNegativeKgToTon() {
-        convertToTon(-1);
+    public void convertNegativeToTonne() {
+        convertToSystem(Multipliers.TO_TONNE_MULTIPLIER, -1);
     }
 
     @Test
-    public void isCorrectExceptionMessageForConvertNegativeKgToTon() {
-        try {
-            convertToTon(-1);
-        } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Kilogram must be positive"));
-        }
+    public void convert1kgToTonne() {
+        assertEquals(0.001, convertToSystem(Multipliers.TO_TONNE_MULTIPLIER, 1), DELTA);
     }
 
     @Test
-    public void convertKgToCentner() {
-        double kilogram = convertToCentner(1);
-        assertEquals(0.01, kilogram, DELTA);
+    public void checkNamesOfSystems() {
+        assertEquals("Gram", SystemToConvert.GRAM.toString());
+        assertEquals("Tonne", SystemToConvert.TONNE.toString());
+        assertEquals("Pound", SystemToConvert.POUND.toString());
+        assertEquals("Centner", SystemToConvert.CENTNER.toString());
+        assertEquals("Milligram", SystemToConvert.MILLIGRAM.toString());
+        assertEquals("Microgram", SystemToConvert.MICROGRAM.toString());
+    }
+
+    @Test
+    public void convert1kgToGramThroughSystemToConvert() {
+        assertEquals(1000, SystemToConvert.GRAM.convert(1), DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void convertNegativeKgToCentner() {
-        convertToCentner(-1);
+    public void convertNegativeToGramThroughSystemToConvert() {
+        SystemToConvert.GRAM.convert(-1);
     }
 
     @Test
-    public void isCorrectExceptionMessageForConvertNegativeKgToCentner() {
-        try {
-            convertToCentner(-1);
-        } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Kilogram must be positive"));
-        }
+    public void convert1kgToPoundThroughSystemToConvert() {
+        assertEquals(2.679, SystemToConvert.POUND.convert(1), DELTA);
     }
 
     @Test
-    public void convertKgToPound() {
-        double kilogram = convertToPound(1);
-        assertEquals(2.679, kilogram, DELTA);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void convertNegativeKgToPound() {
-        convertToPound(-1);
+    public void convert1kgToCentnerThroughSystemToConvert() {
+        assertEquals(0.01, SystemToConvert.CENTNER.convert(1), DELTA);
     }
 
     @Test
-    public void isCorrectExceptionMessageForConvertNegativeKgToPound() {
-        try {
-            convertToPound(-1);
-        } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Kilogram must be positive"));
-        }
+    public void convert1kgToMilligramThroughSystemToConvert() {
+        assertEquals(1000000, SystemToConvert.MILLIGRAM.convert(1), DELTA);
     }
 
     @Test
-    public void convertKgToMilligram() {
-        double kilogram = convertToMilligram(1);
-        assertEquals(1000000, kilogram, DELTA);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void convertNegativeKgToMilligram() {
-        convertToMilligram(-1);
-    }
-
-    @Test
-    public void isCorrectExceptionMessageForConvertNegativeKgToMilligram() {
-        try {
-            convertToMilligram(-1);
-        } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Kilogram must be positive"));
-        }
-    }
-
-    @Test
-    public void convertKgToMicrogram() {
-        double kilogram = convertToMicrogram(1);
-        assertEquals(1000000000, kilogram, DELTA);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void convertNegativeKgToMicrogram() {
-        convertToMicrogram(-1);
-    }
-
-    @Test
-    public void isCorrectExceptionMessageForConvertNegativeKgToMicrogram() {
-        try {
-            convertToMicrogram(-1);
-        } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Kilogram must be positive"));
-        }
+    public void convert1kgToMicrogramThroughSystemToConvert() {
+        assertEquals(1000000000, SystemToConvert.MICROGRAM.convert(1), DELTA);
     }
 }
