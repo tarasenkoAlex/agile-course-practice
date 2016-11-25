@@ -15,37 +15,30 @@ public class ViewModel {
     private Vector3D vector;
     private Vector3D dotProductOperand;
     private Vector3D crossProductOperand;
-    private boolean buttonEnabled = false;
+    private boolean buttonEnabled;
 
     public ViewModel() {
-        setVectorText("");
-        setDotProductOperandText("");
-        setCrossProductOperandText("");
-        setNormResultText("");
-        setNormalizationResultText("");
-        setDotProductResultText("");
-        setCrossProductResultText("");
-        setActiveTab(OperationTab.NORM);
+        activeTab = OperationTab.NORM;
+        vectorText = "";
+        dotProductOperandText = "";
+        crossProductOperandText = "";
+        normResultText = "";
+        normalizationResultText = "";
+        dotProductResultText = "";
+        crossProductResultText = "";
+        buttonEnabled = false;
     }
 
     public OperationTab getActiveTab() {
         return activeTab;
     }
 
-    public final void setActiveTab(final OperationTab newActiveTab) {
+    public void setActiveTab(final OperationTab newActiveTab) {
         activeTab = newActiveTab;
     }
 
     public boolean isButtonEnabled() {
         return buttonEnabled;
-    }
-
-    public void enableButton() {
-        buttonEnabled = true;
-    }
-
-    public void disableButton() {
-        buttonEnabled = false;
     }
 
     public String getVectorText() {
@@ -76,32 +69,16 @@ public class ViewModel {
         return normResultText;
     }
 
-    void setNormResultText(final String text) {
-        normResultText = text;
-    }
-
     public String getNormalizationResultText() {
         return normalizationResultText;
-    }
-
-    void setNormalizationResultText(final String text) {
-        normalizationResultText = text;
     }
 
     public String getDotProductResultText() {
         return dotProductResultText;
     }
 
-    void setDotProductResultText(final String text) {
-        dotProductResultText = text;
-    }
-
     public String getCrossProductResultText() {
         return crossProductResultText;
-    }
-
-    void setCrossProductResultText(final String text) {
-        crossProductResultText = text;
     }
 
     public boolean validate(final String text) {

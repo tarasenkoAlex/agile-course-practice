@@ -50,19 +50,6 @@ public class ViewModelTest {
     }
 
     @Test
-    public void canEnableButton() {
-        viewModel.enableButton();
-        assertEquals(true, viewModel.isButtonEnabled());
-    }
-
-    @Test
-    public void canDisableButton() {
-        viewModel.enableButton();
-        viewModel.disableButton();
-        assertEquals(false, viewModel.isButtonEnabled());
-    }
-
-    @Test
     public void canGetVectorText() {
         String text = viewModel.getVectorText();
         assertNotNull(text);
@@ -102,20 +89,8 @@ public class ViewModelTest {
     }
 
     @Test
-    public void canSetNormResultText() {
-        viewModel.setNormResultText(validVectorString);
-        assertEquals(validVectorString, viewModel.getNormResultText());
-    }
-
-    @Test
     public void canGetNormalizationResultText() {
         assertNotNull(viewModel.getNormalizationResultText());
-    }
-
-    @Test
-    public void canSetNormalizationResultText() {
-        viewModel.setNormalizationResultText(validVectorString);
-        assertEquals(validVectorString, viewModel.getNormalizationResultText());
     }
 
     @Test
@@ -124,20 +99,8 @@ public class ViewModelTest {
     }
 
     @Test
-    public void canSetDotProductResultText() {
-        viewModel.setDotProductResultText(validVectorString);
-        assertEquals(validVectorString, viewModel.getDotProductResultText());
-    }
-
-    @Test
     public void canGetCrossProductResultText() {
         assertNotNull(viewModel.getCrossProductResultText());
-    }
-
-    @Test
-    public void canSetCrossProductResultText() {
-        viewModel.setCrossProductResultText(validVectorString);
-        assertEquals(validVectorString, viewModel.getCrossProductResultText());
     }
 
     @Test
