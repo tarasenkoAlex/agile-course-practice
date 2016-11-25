@@ -12,9 +12,6 @@ public class ViewModel {
     private String normalizationResultText;
     private String dotProductResultText;
     private String crossProductResultText;
-    private Vector3D vector;
-    private Vector3D dotProductOperand;
-    private Vector3D crossProductOperand;
     private boolean buttonEnabled;
 
     public ViewModel() {
