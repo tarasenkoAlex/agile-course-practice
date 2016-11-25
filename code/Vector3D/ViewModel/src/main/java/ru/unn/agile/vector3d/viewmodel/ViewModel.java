@@ -104,17 +104,9 @@ public class ViewModel {
     }
 
     public boolean canCalculate() {
-        if (!validate(vectorText)) {
-            return false;
-        }
-        switch (getActiveTab()) {
-            case DOTPRODUCT:
-                return validate(dotProductOperandText);
-            case CROSSPRODUCT:
-                return validate(crossProductOperandText);
-            default:
-                return true;
-        }
+        return validate(vectorText)
+            && (activeTab != OperationTab.DOTPRODUCT || validate(dotProductOperandText))
+            && (activeTab != OperationTab.CROSSPRODUCT || validate(crossProductOperandText));
     }
 }
 
