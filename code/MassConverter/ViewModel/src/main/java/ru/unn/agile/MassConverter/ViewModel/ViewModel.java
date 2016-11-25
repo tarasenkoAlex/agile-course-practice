@@ -6,6 +6,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import ru.unn.agile.MassConverter.Model.MassConverter.SystemToConvert;
 
 public class ViewModel {
@@ -14,6 +16,9 @@ public class ViewModel {
     private final StringProperty result = new SimpleStringProperty();
     private final StringProperty status = new SimpleStringProperty();
     private final ObjectProperty<SystemToConvert> systemToConvert = new SimpleObjectProperty<>();
+    private final ObjectProperty<ObservableList<SystemToConvert>> systemsToConvert
+            = new SimpleObjectProperty<>(FXCollections
+            .observableArrayList(SystemToConvert.values()));
 
     enum Status {
         WAITING("Waiting for data input"),
@@ -83,5 +88,17 @@ public class ViewModel {
 
     public ObjectProperty<SystemToConvert> systemToConvertProperty() {
         return systemToConvert;
+    }
+
+    public final String getResult() {
+        return result.get();
+    }
+
+    public final String getStatus() {
+        return status.get();
+    }
+
+    public final ObservableList<SystemToConvert> getSystemsToConvert() {
+        return systemsToConvert.get();
     }
 }

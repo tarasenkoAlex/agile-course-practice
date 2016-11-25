@@ -11,7 +11,8 @@ public class Main extends Application {
     @Override
     public void start(final Stage primaryStage) throws Exception {
         primaryStage.setTitle("Mass Converter");
-        Parent root = FXMLLoader.load(getClass().getResource("MassConverter.fxml"));
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("MassConverter.fxml"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
