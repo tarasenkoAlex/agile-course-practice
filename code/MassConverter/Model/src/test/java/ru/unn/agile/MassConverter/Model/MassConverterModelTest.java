@@ -117,4 +117,14 @@ public class MassConverterModelTest {
     public void convert1CentnerTo100Kg() {
         assertEquals(100, ConversionSystem.CENTNER.convertFrom(1), DELTA);
     }
+
+    @Test
+    public void convert1kgTo1kgThroughConvertTo() {
+        assertEquals(1, ConversionSystem.KILOGRAM.convertTo(1), DELTA);
+    }
+
+    @Test
+    public void convert1KgTo1KgThroughConvertFrom() {
+        assertEquals(1, ConversionSystem.KILOGRAM.convertFrom(1), DELTA);
+    }
 }
