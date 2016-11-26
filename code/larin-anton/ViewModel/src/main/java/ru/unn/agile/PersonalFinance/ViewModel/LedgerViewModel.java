@@ -27,7 +27,8 @@ public class LedgerViewModel {
     }
 
     public void addAccount(final AccountViewModel accountVM) {
-        // TODO
+        ledgerModel.addAccount(accountVM.getAccount());
+        accountsProperty.add(accountVM);
     }
 
     private ObservableList<AccountViewModel> getAccountViewModels() {

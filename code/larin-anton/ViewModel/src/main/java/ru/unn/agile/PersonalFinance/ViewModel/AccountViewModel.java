@@ -4,16 +4,21 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import ru.unn.agile.PersonalFinance.Model.Account;
 
+import java.util.Objects;
+
 public class AccountViewModel {
     private final StringProperty nameProperty = new SimpleStringProperty();
     private final StringProperty balanceProperty = new SimpleStringProperty();
 
     public AccountViewModel() {
-        // Creates account view model with empty name and balance
+        setName("New account");
+        setBalance("1000");
     }
 
     public AccountViewModel(final Account account) {
-        // TODO
+        Objects.requireNonNull(account);
+        setName(account.getName());
+        setBalance(Integer.toString(account.getBalance()));
     }
 
     public final StringProperty nameProperty() {
@@ -41,11 +46,10 @@ public class AccountViewModel {
     }
 
     public Account getAccount() {
-        // TODO
-        return null;
+        return new Account(getIntBalance(), getName());
     }
 
     int getIntBalance() {
-        return 0;
+        return Integer.parseInt(getBalance());
     }
 }
