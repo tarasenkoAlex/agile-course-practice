@@ -38,6 +38,14 @@ final class WindowsManager {
                 .show(stage);
     }
 
+    void showAddAccountView(final Stage stage) {
+        getView("add-account.fxml")
+                .setTitle("Add new account")
+                .setWidth(ADD_ACCOUNT_WINDOW_WIDTH)
+                .setHeight(ADD_ACCOUNT_WINDOW_HEIGHT)
+                .show(stage);
+    }
+
     private ViewBuilder getView(final String fxmlSource) {
         return new ViewBuilder(fxmlSource);
     }
