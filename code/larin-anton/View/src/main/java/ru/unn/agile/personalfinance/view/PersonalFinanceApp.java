@@ -13,6 +13,6 @@ public class PersonalFinanceApp extends Application {
 
     @Override
     public void start(final Stage primaryStage) throws IOException {
-        // TODO
+        WindowsManager.getInstance().showTransactionsView(primaryStage);
     }
 }
