@@ -138,9 +138,14 @@ include "code/newton-method/View"
 project(":code/newton-method/View").name = "newton-method-View"
 include "code/newton-method/ViewModel"
 project(":code/newton-method/ViewModel").name = "newton-method-viewmodel"
+
 // Ларин Антон
-include "code/larin-anton"
-project(":code/larin-anton").name = "larin-anton-Model"
+include  "code/larin-anton/Model"
+project(":code/larin-anton/Model").name = "larin-anton-Model"
+include  "code/larin-anton/ViewModel"
+project(":code/larin-anton/ViewModel").name = "larin-anton-ViewModel"
+include  "code/larin-anton/View"
+project(":code/larin-anton/View").name = "larin-anton-View"
 
 // Лачинов Дмитрий
 // Луковников Илья
