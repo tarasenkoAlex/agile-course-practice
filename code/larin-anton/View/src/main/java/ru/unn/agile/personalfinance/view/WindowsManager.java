@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Stack;
 
 final class WindowsManager {
     private static final int TRANSACTIONS_WINDOW_WIDTH  = 700;
@@ -16,6 +17,8 @@ final class WindowsManager {
 
     private static final Object LOCK = new Object();
     private static WindowsManager windowsManager;
+
+    private final Stack<Stage> stagesHstory = new Stack<>();
 
     private WindowsManager() { }
 
@@ -36,6 +39,7 @@ final class WindowsManager {
                 .setWidth(TRANSACTIONS_WINDOW_WIDTH)
                 .setHeight(TRANSACTIONS_WINDOW_HEIGHT)
                 .show(stage);
+        stagesHstory.push(stage);
     }
 
     void showAddAccountView(final Stage stage) {
@@ -44,6 +48,12 @@ final class WindowsManager {
                 .setWidth(ADD_ACCOUNT_WINDOW_WIDTH)
                 .setHeight(ADD_ACCOUNT_WINDOW_HEIGHT)
                 .show(stage);
+        stagesHstory.push(stage);
+    }
+
+    void goBack() {
+        Stage currentStage = stagesHstory.pop();
+        currentStage.close();
     }
 
     private ViewBuilder getView(final String fxmlSource) {
