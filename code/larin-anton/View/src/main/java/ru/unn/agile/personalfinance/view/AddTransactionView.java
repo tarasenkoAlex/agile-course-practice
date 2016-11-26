@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 
 import java.net.URL;
