@@ -26,7 +26,7 @@ public class LedgerViewModel {
         return this.accountsProperty.get();
     }
 
-    public void addAccount(AccountViewModel accountVM) {
+    public void addAccount(final AccountViewModel accountVM) {
         // TODO
     }
 

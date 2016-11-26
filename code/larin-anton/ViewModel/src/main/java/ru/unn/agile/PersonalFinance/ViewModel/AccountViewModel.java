@@ -8,7 +8,9 @@ public class AccountViewModel {
     private final StringProperty nameProperty = new SimpleStringProperty();
     private final StringProperty balanceProperty = new SimpleStringProperty();
 
-    public AccountViewModel() { }
+    public AccountViewModel() {
+        // Creates account view model with empty name and balance
+    }
 
     public AccountViewModel(final Account account) {
         // TODO

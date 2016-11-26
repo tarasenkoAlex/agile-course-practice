@@ -1,7 +1,8 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
-import java.util.List;
 import org.junit.Assert;
+
+import java.util.List;
 
 final class AssertHelper {
     private AssertHelper() {

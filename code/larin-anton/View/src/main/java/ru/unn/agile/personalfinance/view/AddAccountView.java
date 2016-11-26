@@ -1,15 +1,11 @@
 package ru.unn.agile.personalfinance.view;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-
-import javafx.util.converter.NumberStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,10 +14,10 @@ public class AddAccountView implements Initializable {
     private final AccountViewModel account = new AccountViewModel();
 
     @FXML
-    TextField nameField;
+    private TextField nameField;
 
     @FXML
-    TextField balanceField;
+    private TextField balanceField;
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {

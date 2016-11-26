@@ -1,8 +1,8 @@
-<?import javafx.scene.layout.GridPane?>
-<?import ru.unn.agile.personalfinance.view.ViewModelSource?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.*?>
+<?import ru.unn.agile.personalfinance.view.ViewModelSource?>
 <GridPane fx:controller="ru.unn.agile.personalfinance.view.TransactionsView"
           xmlns:fx="http://javafx.com/fxml">
     <fx:define>
