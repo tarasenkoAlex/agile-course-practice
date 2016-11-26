@@ -51,6 +51,15 @@ final class WindowsManager {
         stagesHstory.push(stage);
     }
 
+    void showAddTransactionView(final Stage stage) {
+        getView("add-transaction.fxml")
+                .setTitle("Add new transaction")
+                .setWidth(ADD_ACCOUNT_WINDOW_WIDTH)
+                .setHeight(ADD_ACCOUNT_WINDOW_HEIGHT)
+                .show(stage);
+        stagesHstory.push(stage);
+    }
+
     void goBack() {
         Stage currentStage = stagesHstory.pop();
         currentStage.close();

@@ -52,4 +52,8 @@ public class AccountViewModel {
     int getIntBalance() {
         return Integer.parseInt(getBalance());
     }
+
+    public void addTransaction(final ExternalTransactionViewModel transactionVM) {
+        // TODO
+    }
 }

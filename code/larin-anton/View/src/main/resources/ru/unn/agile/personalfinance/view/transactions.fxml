@@ -6,14 +6,25 @@
 <GridPane fx:controller="ru.unn.agile.personalfinance.view.TransactionsView"
           xmlns:fx="http://javafx.com/fxml">
     <fx:define>
-        <ViewModelSource fx:id="src" />
+        <ViewModelSource fx:id="vmSource" />
     </fx:define>
-    <ListView GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS"
-              maxHeight="Infinity" items="${src.model.accounts}" />
+    <ListView fx:id="accountList" GridPane.columnIndex="0"
+              GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS"
+              maxHeight="Infinity" items="${vmSource.model.accounts}" />
     <ListView GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
     <Button onAction="#handleAddAccountAction"
             GridPane.rowIndex="1" GridPane.columnIndex="0"
             GridPane.halignment="CENTER" text="Add account">
+        <GridPane.margin>
+            <Insets>
+                <top>5</top>
+                <bottom>5</bottom>
+            </Insets>
+        </GridPane.margin>
+    </Button>
+    <Button onAction="#handleAddTransactionAction"
+            GridPane.rowIndex="1" GridPane.columnIndex="1"
+            GridPane.halignment="CENTER" text="Add transaction">
         <GridPane.margin>
             <Insets>
                 <top>5</top>

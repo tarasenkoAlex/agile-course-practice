@@ -1,0 +1,22 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<GridPane fx:controller="ru.unn.agile.personalfinance.view.AddTransactionView"
+          xmlns:fx="http://javafx.com/fxml">
+    <VBox GridPane.rowIndex="0" GridPane.columnSpan="2">
+        <HBox>
+            <fx:define>
+                <ToggleGroup fx:id="incomeOrExpenseGroup" />
+            </fx:define>
+            <RadioButton toggleGroup="$incomeOrExpenseGroup" text="Income" />
+            <RadioButton toggleGroup="$incomeOrExpenseGroup" text="Expense" selected="true" />
+        </HBox>
+        <TextField fx:id="transactionAmountField" />
+    </VBox>
+    <Button GridPane.rowIndex="1" GridPane.columnIndex="0" text="Add"
+            onAction="#handleAddButtonAction" />
+    <Button GridPane.rowIndex="1" GridPane.columnIndex="1" text="Cancel"
+            onAction="#handleCancelButtonAction" />
+</GridPane>
