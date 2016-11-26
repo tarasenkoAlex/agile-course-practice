@@ -15,7 +15,7 @@ public class WhenCreatingAccountFromViewModel {
     public void setUp() throws Exception {
         accountVM = new AccountViewModel();
         accountVM.setName(accountName);
-        accountVM.setBalance(Integer.toString(accountBalance));
+        accountVM.setBalance(accountBalance);
     }
 
     @Test

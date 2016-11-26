@@ -26,11 +26,11 @@ public class WhenAddingTransactionToAccount {
     @Test
     public void andAccountBalanceChanges() throws Exception {
         TransactionViewModel transactionVM = new TransactionViewModel();
-        transactionVM.setIntAmount(10);
+        transactionVM.setAmount(10);
 
-        int balanceBeforeAddingTransaction = accountViewModel.getIntBalance();
+        int balanceBeforeAddingTransaction = accountViewModel.getBalance();
         accountViewModel.addTransaction(transactionVM);
 
-        assertNotEquals(accountViewModel.getIntBalance(), balanceBeforeAddingTransaction);
+        assertNotEquals(accountViewModel.getBalance(), balanceBeforeAddingTransaction);
     }
 }

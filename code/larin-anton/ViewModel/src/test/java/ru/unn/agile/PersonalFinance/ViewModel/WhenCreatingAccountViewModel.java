@@ -25,7 +25,7 @@ public class WhenCreatingAccountViewModel {
     public void andItsBalanceEqualsToTheSourceBalance() throws Exception {
         AccountViewModel accountVM = new AccountViewModel(sourceAccount);
 
-        assertEquals(accountVM.getIntBalance(), sourceAccount.getBalance());
+        assertEquals(accountVM.getBalance(), sourceAccount.getBalance());
     }
 
     @Test(expected = NullPointerException.class)

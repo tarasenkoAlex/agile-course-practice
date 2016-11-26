@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
@@ -29,11 +28,6 @@ public class TransactionsView implements Initializable {
     @FXML
     protected void handleAddTransactionAction(final ActionEvent actionEvent) {
         WindowsManager.getInstance().showAddTransactionView(new Stage());
-    }
-
-    @FXML
-    protected void handleAccountSelectedAction(final MouseEvent mouseEvent) {
-
     }
 
     @Override

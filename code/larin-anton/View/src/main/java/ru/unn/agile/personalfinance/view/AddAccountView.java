@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.util.converter.NumberStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 
 import java.net.URL;
@@ -25,7 +26,10 @@ public class AddAccountView implements Initializable {
         Bindings.bindBidirectional(nameField.textProperty(), account.nameProperty());
 
         /* balanceField.text <-> account.balance */
-        Bindings.bindBidirectional(balanceField.textProperty(), account.balanceProperty());
+        Bindings.bindBidirectional(
+                balanceField.textProperty(),
+                account.balanceProperty(),
+                new NumberStringConverter());
     }
 
     public void handleAddButton(final ActionEvent actionEvent) {

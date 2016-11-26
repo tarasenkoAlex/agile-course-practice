@@ -39,7 +39,7 @@ public class LedgerViewModel {
         return this.selectedAccountProperty.get();
     }
 
-    public void setSelectedAccount(AccountViewModel selectedAccountProperty) {
+    public void setSelectedAccount(final AccountViewModel selectedAccountProperty) {
         this.selectedAccountProperty.set(selectedAccountProperty);
     }
 
