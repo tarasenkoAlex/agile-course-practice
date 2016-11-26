@@ -14,11 +14,11 @@ public class LedgerViewModel {
     }
 
     public AccountViewModel getNewAccount() {
-        return newAccount.get();
+        return newAccount.getValue();
     }
 
     public void createNewAccount() {
-        // TODO
+        newAccount.setValue(new AccountViewModel());
     }
 
     public void saveNewAccount() {
