@@ -65,8 +65,12 @@ project(":code/volkov-denis").name = "volkov-denis-Model"
 
 // Воронин Дмитрий
 // Грошева Людмила
-include "code/grosheva-ludmila"
-project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
+include "code/Statistics/Model"
+project(":code/Statistics/Model").name = "Statistics-Model"
+include "code/Statistics/ViewModel"
+project(":code/Statistics/ViewModel").name = "Statistics-ViewModel"
+include "code/Statistics/View"
+project(":code/Statistics/View").name = "Statistics-View"
 
 // Добролюбова Евгения
 include "code/dobroliubova-evgeniia"
