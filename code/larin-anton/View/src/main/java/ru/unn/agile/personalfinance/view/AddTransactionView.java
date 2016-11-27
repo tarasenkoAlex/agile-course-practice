@@ -33,8 +33,11 @@ public class AddTransactionView implements Initializable {
     @FXML
     protected void handleAddButtonAction(final ActionEvent actionEvent) {
         LedgerViewModel viewModel = ViewModelService.getViewModel();
+
         AccountViewModel selectedAccount = viewModel.getSelectedAccount();
-        selectedAccount.addTransaction(transaction);
+        transaction.setParentAccount(selectedAccount);
+        transaction.execute();
+
         WindowsManager.getInstance().goBack();
     }
 

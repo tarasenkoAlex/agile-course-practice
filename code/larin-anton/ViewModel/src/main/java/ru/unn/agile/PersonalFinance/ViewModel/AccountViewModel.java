@@ -79,14 +79,9 @@ public class AccountViewModel {
         return internalAccount;
     }
 
-    public void addTransaction(final TransactionViewModel transactionVM) {
+    public void registerTransaction(final TransactionViewModel transactionVM) {
         transactionsProperty.add(transactionVM);
-        internalAccount.addExternalTransaction(transactionVM.getExternal());
         setBalance(internalAccount.getBalance());
-
-        if (parentLedger != null) {
-            parentLedger.forceUpdateAccounts(this);
-        }
     }
 
     private void initializeDefaultAccount(final LedgerViewModel ledgerVM) {

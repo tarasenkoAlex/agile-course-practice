@@ -61,8 +61,4 @@ public class LedgerViewModel {
                 .collect(Collectors.toList());
         return FXCollections.observableList(accountModels);
     }
-
-    public void forceUpdateAccounts(final AccountViewModel accountVM) {
-        // TODO
-    }
 }

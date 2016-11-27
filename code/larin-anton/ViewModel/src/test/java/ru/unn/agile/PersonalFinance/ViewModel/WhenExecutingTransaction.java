@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static ru.unn.agile.PersonalFinance.ViewModel.AssertHelper.assertContains;
 
-public class WhenAddingTransactionToAccount {
+public class WhenExecutingTransaction {
     private AccountViewModel accountViewModel;
     @Before
     public void setUp() throws Exception {
@@ -18,8 +18,9 @@ public class WhenAddingTransactionToAccount {
     @Test
     public void andItIsAddedToTransactionsList() throws Exception {
         TransactionViewModel transactionVM = new TransactionViewModel();
+        transactionVM.setParentAccount(accountViewModel);
 
-        accountViewModel.addTransaction(transactionVM);
+        transactionVM.execute();
 
         assertContains(accountViewModel.getTransactions(), transactionVM);
     }
@@ -27,12 +28,13 @@ public class WhenAddingTransactionToAccount {
     @Test
     public void andAccountBalanceChanges() throws Exception {
         TransactionViewModel transactionVM = new TransactionViewModel();
+        transactionVM.setParentAccount(accountViewModel);
         transactionVM.setAmount(10);
 
-        int balanceBeforeAddingTransaction = accountViewModel.getBalance();
-        accountViewModel.addTransaction(transactionVM);
+        int balanceBeforeTransaction = accountViewModel.getBalance();
+        transactionVM.execute();
 
-        assertNotEquals(accountViewModel.getBalance(), balanceBeforeAddingTransaction);
+        assertNotEquals(accountViewModel.getBalance(), balanceBeforeTransaction);
     }
 
     @Test
@@ -53,9 +55,9 @@ public class WhenAddingTransactionToAccount {
         newTransaction.setAmount(transferAmount);
         newTransaction.setAccountFrom(cashAccountVM);
         newTransaction.setAccountTo(debitCardAccountVM);
-        cashAccountVM.addTransaction(newTransaction);
+        newTransaction.execute();
 
-        assertEquals(debitCardAccountVM.getBalance(), startingDebitCardBalance + transferAmount);
-        assertEquals(cashAccountVM.getBalance(), startingCashBalance - transferAmount);
+        assertEquals(startingDebitCardBalance + transferAmount, debitCardAccountVM.getBalance());
+        assertEquals(startingCashBalance - transferAmount, cashAccountVM.getBalance());
     }
 }
