@@ -38,15 +38,13 @@ public class WhenExecutingTransaction {
     }
 
     @Test
-    public void andBalanceOfOtherAccountChangesIfTransactionIsTransfer() throws Exception {
+    public void andBalanceOfOtherAccountChangesIfTransfer() throws Exception {
         int transferAmount = 1000;
         int startingCashBalance = 10000;
         int startingDebitCardBalance = 50000;
-        Account cashAccount = new Account(startingCashBalance, "Cash");
-        Account debitCardAccount = new Account(startingDebitCardBalance, "Debit card");
         LedgerViewModel ledgerVM = new LedgerViewModel();
-        AccountViewModel cashAccountVM = new AccountViewModel(ledgerVM, cashAccount);
-        AccountViewModel debitCardAccountVM = new AccountViewModel(ledgerVM, debitCardAccount);
+        AccountViewModel cashAccountVM = createAccount(startingCashBalance, "Cash");
+        AccountViewModel debitCardAccountVM = createAccount(startingDebitCardBalance, "Debit card");
         ledgerVM.addAccount(cashAccountVM);
         ledgerVM.addAccount(debitCardAccountVM);
 
@@ -59,5 +57,9 @@ public class WhenExecutingTransaction {
 
         assertEquals(startingDebitCardBalance + transferAmount, debitCardAccountVM.getBalance());
         assertEquals(startingCashBalance - transferAmount, cashAccountVM.getBalance());
+    }
+
+    private AccountViewModel createAccount(final int balance, final String name) {
+        return new AccountViewModel(new Account(balance, name));
     }
 }

@@ -13,27 +13,32 @@ import java.util.GregorianCalendar;
 
 public class TransactionViewModel {
     private AccountViewModel parentAccount;
-    private Transaction internalTransaction;
 
     private final IntegerProperty amountProperty = new SimpleIntegerProperty();
-    private final ObjectProperty<LocalDate> dateProperty = new SimpleObjectProperty<>();
     private final StringProperty descriptionProperty = new SimpleStringProperty();
     private final StringProperty counterpartyProperty = new SimpleStringProperty();
     private final BooleanProperty isTransferProperty = new SimpleBooleanProperty();
-    private final ObjectProperty<CategoryViewModel> categoryProperty = new SimpleObjectProperty<>();
     private final BooleanProperty isIncomeProperty = new SimpleBooleanProperty();
-    private final ObjectProperty<AccountViewModel> accountFromProperty = new SimpleObjectProperty<>();
-    private final ObjectProperty<AccountViewModel> accountToProperty = new SimpleObjectProperty<>();
+
+    private final ObjectProperty<LocalDate> dateProperty =
+            new SimpleObjectProperty<>();
+
+    private final ObjectProperty<CategoryViewModel> categoryProperty =
+            new SimpleObjectProperty<>();
+
+    private final ObjectProperty<AccountViewModel> accountFromProperty =
+            new SimpleObjectProperty<>();
+
+    private final ObjectProperty<AccountViewModel> accountToProperty =
+            new SimpleObjectProperty<>();
 
     public TransactionViewModel() {
         setDate(LocalDate.now());
         setCategory(new CategoryViewModel());
     }
 
-    public TransactionViewModel(final AccountViewModel parentAccountVM,
-                                final Transaction transaction) {
-        this.parentAccount = parentAccountVM;
-        this.internalTransaction = transaction;
+    public TransactionViewModel(final Transaction transaction) {
+        // TODO
     }
 
     // region Properties for Binding

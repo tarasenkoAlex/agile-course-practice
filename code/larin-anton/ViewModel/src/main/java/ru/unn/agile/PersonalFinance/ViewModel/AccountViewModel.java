@@ -16,7 +16,6 @@ public class AccountViewModel {
     private static final String DEFAULT_ACCOUNT_NAME = "New Account";
 
     private Account internalAccount;
-    private LedgerViewModel parentLedger;
 
     private final StringProperty nameProperty = new SimpleStringProperty();
     private final IntegerProperty balanceProperty = new SimpleIntegerProperty();
@@ -24,15 +23,12 @@ public class AccountViewModel {
             new SimpleListProperty<>();
 
     public AccountViewModel() {
-        initializeDefaultAccount(null);
+        Account account = new Account(DEFAULT_ACCOUNT_BALANCE, DEFAULT_ACCOUNT_NAME);
+        initialize(account);
     }
 
-    public AccountViewModel(final LedgerViewModel ledgerVM) {
-        initializeDefaultAccount(ledgerVM);
-    }
-
-    public AccountViewModel(final LedgerViewModel ledgerVM, final Account account) {
-        initialize(ledgerVM, account);
+    public AccountViewModel(final Account account) {
+        initialize(account);
     }
 
     // region Properties for Binding
@@ -71,10 +67,6 @@ public class AccountViewModel {
 
     // endregion
 
-    public final void setParentLedger(final LedgerViewModel ledgerVM) {
-        parentLedger = ledgerVM;
-    }
-
     public final Account getAccount() {
         return internalAccount;
     }
@@ -84,15 +76,8 @@ public class AccountViewModel {
         setBalance(internalAccount.getBalance());
     }
 
-    private void initializeDefaultAccount(final LedgerViewModel ledgerVM) {
-        Account account = new Account(DEFAULT_ACCOUNT_BALANCE, DEFAULT_ACCOUNT_NAME);
-        initialize(ledgerVM, account);
-    }
-
-    private void initialize(final LedgerViewModel ledgerVM, final Account account) {
+    private void initialize(final Account account) {
         Objects.requireNonNull(account);
-
-        this.parentLedger = ledgerVM;
         this.internalAccount = account;
 
         setName(account.getName());
@@ -109,7 +94,7 @@ public class AccountViewModel {
     private ObservableList<TransactionViewModel> wrapTransactions(final Account account) {
         List<Transaction> transactions = account.getTransactions();
         List<TransactionViewModel> accountModels = transactions.stream()
-                .map(transaction -> new TransactionViewModel(this, transaction))
+                .map(transaction -> new TransactionViewModel(transaction))
                 .collect(Collectors.toList());
         return FXCollections.observableList(accountModels);
     }

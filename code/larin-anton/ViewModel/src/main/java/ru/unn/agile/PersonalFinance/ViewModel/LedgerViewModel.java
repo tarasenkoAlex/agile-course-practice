@@ -51,13 +51,12 @@ public class LedgerViewModel {
     public void addAccount(final AccountViewModel accountVM) {
         ledgerModel.addAccount(accountVM.getAccount());
         accountsProperty.add(accountVM);
-        accountVM.setParentLedger(this);
     }
 
     private ObservableList<AccountViewModel> wrapAccounts() {
         List<Account> accounts = this.ledgerModel.getAccounts();
         List<AccountViewModel> accountModels = accounts.stream()
-                .map(account -> new AccountViewModel(this, account))
+                .map(account -> new AccountViewModel(account))
                 .collect(Collectors.toList());
         return FXCollections.observableList(accountModels);
     }
