@@ -10,8 +10,8 @@
             <fx:define>
                 <ToggleGroup fx:id="incomeOrExpenseGroup" />
             </fx:define>
-            <RadioButton toggleGroup="$incomeOrExpenseGroup" text="Income" />
-            <RadioButton toggleGroup="$incomeOrExpenseGroup" text="Expense" selected="true" />
+            <RadioButton fx:id="incomeRBtn" toggleGroup="$incomeOrExpenseGroup" text="Income" />
+            <RadioButton fx:id="expenseRBtn" toggleGroup="$incomeOrExpenseGroup" text="Expense" selected="true" />
         </HBox>
         <TextField fx:id="transactionAmountField" />
     </VBox>

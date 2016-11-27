@@ -17,6 +17,7 @@ public class TransactionViewModel {
     private final StringProperty counterpartyProperty = new SimpleStringProperty();
     private final BooleanProperty isInternalTransactionProperty = new SimpleBooleanProperty();
     private final ObjectProperty<CategoryViewModel> categoryProperty = new SimpleObjectProperty<>();
+    private final BooleanProperty isIncomeProperty = new SimpleBooleanProperty();
 
     public TransactionViewModel() {
         setDate(LocalDate.now());
@@ -101,6 +102,18 @@ public class TransactionViewModel {
         this.categoryProperty.set(category);
     }
 
+    public final BooleanProperty isIncomeProperty() {
+        return this.isIncomeProperty;
+    }
+
+    public final boolean setIsIncome() {
+        return this.isIncomeProperty.get();
+    }
+
+    public final void setIsIncome(boolean isIncomeProperty) {
+        this.isIncomeProperty.set(isIncomeProperty);
+    }
+
     // endregion
 
     public ExternalTransaction getExternal() {
@@ -119,4 +132,5 @@ public class TransactionViewModel {
         return new ExternalTransaction(getAmount(), getDescription(),
                 category, calendar, getCounterparty());
     }
+
 }
