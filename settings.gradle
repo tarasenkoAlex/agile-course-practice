@@ -166,6 +166,9 @@ project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
 // Шочин Александр
 include "code/shochin-alexandr"
 project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
+include "code/Polynomial/View"
+project(":code/Polynomial/View").name = "Polynomial-View"
+
 // Шургалин Петр
 include "code/shurgalin-pyotr"
 project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
