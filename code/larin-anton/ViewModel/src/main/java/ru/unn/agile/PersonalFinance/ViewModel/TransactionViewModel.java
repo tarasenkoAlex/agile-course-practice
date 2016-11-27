@@ -11,6 +11,9 @@ import java.time.ZonedDateTime;
 import java.util.GregorianCalendar;
 
 public class TransactionViewModel {
+    private AccountViewModel parentAccount;
+    private Transaction internalTransaction;
+
     private final IntegerProperty amountProperty = new SimpleIntegerProperty();
     private final ObjectProperty<LocalDate> dateProperty = new SimpleObjectProperty<>();
     private final StringProperty descriptionProperty = new SimpleStringProperty();
@@ -18,14 +21,18 @@ public class TransactionViewModel {
     private final BooleanProperty isInternalTransactionProperty = new SimpleBooleanProperty();
     private final ObjectProperty<CategoryViewModel> categoryProperty = new SimpleObjectProperty<>();
     private final BooleanProperty isIncomeProperty = new SimpleBooleanProperty();
+    private final ObjectProperty<AccountViewModel> accountFromProperty = new SimpleObjectProperty<>();
+    private final ObjectProperty<AccountViewModel> accountToProperty = new SimpleObjectProperty<>();
 
     public TransactionViewModel() {
         setDate(LocalDate.now());
         setCategory(new CategoryViewModel());
     }
 
-    public TransactionViewModel(final Transaction transaction) {
-        // TODO
+    public TransactionViewModel(final AccountViewModel parentAccountVM,
+                                final Transaction transaction) {
+        this.parentAccount = parentAccountVM;
+        this.internalTransaction = transaction;
     }
 
     // region Properties for Binding
@@ -86,7 +93,7 @@ public class TransactionViewModel {
         return this.isInternalTransactionProperty.get();
     }
 
-    public final void setIsInternalTransaction(final boolean isInternalTransaction) {
+    public final void setIsTransfer(final boolean isInternalTransaction) {
         this.isInternalTransactionProperty.set(isInternalTransaction);
     }
 
@@ -112,6 +119,30 @@ public class TransactionViewModel {
 
     public final void setIsIncome(final boolean isIncomeProperty) {
         this.isIncomeProperty.set(isIncomeProperty);
+    }
+
+    public final ObjectProperty<AccountViewModel> accountFromProperty() {
+        return this.accountFromProperty;
+    }
+
+    public final AccountViewModel getAccountFrom() {
+        return this.accountFromProperty.get();
+    }
+
+    public final void setAccountFrom(final AccountViewModel account) {
+        this.accountFromProperty.set(account);
+    }
+
+    public final ObjectProperty<AccountViewModel> accountToProperty() {
+        return this.accountToProperty;
+    }
+
+    public final AccountViewModel getAccountTo() {
+        return this.accountToProperty.get();
+    }
+
+    public final void setAccountTo(final AccountViewModel account) {
+        this.accountToProperty.set(account);
     }
 
     // endregion

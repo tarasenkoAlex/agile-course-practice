@@ -3,18 +3,20 @@ package ru.unn.agile.PersonalFinance.ViewModel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import ru.unn.agile.PersonalFinance.Model.Account;
-import ru.unn.agile.PersonalFinance.Model.Transaction;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class AccountViewModel {
-    private static final int STARTING_ACCOUNT_BALANCE = 10000;
+import ru.unn.agile.PersonalFinance.Model.Account;
+import ru.unn.agile.PersonalFinance.Model.Transaction;
 
-    private final Account internalAccount;
-    private final boolean isAccountCreatedExternally;
+public class AccountViewModel {
+    private static final int DEFAULT_ACCOUNT_BALANCE = 10000;
+    private static final String DEFAULT_ACCOUNT_NAME = "New Account";
+
+    private Account internalAccount;
+    private LedgerViewModel parentLedger;
 
     private final StringProperty nameProperty = new SimpleStringProperty();
     private final IntegerProperty balanceProperty = new SimpleIntegerProperty();
@@ -22,18 +24,15 @@ public class AccountViewModel {
             new SimpleListProperty<>();
 
     public AccountViewModel() {
-        internalAccount = new Account(STARTING_ACCOUNT_BALANCE, "New account");
-        isAccountCreatedExternally = false;
-        copyFieldsValueFromAccount(internalAccount);
-        addListenersToProperties();
+        initializeDefaultAccount(null);
     }
 
-    public AccountViewModel(final Account account) {
-        Objects.requireNonNull(account);
-        internalAccount = account;
-        isAccountCreatedExternally = true;
-        copyFieldsValueFromAccount(internalAccount);
-        addListenersToProperties();
+    public AccountViewModel(final LedgerViewModel ledgerVM) {
+        initializeDefaultAccount(ledgerVM);
+    }
+
+    public AccountViewModel(final LedgerViewModel ledgerVM, final Account account) {
+        initialize(ledgerVM, account);
     }
 
     // region Properties for Binding
@@ -72,38 +71,50 @@ public class AccountViewModel {
 
     // endregion
 
-    public Account getAccount() {
-        if (isAccountCreatedExternally) {
-            return internalAccount;
-        } else {
-            return new Account(getBalance(), getName());
-        }
+    public final void setParentLedger(final LedgerViewModel ledgerVM) {
+        parentLedger = ledgerVM;
+    }
+
+    public final Account getAccount() {
+        return internalAccount;
     }
 
     public void addTransaction(final TransactionViewModel transactionVM) {
         transactionsProperty.add(transactionVM);
         internalAccount.addExternalTransaction(transactionVM.getExternal());
         setBalance(internalAccount.getBalance());
+
+        if (parentLedger != null) {
+            parentLedger.forceUpdateAccounts(this);
+        }
     }
 
-    private void copyFieldsValueFromAccount(final Account account) {
+    private void initializeDefaultAccount(final LedgerViewModel ledgerVM) {
+        Account account = new Account(DEFAULT_ACCOUNT_BALANCE, DEFAULT_ACCOUNT_NAME);
+        initialize(ledgerVM, account);
+    }
+
+    private void initialize(final LedgerViewModel ledgerVM, final Account account) {
+        Objects.requireNonNull(account);
+
+        this.parentLedger = ledgerVM;
+        this.internalAccount = account;
+
         setName(account.getName());
         setBalance(account.getBalance());
 
-        ObservableList<TransactionViewModel> transactions = getTransactionViewModels(account);
+        ObservableList<TransactionViewModel> transactions = wrapTransactions(account);
         transactionsProperty.setValue(transactions);
-    }
 
-    private void addListenersToProperties() {
         nameProperty.addListener((observable, oldValue, newValue) -> {
             internalAccount.changeName(newValue);
         });
     }
 
-    private ObservableList<TransactionViewModel> getTransactionViewModels(final Account account) {
+    private ObservableList<TransactionViewModel> wrapTransactions(final Account account) {
         List<Transaction> transactions = account.getTransactions();
         List<TransactionViewModel> accountModels = transactions.stream()
-                .map(transaction -> new TransactionViewModel(transaction))
+                .map(transaction -> new TransactionViewModel(this, transaction))
                 .collect(Collectors.toList());
         return FXCollections.observableList(accountModels);
     }

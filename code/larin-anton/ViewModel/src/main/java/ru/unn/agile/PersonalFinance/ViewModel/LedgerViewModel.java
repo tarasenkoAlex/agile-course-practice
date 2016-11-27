@@ -6,11 +6,12 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import ru.unn.agile.PersonalFinance.Model.Account;
-import ru.unn.agile.PersonalFinance.Model.Ledger;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import ru.unn.agile.PersonalFinance.Model.Account;
+import ru.unn.agile.PersonalFinance.Model.Ledger;
 
 public class LedgerViewModel {
     private final Ledger ledgerModel = new Ledger();
@@ -19,7 +20,7 @@ public class LedgerViewModel {
     private final ObjectProperty<AccountViewModel> selectedAccountProperty;
 
     public LedgerViewModel() {
-        this.accountsProperty = new SimpleListProperty<>(getAccountViewModels());
+        this.accountsProperty = new SimpleListProperty<>(wrapAccounts());
         this.selectedAccountProperty = new SimpleObjectProperty<>();
     }
 
@@ -50,13 +51,18 @@ public class LedgerViewModel {
     public void addAccount(final AccountViewModel accountVM) {
         ledgerModel.addAccount(accountVM.getAccount());
         accountsProperty.add(accountVM);
+        accountVM.setParentLedger(this);
     }
 
-    private ObservableList<AccountViewModel> getAccountViewModels() {
+    private ObservableList<AccountViewModel> wrapAccounts() {
         List<Account> accounts = this.ledgerModel.getAccounts();
         List<AccountViewModel> accountModels = accounts.stream()
-                .map(account -> new AccountViewModel(account))
+                .map(account -> new AccountViewModel(this, account))
                 .collect(Collectors.toList());
         return FXCollections.observableList(accountModels);
+    }
+
+    public void forceUpdateAccounts(final AccountViewModel accountVM) {
+        // TODO
     }
 }
