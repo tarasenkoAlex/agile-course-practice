@@ -5,10 +5,15 @@ import javafx.beans.property.StringProperty;
 import ru.unn.agile.PersonalFinance.Model.Category;
 
 public class CategoryViewModel {
+    private final Category internalCategory;
     private final StringProperty nameProperty = new SimpleStringProperty();
 
     public CategoryViewModel() {
-        setName("New category");
+        this.internalCategory = new Category("New category");
+    }
+
+    public CategoryViewModel(final String name) {
+        this.internalCategory = new Category(name);
     }
 
     // region Properties for Binding
@@ -21,13 +26,9 @@ public class CategoryViewModel {
         return this.nameProperty.get();
     }
 
-    public final void setName(final String nameProperty) {
-        this.nameProperty.set(nameProperty);
-    }
-
     // endregion
 
     public Category getCategory() {
-        return new Category(getName());
+        return internalCategory;
     }
 }

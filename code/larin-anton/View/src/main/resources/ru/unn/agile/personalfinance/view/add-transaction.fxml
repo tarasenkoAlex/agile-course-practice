@@ -8,9 +8,11 @@
                 <ToggleGroup fx:id="incomeOrExpenseGroup" />
             </fx:define>
             <RadioButton fx:id="incomeRBtn" toggleGroup="$incomeOrExpenseGroup" text="Income" />
-            <RadioButton toggleGroup="$incomeOrExpenseGroup" text="Expense" selected="true" />
+            <RadioButton toggleGroup="$incomeOrExpenseGroup" selected="true" text="Expense" />
         </HBox>
         <TextField fx:id="transactionAmountField" />
+        <ComboBox fx:id="categoryComboBox" />
+        <TextArea fx:id="descriptionTextArea" />
     </VBox>
     <Button GridPane.rowIndex="1" GridPane.columnIndex="0" text="Add"
             onAction="#handleAddButtonAction" />

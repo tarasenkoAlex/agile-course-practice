@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +18,16 @@ public class LedgerViewModel {
     private final Ledger ledgerModel = new Ledger();
 
     private final ListProperty<AccountViewModel> accountsProperty;
-    private final ObjectProperty<AccountViewModel> selectedAccountProperty;
+
+    private final ListProperty<CategoryViewModel> categoriesProperty =
+            new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
+
+    private final ObjectProperty<AccountViewModel> selectedAccountProperty =
+            new SimpleObjectProperty<>();
 
     public LedgerViewModel() {
         this.accountsProperty = new SimpleListProperty<>(wrapAccounts());
-        this.selectedAccountProperty = new SimpleObjectProperty<>();
+        initializeCategories();
     }
 
     // region Properties for Binding
@@ -32,6 +38,14 @@ public class LedgerViewModel {
 
     public final ObservableList<AccountViewModel> getAccounts() {
         return this.accountsProperty.get();
+    }
+
+    public final ListProperty<CategoryViewModel> categoriesProperty() {
+        return this.categoriesProperty;
+    }
+
+    public final ObservableList<CategoryViewModel> getCategories() {
+        return this.categoriesProperty.get();
     }
 
     public final ObjectProperty<AccountViewModel> selectedAccountProperty() {
@@ -59,5 +73,13 @@ public class LedgerViewModel {
                 .map(account -> new AccountViewModel(account))
                 .collect(Collectors.toList());
         return FXCollections.observableList(accountModels);
+    }
+
+    private void initializeCategories() {
+        categoriesProperty.add(new CategoryViewModel("Category 1"));
+        categoriesProperty.add(new CategoryViewModel("Category 2"));
+        categoriesProperty.add(new CategoryViewModel("Category 3"));
+        categoriesProperty.add(new CategoryViewModel("Category 4"));
+        categoriesProperty.add(new CategoryViewModel("Category 5"));
     }
 }
