@@ -72,8 +72,13 @@ project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 include "code/dobroliubova-evgeniia"
 project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
 // Евтюшин Валерий
-include "code/Yevtyushin-Valery"
-project(":code/Yevtyushin-Valery").name = "YevtyushinValery-tdd-lab1"
+include "code/Yevtyushin-Valery/Model"
+project(":code/Yevtyushin-Valery/Model").name = "MortgageCalculatorModel"
+include "code/Yevtyushin-Valery/View"
+project(":code/Yevtyushin-Valery/View").name = "MortgageCalculatorView"
+include "code/Yevtyushin-Valery/ViewModel"
+project(":code/Yevtyushin-Valery/ViewModel").name = "MortgageCalculatorViewModel"
+
 // Еланов Артем
 // Зайдуллова Алина
 include "code/zaydullova-alina"
