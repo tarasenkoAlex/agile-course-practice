@@ -106,7 +106,7 @@ public class TransactionViewModel {
         return this.isIncomeProperty;
     }
 
-    public final boolean setIsIncome() {
+    public final boolean getIsIncome() {
         return this.isIncomeProperty.get();
     }
 
@@ -122,15 +122,26 @@ public class TransactionViewModel {
                     + "transaction because transaction marked as internal");
         }
 
-        CategoryViewModel categoryViewModel = getCategory();
-        LocalDate localDate = getDate();
+        ExternalTransaction.Builder transactionBuilder = getIsIncome() ?
+                ExternalTransaction.incomeBuilder(getAmount()) :
+                ExternalTransaction.expenseBuilder(getAmount());
 
-        ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
-        GregorianCalendar calendar = GregorianCalendar.from(zonedDateTime);
-        Category category = categoryViewModel.getCategory();
-
-        return new ExternalTransaction(getAmount(), getDescription(),
-                category, calendar, getCounterparty());
+        return transactionBuilder
+                .date(getModelDate())
+                .category(getModelCategory())
+                .description(getDescription())
+                .counterparty(getCounterparty())
+                .build();
     }
 
+    private GregorianCalendar getModelDate() {
+        LocalDate localDate = getDate();
+        ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
+        return GregorianCalendar.from(zonedDateTime);
+    }
+
+    private Category getModelCategory() {
+        CategoryViewModel categoryViewModel = getCategory();
+        return categoryViewModel.getCategory();
+    }
 }
