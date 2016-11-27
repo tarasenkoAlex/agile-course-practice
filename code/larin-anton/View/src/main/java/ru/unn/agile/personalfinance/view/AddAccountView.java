@@ -20,8 +20,21 @@ public class AddAccountView implements Initializable {
     @FXML
     private TextField balanceField;
 
+    public void handleAddButton(final ActionEvent actionEvent) {
+        ViewModelService.getViewModel().addAccount(account);
+        WindowsManager.getInstance().goBack();
+    }
+
+    public void handleCancelButton(final ActionEvent actionEvent) {
+        WindowsManager.getInstance().goBack();
+    }
+
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
+        setUpBindings();
+    }
+
+    private void setUpBindings() {
         /* nameField.text <-> account.name */
         Bindings.bindBidirectional(nameField.textProperty(), account.nameProperty());
 
@@ -30,14 +43,5 @@ public class AddAccountView implements Initializable {
                 balanceField.textProperty(),
                 account.balanceProperty(),
                 new CurrencyStringConverter());
-    }
-
-    public void handleAddButton(final ActionEvent actionEvent) {
-        ViewModelService.getViewModel().addAccount(account);
-        WindowsManager.getInstance().goBack();
-    }
-
-    public void handleCancelButton(final ActionEvent actionEvent) {
-        WindowsManager.getInstance().goBack();
     }
 }

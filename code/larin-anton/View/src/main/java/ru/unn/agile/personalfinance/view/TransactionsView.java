@@ -6,19 +6,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
+import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
+
 public class TransactionsView implements Initializable {
-
     @FXML
-    private ViewModelSource vmSource;
-
-    @FXML
-    private ListView<AccountViewModel> accountList;
+    private ListView<AccountViewModel> accountsList;
 
     @FXML
     protected void handleAddAccountAction(final ActionEvent event) {
@@ -32,10 +29,13 @@ public class TransactionsView implements Initializable {
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
-        LedgerViewModel ledgerVM = vmSource.getModel();
+        setUpBindings(ViewModelService.getViewModel());
+    }
 
+    private void setUpBindings(final LedgerViewModel ledgerVM) {
+        /* accountsList.selectedItem -> ledgerVM.selectedAccount */
         ReadOnlyObjectProperty<AccountViewModel> selectedItemProperty =
-                accountList.getSelectionModel().selectedItemProperty();
+                accountsList.getSelectionModel().selectedItemProperty();
         ledgerVM.selectedAccountProperty().bind(selectedItemProperty);
     }
 }

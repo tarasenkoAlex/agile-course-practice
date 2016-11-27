@@ -49,8 +49,11 @@ public class AddTransactionView implements Initializable {
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
-        LedgerViewModel ledgerVM = ViewModelService.getViewModel();
+        setUpBindings(ViewModelService.getViewModel());
+        categoryComboBox.getSelectionModel().selectFirst();
+    }
 
+    private void setUpBindings(final LedgerViewModel ledgerVM) {
         /* transactionAmountField.text <-> transaction.amount */
         Bindings.bindBidirectional(
                 transactionAmountField.textProperty(),
@@ -58,7 +61,9 @@ public class AddTransactionView implements Initializable {
                 new CurrencyStringConverter());
 
         /* incomeRBtn.isSelected <-> transaction.isIncome */
-        Bindings.bindBidirectional(incomeRBtn.selectedProperty(), transaction.isIncomeProperty());
+        Bindings.bindBidirectional(
+                incomeRBtn.selectedProperty(),
+                transaction.isIncomeProperty());
 
         /* descriptionTextArea.text <-> transaction.description */
         Bindings.bindBidirectional(
@@ -68,10 +73,5 @@ public class AddTransactionView implements Initializable {
         /* categoryComboBox.selectedItem -> transaction.category */
         ObjectProperty<CategoryViewModel> categoryProperty = transaction.categoryProperty();
         categoryProperty.bind(categoryComboBox.getSelectionModel().selectedItemProperty());
-
-        /* ledgerVM.categories -> categoryComboBox.items */
-        categoryComboBox.itemsProperty().bind(ledgerVM.categoriesProperty());
-
-        categoryComboBox.getSelectionModel().selectFirst();
     }
 }

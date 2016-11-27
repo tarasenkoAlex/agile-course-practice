@@ -1,7 +1,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import ru.unn.agile.personalfinance.view.ViewModelSource?>
 <GridPane fx:controller="ru.unn.agile.personalfinance.view.AddTransactionView"
           xmlns:fx="http://javafx.com/fxml">
+    <fx:define>
+        <ViewModelSource fx:id="vmSource" />
+    </fx:define>
     <VBox GridPane.rowIndex="0" GridPane.columnSpan="2">
         <HBox>
             <fx:define>
@@ -11,7 +15,7 @@
             <RadioButton toggleGroup="$incomeOrExpenseGroup" selected="true" text="Expense" />
         </HBox>
         <TextField fx:id="transactionAmountField" />
-        <ComboBox fx:id="categoryComboBox" />
+        <ComboBox fx:id="categoryComboBox" items="${vmSource.model.categories}" />
         <TextArea fx:id="descriptionTextArea" />
     </VBox>
     <Button GridPane.rowIndex="1" GridPane.columnIndex="0" text="Add"

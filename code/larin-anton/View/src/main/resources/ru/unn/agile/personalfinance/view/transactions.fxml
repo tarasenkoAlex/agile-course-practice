@@ -8,7 +8,7 @@
     <fx:define>
         <ViewModelSource fx:id="vmSource" />
     </fx:define>
-    <ListView fx:id="accountList" GridPane.columnIndex="0"
+    <ListView fx:id="accountsList" GridPane.columnIndex="0"
               GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS"
               maxHeight="Infinity" items="${vmSource.model.accounts}" />
     <ListView GridPane.columnIndex="1" GridPane.hgrow="ALWAYS"
