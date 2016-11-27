@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 import ru.unn.agile.vector3d.model.Vector3D;
+import ru.unn.agile.vector3d.viewmodel.ViewModel.OperationTab;
 
 import static org.junit.Assert.*;
 

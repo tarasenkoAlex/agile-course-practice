@@ -138,11 +138,11 @@ public class ViewModel {
                 break;
         }
     }
-}
 
-enum OperationTab {
-    NORM,
-    NORMALIZATION,
-    DOTPRODUCT,
-    CROSSPRODUCT
+    public enum OperationTab {
+        NORM,
+        NORMALIZATION,
+        DOTPRODUCT,
+        CROSSPRODUCT
+    };
 }
