@@ -20,10 +20,10 @@ public class AddTransactionView implements Initializable {
     private final TransactionViewModel transaction = new TransactionViewModel();
 
     @FXML
-    public TextArea descriptionTextArea;
+    private TextArea descriptionTextArea;
 
     @FXML
-    public ComboBox<CategoryViewModel> categoryComboBox;
+    private ComboBox<CategoryViewModel> categoryComboBox;
 
     @FXML
     private RadioButton incomeRBtn;
@@ -61,7 +61,9 @@ public class AddTransactionView implements Initializable {
         Bindings.bindBidirectional(incomeRBtn.selectedProperty(), transaction.isIncomeProperty());
 
         /* descriptionTextArea.text <-> transaction.description */
-        Bindings.bindBidirectional(descriptionTextArea.textProperty(), transaction.descriptionProperty());
+        Bindings.bindBidirectional(
+                descriptionTextArea.textProperty(),
+                transaction.descriptionProperty());
 
         /* categoryComboBox.selectedItem -> transaction.category */
         ObjectProperty<CategoryViewModel> categoryProperty = transaction.categoryProperty();
