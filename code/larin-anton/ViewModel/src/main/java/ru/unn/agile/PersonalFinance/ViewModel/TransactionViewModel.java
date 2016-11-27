@@ -110,7 +110,7 @@ public class TransactionViewModel {
         return this.isIncomeProperty.get();
     }
 
-    public final void setIsIncome(boolean isIncomeProperty) {
+    public final void setIsIncome(final boolean isIncomeProperty) {
         this.isIncomeProperty.set(isIncomeProperty);
     }
 
@@ -122,9 +122,9 @@ public class TransactionViewModel {
                     + "transaction because transaction marked as internal");
         }
 
-        ExternalTransaction.Builder transactionBuilder = getIsIncome() ?
-                ExternalTransaction.incomeBuilder(getAmount()) :
-                ExternalTransaction.expenseBuilder(getAmount());
+        ExternalTransaction.Builder transactionBuilder = getIsIncome()
+                ? ExternalTransaction.incomeBuilder(getAmount())
+                : ExternalTransaction.expenseBuilder(getAmount());
 
         return transactionBuilder
                 .date(getModelDate())

@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.util.converter.CurrencyStringConverter;
-import javafx.util.converter.NumberStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 
 import java.net.URL;
