@@ -1,4 +1,4 @@
-package com.github.rybval.polynomial.model;
+package ru.unn.agile.polynomial.model;
 
 import java.util.regex.Pattern;
 

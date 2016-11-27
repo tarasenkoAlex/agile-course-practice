@@ -1,4 +1,4 @@
-package com.github.rybval.polynomial.model;
+package ru.unn.agile.polynomial.model;
 
 import org.junit.Test;
 import java.util.List;
