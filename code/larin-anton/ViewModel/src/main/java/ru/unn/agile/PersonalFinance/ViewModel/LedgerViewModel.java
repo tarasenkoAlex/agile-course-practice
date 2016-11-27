@@ -23,25 +23,29 @@ public class LedgerViewModel {
         this.selectedAccountProperty = new SimpleObjectProperty<>();
     }
 
-    public ListProperty<AccountViewModel> accountsProperty() {
+    // region Properties for Binding
+
+    public final ListProperty<AccountViewModel> accountsProperty() {
         return this.accountsProperty;
     }
 
-    public ObservableList<AccountViewModel> getAccounts() {
+    public final ObservableList<AccountViewModel> getAccounts() {
         return this.accountsProperty.get();
     }
 
-    public ObjectProperty<AccountViewModel> selectedAccountProperty() {
+    public final ObjectProperty<AccountViewModel> selectedAccountProperty() {
         return this.selectedAccountProperty;
     }
 
-    public AccountViewModel getSelectedAccount() {
+    public final AccountViewModel getSelectedAccount() {
         return this.selectedAccountProperty.get();
     }
 
-    public void setSelectedAccount(final AccountViewModel selectedAccountProperty) {
+    public final void setSelectedAccount(final AccountViewModel selectedAccountProperty) {
         this.selectedAccountProperty.set(selectedAccountProperty);
     }
+
+    // endregion
 
     public void addAccount(final AccountViewModel accountVM) {
         ledgerModel.addAccount(accountVM.getAccount());

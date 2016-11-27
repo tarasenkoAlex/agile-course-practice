@@ -36,6 +36,8 @@ public class AccountViewModel {
         addListenersToProperties();
     }
 
+    // region Properties for Binding
+
     public final StringProperty nameProperty() {
         return nameProperty;
     }
@@ -60,13 +62,15 @@ public class AccountViewModel {
         balanceProperty.setValue(balance);
     }
 
-    public ListProperty<TransactionViewModel> transactionsProperty() {
+    public final ListProperty<TransactionViewModel> transactionsProperty() {
         return this.transactionsProperty;
     }
 
-    public ObservableList<TransactionViewModel> getTransactions() {
+    public final ObservableList<TransactionViewModel> getTransactions() {
         return this.transactionsProperty.get();
     }
+
+    // endregion
 
     public Account getAccount() {
         if (isAccountCreatedExternally) {

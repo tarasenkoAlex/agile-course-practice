@@ -27,77 +27,81 @@ public class TransactionViewModel {
         // TODO
     }
 
-    public IntegerProperty amountProperty() {
+    // region Properties for Binding
+
+    public final IntegerProperty amountProperty() {
         return amountProperty;
     }
 
-    public int getAmmount() {
+    public final int getAmount() {
         return this.amountProperty.get();
     }
 
-    public void setAmount(final int amount) {
+    public final void setAmount(final int amount) {
         this.amountProperty.set(amount);
     }
 
-    public ObjectProperty<LocalDate> dateProperty() {
+    public final ObjectProperty<LocalDate> dateProperty() {
         return this.dateProperty;
     }
 
-    public LocalDate getDate() {
+    public final LocalDate getDate() {
         return this.dateProperty.get();
     }
 
-    public void setDate(final LocalDate date) {
+    public final void setDate(final LocalDate date) {
         this.dateProperty.set(date);
     }
 
-    public String getDescription() {
+    public final String getDescription() {
         return this.descriptionProperty.get();
     }
 
-    public StringProperty descriptionProperty() {
+    public final StringProperty descriptionProperty() {
         return this.descriptionProperty;
     }
 
-    public void setDescription(final String description) {
+    public final void setDescription(final String description) {
         this.descriptionProperty.set(description);
     }
 
-    public StringProperty counterpartyProperty() {
+    public final StringProperty counterpartyProperty() {
         return this.counterpartyProperty;
     }
 
-    public String getCounterparty() {
+    public final String getCounterparty() {
         return this.counterpartyProperty.get();
     }
 
-    public void setCounterparty(final String counterparty) {
+    public final void setCounterparty(final String counterparty) {
         this.counterpartyProperty.set(counterparty);
     }
 
-    public BooleanProperty isInternalTransactionProperty() {
+    public final BooleanProperty isInternalTransactionProperty() {
         return this.isInternalTransactionProperty;
     }
 
-    public boolean getIsInternalTransaction() {
+    public final boolean getIsInternalTransaction() {
         return this.isInternalTransactionProperty.get();
     }
 
-    public void setIsInternalTransaction(final boolean isInternalTransaction) {
+    public final void setIsInternalTransaction(final boolean isInternalTransaction) {
         this.isInternalTransactionProperty.set(isInternalTransaction);
     }
 
-    public ObjectProperty<CategoryViewModel> categoryProperty() {
+    public final ObjectProperty<CategoryViewModel> categoryProperty() {
         return this.categoryProperty;
     }
 
-    public CategoryViewModel getCategory() {
+    public final CategoryViewModel getCategory() {
         return this.categoryProperty.get();
     }
 
-    public void setCategory(final CategoryViewModel category) {
+    public final void setCategory(final CategoryViewModel category) {
         this.categoryProperty.set(category);
     }
+
+    // endregion
 
     public ExternalTransaction getExternal() {
         if (getIsInternalTransaction()) {
@@ -112,7 +116,7 @@ public class TransactionViewModel {
         GregorianCalendar calendar = GregorianCalendar.from(zonedDateTime);
         Category category = categoryViewModel.getCategory();
 
-        return new ExternalTransaction(getAmmount(), getDescription(),
+        return new ExternalTransaction(getAmount(), getDescription(),
                 category, calendar, getCounterparty());
     }
 }

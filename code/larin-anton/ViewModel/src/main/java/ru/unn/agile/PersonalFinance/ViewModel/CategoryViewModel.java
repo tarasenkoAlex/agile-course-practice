@@ -11,17 +11,21 @@ public class CategoryViewModel {
         setName("New category");
     }
 
-    public StringProperty nameProperty() {
+    // region Properties for Binding
+
+    public final StringProperty nameProperty() {
         return this.nameProperty;
     }
 
-    public String getName() {
+    public final String getName() {
         return this.nameProperty.get();
     }
 
-    public void setName(final String nameProperty) {
+    public final void setName(final String nameProperty) {
         this.nameProperty.set(nameProperty);
     }
+
+    // endregion
 
     public Category getCategory() {
         return new Category(getName());
