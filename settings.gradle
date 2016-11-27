@@ -124,8 +124,8 @@ include "code/Redkin-Michail"
 project(":code/Redkin-Michail").name = "Redkin-Michail-Model"
 // Рыбаков Антон
 // Рыбин Валентин
-include "code/Polynomial"
-project(":code/Polynomial").name = "Polynomial-Model"
+include "code/Polynomial/Model"
+project(":code/Polynomial/Model").name = "Polynomial-Model"
 
 // Рябинкин Евгений
 include "code/ryabinkin-evgeni"
