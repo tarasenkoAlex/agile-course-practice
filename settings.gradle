@@ -91,6 +91,12 @@ project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
 // Кочетов Павел
 include "code/kochetov-pavel"
 project(":code/kochetov-pavel").name = "kochetov-pavel-Model"
+include "code/Stack/Model"
+project(":code/Stack/Model").name = "Stack-Model"
+include "code/Stack/ViewModel"
+project(":code/Stack/ViewModel").name = "Stack-ViewModel"
+include "code/Stack/View"
+project(":code/Stack/View").name = "Stack-View"
 
 // Кудрявцев Никита
 include "code/kudriavtsev-nikita"
