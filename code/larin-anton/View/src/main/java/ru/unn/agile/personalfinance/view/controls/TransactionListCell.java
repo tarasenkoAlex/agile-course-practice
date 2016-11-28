@@ -6,7 +6,7 @@ import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
 public class TransactionListCell extends ListCell<TransactionViewModel> {
 
     @Override
-    protected void updateItem(TransactionViewModel item, boolean empty) {
+    protected void updateItem(final TransactionViewModel item, final boolean empty) {
         super.updateItem(item, empty);
         if (empty) {
             setText(null);
