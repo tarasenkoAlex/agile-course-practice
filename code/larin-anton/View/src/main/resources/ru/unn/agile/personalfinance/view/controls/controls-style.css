@@ -1,0 +1,7 @@
+.expenseLabel {
+    -fx-text-fill: red;
+}
+
+.incomeLabel {
+    -fx-text-fill: green;
+}

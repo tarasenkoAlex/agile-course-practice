@@ -1,0 +1,10 @@
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:id="root" vgap="5">
+    <Label fx:id="nameLabel" GridPane.rowIndex="0" />
+    <HBox GridPane.rowIndex="1">
+        <Label text="Balance: " />
+        <Label fx:id="balanceLabel" />
+    </HBox>
+</GridPane>

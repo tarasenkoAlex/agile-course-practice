@@ -20,6 +20,9 @@ public class AddTransactionView implements Initializable {
     private final TransactionViewModel transaction = new TransactionViewModel();
 
     @FXML
+    private TextField counterpartyField;
+
+    @FXML
     private TextArea descriptionTextArea;
 
     @FXML
@@ -73,5 +76,10 @@ public class AddTransactionView implements Initializable {
         /* categoryComboBox.selectedItem -> transaction.category */
         ObjectProperty<CategoryViewModel> categoryProperty = transaction.categoryProperty();
         categoryProperty.bind(categoryComboBox.getSelectionModel().selectedItemProperty());
+
+        /* counterpartyField.text <-> transaction.counterparty */
+        Bindings.bindBidirectional(
+                counterpartyField.textProperty(),
+                transaction.counterpartyProperty());
     }
 }

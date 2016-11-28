@@ -15,6 +15,7 @@
             <RadioButton toggleGroup="$incomeOrExpenseGroup" selected="true" text="Expense" />
         </HBox>
         <TextField fx:id="transactionAmountField" />
+        <TextField fx:id="counterpartyField" />
         <ComboBox fx:id="categoryComboBox" items="${vmSource.model.categories}" />
         <TextArea fx:id="descriptionTextArea" />
     </VBox>

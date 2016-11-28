@@ -1,0 +1,11 @@
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:id="root" vgap="5"
+          stylesheets="@controls-style.css">
+    <Label fx:id="counterpartyLabel" GridPane.rowIndex="0" />
+    <HBox GridPane.rowIndex="1">
+        <Label text="Amount: " />
+        <Label fx:id="amountLabel" styleClass="incomeLabel" />
+    </HBox>
+</GridPane>
