@@ -1,6 +1,9 @@
 package ru.unn.agile.todoapp.viewmodel;
 
 import org.junit.Test;
+import ru.unn.agile.todoapp.model.Task;
+
+import java.time.LocalDate;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -8,17 +11,19 @@ import static org.junit.Assert.assertTrue;
 public class TaskListCellViewModelTest {
     @Test
     public void byDefaultDoneCheckboxIsUnchecked() {
-        TaskListCellViewModel viewModel = new TaskListCellViewModel();
+        Task task = new Task("Wash the car", LocalDate.now());
+        TaskListCellViewModel viewModel = new TaskListCellViewModel(task);
 
-        assertFalse(viewModel.isDoneCheckboxChecked());
+        assertFalse(viewModel.doneCheckboxCheckedProperty().get());
     }
 
     @Test
     public void whenDoneCheckboxIsClickedTaskIsMarkedAsDone() {
-        TaskListCellViewModel viewModel = new TaskListCellViewModel();
+        Task task = new Task("Wash the car", LocalDate.now());
+        TaskListCellViewModel viewModel = new TaskListCellViewModel(task);
 
         viewModel.clickIsDoneCheckBox();
 
-        assertTrue(viewModel.isDoneCheckboxChecked());
+        assertTrue(viewModel.doneCheckboxCheckedProperty().get());
     }
 }

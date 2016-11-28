@@ -77,10 +77,10 @@ public class TodoAppViewModelTest {
         viewModel.newTaskDueDateProperty().set(DAY_AFTER_TOMORROW);
 
         viewModel.pressAddNewTaskButton();
-        Task lastTask = viewModel.getTasks().get(0);
+        TaskListCellViewModel lastTask = viewModel.getTasks().get(0);
 
         assertEquals(NEW_TASK_DESCRIPTION, lastTask.getDescription());
         assertEquals(DAY_AFTER_TOMORROW, lastTask.getDueDate());
-        assertFalse(lastTask.isDone());
+        assertFalse(lastTask.doneCheckboxCheckedProperty().get());
     }
 }

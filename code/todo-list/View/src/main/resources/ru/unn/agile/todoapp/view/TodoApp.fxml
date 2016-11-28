@@ -36,7 +36,7 @@
                </padding>
             </HBox>
             <Separator prefWidth="200.0" VBox.vgrow="NEVER" />
-            <ListView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <ListView fx:id="taskListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </children>
