@@ -21,5 +21,8 @@
         <ChoiceBox fx:id="operationsChoiceBox"/>
         <Button fx:id="calculationButton" text="Calculate" defaultButton="true" maxWidth="Infinity" HBox.hgrow="always"/>
     </HBox>
-    <Label fx:id="statusLabel"/>
+    <HBox>
+        <Label text="Status: "/>
+        <Label fx:id="statusLabel"/>
+    </HBox>
 </VBox>
