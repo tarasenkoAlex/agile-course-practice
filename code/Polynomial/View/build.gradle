@@ -1,8 +1,8 @@
 apply from:   rootDir.getAbsolutePath() + '/code/config/scripts/javafx.plugin'
 
-//dependencies {
-//    compile project(':Polynomial-ViewModel')
-//}
+dependencies {
+    compile project(':Polynomial-ViewModel')
+}
 
 sourceSets {
     main.java.srcDir 'src/main/java'
