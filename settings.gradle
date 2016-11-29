@@ -168,6 +168,8 @@ include "code/shochin-alexandr"
 project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
 include "code/Polynomial/View"
 project(":code/Polynomial/View").name = "Polynomial-View"
+include "code/Polynomial/ViewModel"
+project(":code/Polynomial/ViewModel").name = "Polynomial-ViewModel"
 
 // Шургалин Петр
 include "code/shurgalin-pyotr"
