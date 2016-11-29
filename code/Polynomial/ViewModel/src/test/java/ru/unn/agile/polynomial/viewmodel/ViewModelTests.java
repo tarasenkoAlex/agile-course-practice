@@ -30,14 +30,14 @@ public class ViewModelTests {
         assertEquals("", viewModel.getFirstOperandString());
         assertEquals("", viewModel.getSecondOperandString());
         assertEquals("", viewModel.getResultString());
-        assertEquals(Operation.ADD.toString(), viewModel.getOperationString());
+        assertEquals(Operation.ADD, viewModel.getOperation());
         assertEquals(Status.WAIT.toString(), viewModel.getStatusString());
     }
 
     @Test
     public void canSetOperation() {
-        viewModel.setOperationString(Operation.MULTIPLY.toString());
-        assertEquals(Operation.MULTIPLY.toString(), viewModel.getOperationString());
+        viewModel.setOperation(Operation.MULTIPLY);
+        assertEquals(Operation.MULTIPLY, viewModel.getOperation());
     }
 
     @Test
@@ -87,7 +87,7 @@ public class ViewModelTests {
 
     @Test
     public void isCalculationDisabledWhenExponentiateOperationAndCorrectPolynomialSecondOperand() {
-        viewModel.setOperationString(Operation.EXPONENTIATE.toString());
+        viewModel.setOperation(Operation.EXPONENTIATE);
         viewModel.setFirstOperandString(correctFirstPolynomialOperandString);
         viewModel.setSecondOperandString(correctSecondPolynomialOperandString);
         assertEquals(true, viewModel.isCalculationDisabled());
@@ -95,7 +95,7 @@ public class ViewModelTests {
 
     @Test
     public void isCalculationDisabledWhenExponentiateOperationAndNegativeExponent() {
-        viewModel.setOperationString(Operation.EXPONENTIATE.toString());
+        viewModel.setOperation(Operation.EXPONENTIATE);
         viewModel.setFirstOperandString(correctFirstPolynomialOperandString);
         viewModel.setSecondOperandString("-2");
         assertEquals(true, viewModel.isCalculationDisabled());
@@ -103,7 +103,7 @@ public class ViewModelTests {
 
     @Test
     public void isCalculationEnabledWhenExponentiateOperationAndCorrectOperands() {
-        viewModel.setOperationString(Operation.EXPONENTIATE.toString());
+        viewModel.setOperation(Operation.EXPONENTIATE);
         viewModel.setFirstOperandString(correctFirstPolynomialOperandString);
         viewModel.setSecondOperandString(correctSecondExponentOperandString);
         assertEquals(false, viewModel.isCalculationDisabled());
@@ -132,7 +132,7 @@ public class ViewModelTests {
 
     @Test
     public void isStatusBadWhenFirstOperandEmptySecondIncorrectForExponentiation() {
-        viewModel.setOperationString(Operation.EXPONENTIATE.toString());
+        viewModel.setOperation(Operation.EXPONENTIATE);
         viewModel.setFirstOperandString("");
         viewModel.setSecondOperandString("incorrect input");
         assertEquals(Status.BAD.toString(), viewModel.getStatusString());
@@ -168,7 +168,7 @@ public class ViewModelTests {
 
     @Test
     public void isStatusReadyWhenInputCorrectForExponentiation() {
-        viewModel.setOperationString(Operation.EXPONENTIATE.toString());
+        viewModel.setOperation(Operation.EXPONENTIATE);
         viewModel.setFirstOperandString(correctFirstPolynomialOperandString);
         viewModel.setSecondOperandString(correctSecondExponentOperandString);
         assertEquals(Status.READY.toString(), viewModel.getStatusString());
@@ -178,7 +178,7 @@ public class ViewModelTests {
     public void isCalculationCorrectForAddWhenInputCorrect() {
         viewModel.setFirstOperandString("5.3*x^9 + 0.5*x^3 + 55*x");
         viewModel.setSecondOperandString("1*x^3 - 5*x");
-        viewModel.setOperationString(Operation.ADD.toString());
+        viewModel.setOperation(Operation.ADD);
 
         viewModel.calculate();
 
@@ -189,7 +189,7 @@ public class ViewModelTests {
     public void isCalculationCorrectForSubtractWhenInputCorrect() {
         viewModel.setFirstOperandString("5.3*x^9 + 0.5*x^3 + 55*x");
         viewModel.setSecondOperandString("1*x^3 - 5*x");
-        viewModel.setOperationString(Operation.SUBTRACT.toString());
+        viewModel.setOperation(Operation.SUBTRACT);
 
         viewModel.calculate();
 
@@ -200,7 +200,7 @@ public class ViewModelTests {
     public void isCalculationCorrectForMultiplyWhenInputCorrect() {
         viewModel.setFirstOperandString("6*x^9 + 0.5*x^3 + 55*x");
         viewModel.setSecondOperandString("3*x");
-        viewModel.setOperationString(Operation.MULTIPLY.toString());
+        viewModel.setOperation(Operation.MULTIPLY);
 
         viewModel.calculate();
 
@@ -211,7 +211,7 @@ public class ViewModelTests {
     public void isCalculationCorrectForDivideWhenInputCorrect() {
         viewModel.setFirstOperandString("6*x^9 + 1.5*x^3 + 75*x");
         viewModel.setSecondOperandString("3*x");
-        viewModel.setOperationString(Operation.DIVIDE.toString());
+        viewModel.setOperation(Operation.DIVIDE);
 
         viewModel.calculate();
 
@@ -222,7 +222,7 @@ public class ViewModelTests {
     public void isCalculationCorrectForExponentiateWhenInputCorrect() {
         viewModel.setFirstOperandString("x^2");
         viewModel.setSecondOperandString("3");
-        viewModel.setOperationString(Operation.EXPONENTIATE.toString());
+        viewModel.setOperation(Operation.EXPONENTIATE);
 
         viewModel.calculate();
 
@@ -233,7 +233,7 @@ public class ViewModelTests {
     public void isCalculationCorrectForExponentiateWhenInputIncorrect() {
         viewModel.setFirstOperandString("incorrect input");
         viewModel.setSecondOperandString("incorrect input");
-        viewModel.setOperationString(Operation.EXPONENTIATE.toString());
+        viewModel.setOperation(Operation.EXPONENTIATE);
 
         viewModel.calculate();
     }

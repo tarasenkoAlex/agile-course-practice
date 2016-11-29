@@ -1,6 +1,5 @@
 package ru.unn.agile.polynomial.viewmodel;
 
-import java.util.Locale;
 import ru.unn.agile.polynomial.model.Polynomial;
 
 public class ViewModel {
@@ -8,14 +7,14 @@ public class ViewModel {
     private String firstOperandString;
     private String secondOperandString;
     private String resultString;
-    private String operationString;
+    private Operation operation;
 
     public ViewModel() {
         secondOperandLabelString = "";
         firstOperandString = "";
         secondOperandString = "";
         resultString = "";
-        operationString = Operation.ADD.toString();
+        operation = Operation.ADD;
     }
 
     public String getSecondOperandLabelString() {
@@ -42,18 +41,18 @@ public class ViewModel {
         return resultString;
     }
 
-    public void setOperationString(final String newOperationString) {
-        operationString = newOperationString;
+    public void setOperation(final Operation newOperation) {
+        operation = newOperation;
     }
 
-    public String getOperationString() {
-        return operationString;
+    public Operation getOperation() {
+        return operation;
     }
 
     public boolean isCalculationDisabled() {
         try {
             Polynomial.fromString(firstOperandString);
-            if (operationString.equals(Operation.EXPONENTIATE.toString())) {
+            if (operation.equals(Operation.EXPONENTIATE)) {
                 Integer.parseUnsignedInt(secondOperandString);
             } else {
                 Polynomial.fromString(secondOperandString);
@@ -76,7 +75,7 @@ public class ViewModel {
                 Polynomial.fromString(firstOperandString);
             }
             if (!"".equals(secondOperandString)) {
-                if (operationString.equals(Operation.EXPONENTIATE.toString())) {
+                if (operation.equals(Operation.EXPONENTIATE)) {
                     Integer.parseInt(secondOperandString);
                 } else {
                     Polynomial.fromString(secondOperandString);
@@ -91,12 +90,12 @@ public class ViewModel {
     public void calculate() {
         Polynomial result;
         Polynomial firstOperand = Polynomial.fromString(firstOperandString);
-        if (operationString.equals(Operation.EXPONENTIATE.toString())) {
+        if (operation.equals(Operation.EXPONENTIATE)) {
             int secondOperand = Integer.parseUnsignedInt(secondOperandString);
             result = firstOperand.exponentiate(secondOperand);
         } else {
             Polynomial secondOperand = Polynomial.fromString(secondOperandString);
-            switch (Operation.fromString(operationString)) {
+            switch (operation) {
                 case ADD:
                     result = firstOperand.add(secondOperand);
                     break;
@@ -132,10 +131,6 @@ public class ViewModel {
         @Override
         public String toString() {
             return name;
-        }
-
-        public static Operation fromString(final String string) {
-            return valueOf(string.toUpperCase(Locale.getDefault()));
         }
     }
 
