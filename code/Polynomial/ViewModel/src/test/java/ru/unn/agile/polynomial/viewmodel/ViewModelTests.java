@@ -25,7 +25,6 @@ public class ViewModelTests {
 
     @Test
     public void areDefaultsCorrect() {
-        assertEquals("", viewModel.getSecondOperandLabelString());
         assertEquals("", viewModel.getFirstOperandString());
         assertEquals("", viewModel.getSecondOperandString());
         assertEquals("", viewModel.getResultString());

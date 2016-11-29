@@ -3,22 +3,16 @@ package ru.unn.agile.polynomial.viewmodel;
 import ru.unn.agile.polynomial.model.Polynomial;
 
 public class ViewModel {
-    private String secondOperandLabelString;
     private String firstOperandString;
     private String secondOperandString;
     private String resultString;
     private Operation operation;
 
     public ViewModel() {
-        secondOperandLabelString = "";
         firstOperandString = "";
         secondOperandString = "";
         resultString = "";
         operation = Operation.ADD;
-    }
-
-    public String getSecondOperandLabelString() {
-        return secondOperandLabelString;
     }
 
     public void setFirstOperandString(final String firstOperandString) {
