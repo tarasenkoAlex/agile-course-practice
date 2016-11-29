@@ -76,7 +76,7 @@ public class ViewModel {
             }
             if (!"".equals(secondOperandString)) {
                 if (operation.equals(Operation.EXPONENTIATE)) {
-                    Integer.parseInt(secondOperandString);
+                    Integer.parseUnsignedInt(secondOperandString);
                 } else {
                     Polynomial.fromString(secondOperandString);
                 }
