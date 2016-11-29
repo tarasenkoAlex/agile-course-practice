@@ -46,6 +46,9 @@ public class Polynomial {
     }
 
     public static Polynomial fromString(final String string) {
+        if ("".equals(string)) {
+            throw new IllegalArgumentException();
+        }
         String[] monomialStrings = string.replaceAll(" *- *", " -")
                                          .replaceAll(" *\\+ *", " +")
                                          .split(" +");

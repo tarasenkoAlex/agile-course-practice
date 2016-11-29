@@ -289,4 +289,9 @@ public class PolynomialTest {
         Polynomial polynomial = new Polynomial();
         assertEquals(-1, polynomial.getDegree());
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cantCreatePolynomialFromEmptyString() {
+        Polynomial.fromString("");
+    }
 }
