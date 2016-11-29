@@ -50,17 +50,15 @@ public class ViewModel {
     }
 
     public boolean isCalculationDisabled() {
-        try {
-            Polynomial.fromString(firstOperandString);
-            if (operation.equals(Operation.EXPONENTIATE)) {
-                Integer.parseUnsignedInt(secondOperandString);
-            } else {
-                Polynomial.fromString(secondOperandString);
-            }
-        } catch (Throwable e) {
-           return true;
+        return getStatusString() != Status.READY.toString();
+    }
+
+    private Object getSecondOperand() {
+        if (operation.equals(Operation.EXPONENTIATE)) {
+            return Integer.parseUnsignedInt(secondOperandString);
+        } else {
+            return Polynomial.fromString(secondOperandString);
         }
-        return false;
     }
 
     public String getStatusString() {
@@ -75,11 +73,7 @@ public class ViewModel {
                 Polynomial.fromString(firstOperandString);
             }
             if (!"".equals(secondOperandString)) {
-                if (operation.equals(Operation.EXPONENTIATE)) {
-                    Integer.parseUnsignedInt(secondOperandString);
-                } else {
-                    Polynomial.fromString(secondOperandString);
-                }
+                getSecondOperand();
             }
         } catch (Throwable e) {
             status = Status.BAD;
@@ -88,41 +82,40 @@ public class ViewModel {
     }
 
     public void calculate() {
-        Polynomial result;
         Polynomial firstOperand = Polynomial.fromString(firstOperandString);
-        if (operation.equals(Operation.EXPONENTIATE)) {
-            int secondOperand = Integer.parseUnsignedInt(secondOperandString);
-            result = firstOperand.exponentiate(secondOperand);
-        } else {
-            Polynomial secondOperand = Polynomial.fromString(secondOperandString);
-            switch (operation) {
-                case ADD:
-                    result = firstOperand.add(secondOperand);
-                    break;
-                case SUBTRACT:
-                    result = firstOperand.subtract(secondOperand);
-                    break;
-                case MULTIPLY:
-                    result = firstOperand.multiply(secondOperand);
-                    break;
-                case DIVIDE:
-                    result = firstOperand.divide(secondOperand);
-                    break;
-                default:
-                    return;
-            }
-        }
-        resultString = result.toString();
+        resultString = operation.apply(firstOperand, getSecondOperand()).toString();
     }
 
     public enum Operation {
-        ADD("Add"),
-        SUBTRACT("Subtract"),
-        MULTIPLY("Multiply"),
-        DIVIDE("Divide"),
-        EXPONENTIATE("Exponentiate");
+        ADD("Add") {
+            public Polynomial apply(final Polynomial op1, final Object op2) {
+                return op1.add((Polynomial) op2);
+            }
+        },
+        SUBTRACT("Subtract") {
+            public Polynomial apply(final Polynomial op1, final Object op2) {
+                return op1.subtract((Polynomial) op2);
+            }
+        },
+        MULTIPLY("Multiply") {
+            public Polynomial apply(final Polynomial op1, final Object op2) {
+                return op1.multiply((Polynomial) op2);
+            }
+        },
+        DIVIDE("Divide") {
+            public Polynomial apply(final Polynomial op1, final Object op2) {
+                return op1.divide((Polynomial) op2);
+            }
+        },
+        EXPONENTIATE("Exponentiate") {
+            public Polynomial apply(final Polynomial op1, final Object op2) {
+                return op1.exponentiate((int) op2);
+            }
+        };
 
         private final String name;
+
+        public abstract Polynomial apply(Polynomial op1, Object op2);
 
         Operation(final String name) {
             this.name = name;
@@ -133,21 +126,21 @@ public class ViewModel {
             return name;
         }
     }
+}
 
-    public enum Status {
-        WAIT("Please input operands"),
-        BAD("Incorrect input"),
-        READY("Can calculate");
+enum Status {
+    WAIT("Please input operands"),
+    BAD("Incorrect input"),
+    READY("Can calculate");
 
-        private final String name;
+    private final String name;
 
-        Status(final String name) {
-            this.name = name;
-        }
+    Status(final String name) {
+        this.name = name;
+    }
 
-        @Override
-        public String toString() {
-            return name;
-        }
+    @Override
+    public String toString() {
+        return name;
     }
 }

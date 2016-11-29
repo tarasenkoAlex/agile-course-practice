@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ru.unn.agile.polynomial.viewmodel.ViewModel.Operation;
-import ru.unn.agile.polynomial.viewmodel.ViewModel.Status;
 
 import static org.junit.Assert.*;
 
