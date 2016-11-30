@@ -86,6 +86,8 @@ include "code/israfilov-ruslan"
 project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
 
 // Карчков Денис
+include "code/Karchkov-Denis"
+project(":code/Karchkov-Denis").name = "Karchkov-Denis-Model"
 // Кокошников Алексей
 // Колистратова Дарья
 // Кочетов Павел
@@ -115,6 +117,8 @@ project(":code/maloykina-elena").name = "maloykina-elena-Model"
 // Пауль Эдуард
 // Песков Дмитрий
 // Поздеев Антон
+include "code/Pozdeev-Anton"
+project(":code/Pozdeev-Anton").name = "pozdeev-anton-model"
 // Пономарев Георгий
 // Пономарев Никита
 include "code/ponomarev-nikita/Model"
@@ -153,7 +157,8 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 include "code/tarasenko-alex"
 project(":code/tarasenko-alex").name = "tarasenko-alex"
 // Тропичева Дарья
-
+include "code/Tropicheva-Darya"
+project(":code/Tropicheva-Darya").name = "Tropicheva-Darya"
 // Федосов Александр
 include "code/Fedosov-Alexander"
 project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
@@ -161,7 +166,11 @@ project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
 // Цыганов Алексей
 // Чугунов Евгений
 // Шадрунов Артем
+
 // Ширяева Вера
+include "code/shiryaeva-vera"
+project(":code/shiryaeva-vera").name = "shiryaeva-vera-Model"
+
 // Шишкин Владислав
 // Шочин Александр
 include "code/shochin-alexandr"
