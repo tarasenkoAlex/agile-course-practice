@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import ru.unn.agile.matrixoperations.viewmodel.ViewModel?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.agile.matrixoperations.view.MatrixCalculator">
+    <fx:define>
+        <ViewModel fx:id="viewModel" />
+    </fx:define>
+     <children>
+        <VBox prefHeight="454.0" prefWidth="660.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+           <children>
+              <HBox prefHeight="29.0" prefWidth="641.0" spacing="4.0">
+                 <children>
+                    <Label text="Operation:" />
+                    <ComboBox fx:id="cbOperation" items="${viewModel.operations}" prefWidth="150.0" />
+                    <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                    <Button fx:id="btnCalculate" mnemonicParsing="false" text="Calculate" disable="${viewModel.calculationDisabled}" />
+                 </children>
+              </HBox>
+              <Accordion prefHeight="392.0" prefWidth="662.0">
+                <panes>
+                  <TitledPane animated="false" prefHeight="358.0" prefWidth="666.0" text="Left Matrix">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                             <children>
+                                <VBox prefHeight="316.0" prefWidth="660.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                   <children>
+                                      <HBox prefHeight="77.0" prefWidth="641.0" spacing="4.0">
+                                         <children>
+                                            <Label text="Rows:" />
+                                            <TextField fx:id="leftMatrixRowsCount" prefHeight="25.0" prefWidth="64.0" />
+                                            <Region prefHeight="25.0" prefWidth="32.0" />
+                                            <Label text="Columns:" />
+                                            <TextField fx:id="leftMatrixColumnsCount" prefHeight="25.0" prefWidth="74.0" />
+                                         </children>
+                                      </HBox>
+                                      <TableView fx:id="leftTable" prefHeight="316.0" prefWidth="660.0">
+                                        <columns>
+                                          <TableColumn prefWidth="75.0" text="C1" />
+                                          <TableColumn prefWidth="75.0" text="C2" />
+                                        </columns>
+                                      </TableView>
+                                   </children>
+                                </VBox>
+                             </children>
+                          </AnchorPane>
+                    </content>
+                  </TitledPane>
+                  <TitledPane animated="false" text="Right Matrix">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                             <children>
+                                <VBox prefHeight="316.0" prefWidth="639.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                   <children>
+                                      <HBox prefHeight="77.0" prefWidth="641.0" spacing="4.0">
+                                         <children>
+                                            <Label text="Rows:" />
+                                            <TextField fx:id="rightMatrixRowsCount" prefHeight="25.0" prefWidth="64.0" />
+                                            <Region prefHeight="25.0" prefWidth="32.0" />
+                                            <Label text="Columns:" />
+                                            <TextField fx:id="rightMatrixColumnsCount" prefHeight="25.0" prefWidth="74.0" />
+                                         </children>
+                                      </HBox>
+                                      <TableView fx:id="rightTable" prefHeight="316.0" prefWidth="660.0">
+                                         <columns>
+                                            <TableColumn prefWidth="75.0" text="C1" />
+                                            <TableColumn prefWidth="75.0" text="C2" />
+                                         </columns>
+                                      </TableView>
+                                   </children>
+                                </VBox>
+                             </children>
+                          </AnchorPane>
+                    </content>
+                  </TitledPane>
+                  <TitledPane animated="false" text="Result Matrix">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                             <children>
+                                <VBox prefHeight="316.0" prefWidth="639.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                   <children>
+                                      <HBox prefHeight="77.0" prefWidth="641.0" spacing="4.0">
+                                         <children>
+                                            <Label text="Rows:" />
+                                            <Label fx:id="resultMatrixRowsCount" text="0" />
+                                            <Region prefHeight="25.0" prefWidth="32.0" />
+                                            <Label text="Columns:" />
+                                            <Label fx:id="resultMatrixColumnsCount" text="0" />
+                                         </children>
+                                      </HBox>
+                                      <TableView fx:id="resultTable" prefHeight="316.0" prefWidth="660.0">
+                                         <columns>
+                                            <TableColumn prefWidth="75.0" text="C1" />
+                                            <TableColumn prefWidth="75.0" text="C2" />
+                                         </columns>
+                                      </TableView>
+                                   </children>
+                                </VBox>
+                             </children>
+                          </AnchorPane>
+                    </content>
+                  </TitledPane>
+                </panes>
+              </Accordion>
+        <Pane prefHeight="34.0" prefWidth="660.0">
+           <children>
+              <Label fx:id="statusLabel" layoutX="9.0" layoutY="9.0" prefHeight="17.0" prefWidth="642.0" text="Label" />
+           </children>
+        </Pane>
+           </children>
+        </VBox>
+     </children>
+</AnchorPane>

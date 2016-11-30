@@ -86,8 +86,12 @@ include "code/israfilov-ruslan"
 project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
 
 // Карчков Денис
-include "code/Karchkov-Denis"
-project(":code/Karchkov-Denis").name = "Karchkov-Denis-Model"
+include "code/matrix-operations/Model"
+project(":code/matrix-operations/Model").name = "matrix-operations-Model"
+include "code/matrix-operations/View"
+project(":code/matrix-operations/View").name = "matrix-operations-View"
+include "code/matrix-operations/ViewModel"
+project(":code/matrix-operations/ViewModel").name = "matrix-operations-ViewModel"
 // Кокошников Алексей
 // Колистратова Дарья
 // Кочетов Павел
