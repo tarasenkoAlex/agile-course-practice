@@ -13,4 +13,14 @@ public class WhenCreatingLedger {
 
         assertEquals(false, canAddTransaction);
     }
+
+    @Test
+    public void andCanAddTransferPropertyIsFalse() throws Exception {
+        LedgerViewModel ledger = new LedgerViewModel();
+
+        boolean canAddTransfer = ledger.getCanAddTransfer();
+
+        assertEquals(false, canAddTransfer);
+    }
+
 }

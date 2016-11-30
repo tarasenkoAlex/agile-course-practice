@@ -55,4 +55,15 @@ public class WhenSavingAccount {
         accountViewModel.save();
     }
 
+    @Test
+    public void andCanAddTransferPropertyChangesToTrueIfAtLeastTwoAccounts() throws Exception {
+        AccountViewModel cacheAccount = new AccountViewModel(ledgerViewModel);
+        AccountViewModel debitCardAccount = new AccountViewModel(ledgerViewModel);
+
+        cacheAccount.save();
+        debitCardAccount.save();
+
+        boolean canAddTransfer = ledgerViewModel.getCanAddTransfer();
+        assertEquals(true, canAddTransfer);
+    }
 }

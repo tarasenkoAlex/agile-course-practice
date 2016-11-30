@@ -11,6 +11,8 @@ public class LedgerViewModel {
     private final Ledger modelLedger = new Ledger();
 
     private final BooleanProperty canAddTransactionProperty = new SimpleBooleanProperty();
+    private final BooleanProperty canAddTransferProperty = new SimpleBooleanProperty();
+
     private final ListProperty<AccountViewModel> accountsProperty =
             new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
 
@@ -63,6 +65,14 @@ public class LedgerViewModel {
         return this.canAddTransactionProperty.get();
     }
 
+    public final BooleanProperty canAddTransferProperty() {
+        return this.canAddTransferProperty;
+    }
+
+    public final boolean getCanAddTransfer() {
+        return this.canAddTransferProperty.get();
+    }
+
     // endregion
 
     void addAccount(final AccountViewModel account) {
@@ -75,8 +85,10 @@ public class LedgerViewModel {
     }
 
     private void setUpBindings() {
-        ReadOnlyIntegerProperty accountsSizeProperties = accountsProperty.sizeProperty();
-        canAddTransactionProperty.bind(accountsSizeProperties.greaterThan(0));
+        // ReadOnlyIntegerProperty accountsSizeProperties = accountsProperty.sizeProperty();
+        // canAddTransactionProperty.bind(accountsSizeProperties.greaterThan(0));
+
+        canAddTransactionProperty.bind(selectedAccountProperty().isNotNull());
     }
 
     private void initializeCategories() {
