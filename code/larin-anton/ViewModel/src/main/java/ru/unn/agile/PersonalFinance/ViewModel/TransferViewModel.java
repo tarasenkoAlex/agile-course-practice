@@ -46,12 +46,5 @@ public class TransferViewModel extends TransactionViewModel {
 
     protected void saveInternal() {
         parentLedger.registerTransfer(this);
-
-//        Account accountTo = getAccountTo().getAccount();
-//        Account accountFrom = getAccountFrom().getAccount();
-//
-//        accountFrom.transferTo(accountTo, getAmount(), getModelDate());
-//        getAccountTo().registerTransaction(this);
-//        getAccountFrom().registerTransaction(this);
     }
 }
