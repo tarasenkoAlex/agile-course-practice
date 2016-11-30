@@ -109,14 +109,12 @@ public class ViewModel {
     boolean checkNegativeNumberInput() {
         if (parseInput(debt) < 0) {
             return true;
-        }
-        if (parseInput(years) < 0) {
+        } else if (parseInput(years) < 0) {
+            return true;
+        } else if (parseInput(percents) < 0) {
             return true;
         }
-        if (parseInput(percents) < 0 || parseInput(percents) > MortrageDataFactory.PERCENT_MAX) {
-            return true;
-        }
-        return false;
+        return parseInput(percents) > MortrageDataFactory.PERCENT_MAX;
     }
 
     double parseInput(final String input) {
