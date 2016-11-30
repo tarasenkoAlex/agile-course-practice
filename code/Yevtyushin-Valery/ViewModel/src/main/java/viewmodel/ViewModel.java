@@ -14,6 +14,7 @@ public class ViewModel {
     private String overPayment;
     private String status;
     private boolean isCalcButtonEnabled;
+    public static final int ENTER = 10;
 
     public ViewModel() {
         debt = "";
@@ -67,6 +68,21 @@ public class ViewModel {
     public void setPercents(final String percents) {
         this.percents = percents;
         changeStatus();
+    }
+
+    public void processKeyInTextField(final int keyCode) {
+        changeStatus();
+
+        if (keyCode == ENTER) {
+            enterPressed();
+        }
+    }
+
+    private void enterPressed() {
+
+        if (isCalcButtonEnabled()) {
+            calculate();
+        }
     }
 
     private void clearResultFields() {
