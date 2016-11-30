@@ -1,0 +1,20 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import ru.unn.agile.personalfinance.view.ViewModelSource?>
+<GridPane fx:controller="ru.unn.agile.personalfinance.view.AddTransferView"
+          xmlns:fx="http://javafx.com/fxml">
+    <fx:define>
+        <ViewModelSource fx:id="vmSource" />
+    </fx:define>
+    <VBox>
+        <HBox>
+            <ComboBox fx:id="accountFromComboBox" items="${vmSource.model.accounts}" />
+            <ComboBox fx:id="accountToComboBox" items="${vmSource.model.accounts}" />
+        </HBox>
+        <TextField fx:id="amountField" />
+        <Button GridPane.rowIndex="1" GridPane.columnIndex="0" text="Add"
+                onAction="#handleAddButtonAction" />
+        <Button GridPane.rowIndex="1" GridPane.columnIndex="1" text="Cancel"
+                onAction="#handleCancelButtonAction" />
+    </VBox>
+</GridPane>

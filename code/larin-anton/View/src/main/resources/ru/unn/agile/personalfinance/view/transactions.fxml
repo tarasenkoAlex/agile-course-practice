@@ -3,8 +3,8 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.*?>
 <?import ru.unn.agile.personalfinance.view.ViewModelSource?>
-<BorderPane fx:controller="ru.unn.agile.personalfinance.view.TransactionsView"
-          xmlns:fx="http://javafx.com/fxml">
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+          fx:controller="ru.unn.agile.personalfinance.view.TransactionsView">
     <fx:define>
         <ViewModelSource fx:id="vmSource" />
     </fx:define>
@@ -16,15 +16,17 @@
             </rowConstraints>
             <ListView fx:id="accountsList" GridPane.rowIndex="0"
                       items="${vmSource.model.accounts}" />
-            <Button onAction="#handleAddAccountAction" GridPane.rowIndex="1"
-                    GridPane.halignment="CENTER" text="Add account">
+            <HBox GridPane.rowIndex="1" GridPane.halignment="CENTER">
                 <GridPane.margin>
                     <Insets>
                         <top>5</top>
                         <bottom>5</bottom>
                     </Insets>
                 </GridPane.margin>
-            </Button>
+                <Button onAction="#handleAddAccountAction" text="Add account" />
+                <Button fx:id="addTransferButton" onAction="#handleAddTransferAction"
+                        text="Add transfer" />
+            </HBox>
         </GridPane>
     </left>
     <center>
@@ -38,8 +40,8 @@
             </rowConstraints>
             <ListView fx:id="transactionsList" GridPane.rowIndex="0"
                       items="${vmSource.model.selectedAccount.transactions}" />
-            <Button onAction="#handleAddTransactionAction" GridPane.rowIndex="1"
-                    GridPane.halignment="CENTER" text="Add transaction">
+            <Button fx:id="addTransactionButton" onAction="#handleAddTransactionAction"
+                    GridPane.rowIndex="1" GridPane.halignment="CENTER" text="Add transaction">
                 <GridPane.margin>
                     <Insets>
                         <top>5</top>

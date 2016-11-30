@@ -4,6 +4,7 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
@@ -23,13 +24,24 @@ public class TransactionsView implements Initializable {
     private ListView<AccountViewModel> accountsList;
 
     @FXML
+    private Button addTransferButton;
+
+    @FXML
+    private Button addTransactionButton;
+
+    @FXML
     protected void handleAddAccountAction(final ActionEvent event) {
         WindowsManager.getInstance().showAddAccountView(new Stage());
     }
 
     @FXML
     protected void handleAddTransactionAction(final ActionEvent actionEvent) {
-        WindowsManager.getInstance().showAddTransactionView(new Stage());
+        WindowsManager.getInstance().showAddExternalTransactionView(new Stage());
+    }
+
+    @FXML
+    protected void handleAddTransferAction(final ActionEvent actionEvent) {
+        WindowsManager.getInstance().showAddTransferView(new Stage());
     }
 
     @Override
@@ -45,5 +57,8 @@ public class TransactionsView implements Initializable {
         ReadOnlyObjectProperty<AccountViewModel> selectedItemProperty =
                 accountsList.getSelectionModel().selectedItemProperty();
         ledgerVM.selectedAccountProperty().bind(selectedItemProperty);
+
+        /* */
+        addTransactionButton.disableProperty().bind(ledgerVM.canAddTransactionProperty().not());
     }
 }

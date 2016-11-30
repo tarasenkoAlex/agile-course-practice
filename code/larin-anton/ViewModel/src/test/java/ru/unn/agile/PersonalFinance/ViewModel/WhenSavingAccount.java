@@ -54,4 +54,12 @@ public class WhenSavingAccount {
         accountViewModel.save();
         accountViewModel.save();
     }
+
+    @Test
+    public void andCanAddTransactionPropertyChangesToTrue() throws Exception {
+        accountViewModel.save();
+
+        boolean canAddTransaction = ledgerViewModel.getCanAddTransaction();
+        assertEquals(true, canAddTransaction);
+    }
 }

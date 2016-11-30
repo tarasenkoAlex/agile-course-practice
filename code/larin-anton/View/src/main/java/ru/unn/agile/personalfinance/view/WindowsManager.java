@@ -51,9 +51,18 @@ final class WindowsManager {
         stagesHstory.push(stage);
     }
 
-    void showAddTransactionView(final Stage stage) {
-        getView("add-transaction.fxml")
+    void showAddExternalTransactionView(final Stage stage) {
+        getView("add-external-transaction.fxml")
                 .setTitle("Add new transaction")
+                .setWidth(ADD_ACCOUNT_WINDOW_WIDTH)
+                .setHeight(ADD_ACCOUNT_WINDOW_HEIGHT)
+                .show(stage);
+        stagesHstory.push(stage);
+    }
+
+    void showAddTransferView(final Stage stage) {
+        getView("add-transfer.fxml")
+                .setTitle("Add new transfer")
                 .setWidth(ADD_ACCOUNT_WINDOW_WIDTH)
                 .setHeight(ADD_ACCOUNT_WINDOW_HEIGHT)
                 .show(stage);

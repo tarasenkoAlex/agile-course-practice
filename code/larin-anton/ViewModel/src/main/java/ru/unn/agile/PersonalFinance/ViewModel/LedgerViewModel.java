@@ -1,10 +1,9 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import ru.unn.agile.PersonalFinance.Model.Ledger;
 
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 public class LedgerViewModel {
     private final Ledger modelLedger = new Ledger();
 
+    private final BooleanProperty canAddTransactionProperty = new SimpleBooleanProperty();
     private final ListProperty<AccountViewModel> accountsProperty =
             new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
 
@@ -54,6 +54,14 @@ public class LedgerViewModel {
 
     public final void setSelectedAccount(final AccountViewModel selectedAccountProperty) {
         this.selectedAccountProperty.set(selectedAccountProperty);
+    }
+
+    public final BooleanProperty canAddTransactionProperty() {
+        return this.canAddTransactionProperty;
+    }
+
+    public final boolean getCanAddTransaction() {
+        return this.canAddTransactionProperty.get();
     }
 
     // endregion
