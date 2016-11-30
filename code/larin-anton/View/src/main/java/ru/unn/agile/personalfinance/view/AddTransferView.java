@@ -4,10 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import ru.unn.agile.PersonalFinance.ViewModel.CategoryViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
 
