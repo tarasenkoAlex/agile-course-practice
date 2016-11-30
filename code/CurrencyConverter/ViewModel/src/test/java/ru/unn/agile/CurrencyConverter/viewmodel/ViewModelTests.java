@@ -21,11 +21,23 @@ public class ViewModelTests {
     }
 
     @Test
-    public void canSetDefaultValues() {
+    public void canSetDefaultAmount() {
         assertEquals("", viewModel.amountProperty().get());
+    }
+    @Test
+    public void canSetDefaultFromCurrencyBox() {
         assertEquals(Constants.RUBLE, viewModel.fromCurrencyProperty().get());
+    }
+    @Test
+    public void canSetDefaultToCurrencyBox() {
         assertEquals(Constants.DOLLAR, viewModel.toCurrencyProperty().get());
+    }
+    @Test
+    public void canSetDefaultResult() {
         assertEquals("", viewModel.resultingValueProperty().get());
+    }
+    @Test
+    public void canSetDefaultMessage() {
         assertEquals(MessageStatus.WAITING.getValue(), viewModel.messageProperty().get());
     }
     @Test
