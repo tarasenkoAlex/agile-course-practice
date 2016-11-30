@@ -48,4 +48,10 @@ public class WhenSavingAccount {
         Account account = accountViewModel.getModelAccount();
         assertEquals(account.getBalance(), accountBalance);
     }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void andDoubleSavingCauseFail() throws Exception {
+        accountViewModel.save();
+        accountViewModel.save();
+    }
 }

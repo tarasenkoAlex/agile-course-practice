@@ -3,6 +3,8 @@ package ru.unn.agile.PersonalFinance.ViewModel;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
+
 import static org.junit.Assert.assertNotEquals;
 import static ru.unn.agile.PersonalFinance.ViewModel.AssertHelper.assertContains;
 
@@ -38,5 +40,24 @@ public class WhenSavingExternalTransaction {
         transactionVM.save();
 
         assertNotEquals(accountViewModel.getBalance(), balanceBeforeTransaction);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void andIfAccountWasNotSavedItCauseFail() throws Exception {
+        AccountViewModel unsavedAccount = new AccountViewModel(ledgerViewModel);
+        ledgerViewModel.setSelectedAccount(unsavedAccount);
+        ExternalTransactionViewModel transactionVM =
+                new ExternalTransactionViewModel(ledgerViewModel);
+
+        transactionVM.save();
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void andIfAccountWasNotSelectedItCauseFail() throws Exception {
+        ledgerViewModel.setSelectedAccount(null);
+        ExternalTransactionViewModel transactionVM =
+                new ExternalTransactionViewModel(ledgerViewModel);
+
+        transactionVM.save();
     }
 }
