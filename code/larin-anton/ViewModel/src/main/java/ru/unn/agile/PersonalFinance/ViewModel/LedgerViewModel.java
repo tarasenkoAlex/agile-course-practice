@@ -1,9 +1,7 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
 import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import ru.unn.agile.PersonalFinance.Model.Ledger;
 
@@ -24,6 +22,7 @@ public class LedgerViewModel {
 
     public LedgerViewModel() {
         initializeCategories();
+        setUpBindings();
     }
 
     // region Properties for Binding
@@ -73,6 +72,11 @@ public class LedgerViewModel {
 
     void registerTransfer(final TransferViewModel transferViewModel) {
         // TODO
+    }
+
+    private void setUpBindings() {
+        ReadOnlyIntegerProperty accountsSizeProperties = accountsProperty.sizeProperty();
+        canAddTransactionProperty.bind(accountsSizeProperties.greaterThan(0));
     }
 
     private void initializeCategories() {
