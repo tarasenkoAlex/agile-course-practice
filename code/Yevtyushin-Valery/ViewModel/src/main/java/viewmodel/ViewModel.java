@@ -144,7 +144,7 @@ public class ViewModel {
             MortrageData mortrageData = mortrageDataBuilder
                     .setDebt(parseInput(debt))
                     .setYears(parseInput(years))
-                    .setPercents( parseInput(percents))
+                    .setPercents(parseInput(percents))
                     .build();
 
             totalSum = goToOutputFormat(MortrageCalculator.countTotalSum(mortrageData));
