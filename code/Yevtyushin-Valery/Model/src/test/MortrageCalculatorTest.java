@@ -5,7 +5,7 @@ package test;
 
 import main.MortrageCalculator;
 import main.mortrage.MortrageData;
-import main.mortrage.MortrageDataFactory;
+import main.mortrage.MortrageDataBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -18,8 +18,11 @@ public class MortrageCalculatorTest {
     private final double percents = 20;
     private final double delta = 0.0001;
 
-
-    private MortrageData mortrageData = MortrageDataFactory.getMortrageData(debt, years, percents);
+    private MortrageDataBuilder mortrageDataBuilder = new MortrageDataBuilder();
+    private MortrageData mortrageData = mortrageDataBuilder
+            .setDebt(debt).setPercents(percents)
+            .setYears(years)
+            .build();
 
     @Test
     public void testThatCalculateCountOverpayment() {

@@ -1,7 +1,7 @@
 package main;
 
 import main.mortrage.MortrageData;
-import main.mortrage.MortrageDataFactory;
+import main.mortrage.MortrageDataBuilder;
 
 public final class MortrageCalculator {
     public static final double MONTH_IN_THE_YEAR = 12;
@@ -10,7 +10,7 @@ public final class MortrageCalculator {
     }
 
     public static double countPayment(final MortrageData mortrageData) {
-        double percentBet = mortrageData.getPercents() / MortrageDataFactory.PERCENT_MAX;
+        double percentBet = mortrageData.getPercents() / MortrageDataBuilder.PERCENT_MAX;
         double mortragePercent = mortrageData.getDebt() * percentBet
                 * (1 + 1 / (Math.pow(1 + percentBet, mortrageData.getYears())));
         return mortragePercent / MONTH_IN_THE_YEAR;

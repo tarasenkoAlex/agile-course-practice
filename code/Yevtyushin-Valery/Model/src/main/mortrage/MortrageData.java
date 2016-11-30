@@ -5,14 +5,11 @@ package main.mortrage;
  */
 public class MortrageData {
 
-    private final double years;
-    private final double percents;
-    private final double debt;
+    private double years;
+    private double percents;
+    private double debt;
 
-    protected MortrageData(final double debt, final double years, final double percents) {
-        this.years = years;
-        this.debt = debt;
-        this.percents = percents;
+    protected MortrageData() {
     }
 
     public double getDebt() {
@@ -25,5 +22,17 @@ public class MortrageData {
 
     public double getPercents() {
         return percents;
+    }
+
+    protected void setDebt(final double debt) {
+        this.debt = debt;
+    }
+
+    protected void setYears(final double years) {
+        this.years = years;
+    }
+
+    protected void setPercents(final double percents) {
+        this.percents = percents;
     }
 }

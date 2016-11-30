@@ -15,6 +15,7 @@ public class ViewModel {
     private String status;
     private boolean isCalcButtonEnabled;
     public static final int ENTER = 10;
+    private MortrageDataBuilder mortrageDataBuilder;
 
     public ViewModel() {
         debt = "";
@@ -130,7 +131,7 @@ public class ViewModel {
         } else if (parseInput(percents) < 0) {
             return true;
         }
-        return parseInput(percents) > MortrageDataFactory.PERCENT_MAX;
+        return parseInput(percents) > MortrageDataBuilder.PERCENT_MAX;
     }
 
     double parseInput(final String input) {
@@ -139,8 +140,12 @@ public class ViewModel {
 
     public void calculate() {
         if (status == Status.READY) {
-            MortrageData mortrageData = MortrageDataFactory
-                    .getMortrageData(parseInput(debt), parseInput(years), parseInput(percents));
+            mortrageDataBuilder = new MortrageDataBuilder();
+            MortrageData mortrageData = mortrageDataBuilder
+                    .setDebt(parseInput(debt))
+                    .setYears(parseInput(years))
+                    .setPercents( parseInput(percents))
+                    .build();
 
             totalSum = goToOutputFormat(MortrageCalculator.countTotalSum(mortrageData));
             payment = goToOutputFormat(MortrageCalculator.countPayment(mortrageData));
