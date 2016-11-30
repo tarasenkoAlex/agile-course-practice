@@ -235,4 +235,49 @@ public class ViewModelTests {
 
         viewModel.calculate();
     }
+
+    @Test
+    public void canGetOperations() {
+        assertNotNull(viewModel.getOperations());
+    }
+
+    @Test
+    public void canGetOperationsProperty() {
+        assertNotNull(viewModel.operationsProperty());
+    }
+
+    @Test
+    public void canGetOperationProperty() {
+        assertNotNull(viewModel.operationProperty());
+    }
+
+    @Test
+    public void canGetFirstOperandStringProperty() {
+        assertNotNull(viewModel.firstOperandStringProperty());
+    }
+
+    @Test
+    public void canGetSecondOperandStringProperty() {
+        assertNotNull(viewModel.secondOperandStringProperty());
+    }
+
+    @Test
+    public void canGetResultStringProperty() {
+        assertNotNull(viewModel.resultStringProperty());
+    }
+
+    @Test
+    public void canGetStatusStringProperty() {
+        assertNotNull(viewModel.statusStringProperty());
+    }
+
+    @Test
+    public void canGetCalculationDisabledProperty() {
+        assertNotNull(viewModel.calculationDisabledProperty());
+    }
+
+    @Test
+    public void canConvertOperationToString() {
+        assertNotNull(viewModel.getOperation().toString());
+    }
 }
