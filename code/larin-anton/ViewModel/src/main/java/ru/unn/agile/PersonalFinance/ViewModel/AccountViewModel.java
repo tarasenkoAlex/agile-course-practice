@@ -7,6 +7,7 @@ import ru.unn.agile.PersonalFinance.Model.Account;
 import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AccountViewModel {
     private static final int DEFAULT_ACCOUNT_BALANCE = 10000;
@@ -22,6 +23,7 @@ public class AccountViewModel {
     private final LedgerViewModel parentLedger;
 
     public AccountViewModel(final LedgerViewModel parentLedger) {
+        Objects.requireNonNull(parentLedger);
         this.parentLedger = parentLedger;
         setName(DEFAULT_ACCOUNT_NAME);
         setBalance(DEFAULT_ACCOUNT_BALANCE);

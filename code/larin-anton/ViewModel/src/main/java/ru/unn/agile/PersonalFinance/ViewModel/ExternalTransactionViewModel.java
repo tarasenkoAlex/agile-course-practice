@@ -1,11 +1,14 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
 import javafx.beans.property.*;
+
 import ru.unn.agile.PersonalFinance.Model.Category;
 import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
 
+import java.util.Objects;
+
 public class ExternalTransactionViewModel extends TransactionViewModel {
-    private final AccountViewModel parentAccount;
+    private final LedgerViewModel parentLedger;
     private ExternalTransaction modelExternalTransaction;
 
     private final StringProperty descriptionProperty = new SimpleStringProperty();
@@ -15,7 +18,8 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
             new SimpleObjectProperty<>();
 
     public ExternalTransactionViewModel(final LedgerViewModel parentLedger) {
-        this.parentAccount = parentLedger.getSelectedAccount();
+        Objects.requireNonNull(parentLedger);
+        this.parentLedger = parentLedger;
         setCategory(new CategoryViewModel());
     }
 
@@ -81,6 +85,11 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
 
     @Override
     protected void saveInternal() {
+        AccountViewModel parentAccount = parentLedger.getSelectedAccount();
+        if (parentAccount == null) {
+            throw new UnsupportedOperationException("Account should be selected before saving");
+        }
+
         modelExternalTransaction = buildExternalTransaction();
         parentAccount.addExternalTransaction(this);
     }

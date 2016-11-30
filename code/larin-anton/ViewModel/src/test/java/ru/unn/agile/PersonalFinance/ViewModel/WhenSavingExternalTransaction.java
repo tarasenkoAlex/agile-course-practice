@@ -3,8 +3,6 @@ package ru.unn.agile.PersonalFinance.ViewModel;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.file.attribute.UserPrincipalNotFoundException;
-
 import static org.junit.Assert.assertNotEquals;
 import static ru.unn.agile.PersonalFinance.ViewModel.AssertHelper.assertContains;
 
