@@ -1,4 +1,4 @@
-package ru.unn.agile.Converter.Model;
+package ru.unn.agile.RomanArabicConverter.Model;
 
 import java.util.TreeMap;
 

@@ -1,6 +1,6 @@
-package ru.unn.agile.Converter.Model;
+package ru.unn.agile.RomanArabicConverter.Model;
 
-import static ru.unn.agile.Converter.Model.MapData.*;
+import static ru.unn.agile.RomanArabicConverter.Model.MapData.*;
 
 public class RomanNumberValidator {
     public void validate(final String romanNumber) {

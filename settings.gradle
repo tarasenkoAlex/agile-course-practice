@@ -217,8 +217,13 @@ project(":code/MultisystemCalculator/View").name = "MultiSystemCalculatorView"
 // Шадрунов Артем
 
 // Ширяева Вера
-include "code/shiryaeva-vera"
-project(":code/shiryaeva-vera").name = "shiryaeva-vera-Model"
+include "code/shiryaeva-vera/Model"
+project(":code/shiryaeva-vera/Model").name = "shiryaeva-vera-Model"
+include "code/shiryaeva-vera/View"
+project(":code/shiryaeva-vera/View").name = "shiryaeva-vera-View"
+include "code/shiryaeva-vera/ViewModel"
+project(":code/shiryaeva-vera/ViewModel").name = "shiryaeva-vera-ViewModel"
+// Ширяева Вера
 include "code/MassConverter/Model"
 project(":code/MassConverter/Model").name = "shiryaeva-vera-lab2-Model"
 include "code/MassConverter/ViewModel"
