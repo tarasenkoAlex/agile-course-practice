@@ -17,7 +17,7 @@ import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddTransactionView implements Initializable {
+public class AddExternalTransactionView implements Initializable {
     private final ExternalTransactionViewModel transaction =
             new ExternalTransactionViewModel(ViewModelService.getViewModel());
 
