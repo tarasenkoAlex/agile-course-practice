@@ -6,18 +6,15 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import ru.unn.agile.PersonalFinance.Model.Account;
 import ru.unn.agile.PersonalFinance.Model.Ledger;
 
-public class LedgerViewModel {
-    private final Ledger ledgerModel = new Ledger();
+import java.util.ArrayList;
 
-    private final ListProperty<AccountViewModel> accountsProperty;
+public class LedgerViewModel {
+    private final Ledger modelLedger = new Ledger();
+
+    private final ListProperty<AccountViewModel> accountsProperty =
+            new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
 
     private final ListProperty<CategoryViewModel> categoriesProperty =
             new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
@@ -26,7 +23,6 @@ public class LedgerViewModel {
             new SimpleObjectProperty<>();
 
     public LedgerViewModel() {
-        this.accountsProperty = new SimpleListProperty<>(wrapAccounts());
         initializeCategories();
     }
 
@@ -62,17 +58,13 @@ public class LedgerViewModel {
 
     // endregion
 
-    public void addAccount(final AccountViewModel accountVM) {
-        ledgerModel.addAccount(accountVM.getAccount());
-        accountsProperty.add(accountVM);
+    void addAccount(final AccountViewModel account) {
+        modelLedger.addAccount(account.getModelAccount());
+        accountsProperty.add(account);
     }
 
-    private ObservableList<AccountViewModel> wrapAccounts() {
-        List<Account> accounts = this.ledgerModel.getAccounts();
-        List<AccountViewModel> accountModels = accounts.stream()
-                .map(account -> new AccountViewModel(account))
-                .collect(Collectors.toList());
-        return FXCollections.observableList(accountModels);
+    void registerTransfer(final TransferViewModel transferViewModel) {
+        // TODO
     }
 
     private void initializeCategories() {

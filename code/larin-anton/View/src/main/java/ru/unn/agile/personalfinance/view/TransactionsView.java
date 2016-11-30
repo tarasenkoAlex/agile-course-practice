@@ -6,15 +6,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
 import ru.unn.agile.personalfinance.view.controls.AccountListCell;
-import ru.unn.agile.personalfinance.view.controls.TransactionListCell;
+import ru.unn.agile.personalfinance.view.controls.ExternalTransactionListCell;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class TransactionsView implements Initializable {
     @FXML
@@ -38,7 +37,7 @@ public class TransactionsView implements Initializable {
         setUpBindings(ViewModelService.getViewModel());
 
         accountsList.setCellFactory(listView -> new AccountListCell());
-        transactionsList.setCellFactory(listView -> new TransactionListCell());
+        transactionsList.setCellFactory(listView -> new ExternalTransactionListCell());
     }
 
     private void setUpBindings(final LedgerViewModel ledgerVM) {

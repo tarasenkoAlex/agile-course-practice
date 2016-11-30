@@ -13,21 +13,23 @@ public class WhenCreatingAccountFromViewModel {
 
     @Before
     public void setUp() throws Exception {
-        accountVM = new AccountViewModel();
+        LedgerViewModel ledgerViewModel = new LedgerViewModel();
+        accountVM = new AccountViewModel(ledgerViewModel);
         accountVM.setName(accountName);
         accountVM.setBalance(accountBalance);
+        accountVM.save();
     }
 
     @Test
     public void andAccountNameEqualsToTheNamePropertyValue() throws Exception {
-        Account account = accountVM.getAccount();
+        Account account = accountVM.getModelAccount();
 
         assertEquals(account.getName(), accountName);
     }
 
     @Test
     public void andAccountNameEqualsToTheBalancePropertyValue() throws Exception {
-        Account account = accountVM.getAccount();
+        Account account = accountVM.getModelAccount();
 
         assertEquals(account.getBalance(), accountBalance);
     }

@@ -6,10 +6,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.util.converter.CurrencyStringConverter;
+import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
 
-import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
-
-class TransactionListCellView {
+class ExternalTransactionListCellView {
     @FXML
     private Label counterpartyLabel;
 
@@ -19,12 +18,12 @@ class TransactionListCellView {
     @FXML
     private GridPane root;
 
-    TransactionListCellView(final TransactionViewModel transaction) {
+    ExternalTransactionListCellView(final ExternalTransactionViewModel transaction) {
         loadFxml(transaction);
         setUpBindings(transaction);
     }
 
-    private void loadFxml(final TransactionViewModel transaction) {
+    private void loadFxml(final ExternalTransactionViewModel transaction) {
         if (transaction.getIsIncome()) {
             FXMLHelper.load(this, "transaction-list-cell-income.fxml");
         } else {
@@ -36,7 +35,7 @@ class TransactionListCellView {
         return root;
     }
 
-    private void setUpBindings(final TransactionViewModel transaction) {
+    private void setUpBindings(final ExternalTransactionViewModel transaction) {
         /* */
         Bindings.bindBidirectional(
                 amountLabel.textProperty(),

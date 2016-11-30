@@ -5,19 +5,21 @@ import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.util.converter.CurrencyStringConverter;
+import ru.unn.agile.PersonalFinance.ViewModel.CategoryViewModel;
+import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
+import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.CategoryViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
-
 public class AddTransactionView implements Initializable {
-    private final TransactionViewModel transaction = new TransactionViewModel();
+    private final ExternalTransactionViewModel transaction =
+            new ExternalTransactionViewModel(ViewModelService.getViewModel());
 
     @FXML
     private TextField counterpartyField;
@@ -36,12 +38,7 @@ public class AddTransactionView implements Initializable {
 
     @FXML
     protected void handleAddButtonAction(final ActionEvent actionEvent) {
-        LedgerViewModel viewModel = ViewModelService.getViewModel();
-
-        AccountViewModel selectedAccount = viewModel.getSelectedAccount();
-        transaction.setParentAccount(selectedAccount);
-        transaction.execute();
-
+        transaction.save();
         WindowsManager.getInstance().goBack();
     }
 

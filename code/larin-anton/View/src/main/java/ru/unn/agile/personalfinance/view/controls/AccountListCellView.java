@@ -6,7 +6,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.util.converter.CurrencyStringConverter;
-
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 
 class AccountListCellView {

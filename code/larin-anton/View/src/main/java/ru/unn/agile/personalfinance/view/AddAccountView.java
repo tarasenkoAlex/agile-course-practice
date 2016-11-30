@@ -12,7 +12,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddAccountView implements Initializable {
-    private final AccountViewModel account = new AccountViewModel();
+    private final AccountViewModel account =
+            new AccountViewModel(ViewModelService.getViewModel());
 
     @FXML
     private TextField nameField;
@@ -21,7 +22,7 @@ public class AddAccountView implements Initializable {
     private TextField balanceField;
 
     public void handleAddButton(final ActionEvent actionEvent) {
-        ViewModelService.getViewModel().addAccount(account);
+        account.save();
         WindowsManager.getInstance().goBack();
     }
 

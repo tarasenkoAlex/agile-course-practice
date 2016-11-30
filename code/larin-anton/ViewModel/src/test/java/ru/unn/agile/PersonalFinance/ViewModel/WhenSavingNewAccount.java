@@ -7,19 +7,19 @@ import java.util.List;
 
 import static ru.unn.agile.PersonalFinance.ViewModel.AssertHelper.assertContains;
 
-public class WhenAddingNewAccount {
+public class WhenSavingNewAccount {
     private LedgerViewModel ledgerVM;
     private AccountViewModel emptyAccount;
 
     @Before
     public void setUp() throws Exception {
         ledgerVM = new LedgerViewModel();
-        emptyAccount = new AccountViewModel();
+        emptyAccount = new AccountViewModel(ledgerVM);
     }
 
     @Test
     public void andItIsAddedToAccountList() throws Exception {
-        ledgerVM.addAccount(emptyAccount);
+        emptyAccount.save();
 
         List<AccountViewModel> accountVMs = ledgerVM.getAccounts();
         assertContains(accountVMs, emptyAccount);

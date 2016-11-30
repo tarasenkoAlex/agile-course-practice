@@ -3,32 +3,28 @@ package ru.unn.agile.PersonalFinance.ViewModel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import ru.unn.agile.PersonalFinance.Model.Account;
-import ru.unn.agile.PersonalFinance.Model.Transaction;
+import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
+
+import java.util.ArrayList;
 
 public class AccountViewModel {
     private static final int DEFAULT_ACCOUNT_BALANCE = 10000;
     private static final String DEFAULT_ACCOUNT_NAME = "New Account";
 
-    private Account internalAccount;
-
     private final StringProperty nameProperty = new SimpleStringProperty();
     private final IntegerProperty balanceProperty = new SimpleIntegerProperty();
     private final ListProperty<TransactionViewModel> transactionsProperty =
-            new SimpleListProperty<>();
+            new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
 
-    public AccountViewModel() {
-        Account account = new Account(DEFAULT_ACCOUNT_BALANCE, DEFAULT_ACCOUNT_NAME);
-        initialize(account);
-    }
+    private boolean isSaved;
+    private Account modelAccount;
+    private final LedgerViewModel parentLedger;
 
-    public AccountViewModel(final Account account) {
-        initialize(account);
+    public AccountViewModel(final LedgerViewModel parentLedger) {
+        this.parentLedger = parentLedger;
+        setName(DEFAULT_ACCOUNT_NAME);
+        setBalance(DEFAULT_ACCOUNT_BALANCE);
     }
 
     // region Properties for Binding
@@ -67,35 +63,36 @@ public class AccountViewModel {
 
     // endregion
 
-    public final Account getAccount() {
-        return internalAccount;
+    Account getModelAccount() {
+        if (modelAccount == null) {
+            throw new UnsupportedOperationException("Account should be "
+                    + "saved before getting model account");
+        }
+        return modelAccount;
     }
 
-    public void registerTransaction(final TransactionViewModel transactionVM) {
-        transactionsProperty.add(transactionVM);
-        setBalance(internalAccount.getBalance());
+    public void save() {
+        if (isSaved) {
+            throw new UnsupportedOperationException("Account has been already saved");
+        }
+        modelAccount = new Account(getBalance(), getName());
+        parentLedger.addAccount(this);
+        isSaved = true;
     }
 
-    private void initialize(final Account account) {
-        Objects.requireNonNull(account);
-        this.internalAccount = account;
+    void addExternalTransaction(final ExternalTransactionViewModel transaction) {
+        if (!isSaved) {
+            throw new UnsupportedOperationException("Account should be "
+                    + "saved before adding new transaction");
+        }
 
-        setName(account.getName());
-        setBalance(account.getBalance());
-
-        ObservableList<TransactionViewModel> transactions = wrapTransactions(account);
-        transactionsProperty.setValue(transactions);
-
-        nameProperty.addListener((observable, oldValue, newValue) -> {
-            internalAccount.changeName(newValue);
-        });
+        ExternalTransaction modelTransaction = transaction.getModelExternalTransaction();
+        modelAccount.addExternalTransaction(modelTransaction);
+        registerTransaction(transaction);
     }
 
-    private ObservableList<TransactionViewModel> wrapTransactions(final Account account) {
-        List<Transaction> transactions = account.getTransactions();
-        List<TransactionViewModel> accountModels = transactions.stream()
-                .map(transaction -> new TransactionViewModel(transaction))
-                .collect(Collectors.toList());
-        return FXCollections.observableList(accountModels);
+    private void registerTransaction(final TransactionViewModel transactionVM) {
+        getTransactions().add(transactionVM);
+        setBalance(modelAccount.getBalance());
     }
 }
