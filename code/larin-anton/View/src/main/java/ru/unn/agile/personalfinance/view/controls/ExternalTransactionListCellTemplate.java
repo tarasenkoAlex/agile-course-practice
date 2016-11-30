@@ -8,7 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
 
-class ExternalTransactionListCellView {
+class ExternalTransactionListCellTemplate {
     @FXML
     private Label counterpartyLabel;
 
@@ -18,7 +18,7 @@ class ExternalTransactionListCellView {
     @FXML
     private GridPane root;
 
-    ExternalTransactionListCellView(final ExternalTransactionViewModel transaction) {
+    ExternalTransactionListCellTemplate(final ExternalTransactionViewModel transaction) {
         loadFxml(transaction);
         setUpBindings(transaction);
     }

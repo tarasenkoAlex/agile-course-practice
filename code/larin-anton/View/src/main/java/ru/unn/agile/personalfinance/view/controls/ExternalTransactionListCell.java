@@ -16,8 +16,8 @@ public class ExternalTransactionListCell extends ListCell<TransactionViewModel> 
             // NOTE: Do not create new object here
             if (item instanceof ExternalTransactionViewModel) {
                 ExternalTransactionViewModel transaction = (ExternalTransactionViewModel) item;
-                ExternalTransactionListCellView transactionView =
-                        new ExternalTransactionListCellView(transaction);
+                ExternalTransactionListCellTemplate transactionView =
+                        new ExternalTransactionListCellTemplate(transaction);
                 setGraphic(transactionView.getRootNode());
             }
         }

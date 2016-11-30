@@ -16,7 +16,7 @@ public class AccountListCell extends ListCell<AccountViewModel> {
             setText(null);
             setGraphic(null);
         } else {
-            AccountListCellView view = new AccountListCellView(item);
+            AccountListCellTemplate view = new AccountListCellTemplate(item);
             setGraphic(view.getRootNode());
         }
     }

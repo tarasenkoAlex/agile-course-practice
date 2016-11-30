@@ -8,7 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 
-class AccountListCellView {
+class AccountListCellTemplate {
     @FXML
     private Label nameLabel;
 
@@ -18,7 +18,7 @@ class AccountListCellView {
     @FXML
     private GridPane root;
 
-    AccountListCellView(final AccountViewModel account) {
+    AccountListCellTemplate(final AccountViewModel account) {
         FXMLHelper.load(this, "account-list-cell.fxml");
         setUpBindings(account);
     }
