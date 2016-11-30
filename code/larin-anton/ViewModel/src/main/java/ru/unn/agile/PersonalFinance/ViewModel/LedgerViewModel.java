@@ -85,8 +85,8 @@ public class LedgerViewModel {
     }
 
     private void setUpBindings() {
-        // ReadOnlyIntegerProperty accountsSizeProperties = accountsProperty.sizeProperty();
-        // canAddTransactionProperty.bind(accountsSizeProperties.greaterThan(0));
+        ReadOnlyIntegerProperty accountsSizeProperties = accountsProperty.sizeProperty();
+        canAddTransferProperty.bind(accountsSizeProperties.greaterThan(1));
 
         canAddTransactionProperty.bind(selectedAccountProperty().isNotNull());
     }

@@ -58,7 +58,10 @@ public class TransactionsView implements Initializable {
                 accountsList.getSelectionModel().selectedItemProperty();
         ledgerVM.selectedAccountProperty().bind(selectedItemProperty);
 
-        /* */
+        /* ledgerVM.canAddTransaction -> addTransactionButton.disabled */
         addTransactionButton.disableProperty().bind(ledgerVM.canAddTransactionProperty().not());
+
+        /* ledgerVM.canAddTransfer-> addTransferButton.disabled */
+        addTransferButton.disableProperty().bind(ledgerVM.canAddTransferProperty().not());
     }
 }
