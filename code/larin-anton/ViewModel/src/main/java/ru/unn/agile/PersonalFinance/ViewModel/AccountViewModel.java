@@ -7,6 +7,7 @@ import ru.unn.agile.PersonalFinance.Model.Account;
 import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class AccountViewModel {
@@ -91,6 +92,24 @@ public class AccountViewModel {
         ExternalTransaction modelTransaction = transaction.getModelExternalTransaction();
         modelAccount.addExternalTransaction(modelTransaction);
         registerTransaction(transaction);
+    }
+
+    void addTransfer(final TransferViewModel transfer) {
+        if (transfer.getAccountFrom() != this) {
+            throw new UnsupportedOperationException("Transfer source should be equal "
+                    + "to the account where transfer will be added");
+        }
+
+        AccountViewModel accountTo = transfer.getAccountTo();
+        Account modelAccountFrom = getModelAccount();
+        Account modelAccountTo = accountTo.getModelAccount();
+
+        GregorianCalendar transferDate =
+                GregorianCalendarHelper.convertFromLocalDate(transfer.getDate());
+        modelAccountFrom.transferTo(modelAccountTo, transfer.getAmount(), transferDate);
+
+        registerTransaction(transfer);
+        accountTo.registerTransaction(transfer);
     }
 
     private void registerTransaction(final TransactionViewModel transactionVM) {

@@ -81,7 +81,8 @@ public class LedgerViewModel {
     }
 
     void registerTransfer(final TransferViewModel transferViewModel) {
-        // TODO
+        AccountViewModel accountFrom = transferViewModel.getAccountFrom();
+        accountFrom.addTransfer(transferViewModel);
     }
 
     private void setUpBindings() {
