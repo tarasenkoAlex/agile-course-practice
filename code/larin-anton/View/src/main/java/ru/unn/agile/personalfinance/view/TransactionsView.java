@@ -10,7 +10,7 @@ import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
 import ru.unn.agile.personalfinance.view.controls.AccountListCell;
-import ru.unn.agile.personalfinance.view.controls.ExternalTransactionListCell;
+import ru.unn.agile.personalfinance.view.controls.TransactionListCell;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,7 +37,7 @@ public class TransactionsView implements Initializable {
         setUpBindings(ViewModelService.getViewModel());
 
         accountsList.setCellFactory(listView -> new AccountListCell());
-        transactionsList.setCellFactory(listView -> new ExternalTransactionListCell());
+        transactionsList.setCellFactory(listView -> new TransactionListCell());
     }
 
     private void setUpBindings(final LedgerViewModel ledgerVM) {

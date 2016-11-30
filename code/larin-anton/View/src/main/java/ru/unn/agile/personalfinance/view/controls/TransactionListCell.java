@@ -4,7 +4,7 @@ import javafx.scene.control.ListCell;
 import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
 
-public class ExternalTransactionListCell extends ListCell<TransactionViewModel> {
+public class TransactionListCell extends ListCell<TransactionViewModel> {
 
     @Override
     protected void updateItem(final TransactionViewModel item, final boolean empty) {
