@@ -2,18 +2,15 @@ package main.java.view;
 
 import javax.swing.*;
 
-/**
- * Created by maxop on 11/22/16.
- */
 public class MortgageCalc {
     private JPanel mainPanel;
     private JButton calcButton;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
+    private JTextField deptTextField;
+    private JTextField yearsTextField;
+    private JTextField persentsTextField;
+    private JTextField totalSumTextField;
+    private JTextField paymentTextField;
+    private JTextField overPaymentTextField;
     private JLabel statusLabel;
 
     public static void main(final String[] args) {
