@@ -1,8 +1,8 @@
-package ru.unn.agile.SolvingQuadraticEquation.Model;
+package ru.unn.agile.SolvingQuadraticEquation.model;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static ru.unn.agile.SolvingQuadraticEquation.Model.SolvingQuadraticEquation.*;
+import static org.junit.Assert.assertArrayEquals;
+import static ru.unn.agile.SolvingQuadraticEquation.model.SolvingQuadraticEquation.*;
 
 public class SolvingQuadraticEquationTest {
 
@@ -73,7 +73,7 @@ public class SolvingQuadraticEquationTest {
 
     @Test
     public void twoRootsTest() {
-        initialization(1, -5, 4, 4, 1);
+        initialization(2, -5, 2, 2, 0.5);
 
         this.actual = calc(a, b, c);
 

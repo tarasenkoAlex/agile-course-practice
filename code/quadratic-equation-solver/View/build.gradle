@@ -1,7 +1,7 @@
 apply from:   rootDir.getAbsolutePath() + '/code/config/scripts/javafx.plugin'
 
 dependencies {
-    compile project(':kornyakov-kirill-lab2-ViewModel')
+    compile project(':quadratic-equation-solver-ViewModel')
 }
 
 sourceSets {

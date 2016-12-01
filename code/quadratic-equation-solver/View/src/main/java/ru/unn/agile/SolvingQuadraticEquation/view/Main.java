@@ -1,4 +1,4 @@
-package ru.unn.agile.ComplexNumber.view;
+package ru.unn.agile.SolvingQuadraticEquation.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +10,8 @@ public class Main extends Application {
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Calculator.fxml"));
-        primaryStage.setTitle("Calculator");
+        Parent root = FXMLLoader.load(getClass().getResource("Solver.fxml"));
+        primaryStage.setTitle("Quadratic Equation Solver");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

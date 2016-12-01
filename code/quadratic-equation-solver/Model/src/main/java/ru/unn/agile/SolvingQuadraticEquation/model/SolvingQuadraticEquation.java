@@ -1,9 +1,9 @@
-package ru.unn.agile.SolvingQuadraticEquation.Model;
+package ru.unn.agile.SolvingQuadraticEquation.model;
 
 public final class SolvingQuadraticEquation {
     private static final double EPS = 0.001;
     private static final double DISCRIMINANT_COEFFICIENT = 4;
-
+    private SolvingQuadraticEquation() { }
     private static double[] notQuadratic(final double b, final double c) {
         double[] result = new double[0];
 
@@ -19,6 +19,10 @@ public final class SolvingQuadraticEquation {
         return result;
     }
 
+    public static double[] calc(final String aStr, final String bStr, final String cStr) {
+        return calc(Double.parseDouble(aStr), Double.parseDouble(bStr), Double.parseDouble(cStr));
+    }
+
     public static double[] calc(final double a, final double b, final double c) {
         double[] result = new double[0];
 
@@ -30,7 +34,7 @@ public final class SolvingQuadraticEquation {
         double discriminant = b * b - DISCRIMINANT_COEFFICIENT * a * c;
 
         if (Math.abs(discriminant) < EPS) {
-            result = new double[]{-b / (2 * a)};
+            result = new double[]{Math.abs(-b / (2 * a))};
         }
 
         if (discriminant > EPS) {
@@ -43,6 +47,4 @@ public final class SolvingQuadraticEquation {
         return result;
     }
 
-    private SolvingQuadraticEquation() {
-    }
 }
