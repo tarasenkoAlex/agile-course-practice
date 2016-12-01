@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import ru.unn.agile.todoapp.viewmodel.TaskListCellViewModel;
 
 import java.io.IOException;
@@ -15,9 +15,11 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
     @FXML
     private Label taskDescriptionLabel;
     @FXML
+    private Label dueDateLabel;
+    @FXML
     private CheckBox taskIsDoneCheckbox;
     @FXML
-    private BorderPane pane;
+    private GridPane pane;
     @FXML
     private TaskListCellViewModel viewModel;
 
@@ -38,6 +40,7 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
             }
 
             taskDescriptionLabel.setText(viewModel.getDescription());
+            dueDateLabel.setText(viewModel.getDueDate().toString());
             taskIsDoneCheckbox.setSelected(viewModel.doneCheckboxCheckedProperty().get());
             taskIsDoneCheckbox.setDisable(viewModel.doneCheckboxDisableProperty().get());
 
