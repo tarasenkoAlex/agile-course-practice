@@ -107,7 +107,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void solvingTwoRootsEquationHasTwoRootsOutput() {
+    public void solvingTwoRootsEquationGivesTwoRootsOutput() {
         fillFields("1", "-5", "4");
 
         viewModel.solve();
