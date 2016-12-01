@@ -82,8 +82,8 @@ public final class MultisystemCalculator {
     }
 
     public static String addB(final String first, final String second) {
-        return "0b" + NumberConverter.decimalToSystem(add(first, second), 2, NumeralSystemsData
-                .BINARY_CHARACTERS);
+        return "0b" + NumberConverter.decimalToSystem(add(first, second), 2,
+                NumeralSystemsData.BINARY_CHARACTERS);
     }
 
     public static String subB(final String first, final String second) {
