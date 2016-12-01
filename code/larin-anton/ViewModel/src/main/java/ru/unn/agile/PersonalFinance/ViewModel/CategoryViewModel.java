@@ -4,16 +4,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import ru.unn.agile.PersonalFinance.Model.Category;
 
-public class CategoryViewModel {
-    private final Category internalCategory;
+public class CategoryViewModel extends SavableObject {
+    private Category internalCategory;
     private final StringProperty nameProperty = new SimpleStringProperty();
 
     public CategoryViewModel() {
+        markAsSaved();
         this.internalCategory = new Category("New category");
     }
 
     public CategoryViewModel(final String name) {
-        this.internalCategory = new Category(name);
+        markAsSaved();
+        setName(name);
     }
 
     // region Properties for Binding
@@ -26,9 +28,22 @@ public class CategoryViewModel {
         return this.nameProperty.get();
     }
 
+    public final void setName(final String name) {
+        this.nameProperty.set(name);
+    }
+
     // endregion
 
-    public Category getCategory() {
+    public Category getModelCategory() {
+        if (internalCategory == null) {
+            throw new UnsupportedOperationException("Category should be "
+                    + "saved before accessing to the model category");
+        }
         return internalCategory;
+    }
+
+    @Override
+    protected void saveInternal() {
+        internalCategory = new Category(getName());
     }
 }

@@ -7,11 +7,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.util.converter.CurrencyStringConverter;
+
 import ru.unn.agile.PersonalFinance.ViewModel.CategoryViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.personalfinance.view.ViewModelService;
 import ru.unn.agile.personalfinance.view.WindowsManager;
+import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +21,9 @@ import java.util.ResourceBundle;
 public class AddExternalTransactionController implements Initializable {
     private final ExternalTransactionViewModel transaction =
             new ExternalTransactionViewModel(ViewModelService.getViewModel());
+
+    private final static StringListCellFactory<CategoryViewModel> categoryListCellFactory =
+            new StringListCellFactory<>(category -> category.getName());
 
     @FXML
     private Button addButton;
@@ -51,8 +56,11 @@ public class AddExternalTransactionController implements Initializable {
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
-        setUpBindings(ViewModelService.getViewModel());
+        categoryComboBox.setCellFactory(categoryListCellFactory);
+        categoryComboBox.setButtonCell(categoryListCellFactory.call(null));
         categoryComboBox.getSelectionModel().selectFirst();
+
+        setUpBindings(ViewModelService.getViewModel());
     }
 
     private void setUpBindings(final LedgerViewModel ledgerVM) {

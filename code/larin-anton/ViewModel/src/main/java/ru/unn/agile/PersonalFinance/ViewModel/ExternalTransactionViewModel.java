@@ -100,7 +100,7 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
 
     private Category getModelCategory() {
         CategoryViewModel categoryViewModel = getCategory();
-        return categoryViewModel.getCategory();
+        return categoryViewModel.getModelCategory();
     }
 
     private void setUpBindings() {
