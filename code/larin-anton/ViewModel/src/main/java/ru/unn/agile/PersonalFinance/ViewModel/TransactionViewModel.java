@@ -4,15 +4,13 @@ import javafx.beans.property.*;
 
 import java.time.LocalDate;
 
-public abstract class TransactionViewModel {
+public abstract class TransactionViewModel extends SavableObject {
     private static final int DEFAULT_AMOUNT = 100;
 
     private final IntegerProperty amountProperty = new SimpleIntegerProperty();
     private final BooleanProperty isIncomeProperty = new SimpleBooleanProperty();
     private final ObjectProperty<LocalDate> dateProperty =
             new SimpleObjectProperty<>();
-
-    private boolean isSaved;
 
     public TransactionViewModel() {
         setDate(LocalDate.now());
@@ -59,21 +57,4 @@ public abstract class TransactionViewModel {
 
     // endregion
 
-    protected final void markAsSaved() {
-        isSaved = true;
-    }
-
-    public final boolean isSaved() {
-        return isSaved;
-    }
-
-    public final void save() {
-        if (isSaved) {
-            throw new UnsupportedOperationException("Transaction has been already executed");
-        }
-        saveInternal();
-        markAsSaved();
-    }
-
-    protected abstract void saveInternal();
 }

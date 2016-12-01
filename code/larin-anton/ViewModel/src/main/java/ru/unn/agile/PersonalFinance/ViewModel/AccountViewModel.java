@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
-public class AccountViewModel {
+public class AccountViewModel extends SavableObject {
     private static final int DEFAULT_ACCOUNT_BALANCE = 10000;
     private static final String DEFAULT_ACCOUNT_NAME = "New Account";
 
@@ -74,10 +74,8 @@ public class AccountViewModel {
         return modelAccount;
     }
 
-    public void save() {
-        if (isSaved) {
-            throw new UnsupportedOperationException("Account has been already saved");
-        }
+    @Override
+    protected void saveInternal() {
         modelAccount = new Account(getBalance(), getName());
         parentLedger.addAccount(this);
         isSaved = true;
