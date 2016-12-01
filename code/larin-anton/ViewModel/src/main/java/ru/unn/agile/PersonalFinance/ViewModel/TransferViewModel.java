@@ -4,7 +4,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 public class TransferViewModel extends TransactionViewModel {
-    private boolean isIncome;
     private final LedgerViewModel parentLedger;
 
     private final ObjectProperty<AccountViewModel> accountFromProperty =

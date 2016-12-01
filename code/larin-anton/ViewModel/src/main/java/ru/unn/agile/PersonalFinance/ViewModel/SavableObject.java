@@ -1,7 +1,27 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 public abstract class SavableObject {
     private boolean isSaved;
+    private BooleanProperty isAbleToSaveProperty = new SimpleBooleanProperty();
+
+    // region Properties for Bindings
+
+    public final BooleanProperty isAbleToSaveProperty() {
+        return this.isAbleToSaveProperty;
+    }
+
+    public final boolean getIsIsAbleToSave() {
+        return this.isAbleToSaveProperty.get();
+    }
+
+    protected void setIsAbleToSave(final boolean isAbleToSave) {
+        this.isAbleToSaveProperty.set(isAbleToSave);
+    }
+
+    // endregion
 
     protected final void markAsSaved() {
         isSaved = true;
