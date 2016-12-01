@@ -1,4 +1,4 @@
-package ru.unn.agile.TemperatureConverter.Model;
+package ru.unn.agile.TemperatureConverter.model;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,7 +6,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 
-import static ru.unn.agile.TemperatureConverter.Model.TemperatureScale.*;
+import static ru.unn.agile.TemperatureConverter.model.TemperatureScale.*;
 
 @RunWith(Parameterized.class)
 public class TemperatureConverterExceptionTest {

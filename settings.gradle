@@ -118,8 +118,12 @@ include "code/Stack/View"
 project(":code/Stack/View").name = "Stack-View"
 
 // Кудрявцев Никита
-include "code/kudriavtsev-nikita"
-project(":code/kudriavtsev-nikita").name = "kudriavtsev-nikita-lab1-Model"
+include "code/TemperatureConverter/Model"
+project(":code/TemperatureConverter/Model").name = "kudriavtsev-nikita-lab2-Model"
+include "code/TemperatureConverter/ViewModel"
+project(":code/TemperatureConverter/ViewModel").name = "kudriavtsev-nikita-lab2-ViewModel"
+include "code/TemperatureConverter/View"
+project(":code/TemperatureConverter/View").name = "kudriavtsev-nikita-lab2-View"
 
 // Кукушкин Даниил
 include "code/kukushkin-daniil"

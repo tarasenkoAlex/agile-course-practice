@@ -1,4 +1,4 @@
-package ru.unn.agile.TemperatureConverter.Model;
+package ru.unn.agile.TemperatureConverter.model;
 
 public enum TemperatureScale {
     CELSIUS(1.0, 0.0),

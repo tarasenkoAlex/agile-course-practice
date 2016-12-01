@@ -1,4 +1,4 @@
-package ru.unn.agile.TemperatureConverter.Model;
+package ru.unn.agile.TemperatureConverter.model;
 
 public final class AbsoluteZero {
     public static final double CELSIUS = -273.15;
