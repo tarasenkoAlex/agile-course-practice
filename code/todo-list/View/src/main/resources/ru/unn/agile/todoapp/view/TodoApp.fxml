@@ -11,38 +11,32 @@
 <?import javafx.scene.layout.VBox?>
 <?import ru.unn.agile.todoapp.viewmodel.TodoAppViewModel?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="451.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.agile.todoapp.view.TodoApp">
-    <fx:define>
-       <TodoAppViewModel fx:id="viewModel" />
-    </fx:define>
-   <children>
-      <VBox prefHeight="451.0" prefWidth="403.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="403.0" spacing="4.0" VBox.vgrow="NEVER">
-               <children>
-                  <TextField fx:id="taskDescriptionTextField" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="184.0" promptText="What would you like to do?" HBox.hgrow="ALWAYS">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </TextField>
-                  <DatePicker fx:id="taskDueDatePicker" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="122.0" promptText="88/88/8888" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </DatePicker>
-                  <Button fx:id="addTaskButton" defaultButton="true" disable="${viewModel.addNewTaskButtonDisable}" mnemonicParsing="false" text="New task" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets left="5.0" right="5.0" />
-               </padding>
-            </HBox>
-            <Separator prefWidth="200.0" VBox.vgrow="NEVER" />
-            <ListView fx:id="taskListView" prefHeight="409.0" prefWidth="418.0" VBox.vgrow="ALWAYS" />
-         </children>
-      </VBox>
-   </children>
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="451.0" prefWidth="413.0" stylesheets="@todoapp.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.agile.todoapp.view.TodoApp">
+   <fx:define>
+      <TodoAppViewModel fx:id="viewModel" />
+   </fx:define>
+   <VBox prefHeight="451.0" prefWidth="403.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="403.0" spacing="4.0" VBox.vgrow="NEVER">
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+         <TextField fx:id="taskDescriptionTextField" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="184.0" promptText="What would you like to do?" HBox.hgrow="ALWAYS">
+            <HBox.margin>
+               <Insets />
+            </HBox.margin>
+         </TextField>
+         <DatePicker fx:id="taskDueDatePicker" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="122.0" promptText="88/88/8888" HBox.hgrow="NEVER">
+            <HBox.margin>
+               <Insets />
+            </HBox.margin>
+         </DatePicker>
+         <Button fx:id="addTaskButton" defaultButton="true" disable="${viewModel.addNewTaskButtonDisable}" mnemonicParsing="false" text="New task" HBox.hgrow="NEVER">
+            <HBox.margin>
+               <Insets />
+            </HBox.margin>
+         </Button>
+      </HBox>
+      <Separator prefWidth="200.0" VBox.vgrow="NEVER" />
+      <ListView fx:id="taskListView" focusTraversable="false" mouseTransparent="false" prefHeight="409.0" prefWidth="418.0" VBox.vgrow="ALWAYS" />
+   </VBox>
 </AnchorPane>

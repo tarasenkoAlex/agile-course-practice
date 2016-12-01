@@ -1,5 +1,6 @@
 package ru.unn.agile.todoapp.view;
 
+import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -13,6 +14,7 @@ import ru.unn.agile.todoapp.viewmodel.TodoAppViewModel;
 import java.io.IOException;
 
 public class TaskListCell extends ListCell<TaskListCellViewModel> {
+    private static PseudoClass DONE_TASK = PseudoClass.getPseudoClass("task-done");
     private final TodoAppViewModel masterViewModel;
     private TaskListCellViewModel viewModel;
     private FXMLLoader fxmlLoader;
@@ -51,6 +53,11 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
             dueDateLabel.setText(viewModel.getDueDateString());
             taskIsDoneCheckbox.setSelected(viewModel.doneCheckboxCheckedProperty().get());
             taskIsDoneCheckbox.setDisable(viewModel.doneCheckboxDisableProperty().get());
+
+            if (viewModel.doneCheckboxCheckedProperty().get()) {
+                taskDescriptionLabel.pseudoClassStateChanged(DONE_TASK, true);
+                dueDateLabel.pseudoClassStateChanged(DONE_TASK, true);
+            }
 
             setText(null);
             setGraphic(pane);
