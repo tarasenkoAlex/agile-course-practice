@@ -1,5 +1,6 @@
 package ru.unn.agile.SolvingQuadraticEquation.viewmodel;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.Before;
 
@@ -32,6 +33,11 @@ public class ViewModelTests {
     @Before
     public void setUp() {
         viewModel = new ViewModel();
+    }
+
+    @After
+    public void tearDown() {
+        viewModel = null;
     }
 
     @Test
