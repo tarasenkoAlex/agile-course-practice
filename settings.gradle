@@ -3,9 +3,6 @@ include "code/bevzuk-anton"
 project(":code/bevzuk-anton").name = "bevzuk-anton-Model"
 
 // Kolistratova Daria
-include "code/kolistratova-daria"
-project(":code/kolistratova-daria").name = "kolistratova-daria-Model"
-
 
 // Kornyakov Kirill, lab1
 include "code/kornyakov-kirill-lab1"
@@ -88,15 +85,16 @@ project(":code/israfilov-ruslan").name = "israfilov-ruslan-model"
 // Карчков Денис
 // Кокошников Алексей
 // Колистратова Дарья
-// Кочетов Павел
-include "code/kochetov-pavel"
-project(":code/kochetov-pavel").name = "kochetov-pavel-Model"
 include "code/Stack/Model"
 project(":code/Stack/Model").name = "Stack-Model"
 include "code/Stack/ViewModel"
 project(":code/Stack/ViewModel").name = "Stack-ViewModel"
 include "code/Stack/View"
 project(":code/Stack/View").name = "Stack-View"
+
+// Кочетов Павел
+include "code/kochetov-pavel"
+project(":code/kochetov-pavel").name = "kochetov-pavel-Model"
 
 // Кудрявцев Никита
 include "code/kudriavtsev-nikita"
