@@ -1,9 +1,6 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 
 import java.time.LocalDate;
 
@@ -11,6 +8,7 @@ public abstract class TransactionViewModel {
     private static final int DEFAULT_AMOUNT = 100;
 
     private final IntegerProperty amountProperty = new SimpleIntegerProperty();
+    private final BooleanProperty isIncomeProperty = new SimpleBooleanProperty();
     private final ObjectProperty<LocalDate> dateProperty =
             new SimpleObjectProperty<>();
 
@@ -45,6 +43,18 @@ public abstract class TransactionViewModel {
 
     public final void setDate(final LocalDate date) {
         this.dateProperty.set(date);
+    }
+
+    public final BooleanProperty isIncomeProperty() {
+        return this.isIncomeProperty;
+    }
+
+    public final boolean getIsIncome() {
+        return this.isIncomeProperty.get();
+    }
+
+    public final void setIsIncome(final boolean isIncomeProperty) {
+        this.isIncomeProperty.set(isIncomeProperty);
     }
 
     // endregion

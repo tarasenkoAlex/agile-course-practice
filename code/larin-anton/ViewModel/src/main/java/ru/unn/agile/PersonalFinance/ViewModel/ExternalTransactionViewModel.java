@@ -12,7 +12,6 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
 
     private final StringProperty descriptionProperty = new SimpleStringProperty();
     private final StringProperty counterpartyProperty = new SimpleStringProperty();
-    private final BooleanProperty isIncomeProperty = new SimpleBooleanProperty();
     private final ObjectProperty<CategoryViewModel> categoryProperty =
             new SimpleObjectProperty<>();
 
@@ -46,18 +45,6 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
 
     public final void setCounterparty(final String counterparty) {
         this.counterpartyProperty.set(counterparty);
-    }
-
-    public final BooleanProperty isIncomeProperty() {
-        return this.isIncomeProperty;
-    }
-
-    public final boolean getIsIncome() {
-        return this.isIncomeProperty.get();
-    }
-
-    public final void setIsIncome(final boolean isIncomeProperty) {
-        this.isIncomeProperty.set(isIncomeProperty);
     }
 
     public final ObjectProperty<CategoryViewModel> categoryProperty() {
