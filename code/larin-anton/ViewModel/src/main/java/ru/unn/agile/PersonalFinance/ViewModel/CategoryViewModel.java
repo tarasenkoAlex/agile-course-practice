@@ -9,13 +9,13 @@ public class CategoryViewModel extends SavableObject {
     private final StringProperty nameProperty = new SimpleStringProperty();
 
     public CategoryViewModel() {
-        markAsSaved();
-        this.internalCategory = new Category("New category");
+        setName("New category");
+        save();
     }
 
     public CategoryViewModel(final String name) {
-        markAsSaved();
         setName(name);
+        save();
     }
 
     // region Properties for Binding
