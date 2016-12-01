@@ -45,7 +45,7 @@ public class TodoApp {
         taskDueDatePicker.valueProperty().bindBidirectional(viewModel.newTaskDueDateProperty());
         addTaskButton.setOnAction(value -> viewModel.pressAddNewTaskButton());
 
-        taskListView.setItems(viewModel.getTasksViewModels());
+        taskListView.setItems(viewModel.getSortedTasksViewModels());
         taskListView.setCellFactory(taskListView -> new TaskListCell(viewModel));
     }
 }

@@ -13,10 +13,12 @@ import static org.junit.Assert.assertTrue;
 public class TodoAppViewModelTest {
     private TodoAppViewModel viewModel;
     private static final LocalDate TODAY = LocalDate.now();
+    private static final LocalDate TOMORROW = TODAY.plusDays(1);
     private static final LocalDate DAY_AFTER_TOMORROW = TODAY.plusDays(2);
     private static final String DAY_AFTER_TOMORROW_STRING = DAY_AFTER_TOMORROW.format(
             DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     private static final String NEW_TASK_DESCRIPTION = "Wash the car";
+    private static final String ANOTHER_TASK_DESCRIPTION = "Water the plants";
 
     @Before
     public void setUp() {
@@ -56,30 +58,22 @@ public class TodoAppViewModelTest {
 
     @Test
     public void whenAddingNewTaskDescriptionFieldShouldClear() {
-        viewModel.newTaskDescriptionProperty().set(NEW_TASK_DESCRIPTION);
-
-        viewModel.pressAddNewTaskButton();
+        addTask(viewModel, NEW_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
 
         assertEquals("", viewModel.newTaskDescriptionProperty().get());
     }
 
     @Test
     public void whenAddingNewTaskDueDateShouldJumpBackToToday() {
-        viewModel.newTaskDescriptionProperty().set(NEW_TASK_DESCRIPTION);
-        viewModel.newTaskDueDateProperty().set(DAY_AFTER_TOMORROW);
-
-        viewModel.pressAddNewTaskButton();
+        addTask(viewModel, NEW_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
 
         assertEquals(TODAY, viewModel.newTaskDueDateProperty().get());
     }
 
     @Test
     public void whenAddingNewTaskItAppearsInTheList() {
-        viewModel.newTaskDescriptionProperty().set(NEW_TASK_DESCRIPTION);
-        viewModel.newTaskDueDateProperty().set(DAY_AFTER_TOMORROW);
-
-        viewModel.pressAddNewTaskButton();
-        TaskListCellViewModel lastTask = viewModel.getTasksViewModels().get(0);
+        addTask(viewModel, NEW_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
+        TaskListCellViewModel lastTask = viewModel.getSortedTasksViewModels().get(0);
 
         assertEquals(NEW_TASK_DESCRIPTION, lastTask.getDescription());
         assertEquals(DAY_AFTER_TOMORROW_STRING, lastTask.getDueDateString());
@@ -88,13 +82,28 @@ public class TodoAppViewModelTest {
 
     @Test
     public void whenDeleteButtonIsPressedTaskIsDeletedFromTheList() {
-        viewModel.newTaskDescriptionProperty().set(NEW_TASK_DESCRIPTION);
-        viewModel.newTaskDueDateProperty().set(DAY_AFTER_TOMORROW);
-        viewModel.pressAddNewTaskButton();
+        addTask(viewModel, NEW_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
 
-        TaskListCellViewModel deletedTask = viewModel.getTasksViewModels().get(0);
+        TaskListCellViewModel deletedTask = viewModel.getSortedTasksViewModels().get(0);
         viewModel.pressDeleteButton(deletedTask);
 
-        assertTrue(viewModel.getTasksViewModels().isEmpty());
+        assertTrue(viewModel.getSortedTasksViewModels().isEmpty());
+    }
+
+    @Test
+    public void undoneTasksAreSortedByDueDate() {
+        addTask(viewModel, NEW_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
+        addTask(viewModel, ANOTHER_TASK_DESCRIPTION, TOMORROW);
+
+        assertEquals(ANOTHER_TASK_DESCRIPTION,
+                viewModel.getSortedTasksViewModels().get(0).getDescription());
+        assertEquals(NEW_TASK_DESCRIPTION,
+                viewModel.getSortedTasksViewModels().get(1).getDescription());
+    }
+
+    private void addTask(TodoAppViewModel viewModel, String description, LocalDate dueDate) {
+        viewModel.newTaskDescriptionProperty().set(description);
+        viewModel.newTaskDueDateProperty().set(dueDate);
+        viewModel.pressAddNewTaskButton();
     }
 }
