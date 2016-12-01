@@ -1,15 +1,7 @@
 package ru.unn.agile.Stack.viewmodel;
 
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
-import java.util.List;
-import ru.unn.agile.Stack.model;
+import ru.unn.agile.Stack.model.Stack;
 
 public class ViewModel {
     private final StringProperty txtinput = new SimpleStringProperty();
@@ -17,7 +9,7 @@ public class ViewModel {
     private final StringProperty txtlog = new SimpleStringProperty();
     private final StringProperty txtmsg = new SimpleStringProperty();
 
-    private Stack stk;
+    private final Stack stk;
 
     public StringProperty txtinputProperty() {
         return txtinput;
@@ -40,9 +32,38 @@ public class ViewModel {
         txtprint.set("");
         txtlog.set("");
         txtmsg.set("");
+        stk = new Stack();
     }
 
     public void push() {
-
+        try {
+            stk.push(Integer.parseInt(txtinput.get()));
+        } catch (NumberFormatException e) {
+            txtlog.set("Bad input!");
+        }
     }
+
+    public Stack getStack() {
+        return stk;
+    }
+
+    public void pop() {
+        stk.pop();
+        txtlog.set("Stack is empty! Cannot pop!");
+    }
+
+    public void top() {
+        stk.top();
+        txtlog.set("Stack is empty! Cannot top!");
+    }
+
+    public void isEmpty() {
+        stk.isEmpty();
+        txtmsg.set("Stack is empty!");
+    }
+
+    public void isNotEmpty() {
+        txtmsg.set("Stack is not empty!");
+    }
+
 }

@@ -7,15 +7,24 @@ import javafx.scene.control.*;
 
 public class Stack {
 
-    public Button popbutton;
-    public Button pushbutton;
-    public Button topbutton;
-    public Button printbutton;
-    public TextField txtinput;
-    public TextArea txtprint;
-    public TextArea txtlog;
-    public Button isemptybutton;
-    public TextArea txtmsg;
+    @FXML
+    private Button popbutton;
+    @FXML
+    private Button pushbutton;
+    @FXML
+    private Button topbutton;
+    @FXML
+    private Button printbutton;
+    @FXML
+    private TextField txtinput;
+    @FXML
+    private TextArea txtprint;
+    @FXML
+    private TextArea txtlog;
+    @FXML
+    private Button isemptybutton;
+    @FXML
+    private TextArea txtmsg;
 
     @FXML
     void initialize() {
