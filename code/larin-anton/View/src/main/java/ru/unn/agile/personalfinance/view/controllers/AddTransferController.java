@@ -6,21 +6,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
-import javafx.util.StringConverter;
 import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
 import ru.unn.agile.personalfinance.view.ViewModelService;
 import ru.unn.agile.personalfinance.view.WindowsManager;
-import ru.unn.agile.personalfinance.view.controls.StringListCell;
 import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 
 public class AddTransferController implements Initializable {
     private final TransferViewModel transfer =

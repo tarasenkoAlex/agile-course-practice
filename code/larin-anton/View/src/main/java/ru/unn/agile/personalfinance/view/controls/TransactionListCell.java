@@ -1,7 +1,6 @@
 package ru.unn.agile.personalfinance.view.controls;
 
 import javafx.scene.control.ListCell;
-import ru.unn.agile.PersonalFinance.Model.Transfer;
 import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
