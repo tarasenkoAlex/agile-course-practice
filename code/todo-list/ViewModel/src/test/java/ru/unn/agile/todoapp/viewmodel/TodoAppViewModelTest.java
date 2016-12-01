@@ -17,8 +17,8 @@ public class TodoAppViewModelTest {
     private static final LocalDate DAY_AFTER_TOMORROW = TODAY.plusDays(2);
     private static final String DAY_AFTER_TOMORROW_STRING = DAY_AFTER_TOMORROW.format(
             DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    private static final String NEW_TASK_DESCRIPTION = "Wash the car";
-    private static final String ANOTHER_TASK_DESCRIPTION = "Water the plants";
+    private static final String NONURGENT_TASK_DESCRIPTION = "Wash the car";
+    private static final String URGENT_TASK_DESCRIPTION = "Water the plants";
 
     @Before
     public void setUp() {
@@ -42,14 +42,14 @@ public class TodoAppViewModelTest {
 
     @Test
     public void whenDescriptionIsNonEmptyAddNewTaskButtonIsEnabled() {
-        viewModel.newTaskDescriptionProperty().set(NEW_TASK_DESCRIPTION);
+        viewModel.newTaskDescriptionProperty().set(NONURGENT_TASK_DESCRIPTION);
 
         assertFalse(viewModel.addNewTaskButtonDisableProperty().get());
     }
 
     @Test
     public void whenDescriptionIsClearedAddNewTaskButtonIsDisabled() {
-        viewModel.newTaskDescriptionProperty().set(NEW_TASK_DESCRIPTION);
+        viewModel.newTaskDescriptionProperty().set(NONURGENT_TASK_DESCRIPTION);
 
         viewModel.newTaskDescriptionProperty().set("");
 
@@ -58,31 +58,31 @@ public class TodoAppViewModelTest {
 
     @Test
     public void whenAddingNewTaskDescriptionFieldShouldClear() {
-        addTask(viewModel, NEW_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
+        addTask(viewModel, NONURGENT_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
 
         assertEquals("", viewModel.newTaskDescriptionProperty().get());
     }
 
     @Test
     public void whenAddingNewTaskDueDateShouldJumpBackToToday() {
-        addTask(viewModel, NEW_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
+        addTask(viewModel, NONURGENT_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
 
         assertEquals(TODAY, viewModel.newTaskDueDateProperty().get());
     }
 
     @Test
     public void whenAddingNewTaskItAppearsInTheList() {
-        addTask(viewModel, NEW_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
+        addTask(viewModel, NONURGENT_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
         TaskListCellViewModel lastTask = viewModel.getSortedTasksViewModels().get(0);
 
-        assertEquals(NEW_TASK_DESCRIPTION, lastTask.getDescription());
+        assertEquals(NONURGENT_TASK_DESCRIPTION, lastTask.getDescription());
         assertEquals(DAY_AFTER_TOMORROW_STRING, lastTask.getDueDateString());
         assertFalse(lastTask.doneCheckboxCheckedProperty().get());
     }
 
     @Test
     public void whenDeleteButtonIsPressedTaskIsDeletedFromTheList() {
-        addTask(viewModel, NEW_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
+        addTask(viewModel, NONURGENT_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
 
         TaskListCellViewModel deletedTask = viewModel.getSortedTasksViewModels().get(0);
         viewModel.pressDeleteButton(deletedTask);
@@ -92,12 +92,26 @@ public class TodoAppViewModelTest {
 
     @Test
     public void undoneTasksAreSortedByDueDate() {
-        addTask(viewModel, NEW_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
-        addTask(viewModel, ANOTHER_TASK_DESCRIPTION, TOMORROW);
+        addTask(viewModel, NONURGENT_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
+        addTask(viewModel, URGENT_TASK_DESCRIPTION, TOMORROW);
 
-        assertEquals(ANOTHER_TASK_DESCRIPTION,
+        assertEquals(URGENT_TASK_DESCRIPTION,
                 viewModel.getSortedTasksViewModels().get(0).getDescription());
-        assertEquals(NEW_TASK_DESCRIPTION,
+        assertEquals(NONURGENT_TASK_DESCRIPTION,
+                viewModel.getSortedTasksViewModels().get(1).getDescription());
+    }
+
+    @Test
+    public void doneTasksAreReverseSortedByDueDate() {
+        addTask(viewModel, NONURGENT_TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
+        addTask(viewModel, URGENT_TASK_DESCRIPTION, TOMORROW);
+
+        viewModel.getSortedTasksViewModels().get(0).clickIsDoneCheckBox();
+        viewModel.getSortedTasksViewModels().get(1).clickIsDoneCheckBox();
+
+        assertEquals(NONURGENT_TASK_DESCRIPTION,
+                viewModel.getSortedTasksViewModels().get(0).getDescription());
+        assertEquals(URGENT_TASK_DESCRIPTION,
                 viewModel.getSortedTasksViewModels().get(1).getDescription());
     }
 

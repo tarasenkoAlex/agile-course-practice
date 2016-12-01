@@ -8,9 +8,6 @@ import ru.unn.agile.todoapp.model.Task;
 import ru.unn.agile.todoapp.model.TaskList;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 public class TodoAppViewModel {
     private final TaskList tasks;
@@ -26,8 +23,21 @@ public class TodoAppViewModel {
         newTaskDueDate = new SimpleObjectProperty<>(LocalDate.now());
         addNewTaskButtonDisable = new SimpleBooleanProperty(true);
         tasksViewModels = FXCollections.observableArrayList(TaskListCellViewModel::extractor);
-        sortedTasksViewModels = new SortedList<>(tasksViewModels, (tvm1, tvm2) ->
-                tvm1.getTask().getDueDate().compareTo(tvm2.getTask().getDueDate()));
+        sortedTasksViewModels = new SortedList<>(
+                tasksViewModels,
+                (tvm1, tvm2) -> {
+                    LocalDate dueDate1 = tvm1.getTask().getDueDate();
+                    LocalDate dueDate2 = tvm2.getTask().getDueDate();
+                    boolean taskDone1 = tvm1.getTask().isDone();
+                    boolean taskDone2 = tvm2.getTask().isDone();
+                    int dueDateComparison = dueDate1.compareTo(dueDate2);
+
+                    if (taskDone1 && taskDone2) {
+                        return -dueDateComparison;
+                    } else {
+                        return dueDateComparison;
+                    }
+        });
 
         newTaskDescription.addListener((observable, oldValue, newValue) ->
                 updateAddNewTaskButtonStatus(newValue));
