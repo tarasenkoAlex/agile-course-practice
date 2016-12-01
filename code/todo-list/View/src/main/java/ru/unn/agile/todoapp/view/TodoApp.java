@@ -30,12 +30,12 @@ public class TodoApp {
             private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
             @Override
-            public String toString(LocalDate date) {
+            public String toString(final LocalDate date) {
                 return date.format(dateFormatter);
             }
 
             @Override
-            public LocalDate fromString(String dateString) {
+            public LocalDate fromString(final String dateString) {
                 return LocalDate.parse(dateString, dateFormatter);
             }
         });

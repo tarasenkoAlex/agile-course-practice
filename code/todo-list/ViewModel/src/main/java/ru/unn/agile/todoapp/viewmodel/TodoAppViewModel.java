@@ -41,7 +41,7 @@ public class TodoAppViewModel {
                     } else {
                         return dueDateComparison;
                     }
-        });
+                });
 
         newTaskDescription.addListener((observable, oldValue, newValue) ->
                 updateAddNewTaskButtonStatus(newValue));
@@ -80,7 +80,7 @@ public class TodoAppViewModel {
         return sortedTasksViewModels;
     }
 
-    public void pressDeleteButton(TaskListCellViewModel taskListCellViewModel) {
+    public void pressDeleteButton(final TaskListCellViewModel taskListCellViewModel) {
         int deletionIndex = tasksViewModels.indexOf(taskListCellViewModel);
         if (deletionIndex != -1) {
             Task rawTask = tasksViewModels.get(deletionIndex).getTask();
@@ -89,7 +89,7 @@ public class TodoAppViewModel {
         }
     }
 
-    private TaskListCellViewModel wrapTaskInListCellViewModel(Task task) {
+    private TaskListCellViewModel wrapTaskInListCellViewModel(final Task task) {
         return new TaskListCellViewModel(task);
     }
 }

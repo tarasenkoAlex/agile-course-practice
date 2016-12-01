@@ -14,7 +14,7 @@ import ru.unn.agile.todoapp.viewmodel.TodoAppViewModel;
 import java.io.IOException;
 
 public class TaskListCell extends ListCell<TaskListCellViewModel> {
-    private static PseudoClass DONE_TASK = PseudoClass.getPseudoClass("task-done");
+    private static final PseudoClass DONE_TASK = PseudoClass.getPseudoClass("task-done");
     private final TodoAppViewModel masterViewModel;
     private TaskListCellViewModel viewModel;
     private FXMLLoader fxmlLoader;
@@ -29,12 +29,12 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
     @FXML
     private Button deleteTaskButton;
 
-    public TaskListCell(TodoAppViewModel masterViewModel) {
+    public TaskListCell(final TodoAppViewModel masterViewModel) {
         this.masterViewModel = masterViewModel;
     }
 
     @Override
-    protected void updateItem(TaskListCellViewModel viewModel, boolean empty) {
+    protected void updateItem(final TaskListCellViewModel viewModel, final boolean empty) {
         super.updateItem(viewModel, empty);
 
         if (empty || viewModel == null) {
@@ -74,7 +74,7 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
         }
     }
 
-    private void replaceViewModel(TaskListCellViewModel viewModel) {
+    private void replaceViewModel(final TaskListCellViewModel viewModel) {
         this.viewModel = viewModel;
         taskIsDoneCheckbox.setOnAction(event -> this.viewModel.clickIsDoneCheckBox());
         deleteTaskButton.setOnAction(event -> this.masterViewModel.pressDeleteButton(viewModel));

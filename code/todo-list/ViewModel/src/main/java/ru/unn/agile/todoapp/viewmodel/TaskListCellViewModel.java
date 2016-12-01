@@ -8,16 +8,23 @@ import ru.unn.agile.todoapp.model.Task;
 import java.time.format.DateTimeFormatter;
 
 public class TaskListCellViewModel {
+    private static final DateTimeFormatter DATE_FORMATTER =
+            DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private final Task task;
     private final BooleanProperty doneCheckboxChecked;
     private final BooleanProperty doneCheckboxDisable;
-    private static final DateTimeFormatter dateFormatter =
-            DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public TaskListCellViewModel(Task task) {
+    public TaskListCellViewModel(final Task task) {
         this.task = task;
         this.doneCheckboxChecked = new SimpleBooleanProperty(task.isDone());
         this.doneCheckboxDisable = new SimpleBooleanProperty(task.isDone());
+    }
+
+    public static Observable[] extractor(final TaskListCellViewModel viewModel) {
+        return new Observable[]{
+                viewModel.doneCheckboxCheckedProperty(),
+                viewModel.doneCheckboxDisableProperty()
+        };
     }
 
     public void clickIsDoneCheckBox() {
@@ -35,7 +42,7 @@ public class TaskListCellViewModel {
     }
 
     public String getDueDateString() {
-        return task.getDueDate().format(dateFormatter);
+        return task.getDueDate().format(DATE_FORMATTER);
     }
 
     public BooleanProperty doneCheckboxDisableProperty() {
@@ -44,12 +51,5 @@ public class TaskListCellViewModel {
 
     public Task getTask() {
         return task;
-    }
-
-    public static Observable[] extractor(TaskListCellViewModel viewModel) {
-        return new Observable[]{
-                viewModel.doneCheckboxCheckedProperty(),
-                viewModel.doneCheckboxDisableProperty()
-        };
     }
 }
