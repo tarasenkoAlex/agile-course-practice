@@ -1,6 +1,7 @@
 package ru.unn.agile.todoapp.viewmodel;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,8 @@ public class TodoAppViewModelTest {
     private TodoAppViewModel viewModel;
     private static final LocalDate TODAY = LocalDate.now();
     private static final LocalDate DAY_AFTER_TOMORROW = TODAY.plusDays(2);
+    private static final String DAY_AFTER_TOMORROW_STRING = DAY_AFTER_TOMORROW.format(
+            DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     private static final String NEW_TASK_DESCRIPTION = "Wash the car";
 
     @Before
@@ -79,7 +82,7 @@ public class TodoAppViewModelTest {
         TaskListCellViewModel lastTask = viewModel.getTasksViewModels().get(0);
 
         assertEquals(NEW_TASK_DESCRIPTION, lastTask.getDescription());
-        assertEquals(DAY_AFTER_TOMORROW, lastTask.getDueDate());
+        assertEquals(DAY_AFTER_TOMORROW_STRING, lastTask.getDueDateString());
         assertFalse(lastTask.doneCheckboxCheckedProperty().get());
     }
 

@@ -5,12 +5,14 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import ru.unn.agile.todoapp.model.Task;
 
-import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class TaskListCellViewModel {
     private final Task task;
-    private BooleanProperty doneCheckboxChecked;
-    private BooleanProperty doneCheckboxDisable;
+    private final BooleanProperty doneCheckboxChecked;
+    private final BooleanProperty doneCheckboxDisable;
+    private static final DateTimeFormatter dateFormatter =
+            DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public TaskListCellViewModel(Task task) {
         this.task = task;
@@ -32,8 +34,8 @@ public class TaskListCellViewModel {
         return task.getDescription();
     }
 
-    public LocalDate getDueDate() {
-        return task.getDueDate();
+    public String getDueDateString() {
+        return task.getDueDate().format(dateFormatter);
     }
 
     public BooleanProperty doneCheckboxDisableProperty() {
@@ -45,9 +47,9 @@ public class TaskListCellViewModel {
     }
 
     public static Observable[] extractor(TaskListCellViewModel viewModel) {
-        return new Observable[] {
-            viewModel.doneCheckboxCheckedProperty(),
-            viewModel.doneCheckboxDisableProperty()
+        return new Observable[]{
+                viewModel.doneCheckboxCheckedProperty(),
+                viewModel.doneCheckboxDisableProperty()
         };
     }
 }

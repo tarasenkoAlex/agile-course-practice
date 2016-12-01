@@ -48,7 +48,7 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
             }
 
             taskDescriptionLabel.setText(viewModel.getDescription());
-            dueDateLabel.setText(viewModel.getDueDate().toString());
+            dueDateLabel.setText(viewModel.getDueDateString());
             taskIsDoneCheckbox.setSelected(viewModel.doneCheckboxCheckedProperty().get());
             taskIsDoneCheckbox.setDisable(viewModel.doneCheckboxDisableProperty().get());
 
