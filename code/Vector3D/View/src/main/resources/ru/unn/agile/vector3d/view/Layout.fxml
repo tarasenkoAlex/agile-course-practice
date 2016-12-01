@@ -20,9 +20,9 @@
                 <TextField fx:id="normResultTextField" maxWidth="Infinity" HBox.hgrow="always" editable="false"/>
             </HBox>
         </Tab>
-        <Tab fx:id="normalizationTab" text="Нормализация">
+        <Tab fx:id="normalizationTab" text="Нормирование">
             <HBox>
-                <Label text="Нормализованный вектор: "/>
+                <Label text="Нормированный вектор: "/>
                 <TextField fx:id="normalizationResultTextField" maxWidth="Infinity" HBox.hgrow="always" editable="false"/>
             </HBox>
         </Tab>
@@ -52,4 +52,8 @@
         </Tab>
     </TabPane>
     <Button fx:id="calculateButton" text="Рассчитать" maxWidth="Infinity"/>
+    <HBox>
+        <Label text="Статус: "/>
+        <Label fx:id="statusLabel"/>
+    </HBox>
 </VBox>

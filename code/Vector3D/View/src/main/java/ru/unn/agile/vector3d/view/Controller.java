@@ -4,6 +4,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.Label;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -39,6 +40,8 @@ public class Controller {
     private TextField crossProductResultTextField;
     @FXML
     private Button calculateButton;
+    @FXML
+    private Label statusLabel;
 
     private final ViewModel viewModel = new ViewModel();
 
@@ -51,6 +54,7 @@ public class Controller {
         crossProductOperandTextField.setText(viewModel.getCrossProductOperandText());
         crossProductResultTextField.setText(viewModel.getCrossProductResultText());
         calculateButton.setDisable(!viewModel.isButtonEnabled());
+        statusLabel.setText(viewModel.getStatusText());
     }
 
     private void backbind() {

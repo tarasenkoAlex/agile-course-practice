@@ -343,4 +343,120 @@ public class ViewModelTest {
         viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
         viewModel.calculate();
     }
+
+    @Test
+    public void canGetStatusText() {
+        assertNotNull(viewModel.getStatusText());
+    }
+
+    @Test
+    public void isStatusWaitingOnStart() {
+        assertEquals(Status.WAITING.toString(), viewModel.getStatusText());
+    }
+
+    @Test
+    public void isStatusBadIfNormOpAndInvalidVectorText() {
+        viewModel.setActiveTab(OperationTab.NORM);
+        viewModel.setVectorText(invalidVectorString);
+
+        String status = viewModel.getStatusText();
+
+        assertEquals(Status.BAD.toString(), status);
+    }
+
+    @Test
+    public void isStatusReadyIfNormOpAndValidVectorString() {
+        viewModel.setActiveTab(OperationTab.NORM);
+        viewModel.setVectorText(validVectorString);
+
+        String status = viewModel.getStatusText();
+
+        assertEquals(Status.READY.toString(), status);
+    }
+
+    @Test
+    public void isStatusBadIfNormalizationOpAndIvalidVectorText() {
+        viewModel.setActiveTab(OperationTab.NORMALIZATION);
+        viewModel.setVectorText(invalidVectorString);
+
+        String status = viewModel.getStatusText();
+
+        assertEquals(Status.BAD.toString(), status);
+    }
+
+    @Test
+    public void isStatusReadyIfNormalizationOpAndInvalidVectorText() {
+        viewModel.setActiveTab(OperationTab.NORMALIZATION);
+        viewModel.setVectorText(validVectorString);
+
+        String status = viewModel.getStatusText();
+
+        assertEquals(Status.READY.toString(), status);
+    }
+
+    @Test
+    public void isStatusWaitingIfDotProductOpAndEmptySecondOperand() {
+        viewModel.setActiveTab(OperationTab.DOTPRODUCT);
+        viewModel.setVectorText(validVectorString);
+        viewModel.setDotProductOperandText("");
+
+        String status = viewModel.getStatusText();
+
+        assertEquals(Status.WAITING.toString(), status);
+    }
+
+    @Test
+    public void isStatusBadIfDotProductOpAndInvalidSecondOperand() {
+        viewModel.setActiveTab(OperationTab.DOTPRODUCT);
+        viewModel.setVectorText(validVectorString);
+        viewModel.setDotProductOperandText(invalidVectorString);
+
+        String status = viewModel.getStatusText();
+
+        assertEquals(Status.BAD.toString(), status);
+    }
+
+    @Test
+    public void isStatusReadyIfDotProductOpAndInvalidSecondOperand() {
+        viewModel.setActiveTab(OperationTab.DOTPRODUCT);
+        viewModel.setVectorText(validVectorString);
+        viewModel.setDotProductOperandText(validVectorString);
+
+        String status = viewModel.getStatusText();
+
+        assertEquals(Status.READY.toString(), status);
+    }
+
+    @Test
+    public void isStatusWaitingIfCrossProductOpAndEmptySecondOperand() {
+        viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
+        viewModel.setVectorText(validVectorString);
+        viewModel.setCrossProductOperandText("");
+
+        String status = viewModel.getStatusText();
+
+        assertEquals(Status.WAITING.toString(), status);
+    }
+
+    @Test
+    public void isStatusBadIfCrossProductOpAndInvalidSecondOperand() {
+        viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
+        viewModel.setVectorText(validVectorString);
+        viewModel.setCrossProductOperandText(invalidVectorString);
+
+        String status = viewModel.getStatusText();
+
+        assertEquals(Status.BAD.toString(), status);
+    }
+
+    @Test
+    public void isStatusReadyIfCrossProductOpAndInvalidSecondOperand() {
+        viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
+        viewModel.setVectorText(validVectorString);
+        viewModel.setCrossProductOperandText(validVectorString);
+
+        String status = viewModel.getStatusText();
+
+        assertEquals(Status.READY.toString(), status);
+    }
 }

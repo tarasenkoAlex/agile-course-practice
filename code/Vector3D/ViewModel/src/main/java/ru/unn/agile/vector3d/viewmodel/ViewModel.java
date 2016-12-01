@@ -114,6 +114,20 @@ public class ViewModel {
         buttonEnabled = canCalculate();
     }
 
+    public String getStatusText() {
+        Status status;
+        if (vectorText.isEmpty()
+            || (activeTab == OperationTab.DOTPRODUCT && dotProductOperandText.isEmpty())
+            || (activeTab == OperationTab.CROSSPRODUCT && crossProductOperandText.isEmpty())) {
+            status = Status.WAITING;
+        } else if (canCalculate()) {
+            status = Status.READY;
+        } else {
+            status = Status.BAD;
+        }
+        return status.toString();
+    }
+
     public void calculate() {
         Vector3D vector = vectorFromString(vectorText);
 
@@ -145,4 +159,21 @@ public class ViewModel {
         DOTPRODUCT,
         CROSSPRODUCT
     };
+}
+
+enum Status {
+    WAITING("Пожалуйста, введите операнды."),
+    BAD("Введены некорректные данные."),
+    READY("К расчёту готов.");
+
+    private final String message;
+
+    Status(final String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return message;
+    }
 }
