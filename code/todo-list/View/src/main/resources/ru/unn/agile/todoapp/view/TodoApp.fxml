@@ -30,7 +30,7 @@
                         <Insets />
                      </HBox.margin>
                   </DatePicker>
-                  <Button fx:id="addTaskButton" disable="${viewModel.addNewTaskButtonDisable}" mnemonicParsing="false" text="New task" HBox.hgrow="NEVER">
+                  <Button fx:id="addTaskButton" defaultButton="true" disable="${viewModel.addNewTaskButtonDisable}" mnemonicParsing="false" text="New task" HBox.hgrow="NEVER">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
