@@ -68,4 +68,11 @@ public class WhenCreatingExternalTransaction {
 
         assertFalse(transaction.getIsIsAbleToSave());
     }
+
+    @Test
+    public void andItCanNotBeSavedIfCategoryIsNull() throws Exception {
+        transaction.setCategory(null);
+
+        assertFalse(transaction.getIsIsAbleToSave());
+    }
 }

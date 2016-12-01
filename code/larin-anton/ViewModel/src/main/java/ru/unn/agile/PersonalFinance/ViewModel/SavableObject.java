@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 public abstract class SavableObject {
     private boolean isSaved;
-    private BooleanProperty isAbleToSaveProperty = new SimpleBooleanProperty();
+    protected BooleanProperty isAbleToSaveProperty = new SimpleBooleanProperty();
 
     // region Properties for Bindings
 

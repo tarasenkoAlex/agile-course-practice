@@ -107,12 +107,12 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
         BooleanBinding isCounterpartyEmptyBinding = Bindings.createBooleanBinding(() ->
                 isCounterpartyEmpty(), counterpartyProperty);
 
-        BooleanBinding isAbleToSaveBinding = amountProperty()
-                .greaterThan(0)
-                .and(isCounterpartyEmptyBinding.not());
+        BooleanBinding isAbleToSaveBinding =
+                amountProperty().greaterThan(0)
+                .and(isCounterpartyEmptyBinding.not())
+                .and(categoryProperty().isNotNull());
 
-        BooleanProperty isAbleToSave = isAbleToSaveProperty();
-        isAbleToSave.bind(isAbleToSaveBinding);
+        isAbleToSaveProperty.bind(isAbleToSaveBinding);
     }
 
     private boolean isCounterpartyEmpty() {
