@@ -66,8 +66,6 @@ include "code/quadratic-equation-solver/Model"
 project(":code/quadratic-equation-solver/Model").name = "quadratic-equation-solver-Model"
 
 // Волков Денис
-include "code/volkov-denis"
-project(":code/volkov-denis").name = "volkov-denis-Model"
 
 // Воронин Дмитрий
 // Грошева Людмила
