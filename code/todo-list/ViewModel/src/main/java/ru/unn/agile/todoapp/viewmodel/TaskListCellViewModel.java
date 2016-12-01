@@ -5,10 +5,11 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import ru.unn.agile.todoapp.model.Task;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class TaskListCellViewModel {
-    private static final DateTimeFormatter DATE_FORMATTER =
+    static final DateTimeFormatter DATE_FORMATTER =
             DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private final Task task;
     private final BooleanProperty doneCheckboxChecked;
@@ -25,6 +26,25 @@ public class TaskListCellViewModel {
                 viewModel.doneCheckboxCheckedProperty(),
                 viewModel.doneCheckboxDisableProperty()
         };
+    }
+
+    public static int comparator(final TaskListCellViewModel tvm1,
+                                 final TaskListCellViewModel tvm2) {
+        LocalDate dueDate1 = tvm1.getTask().getDueDate();
+        LocalDate dueDate2 = tvm2.getTask().getDueDate();
+        boolean taskDone1 = tvm1.getTask().isDone();
+        boolean taskDone2 = tvm2.getTask().isDone();
+        int dueDateComparison = dueDate1.compareTo(dueDate2);
+
+        if (taskDone1 && taskDone2) {
+            return -dueDateComparison;
+        } else if (taskDone1 && !taskDone2) {
+            return 1;
+        } else if (!taskDone1 && taskDone2) {
+            return -1;
+        } else {
+            return dueDateComparison;
+        }
     }
 
     public void clickIsDoneCheckBox() {

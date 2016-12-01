@@ -8,6 +8,7 @@ import ru.unn.agile.todoapp.model.Task;
 import ru.unn.agile.todoapp.model.TaskList;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class TodoAppViewModel {
     private final TaskList tasks;
@@ -23,25 +24,8 @@ public class TodoAppViewModel {
         newTaskDueDate = new SimpleObjectProperty<>(LocalDate.now());
         addNewTaskButtonDisable = new SimpleBooleanProperty(true);
         tasksViewModels = FXCollections.observableArrayList(TaskListCellViewModel::extractor);
-        sortedTasksViewModels = new SortedList<>(
-                tasksViewModels,
-                (tvm1, tvm2) -> {
-                    LocalDate dueDate1 = tvm1.getTask().getDueDate();
-                    LocalDate dueDate2 = tvm2.getTask().getDueDate();
-                    boolean taskDone1 = tvm1.getTask().isDone();
-                    boolean taskDone2 = tvm2.getTask().isDone();
-                    int dueDateComparison = dueDate1.compareTo(dueDate2);
-
-                    if (taskDone1 && taskDone2) {
-                        return -dueDateComparison;
-                    } else if (taskDone1 && !taskDone2) {
-                        return 1;
-                    } else if (!taskDone1 && taskDone2) {
-                        return -1;
-                    } else {
-                        return dueDateComparison;
-                    }
-                });
+        sortedTasksViewModels = new SortedList<>(tasksViewModels,
+                TaskListCellViewModel::comparator);
 
         newTaskDescription.addListener((observable, oldValue, newValue) ->
                 updateAddNewTaskButtonStatus(newValue));
@@ -63,6 +47,14 @@ public class TodoAppViewModel {
         return addNewTaskButtonDisable.get();
     }
 
+    public SortedList<TaskListCellViewModel> getSortedTasksViewModels() {
+        return sortedTasksViewModels;
+    }
+
+    List<TaskListCellViewModel> getTasksViewModels() {
+        return tasksViewModels;
+    }
+
     public final void updateAddNewTaskButtonStatus(final String newTaskDescription) {
         this.addNewTaskButtonDisable.setValue(newTaskDescription.isEmpty());
     }
@@ -74,10 +66,6 @@ public class TodoAppViewModel {
 
         newTaskDescription.set("");
         newTaskDueDate.set(LocalDate.now());
-    }
-
-    public SortedList<TaskListCellViewModel> getSortedTasksViewModels() {
-        return sortedTasksViewModels;
     }
 
     public void pressDeleteButton(final TaskListCellViewModel taskListCellViewModel) {
