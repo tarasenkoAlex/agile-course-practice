@@ -9,21 +9,25 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class TaskListCellViewModelTest {
+    private final Task task = new Task("Wash the car", LocalDate.now());
+    private final TaskListCellViewModel viewModel = new TaskListCellViewModel(task);
+
     @Test
     public void byDefaultDoneCheckboxIsUnchecked() {
-        Task task = new Task("Wash the car", LocalDate.now());
-        TaskListCellViewModel viewModel = new TaskListCellViewModel(task);
-
         assertFalse(viewModel.doneCheckboxCheckedProperty().get());
     }
 
     @Test
     public void whenDoneCheckboxIsClickedTaskIsMarkedAsDone() {
-        Task task = new Task("Wash the car", LocalDate.now());
-        TaskListCellViewModel viewModel = new TaskListCellViewModel(task);
-
         viewModel.clickIsDoneCheckBox();
 
         assertTrue(viewModel.doneCheckboxCheckedProperty().get());
+    }
+
+    @Test
+    public void whenDoneCheckboxIsClickedItIsDisabled() {
+        viewModel.clickIsDoneCheckBox();
+
+        assertTrue(viewModel.doneCheckboxDisableProperty().get());
     }
 }

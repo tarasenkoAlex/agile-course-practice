@@ -11,17 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TodoAppViewModel {
-    private final StringProperty newTaskDescription =
-            new SimpleStringProperty("");
-    private final ObjectProperty<LocalDate> newTaskDueDate =
-            new SimpleObjectProperty<>(LocalDate.now());
-    private final BooleanProperty addNewTaskButtonDisable =
-            new SimpleBooleanProperty(true);
-    private final TaskList tasks = new TaskList();
-    private final ObservableList<TaskListCellViewModel> tasksViewModels =
-            FXCollections.observableArrayList();
+    private final TaskList tasks;
+    private final StringProperty newTaskDescription;
+    private final ObjectProperty<LocalDate> newTaskDueDate;
+    private final BooleanProperty addNewTaskButtonDisable;
+    private final ObservableList<TaskListCellViewModel> tasksViewModels;
 
     public TodoAppViewModel() {
+        tasks = new TaskList();
+        newTaskDescription = new SimpleStringProperty("");
+        newTaskDueDate = new SimpleObjectProperty<>(LocalDate.now());
+        addNewTaskButtonDisable = new SimpleBooleanProperty(true);
+        tasksViewModels = FXCollections.observableArrayList(TaskListCellViewModel::extractor);
+
         newTaskDescription.addListener((observable, oldValue, newValue) ->
                 updateAddNewTaskButtonStatus(newValue));
     }

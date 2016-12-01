@@ -18,6 +18,8 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
     private CheckBox taskIsDoneCheckbox;
     @FXML
     private BorderPane pane;
+    @FXML
+    private TaskListCellViewModel viewModel;
 
     @Override
     protected void updateItem(TaskListCellViewModel viewModel, boolean empty) {
@@ -31,8 +33,13 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
                 tryLoadFxml();
             }
 
+            if (this.viewModel != viewModel) {
+                replaceViewModel(viewModel);
+            }
+
             taskDescriptionLabel.setText(viewModel.getDescription());
-            taskIsDoneCheckbox.setSelected(viewModel.doneCheckboxCheckedProperty().getValue());
+            taskIsDoneCheckbox.setSelected(viewModel.doneCheckboxCheckedProperty().get());
+            taskIsDoneCheckbox.setDisable(viewModel.doneCheckboxDisableProperty().get());
 
             setText(null);
             setGraphic(pane);
@@ -47,5 +54,10 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void replaceViewModel(TaskListCellViewModel viewModel) {
+        this.viewModel = viewModel;
+        taskIsDoneCheckbox.setOnAction(event -> this.viewModel.clickIsDoneCheckBox());
     }
 }
