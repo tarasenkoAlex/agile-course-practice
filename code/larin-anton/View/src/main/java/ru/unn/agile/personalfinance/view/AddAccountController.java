@@ -11,7 +11,7 @@ import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddAccountView implements Initializable {
+public class AddAccountController implements Initializable {
     private final AccountViewModel account =
             new AccountViewModel(ViewModelService.getViewModel());
 

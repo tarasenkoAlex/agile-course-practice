@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-public class AddTransferView implements Initializable {
+public class AddTransferController implements Initializable {
     private final TransferViewModel transfer =
             new TransferViewModel(ViewModelService.getViewModel());
 

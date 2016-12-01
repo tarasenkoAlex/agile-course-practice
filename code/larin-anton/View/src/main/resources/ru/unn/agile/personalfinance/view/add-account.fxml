@@ -1,7 +1,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
-<GridPane fx:controller="ru.unn.agile.personalfinance.view.AddAccountView"
+<GridPane fx:controller="ru.unn.agile.personalfinance.view.AddAccountController"
           xmlns:fx="http://javafx.com/fxml">
     <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnSpan="2" />
     <TextField fx:id="balanceField" GridPane.rowIndex="1" GridPane.columnSpan="2" />

@@ -16,7 +16,7 @@ import ru.unn.agile.personalfinance.view.controls.TransactionListCell;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TransactionsView implements Initializable {
+public class TransactionsController implements Initializable {
     @FXML
     private ListView<TransactionViewModel> transactionsList;
 

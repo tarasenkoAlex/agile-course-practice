@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 <?import ru.unn.agile.personalfinance.view.ViewModelSource?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ru.unn.agile.personalfinance.view.TransactionsView">
+            fx:controller="ru.unn.agile.personalfinance.view.TransactionsController">
     <fx:define>
         <ViewModelSource fx:id="vmSource" />
     </fx:define>
