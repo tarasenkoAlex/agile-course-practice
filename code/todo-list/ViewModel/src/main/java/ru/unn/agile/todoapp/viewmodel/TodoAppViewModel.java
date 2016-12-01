@@ -34,6 +34,10 @@ public class TodoAppViewModel {
 
                     if (taskDone1 && taskDone2) {
                         return -dueDateComparison;
+                    } else if (taskDone1 && !taskDone2) {
+                        return 1;
+                    } else if (!taskDone1 && taskDone2) {
+                        return -1;
                     } else {
                         return dueDateComparison;
                     }
