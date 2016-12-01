@@ -1,5 +1,7 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import ru.unn.agile.PersonalFinance.Model.Category;
 import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
@@ -18,6 +20,9 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
     public ExternalTransactionViewModel(final LedgerViewModel parentLedger) {
         Objects.requireNonNull(parentLedger);
         this.parentLedger = parentLedger;
+        setUpBindings();
+
+        setCounterparty("<Most frequent counterparty>");
         setCategory(new CategoryViewModel());
     }
 
@@ -96,5 +101,22 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
     private Category getModelCategory() {
         CategoryViewModel categoryViewModel = getCategory();
         return categoryViewModel.getCategory();
+    }
+
+    private void setUpBindings() {
+        BooleanBinding isCounterpartyEmptyBinding = Bindings.createBooleanBinding(() ->
+                isCounterpartyEmpty(), counterpartyProperty);
+
+        BooleanBinding isAbleToSaveBinding = amountProperty()
+                .greaterThan(0)
+                .and(isCounterpartyEmptyBinding.not());
+
+        BooleanProperty isAbleToSave = isAbleToSaveProperty();
+        isAbleToSave.bind(isAbleToSaveBinding);
+    }
+
+    private boolean isCounterpartyEmpty() {
+        return  getCounterparty() == null ||
+                getCounterparty().trim().isEmpty();
     }
 }

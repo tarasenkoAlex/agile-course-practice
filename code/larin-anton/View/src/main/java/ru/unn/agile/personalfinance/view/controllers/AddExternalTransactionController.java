@@ -5,10 +5,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.CategoryViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
@@ -22,6 +19,9 @@ import java.util.ResourceBundle;
 public class AddExternalTransactionController implements Initializable {
     private final ExternalTransactionViewModel transaction =
             new ExternalTransactionViewModel(ViewModelService.getViewModel());
+
+    @FXML
+    private Button addButton;
 
     @FXML
     private TextField counterpartyField;
@@ -80,5 +80,8 @@ public class AddExternalTransactionController implements Initializable {
         Bindings.bindBidirectional(
                 counterpartyField.textProperty(),
                 transaction.counterpartyProperty());
+
+        /* !transaction.isAbleToSave -> addButton.disabled  */
+        addButton.disableProperty().bind(transaction.isAbleToSaveProperty().not());
     }
 }

@@ -19,7 +19,7 @@
         <ComboBox fx:id="categoryComboBox" items="${vmSource.model.categories}" />
         <TextArea fx:id="descriptionTextArea" />
     </VBox>
-    <Button GridPane.rowIndex="1" GridPane.columnIndex="0" text="Add"
+    <Button fx:id="addButton" GridPane.rowIndex="1" GridPane.columnIndex="0" text="Add"
             onAction="#handleAddButtonAction" />
     <Button GridPane.rowIndex="1" GridPane.columnIndex="1" text="Cancel"
             onAction="#handleCancelButtonAction" />
