@@ -41,13 +41,13 @@ public class ViewModelTest {
 
     @Test
     public void canGetButtonStatus() {
-        boolean enabled = viewModel.isButtonEnabled();
+        boolean enabled = viewModel.isButtonDisabled();
         assertNotNull(enabled);
     }
 
     @Test
     public void isButtonDisabledOnStart() {
-        assertEquals(false, viewModel.isButtonEnabled());
+        assertTrue(viewModel.isButtonDisabled());
     }
 
     @Test
@@ -248,28 +248,28 @@ public class ViewModelTest {
     public void isButtonEnabledWhenVectorTextValidAndNormOp() {
         viewModel.setVectorText(validVectorString);
         viewModel.setActiveTab(OperationTab.NORM);
-        assertTrue(viewModel.isButtonEnabled());
+        assertFalse(viewModel.isButtonDisabled());
     }
 
     @Test
     public void isButtonDisabledWhenVectorTextInvalidAndNormOp() {
         viewModel.setVectorText(invalidVectorString);
         viewModel.setActiveTab(OperationTab.NORM);
-        assertFalse(viewModel.isButtonEnabled());
+        assertTrue(viewModel.isButtonDisabled());
     }
 
     @Test
     public void isButtonEnabledWhenVectorTextValidAndNormalizationOp() {
         viewModel.setVectorText(validVectorString);
         viewModel.setActiveTab(OperationTab.NORMALIZATION);
-        assertTrue(viewModel.isButtonEnabled());
+        assertFalse(viewModel.isButtonDisabled());
     }
 
     @Test
     public void isButtonDisabledWhenVectorTextInvalidAndNormalizationOp() {
         viewModel.setVectorText(invalidVectorString);
         viewModel.setActiveTab(OperationTab.NORMALIZATION);
-        assertFalse(viewModel.isButtonEnabled());
+        assertTrue(viewModel.isButtonDisabled());
     }
 
     @Test
@@ -458,5 +458,55 @@ public class ViewModelTest {
         String status = viewModel.getStatusText();
 
         assertEquals(Status.READY.toString(), status);
+    }
+
+    @Test
+    public void canAccessActiveTabIndexProperty() {
+        assertNotNull(viewModel.activeTabIndexProperty());
+    }
+
+    @Test
+    public void canAccessVectorTextProperty() {
+        assertNotNull(viewModel.vectorTextProperty());
+    }
+
+    @Test
+    public void canAccessDotProductOperandTextProperty() {
+        assertNotNull(viewModel.dotProductOperandTextProperty());
+    }
+
+    @Test
+    public void canAccessCrossProductOperandTextProperty() {
+        assertNotNull(viewModel.crossProductOperandTextProperty());
+    }
+
+    @Test
+    public void canAccessNormResultTextProperty() {
+        assertNotNull(viewModel.normResultTextProperty());
+    }
+
+    @Test
+    public void canAccessNormalizationResultTextProperty() {
+        assertNotNull(viewModel.normalizationResultTextProperty());
+    }
+
+    @Test
+    public void canAccessDotProductResultTextProperty() {
+        assertNotNull(viewModel.dotProductResultTextProperty());
+    }
+
+    @Test
+    public void canAccessCrossProductResultTextProperty() {
+        assertNotNull(viewModel.crossProductResultTextProperty());
+    }
+
+    @Test
+    public void canAccessStatusTextProperty() {
+        assertNotNull(viewModel.statusTextProperty());
+    }
+
+    @Test
+    public void canAccessButtonDisabledProperty() {
+        assertNotNull(viewModel.buttonDisabledProperty());
     }
 }
