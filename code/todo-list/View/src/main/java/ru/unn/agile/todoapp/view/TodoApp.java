@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import ru.unn.agile.todoapp.viewmodel.TaskListCellViewModel;
 import ru.unn.agile.todoapp.viewmodel.TodoAppViewModel;
 
 public class TodoApp {
@@ -17,7 +18,7 @@ public class TodoApp {
     @FXML
     private Button addTaskButton;
     @FXML
-    private ListView taskListView;
+    private ListView<TaskListCellViewModel> taskListView;
 
     @FXML
     private void initialize() {
@@ -27,6 +28,6 @@ public class TodoApp {
         addTaskButton.setOnAction(value -> viewModel.pressAddNewTaskButton());
 
         taskListView.setItems(viewModel.getTasksViewModels());
-        taskListView.setCellFactory(taskListView -> new TaskListCell());
+        taskListView.setCellFactory(taskListView -> new TaskListCell(viewModel));
     }
 }

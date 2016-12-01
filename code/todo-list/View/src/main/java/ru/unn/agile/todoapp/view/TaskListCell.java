@@ -2,15 +2,19 @@ package ru.unn.agile.todoapp.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.GridPane;
 import ru.unn.agile.todoapp.viewmodel.TaskListCellViewModel;
+import ru.unn.agile.todoapp.viewmodel.TodoAppViewModel;
 
 import java.io.IOException;
 
 public class TaskListCell extends ListCell<TaskListCellViewModel> {
+    private final TodoAppViewModel masterViewModel;
+    private TaskListCellViewModel viewModel;
     private FXMLLoader fxmlLoader;
     @FXML
     private Label taskDescriptionLabel;
@@ -21,7 +25,11 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
     @FXML
     private GridPane pane;
     @FXML
-    private TaskListCellViewModel viewModel;
+    private Button deleteTaskButton;
+
+    public TaskListCell(TodoAppViewModel masterViewModel) {
+        this.masterViewModel = masterViewModel;
+    }
 
     @Override
     protected void updateItem(TaskListCellViewModel viewModel, boolean empty) {
@@ -62,5 +70,6 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
     private void replaceViewModel(TaskListCellViewModel viewModel) {
         this.viewModel = viewModel;
         taskIsDoneCheckbox.setOnAction(event -> this.viewModel.clickIsDoneCheckBox());
+        deleteTaskButton.setOnAction(event -> this.masterViewModel.pressDeleteButton(viewModel));
     }
 }

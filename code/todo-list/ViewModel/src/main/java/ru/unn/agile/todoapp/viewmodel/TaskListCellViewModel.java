@@ -40,6 +40,10 @@ public class TaskListCellViewModel {
         return doneCheckboxDisable;
     }
 
+    public Task getTask() {
+        return task;
+    }
+
     public static Observable[] extractor(TaskListCellViewModel viewModel) {
         return new Observable[] {
             viewModel.doneCheckboxCheckedProperty(),

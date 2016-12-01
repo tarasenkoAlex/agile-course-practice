@@ -53,20 +53,28 @@ public class TodoAppViewModel {
                 this.newTaskDueDate.getValue()));
         this.newTaskDescription.set("");
         this.newTaskDueDate.set(LocalDate.now());
-        this.tasksViewModels.setAll(this.getTasks());
-    }
-
-    public List<TaskListCellViewModel> getTasks() {
-        List<Task> rawTasks = tasks.getAll();
-        List<TaskListCellViewModel> taskViewModels = new ArrayList<>();
-        for (Task rawTask : rawTasks) {
-            taskViewModels.add(new TaskListCellViewModel(rawTask));
-        }
-
-        return taskViewModels;
+        this.tasksViewModels.setAll(wrapTasksInListCellViewModels(tasks));
     }
 
     public ObservableList<TaskListCellViewModel> getTasksViewModels() {
+        return tasksViewModels;
+    }
+
+    public void pressDeleteButton(TaskListCellViewModel taskListCellViewModel) {
+        int deletionIndex = tasksViewModels.indexOf(taskListCellViewModel);
+        if (deletionIndex != -1) {
+            Task rawTask = tasksViewModels.get(deletionIndex).getTask();
+            tasks.remove(rawTask);
+            tasksViewModels.setAll(wrapTasksInListCellViewModels(tasks));
+        }
+    }
+
+    private List<TaskListCellViewModel> wrapTasksInListCellViewModels(TaskList tasks) {
+        List<TaskListCellViewModel> tasksViewModels = new ArrayList<>();
+        for (Task rawTask : tasks.getAll()) {
+            tasksViewModels.add(new TaskListCellViewModel(rawTask));
+        }
+
         return tasksViewModels;
     }
 }

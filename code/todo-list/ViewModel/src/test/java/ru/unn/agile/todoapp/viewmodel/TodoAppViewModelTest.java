@@ -76,10 +76,22 @@ public class TodoAppViewModelTest {
         viewModel.newTaskDueDateProperty().set(DAY_AFTER_TOMORROW);
 
         viewModel.pressAddNewTaskButton();
-        TaskListCellViewModel lastTask = viewModel.getTasks().get(0);
+        TaskListCellViewModel lastTask = viewModel.getTasksViewModels().get(0);
 
         assertEquals(NEW_TASK_DESCRIPTION, lastTask.getDescription());
         assertEquals(DAY_AFTER_TOMORROW, lastTask.getDueDate());
         assertFalse(lastTask.doneCheckboxCheckedProperty().get());
+    }
+
+    @Test
+    public void whenDeleteButtonIsPressedTaskIsDeletedFromTheList() {
+        viewModel.newTaskDescriptionProperty().set(NEW_TASK_DESCRIPTION);
+        viewModel.newTaskDueDateProperty().set(DAY_AFTER_TOMORROW);
+        viewModel.pressAddNewTaskButton();
+
+        TaskListCellViewModel deletedTask = viewModel.getTasksViewModels().get(0);
+        viewModel.pressDeleteButton(deletedTask);
+
+        assertTrue(viewModel.getTasksViewModels().isEmpty());
     }
 }
