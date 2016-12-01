@@ -177,11 +177,4 @@ task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
         csv.enabled = false
         xml.destination = "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
     }
-    afterEvaluate {
-        classDirectories = files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: [
-                    'ru/unn/agile/*/view/*'
-            ])
-        })
-    }
 }
