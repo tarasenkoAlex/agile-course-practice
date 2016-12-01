@@ -1,4 +1,4 @@
-package ru.unn.agile.personalfinance.view;
+package ru.unn.agile.personalfinance.view.controllers;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -13,6 +13,8 @@ import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
+import ru.unn.agile.personalfinance.view.ViewModelService;
+import ru.unn.agile.personalfinance.view.WindowsManager;
 import ru.unn.agile.personalfinance.view.controls.StringListCell;
 import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
 

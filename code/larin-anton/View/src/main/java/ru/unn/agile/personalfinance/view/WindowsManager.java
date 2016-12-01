@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Stack;
 
-final class WindowsManager {
+public final class WindowsManager {
     private static final int TRANSACTIONS_WINDOW_WIDTH  = 700;
     private static final int TRANSACTIONS_WINDOW_HEIGHT = 400;
     private static final int ADD_ACCOUNT_WINDOW_WIDTH   = 500;
@@ -22,7 +22,7 @@ final class WindowsManager {
 
     private WindowsManager() { }
 
-    static WindowsManager getInstance() {
+    public static WindowsManager getInstance() {
         // Using synchronized block instead of
         // synchronized method to prevent PMD violation
         synchronized (LOCK) {
@@ -33,7 +33,7 @@ final class WindowsManager {
         return windowsManager;
     }
 
-    void showTransactionsView(final Stage stage) {
+    public void showTransactionsView(final Stage stage) {
         getView("transactions.fxml")
                 .setTitle("My Wallet")
                 .setWidth(TRANSACTIONS_WINDOW_WIDTH)
@@ -42,7 +42,7 @@ final class WindowsManager {
         stagesHstory.push(stage);
     }
 
-    void showAddAccountView(final Stage stage) {
+    public void showAddAccountView(final Stage stage) {
         getView("add-account.fxml")
                 .setTitle("Add new account")
                 .setWidth(ADD_ACCOUNT_WINDOW_WIDTH)
@@ -51,7 +51,7 @@ final class WindowsManager {
         stagesHstory.push(stage);
     }
 
-    void showAddExternalTransactionView(final Stage stage) {
+    public void showAddExternalTransactionView(final Stage stage) {
         getView("add-external-transaction.fxml")
                 .setTitle("Add new transaction")
                 .setWidth(ADD_ACCOUNT_WINDOW_WIDTH)
@@ -60,7 +60,7 @@ final class WindowsManager {
         stagesHstory.push(stage);
     }
 
-    void showAddTransferView(final Stage stage) {
+    public void showAddTransferView(final Stage stage) {
         getView("add-transfer.fxml")
                 .setTitle("Add new transfer")
                 .setWidth(ADD_ACCOUNT_WINDOW_WIDTH)
@@ -69,7 +69,7 @@ final class WindowsManager {
         stagesHstory.push(stage);
     }
 
-    void goBack() {
+    public void goBack() {
         Stage currentStage = stagesHstory.pop();
         currentStage.close();
     }

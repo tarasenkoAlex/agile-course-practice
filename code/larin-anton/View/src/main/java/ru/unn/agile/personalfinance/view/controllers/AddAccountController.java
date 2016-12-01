@@ -1,4 +1,4 @@
-package ru.unn.agile.personalfinance.view;
+package ru.unn.agile.personalfinance.view.controllers;
 
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
+import ru.unn.agile.personalfinance.view.ViewModelService;
+import ru.unn.agile.personalfinance.view.WindowsManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;

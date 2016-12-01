@@ -1,4 +1,4 @@
-package ru.unn.agile.personalfinance.view;
+package ru.unn.agile.personalfinance.view.controllers;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.event.ActionEvent;
@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
+import ru.unn.agile.personalfinance.view.ViewModelService;
+import ru.unn.agile.personalfinance.view.WindowsManager;
 import ru.unn.agile.personalfinance.view.controls.AccountListCell;
 import ru.unn.agile.personalfinance.view.controls.TransactionListCell;
 
