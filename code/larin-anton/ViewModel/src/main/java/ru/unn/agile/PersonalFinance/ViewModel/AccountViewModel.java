@@ -100,6 +100,7 @@ public class AccountViewModel {
                     + "to the account where transfer will be added");
         }
 
+        AccountViewModel accountFrom = transfer.getAccountFrom();
         AccountViewModel accountTo = transfer.getAccountTo();
         Account modelAccountFrom = getModelAccount();
         Account modelAccountTo = accountTo.getModelAccount();
@@ -108,12 +109,22 @@ public class AccountViewModel {
                 GregorianCalendarHelper.convertFromLocalDate(transfer.getDate());
         modelAccountFrom.transferTo(modelAccountTo, transfer.getAmount(), transferDate);
 
-        registerTransaction(transfer);
-        accountTo.registerTransaction(transfer);
+        accountFrom.registerTransferAsOutcoming(transfer);
+        accountTo.registerTransferAsIncoming(transfer.copy());
     }
 
     private void registerTransaction(final TransactionViewModel transactionVM) {
         getTransactions().add(transactionVM);
         setBalance(modelAccount.getBalance());
+    }
+
+    private void registerTransferAsIncoming(final TransferViewModel transfer) {
+        transfer.setIsIncome(true);
+        registerTransaction(transfer);
+    }
+
+    private void registerTransferAsOutcoming(final TransferViewModel transfer) {
+        transfer.setIsIncome(false);
+        registerTransaction(transfer);
     }
 }
