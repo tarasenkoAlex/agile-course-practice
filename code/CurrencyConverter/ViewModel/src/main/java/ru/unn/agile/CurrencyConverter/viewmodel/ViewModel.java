@@ -138,9 +138,9 @@ public class ViewModel {
 
     enum MessageStatus {
         SUCCESS("Success!"),
-        FAILED("Error! Enter correct data to field"),
+        FAILED("Error! Enter correct data"),
         WAITING("Please, enter input data"),
-        READY("Please, press the Convert button");
+        READY("Please, press the Convert");
 
         private final String value;
 
