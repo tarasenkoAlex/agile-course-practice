@@ -55,7 +55,7 @@
             </VBox>
         </Tab>
     </TabPane>
-    <Button fx:id="calculateButton" text="Рассчитать" disable="${viewModel.calculationDisabled}" maxWidth="Infinity"/>
+    <Button fx:id="calculateButton" text="Рассчитать" disable="${viewModel.calculationDisabled}" defaultButton="true" maxWidth="Infinity"/>
     <HBox>
         <Label text="Статус: "/>
         <Label fx:id="statusLabel" text="${viewModel.statusText}"/>
