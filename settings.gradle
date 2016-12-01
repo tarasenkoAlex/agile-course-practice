@@ -170,8 +170,13 @@ project(":code/tarasenko-alex").name = "tarasenko-alex"
 include "code/Tropicheva-Darya"
 project(":code/Tropicheva-Darya").name = "Tropicheva-Darya"
 // Федосов Александр
-include "code/Fedosov-Alexander"
-project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
+include "code/MultisystemCalculator/Model"
+project(":code/MultisystemCalculator/Model").name = "MultiSystemCalculatorModel"
+include "code/MultisystemCalculator/ViewModel"
+project(":code/MultisystemCalculator/ViewModel").name = "MultiSystemCalculatorViewModel"
+include "code/MultisystemCalculator/View"
+project(":code/MultisystemCalculator/View").name = "MultiSystemCalculatorView"
+
 
 // Цыганов Алексей
 // Чугунов Евгений

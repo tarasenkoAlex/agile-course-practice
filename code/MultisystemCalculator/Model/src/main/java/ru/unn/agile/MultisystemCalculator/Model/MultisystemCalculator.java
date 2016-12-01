@@ -10,7 +10,7 @@ public final class MultisystemCalculator {
     private MultisystemCalculator() {
     }
 
-    private static int add(final String first, final String second) {
+    public static int add(final String first, final String second) {
         int frst = NumberParser.parseNumber(first);
         int scnd = NumberParser.parseNumber(second);
         if (scnd > 0 && frst > 0 && (scnd > Integer.MAX_VALUE - frst || frst > Integer.MAX_VALUE
@@ -24,7 +24,7 @@ public final class MultisystemCalculator {
         return frst + scnd;
     }
 
-    private static int subtract(final String first, final String second) {
+    public static int subtract(final String first, final String second) {
         int frst = NumberParser.parseNumber(first);
         int scnd = NumberParser.parseNumber(second);
         if (frst > 0 && scnd < 0 && (frst > Integer.MAX_VALUE + scnd || -scnd > Integer
@@ -38,7 +38,7 @@ public final class MultisystemCalculator {
         return frst - scnd;
     }
 
-    private static int multiply(final String first, final String second) {
+    public static int multiply(final String first, final String second) {
         int frst = NumberParser.parseNumber(first);
         int scnd = NumberParser.parseNumber(second);
         if ((frst > 0 && scnd < 0 || frst < 0 && scnd > 0) && (frst < -Integer.MAX_VALUE / scnd
@@ -56,7 +56,7 @@ public final class MultisystemCalculator {
         return frst * scnd;
     }
 
-    private static int divide(final String first, final String second) {
+    public static int divide(final String first, final String second) {
         int frst = NumberParser.parseNumber(first);
         int scnd = NumberParser.parseNumber(second);
         if (scnd == 0) {
@@ -140,5 +140,4 @@ public final class MultisystemCalculator {
         return "0x" + NumberConverter.decimalToSystem(divide(first, second), HEX_BASE,
                 NumeralSystemsData.HEXADECIMAL_CHARACTERS);
     }
-
 }

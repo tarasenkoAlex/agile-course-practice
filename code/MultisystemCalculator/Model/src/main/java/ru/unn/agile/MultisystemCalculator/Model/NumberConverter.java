@@ -9,15 +9,15 @@ public final class NumberConverter {
     private NumberConverter() {
     }
 
-    public static String decimalToSystem(final int decimal, final int system, final List
+    public static String decimalToSystem(final int decimal, final int base, final List
             symbolMappings) {
         if (decimal == 0) {
             return "0";
         }
-        if (system < 2) {
+        if (base < 2) {
             throw new IllegalArgumentException("Base of numeral system should be greater than 1");
         }
-        if (symbolMappings.size() < system) {
+        if (symbolMappings.size() < base) {
             throw new IllegalArgumentException("Length of symbol mapping array should be equal to"
                     + " numeral system base");
         }
@@ -28,8 +28,8 @@ public final class NumberConverter {
             number *= -1;
         }
         while (number != 0) {
-            representation.append(symbolMappings.get(number % system));
-            number = number / system;
+            representation.append(symbolMappings.get(number % base));
+            number = number / base;
         }
         if (isNegative) {
             representation.append('-');
