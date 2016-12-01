@@ -148,8 +148,12 @@ include "code/sovrasov-vlad"
 project(":code/sovrasov-vlad").name = "sovrasov-vlad"
 
 // Соловьев Дмитрий
-include "code/solovev-dmitriy"
-project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
+include "code/Fraction/Model"
+project(":code/Fraction/Model").name = "Fraction-Model"
+include "code/Fraction/ViewModel"
+project(":code/Fraction/ViewModel").name = "Fraction-ViewModel"
+include "code/Fraction/View"
+project(":code/Fraction/View").name = "Fraction-View"
 
 // Старлытов Евгений
 // Степыкин Илья
