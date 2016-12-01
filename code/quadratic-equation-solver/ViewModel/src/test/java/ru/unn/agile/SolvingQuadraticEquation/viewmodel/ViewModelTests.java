@@ -118,7 +118,7 @@ public class ViewModelTests {
 
         viewModel.solve();
 
-        assertEquals("X(1) = 4,000; X(2) = 1,000", viewModel.resultProperty().get());
+        assertEquals("X(1) = 4.0; X(2) = 1.0", viewModel.resultProperty().get());
     }
 
     @Test
@@ -127,7 +127,7 @@ public class ViewModelTests {
 
         viewModel.solve();
 
-        assertEquals("X = 2,000", viewModel.resultProperty().get());
+        assertEquals("X = 2.0", viewModel.resultProperty().get());
     }
 
     @Test

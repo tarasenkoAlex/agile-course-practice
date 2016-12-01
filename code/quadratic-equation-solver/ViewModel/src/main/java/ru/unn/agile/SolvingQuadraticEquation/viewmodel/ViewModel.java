@@ -4,7 +4,6 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import java.text.DecimalFormat;
 import ru.unn.agile.SolvingQuadraticEquation.model.SolvingQuadraticEquation;
 
 import java.util.ArrayList;
@@ -115,10 +114,10 @@ public class ViewModel {
     private String buildResultString(final double[] roots) {
         switch (roots.length) {
             case 1:
-                return "X = " + new DecimalFormat("#0.000").format(roots[0]);
+                return "X = " + Double.toString(roots[0]);
             case 2:
-                return "X(1) = " + new DecimalFormat("#0.000").format(roots[0]) + "; "
-                        + "X(2) = " + new DecimalFormat("#0.000").format(roots[1]);
+                return "X(1) = " + Double.toString(roots[0]) + "; "
+                        + "X(2) = " + Double.toString(roots[1]);
             case INFINITE_NUMBER_OF_SOLUTIONS:
                 return "Infinite Set of Solutions";
             default:
