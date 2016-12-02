@@ -15,8 +15,8 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         double height = primaryStage.getHeight();
-        primaryStage.setMaxHeight(height);
         primaryStage.setMinHeight(height);
+        primaryStage.setMaxHeight(height);
     }
 
     public static void main(final String[] args) {
