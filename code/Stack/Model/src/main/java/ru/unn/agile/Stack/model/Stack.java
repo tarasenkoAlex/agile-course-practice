@@ -42,16 +42,16 @@ public class Stack {
     }
 
     public String print() {
-        String str = "";
+        final StringBuilder str = new StringBuilder();
         if (isEmpty()) {
-            str = "Stack is empty! Nothing to print!";
+            str.append("Stack is empty! Nothing to print!");
         } else if (stackPointer == 0) {
-            str += array[stackPointer].toString();
+            str.append(array[stackPointer].toString());
         } else {
             for (int i = 0; i <= stackPointer; i++) {
-                str += array[i].toString() + " ";
+                str.append(array[i].toString() + " ");
             }
         }
-        return str;
+        return str.toString();
     }
 }

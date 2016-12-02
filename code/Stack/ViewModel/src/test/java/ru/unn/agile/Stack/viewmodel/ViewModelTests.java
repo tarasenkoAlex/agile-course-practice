@@ -23,9 +23,54 @@ public class ViewModelTests {
     @Test
     public void canSetDefaultValues() {
         assertEquals("", viewModel.txtinputProperty().get());
-        assertEquals("", viewModel.txtprintProperty().get());
+    }
+
+    @Test
+    public void testGetStringTxttop() {
+        viewModel.txtinputProperty().set("1");
+        viewModel.push();
+        viewModel.top();
+        assertEquals("1", viewModel.getTxttop());
+    }
+
+    @Test
+    public void testSetTxttop() {
+        viewModel.txtinputProperty().set("1");
+        viewModel.push();
+        viewModel.top();
+        assertEquals("1", viewModel.txttopProperty().get());
+    }
+
+    @Test
+    public void testGetStringTxtlogF() {
+        viewModel.txtinputProperty().set("1");
+        viewModel.push();
+        viewModel.pop();
+        assertEquals("", viewModel.getTxtlog());
+    }
+
+    @Test
+    public void testSetTxtlog() {
+        viewModel.txtinputProperty().set("1");
+        viewModel.push();
+        viewModel.pop();
         assertEquals("", viewModel.txtlogProperty().get());
-        assertEquals("", viewModel.txtmsgProperty().get());
+    }
+
+    @Test
+    public void testGetStringTxtprint() {
+        viewModel.txtinputProperty().set("1");
+        viewModel.push();
+        viewModel.print();
+        assertEquals("1", viewModel.getTxtprint());
+    }
+
+    @Test
+    public void testSetTxtprint() {
+        viewModel.txtinputProperty().set("1");
+        viewModel.push();
+        viewModel.print();
+        assertEquals("1", viewModel.txtprintProperty().get());
     }
 
     @Test

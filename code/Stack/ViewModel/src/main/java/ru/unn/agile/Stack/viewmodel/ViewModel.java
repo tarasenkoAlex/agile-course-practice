@@ -7,7 +7,7 @@ public class ViewModel {
     private final StringProperty txtinput = new SimpleStringProperty();
     private final StringProperty txtprint = new SimpleStringProperty();
     private final StringProperty txtlog = new SimpleStringProperty();
-    private final StringProperty txtmsg = new SimpleStringProperty();
+    private final StringProperty txttop = new SimpleStringProperty();
 
     private final Stack stk;
 
@@ -19,19 +19,31 @@ public class ViewModel {
         return txtprint;
     }
 
+    public final String getTxtprint() {
+        return txtprint.get();
+    }
+
     public StringProperty txtlogProperty() {
         return txtlog;
     }
 
-    public StringProperty txtmsgProperty() {
-        return txtmsg;
+    public final String getTxtlog() {
+        return txtlog.get();
+    }
+
+    public StringProperty txttopProperty() {
+        return txttop;
+    }
+
+    public final String getTxttop() {
+        return txttop.get();
     }
 
     public ViewModel() {
         txtinput.set("");
         txtprint.set("");
         txtlog.set("");
-        txtmsg.set("");
+        txttop.set("");
         stk = new Stack();
     }
 
@@ -57,9 +69,9 @@ public class ViewModel {
 
     public void top() {
         if (stk.isEmpty()) {
-            txtmsg.set("Stack is empty! Cannot top!");
+            txttop.set("Stack is empty! Cannot top!");
         } else {
-            txtmsg.set(stk.top().toString());
+            txttop.set(stk.top().toString());
         }
     }
 

@@ -5,12 +5,9 @@ import static org.junit.Assert.*;
 
 public class StackTest {
     private Stack stk;
-    // push and pop the same number
     private final Integer number = 12345;
     private final Integer[] numbers = new Integer[PUSHES_MAX];
-    // minimum of pushes
     private static final int PUSHES_MIN = 10;
-    // maximum of pushes
     private static final int PUSHES_MAX = 1000;
 
     public StackTest() {
@@ -117,11 +114,11 @@ public class StackTest {
     @Test
     public void testPrintMultiple() {
         stk = new Stack();
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (int i = 0; i < PUSHES_MIN; i++) {
-            str += numbers[i].toString() + " ";
+            str.append(numbers[i].toString() + " ");
             stk.push(numbers[i]);
         }
-        assertEquals(str, stk.print());
+        assertEquals(str.toString(), stk.print());
     }
 }

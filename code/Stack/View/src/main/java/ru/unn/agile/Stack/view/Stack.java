@@ -20,20 +20,11 @@ public class Stack {
     @FXML
     private TextField txtinput;
     @FXML
-    private TextArea txtprint;
-    @FXML
-    private TextArea txtlog;
-    @FXML
     private Button isemptybutton;
-    @FXML
-    private TextArea txtmsg;
 
     @FXML
     void initialize() {
         txtinput.textProperty().bindBidirectional(viewModel.txtinputProperty());
-        txtprint.textProperty().bindBidirectional(viewModel.txtprintProperty());
-        txtlog.textProperty().bindBidirectional(viewModel.txtlogProperty());
-        txtmsg.textProperty().bindBidirectional(viewModel.txtmsgProperty());
 
         popbutton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
