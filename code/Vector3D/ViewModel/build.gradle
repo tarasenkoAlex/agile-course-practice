@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':Vector3D-Model')
+}
+
+compileJava.options.encoding = 'UTF-8'
