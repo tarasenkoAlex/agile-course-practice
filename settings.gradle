@@ -69,12 +69,8 @@ include "code/grosheva-ludmila"
 project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 
 // Добролюбова Евгения
-include "code/CurrencyConverter/Model"
-project(":code/CurrencyConverter/Model").name = "currency-converter-lab2-Model"
-include "code/CurrencyConverter/View"
-project(":code/CurrencyConverter/View").name = "currency-converter-lab2-View"
-include "code/CurrencyConverter/ViewModel"
-project(":code/CurrencyConverter/ViewModel").name = "currency-converter-lab2-ViewModel"
+include "code/dobroliubova-evgeniia"
+project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
 // Евтюшин Валерий
 include "code/MortgageCalculator/Model"
 project(":code/MortgageCalculator/Model").name = "MortgageCalculatorModel"
