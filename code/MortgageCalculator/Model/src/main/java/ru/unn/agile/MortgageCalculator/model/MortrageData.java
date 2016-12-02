@@ -1,15 +1,14 @@
 package ru.unn.agile.MortgageCalculator.model;
 
 public class MortrageData {
-    private static final double ONE = 1;
-    private double years;
-    private double percents;
-    private double debt;
+    private final double years;
+    private final double percents;
+    private final double debt;
 
-    protected MortrageData() {
-        years = ONE;
-        percents = ONE;
-        debt = ONE;
+    protected MortrageData(final double debt, final double years, final double percents) {
+        this.years = years;
+        this.percents = percents;
+        this.debt = debt;
     }
 
     public double getDebt() {
@@ -24,15 +23,4 @@ public class MortrageData {
         return percents;
     }
 
-    protected void setDebt(final double debt) {
-        this.debt = debt;
-    }
-
-    protected void setYears(final double years) {
-        this.years = years;
-    }
-
-    protected void setPercents(final double percents) {
-        this.percents = percents;
-    }
 }

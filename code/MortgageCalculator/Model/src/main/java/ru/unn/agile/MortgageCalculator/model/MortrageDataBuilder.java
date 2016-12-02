@@ -44,10 +44,6 @@ public final class MortrageDataBuilder {
     }
 
     public MortrageData build() {
-        MortrageData mortrageData = new MortrageData();
-        mortrageData.setDebt(debt);
-        mortrageData.setYears(years);
-        mortrageData.setPercents(percents);
-        return mortrageData;
+        return  new MortrageData(debt, years, percents);
     }
 }
