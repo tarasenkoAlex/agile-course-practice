@@ -2,6 +2,11 @@
 include "code/bevzuk-anton"
 project(":code/bevzuk-anton").name = "bevzuk-anton-Model"
 
+// Kolistratova Daria
+include "code/kolistratova-daria"
+project(":code/kolistratova-daria").name = "kolistratova-daria-Model"
+
+
 // Kornyakov Kirill, lab1
 include "code/kornyakov-kirill-lab1"
 project(":code/kornyakov-kirill-lab1").name = "kornyakov-kirill-lab1-Model"
@@ -90,16 +95,9 @@ include "code/Karchkov-Denis"
 project(":code/Karchkov-Denis").name = "Karchkov-Denis-Model"
 // Кокошников Алексей
 // Колистратова Дарья
-include "code/kolistratova-daria"
-project(":code/kolistratova-daria").name = "kolistratova-daria-Model"
-include "code/CreditCalculator/View"
-project(":code/CreditCalculator/View").name = "credit-calculator-View"
-include "code/CreditCalculator/ViewModel"
-project(":code/CreditCalculator/ViewModel").name = "credit-calculator-ViewModel"
-
 // Кочетов Павел
-include "code/CreditCalculator/Model"
-project(":code/CreditCalculator/Model").name = "credit-calculator-Model"
+include "code/kochetov-pavel"
+project(":code/kochetov-pavel").name = "kochetov-pavel-Model"
 
 // Кудрявцев Никита
 include "code/kudriavtsev-nikita"
