@@ -5,6 +5,8 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.Map;
 
+import static ru.unn.agile.MultisystemCalculator.Model.Format.*;
+
 /**
  * Created by Alexander on 09.11.2016.
  */
@@ -47,6 +49,12 @@ public final class NumeralSystemsData {
     public static final ImmutableList<Character> HEXADECIMAL_CHARACTERS = ImmutableList.of('0', '1',
             '2', '3',
             '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F');
+
+    public static final Map<Format, String> FORMAT_PREFIXES_MAPPING =
+            ImmutableMap.<Format, String>builder().put(BIN, "0b")
+                    .put(OCT, "0o")
+                    .put(HEX, "0x")
+                    .build();
 
     private NumeralSystemsData() {
     }
