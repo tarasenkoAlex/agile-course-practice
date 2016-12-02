@@ -1,4 +1,4 @@
-package ru.unn.agile.MassConverter.View;
+package ru.unn.agile.MassConverter.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -1,4 +1,4 @@
-package ru.unn.agile.MassConverter.View;
+package ru.unn.agile.MassConverter.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
