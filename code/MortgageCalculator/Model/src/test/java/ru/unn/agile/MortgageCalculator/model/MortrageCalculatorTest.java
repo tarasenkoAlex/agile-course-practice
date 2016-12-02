@@ -1,9 +1,8 @@
+package ru.unn.agile.MortgageCalculator.model;
 /**
  * Created by Yevtyushin Valery on 13.11.2016.
  */
 
-import mortrage.MortrageData;
-import mortrage.MortrageDataFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -16,8 +15,11 @@ public class MortrageCalculatorTest {
     private final double percents = 20;
     private final double delta = 0.0001;
 
-
-    private MortrageData mortrageData = MortrageDataFactory.getMortrageData(debt, years, percents);
+    private MortrageDataBuilder mortrageDataBuilder = new MortrageDataBuilder();
+    private MortrageData mortrageData = mortrageDataBuilder
+            .setDebt(debt).setPercents(percents)
+            .setYears(years)
+            .build();
 
     @Test
     public void testThatCalculateCountOverpayment() {

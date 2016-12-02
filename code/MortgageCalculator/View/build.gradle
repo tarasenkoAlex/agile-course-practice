@@ -1,0 +1,7 @@
+dependencies {
+ compile project(':MortgageCalculatorViewModel')
+}
+sourceSets {
+ main.java.srcDir 'src/main'
+ test.java.srcDir 'src/test'
+}

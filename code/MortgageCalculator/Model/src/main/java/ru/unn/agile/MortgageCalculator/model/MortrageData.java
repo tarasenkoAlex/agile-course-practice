@@ -1,18 +1,14 @@
-package mortrage;
+package ru.unn.agile.MortgageCalculator.model;
 
-/**
- * Created by Yevtyushin Valery on 15.11.2016.
- */
 public class MortrageData {
-
     private final double years;
     private final double percents;
     private final double debt;
 
     protected MortrageData(final double debt, final double years, final double percents) {
         this.years = years;
-        this.debt = debt;
         this.percents = percents;
+        this.debt = debt;
     }
 
     public double getDebt() {
@@ -26,4 +22,5 @@ public class MortrageData {
     public double getPercents() {
         return percents;
     }
+
 }
