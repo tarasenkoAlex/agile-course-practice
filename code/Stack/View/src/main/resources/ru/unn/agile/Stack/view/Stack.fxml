@@ -2,20 +2,24 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import ru.unn.agile.Stack.viewmodel.*?>
 
 <AnchorPane prefHeight="504.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.agile.Stack.view.Stack">
+   <fx:define>
+      <ViewModel fx:id="viewModel" />
+   </fx:define>
    <children>
       <Button fx:id="popbutton" layoutX="217.0" layoutY="147.0" mnemonicParsing="false" text="Pop" />
       <Button fx:id="pushbutton" layoutX="134.0" layoutY="147.0" mnemonicParsing="false" text="Push" />
       <Button fx:id="topbutton" layoutX="137.0" layoutY="305.0" mnemonicParsing="false" text="Top" />
       <Button fx:id="printbutton" layoutX="487.0" layoutY="387.0" mnemonicParsing="false" text="Print" textAlignment="CENTER" />
-      <Label fx:id="msglabel" layoutX="105.0" layoutY="114.0" text="Input an integer number to push..." />
+      <Label layoutX="105.0" layoutY="114.0" text="Input an integer number to push..." />
       <TextField fx:id="txtinput" layoutX="121.0" layoutY="79.0" />
-      <TextArea fx:id="txtprint" layoutX="407.0" layoutY="57.0" prefHeight="131.0" prefWidth="200.0" />
-      <TextArea fx:id="txtlog" layoutX="407.0" layoutY="242.0" prefHeight="131.0" prefWidth="200.0" />
+      <TextArea fx:id="txtlog" layoutX="407.0" layoutY="57.0" prefHeight="131.0" prefWidth="200.0" />
+      <TextArea fx:id="txtprint" layoutX="407.0" layoutY="242.0" prefHeight="131.0" prefWidth="200.0" />
       <Button fx:id="isemptybutton" layoutX="207.0" layoutY="305.0" mnemonicParsing="false" text="isEmpty" />
-      <Label fx:id="loglabel" layoutX="483.0" layoutY="34.0" text="Error log:" />
-      <Label fx:id="stacklabel" layoutX="492.0" layoutY="219.0" text="Stack:" />
+      <Label layoutX="483.0" layoutY="34.0" text="Error log:" />
+      <Label layoutX="492.0" layoutY="219.0" text="Stack:" />
       <TextArea fx:id="txtmsg" layoutX="96.0" layoutY="214.0" prefHeight="76.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

@@ -66,4 +66,8 @@ public class ViewModel {
         txtmsg.set("Stack is not empty!");
     }
 
+
+    public void print() {
+        stk.print();
+    }
 }

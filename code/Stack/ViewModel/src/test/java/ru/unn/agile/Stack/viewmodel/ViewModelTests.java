@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 
 public class ViewModelTests {
     private ViewModel viewModel;
+    private final Integer number = 12345;
 
     @Before
     public void setUp() {
@@ -95,5 +96,13 @@ public class ViewModelTests {
     public void testIsNotEmpty() {
         viewModel.isNotEmpty();
         assertEquals("Stack is not empty!", viewModel.txtmsgProperty().get());
+    }
+
+    @Test
+    public void testPrint() {
+        viewModel.print();
+        assertTrue(viewModel.getStack().isEmpty());
+        viewModel.getStack().push(number);
+        assertEquals(number, viewModel.getStack().top());
     }
 }
