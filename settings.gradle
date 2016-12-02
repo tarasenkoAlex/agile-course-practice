@@ -58,14 +58,14 @@ project(":code/tarasenko-alex").name = "tarasenko-alex"
 // Веселов Илья
 include "code/veselov-ilya"
 project(":code/veselov-ilya").name = "veselov-ilya-Model"
+
+// Волков Денис
 include "code/quadratic-equation-solver/View"
 project(":code/quadratic-equation-solver/View").name = "quadratic-equation-solver-View"
 include "code/quadratic-equation-solver/ViewModel"
 project(":code/quadratic-equation-solver/ViewModel").name = "quadratic-equation-solver-ViewModel"
 include "code/quadratic-equation-solver/Model"
 project(":code/quadratic-equation-solver/Model").name = "quadratic-equation-solver-Model"
-
-// Волков Денис
 
 // Воронин Дмитрий
 // Грошева Людмила
