@@ -1,6 +1,7 @@
-package ru.unn.agile.PositionalNotation;
+package ru.unn.agile.PositionalNotation.model;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class ToDecimalConverterTest {

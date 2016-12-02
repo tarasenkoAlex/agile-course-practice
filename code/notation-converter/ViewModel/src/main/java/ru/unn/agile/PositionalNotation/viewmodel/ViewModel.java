@@ -6,7 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import ru.unn.agile.PositionalNotation.Converter;
+import ru.unn.agile.PositionalNotation.model.Converter;
 
 import java.util.ArrayList;
 import java.util.List;

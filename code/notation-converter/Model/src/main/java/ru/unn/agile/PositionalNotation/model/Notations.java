@@ -1,4 +1,4 @@
-package ru.unn.agile.PositionalNotation;
+package ru.unn.agile.PositionalNotation.model;
 
 /**
  * Created by Jane on 23.11.2016.

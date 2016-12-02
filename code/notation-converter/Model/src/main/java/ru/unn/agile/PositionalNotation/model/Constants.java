@@ -1,4 +1,4 @@
-package ru.unn.agile.PositionalNotation;
+package ru.unn.agile.PositionalNotation.model;
 
 public final class Constants {
     public static final int OCTAL_ITER = 3;
