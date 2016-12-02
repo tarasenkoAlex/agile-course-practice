@@ -47,9 +47,6 @@ project(":code/kornyakov-kirill-lab3/View").name = "kornyakov-kirill-lab3-View"
 include "code/kornyakov-kirill-lab3/Infrastructure"
 project(":code/kornyakov-kirill-lab3/Infrastructure").name = "kornyakov-kirill-lab3-Infrastructure"
 
-// Tarasenko Alex
-include "code/tarasenko-alex"
-project(":code/tarasenko-alex").name = "tarasenko-alex"
 // Kamtiko Sam
 // Masunda Nyararai
 // Александров Дмитрий
@@ -181,9 +178,15 @@ project(":code/Fraction/View").name = "Fraction-View"
 
 // Старлытов Евгений
 // Степыкин Илья
-// Тарасенко Алексей
-include "code/tarasenko-alex"
-project(":code/tarasenko-alex").name = "tarasenko-alex"
+// Тарасенко Алексей (лаб. №1), Пономарев Никита (лаб. №2)
+include "code/volumeCalculator/Model"
+project(":code/volumeCalculator/Model").name = "VolumeCalculator-Model"
+
+include "code/volumeCalculator/View"
+project(":code/volumeCalculator/View").name = "VolumeCalculator-View"
+
+include "code/volumeCalculator/ViewModel"
+project(":code/volumeCalculator/ViewModel").name = "VolumeCalculator-ViewModel"
 // Тропичева Дарья
 include "code/ComplexNumberCalculator/Model"
 project(":code/ComplexNumberCalculator/Model").name = "ComplexNumberCalculator-Model"
