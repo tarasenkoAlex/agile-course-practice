@@ -34,7 +34,7 @@ public final class SolvingQuadraticEquation {
         double discriminant = b * b - DISCRIMINANT_COEFFICIENT * a * c;
 
         if (Math.abs(discriminant) < EPS) {
-            result = new double[]{Math.abs(-b / (2 * a))};
+            result = new double[]{-b / (2 * a)};
         }
 
         if (discriminant > EPS) {
