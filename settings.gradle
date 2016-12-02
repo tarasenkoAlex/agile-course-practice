@@ -148,8 +148,8 @@ include "code/Redkin-Michail"
 project(":code/Redkin-Michail").name = "Redkin-Michail-Model"
 // Рыбаков Антон
 // Рыбин Валентин
-include "code/rybin-valentine"
-project(":code/rybin-valentine").name = "rybin-valentine-polynomial"
+include "code/Polynomial/Model"
+project(":code/Polynomial/Model").name = "Polynomial-Model"
 include "code/Vector3D/ViewModel"
 project(":code/Vector3D/ViewModel").name = "Vector3D-ViewModel"
 include "code/Vector3D/View"
@@ -221,6 +221,10 @@ project(":code/MassConverter/View").name = "shiryaeva-vera-lab2-View"
 // Шочин Александр
 include "code/Vector3D/Model"
 project(":code/Vector3D/Model").name = "Vector3D-Model"
+include "code/Polynomial/View"
+project(":code/Polynomial/View").name = "Polynomial-View"
+include "code/Polynomial/ViewModel"
+project(":code/Polynomial/ViewModel").name = "Polynomial-ViewModel"
 
 // Шургалин Петр
 include "code/shurgalin-pyotr"

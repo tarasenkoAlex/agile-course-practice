@@ -1,4 +1,4 @@
-package ru.unn.agile.vector3d.view;
+package ru.unn.agile.polynomial.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,13 +10,13 @@ public class Main extends Application {
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Layout.fxml"));
-        primaryStage.setTitle("Операции над трёхмерными векторами");
+        Parent root = FXMLLoader.load(getClass().getResource("Markup.fxml"));
+        primaryStage.setTitle("Polynomials Calculator");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         double height = primaryStage.getHeight();
-        primaryStage.setMinHeight(height);
         primaryStage.setMaxHeight(height);
+        primaryStage.setMinHeight(height);
     }
 
     public static void main(final String[] args) {
