@@ -8,15 +8,15 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.GridPane;
-import ru.unn.agile.todoapp.viewmodel.TaskListCellViewModel;
+import ru.unn.agile.todoapp.viewmodel.TaskViewModel;
 import ru.unn.agile.todoapp.viewmodel.TodoAppViewModel;
 
 import java.io.IOException;
 
-public class TaskListCell extends ListCell<TaskListCellViewModel> {
+public class TaskListCell extends ListCell<TaskViewModel> {
     private static final PseudoClass DONE_TASK = PseudoClass.getPseudoClass("task-done");
     private final TodoAppViewModel masterViewModel;
-    private TaskListCellViewModel viewModel;
+    private TaskViewModel viewModel;
     private FXMLLoader fxmlLoader;
     @FXML
     private Label taskDescriptionLabel;
@@ -34,7 +34,7 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
     }
 
     @Override
-    protected void updateItem(final TaskListCellViewModel viewModel, final boolean empty) {
+    protected void updateItem(final TaskViewModel viewModel, final boolean empty) {
         super.updateItem(viewModel, empty);
 
         if (empty || viewModel == null) {
@@ -51,10 +51,10 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
 
             taskDescriptionLabel.setText(viewModel.getDescription());
             dueDateLabel.setText(viewModel.getDueDateString());
-            taskIsDoneCheckbox.setSelected(viewModel.doneCheckboxCheckedProperty().get());
-            taskIsDoneCheckbox.setDisable(viewModel.doneCheckboxDisableProperty().get());
+            taskIsDoneCheckbox.setSelected(viewModel.getDoneCheckboxChecked());
+            taskIsDoneCheckbox.setDisable(viewModel.getDoneCheckboxDisable());
 
-            if (viewModel.doneCheckboxCheckedProperty().get()) {
+            if (viewModel.getDoneCheckboxChecked()) {
                 taskDescriptionLabel.pseudoClassStateChanged(DONE_TASK, true);
                 dueDateLabel.pseudoClassStateChanged(DONE_TASK, true);
             }
@@ -74,7 +74,7 @@ public class TaskListCell extends ListCell<TaskListCellViewModel> {
         }
     }
 
-    private void replaceViewModel(final TaskListCellViewModel viewModel) {
+    private void replaceViewModel(final TaskViewModel viewModel) {
         this.viewModel = viewModel;
         taskIsDoneCheckbox.setOnAction(event -> this.viewModel.clickIsDoneCheckBox());
         deleteTaskButton.setOnAction(event -> this.masterViewModel.pressDeleteButton(viewModel));

@@ -12,7 +12,7 @@ public class TodoAppViewModelTest {
     private static final LocalDate TOMORROW = TODAY.plusDays(1);
     private static final LocalDate DAY_AFTER_TOMORROW = TODAY.plusDays(2);
     private static final String DAY_AFTER_TOMORROW_STRING =
-            DAY_AFTER_TOMORROW.format(TaskListCellViewModel.DATE_FORMATTER);
+            DAY_AFTER_TOMORROW.format(TaskViewModel.DATE_FORMATTER);
     private static final String TASK_DESCRIPTION = "Water the plants";
     private static final String NONURGENT_TASK_DESCRIPTION = "Wash the car";
     private static final String URGENT_TASK_DESCRIPTION = "Do taxes";
@@ -27,64 +27,64 @@ public class TodoAppViewModelTest {
 
     @Test
     public void byDefaultNewTaskDateIsToday() {
-        assertEquals(TODAY, viewModel.newTaskDueDateProperty().getValue());
+        assertEquals(TODAY, viewModel.getNewTaskDueDate());
     }
 
     @Test
     public void byDefaultNewTaskDescriptionIsEmpty() {
-        assertEquals("", viewModel.newTaskDescriptionProperty().getValue());
+        assertEquals("", viewModel.getNewTaskDescription());
     }
 
     @Test
     public void byDefaultAddNewTaskButtonIsDisabled() {
-        assertTrue(viewModel.addNewTaskButtonDisableProperty().get());
+        assertTrue(viewModel.getAddNewTaskButtonDisable());
     }
 
     @Test
     public void whenDescriptionIsNonEmptyAddNewTaskButtonIsEnabled() {
-        viewModel.newTaskDescriptionProperty().set(TASK_DESCRIPTION);
+        viewModel.setNewTaskDescription(TASK_DESCRIPTION);
 
-        assertFalse(viewModel.addNewTaskButtonDisableProperty().get());
+        assertFalse(viewModel.getAddNewTaskButtonDisable());
     }
 
     @Test
     public void whenDescriptionIsClearedAddNewTaskButtonIsDisabled() {
-        viewModel.newTaskDescriptionProperty().set(TASK_DESCRIPTION);
+        viewModel.setNewTaskDescription(TASK_DESCRIPTION);
 
-        viewModel.newTaskDescriptionProperty().set("");
+        viewModel.setNewTaskDescription("");
 
-        assertTrue(viewModel.addNewTaskButtonDisableProperty().get());
+        assertTrue(viewModel.getAddNewTaskButtonDisable());
     }
 
     @Test
     public void whenAddingNewTaskDescriptionFieldShouldClear() {
         addTask(viewModel, TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
 
-        assertEquals("", viewModel.newTaskDescriptionProperty().get());
+        assertEquals("", viewModel.getNewTaskDescription());
     }
 
     @Test
     public void whenAddingNewTaskDueDateShouldJumpBackToToday() {
         addTask(viewModel, TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
 
-        assertEquals(TODAY, viewModel.newTaskDueDateProperty().get());
+        assertEquals(TODAY, viewModel.getNewTaskDueDate());
     }
 
     @Test
     public void whenAddingNewTaskItAppearsInTheList() {
         addTask(viewModel, TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
-        TaskListCellViewModel lastTask = viewModel.getSortedTasksViewModels().get(0);
+        TaskViewModel lastTask = viewModel.getSortedTasksViewModels().get(0);
 
         assertEquals(TASK_DESCRIPTION, lastTask.getDescription());
         assertEquals(DAY_AFTER_TOMORROW_STRING, lastTask.getDueDateString());
-        assertFalse(lastTask.doneCheckboxCheckedProperty().get());
+        assertFalse(lastTask.getDoneCheckboxChecked());
     }
 
     @Test
     public void whenDeleteButtonIsPressedTaskIsDeletedFromTheList() {
         addTask(viewModel, TASK_DESCRIPTION, DAY_AFTER_TOMORROW);
 
-        TaskListCellViewModel deletedTask = viewModel.getSortedTasksViewModels().get(0);
+        TaskViewModel deletedTask = viewModel.getSortedTasksViewModels().get(0);
         viewModel.pressDeleteButton(deletedTask);
 
         assertTrue(viewModel.getSortedTasksViewModels().isEmpty());
@@ -130,8 +130,8 @@ public class TodoAppViewModelTest {
 
     private void addTask(final TodoAppViewModel viewModel, final String description,
                          final LocalDate dueDate) {
-        viewModel.newTaskDescriptionProperty().set(description);
-        viewModel.newTaskDueDateProperty().set(dueDate);
+        viewModel.setNewTaskDescription(description);
+        viewModel.setNewTaskDueDate(dueDate);
         viewModel.pressAddNewTaskButton();
     }
 }

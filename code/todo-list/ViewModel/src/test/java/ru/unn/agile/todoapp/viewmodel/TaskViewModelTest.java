@@ -8,26 +8,26 @@ import java.time.LocalDate;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class TaskListCellViewModelTest {
+public class TaskViewModelTest {
     private final Task task = new Task("Wash the car", LocalDate.now());
-    private final TaskListCellViewModel viewModel = new TaskListCellViewModel(task);
+    private final TaskViewModel viewModel = new TaskViewModel(task);
 
     @Test
     public void byDefaultDoneCheckboxIsUnchecked() {
-        assertFalse(viewModel.doneCheckboxCheckedProperty().get());
+        assertFalse(viewModel.getDoneCheckboxChecked());
     }
 
     @Test
     public void whenDoneCheckboxIsClickedTaskIsMarkedAsDone() {
         viewModel.clickIsDoneCheckBox();
 
-        assertTrue(viewModel.doneCheckboxCheckedProperty().get());
+        assertTrue(viewModel.getDoneCheckboxChecked());
     }
 
     @Test
     public void whenDoneCheckboxIsClickedItIsDisabled() {
         viewModel.clickIsDoneCheckBox();
 
-        assertTrue(viewModel.doneCheckboxDisableProperty().get());
+        assertTrue(viewModel.getDoneCheckboxDisable());
     }
 }

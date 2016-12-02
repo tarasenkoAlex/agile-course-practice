@@ -15,28 +15,47 @@ public class TodoAppViewModel {
     private final StringProperty newTaskDescription;
     private final ObjectProperty<LocalDate> newTaskDueDate;
     private final BooleanProperty addNewTaskButtonDisable;
-    private final ObservableList<TaskListCellViewModel> tasksViewModels;
-    private final SortedList<TaskListCellViewModel> sortedTasksViewModels;
+    private final ObservableList<TaskViewModel> tasksViewModels;
+    private final SortedList<TaskViewModel> sortedTasksViewModels;
 
     public TodoAppViewModel() {
         tasks = new TaskList();
         newTaskDescription = new SimpleStringProperty("");
         newTaskDueDate = new SimpleObjectProperty<>(LocalDate.now());
         addNewTaskButtonDisable = new SimpleBooleanProperty(true);
-        tasksViewModels = FXCollections.observableArrayList(TaskListCellViewModel::extractor);
+        tasksViewModels = FXCollections.observableArrayList(TaskViewModel::extractor);
         sortedTasksViewModels = new SortedList<>(tasksViewModels,
-                TaskListCellViewModel::comparator);
+                TaskViewModel::comparator);
 
-        newTaskDescription.addListener((observable, oldValue, newValue) ->
-                updateAddNewTaskButtonStatus(newValue));
+        addNewTaskButtonDisable.bind(newTaskDescription.isEmpty());
+    }
+
+    private static TaskViewModel wrapTaskInListCellViewModel(final Task task) {
+        return new TaskViewModel(task);
     }
 
     public ObjectProperty<LocalDate> newTaskDueDateProperty() {
         return newTaskDueDate;
     }
 
+    public LocalDate getNewTaskDueDate() {
+        return newTaskDueDate.get();
+    }
+
+    public void setNewTaskDueDate(final LocalDate dueDate) {
+        newTaskDueDate.set(dueDate);
+    }
+
     public StringProperty newTaskDescriptionProperty() {
         return newTaskDescription;
+    }
+
+    public String getNewTaskDescription() {
+        return newTaskDescription.get();
+    }
+
+    public void setNewTaskDescription(final String description) {
+        newTaskDescription.set(description);
     }
 
     public BooleanProperty addNewTaskButtonDisableProperty() {
@@ -47,16 +66,12 @@ public class TodoAppViewModel {
         return addNewTaskButtonDisable.get();
     }
 
-    public SortedList<TaskListCellViewModel> getSortedTasksViewModels() {
+    public SortedList<TaskViewModel> getSortedTasksViewModels() {
         return sortedTasksViewModels;
     }
 
-    List<TaskListCellViewModel> getTasksViewModels() {
+    List<TaskViewModel> getTasksViewModels() {
         return tasksViewModels;
-    }
-
-    public final void updateAddNewTaskButtonStatus(final String newTaskDescription) {
-        this.addNewTaskButtonDisable.setValue(newTaskDescription.isEmpty());
     }
 
     public void pressAddNewTaskButton() {
@@ -68,16 +83,8 @@ public class TodoAppViewModel {
         newTaskDueDate.set(LocalDate.now());
     }
 
-    public void pressDeleteButton(final TaskListCellViewModel taskListCellViewModel) {
-        int deletionIndex = tasksViewModels.indexOf(taskListCellViewModel);
-        if (deletionIndex != -1) {
-            Task rawTask = tasksViewModels.get(deletionIndex).getTask();
-            tasks.remove(rawTask);
-            tasksViewModels.remove(deletionIndex);
-        }
-    }
-
-    private TaskListCellViewModel wrapTaskInListCellViewModel(final Task task) {
-        return new TaskListCellViewModel(task);
+    public void pressDeleteButton(final TaskViewModel taskViewModel) {
+        tasks.remove(taskViewModel.getTask());
+        tasksViewModels.remove(taskViewModel);
     }
 }
