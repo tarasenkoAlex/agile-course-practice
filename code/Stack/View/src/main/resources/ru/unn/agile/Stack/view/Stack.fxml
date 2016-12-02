@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import ru.unn.agile.Stack.viewmodel.*?>
@@ -9,17 +10,18 @@
       <ViewModel fx:id="viewModel" />
    </fx:define>
    <children>
-      <Button fx:id="popbutton" layoutX="217.0" layoutY="147.0" mnemonicParsing="false" text="Pop" />
-      <Button fx:id="pushbutton" layoutX="134.0" layoutY="147.0" mnemonicParsing="false" text="Push" />
-      <Button fx:id="topbutton" layoutX="137.0" layoutY="305.0" mnemonicParsing="false" text="Top" />
+      <Button fx:id="popbutton" layoutX="249.0" layoutY="147.0" mnemonicParsing="false" text="Pop" />
+      <Button fx:id="pushbutton" layoutX="121.0" layoutY="147.0" mnemonicParsing="false" text="Push" />
+      <Button fx:id="topbutton" layoutX="490.0" layoutY="160.0" mnemonicParsing="false" text="Top" />
       <Button fx:id="printbutton" layoutX="487.0" layoutY="387.0" mnemonicParsing="false" text="Print" textAlignment="CENTER" />
       <Label layoutX="105.0" layoutY="114.0" text="Input an integer number to push..." />
-      <TextField fx:id="txtinput" layoutX="121.0" layoutY="79.0" />
-      <TextArea fx:id="txtlog" layoutX="407.0" layoutY="57.0" prefHeight="131.0" prefWidth="200.0" />
+      <TextField fx:id="txtinput" layoutX="106.0" layoutY="76.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextArea fx:id="txtlog" layoutX="106.0" layoutY="242.0" prefHeight="131.0" prefWidth="200.0" />
       <TextArea fx:id="txtprint" layoutX="407.0" layoutY="242.0" prefHeight="131.0" prefWidth="200.0" />
-      <Button fx:id="isemptybutton" layoutX="207.0" layoutY="305.0" mnemonicParsing="false" text="isEmpty" />
-      <Label layoutX="483.0" layoutY="34.0" text="Error log:" />
+      <Button fx:id="isemptybutton" layoutX="177.0" layoutY="147.0" mnemonicParsing="false" text="isEmpty" />
+      <Label layoutX="182.0" layoutY="219.0" text="Error log:" />
       <Label layoutX="492.0" layoutY="219.0" text="Stack:" />
-      <TextArea fx:id="txtmsg" layoutX="96.0" layoutY="214.0" prefHeight="76.0" prefWidth="200.0" />
+      <TextArea fx:id="txtmsg" layoutX="408.0" layoutY="76.0" prefHeight="76.0" prefWidth="200.0" />
+      <Label layoutX="474.0" layoutY="52.0" text="Top element:" />
    </children>
 </AnchorPane>

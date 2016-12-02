@@ -41,18 +41,17 @@ public class Stack {
         return array[stackPointer];
     }
 
-    public void print() {
+    public String print() {
+        String str = "";
         if (isEmpty()) {
-            System.out.print("");
+            str = "Stack is empty! Nothing to print!";
         } else if (stackPointer == 0) {
-            System.out.print(array[stackPointer]);
+            str += array[stackPointer].toString();
         } else {
-            final StringBuilder str = new StringBuilder();
             for (int i = 0; i <= stackPointer; i++) {
-                str.append(array[i] + " ");
+                str += array[i].toString() + " ";
             }
-            System.out.print(str);
         }
+        return str;
     }
-
 }

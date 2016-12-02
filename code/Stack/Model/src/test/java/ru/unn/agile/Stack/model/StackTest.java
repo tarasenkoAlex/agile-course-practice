@@ -1,10 +1,6 @@
 package ru.unn.agile.Stack.model;
 
 import org.junit.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import static org.junit.Assert.*;
 
 public class StackTest {
@@ -112,29 +108,20 @@ public class StackTest {
 
     @Test
     public void testPrint() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
         stk = new Stack();
-        stk.print();
-        assertEquals("", outContent.toString());
+        assertEquals("Stack is empty! Nothing to print!", stk.print());
         stk.push(number);
-        stk.print();
-        assertEquals(number.toString(), outContent.toString());
-        System.setOut(null);
+        assertEquals(number.toString(), stk.print());
     }
 
     @Test
     public void testPrintMultiple() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
         stk = new Stack();
-        StringBuilder str = new StringBuilder();
+        String str = "";
         for (int i = 0; i < PUSHES_MIN; i++) {
-            str.append(numbers[i] + " ");
+            str += numbers[i].toString() + " ";
             stk.push(numbers[i]);
         }
-        stk.print();
-        assertEquals(str.toString(), outContent.toString());
-        System.setOut(null);
+        assertEquals(str, stk.print());
     }
 }

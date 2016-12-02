@@ -59,11 +59,7 @@ public class Stack {
         isemptybutton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent event) {
-                try {
                     viewModel.isEmpty();
-                } catch (Exception e) {
-                    viewModel.isNotEmpty();
-                }
             }
         });
 

@@ -48,26 +48,32 @@ public class ViewModel {
     }
 
     public void pop() {
-        stk.pop();
-        txtlog.set("Stack is empty! Cannot pop!");
+        if (stk.isEmpty()) {
+            txtlog.set("Stack is empty! Cannot pop!");
+        } else {
+            stk.pop();
+        }
     }
 
     public void top() {
-        stk.top();
-        txtlog.set("Stack is empty! Cannot top!");
+        if (stk.isEmpty()) {
+            txtmsg.set("Stack is empty! Cannot top!");
+        } else {
+            txtmsg.set(stk.top().toString());
+        }
     }
 
-    public void isEmpty() {
-        stk.isEmpty();
-        txtmsg.set("Stack is empty!");
+    public boolean isEmpty() {
+        if (stk.isEmpty()) {
+            txtlog.set("Stack is empty!");
+            return true;
+        } else {
+            txtlog.set("Stack is not empty!");
+            return false;
+        }
     }
-
-    public void isNotEmpty() {
-        txtmsg.set("Stack is not empty!");
-    }
-
 
     public void print() {
-        stk.print();
+        txtprint.set(stk.print());
     }
 }

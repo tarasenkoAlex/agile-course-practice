@@ -61,8 +61,8 @@ public class ViewModelTests {
 
     @Test
     public void canPopFromEmptyStack() {
-        viewModel.pop();
-        assertEquals("Stack is empty! Cannot pop!", viewModel.txtlogProperty().get());
+        assertNull(viewModel.getStack().pop());
+        assertTrue(viewModel.isEmpty());
     }
 
     @Test
@@ -74,28 +74,28 @@ public class ViewModelTests {
 
     @Test
     public void canTopFromEmptyStack() {
-        viewModel.top();
-        assertEquals("Stack is empty! Cannot top!", viewModel.txtlogProperty().get());
+        assertNull(viewModel.getStack().top());
+        assertTrue(viewModel.isEmpty());
     }
 
     @Test
     public void testIsEmpty() {
-        viewModel.isEmpty();
-        assertEquals("Stack is empty!", viewModel.txtmsgProperty().get());
+        assertTrue(viewModel.isEmpty());
     }
 
     @Test
     public void testIsEmptyAfterPushThenPop() {
+        viewModel.txtinputProperty().set("1");
         viewModel.push();
         viewModel.pop();
-        viewModel.isEmpty();
-        assertEquals("Stack is empty!", viewModel.txtmsgProperty().get());
+        assertTrue(viewModel.isEmpty());
     }
 
     @Test
     public void testIsNotEmpty() {
-        viewModel.isNotEmpty();
-        assertEquals("Stack is not empty!", viewModel.txtmsgProperty().get());
+        viewModel.txtinputProperty().set("1");
+        viewModel.push();
+        assertFalse(viewModel.isEmpty());
     }
 
     @Test
