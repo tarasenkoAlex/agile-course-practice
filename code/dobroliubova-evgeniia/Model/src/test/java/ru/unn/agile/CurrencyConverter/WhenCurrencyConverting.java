@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  */
 public class WhenCurrencyConverting {
     private Converter converter;
-    
+
     private double delta = 0.001;
 
     @Before
