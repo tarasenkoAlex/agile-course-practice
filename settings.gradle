@@ -166,14 +166,14 @@ project(":code/Fraction/View").name = "Fraction-View"
 // Старлытов Евгений
 // Степыкин Илья
 // Тарасенко Алексей (лаб. №1), Пономарев Никита (лаб. №2)
-include "code/VolumeCalculator/Model"
-project(":code/VolumeCalculator/Model").name = "VolumeCalculator-Model"
+include "code/volumeCalculator/Model"
+project(":code/volumeCalculator/Model").name = "VolumeCalculator-Model"
 
-include "code/VolumeCalculator/view"
-project(":code/VolumeCalculator/view").name = "VolumeCalculator-View"
+include "code/volumeCalculator/view"
+project(":code/volumeCalculator/view").name = "VolumeCalculator-View"
 
-include "code/VolumeCalculator/ViewModel"
-project(":code/VolumeCalculator/ViewModel").name = "VolumeCalculator-ViewModel"
+include "code/volumeCalculator/ViewModel"
+project(":code/volumeCalculator/ViewModel").name = "VolumeCalculator-ViewModel"
 // Тропичева Дарья
 include "code/Tropicheva-Darya"
 project(":code/Tropicheva-Darya").name = "Tropicheva-Darya"
