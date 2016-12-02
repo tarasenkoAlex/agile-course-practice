@@ -169,8 +169,8 @@ project(":code/Fraction/View").name = "Fraction-View"
 include "code/volumeCalculator/Model"
 project(":code/volumeCalculator/Model").name = "VolumeCalculator-Model"
 
-include "code/volumeCalculator/view"
-project(":code/volumeCalculator/view").name = "VolumeCalculator-View"
+include "code/volumeCalculator/View"
+project(":code/volumeCalculator/View").name = "VolumeCalculator-View"
 
 include "code/volumeCalculator/ViewModel"
 project(":code/volumeCalculator/ViewModel").name = "VolumeCalculator-ViewModel"
