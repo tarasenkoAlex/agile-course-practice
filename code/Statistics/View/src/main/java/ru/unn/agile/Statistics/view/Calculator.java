@@ -183,19 +183,19 @@ public class Calculator {
         operationComboBox.setModel(new JComboBox<>(operations).getModel());
     }
 
+
     private void bind() {
         viewModel.setDelta(deltaText.getText());
         if (viewModel.isMomentOrderEnabled()) {
             viewModel.setMomentOrder(momentOrderText.getText());
         }
-
         viewModel.setOperation((Operation) operationComboBox.getSelectedItem());
     }
 
+
     private void backBindAll() {
-        computeButton.setEnabled(viewModel.isCalculateButtonEnabled());
         deltaText.setText(viewModel.getDelta());
-        backBindResult();
+        backBindResultAndStatus();
 
         momentOrderText.setEnabled(viewModel.isMomentOrderEnabled());
         if (viewModel.isMomentOrderEnabled()) {
@@ -204,23 +204,29 @@ public class Calculator {
 
         nSpinner.setValue(viewModel.getValues().length);
     }
-    private void backBindResult() {
+
+
+    private void backBindResultAndStatus() {
         resultText.setText(viewModel.getResult());
         statusText.setText(viewModel.getStatus());
+        computeButton.setEnabled(viewModel.isCalculateButtonEnabled());
     }
+
 
     private void updateAll() {
         bind();
         backBindAll();
     }
+
     private void updateStatus() {
         bind();
-        backBindResult();
+        backBindResultAndStatus();
     }
+
     private void calculate() {
         bind();
         viewModel.calculate();
-        backBindResult();
+        backBindResultAndStatus();
     }
 
     private final class RowNumberRenderer extends DefaultTableCellRenderer {
