@@ -69,11 +69,16 @@ include "code/grosheva-ludmila"
 project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
 
 // Добролюбова Евгения
-include "code/dobroliubova-evgeniia"
-project(":code/dobroliubova-evgeniia").name = "dobroliubova-evgeniia-Model"
+include "code/dobroliubova-evgeniia/Model"
+project(":code/dobroliubova-evgeniia/Model").name = "dobroliubova-evgeniia-Model"
 // Евтюшин Валерий
-include "code/Yevtyushin-Valery"
-project(":code/Yevtyushin-Valery").name = "YevtyushinValery-tdd-lab1"
+include "code/MortgageCalculator/Model"
+project(":code/MortgageCalculator/Model").name = "MortgageCalculatorModel"
+include "code/MortgageCalculator/View"
+project(":code/MortgageCalculator/View").name = "MortgageCalculatorView"
+include "code/MortgageCalculator/ViewModel"
+project(":code/MortgageCalculator/ViewModel").name = "MortgageCalculatorViewModel"
+
 // Еланов Артем
 // Зайдуллова Алина
 include "code/zaydullova-alina"
@@ -99,6 +104,8 @@ include "code/kudriavtsev-nikita"
 project(":code/kudriavtsev-nikita").name = "kudriavtsev-nikita-lab1-Model"
 
 // Кукушкин Даниил
+include "code/kukushkin-daniil"
+project(":code/kukushkin-daniil").name = "kukushkin-daniil-Model"
 // Ларин Антон
 include "code/larin-anton"
 project(":code/larin-anton").name = "larin-anton-Model"
@@ -130,11 +137,12 @@ project(":code/Redkin-Michail").name = "Redkin-Michail-Model"
 // Рыбин Валентин
 include "code/Polynomial/Model"
 project(":code/Polynomial/Model").name = "Polynomial-Model"
+include "code/Vector3D/ViewModel"
+project(":code/Vector3D/ViewModel").name = "Vector3D-ViewModel"
+include "code/Vector3D/View"
+project(":code/Vector3D/View").name = "Vector3D-View"
 
 // Рябинкин Евгений
-include "code/ryabinkin-evgeni"
-project(":code/ryabinkin-evgeni").name = "ryabinkin-evgeni-Model"
-
 // Сахаров Алексей
 // Сиротин Никита
 include "code/sirotin-nikita"
@@ -148,8 +156,12 @@ include "code/sovrasov-vlad"
 project(":code/sovrasov-vlad").name = "sovrasov-vlad"
 
 // Соловьев Дмитрий
-include "code/solovev-dmitriy"
-project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
+include "code/Fraction/Model"
+project(":code/Fraction/Model").name = "Fraction-Model"
+include "code/Fraction/ViewModel"
+project(":code/Fraction/ViewModel").name = "Fraction-ViewModel"
+include "code/Fraction/View"
+project(":code/Fraction/View").name = "Fraction-View"
 
 // Старлытов Евгений
 // Степыкин Илья
@@ -157,11 +169,20 @@ project(":code/solovev-dmitriy").name = "solovev-dmitriy-Model"
 include "code/tarasenko-alex"
 project(":code/tarasenko-alex").name = "tarasenko-alex"
 // Тропичева Дарья
-include "code/Tropicheva-Darya"
-project(":code/Tropicheva-Darya").name = "Tropicheva-Darya"
+include "code/ComplexNumberCalculator/Model"
+project(":code/ComplexNumberCalculator/Model").name = "ComplexNumberCalculator-Model"
+include "code/ComplexNumberCalculator/ViewModel"
+project(":code/ComplexNumberCalculator/ViewModel").name = "ComplexNumberCalculator-ViewModel"
+include "code/ComplexNumberCalculator/View"
+project(":code/ComplexNumberCalculator/View").name = "ComplexNumberCalculator-View"
 // Федосов Александр
-include "code/Fedosov-Alexander"
-project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
+include "code/MultisystemCalculator/Model"
+project(":code/MultisystemCalculator/Model").name = "MultiSystemCalculatorModel"
+include "code/MultisystemCalculator/ViewModel"
+project(":code/MultisystemCalculator/ViewModel").name = "MultiSystemCalculatorViewModel"
+include "code/MultisystemCalculator/View"
+project(":code/MultisystemCalculator/View").name = "MultiSystemCalculatorView"
+
 
 // Цыганов Алексей
 // Чугунов Евгений
@@ -170,11 +191,17 @@ project(":code/Fedosov-Alexander").name = "Fedosov-Alexander-Model"
 // Ширяева Вера
 include "code/shiryaeva-vera"
 project(":code/shiryaeva-vera").name = "shiryaeva-vera-Model"
+include "code/MassConverter/Model"
+project(":code/MassConverter/Model").name = "shiryaeva-vera-lab2-Model"
+include "code/MassConverter/ViewModel"
+project(":code/MassConverter/ViewModel").name = "shiryaeva-vera-lab2-ViewModel"
+include "code/MassConverter/View"
+project(":code/MassConverter/View").name = "shiryaeva-vera-lab2-View"
 
 // Шишкин Владислав
 // Шочин Александр
-include "code/shochin-alexandr"
-project(":code/shochin-alexandr").name = "shochin-alexandr-Model"
+include "code/Vector3D/Model"
+project(":code/Vector3D/Model").name = "Vector3D-Model"
 include "code/Polynomial/View"
 project(":code/Polynomial/View").name = "Polynomial-View"
 include "code/Polynomial/ViewModel"
