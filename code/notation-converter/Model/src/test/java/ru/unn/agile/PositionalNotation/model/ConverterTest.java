@@ -1,8 +1,6 @@
 package ru.unn.agile.PositionalNotation.model;
 
 import org.junit.Test;
-import ru.unn.agile.PositionalNotation.model.Converter;
-import ru.unn.agile.PositionalNotation.model.Notations;
 
 import static org.junit.Assert.*;
 

@@ -1,7 +1,6 @@
 package ru.unn.agile.PositionalNotation.model;
 
 import org.junit.Test;
-import ru.unn.agile.PositionalNotation.model.Validator;
 
 public class ValidatorTest {
     @Test(expected = IllegalArgumentException.class)
