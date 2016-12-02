@@ -25,6 +25,19 @@ public class MatrixOperationsTest {
     private final float[] addData = {4.0f, 7.0f, 4.3f, 3.3f, 5.7f, 2.4f};
 
     @Test
+    public void testToStringForDefaultMatrix() {
+        Matrix m = new Matrix(1, 1);
+        assertEquals("{0.0}", m.toString());
+    }
+
+    @Test
+    public void testToStringForNonDefaultMatrix() {
+        float[] data = {3.5f};
+        Matrix m = new Matrix(1, 1, data);
+        assertEquals("{3.5}", m.toString());
+    }
+
+    @Test
     public void testNegativeRowsCount() {
         doTestInvalidSizeMatrix(-1, 1);
     }

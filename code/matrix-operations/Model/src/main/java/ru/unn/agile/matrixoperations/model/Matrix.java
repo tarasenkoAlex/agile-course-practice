@@ -144,14 +144,21 @@ public class Matrix {
 
     @Override
     public String toString() {
-        String arrayText = "";
-        if (this.rows > 0 && this.columns > 0) {
-            for (int elementNumber = 0; elementNumber < elements.length; elementNumber++) {
-                arrayText += Float.toString(elements[elementNumber]) + ",";
+        StringBuilder bld = new StringBuilder();
+        bld.append("{");
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                bld.append(elements[r * columns + c]);
+                if (c < columns - 1) {
+                    bld.append(",");
+                }
             }
-            return arrayText;
+            if (r < rows - 1) {
+                bld.append(", ");
+            }
         }
-        return null;
+        bld.append("}");
+        return bld.toString();
     }
 
     private void privateCopyData(final int rows, final int columns, final float[] data) {
