@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
@@ -22,6 +23,9 @@ public class AddAccountController implements Initializable {
 
     @FXML
     private TextField balanceField;
+
+    @FXML
+    private Button addButton;
 
     public void handleAddButton(final ActionEvent actionEvent) {
         account.save();
@@ -46,5 +50,8 @@ public class AddAccountController implements Initializable {
                 balanceField.textProperty(),
                 account.balanceProperty(),
                 new CurrencyStringConverter());
+
+        /* account.isAbleToSave -> addButton.disabled */
+        addButton.disableProperty().bind(account.isAbleToSaveProperty().not());
     }
 }

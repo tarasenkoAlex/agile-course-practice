@@ -26,6 +26,7 @@ public class AccountViewModel extends SavableObject {
     public AccountViewModel(final LedgerViewModel parentLedger) {
         Objects.requireNonNull(parentLedger);
         this.parentLedger = parentLedger;
+        setUpBindings();
         setName(DEFAULT_ACCOUNT_NAME);
         setBalance(DEFAULT_ACCOUNT_BALANCE);
     }
@@ -124,5 +125,14 @@ public class AccountViewModel extends SavableObject {
     private void registerTransferAsOutcoming(final TransferViewModel transfer) {
         transfer.setIsIncome(false);
         registerTransaction(transfer);
+    }
+
+    private void setUpBindings() {
+        nameProperty.addListener((observable, oldValue, newValue) -> {
+            String newAccountName = newValue.trim();
+            boolean isAccountNameUnique = !parentLedger.isAccountNameExists(newAccountName);
+            setIsAbleToSave(isAccountNameUnique);
+        });
+
     }
 }

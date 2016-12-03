@@ -85,6 +85,11 @@ public class LedgerViewModel {
         accountFrom.addTransfer(transferViewModel);
     }
 
+    boolean isAccountNameExists(final String accountName) {
+        return getAccounts().stream().anyMatch(account ->
+                account.getName().equals(accountName));
+    }
+
     private void setUpBindings() {
         ReadOnlyIntegerProperty accountsSizeProperties = accountsProperty.sizeProperty();
         canAddTransferProperty.bind(accountsSizeProperties.greaterThan(1));
