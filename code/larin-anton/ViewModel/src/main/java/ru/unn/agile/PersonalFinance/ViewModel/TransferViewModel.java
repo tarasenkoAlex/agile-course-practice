@@ -1,5 +1,6 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -14,6 +15,7 @@ public class TransferViewModel extends TransactionViewModel {
 
     public TransferViewModel(final LedgerViewModel parentLedger) {
         this.parentLedger = parentLedger;
+        setUpBindings();
     }
 
     // region Properties for Binding
@@ -56,5 +58,23 @@ public class TransferViewModel extends TransactionViewModel {
         other.setAccountFrom(getAccountFrom());
         other.setAccountTo(getAccountTo());
         return other;
+    }
+
+    private void setUpBindings() {
+        BooleanBinding accountsNotNull =
+                accountFromProperty.isNotNull().and(
+                accountToProperty.isNotNull());
+
+        BooleanBinding accountsNotEqual =
+                accountFromProperty.isNotEqualTo(
+                accountToProperty);
+
+        BooleanBinding isAmountPositive =
+                amountProperty.greaterThan(0);
+
+        isAbleToSaveProperty.bind(
+                accountsNotNull.and(
+                accountsNotEqual).and(
+                isAmountPositive));
     }
 }

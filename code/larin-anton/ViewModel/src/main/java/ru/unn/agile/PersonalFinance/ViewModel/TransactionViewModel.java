@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public abstract class TransactionViewModel extends SavableObject {
     private static final int DEFAULT_AMOUNT = 100;
 
-    private final IntegerProperty amountProperty = new SimpleIntegerProperty();
+    protected final IntegerProperty amountProperty = new SimpleIntegerProperty();
     private final BooleanProperty isIncomeProperty = new SimpleBooleanProperty();
     private final ObjectProperty<LocalDate> dateProperty =
             new SimpleObjectProperty<>();

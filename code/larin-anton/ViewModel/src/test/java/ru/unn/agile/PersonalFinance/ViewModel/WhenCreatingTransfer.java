@@ -14,6 +14,10 @@ public class WhenCreatingTransfer {
     public void setUp() throws Exception {
         ledger = new LedgerViewModel();
         transfer = new TransferViewModel(ledger);
+
+        transfer.setAccountFrom(new AccountViewModel(ledger));
+        transfer.setAccountTo(new AccountViewModel(ledger));
+        transfer.setAmount(1000);
     }
 
     @Test
