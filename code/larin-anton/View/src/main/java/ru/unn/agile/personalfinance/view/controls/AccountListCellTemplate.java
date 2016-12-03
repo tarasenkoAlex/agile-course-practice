@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
+import ru.unn.agile.personalfinance.view.utils.FXMLHelper;
 
 class AccountListCellTemplate {
     @FXML

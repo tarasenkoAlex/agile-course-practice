@@ -1,6 +1,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import ru.unn.agile.personalfinance.view.ViewModelSource?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <GridPane fx:controller="ru.unn.agile.personalfinance.view.controllers.AddTransferController"
           xmlns:fx="http://javafx.com/fxml">
     <fx:define>
@@ -8,15 +10,15 @@
     </fx:define>
     <VBox>
         <HBox>
-            <ComboBox fx:id="accountFromComboBox" items="${vmSource.model.accounts}" />
-            <ComboBox fx:id="accountToComboBox" items="${vmSource.model.accounts}" />
+            <JFXComboBox fx:id="accountFromComboBox" items="${vmSource.model.accounts}" />
+            <JFXComboBox fx:id="accountToComboBox" items="${vmSource.model.accounts}" />
         </HBox>
         <TextField fx:id="amountField" />
         <HBox>
-            <Button fx:id="addButton" GridPane.rowIndex="1" GridPane.columnIndex="0" text="Add"
-                    onAction="#handleAddButtonAction" />
-            <Button GridPane.rowIndex="1" GridPane.columnIndex="1" text="Cancel"
-                    onAction="#handleCancelButtonAction" />
+            <JFXButton fx:id="addButton" GridPane.rowIndex="1" GridPane.columnIndex="0" text="Add"
+                       onAction="#handleAddButtonAction" />
+            <JFXButton GridPane.rowIndex="1" GridPane.columnIndex="1" text="Cancel"
+                       onAction="#handleCancelButtonAction" />
         </HBox>
     </VBox>
 </GridPane>

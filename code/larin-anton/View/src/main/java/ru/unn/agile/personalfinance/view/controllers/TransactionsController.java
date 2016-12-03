@@ -1,12 +1,14 @@
 package ru.unn.agile.personalfinance.view.controllers;
 
+import com.jfoenix.controls.JFXListView;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
@@ -20,10 +22,10 @@ import java.util.ResourceBundle;
 
 public class TransactionsController implements Initializable {
     @FXML
-    private ListView<TransactionViewModel> transactionsList;
+    private JFXListView<TransactionViewModel> transactionsList;
 
     @FXML
-    private ListView<AccountViewModel> accountsList;
+    private JFXListView<AccountViewModel> accountsList;
 
     @FXML
     private Button addTransferButton;
@@ -54,16 +56,28 @@ public class TransactionsController implements Initializable {
         transactionsList.setCellFactory(listView -> new TransactionListCell());
     }
 
-    private void setUpBindings(final LedgerViewModel ledgerVM) {
-        /* accountsList.selectedItem -> ledgerVM.selectedAccount */
+    private void setUpBindings(final LedgerViewModel ledger) {
+        /* accountsList.selectedItem -> ledger.selectedAccount */
         ReadOnlyObjectProperty<AccountViewModel> selectedItemProperty =
                 accountsList.getSelectionModel().selectedItemProperty();
-        ledgerVM.selectedAccountProperty().bind(selectedItemProperty);
+        ledger.selectedAccountProperty().bind(selectedItemProperty);
 
-        /* ledgerVM.canAddTransaction -> addTransactionButton.disabled */
-        addTransactionButton.disableProperty().bind(ledgerVM.canAddTransactionProperty().not());
+        /* ledger.canAddTransaction -> addTransactionButton.disabled */
+        addTransactionButton.disableProperty().bind(ledger.canAddTransactionProperty().not());
 
-        /* ledgerVM.canAddTransfer-> addTransferButton.disabled */
-        addTransferButton.disableProperty().bind(ledgerVM.canAddTransferProperty().not());
+        /* ledger.canAddTransfer-> addTransferButton.disabled */
+        addTransferButton.disableProperty().bind(ledger.canAddTransferProperty().not());
+
+        /* ledger.accounts -> accountsList.items */
+        accountsList.itemsProperty().bind(ledger.accountsProperty());
+
+        /* ledger.selected.transactions -> transactionsList.items */
+        ledger.selectedAccountProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                transactionsList.itemsProperty().bind(newValue.transactionsProperty());
+            } else {
+                transactionsList.itemsProperty().unbind();
+            }
+        });
     }
 }

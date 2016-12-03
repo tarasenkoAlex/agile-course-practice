@@ -3,6 +3,7 @@ apply from:   rootDir.getAbsolutePath() + '/code/config/scripts/javafx.plugin'
 dependencies {
     compile project(':larin-anton-ViewModel')
     compile group: 'com.cathive.fonts', name: 'fonts-fontawesome', version: '3.2.1.0'
+    compile 'com.jfoenix:jfoenix:1.0.0'
 }
 
 sourceSets {

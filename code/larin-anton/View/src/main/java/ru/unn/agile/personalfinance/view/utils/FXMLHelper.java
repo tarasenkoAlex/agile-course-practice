@@ -1,11 +1,11 @@
-package ru.unn.agile.personalfinance.view.controls;
+package ru.unn.agile.personalfinance.view.utils;
 
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 import java.net.URL;
 
-final class FXMLHelper {
+public final class FXMLHelper {
     public static <T> void load(final T controller, final String fxmlResourceName) {
         URL fxmlUrl = controller.getClass().getResource(fxmlResourceName);
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);

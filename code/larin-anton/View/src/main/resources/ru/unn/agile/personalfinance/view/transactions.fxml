@@ -1,7 +1,8 @@
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import ru.unn.agile.personalfinance.view.ViewModelSource?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="ru.unn.agile.personalfinance.view.controllers.TransactionsController">
     <fx:define>
@@ -13,8 +14,7 @@
                 <RowConstraints vgrow="ALWAYS" />
                 <RowConstraints vgrow="NEVER" />
             </rowConstraints>
-            <ListView fx:id="accountsList" GridPane.rowIndex="0"
-                      items="${vmSource.model.accounts}" />
+            <JFXListView fx:id="accountsList" GridPane.rowIndex="0" />
             <HBox GridPane.rowIndex="1" GridPane.halignment="CENTER">
                 <GridPane.margin>
                     <Insets>
@@ -22,8 +22,8 @@
                         <bottom>5</bottom>
                     </Insets>
                 </GridPane.margin>
-                <Button onAction="#handleAddAccountAction" text="Add account" />
-                <Button fx:id="addTransferButton" onAction="#handleAddTransferAction"
+                <JFXButton onAction="#handleAddAccountAction" text="Add account" />
+                <JFXButton fx:id="addTransferButton" onAction="#handleAddTransferAction"
                         text="Add transfer" />
             </HBox>
         </GridPane>
@@ -37,9 +37,8 @@
                 <RowConstraints vgrow="ALWAYS" />
                 <RowConstraints vgrow="NEVER" />
             </rowConstraints>
-            <ListView fx:id="transactionsList" GridPane.rowIndex="0"
-                      items="${vmSource.model.selectedAccount.transactions}" />
-            <Button fx:id="addTransactionButton" onAction="#handleAddTransactionAction"
+            <JFXListView fx:id="transactionsList" GridPane.rowIndex="0" />
+            <JFXButton fx:id="addTransactionButton" onAction="#handleAddTransactionAction"
                     GridPane.rowIndex="1" GridPane.halignment="CENTER" text="Add transaction">
                 <GridPane.margin>
                     <Insets>
@@ -47,7 +46,7 @@
                         <bottom>5</bottom>
                     </Insets>
                 </GridPane.margin>
-            </Button>
+            </JFXButton>
         </GridPane>
     </center>
 </BorderPane>

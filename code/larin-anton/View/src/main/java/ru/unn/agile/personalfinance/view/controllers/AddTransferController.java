@@ -1,5 +1,6 @@
 package ru.unn.agile.personalfinance.view.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.event.ActionEvent;
@@ -8,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.util.StringConverter;
 import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
@@ -15,6 +17,7 @@ import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
 import ru.unn.agile.personalfinance.view.ViewModelService;
 import ru.unn.agile.personalfinance.view.WindowsManager;
 import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
+import ru.unn.agile.personalfinance.view.utils.Converters;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,10 +30,10 @@ public class AddTransferController implements Initializable {
             new StringListCellFactory<>(account -> account.getName());
 
     @FXML
-    private ComboBox<AccountViewModel> accountFromComboBox;
+    private JFXComboBox<AccountViewModel> accountFromComboBox;
 
     @FXML
-    private ComboBox<AccountViewModel> accountToComboBox;
+    private JFXComboBox<AccountViewModel> accountToComboBox;
 
     @FXML
     private TextField amountField;
@@ -80,7 +83,7 @@ public class AddTransferController implements Initializable {
     private void setUpAccountComboBox(final ComboBox<AccountViewModel> comboBox,
                                       final int selectedIndex) {
         comboBox.setCellFactory(accountListCellFactory);
-        comboBox.setButtonCell(accountListCellFactory.call(null));
+        comboBox.setConverter(Converters.getAccountToStringConverter());
         comboBox.getSelectionModel().select(selectedIndex);
     }
 }

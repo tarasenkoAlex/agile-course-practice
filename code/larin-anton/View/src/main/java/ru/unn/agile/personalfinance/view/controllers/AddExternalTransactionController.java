@@ -14,6 +14,7 @@ import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.personalfinance.view.ViewModelService;
 import ru.unn.agile.personalfinance.view.WindowsManager;
 import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
+import ru.unn.agile.personalfinance.view.utils.Converters;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -57,7 +58,7 @@ public class AddExternalTransactionController implements Initializable {
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         categoryComboBox.setCellFactory(categoryListCellFactory);
-        categoryComboBox.setButtonCell(categoryListCellFactory.call(null));
+        categoryComboBox.setConverter(Converters.getCategoryToStringConverter());
         categoryComboBox.getSelectionModel().selectFirst();
 
         setUpBindings(ViewModelService.getViewModel());
