@@ -1,4 +1,4 @@
-package ru.unn.agile.NewtonRoots.View;
+package ru.unn.agile.NewtonRoots.view;
 
 import org.junit.Ignore;
 import org.junit.Test;
