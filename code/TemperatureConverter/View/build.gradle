@@ -1,5 +1,5 @@
 dependencies {
-    compile project(':kudriavtsev-nikita-lab2-ViewModel')
+    compile project(':Temperature-Converter-ViewModel')
 }
 
 sourceSets {

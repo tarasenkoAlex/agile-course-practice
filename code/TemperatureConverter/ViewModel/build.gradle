@@ -1,5 +1,5 @@
 dependencies {
-    compile project(':kudriavtsev-nikita-lab2-Model')
+    compile project(':Temperature-Converter-Model')
 }
 
 sourceSets {
