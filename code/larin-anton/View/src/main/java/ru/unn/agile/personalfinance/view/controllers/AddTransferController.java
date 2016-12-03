@@ -5,6 +5,7 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.util.converter.CurrencyStringConverter;
@@ -33,6 +34,9 @@ public class AddTransferController implements Initializable {
 
     @FXML
     private TextField amountField;
+
+    @FXML
+    public Button addButton;
 
     @FXML
     protected void handleAddButtonAction(final ActionEvent actionEvent) {
@@ -68,6 +72,9 @@ public class AddTransferController implements Initializable {
         ReadOnlyObjectProperty<AccountViewModel> selectedAccountToProperty =
                 accountToComboBox.getSelectionModel().selectedItemProperty();
         transfer.accountToProperty().bind(selectedAccountToProperty);
+
+        /* transfer.isAbleToSave -> addButton.disabled */
+        addButton.disableProperty().bind(transfer.isAbleToSaveProperty().not());
     }
 
     private void setUpAccountComboBox(final ComboBox<AccountViewModel> comboBox,
