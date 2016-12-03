@@ -1,5 +1,5 @@
-.window-root {
-    -fx-background: white;
+.root {
+    -fx-background-color: white;
 }
 
 .list-view,
@@ -36,3 +36,9 @@
 .add-button-node {
     -fx-padding: 20 0 0 -20;
 }
+
+.button-raised {
+     -fx-button-type: RAISED;
+     -fx-background-color: #71c4f7;
+     -fx-text-fill: WHITE;
+ }

@@ -16,7 +16,7 @@ public class TransactionListCell extends JFXListCell<TransactionViewModel> {
             setGraphic(null);
         } else {
             // NOTE: Do not create new object here
-            Node rootNode = null;
+            Node rootNode;
             if (item instanceof ExternalTransactionViewModel) {
                 ExternalTransactionViewModel transaction = (ExternalTransactionViewModel) item;
                 ExternalTransactionListCellTemplate transactionTemplate =
