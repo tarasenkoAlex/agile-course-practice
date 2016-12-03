@@ -49,7 +49,7 @@ public class WhenCreatingExternalTransaction {
     }
 
     @Test
-    public void andItCanNotBeSavedIfAmountIsPositive() throws Exception {
+    public void andItCanBeSavedIfAmountIsPositive() throws Exception {
         transaction.setAmount(100);
 
         assertTrue(transaction.getIsIsAbleToSave());
