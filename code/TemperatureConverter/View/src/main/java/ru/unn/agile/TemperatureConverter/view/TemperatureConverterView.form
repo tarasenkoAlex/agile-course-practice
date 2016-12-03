@@ -50,7 +50,7 @@
                       </model>
                     </properties>
                   </component>
-                  <component id="bbec8" class="javax.swing.JTextField" binding="secondValue" default-binding="true">
+                  <component id="f18b0" class="javax.swing.JTextField" binding="firstTextField">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="2" fill="0" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -83,7 +83,7 @@
                       </model>
                     </properties>
                   </component>
-                  <component id="f87c4" class="javax.swing.JTextField" binding="firstValue" default-binding="true">
+                  <component id="7ec3d" class="javax.swing.JTextField" binding="secondTextField">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="2" fill="0" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>

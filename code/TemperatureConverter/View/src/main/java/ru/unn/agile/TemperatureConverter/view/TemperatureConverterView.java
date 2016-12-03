@@ -9,8 +9,8 @@ import java.awt.event.ActionListener;
 public final class TemperatureConverterView {
     private TemperatureConverterViewModel tempConverterViewModel;
     private JPanel mainPanel;
-    private JTextField firstValue;
-    private JTextField secondValue;
+    private JTextField firstTextField;
+    private JTextField secondTextField;
     private JComboBox firstComboBoxScales;
     private JComboBox secondComboBoxScales;
     private JLabel warningLabel;
@@ -24,19 +24,19 @@ public final class TemperatureConverterView {
         tempConverterViewModel.setFirstScale((String) firstComboBoxScales.getSelectedItem());
         tempConverterViewModel.setSecondScale((String) secondComboBoxScales.getSelectedItem());
 
-        firstValue.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent actionEvent) {
-                bindSecondValue();
-                backBindFirstValue();
-            }
-        });
-
-        secondValue.addActionListener(new ActionListener() {
+        firstTextField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent actionEvent) {
                 bindFirstValue();
                 backBindSecondValue();
+            }
+        });
+
+        secondTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent actionEvent) {
+                bindSecondValue();
+                backBindFirstValue();
             }
         });
 
@@ -69,20 +69,20 @@ public final class TemperatureConverterView {
     }
 
     private void bindFirstValue() {
-        tempConverterViewModel.setFirstValue(secondValue.getText());
+        tempConverterViewModel.setFirstValue(firstTextField.getText());
     }
 
     private void backBindSecondValue() {
-        firstValue.setText(tempConverterViewModel.getSecondValue());
+        secondTextField.setText(tempConverterViewModel.getSecondValue());
         warningLabel.setText(tempConverterViewModel.getWarningLabelText());
     }
 
     private void bindSecondValue() {
-        tempConverterViewModel.setSecondValue(firstValue.getText());
+        tempConverterViewModel.setSecondValue(secondTextField.getText());
     }
 
     private void backBindFirstValue() {
-        secondValue.setText(tempConverterViewModel.getFirstValue());
+        firstTextField.setText(tempConverterViewModel.getFirstValue());
         warningLabel.setText(tempConverterViewModel.getWarningLabelText());
     }
 

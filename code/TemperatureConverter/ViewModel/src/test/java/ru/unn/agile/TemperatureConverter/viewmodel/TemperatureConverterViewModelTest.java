@@ -27,21 +27,21 @@ public class TemperatureConverterViewModelTest {
     }
 
     @Test
-    public void canSetValuesFromTextFirstField() {
+    public void canSetValueInFirstTemperatureValueField() {
         viewModel.setFirstValue("10");
 
         assertEquals("10", viewModel.getFirstValue());
     }
 
     @Test
-    public void canSetValuesFromTextSecondField() {
+    public void canSetValueInSecondTemperatureValueField() {
         viewModel.setSecondValue("af");
 
         assertEquals("af", viewModel.getSecondValue());
     }
 
     @Test
-    public void canSetDefaultValueOfTemperatureScalesFields() {
+    public void canSetDefaultValuesOfTemperatureScalesFields() {
         assertEquals(TemperatureScale.CELSIUS, viewModel.getFirstScale());
         assertEquals(TemperatureScale.CELSIUS, viewModel.getSecondScale());
     }
@@ -56,7 +56,7 @@ public class TemperatureConverterViewModelTest {
     }
 
     @Test
-    public void canSetDefaultValueToScaleFieldsWhenInputValueIsIncorrect() {
+    public void canSetDefaultValueInTemperatureScaleFieldsWhenInputValueScaleIsIncorrect() {
         viewModel.setFirstScale("AD");
         viewModel.setSecondScale("1R");
 
@@ -65,7 +65,7 @@ public class TemperatureConverterViewModelTest {
     }
 
     @Test
-    public void canCorrectlyConvertTemperatureValuesWhenInputFirstValueAndScalesIsEqual() {
+    public void canCorrectlyConvertTemperatureValuesWhenSetFirstValueAndScalesAreEqual() {
         viewModel.setFirstScale("CELSIUS");
         viewModel.setSecondScale("CELSIUS");
         viewModel.setFirstValue("0");
@@ -74,7 +74,7 @@ public class TemperatureConverterViewModelTest {
     }
 
     @Test
-    public void canCorrectlyConvertTemperatureValuesWhenInputSecondValueAndScalesIsEqual() {
+    public void canCorrectlyConvertTemperatureValuesWhenSetSecondValueAndScalesAreEqual() {
         viewModel.setFirstScale("CELSIUS");
         viewModel.setSecondScale("CELSIUS");
         viewModel.setSecondValue("0");
@@ -83,7 +83,7 @@ public class TemperatureConverterViewModelTest {
     }
 
     @Test
-    public void canCorrectlyConvertTemperatureValuesWhenInputFirstValueAndScalesIsDiferent() {
+    public void canCorrectlyConvertTemperatureValuesWhenSetFirstValueAndScalesAreDiferent() {
         viewModel.setFirstScale("CELSIUS");
         viewModel.setSecondScale("FAHRENHEIT");
         viewModel.setFirstValue("0");
@@ -92,7 +92,7 @@ public class TemperatureConverterViewModelTest {
     }
 
     @Test
-    public void canCorrectlyConvertTemperatureValuesWhenInputSecondValueAndScalesIsDiferent() {
+    public void canCorrectlyConvertTemperatureValuesWhenSetSecondValueAndScalesAreDiferent() {
         viewModel.setFirstScale("KELVIN");
         viewModel.setSecondScale("CELSIUS");
         viewModel.setFirstValue("0");
@@ -101,7 +101,7 @@ public class TemperatureConverterViewModelTest {
     }
 
     @Test
-    public void canSetWarningAndEmptyStringToSecondValueWhenInputIsIncorrect() {
+    public void canSetWarningMessageAndEmptyStringInSecondValueWhenInputIsIncorrect() {
         viewModel.setFirstValue("a");
 
         assertEquals("We wrote incorrect value of temperature!", viewModel.getWarningLabelText());
@@ -109,7 +109,7 @@ public class TemperatureConverterViewModelTest {
     }
 
     @Test
-    public void canSetWarningAndEmptyStringToSecondValueWhenInputIsLowerThanAbsoluteZero() {
+    public void canSetWarningMessageAndEmptyStringInSecondValueWhenInputValueIsLowerThanAbsoluteZero() {
         viewModel.setSecondScale("KELVIN");
         viewModel.setFirstScale("FAHRENHEIT");
         viewModel.setFirstValue("-300");
@@ -119,7 +119,7 @@ public class TemperatureConverterViewModelTest {
     }
 
     @Test
-    public void canSetEmptyStringToWarningLabelWhenUserWritedCorrectValue() {
+    public void canSetEmptyStringInWarningLabelWhenUserWritedCorrectInputValue() {
         viewModel.setSecondScale("KELVIN");
         viewModel.setFirstScale("FAHRENHEIT");
         viewModel.setFirstValue("as");
