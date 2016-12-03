@@ -26,9 +26,9 @@ class ExternalTransactionListCellTemplate {
 
     private void loadFxml(final ExternalTransactionViewModel transaction) {
         if (transaction.getIsIncome()) {
-            FXMLHelper.load(this, "transaction-list-cell-income.fxml");
+            FXMLHelper.applyTemplate(this, "transaction-list-cell-income.fxml");
         } else {
-            FXMLHelper.load(this, "transaction-list-cell-expense.fxml");
+            FXMLHelper.applyTemplate(this, "transaction-list-cell-expense.fxml");
         }
     }
 

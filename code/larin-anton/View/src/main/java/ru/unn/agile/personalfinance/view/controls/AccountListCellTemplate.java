@@ -20,7 +20,7 @@ class AccountListCellTemplate {
     private GridPane root;
 
     AccountListCellTemplate(final AccountViewModel account) {
-        FXMLHelper.load(this, "account-list-cell.fxml");
+        FXMLHelper.applyTemplate(this, "account-list-cell.fxml");
         setUpBindings(account);
     }
 

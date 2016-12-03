@@ -1,8 +1,8 @@
 package ru.unn.agile.personalfinance.view.controls;
 
 import com.jfoenix.controls.JFXListCell;
+import javafx.scene.Node;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.ListCell;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 
 public class AccountListCell extends JFXListCell<AccountViewModel> {
@@ -17,8 +17,11 @@ public class AccountListCell extends JFXListCell<AccountViewModel> {
             setText(null);
             setGraphic(null);
         } else {
-            AccountListCellTemplate view = new AccountListCellTemplate(item);
-            setGraphic(view.getRootNode());
+            // NOTE: Do not create new object!
+            AccountListCellTemplate template = new AccountListCellTemplate(item);
+            Node rootNode = template.getRootNode();
+            rootNode.setMouseTransparent(true);
+            setGraphic(rootNode);
         }
     }
 }

@@ -1,10 +1,10 @@
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import ru.unn.agile.personalfinance.view.ViewModelSource?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<GridPane fx:controller="ru.unn.agile.personalfinance.view.controllers.AddTransferController"
-          xmlns:fx="http://javafx.com/fxml">
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<?import ru.unn.agile.personalfinance.view.ViewModelSource?>
+<GridPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
+          fx:controller="ru.unn.agile.personalfinance.view.controllers.AddTransferController">
     <fx:define>
         <ViewModelSource fx:id="vmSource" />
     </fx:define>

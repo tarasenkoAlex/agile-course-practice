@@ -30,9 +30,9 @@ class TransferListCellTemplate {
 
     private void loadFxml(final TransferViewModel transfer) {
         if (transfer.getIsIncome()) {
-            FXMLHelper.load(this, "transfer-list-cell-income.fxml");
+            FXMLHelper.applyTemplate(this, "transfer-list-cell-income.fxml");
         } else {
-            FXMLHelper.load(this, "transfer-list-cell-outcome.fxml");
+            FXMLHelper.applyTemplate(this, "transfer-list-cell-outcome.fxml");
         }
     }
 

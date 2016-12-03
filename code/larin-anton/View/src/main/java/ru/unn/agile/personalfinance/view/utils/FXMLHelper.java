@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public final class FXMLHelper {
-    public static <T> void load(final T controller, final String fxmlResourceName) {
+    public static <T> void applyTemplate(final T controller, final String fxmlResourceName) {
         URL fxmlUrl = controller.getClass().getResource(fxmlResourceName);
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
         fxmlLoader.setController(controller);
