@@ -1,0 +1,31 @@
+#deleteTaskButton {
+    -fx-background-color: darkgray;
+}
+
+#deleteTaskButton:hover {
+    -fx-background-color: tomato;
+}
+
+#taskDescription:task-done .text {
+    -fx-strikethrough: true;
+}
+
+#taskDescription:task-done {
+    -fx-text-fill: gray;
+}
+
+#taskDueDate:task-done {
+    -fx-text-fill: gray;
+}
+
+.list-cell:odd:empty {
+    -fx-background-color: white;
+}
+
+.list-cell:selected:filled:even {
+    -fx-background-color: white;
+}
+
+.list-cell:selected:filled:odd {
+    -fx-background-color: derive(derive(#ececec, 80%), -2%);
+}
