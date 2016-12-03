@@ -122,8 +122,12 @@ include "code/kudriavtsev-nikita"
 project(":code/kudriavtsev-nikita").name = "kudriavtsev-nikita-lab1-Model"
 
 // Кукушкин Даниил
-include "code/newton-method"
-project(":code/newton-method").name = "newton-method-Model"
+include "code/newton-method/Model"
+project(":code/newton-method/Model").name = "newton-method-Model"
+include "code/newton-method/View"
+project(":code/newton-method/View").name = "newton-method-View"
+include "code/newton-method/ViewModel"
+project(":code/newton-method/ViewModel").name = "newton-method-Viewmodel"
 // Ларин Антон
 include "code/larin-anton"
 project(":code/larin-anton").name = "larin-anton-Model"
