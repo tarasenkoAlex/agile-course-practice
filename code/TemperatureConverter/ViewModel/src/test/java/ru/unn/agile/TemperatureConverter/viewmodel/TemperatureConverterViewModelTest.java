@@ -101,20 +101,39 @@ public class TemperatureConverterViewModelTest {
     }
 
     @Test
-    public void canSetWarningMessageAndEmptyStringInSecondValueWhenInputIsIncorrect() {
-        viewModel.setFirstValue("a");
-
-        assertEquals("We wrote incorrect value of temperature!", viewModel.getWarningLabelText());
-        assertEquals("", viewModel.getSecondValue());
+    public void setDefaultValuesOfWarningLabelField() {
+        assertEquals("", viewModel.getWarningLabelText());
     }
 
     @Test
-    public void canSetWarningMessageAndEmptyStringInSecondValueWhenInputValueIsLowerThanAbsoluteZero() {
+    public void canSetWarningMessageWhenInputIsIncorrect() {
+        viewModel.setFirstValue("a");
+
+        assertEquals("We wrote incorrect value of temperature!", viewModel.getWarningLabelText());
+    }
+
+    @Test
+    public void canSetWarningMessageWhenInputValueIsLowerThanAbsoluteZero() {
         viewModel.setSecondScale("KELVIN");
         viewModel.setFirstScale("FAHRENHEIT");
         viewModel.setFirstValue("-300");
 
         assertEquals("We wrote incorrect value of temperature!", viewModel.getWarningLabelText());
+    }
+
+    @Test
+    public void canSetEmptyStringInSecondValueWhenInputIsIncorrect() {
+        viewModel.setFirstValue("a");
+
+        assertEquals("", viewModel.getSecondValue());
+    }
+
+    @Test
+    public void canEmptyStringInSecondValueWhenInputValueIsLowerThanAbsoluteZero() {
+        viewModel.setSecondScale("KELVIN");
+        viewModel.setFirstScale("FAHRENHEIT");
+        viewModel.setFirstValue("-300");
+
         assertEquals("", viewModel.getSecondValue());
     }
 
