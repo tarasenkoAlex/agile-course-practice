@@ -15,7 +15,7 @@ public class NewtonRootsTests {
     @Test
     public void findRootIfExistInIntervalWithFunctionModuleStopping() {
         newtonMethod.setStoppingCriterion(NewtonMethod.StoppingCriterion.FunctionModule);
-        FunctionInterface func = (x) -> (x - 1);
+        FunctionInterface func = x -> x - 1;
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
 
@@ -26,7 +26,7 @@ public class NewtonRootsTests {
     public void findRootIfExistInIntervalWithDifferenceBetweenApproxStopping() {
         newtonMethod.setStoppingCriterion(
                 NewtonMethod.StoppingCriterion.DifferenceBetweenApproximates);
-        FunctionInterface func = (x) -> (x - 1);
+        FunctionInterface func = x -> x - 1;
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
 
@@ -35,7 +35,7 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootOnTheLeftBorder() {
-        FunctionInterface func = (x) -> (x);
+        FunctionInterface func = x -> x;
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
 
@@ -44,7 +44,7 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootOnTheRightBorder() {
-        FunctionInterface func = (x) -> (2 - x);
+        FunctionInterface func = x -> 2 - x;
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
 
@@ -53,7 +53,7 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootIfNotExistInInterval() {
-        FunctionInterface func = (x) -> (x + 1);
+        FunctionInterface func = x -> x + 1;
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
 
@@ -62,7 +62,7 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootIfIncorrectIntervalBoundaries() {
-        FunctionInterface func = (x) -> (x + 1);
+        FunctionInterface func = x -> x + 1;
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalEnd, intervalStart);
 
@@ -72,7 +72,7 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootIfInitialPointOutsideInterval() {
-        FunctionInterface func = (x) -> (x + 1);
+        FunctionInterface func = x -> x + 1;
 
         double root = newtonMethod.findRoot(func, -10, intervalStart, intervalEnd);
 
@@ -82,7 +82,7 @@ public class NewtonRootsTests {
 
     @Test
     public void findRootIfNonmonotonicFunction() {
-        FunctionInterface func = (x) -> (x - 1) * (x - 1);
+        FunctionInterface func = x -> (x - 1) * (x - 1);
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
 
