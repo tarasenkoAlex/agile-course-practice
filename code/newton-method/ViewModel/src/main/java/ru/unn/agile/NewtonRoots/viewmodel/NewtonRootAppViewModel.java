@@ -165,12 +165,15 @@ public class NewtonRootAppViewModel  {
             return InputStatus.BAD_FORMAT;
         }
 
-        NewtonMethod method = new NewtonMethod(Double.parseDouble(accuracy.get()),
-                Double.parseDouble(accuracy.get()));
-        if (!method.isMonotonicFunctionOnInterval(testFunction,
+        if (!NewtonMethod.isMonotonicFunctionOnInterval(testFunction,
                 Double.parseDouble(leftPoint.get()),
                 Double.parseDouble(rightPoint.get())))  {
             return InputStatus.NON_MONOTONIC_FUNCTION;
+        }
+
+        if (Double.parseDouble(leftPoint.get()) >= Double.parseDouble(rightPoint.get())
+                || Double.parseDouble(accuracy.get()) <= 0) {
+            return InputStatus.BAD_PARAMETERS;
         }
 
         return InputStatus.READY;
@@ -188,6 +191,10 @@ public class NewtonRootAppViewModel  {
         if (findRootButtonDisable.get()) {
             return;
         }
+
+
+
+        inputStatus.set(InputStatus.SUCCESS.toString());
     }
 }
 
@@ -196,7 +203,8 @@ enum InputStatus {
     READY("Press 'Find root'"),
     NON_MONOTONIC_FUNCTION("The function is not monotonic"),
     BAD_FORMAT("Bad format"),
-    SUCCESS("Success");
+    BAD_PARAMETERS("Wrong method parameters"),
+    SUCCESS("Root found");
 
     private final String name;
     InputStatus(final String name) {
