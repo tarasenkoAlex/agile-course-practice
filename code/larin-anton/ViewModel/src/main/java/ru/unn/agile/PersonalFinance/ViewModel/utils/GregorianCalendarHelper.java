@@ -1,11 +1,11 @@
-package ru.unn.agile.PersonalFinance.ViewModel;
+package ru.unn.agile.PersonalFinance.ViewModel.utils;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.GregorianCalendar;
 
-final class GregorianCalendarHelper {
+public final class GregorianCalendarHelper {
     public static LocalDate convertToLocalDate(final GregorianCalendar calendar) {
         return calendar.toZonedDateTime().toLocalDate();
     }

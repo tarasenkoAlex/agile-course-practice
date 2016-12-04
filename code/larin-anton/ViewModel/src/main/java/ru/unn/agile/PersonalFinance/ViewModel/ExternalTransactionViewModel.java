@@ -1,10 +1,11 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import ru.unn.agile.PersonalFinance.Model.Category;
 import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
+import ru.unn.agile.PersonalFinance.ViewModel.utils.GregorianCalendarHelper;
+import ru.unn.agile.PersonalFinance.ViewModel.utils.StringHelper;
 
 import java.time.LocalDate;
 import java.util.Objects;

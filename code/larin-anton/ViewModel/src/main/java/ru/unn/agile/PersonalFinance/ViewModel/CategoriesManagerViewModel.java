@@ -5,6 +5,7 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import ru.unn.agile.PersonalFinance.ViewModel.utils.StringHelper;
 
 import java.util.ArrayList;
 

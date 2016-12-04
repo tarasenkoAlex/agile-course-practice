@@ -1,4 +1,4 @@
-package ru.unn.agile.PersonalFinance.ViewModel;
+package ru.unn.agile.PersonalFinance.ViewModel.utils;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;

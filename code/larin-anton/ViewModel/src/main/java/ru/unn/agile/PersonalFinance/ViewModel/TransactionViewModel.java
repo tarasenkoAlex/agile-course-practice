@@ -1,6 +1,7 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
 import javafx.beans.property.*;
+import ru.unn.agile.PersonalFinance.ViewModel.utils.SavableObject;
 
 import java.time.LocalDate;
 

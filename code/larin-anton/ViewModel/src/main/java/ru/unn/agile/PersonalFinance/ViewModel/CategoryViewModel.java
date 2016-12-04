@@ -3,6 +3,7 @@ package ru.unn.agile.PersonalFinance.ViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import ru.unn.agile.PersonalFinance.Model.Category;
+import ru.unn.agile.PersonalFinance.ViewModel.utils.SavableObject;
 
 public class CategoryViewModel extends SavableObject {
     private Category internalCategory;
