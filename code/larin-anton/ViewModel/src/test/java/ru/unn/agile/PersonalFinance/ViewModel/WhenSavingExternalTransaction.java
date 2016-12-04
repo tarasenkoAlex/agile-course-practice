@@ -7,55 +7,67 @@ import static org.junit.Assert.assertNotEquals;
 import static ru.unn.agile.PersonalFinance.ViewModel.AssertHelper.assertContains;
 
 public class WhenSavingExternalTransaction {
-    private LedgerViewModel ledgerViewModel;
-    private AccountViewModel accountViewModel;
+    private static final String INITIAL_COUNTERPARTY_NAME = "Initial counterparty";
+    private static final String INITIAL_CATEGORY_NAME = "Initial category";
+    private static final String INITIAL_DESCRIPTION = "Initial description";
+
+    private LedgerViewModel ledger;
+    private AccountViewModel account;
+    private CategoryViewModel initialCategory;
 
     @Before
     public void setUp() throws Exception {
-        ledgerViewModel = new LedgerViewModel();
-        accountViewModel = new AccountViewModel(ledgerViewModel);
-        accountViewModel.save();
-        ledgerViewModel.setSelectedAccount(accountViewModel);
+        ledger = new LedgerViewModel();
+        account = new AccountViewModel(ledger);
+        initialCategory = new CategoryViewModel(INITIAL_CATEGORY_NAME);
+
+        account.save();
+        ledger.setSelectedAccount(account);
     }
 
     @Test
     public void andItIsAddedToTransactionsList() throws Exception {
-        ExternalTransactionViewModel transactionVM =
-                new ExternalTransactionViewModel(ledgerViewModel);
+        TransactionViewModel transaction = createExternalTransaction();
 
-        transactionVM.save();
+        transaction.save();
 
-        assertContains(accountViewModel.getTransactions(), transactionVM);
+        assertContains(account.getTransactions(), transaction);
     }
 
     @Test
     public void andAccountBalanceChanges() throws Exception {
-        ExternalTransactionViewModel transactionVM =
-                new ExternalTransactionViewModel(ledgerViewModel);
-        transactionVM.setAmount(10);
-        int balanceBeforeTransaction = accountViewModel.getBalance();
+        TransactionViewModel transaction = createExternalTransaction();
+        transaction.setAmount(10);
+        int balanceBeforeTransaction = account.getBalance();
 
-        transactionVM.save();
+        transaction.save();
 
-        assertNotEquals(accountViewModel.getBalance(), balanceBeforeTransaction);
+        assertNotEquals(account.getBalance(), balanceBeforeTransaction);
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void andIfAccountWasNotSavedItCauseFail() throws Exception {
-        AccountViewModel unsavedAccount = new AccountViewModel(ledgerViewModel);
-        ledgerViewModel.setSelectedAccount(unsavedAccount);
-        ExternalTransactionViewModel transactionVM =
-                new ExternalTransactionViewModel(ledgerViewModel);
+        AccountViewModel unsavedAccount = new AccountViewModel(ledger);
+        ledger.setSelectedAccount(unsavedAccount);
+        TransactionViewModel transaction = createExternalTransaction();
 
-        transactionVM.save();
+        transaction.save();
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void andIfAccountWasNotSelectedItCauseFail() throws Exception {
-        ledgerViewModel.setSelectedAccount(null);
-        ExternalTransactionViewModel transactionVM =
-                new ExternalTransactionViewModel(ledgerViewModel);
+        ledger.setSelectedAccount(null);
+        TransactionViewModel transactionVM = createExternalTransaction();
 
         transactionVM.save();
+    }
+
+    private TransactionViewModel createExternalTransaction() {
+        ExternalTransactionViewModel transaction =
+                new ExternalTransactionViewModel(ledger);
+        transaction.setCounterparty(INITIAL_COUNTERPARTY_NAME);
+        transaction.setDescription(INITIAL_DESCRIPTION);
+        transaction.setCategory(initialCategory);
+        return transaction;
     }
 }

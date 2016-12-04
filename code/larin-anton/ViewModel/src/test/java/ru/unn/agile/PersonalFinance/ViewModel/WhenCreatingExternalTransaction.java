@@ -13,6 +13,8 @@ public class WhenCreatingExternalTransaction {
     public void setUp() throws Exception {
         LedgerViewModel ledger = new LedgerViewModel();
         transaction = new ExternalTransactionViewModel(ledger);
+
+        transaction.setCategory(new CategoryViewModel("Initial category"));
         transaction.setCounterparty("Initial counterparty");
         transaction.setDescription("Initial description");
     }

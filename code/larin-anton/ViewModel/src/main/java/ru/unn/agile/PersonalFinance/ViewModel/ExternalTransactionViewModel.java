@@ -23,10 +23,7 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
         Objects.requireNonNull(parentLedger);
         this.parentLedger = parentLedger;
         setUpBindings();
-
-        setDate(LocalDate.now());
-        setCounterparty("<Most frequent counterparty>");
-        setCategory(new CategoryViewModel());
+        setDefaults();
     }
 
     // region Properties for Binding
@@ -120,5 +117,9 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
                 .and(categoryProperty().isNotNull());
 
         isAbleToSaveProperty.bind(isAbleToSaveBinding);
+    }
+
+    private void setDefaults() {
+        setDate(LocalDate.now());
     }
 }
