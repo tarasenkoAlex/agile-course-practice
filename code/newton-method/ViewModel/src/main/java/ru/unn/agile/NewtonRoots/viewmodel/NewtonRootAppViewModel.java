@@ -1,9 +1,15 @@
 package ru.unn.agile.NewtonRoots.viewmodel;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewtonRootAppViewModel  {
     private final StringProperty leftPoint;
@@ -13,6 +19,9 @@ public class NewtonRootAppViewModel  {
     private final StringProperty function;
     private final StringProperty solverReport;
     private final BooleanProperty findRootButtonDisable;
+    private final StringProperty inputStatus;
+
+    private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
 
     public NewtonRootAppViewModel()  {
         leftPoint = new SimpleStringProperty("");
@@ -22,6 +31,33 @@ public class NewtonRootAppViewModel  {
         function = new SimpleStringProperty("");
         findRootButtonDisable = new SimpleBooleanProperty(true);
         solverReport = new SimpleStringProperty("");
+        inputStatus = new SimpleStringProperty(InputStatus.WAITING.toString());
+
+
+        BooleanBinding couldFindRoot = new BooleanBinding() {
+            {
+                super.bind(leftPoint, rightPoint, maxIterations, accuracy, function);
+            }
+            @Override
+            protected boolean computeValue() {
+                return checkInput() == InputStatus.READY;
+            }
+        };
+        findRootButtonDisable.bind(couldFindRoot.not());
+
+        final List<StringProperty> fields = new ArrayList<StringProperty>() { {
+            add(leftPoint);
+            add(rightPoint);
+            add(maxIterations);
+            add(accuracy);
+            add(function);
+        } };
+
+        for (StringProperty field : fields) {
+            final ValueChangeListener listener = new ValueChangeListener();
+            field.addListener(listener);
+            valueChangedListeners.add(listener);
+        }
     }
 
     public StringProperty leftPointProperty()  {
@@ -93,4 +129,49 @@ public class NewtonRootAppViewModel  {
     public void setSolverReport(final String value) {
         solverReport.set(value);
     }
+
+    public StringProperty inputStatusProperty()  {
+        return inputStatus;
+    }
+    public String getInputStatus() {
+        return inputStatus.get();
+    }
+    public void setInputStatus(final String value) {
+        inputStatus.set(value);
+    }
+
+    InputStatus checkInput()  {
+        return InputStatus.BAD_FORMAT;
+    }
+
+    private class ValueChangeListener implements ChangeListener<String> {
+        @Override
+        public void changed(final ObservableValue<? extends String> observable,
+                            final String oldValue, final String newValue) {
+            inputStatus.set(checkInput().toString());
+        }
+    }
+
+    public void findRoot() {
+        if (findRootButtonDisable.get()) {
+            return;
+        }
+    }
 }
+
+enum InputStatus {
+    WAITING("Please provide input data"),
+    READY("Press 'Find root'"),
+    NON_MONOTONIC_FUNCTION("The function is not monotonic"),
+    BAD_FORMAT("Bad format"),
+    SUCCESS("Success");
+
+    private final String name;
+    InputStatus(final String name) {
+        this.name = name;
+    }
+    public String toString() {
+        return name;
+    }
+}
+
