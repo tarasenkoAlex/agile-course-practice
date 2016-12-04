@@ -6,13 +6,17 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
-public class CategoriesViewModel {
+public class CategoriesMangerViewModel {
     private final StringProperty newCategoryNameProperty = new SimpleStringProperty();
     private final BooleanProperty isAbleToAddNewCategoryProperty = new SimpleBooleanProperty();
     private final ListProperty<CategoryViewModel> categoriesProperty =
             new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
 
-    public CategoriesViewModel() {
+    CategoriesMangerViewModel() {
+        categoriesProperty.add(new CategoryViewModel("Category 1"));
+        categoriesProperty.add(new CategoryViewModel("Category 2"));
+        categoriesProperty.add(new CategoryViewModel("Category 3"));
+        categoriesProperty.add(new CategoryViewModel("Category 4"));
         setUpBindings();
     }
 
@@ -53,7 +57,6 @@ public class CategoriesViewModel {
     // endregion
 
     void saveCategory() {
-        // TODO
     }
 
     private void setUpBindings() {

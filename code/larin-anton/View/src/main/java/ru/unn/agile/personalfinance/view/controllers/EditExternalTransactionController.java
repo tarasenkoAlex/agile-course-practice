@@ -3,21 +3,20 @@ package ru.unn.agile.personalfinance.view.controllers;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyListProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.converter.CurrencyStringConverter;
-import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
 import ru.unn.agile.PersonalFinance.ViewModel.CategoryViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
+import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.personalfinance.view.ViewModelService;
 import ru.unn.agile.personalfinance.view.WindowsManager;
 import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
 import ru.unn.agile.personalfinance.view.utils.Converters;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class EditExternalTransactionController extends DataContextController {
@@ -60,6 +59,12 @@ public class EditExternalTransactionController extends DataContextController {
     public void initialize(final URL location, final ResourceBundle resources) {
         categoryComboBox.setCellFactory(categoryListCellFactory);
         categoryComboBox.setConverter(Converters.getCategoryToStringConverter());
+
+        /* categories -> categoryComboBox.items */
+        LedgerViewModel ledger = ViewModelService.getViewModel();
+        ReadOnlyListProperty<CategoryViewModel> categories =
+                ledger.getCategoriesManager().categoriesProperty();
+        categoryComboBox.itemsProperty().bind(categories);
     }
 
     @Override

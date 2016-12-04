@@ -53,8 +53,7 @@
         <!-- Category -->
         <Label text="Category" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
         <HBox maxWidth="Infinity" GridPane.rowIndex="3" GridPane.columnIndex="1">
-            <JFXComboBox fx:id="categoryComboBox" maxWidth="Infinity" HBox.hgrow="ALWAYS"
-                         items="${vmSource.model.categories}">
+            <JFXComboBox fx:id="categoryComboBox" maxWidth="Infinity" HBox.hgrow="ALWAYS">
                 <HBox.margin>
                     <Insets left="7" />
                 </HBox.margin>

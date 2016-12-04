@@ -16,14 +16,13 @@ public class LedgerViewModel {
     private final ListProperty<AccountViewModel> accountsProperty =
             new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
 
-    private final ListProperty<CategoryViewModel> categoriesProperty =
-            new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
-
     private final ObjectProperty<AccountViewModel> selectedAccountProperty =
             new SimpleObjectProperty<>();
 
+    private final ObjectProperty<CategoriesMangerViewModel> categoriesManagerProperty =
+            new SimpleObjectProperty<>(new CategoriesMangerViewModel());
+
     public LedgerViewModel() {
-        initializeCategories();
         setUpBindings();
     }
 
@@ -37,12 +36,12 @@ public class LedgerViewModel {
         return this.accountsProperty.get();
     }
 
-    public final ListProperty<CategoryViewModel> categoriesProperty() {
-        return this.categoriesProperty;
+    public final ReadOnlyObjectProperty<CategoriesMangerViewModel> categoriesManagerProperty() {
+        return this.categoriesManagerProperty;
     }
 
-    public final ObservableList<CategoryViewModel> getCategories() {
-        return this.categoriesProperty.get();
+    public final CategoriesMangerViewModel getCategoriesManager() {
+        return categoriesManagerProperty.get();
     }
 
     public final ObjectProperty<AccountViewModel> selectedAccountProperty() {
@@ -95,13 +94,5 @@ public class LedgerViewModel {
         canAddTransferProperty.bind(accountsSizeProperties.greaterThan(1));
 
         canAddTransactionProperty.bind(selectedAccountProperty().isNotNull());
-    }
-
-    private void initializeCategories() {
-        categoriesProperty.add(new CategoryViewModel("Category 1"));
-        categoriesProperty.add(new CategoryViewModel("Category 2"));
-        categoriesProperty.add(new CategoryViewModel("Category 3"));
-        categoriesProperty.add(new CategoryViewModel("Category 4"));
-        categoriesProperty.add(new CategoryViewModel("Category 5"));
     }
 }
