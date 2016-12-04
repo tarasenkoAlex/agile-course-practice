@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-
 public class NewtonRootAppViewModelTests  {
     private NewtonRootAppViewModel viewModel;
 
@@ -27,8 +26,8 @@ public class NewtonRootAppViewModelTests  {
         assertEquals("", viewModel.maxIterationsProperty().get());
         assertEquals("", viewModel.accuracyProperty().get());
         assertEquals("", viewModel.functionProperty().get());
-        assertEquals(true, viewModel.findRootButtonDisableProperty.get());
-        assertEquals("", viewModel.solverReportProperty.get());
+        assertEquals(true, viewModel.findRootButtonDisableProperty().get());
+        assertEquals("", viewModel.solverReportProperty().get());
     }
 
 }
