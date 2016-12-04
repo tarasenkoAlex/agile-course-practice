@@ -11,6 +11,9 @@ import javafx.beans.value.ObservableValue;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.unn.agile.NewtonRoots.Model.NewtonMethod;
+import ru.unn.agile.NewtonRoots.Model.MathFunction;
+
 public class NewtonRootAppViewModel  {
     private final StringProperty leftPoint;
     private final StringProperty rightPoint;
@@ -32,7 +35,6 @@ public class NewtonRootAppViewModel  {
         findRootButtonDisable = new SimpleBooleanProperty(true);
         solverReport = new SimpleStringProperty("");
         inputStatus = new SimpleStringProperty(InputStatus.WAITING.toString());
-
 
         BooleanBinding couldFindRoot = new BooleanBinding() {
             {
@@ -141,7 +143,37 @@ public class NewtonRootAppViewModel  {
     }
 
     InputStatus checkInput()  {
-        return InputStatus.BAD_FORMAT;
+        if (leftPoint.get().isEmpty() || rightPoint.get().isEmpty()
+                || accuracy.get().isEmpty() || maxIterations.get().isEmpty()
+                || function.get().isEmpty()) {
+            return InputStatus.WAITING;
+        }
+
+        MathFunction testFunction = null;
+        try {
+            testFunction = new MathFunction(function.get());
+        } catch (Exception e)  {
+            return InputStatus.BAD_FORMAT;
+        }
+
+        try {
+            Double.parseDouble(leftPoint.get());
+            Double.parseDouble(rightPoint.get());
+            Double.parseDouble(accuracy.get());
+            Integer.parseUnsignedInt(maxIterations.get());
+        } catch (NumberFormatException nfe) {
+            return InputStatus.BAD_FORMAT;
+        }
+
+        NewtonMethod method = new NewtonMethod(Double.parseDouble(accuracy.get()),
+                Double.parseDouble(accuracy.get()));
+        if (!method.isMonotonicFunctionOnInterval(testFunction,
+                Double.parseDouble(leftPoint.get()),
+                Double.parseDouble(rightPoint.get())))  {
+            return InputStatus.NON_MONOTONIC_FUNCTION;
+        }
+
+        return InputStatus.READY;
     }
 
     private class ValueChangeListener implements ChangeListener<String> {

@@ -60,15 +60,18 @@ public class NewtonRootAppViewModelTests  {
         assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.inputStatusProperty().get());
     }
 
-    @Test void setBadFormattedFunction()  {
+    @Test
+    public void setBadFormattedFunction()  {
         setValidViewModelInputState();
         viewModel.setFunction("a");
         assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.inputStatusProperty().get());
     }
 
-    @Test void setNonMonotonicFiction()  {
+    @Test
+    public void setNonMonotonicFiction()  {
         setValidViewModelInputState();
-        viewModel.setFunction("sin(x)");
-        assertEquals(InputStatus.NON_MONOTONIC_FUNCTION.toString(), viewModel.inputStatusProperty().get());
+        viewModel.setFunction("x^2");
+        assertEquals(InputStatus.NON_MONOTONIC_FUNCTION.toString(),
+                viewModel.inputStatusProperty().get());
     }
 }
