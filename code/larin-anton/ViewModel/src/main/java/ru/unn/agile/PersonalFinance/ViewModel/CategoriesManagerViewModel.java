@@ -1,5 +1,7 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,19 +65,19 @@ public class CategoriesManagerViewModel {
     }
 
     private void setUpBindings() {
-        newCategoryNameProperty.addListener((observable, oldValue, newValue) -> {
-            boolean isEmptyString = StringHelper.isNullOrEmpty(newValue);
-            if (isEmptyString) {
-                setIsAbleToAddNewCategory(false);
-            } else {
-                boolean isCategoryExists = hasCategoryWithName(newValue.trim());
-                setIsAbleToAddNewCategory(!isCategoryExists);
-            }
-        });
+        BooleanBinding isCategoryExists = Bindings.createBooleanBinding(() ->
+            hasCategoryWithName(getNewCategoryName()), newCategoryNameProperty);
+
+        BooleanBinding isNewCategoryNameEmpty =
+                StringHelper.isNullOrEmpty(newCategoryNameProperty);
+
+        isAbleToAddNewCategoryProperty.bind(Bindings.and(
+                isNewCategoryNameEmpty.not(),
+                isCategoryExists.not()));
     }
 
     private boolean hasCategoryWithName(final String categoryName) {
-        return categoriesProperty.stream().anyMatch(
-                category -> category.getName().equals(categoryName));
+        return categoriesProperty.stream().anyMatch(category ->
+                StringHelper.areEqualTrimmed(category.getName(), categoryName));
     }
 }
