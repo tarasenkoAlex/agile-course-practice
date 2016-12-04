@@ -1,5 +1,6 @@
 package ru.unn.agile.personalfinance.view.controllers;
 
+import com.jfoenix.controls.JFXDatePicker;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
@@ -20,6 +21,9 @@ import java.util.ResourceBundle;
 public class EditExternalTransactionController extends DataContextController {
     private final static StringListCellFactory<CategoryViewModel> categoryListCellFactory =
             new StringListCellFactory<>(category -> category.getName());
+
+    @FXML
+    private JFXDatePicker datePicker;
 
     @FXML
     private Button addButton;

@@ -4,11 +4,11 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.geometry.Insets?>
+
 <BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
             fx:controller="ru.unn.agile.personalfinance.view.controllers.HomeScreenController">
     <left>
-        <JFXListView fx:id="accountsList" prefWidth="200" maxHeight="Infinity"
+        <JFXListView fx:id="accountsList" prefWidth="250" maxHeight="Infinity"
                      styleClass="accounts-list-view" />
     </left>
     <center>

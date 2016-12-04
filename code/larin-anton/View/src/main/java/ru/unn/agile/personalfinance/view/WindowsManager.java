@@ -16,10 +16,15 @@ import java.util.HashMap;
 import java.util.Stack;
 
 public final class WindowsManager {
-    private static final int TRANSACTIONS_WINDOW_WIDTH  = 700;
+    private static final int TRANSACTIONS_WINDOW_WIDTH = 700;
     private static final int TRANSACTIONS_WINDOW_HEIGHT = 400;
-    private static final int ADD_ACCOUNT_WINDOW_WIDTH   = 500;
-    private static final int ADD_ACCOUNT_WINDOW_HEIGHT  = 300;
+    private static final int ADD_ACCOUNT_WINDOW_WIDTH = 400;
+    private static final int ADD_ACCOUNT_WINDOW_HEIGHT = 200;
+    private static final int ADD_EXTERNAL_TRANSACTION_WINDOW_WIDTH = 500;
+    private static final int ADD_EXTERNAL_TRANSACTION_WINDOW_HEIGHT = 350;
+    private static final int ADD_TRANSFER_WINDOW_WIDTH = 500;
+    private static final int ADD_TRANSFER_WINDOW_HEIGHT = 250;
+
 
     private static final Object LOCK = new Object();
     private static WindowsManager windowsManager;
@@ -27,7 +32,8 @@ public final class WindowsManager {
     private final Stack<Stage> stagesHistory = new Stack<>();
     private final HashMap<URL, Pair<Scene, DataContextController>> scenesCache = new HashMap<>();
 
-    private WindowsManager() { }
+    private WindowsManager() {
+    }
 
     public static WindowsManager getInstance() {
         // Using synchronized block instead of
@@ -61,8 +67,8 @@ public final class WindowsManager {
     public void showEditExternalTransactionView(final ExternalTransactionViewModel transaction) {
         getView("edit-external-transaction.fxml")
                 .title("Add new transaction")
-                .width(ADD_ACCOUNT_WINDOW_WIDTH)
-                .height(ADD_ACCOUNT_WINDOW_HEIGHT)
+                .width(ADD_EXTERNAL_TRANSACTION_WINDOW_WIDTH)
+                .height(ADD_EXTERNAL_TRANSACTION_WINDOW_HEIGHT)
                 .data(transaction)
                 .show();
     }
@@ -70,8 +76,8 @@ public final class WindowsManager {
     public void showAddTransferView(final TransferViewModel transfer) {
         getView("edit-transfer.fxml")
                 .title("Add new transfer")
-                .width(ADD_ACCOUNT_WINDOW_WIDTH)
-                .height(ADD_ACCOUNT_WINDOW_HEIGHT)
+                .width(ADD_TRANSFER_WINDOW_WIDTH)
+                .height(ADD_TRANSFER_WINDOW_HEIGHT)
                 .data(transfer)
                 .show();
     }
@@ -164,7 +170,7 @@ public final class WindowsManager {
         }
 
         private Stage getStage() {
-            return  (userStage == null) ? new Stage() : userStage;
+            return (userStage == null) ? new Stage() : userStage;
         }
 
         private void handleWindowCreatingException(final Exception ex) {
