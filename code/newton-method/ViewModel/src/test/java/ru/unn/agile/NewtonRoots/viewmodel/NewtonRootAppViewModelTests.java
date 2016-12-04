@@ -59,4 +59,16 @@ public class NewtonRootAppViewModelTests  {
         viewModel.setMaxIterations("-a");
         assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.inputStatusProperty().get());
     }
+
+    @Test void setBadFormattedFunction()  {
+        setValidViewModelInputState();
+        viewModel.setFunction("a");
+        assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.inputStatusProperty().get());
+    }
+
+    @Test void setNonMonotonicFiction()  {
+        setValidViewModelInputState();
+        viewModel.setFunction("sin(x)");
+        assertEquals(InputStatus.NON_MONOTONIC_FUNCTION.toString(), viewModel.inputStatusProperty().get());
+    }
 }
