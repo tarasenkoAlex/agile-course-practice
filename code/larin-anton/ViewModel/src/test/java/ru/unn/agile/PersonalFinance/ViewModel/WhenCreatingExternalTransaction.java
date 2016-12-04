@@ -13,6 +13,8 @@ public class WhenCreatingExternalTransaction {
     public void setUp() throws Exception {
         LedgerViewModel ledger = new LedgerViewModel();
         transaction = new ExternalTransactionViewModel(ledger);
+        transaction.setCounterparty("Initial counterparty");
+        transaction.setDescription("Initial description");
     }
 
     @Test(expected = NullPointerException.class)
@@ -75,4 +77,33 @@ public class WhenCreatingExternalTransaction {
 
         assertFalse(transaction.getIsIsAbleToSave());
     }
+
+    @Test
+    public void andItCanNotBeSavedIfDescriptionIsNull() throws Exception {
+        transaction.setDescription(null);
+
+        assertFalse(transaction.getIsIsAbleToSave());
+    }
+
+    @Test
+    public void andItCanNotBeSavedIfDescriptionIsEmpty() throws Exception {
+        transaction.setDescription("");
+
+        assertFalse(transaction.getIsIsAbleToSave());
+    }
+
+    @Test
+    public void andItCanNotBeSavedIfDescriptionIsWhitespacesString() throws Exception {
+        transaction.setDescription("   ");
+
+        assertFalse(transaction.getIsIsAbleToSave());
+    }
+
+    @Test
+    public void andItCanNotBeSavedIfDescriptionIsNormalString() throws Exception {
+        transaction.setDescription("Tesla Model S");
+
+        assertTrue(transaction.getIsIsAbleToSave());
+    }
+
 }
