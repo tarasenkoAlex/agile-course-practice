@@ -12,8 +12,9 @@
 2) Есть точка пересечения;
 3) Отрезки не пересекаются (параллельны);
 
-Все необходимые математические сведения можно найти в статье
-["Координаты точки пересечения двух прямых"][line] на сайте cleverstudents.
+Все необходимые математические сведения можно найти в статьях
+["Координаты точки пересечения двух прямых"][line1] на сайте cleverstudents.
+["Точка пересечения прямых"][line2] на сайте e-maxx.
 
 ## Документация разработчика
 
@@ -21,4 +22,5 @@ TBD
 
 <!-- LINKS -->
 
-[line]: http://www.cleverstudents.ru/line_and_plane/intersection_point_of_straight_lines.html
+[line1]: http://www.cleverstudents.ru/line_and_plane/intersection_point_of_straight_lines.html
+[line2]: http://e-maxx.ru/algo/lines_intersection
