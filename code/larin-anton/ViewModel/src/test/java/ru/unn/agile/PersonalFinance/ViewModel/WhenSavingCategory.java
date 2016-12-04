@@ -8,11 +8,11 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class WhenSavingCategory {
-    private CategoriesMangerViewModel categoriesManger;
+    private CategoriesManagerViewModel categoriesManger;
 
     @Before
     public void setUp() throws Exception {
-        categoriesManger = new CategoriesMangerViewModel();
+        categoriesManger = new CategoriesManagerViewModel();
     }
 
     @Test

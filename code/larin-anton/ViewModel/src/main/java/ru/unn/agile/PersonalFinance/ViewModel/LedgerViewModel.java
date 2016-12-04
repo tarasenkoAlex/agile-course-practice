@@ -19,8 +19,8 @@ public class LedgerViewModel {
     private final ObjectProperty<AccountViewModel> selectedAccountProperty =
             new SimpleObjectProperty<>();
 
-    private final ObjectProperty<CategoriesMangerViewModel> categoriesManagerProperty =
-            new SimpleObjectProperty<>(new CategoriesMangerViewModel());
+    private final ObjectProperty<CategoriesManagerViewModel> categoriesManagerProperty =
+            new SimpleObjectProperty<>(new CategoriesManagerViewModel());
 
     public LedgerViewModel() {
         setUpBindings();
@@ -36,11 +36,11 @@ public class LedgerViewModel {
         return this.accountsProperty.get();
     }
 
-    public final ReadOnlyObjectProperty<CategoriesMangerViewModel> categoriesManagerProperty() {
+    public final ReadOnlyObjectProperty<CategoriesManagerViewModel> categoriesManagerProperty() {
         return this.categoriesManagerProperty;
     }
 
-    public final CategoriesMangerViewModel getCategoriesManager() {
+    public final CategoriesManagerViewModel getCategoriesManager() {
         return categoriesManagerProperty.get();
     }
 

@@ -6,11 +6,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 
 public class WhenCreatingCategory {
-    private CategoriesMangerViewModel categoriesManager;
+    private CategoriesManagerViewModel categoriesManager;
 
     @Before
     public void setUp() throws Exception {
-        categoriesManager = new CategoriesMangerViewModel();
+        categoriesManager = new CategoriesManagerViewModel();
     }
 
     @Test
