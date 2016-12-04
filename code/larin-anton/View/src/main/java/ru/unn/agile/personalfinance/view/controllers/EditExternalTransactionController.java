@@ -17,7 +17,7 @@ import ru.unn.agile.personalfinance.view.utils.Converters;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddExternalTransactionController extends DataContextController {
+public class EditExternalTransactionController extends DataContextController {
     private final static StringListCellFactory<CategoryViewModel> categoryListCellFactory =
             new StringListCellFactory<>(category -> category.getName());
 
@@ -54,9 +54,9 @@ public class AddExternalTransactionController extends DataContextController {
     public void initialize(final URL location, final ResourceBundle resources) {
         categoryComboBox.setCellFactory(categoryListCellFactory);
         categoryComboBox.setConverter(Converters.getCategoryToStringConverter());
-        categoryComboBox.getSelectionModel().selectFirst();
     }
 
+    @Override
     protected void removeBindings(final Object oldDataContext) {
         final ExternalTransactionViewModel transaction =
                 (ExternalTransactionViewModel) oldDataContext;
@@ -82,6 +82,7 @@ public class AddExternalTransactionController extends DataContextController {
         addButton.disableProperty().unbind();
     }
 
+    @Override
     protected void addBindings(final Object newDataContext) {
         final ExternalTransactionViewModel transaction =
                 (ExternalTransactionViewModel) newDataContext;
@@ -113,5 +114,7 @@ public class AddExternalTransactionController extends DataContextController {
 
         /* !transaction.isAbleToSave -> addButton.disabled  */
         addButton.disableProperty().bind(transaction.isAbleToSaveProperty().not());
+
+        categoryComboBox.getSelectionModel().selectFirst();
     }
 }

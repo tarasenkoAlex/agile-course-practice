@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 <?import ru.unn.agile.personalfinance.view.ViewModelSource?>
 <GridPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
-          fx:controller="ru.unn.agile.personalfinance.view.controllers.AddExternalTransactionController">
+          fx:controller="ru.unn.agile.personalfinance.view.controllers.EditExternalTransactionController">
     <fx:define>
         <ViewModelSource fx:id="vmSource" />
     </fx:define>

@@ -19,7 +19,7 @@ import ru.unn.agile.personalfinance.view.utils.Converters;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddTransferController extends DataContextController {
+public class EditTransferController extends DataContextController {
     private final static StringListCellFactory<AccountViewModel> accountListCellFactory =
             new StringListCellFactory<>(account -> account.getName());
 
@@ -48,8 +48,8 @@ public class AddTransferController extends DataContextController {
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
-        setUpAccountComboBox(accountFromComboBox, 0);
-        setUpAccountComboBox(accountToComboBox, 1);
+        setUpAccountComboBox(accountFromComboBox);
+        setUpAccountComboBox(accountToComboBox);
     }
 
     @Override
@@ -83,12 +83,13 @@ public class AddTransferController extends DataContextController {
 
         /* transfer.isAbleToSave -> addButton.disabled */
         addButton.disableProperty().bind(newTransfer.isAbleToSaveProperty().not());
+
+        accountFromComboBox.getSelectionModel().select(0);
+        accountToComboBox.getSelectionModel().select(1);
     }
 
-    private void setUpAccountComboBox(final ComboBox<AccountViewModel> comboBox,
-                                      final int selectedIndex) {
+    private void setUpAccountComboBox(final ComboBox<AccountViewModel> comboBox) {
         comboBox.setCellFactory(accountListCellFactory);
         comboBox.setConverter(Converters.getAccountToStringConverter());
-        comboBox.getSelectionModel().select(selectedIndex);
     }
 }

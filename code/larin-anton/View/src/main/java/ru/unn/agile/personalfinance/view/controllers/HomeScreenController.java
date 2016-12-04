@@ -14,7 +14,7 @@ import ru.unn.agile.personalfinance.view.controls.TransactionListCell;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TransactionsController extends DataContextController {
+public class HomeScreenController extends DataContextController {
     private final LedgerViewModel ledger = ViewModelService.getViewModel();
 
     @FXML

@@ -7,7 +7,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
-            fx:controller="ru.unn.agile.personalfinance.view.controllers.AddTransferController">
+            fx:controller="ru.unn.agile.personalfinance.view.controllers.EditTransferController">
     <GridPane vgap="10"
               AnchorPane.bottomAnchor="50"
               AnchorPane.leftAnchor="10"

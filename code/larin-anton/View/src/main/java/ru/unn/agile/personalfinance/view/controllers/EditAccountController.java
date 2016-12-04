@@ -9,7 +9,7 @@ import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.personalfinance.view.WindowsManager;
 
-public class AddAccountController extends DataContextController {
+public class EditAccountController extends DataContextController {
     @FXML
     private TextField nameField;
 

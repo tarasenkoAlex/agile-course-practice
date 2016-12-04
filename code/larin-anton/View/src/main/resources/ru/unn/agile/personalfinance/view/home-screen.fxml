@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
-            fx:controller="ru.unn.agile.personalfinance.view.controllers.TransactionsController">
+            fx:controller="ru.unn.agile.personalfinance.view.controllers.HomeScreenController">
     <left>
         <JFXListView fx:id="accountsList" prefWidth="200" maxHeight="Infinity"
                      styleClass="accounts-list-view" />

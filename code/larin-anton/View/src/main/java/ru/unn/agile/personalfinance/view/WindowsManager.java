@@ -41,7 +41,7 @@ public final class WindowsManager {
     }
 
     public void showHomeScreenView(final Stage rootStage) {
-        getView("transactions.fxml")
+        getView("home-screen.fxml")
                 .title("My Wallet")
                 .width(TRANSACTIONS_WINDOW_WIDTH)
                 .height(TRANSACTIONS_WINDOW_HEIGHT)
@@ -50,7 +50,7 @@ public final class WindowsManager {
     }
 
     public void showEditAccountView(final AccountViewModel account) {
-        getView("add-account.fxml")
+        getView("edit-account.fxml")
                 .title("Add new account")
                 .width(ADD_ACCOUNT_WINDOW_WIDTH)
                 .height(ADD_ACCOUNT_WINDOW_HEIGHT)
@@ -59,7 +59,7 @@ public final class WindowsManager {
     }
 
     public void showEditExternalTransactionView(final ExternalTransactionViewModel transaction) {
-        getView("add-external-transaction.fxml")
+        getView("edit-external-transaction.fxml")
                 .title("Add new transaction")
                 .width(ADD_ACCOUNT_WINDOW_WIDTH)
                 .height(ADD_ACCOUNT_WINDOW_HEIGHT)
@@ -68,7 +68,7 @@ public final class WindowsManager {
     }
 
     public void showAddTransferView(final TransferViewModel transfer) {
-        getView("add-transfer.fxml")
+        getView("edit-transfer.fxml")
                 .title("Add new transfer")
                 .width(ADD_ACCOUNT_WINDOW_WIDTH)
                 .height(ADD_ACCOUNT_WINDOW_HEIGHT)
@@ -168,7 +168,7 @@ public final class WindowsManager {
         }
 
         private void handleWindowCreatingException(final Exception ex) {
-            // TODO
+            ex.printStackTrace();
         }
 
     }
