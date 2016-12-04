@@ -4,6 +4,7 @@ import ru.unn.agile.TemperatureConverter.model.TemperatureConverter;
 import ru.unn.agile.TemperatureConverter.model.TemperatureScale;
 
 public class TemperatureConverterViewModel {
+    private static String emptyString = "";
     private String firstValue;
     private String secondValue;
     private TemperatureScale firstScale;
@@ -28,25 +29,28 @@ public class TemperatureConverterViewModel {
 
     public void setFirstValue(final String firstValue) {
         this.firstValue = firstValue;
-        convertFirstToSecondValue();
     }
 
     public void setSecondValue(final String secondValue) {
         this.secondValue = secondValue;
-        convertSecondToFirstValue();
     }
 
-    private void convertFirstToSecondValue() {
+    public void convertFirstToSecondValue() {
         secondValue = convertValues(firstValue, firstScale, secondScale);
     }
 
-    private void convertSecondToFirstValue() {
+    public void convertSecondToFirstValue() {
         firstValue = convertValues(secondValue, secondScale, firstScale);
     }
 
     private String convertValues(final String value,
                                  final TemperatureScale firstScale,
                                  final TemperatureScale secondScale) {
+        if (value.equals(emptyString)) {
+            warningLabelText = "";
+            return "";
+        }
+
         try {
             double dFirstValue = Double.parseDouble(value);
             double dSecondValue =
@@ -71,19 +75,15 @@ public class TemperatureConverterViewModel {
 
     public void setFirstScale(final String firstScale) {
         this.firstScale = setScaleValue(firstScale);
-        convertSecondToFirstValue();
     }
 
     public void setSecondScale(final String secondScale) {
         this.secondScale = setScaleValue(secondScale);
-        convertFirstToSecondValue();
     }
 
     private TemperatureScale setScaleValue(final String value) {
         try {
-            if (!value.isEmpty()) {
-                return TemperatureScale.valueOf(value);
-            }
+            return TemperatureScale.valueOf(value);
         } catch (Exception e) {
         }
 

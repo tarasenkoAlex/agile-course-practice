@@ -21,13 +21,14 @@ public final class TemperatureConverterView {
     private TemperatureConverterView(final TemperatureConverterViewModel tempConverterViewModel) {
         this.tempConverterViewModel = tempConverterViewModel;
 
-        tempConverterViewModel.setFirstScale((String) firstComboBoxScales.getSelectedItem());
-        tempConverterViewModel.setSecondScale((String) secondComboBoxScales.getSelectedItem());
+        firstComboBoxScales.setSelectedItem(tempConverterViewModel.getFirstScale().toString());
+        secondComboBoxScales.setSelectedItem(tempConverterViewModel.getSecondScale().toString());
 
         firstTextField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent actionEvent) {
                 bindFirstValue();
+                tempConverterViewModel.convertFirstToSecondValue();
                 backBindSecondValue();
             }
         });
@@ -36,6 +37,7 @@ public final class TemperatureConverterView {
             @Override
             public void actionPerformed(final ActionEvent actionEvent) {
                 bindSecondValue();
+                tempConverterViewModel.convertSecondToFirstValue();
                 backBindFirstValue();
             }
         });
@@ -44,8 +46,8 @@ public final class TemperatureConverterView {
             @Override
             public void actionPerformed(final ActionEvent actionEvent) {
                 bindFirstScale();
+                tempConverterViewModel.convertSecondToFirstValue();
                 backBindFirstValue();
-                backBindSecondValue();
             }
         });
 
@@ -53,7 +55,7 @@ public final class TemperatureConverterView {
             @Override
             public void actionPerformed(final ActionEvent actionEvent) {
                 bindSecondScale();
-                backBindFirstValue();
+                tempConverterViewModel.convertFirstToSecondValue();
                 backBindSecondValue();
             }
         });
@@ -62,6 +64,7 @@ public final class TemperatureConverterView {
     public static void main(final String[] args) {
         JFrame frame = new JFrame("TemperatureConverterView");
         TemperatureConverterViewModel tempConverterViewModel = new TemperatureConverterViewModel();
+
         frame.setContentPane(new TemperatureConverterView(tempConverterViewModel).mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
