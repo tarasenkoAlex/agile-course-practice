@@ -162,11 +162,11 @@ public final class WindowsManager {
 
             stagesHistory.push(stage);
 
-            controller.setDataContext(dataObject);
             stage.setOnHidden(event -> {
                 controller.setDataContext(null);
             });
             stage.show();
+            controller.setDataContext(dataObject);
         }
 
         private Stage getStage() {

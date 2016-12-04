@@ -48,8 +48,7 @@
 
         <!-- Date -->
         <Label text="Date" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <JFXDatePicker GridPane.rowIndex="3" GridPane.columnIndex="1"
-                       maxWidth="Infinity"/>
+        <JFXDatePicker fx:id="datePicker" GridPane.rowIndex="3" GridPane.columnIndex="1" />
     </GridPane>
 
     <!-- Buttons -->

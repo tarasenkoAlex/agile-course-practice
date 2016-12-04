@@ -16,6 +16,8 @@ import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
 import ru.unn.agile.personalfinance.view.utils.Converters;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class EditExternalTransactionController extends DataContextController {
@@ -83,6 +85,10 @@ public class EditExternalTransactionController extends DataContextController {
                 counterpartyField.textProperty(),
                 transaction.counterpartyProperty());
 
+        Bindings.unbindBidirectional(
+                datePicker.valueProperty(),
+                transaction.dateProperty());
+
         addButton.disableProperty().unbind();
     }
 
@@ -115,6 +121,11 @@ public class EditExternalTransactionController extends DataContextController {
         Bindings.bindBidirectional(
                 counterpartyField.textProperty(),
                 transaction.counterpartyProperty());
+
+        /* datePicker.value <-> transaction.date */
+        Bindings.bindBidirectional(
+                datePicker.valueProperty(),
+                transaction.dateProperty());
 
         /* !transaction.isAbleToSave -> addButton.disabled  */
         addButton.disableProperty().bind(transaction.isAbleToSaveProperty().not());

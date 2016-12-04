@@ -1,6 +1,7 @@
 package ru.unn.agile.personalfinance.view.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.event.ActionEvent;
@@ -22,6 +23,9 @@ import java.util.ResourceBundle;
 public class EditTransferController extends DataContextController {
     private final static StringListCellFactory<AccountViewModel> accountListCellFactory =
             new StringListCellFactory<>(account -> account.getName());
+
+    @FXML
+    private JFXDatePicker datePicker;
 
     @FXML
     private JFXComboBox<AccountViewModel> accountFromComboBox;
@@ -54,35 +58,50 @@ public class EditTransferController extends DataContextController {
 
     @Override
     protected void removeBindings(final Object oldDataContext) {
-        final TransferViewModel oldTransfer = (TransferViewModel) oldDataContext;
-        Bindings.unbindBidirectional(amountField.textProperty(), oldTransfer.amountProperty());
-        oldTransfer.accountFromProperty().unbind();
-        oldTransfer.accountToProperty().unbind();
+        final TransferViewModel transfer = (TransferViewModel) oldDataContext;
+
+        Bindings.unbindBidirectional(
+                amountField.textProperty(),
+                transfer.amountProperty());
+
+        transfer.accountFromProperty().unbind();
+
+        transfer.accountToProperty().unbind();
+
+        Bindings.unbindBidirectional(
+                datePicker.valueProperty(),
+                transfer.dateProperty());
+
         addButton.disableProperty().unbind();
     }
 
     @Override
     protected void addBindings(final Object newDataContext) {
-        final TransferViewModel newTransfer = (TransferViewModel) newDataContext;
+        final TransferViewModel transfer = (TransferViewModel) newDataContext;
 
         /* amountField.text <-> transfer.amount */
         Bindings.bindBidirectional(
                 amountField.textProperty(),
-                newTransfer.amountProperty(),
+                transfer.amountProperty(),
                 new CurrencyStringConverter());
 
         /* accountFromComboBox.selected -> transfer.accountFrom */
         ReadOnlyObjectProperty<AccountViewModel> selectedAccountFromProperty =
                 accountFromComboBox.getSelectionModel().selectedItemProperty();
-        newTransfer.accountFromProperty().bind(selectedAccountFromProperty);
+        transfer.accountFromProperty().bind(selectedAccountFromProperty);
 
         /* accountFromComboBox.selected -> transfer.accountTo */
         ReadOnlyObjectProperty<AccountViewModel> selectedAccountToProperty =
                 accountToComboBox.getSelectionModel().selectedItemProperty();
-        newTransfer.accountToProperty().bind(selectedAccountToProperty);
+        transfer.accountToProperty().bind(selectedAccountToProperty);
+
+        /* datePicker.value <-> transfer.date */
+        Bindings.bindBidirectional(
+                datePicker.valueProperty(),
+                transfer.dateProperty());
 
         /* transfer.isAbleToSave -> addButton.disabled */
-        addButton.disableProperty().bind(newTransfer.isAbleToSaveProperty().not());
+        addButton.disableProperty().bind(transfer.isAbleToSaveProperty().not());
 
         accountFromComboBox.getSelectionModel().select(0);
         accountToComboBox.getSelectionModel().select(1);

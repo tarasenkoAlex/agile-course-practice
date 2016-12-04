@@ -1,0 +1,28 @@
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXListView?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
+            fx:controller="ru.unn.agile.personalfinance.view.controllers.EditCategoriesController">
+    <GridPane vgap="10"
+              AnchorPane.bottomAnchor="10"
+              AnchorPane.leftAnchor="10"
+              AnchorPane.rightAnchor="10"
+              AnchorPane.topAnchor="10">
+
+        <rowConstraints>
+            <RowConstraints vgrow="NEVER" />
+            <RowConstraints vgrow="ALWAYS" />
+        </rowConstraints>
+
+        <!-- Name -->
+        <HBox GridPane.rowIndex="0" maxWidth="Infinity">
+            <JFXTextField maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="addCategoryButton" text="Add" />
+        </HBox>
+
+        <!-- Categories -->
+        <JFXListView fx:id="categoriesList" GridPane.rowIndex="1" />
+    </GridPane>
+</AnchorPane>

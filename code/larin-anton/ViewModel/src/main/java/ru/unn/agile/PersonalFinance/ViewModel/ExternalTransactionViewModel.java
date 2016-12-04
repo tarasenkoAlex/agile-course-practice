@@ -6,6 +6,7 @@ import javafx.beans.property.*;
 import ru.unn.agile.PersonalFinance.Model.Category;
 import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class ExternalTransactionViewModel extends TransactionViewModel {
@@ -22,6 +23,7 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
         this.parentLedger = parentLedger;
         setUpBindings();
 
+        setDate(LocalDate.now());
         setCounterparty("<Most frequent counterparty>");
         setCategory(new CategoryViewModel());
     }
