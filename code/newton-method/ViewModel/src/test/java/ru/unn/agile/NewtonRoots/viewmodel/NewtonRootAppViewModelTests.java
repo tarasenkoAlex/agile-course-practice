@@ -107,4 +107,20 @@ public class NewtonRootAppViewModelTests {
                 viewModel.inputStatusProperty().get());
     }
 
+    @Test
+    public void successStatusWhenParametersRootFound() {
+        setValidViewModelInputState();
+        viewModel.findRoot();
+        assertEquals(InputStatus.SUCCESS.toString(),
+                viewModel.inputStatusProperty().get());
+    }
+
+    @Test
+    public void failedStatusWhenParametersRootFound() {
+        setValidViewModelInputState();
+        viewModel.setFunction("x+100");
+        viewModel.findRoot();
+        assertEquals(InputStatus.FAILED.toString(),
+                viewModel.inputStatusProperty().get());
+    }
 }
