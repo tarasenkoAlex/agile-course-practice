@@ -192,9 +192,22 @@ public class NewtonRootAppViewModel  {
             return;
         }
 
-
-
-        inputStatus.set(InputStatus.SUCCESS.toString());
+        try {
+            NewtonMethod method = new NewtonMethod(Double.parseDouble(accuracy.get()),
+                    Double.parseDouble(accuracy.get()) / 2);
+            MathFunction functionObj = new MathFunction(function.get());
+            double left = Double.parseDouble(leftPoint.get());
+            double right = Double.parseDouble(rightPoint.get());
+            double root = method.findRoot(functionObj, (left + right) / 2, left, right);
+            if (Double.isNaN(root))  {
+                throw new Exception();
+            } else  {
+                setSolverReport("Root: " + Double.toString(root));
+                inputStatus.set(InputStatus.SUCCESS.toString());
+            }
+        } catch (Exception e)  {
+            inputStatus.set(InputStatus.FAILED.toString());
+        }
     }
 }
 
@@ -204,7 +217,8 @@ enum InputStatus {
     NON_MONOTONIC_FUNCTION("The function is not monotonic"),
     BAD_FORMAT("Bad format"),
     BAD_PARAMETERS("Wrong method parameters"),
-    SUCCESS("Root found");
+    SUCCESS("Root found"),
+    FAILED("Root not found");
 
     private final String name;
     InputStatus(final String name) {
