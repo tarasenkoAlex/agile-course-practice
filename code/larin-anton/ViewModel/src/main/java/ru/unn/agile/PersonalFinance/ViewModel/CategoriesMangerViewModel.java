@@ -30,7 +30,7 @@ public class CategoriesMangerViewModel {
         return newCategoryNameProperty.get();
     }
 
-    public final void setNewCategoyName(final String newCategoryName) {
+    public final void setNewCategoryName(final String newCategoryName) {
         newCategoryNameProperty.set(newCategoryName);
     }
 
