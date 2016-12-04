@@ -3,7 +3,6 @@ package ru.unn.agile.personalfinance.view.controls;
 import com.jfoenix.controls.JFXListCell;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
 import ru.unn.agile.personalfinance.view.controllers.DataContextController;
 
 import java.io.IOException;

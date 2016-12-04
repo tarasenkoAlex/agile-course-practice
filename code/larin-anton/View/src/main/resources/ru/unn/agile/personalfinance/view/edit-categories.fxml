@@ -1,8 +1,7 @@
-<?import javafx.scene.layout.*?>
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXListView?>
-
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
             fx:controller="ru.unn.agile.personalfinance.view.controllers.EditCategoriesController">
     <GridPane vgap="10"

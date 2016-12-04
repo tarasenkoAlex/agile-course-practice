@@ -1,10 +1,6 @@
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
 <GridPane xmlns:fx="http://javafx.com/fxml" fx:id="root"
           fx:controller="ru.unn.agile.personalfinance.view.controllers.TransactionListCellController"
           stylesheets="@style.css" styleClass="expense">

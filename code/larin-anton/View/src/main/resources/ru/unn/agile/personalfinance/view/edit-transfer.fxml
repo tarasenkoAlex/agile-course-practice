@@ -1,10 +1,6 @@
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.Label?>
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXTextField?>
-
+<?import javafx.scene.layout.*?>
 <?import ru.unn.agile.personalfinance.view.ViewModelSource?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
             fx:controller="ru.unn.agile.personalfinance.view.controllers.EditTransferController">
