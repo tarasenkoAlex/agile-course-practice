@@ -2,25 +2,53 @@ package ru.unn.agile.personalfinance.view.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextField;
+import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import ru.unn.agile.PersonalFinance.ViewModel.CategoriesManagerViewModel;
+import ru.unn.agile.PersonalFinance.ViewModel.CategoryViewModel;
+import ru.unn.agile.personalfinance.view.ViewModelService;
+import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class EditCategoriesController extends DataContextController {
+    private final static StringListCellFactory<CategoryViewModel> categoryListCellFactory =
+            new StringListCellFactory<>(category -> category.getName());
+
+    private final CategoriesManagerViewModel categoriesManager =
+            ViewModelService.getViewModel().getCategoriesManager();
+
+    @FXML
+    private JFXTextField newCategoryField;
 
     @FXML
     private JFXButton addCategoryButton;
 
     @FXML
-    private JFXListView categoriesList;
+    private JFXListView<CategoryViewModel> categoriesList;
 
-    @Override
-    protected void addBindings(final Object newDataContext) {
-        super.addBindings(newDataContext);
+    @FXML
+    private void handleAddCategoryButton(final ActionEvent actionEvent) {
+        categoriesManager.saveCategory();
     }
 
     @Override
-    protected void removeBindings(final Object oldDataContext) {
-        super.removeBindings(oldDataContext);
-    }
+    public void initialize(final URL location, final ResourceBundle resources) {
+        categoriesList.setCellFactory(categoryListCellFactory);
 
+        /* categoriesManager.categories -> categoriesList.items */
+        categoriesList.itemsProperty().bind(categoriesManager.categoriesProperty());
+
+        /* categoriesManager.isAbleToAddNewCategory -> addCategoryButton.disabled */
+        addCategoryButton.disableProperty().bind(
+                categoriesManager.isAbleToAddNewCategoryProperty().not());
+
+        /* categoriesManager.newCategoryName <-> newCategoryField.text */
+        Bindings.bindBidirectional(newCategoryField.textProperty(),
+                categoriesManager.newCategoryNameProperty());
+    }
 
 }

@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class WhenCreatingCategory {
     private CategoriesManagerViewModel categoriesManager;
@@ -33,8 +34,18 @@ public class WhenCreatingCategory {
         categoriesManager.setNewCategoryName(sameCategoryName);
         categoriesManager.saveCategory();
 
-        categoriesManager.setNewCategoryName(sameCategoryName);
+        categoriesManager.setNewCategoryName(" " + sameCategoryName + " ");
 
         assertFalse(categoriesManager.isAbleToAddNewCategory());
+    }
+
+    @Test
+    public void andItCanBeAddedIfCategoryNameUnique() throws Exception {
+        categoriesManager.setNewCategoryName("Gifts");
+        categoriesManager.saveCategory();
+
+        categoriesManager.setNewCategoryName("Clothes");
+
+        assertTrue(categoriesManager.isAbleToAddNewCategory());
     }
 }

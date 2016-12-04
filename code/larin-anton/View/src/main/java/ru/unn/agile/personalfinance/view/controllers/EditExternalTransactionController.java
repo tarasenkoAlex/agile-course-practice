@@ -55,6 +55,11 @@ public class EditExternalTransactionController extends DataContextController {
         WindowsManager.getInstance().goBack();
     }
 
+    @FXML
+    protected void handleMangeButtonAction(final ActionEvent actionEvent) {
+        WindowsManager.getInstance().showManageCategoriesView();
+    }
+
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         categoryComboBox.setCellFactory(categoryListCellFactory);
@@ -137,4 +142,5 @@ public class EditExternalTransactionController extends DataContextController {
 
         categoryComboBox.getSelectionModel().selectFirst();
     }
+
 }

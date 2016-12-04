@@ -8,6 +8,7 @@
 }
 
 .transactions-list-view .list-cell,
+.categories-list-view .list-cell,
 .accounts-list-view .list-cell {
     -fx-background-color: white;
     -fx-padding: 10 10 10 20;

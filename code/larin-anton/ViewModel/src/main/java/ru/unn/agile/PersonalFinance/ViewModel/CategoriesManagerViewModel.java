@@ -56,14 +56,21 @@ public class CategoriesManagerViewModel {
 
     // endregion
 
-    void saveCategory() {
+    public void saveCategory() {
+        String newCategoryName = getNewCategoryName().trim();
+        categoriesProperty.add(new CategoryViewModel(newCategoryName));
+        setNewCategoryName(null);
     }
 
     private void setUpBindings() {
         newCategoryNameProperty.addListener((observable, oldValue, newValue) -> {
             boolean isEmptyString = StringHelper.isNullOrEmpty(newValue);
-            boolean categoryExists = hasCategoryWithName(newValue);
-            setIsAbleToAddNewCategory(!isEmptyString && !categoryExists);
+            if (isEmptyString) {
+                setIsAbleToAddNewCategory(false);
+            } else {
+                boolean isCategoryExists = hasCategoryWithName(newValue.trim());
+                setIsAbleToAddNewCategory(!isCategoryExists);
+            }
         });
     }
 

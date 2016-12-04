@@ -16,13 +16,18 @@
             <RowConstraints vgrow="ALWAYS" />
         </rowConstraints>
 
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" />
+        </columnConstraints>
+
         <!-- Name -->
         <HBox GridPane.rowIndex="0" maxWidth="Infinity">
-            <JFXTextField maxWidth="Infinity" HBox.hgrow="ALWAYS" />
-            <JFXButton fx:id="addCategoryButton" text="Add" />
+            <JFXTextField fx:id="newCategoryField" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="addCategoryButton" onAction="#handleAddCategoryButton" text="Add" />
         </HBox>
 
         <!-- Categories -->
-        <JFXListView fx:id="categoriesList" GridPane.rowIndex="1" />
+        <JFXListView fx:id="categoriesList" styleClass="categories-list-view"
+                     GridPane.rowIndex="1" />
     </GridPane>
 </AnchorPane>

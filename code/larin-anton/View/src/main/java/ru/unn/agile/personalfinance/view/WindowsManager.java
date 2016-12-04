@@ -82,8 +82,16 @@ public final class WindowsManager {
                 .show();
     }
 
+    public void showManageCategoriesView() {
+        getView("edit-categories.fxml")
+                .title("Edit categories")
+                .width(ADD_ACCOUNT_WINDOW_WIDTH)
+                .height(ADD_ACCOUNT_WINDOW_HEIGHT)
+                .show();
+    }
+
     public void goBack() {
-        Stage currentStage = stagesHistory.pop();
+        Stage currentStage = stagesHistory.peek();
         currentStage.close();
     }
 
@@ -163,6 +171,7 @@ public final class WindowsManager {
             stagesHistory.push(stage);
 
             stage.setOnHidden(event -> {
+                stagesHistory.pop();
                 controller.setDataContext(null);
             });
             stage.show();

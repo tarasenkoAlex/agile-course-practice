@@ -58,6 +58,7 @@
                     <Insets left="7" />
                 </HBox.margin>
             </JFXComboBox>
+            <JFXButton text="Manage" onAction="#handleMangeButtonAction" />
         </HBox>
 
         <!-- Date -->
