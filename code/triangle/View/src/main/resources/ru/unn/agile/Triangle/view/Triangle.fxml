@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="243.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.agile.Triangle.view.Triangle">
+   <children>
+      <HBox prefHeight="143.0" prefWidth="403.0">
+         <children>
+            <VBox prefHeight="126.0" prefWidth="185.0">
+               <children>
+                  <Label text="Ax" />
+                  <TextField prefHeight="25.0" prefWidth="100.0" />
+                  <Label text="Bx" />
+                  <TextField prefHeight="25.0" prefWidth="100.0" />
+                  <Label text="Cx" />
+                  <TextField prefHeight="25.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <Separator prefHeight="0.0" prefWidth="31.0" />
+            <VBox prefHeight="126.0" prefWidth="185.0">
+               <children>
+                  <Label text="Ay" />
+                  <TextField prefHeight="25.0" prefWidth="100.0" />
+                  <Label text="By" />
+                  <TextField prefHeight="25.0" prefWidth="100.0" />
+                  <Label text="Cy" />
+                  <TextField prefHeight="25.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox layoutX="2.0" layoutY="168.0" prefHeight="176.0" prefWidth="403.0">
+         <children>
+            <VBox prefHeight="93.0" prefWidth="100.0">
+               <children>
+                  <Label text="Perimeter:" />
+                  <Label text="PerimeterVal" />
+                  <Separator orientation="VERTICAL" prefHeight="9.0" prefWidth="97.0" />
+                  <Label text="Area:" />
+                  <Label text="AreaValue" />
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="89.0" prefWidth="51.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Circumcircle:" />
+                  <Separator orientation="VERTICAL" prefHeight="10.0" prefWidth="96.0" />
+                  <Label text="Radius:" />
+                  <Label text="RadiusVal" />
+                  <Separator orientation="VERTICAL" prefHeight="10.0" prefWidth="96.0" />
+                  <Label text="X:" />
+                  <Label text="Xval" />
+                  <Separator orientation="VERTICAL" prefHeight="10.0" prefWidth="96.0" />
+                  <Label text="Y:" />
+                  <Label text="Yval" />
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="176.0" prefWidth="50.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Circumcircle:" />
+                  <Separator orientation="VERTICAL" prefHeight="10.0" prefWidth="96.0" />
+                  <Label text="Radius:" />
+                  <Label text="RadiusVal" />
+                  <Separator orientation="VERTICAL" prefHeight="10.0" prefWidth="96.0" />
+                  <Label text="X:" />
+                  <Label text="Xval" />
+                  <Separator orientation="VERTICAL" prefHeight="10.0" prefWidth="96.0" />
+                  <Label text="Y:" />
+                  <Label text="Yval" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button layoutX="115.0" layoutY="143.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Calculate" />
+   </children>
+</AnchorPane>
