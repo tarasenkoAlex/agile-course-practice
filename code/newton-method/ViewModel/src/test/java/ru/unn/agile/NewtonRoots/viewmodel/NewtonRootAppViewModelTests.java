@@ -91,4 +91,20 @@ public class NewtonRootAppViewModelTests {
         assertEquals(InputStatus.BAD_PARAMETERS.toString(),
                 viewModel.inputStatusProperty().get());
     }
+
+    @Test
+    public void waitingStatusWhenOneFieldIsEmpty() {
+        setValidViewModelInputState();
+        viewModel.setAccuracy("");
+        assertEquals(InputStatus.WAITING.toString(),
+                viewModel.inputStatusProperty().get());
+    }
+
+    @Test
+    public void readyStatusWhenParametersIsOK() {
+        setValidViewModelInputState();
+        assertEquals(InputStatus.READY.toString(),
+                viewModel.inputStatusProperty().get());
+    }
+
 }
