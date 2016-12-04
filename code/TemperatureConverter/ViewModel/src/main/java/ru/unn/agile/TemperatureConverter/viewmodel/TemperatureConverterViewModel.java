@@ -59,8 +59,8 @@ public class TemperatureConverterViewModel {
 
             return Double.toString(dSecondValue);
         } catch (Exception e) {
+            warningLabelText = "We wrote incorrect value of temperature!";
         }
-        warningLabelText = "We wrote incorrect value of temperature!";
 
         return "";
     }
