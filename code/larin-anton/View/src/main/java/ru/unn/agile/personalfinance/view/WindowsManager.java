@@ -16,15 +16,16 @@ import java.util.HashMap;
 import java.util.Stack;
 
 public final class WindowsManager {
-    private static final int TRANSACTIONS_WINDOW_WIDTH = 700;
-    private static final int TRANSACTIONS_WINDOW_HEIGHT = 400;
-    private static final int ADD_ACCOUNT_WINDOW_WIDTH = 400;
-    private static final int ADD_ACCOUNT_WINDOW_HEIGHT = 200;
-    private static final int ADD_EXTERNAL_TRANSACTION_WINDOW_WIDTH = 500;
-    private static final int ADD_EXTERNAL_TRANSACTION_WINDOW_HEIGHT = 350;
-    private static final int ADD_TRANSFER_WINDOW_WIDTH = 500;
-    private static final int ADD_TRANSFER_WINDOW_HEIGHT = 250;
-
+    private static final int HOME_SCREEN_WINDOW_WIDTH = 700;
+    private static final int HOME_SCREEN_WINDOW_HEIGHT = 400;
+    private static final int EDIT_ACCOUNT_WINDOW_WIDTH = 400;
+    private static final int EDIT_ACCOUNT_WINDOW_HEIGHT = 200;
+    private static final int EDIT_EXTERNAL_TRANSACTION_WINDOW_WIDTH = 500;
+    private static final int EDIT_EXTERNAL_TRANSACTION_WINDOW_HEIGHT = 350;
+    private static final int EDIT_TRANSFER_WINDOW_WIDTH = 500;
+    private static final int EDIT_TRANSFER_WINDOW_HEIGHT = 250;
+    private static final int EDIT_CATEGORIES_WINDOW_WIDTH = 300;
+    private static final int EDIT_CATEGORIES_WINDOW_HEIGHT = 400;
 
     private static final Object LOCK = new Object();
     private static WindowsManager windowsManager;
@@ -49,8 +50,8 @@ public final class WindowsManager {
     public void showHomeScreenView(final Stage rootStage) {
         getView("home-screen.fxml")
                 .title("My Wallet")
-                .width(TRANSACTIONS_WINDOW_WIDTH)
-                .height(TRANSACTIONS_WINDOW_HEIGHT)
+                .width(HOME_SCREEN_WINDOW_WIDTH)
+                .height(HOME_SCREEN_WINDOW_HEIGHT)
                 .userStage(rootStage)
                 .show();
     }
@@ -58,8 +59,8 @@ public final class WindowsManager {
     public void showEditAccountView(final AccountViewModel account) {
         getView("edit-account.fxml")
                 .title("Add new account")
-                .width(ADD_ACCOUNT_WINDOW_WIDTH)
-                .height(ADD_ACCOUNT_WINDOW_HEIGHT)
+                .width(EDIT_ACCOUNT_WINDOW_WIDTH)
+                .height(EDIT_ACCOUNT_WINDOW_HEIGHT)
                 .data(account)
                 .show();
     }
@@ -67,8 +68,8 @@ public final class WindowsManager {
     public void showEditExternalTransactionView(final ExternalTransactionViewModel transaction) {
         getView("edit-external-transaction.fxml")
                 .title("Add new transaction")
-                .width(ADD_EXTERNAL_TRANSACTION_WINDOW_WIDTH)
-                .height(ADD_EXTERNAL_TRANSACTION_WINDOW_HEIGHT)
+                .width(EDIT_EXTERNAL_TRANSACTION_WINDOW_WIDTH)
+                .height(EDIT_EXTERNAL_TRANSACTION_WINDOW_HEIGHT)
                 .data(transaction)
                 .show();
     }
@@ -76,17 +77,17 @@ public final class WindowsManager {
     public void showAddTransferView(final TransferViewModel transfer) {
         getView("edit-transfer.fxml")
                 .title("Add new transfer")
-                .width(ADD_TRANSFER_WINDOW_WIDTH)
-                .height(ADD_TRANSFER_WINDOW_HEIGHT)
+                .width(EDIT_TRANSFER_WINDOW_WIDTH)
+                .height(EDIT_TRANSFER_WINDOW_HEIGHT)
                 .data(transfer)
                 .show();
     }
 
-    public void showManageCategoriesView() {
+    public void showEditCategoriesView() {
         getView("edit-categories.fxml")
                 .title("Edit categories")
-                .width(ADD_ACCOUNT_WINDOW_WIDTH)
-                .height(ADD_ACCOUNT_WINDOW_HEIGHT)
+                .width(EDIT_CATEGORIES_WINDOW_WIDTH)
+                .height(EDIT_CATEGORIES_WINDOW_HEIGHT)
                 .show();
     }
 

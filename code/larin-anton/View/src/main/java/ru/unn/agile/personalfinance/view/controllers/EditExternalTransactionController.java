@@ -57,7 +57,7 @@ public class EditExternalTransactionController extends DataContextController {
 
     @FXML
     protected void handleMangeButtonAction(final ActionEvent actionEvent) {
-        WindowsManager.getInstance().showManageCategoriesView();
+        WindowsManager.getInstance().showEditCategoriesView();
     }
 
     @Override
