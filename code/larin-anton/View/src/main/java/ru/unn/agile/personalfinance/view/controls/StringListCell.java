@@ -1,6 +1,7 @@
 package ru.unn.agile.personalfinance.view.controls;
 
 import com.jfoenix.controls.JFXListCell;
+import javafx.scene.control.Skin;
 
 import java.util.Objects;
 import java.util.function.Function;

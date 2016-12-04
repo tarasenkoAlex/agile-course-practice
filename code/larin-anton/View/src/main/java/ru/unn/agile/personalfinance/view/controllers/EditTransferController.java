@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.util.converter.CurrencyStringConverter;
-import ru.unn.agile.PersonalFinance.Model.Transfer;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
 import ru.unn.agile.personalfinance.view.WindowsManager;

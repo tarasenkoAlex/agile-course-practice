@@ -8,8 +8,7 @@ import javafx.scene.control.Button;
 import ru.unn.agile.PersonalFinance.ViewModel.*;
 import ru.unn.agile.personalfinance.view.ViewModelService;
 import ru.unn.agile.personalfinance.view.WindowsManager;
-import ru.unn.agile.personalfinance.view.controls.AccountListCell;
-import ru.unn.agile.personalfinance.view.controls.TransactionListCell;
+import ru.unn.agile.personalfinance.view.controls.DataContextListCell;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,8 +50,10 @@ public class HomeScreenController extends DataContextController {
     public void initialize(final URL location, final ResourceBundle resources) {
         setUpBindings(ViewModelService.getViewModel());
 
-        accountsList.setCellFactory(listView -> new AccountListCell());
-        transactionsList.setCellFactory(listView -> new TransactionListCell());
+        accountsList.setCellFactory(listView ->
+                new DataContextListCell<>("account-list-cell.fxml"));
+        transactionsList.setCellFactory(listView ->
+                new DataContextListCell<>("transaction-list-cell.fxml"));
     }
 
     private void setUpBindings(final LedgerViewModel ledger) {

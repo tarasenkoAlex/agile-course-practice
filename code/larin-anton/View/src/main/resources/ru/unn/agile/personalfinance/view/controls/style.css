@@ -1,0 +1,18 @@
+.date {
+    -fx-padding: 0 10 0 0;
+}
+
+.date,
+.counterparty {
+    -fx-text-fill: gray;
+}
+
+.expense .amount,
+.expense .direction {
+    -fx-text-fill: red;
+}
+
+.income .amount,
+.income .direction {
+    -fx-text-fill: green;
+}

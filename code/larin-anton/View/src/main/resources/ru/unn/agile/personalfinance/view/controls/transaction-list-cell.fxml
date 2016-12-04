@@ -1,0 +1,28 @@
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:id="root"
+          fx:controller="ru.unn.agile.personalfinance.view.controllers.TransactionListCellController"
+          stylesheets="@style.css" styleClass="expense">
+
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS"/>
+        <ColumnConstraints minWidth="50" />
+    </columnConstraints>
+
+    <VBox spacing="5" maxWidth="Infinity" GridPane.columnIndex="0">
+        <Label fx:id="descriptionLabel" />
+        <HBox spacing="10">
+            <Label fx:id="amountLabel" styleClass="amount"/>
+            <FontAwesomeIconView fx:id="directionIcon" icon="ICON_ARROW_RIGHT" styleClass="direction"/>
+            <Label fx:id="counterpartyLabel" styleClass="counterparty"/>
+        </HBox>
+    </VBox>
+
+    <Label fx:id="dateLabel" styleClass="date" GridPane.columnIndex="1" />
+
+</GridPane>
