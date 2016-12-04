@@ -3,10 +3,16 @@ package ru.unn.agile.personalfinance.view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Pair;
+import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
+import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
+import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
+import ru.unn.agile.personalfinance.view.controllers.DataContextController;
 
-import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Stack;
 
 public final class WindowsManager {
@@ -18,7 +24,8 @@ public final class WindowsManager {
     private static final Object LOCK = new Object();
     private static WindowsManager windowsManager;
 
-    private final Stack<Stage> stagesHstory = new Stack<>();
+    private final Stack<Stage> stagesHistory = new Stack<>();
+    private final HashMap<URL, Pair<Scene, DataContextController>> scenesCache = new HashMap<>();
 
     private WindowsManager() { }
 
@@ -33,44 +40,44 @@ public final class WindowsManager {
         return windowsManager;
     }
 
-    public void showTransactionsView(final Stage stage) {
+    public void showHomeScreenView(final Stage rootStage) {
         getView("transactions.fxml")
-                .setTitle("My Wallet")
-                .setWidth(TRANSACTIONS_WINDOW_WIDTH)
-                .setHeight(TRANSACTIONS_WINDOW_HEIGHT)
-                .show(stage);
-        stagesHstory.push(stage);
+                .title("My Wallet")
+                .width(TRANSACTIONS_WINDOW_WIDTH)
+                .height(TRANSACTIONS_WINDOW_HEIGHT)
+                .userStage(rootStage)
+                .show();
     }
 
-    public void showAddAccountView(final Stage stage) {
+    public void showEditAccountView(final AccountViewModel account) {
         getView("add-account.fxml")
-                .setTitle("Add new account")
-                .setWidth(ADD_ACCOUNT_WINDOW_WIDTH)
-                .setHeight(ADD_ACCOUNT_WINDOW_HEIGHT)
-                .show(stage);
-        stagesHstory.push(stage);
+                .title("Add new account")
+                .width(ADD_ACCOUNT_WINDOW_WIDTH)
+                .height(ADD_ACCOUNT_WINDOW_HEIGHT)
+                .data(account)
+                .show();
     }
 
-    public void showAddExternalTransactionView(final Stage stage) {
+    public void showEditExternalTransactionView(final ExternalTransactionViewModel transaction) {
         getView("add-external-transaction.fxml")
-                .setTitle("Add new transaction")
-                .setWidth(ADD_ACCOUNT_WINDOW_WIDTH)
-                .setHeight(ADD_ACCOUNT_WINDOW_HEIGHT)
-                .show(stage);
-        stagesHstory.push(stage);
+                .title("Add new transaction")
+                .width(ADD_ACCOUNT_WINDOW_WIDTH)
+                .height(ADD_ACCOUNT_WINDOW_HEIGHT)
+                .data(transaction)
+                .show();
     }
 
-    public void showAddTransferView(final Stage stage) {
+    public void showAddTransferView(final TransferViewModel transfer) {
         getView("add-transfer.fxml")
-                .setTitle("Add new transfer")
-                .setWidth(ADD_ACCOUNT_WINDOW_WIDTH)
-                .setHeight(ADD_ACCOUNT_WINDOW_HEIGHT)
-                .show(stage);
-        stagesHstory.push(stage);
+                .title("Add new transfer")
+                .width(ADD_ACCOUNT_WINDOW_WIDTH)
+                .height(ADD_ACCOUNT_WINDOW_HEIGHT)
+                .data(transfer)
+                .show();
     }
 
     public void goBack() {
-        Stage currentStage = stagesHstory.pop();
+        Stage currentStage = stagesHistory.pop();
         currentStage.close();
     }
 
@@ -83,39 +90,86 @@ public final class WindowsManager {
         private String title;
         private int width;
         private int height;
+        private Stage userStage;
+        private Object dataObject;
 
         ViewBuilder(final String fxmlSource) {
             rootUrl = getClass().getResource(fxmlSource);
         }
 
-        ViewBuilder setTitle(final String title) {
+        ViewBuilder title(final String title) {
             this.title = title;
             return this;
         }
 
-        ViewBuilder setWidth(final int width) {
+        ViewBuilder width(final int width) {
             this.width = width;
             return this;
         }
 
-        ViewBuilder setHeight(final int height) {
+        ViewBuilder height(final int height) {
             this.height = height;
             return this;
         }
 
-        void show(final Stage stage) {
-            try {
-                Parent root = FXMLLoader.load(rootUrl);
-                stage.setTitle(title);
-                stage.setScene(new Scene(root, width, height));
-                stage.show();
-            } catch (IOException ex) {
-                handleWindowCreatingException(ex);
+        ViewBuilder userStage(final Stage userStage) {
+            this.userStage = userStage;
+            return this;
+        }
+
+        ViewBuilder data(final Object dataObject) {
+            this.dataObject = dataObject;
+            return this;
+        }
+
+        void show() {
+            if (scenesCache.containsKey(rootUrl)) {
+                Pair<Scene, DataContextController> sceneAndController = scenesCache.get(rootUrl);
+                showScene(sceneAndController.getKey(), sceneAndController.getValue());
+            } else {
+                try {
+                    FXMLLoader loader = new FXMLLoader(rootUrl);
+                    loader.load();
+                    Parent root = loader.getRoot();
+                    DataContextController controller = loader.getController();
+
+                    Scene scene = new Scene(root);
+                    scenesCache.put(rootUrl, new Pair<>(scene, controller));
+                    showScene(scene, controller);
+                } catch (Exception ex) {
+                    handleWindowCreatingException(ex);
+                }
             }
+        }
+
+        private void showScene(final Scene scene, final DataContextController controller) {
+            Stage stage = getStage();
+
+            if (!stagesHistory.isEmpty()) {
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.initOwner(stagesHistory.peek());
+            }
+            stage.setScene(scene);
+            stage.setTitle(title);
+            stage.setWidth(width);
+            stage.setHeight(height);
+
+            stagesHistory.push(stage);
+
+            controller.setDataContext(dataObject);
+            stage.setOnHidden(event -> {
+                controller.setDataContext(null);
+            });
+            stage.show();
+        }
+
+        private Stage getStage() {
+            return  (userStage == null) ? new Stage() : userStage;
         }
 
         private void handleWindowCreatingException(final Exception ex) {
             // TODO
         }
+
     }
 }

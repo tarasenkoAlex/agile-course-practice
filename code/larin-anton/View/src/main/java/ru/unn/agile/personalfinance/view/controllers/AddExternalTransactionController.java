@@ -4,12 +4,11 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.util.converter.CurrencyStringConverter;
+import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
 import ru.unn.agile.PersonalFinance.ViewModel.CategoryViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.personalfinance.view.ViewModelService;
 import ru.unn.agile.personalfinance.view.WindowsManager;
 import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
@@ -18,10 +17,7 @@ import ru.unn.agile.personalfinance.view.utils.Converters;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddExternalTransactionController implements Initializable {
-    private final ExternalTransactionViewModel transaction =
-            new ExternalTransactionViewModel(ViewModelService.getViewModel());
-
+public class AddExternalTransactionController extends DataContextController {
     private final static StringListCellFactory<CategoryViewModel> categoryListCellFactory =
             new StringListCellFactory<>(category -> category.getName());
 
@@ -45,7 +41,7 @@ public class AddExternalTransactionController implements Initializable {
 
     @FXML
     protected void handleAddButtonAction(final ActionEvent actionEvent) {
-        transaction.save();
+        ((ExternalTransactionViewModel) getDataContext()).save();
         WindowsManager.getInstance().goBack();
     }
 
@@ -59,11 +55,37 @@ public class AddExternalTransactionController implements Initializable {
         categoryComboBox.setCellFactory(categoryListCellFactory);
         categoryComboBox.setConverter(Converters.getCategoryToStringConverter());
         categoryComboBox.getSelectionModel().selectFirst();
-
-        setUpBindings(ViewModelService.getViewModel());
     }
 
-    private void setUpBindings(final LedgerViewModel ledgerVM) {
+    protected void removeBindings(final Object oldDataContext) {
+        final ExternalTransactionViewModel transaction =
+                (ExternalTransactionViewModel) oldDataContext;
+
+        Bindings.unbindBidirectional(
+                transactionAmountField.textProperty(),
+                transaction.amountProperty());
+
+        Bindings.unbindBidirectional(
+                incomeRBtn.selectedProperty(),
+                transaction.isIncomeProperty());
+
+        Bindings.unbindBidirectional(
+                descriptionTextArea.textProperty(),
+                transaction.descriptionProperty());
+
+        transaction.categoryProperty().unbind();
+
+        Bindings.unbindBidirectional(
+                counterpartyField.textProperty(),
+                transaction.counterpartyProperty());
+
+        addButton.disableProperty().unbind();
+    }
+
+    protected void addBindings(final Object newDataContext) {
+        final ExternalTransactionViewModel transaction =
+                (ExternalTransactionViewModel) newDataContext;
+
         /* transactionAmountField.text <-> transaction.amount */
         Bindings.bindBidirectional(
                 transactionAmountField.textProperty(),

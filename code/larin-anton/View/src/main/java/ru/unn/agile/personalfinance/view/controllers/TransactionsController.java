@@ -4,12 +4,8 @@ import com.jfoenix.controls.JFXListView;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
+import ru.unn.agile.PersonalFinance.ViewModel.*;
 import ru.unn.agile.personalfinance.view.ViewModelService;
 import ru.unn.agile.personalfinance.view.WindowsManager;
 import ru.unn.agile.personalfinance.view.controls.AccountListCell;
@@ -18,7 +14,9 @@ import ru.unn.agile.personalfinance.view.controls.TransactionListCell;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TransactionsController implements Initializable {
+public class TransactionsController extends DataContextController {
+    private final LedgerViewModel ledger = ViewModelService.getViewModel();
+
     @FXML
     private JFXListView<TransactionViewModel> transactionsList;
 
@@ -33,17 +31,20 @@ public class TransactionsController implements Initializable {
 
     @FXML
     protected void handleAddAccountAction(final ActionEvent event) {
-        WindowsManager.getInstance().showAddAccountView(new Stage());
+        AccountViewModel newAccount = new AccountViewModel(ledger);
+        WindowsManager.getInstance().showEditAccountView(newAccount);
     }
 
     @FXML
     protected void handleAddTransactionAction(final ActionEvent actionEvent) {
-        WindowsManager.getInstance().showAddExternalTransactionView(new Stage());
+        ExternalTransactionViewModel transaction = new ExternalTransactionViewModel(ledger);
+        WindowsManager.getInstance().showEditExternalTransactionView(transaction);
     }
 
     @FXML
     protected void handleAddTransferAction(final ActionEvent actionEvent) {
-        WindowsManager.getInstance().showAddTransferView(new Stage());
+        TransferViewModel newTransfer = new TransferViewModel(ledger);
+        WindowsManager.getInstance().showAddTransferView(newTransfer);
     }
 
     @Override

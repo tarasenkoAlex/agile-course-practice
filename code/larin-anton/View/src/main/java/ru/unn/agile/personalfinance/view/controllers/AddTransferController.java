@@ -5,15 +5,13 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.util.converter.CurrencyStringConverter;
+import ru.unn.agile.PersonalFinance.Model.Transfer;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
-import ru.unn.agile.personalfinance.view.ViewModelService;
 import ru.unn.agile.personalfinance.view.WindowsManager;
 import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
 import ru.unn.agile.personalfinance.view.utils.Converters;
@@ -21,10 +19,7 @@ import ru.unn.agile.personalfinance.view.utils.Converters;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddTransferController implements Initializable {
-    private final TransferViewModel transfer =
-            new TransferViewModel(ViewModelService.getViewModel());
-
+public class AddTransferController extends DataContextController {
     private final static StringListCellFactory<AccountViewModel> accountListCellFactory =
             new StringListCellFactory<>(account -> account.getName());
 
@@ -42,7 +37,7 @@ public class AddTransferController implements Initializable {
 
     @FXML
     protected void handleAddButtonAction(final ActionEvent actionEvent) {
-        transfer.save();
+        ((TransferViewModel) getDataContext()).save();
         WindowsManager.getInstance().goBack();
     }
 
@@ -53,30 +48,41 @@ public class AddTransferController implements Initializable {
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
-        setUpBindings(ViewModelService.getViewModel());
         setUpAccountComboBox(accountFromComboBox, 0);
         setUpAccountComboBox(accountToComboBox, 1);
     }
 
-    private void setUpBindings(final LedgerViewModel ledgerVM) {
+    @Override
+    protected void removeBindings(final Object oldDataContext) {
+        final TransferViewModel oldTransfer = (TransferViewModel) oldDataContext;
+        Bindings.unbindBidirectional(amountField.textProperty(), oldTransfer.amountProperty());
+        oldTransfer.accountFromProperty().unbind();
+        oldTransfer.accountToProperty().unbind();
+        addButton.disableProperty().unbind();
+    }
+
+    @Override
+    protected void addBindings(final Object newDataContext) {
+        final TransferViewModel newTransfer = (TransferViewModel) newDataContext;
+
         /* amountField.text <-> transfer.amount */
         Bindings.bindBidirectional(
                 amountField.textProperty(),
-                transfer.amountProperty(),
+                newTransfer.amountProperty(),
                 new CurrencyStringConverter());
 
         /* accountFromComboBox.selected -> transfer.accountFrom */
         ReadOnlyObjectProperty<AccountViewModel> selectedAccountFromProperty =
                 accountFromComboBox.getSelectionModel().selectedItemProperty();
-        transfer.accountFromProperty().bind(selectedAccountFromProperty);
+        newTransfer.accountFromProperty().bind(selectedAccountFromProperty);
 
         /* accountFromComboBox.selected -> transfer.accountTo */
         ReadOnlyObjectProperty<AccountViewModel> selectedAccountToProperty =
                 accountToComboBox.getSelectionModel().selectedItemProperty();
-        transfer.accountToProperty().bind(selectedAccountToProperty);
+        newTransfer.accountToProperty().bind(selectedAccountToProperty);
 
         /* transfer.isAbleToSave -> addButton.disabled */
-        addButton.disableProperty().bind(transfer.isAbleToSaveProperty().not());
+        addButton.disableProperty().bind(newTransfer.isAbleToSaveProperty().not());
     }
 
     private void setUpAccountComboBox(final ComboBox<AccountViewModel> comboBox,
