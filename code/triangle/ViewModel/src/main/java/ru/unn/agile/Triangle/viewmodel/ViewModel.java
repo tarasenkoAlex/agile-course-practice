@@ -147,11 +147,33 @@ public class ViewModel {
             || cx.get().isEmpty() || cy.get().isEmpty()) {
             inputStatus = Status.WAITING;
         }
+        try {
+            if (!ax.get().isEmpty()) {
+                Double.parseDouble(ax.get());
+            }
+            if (!ay.get().isEmpty()) {
+                Double.parseDouble(ay.get());
+            }
+            if (!bx.get().isEmpty()) {
+                Double.parseDouble(bx.get());
+            }
+            if (!by.get().isEmpty()) {
+                Double.parseDouble(by.get());
+            }
+            if (!bx.get().isEmpty()) {
+                Double.parseDouble(cx.get());
+            }
+            if (!by.get().isEmpty()) {
+                Double.parseDouble(cy.get());
+            }
+        } catch (NumberFormatException nfe) {
+            inputStatus = Status.BAD_FORMAT;
+        }
 
         return inputStatus;
     }
 }
 
 enum Status {
-    WAITING, READY
+    WAITING, READY, BAD_FORMAT
 }

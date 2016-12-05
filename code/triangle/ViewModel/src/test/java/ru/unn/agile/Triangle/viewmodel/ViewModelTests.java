@@ -58,6 +58,14 @@ public class ViewModelTests {
         assertTrue(viewModel.getCalculationDisabled());
     }
 
+    @Test
+    public void whenInputIsIncorrectCalculateButtonIsDisabled() {
+        setInputData();
+        viewModel.axProperty().set("atata");
+
+        assertTrue(viewModel.getCalculationDisabled());
+    }
+
     private void setInputData() {
         viewModel.axProperty().set("0.0");
         viewModel.ayProperty().set("0.0");
