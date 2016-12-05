@@ -27,11 +27,35 @@ public class ViewModelTests {
         assertEquals("", viewModel.byProperty().get());
         assertEquals("", viewModel.cxProperty().get());
         assertEquals("", viewModel.cyProperty().get());
+
+        assertEquals("", viewModel.getArea());
+        assertEquals("", viewModel.getPerimeter());
+        assertEquals("", viewModel.getCircumcircleRadius());
+        assertEquals("", viewModel.getCircumcircleCenterX());
+        assertEquals("", viewModel.getCircumcircleCenterX());
+        assertEquals("", viewModel.getIncircleRadius());
+        assertEquals("", viewModel.getIncircleCenterX());
+        assertEquals("", viewModel.getIncircleCenterY());
     }
 
     @Test
     public void calculateButtonIsDisabledInitially() {
-        assertTrue(viewModel.calculationDisabledProperty().get());
+        assertTrue(viewModel.getCalculationDisabled());
+    }
+
+    @Test
+    public void whenInputIsEnteredCalculateButtonIsEnabled() {
+        setInputData();
+
+        assertFalse(viewModel.getCalculationDisabled());
+    }
+
+    @Test
+    public void whenInputHasEmptyFieldsCalculateButtonIsDisabled() {
+        setInputData();
+        viewModel.axProperty().set("");
+
+        assertTrue(viewModel.getCalculationDisabled());
     }
 
     private void setInputData() {
