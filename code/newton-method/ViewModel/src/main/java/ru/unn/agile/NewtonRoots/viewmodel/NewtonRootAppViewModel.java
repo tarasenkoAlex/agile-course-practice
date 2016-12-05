@@ -23,6 +23,7 @@ public class NewtonRootAppViewModel  {
     private final StringProperty solverReport;
     private final BooleanProperty findRootButtonDisable;
     private final StringProperty inputStatus;
+    private final StringProperty startPoint;
 
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
 
@@ -34,6 +35,7 @@ public class NewtonRootAppViewModel  {
         function = new SimpleStringProperty("");
         findRootButtonDisable = new SimpleBooleanProperty(true);
         solverReport = new SimpleStringProperty("");
+        startPoint = new SimpleStringProperty("");
         inputStatus = new SimpleStringProperty(InputStatus.WAITING.toString());
 
         BooleanBinding couldFindRoot = new BooleanBinding() {
@@ -53,6 +55,7 @@ public class NewtonRootAppViewModel  {
             add(derivativeStep);
             add(accuracy);
             add(function);
+            add(startPoint);
         } };
 
         for (StringProperty field : fields) {
@@ -85,10 +88,10 @@ public class NewtonRootAppViewModel  {
     public StringProperty derivativeStepProperty()  {
         return derivativeStep;
     }
-    public String getderivativeStep() {
+    public String getDerivativeStep() {
         return derivativeStep.get();
     }
-    public void setderivativeStep(final String value) {
+    public void setDerivativeStep(final String value) {
         derivativeStep.set(value);
     }
 
@@ -142,38 +145,90 @@ public class NewtonRootAppViewModel  {
         inputStatus.set(value);
     }
 
-    InputStatus checkInput()  {
-        if (leftPoint.get().isEmpty() || rightPoint.get().isEmpty()
-                || accuracy.get().isEmpty() || derivativeStep.get().isEmpty()
-                || function.get().isEmpty()) {
-            return InputStatus.WAITING;
-        }
+    public StringProperty startPointProperty()  {
+        return startPoint;
+    }
+    public String getStartPoint() {
+        return startPoint.get();
+    }
+    public void setStartPoint(final String value) {
+        startPoint.set(value);
+    }
 
-        MathFunction testFunction = null;
-        try {
-            testFunction = new MathFunction(function.get());
-        } catch (Exception e)  {
-            return InputStatus.BAD_FORMAT;
-        }
-
+    private boolean checkInputFormat()  {
         try {
             Double.parseDouble(leftPoint.get());
             Double.parseDouble(rightPoint.get());
             Double.parseDouble(accuracy.get());
             Double.parseDouble(derivativeStep.get());
+            Double.parseDouble(startPoint.get());
         } catch (NumberFormatException nfe) {
-            return InputStatus.BAD_FORMAT;
+            return false;
+        }
+
+        try {
+            MathFunction testFunction = new MathFunction(function.get());
+        } catch (Exception e)  {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean checkMonotonic()  {
+        MathFunction testFunction = null;
+        try {
+             testFunction = new MathFunction(function.get());
+        } catch (Exception e)  {
+            return false;
         }
 
         if (!NewtonMethod.isMonotonicFunctionOnInterval(testFunction,
                 Double.parseDouble(leftPoint.get()),
                 Double.parseDouble(rightPoint.get())))  {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean checkMethodParameters()  {
+        double leftPointValue = Double.parseDouble(leftPoint.get());
+        double rightPointValue = Double.parseDouble(rightPoint.get());
+        double startPointValue = Double.parseDouble(startPoint.get());
+
+        if (leftPointValue >= rightPointValue || startPointValue < leftPointValue
+                || startPointValue > rightPointValue) {
+            return false;
+        }
+
+        double accuracyValue = Double.parseDouble(accuracy.get());
+        double derivativeStepValue = Double.parseDouble(derivativeStep.get());
+
+        if (accuracyValue <= 0 || accuracyValue > 0.1
+                || derivativeStepValue <= 0 || derivativeStepValue > 0.1)  {
+            return false;
+        }
+
+        return true;
+    }
+
+    private InputStatus checkInput()  {
+        if (leftPoint.get().isEmpty() || rightPoint.get().isEmpty()
+                || accuracy.get().isEmpty() || derivativeStep.get().isEmpty()
+                || function.get().isEmpty() || startPoint.get().isEmpty()) {
+            return InputStatus.WAITING;
+        }
+
+        if (!checkInputFormat()) {
+            return InputStatus.BAD_FORMAT;
+        }
+
+        if (!checkMonotonic())  {
             return InputStatus.NON_MONOTONIC_FUNCTION;
         }
 
-        if (Double.parseDouble(leftPoint.get()) >= Double.parseDouble(rightPoint.get())
-                || Double.parseDouble(accuracy.get()) <= 0
-                || Double.parseDouble(derivativeStep.get()) <= 0) {
+        if (!checkMethodParameters()) {
             return InputStatus.BAD_PARAMETERS;
         }
 
@@ -199,7 +254,7 @@ public class NewtonRootAppViewModel  {
             MathFunction functionObj = new MathFunction(function.get());
             double left = Double.parseDouble(leftPoint.get());
             double right = Double.parseDouble(rightPoint.get());
-            double root = method.findRoot(functionObj, (left + right) / 2, left, right);
+            double root = method.findRoot(functionObj, Double.parseDouble(startPoint.get()), left, right);
             if (Double.isNaN(root))  {
                 throw new Exception();
             } else  {
