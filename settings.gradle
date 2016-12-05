@@ -127,7 +127,7 @@ project(":code/newton-method/Model").name = "newton-method-Model"
 include "code/newton-method/View"
 project(":code/newton-method/View").name = "newton-method-View"
 include "code/newton-method/ViewModel"
-project(":code/newton-method/ViewModel").name = "newton-method-Viewmodel"
+project(":code/newton-method/ViewModel").name = "newton-method-viewmodel"
 // Ларин Антон
 include "code/larin-anton"
 project(":code/larin-anton").name = "larin-anton-Model"

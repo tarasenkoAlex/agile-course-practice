@@ -2,11 +2,7 @@ package ru.unn.agile.NewtonRoots.Model;
 
 import static java.lang.Double.NaN;
 
-interface FunctionInterface {
-    double compute(double x);
-}
-
-class NewtonMethod {
+public class NewtonMethod {
     public enum StoppingCriterion { FunctionModule, DifferenceBetweenApproximates }
     public enum ResultStatus { RootSuccessfullyFound, NoRootInInterval,
         NonmonotonicFunctionOnInterval, InitialPointOutsideInterval, IncorrectIntervalBoundaries }
@@ -29,13 +25,13 @@ class NewtonMethod {
         boolean check(FunctionInterface func, double x, double xPrev, double accuracy);
     }
 
-    NewtonMethod(final double accuracy, final double derivativeComputeStep) {
+    public NewtonMethod(final double accuracy, final double derivativeComputeStep) {
         accuracyEps = accuracy;
         derivativeStep = derivativeComputeStep;
         currentStoppingCriterionFunction = stoppingCriterionAsFunctionModule;
     }
 
-    private boolean isMonotonicFunctionOnInterval(final FunctionInterface func,
+    static public boolean isMonotonicFunctionOnInterval(final FunctionInterface func,
                                                   final double intervalStart,
                                                   final double intervalEnd) {
         double x = intervalStart;
@@ -64,7 +60,7 @@ class NewtonMethod {
         return func.compute(intervalStart) * func.compute(intervalEnd) <= 0;
     }
 
-    double findRoot(final FunctionInterface func, final double initialPoint,
+    public double findRoot(final FunctionInterface func, final double initialPoint,
                     final double intervalStart, final double intervalEnd) {
         double x0 = initialPoint;
         double x = x0;

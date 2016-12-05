@@ -2,9 +2,9 @@ package ru.unn.agile.NewtonRoots.Model;
 
 import org.nfunk.jep.JEP;
 
-class MathFunction implements FunctionInterface  {
+public class MathFunction implements FunctionInterface  {
     private final JEP parser;
-    MathFunction(final String expression) throws Exception {
+    public MathFunction(final String expression) throws Exception {
         parser = new JEP();
         parser.addStandardFunctions();
         parser.addStandardConstants();

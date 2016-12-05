@@ -11,7 +11,7 @@ public class MathFunctionTests {
         MathFunction func = new MathFunction("-z");
     }
     @Test
-    public void evaluateValidFunction() throws Exception {
+    public void evaluateValidFunction() {
         try {
             MathFunction func = new MathFunction("x^2");
         } catch (Exception e)  {
