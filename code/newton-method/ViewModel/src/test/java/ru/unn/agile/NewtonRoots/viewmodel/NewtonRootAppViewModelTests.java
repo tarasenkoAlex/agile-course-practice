@@ -24,14 +24,14 @@ public class NewtonRootAppViewModelTests {
         viewModel.setRightPoint("1");
         viewModel.setAccuracy("0.001");
         viewModel.setFunction("x");
-        viewModel.setMaxIterations("10");
+        viewModel.setderivativeStep("0.001");
     }
 
     @Test
     public void checkDefaultState() {
         assertEquals("", viewModel.leftPointProperty().get());
         assertEquals("", viewModel.rightPointProperty().get());
-        assertEquals("", viewModel.maxIterationsProperty().get());
+        assertEquals("", viewModel.derivativeStepProperty().get());
         assertEquals("", viewModel.accuracyProperty().get());
         assertEquals("", viewModel.functionProperty().get());
         assertEquals(true, viewModel.findRootButtonDisableProperty().get());
@@ -54,9 +54,9 @@ public class NewtonRootAppViewModelTests {
     }
 
     @Test
-    public void setBadMaxIterations() {
+    public void setBadDerivativeStep() {
         setValidViewModelInputState();
-        viewModel.setMaxIterations("-a");
+        viewModel.setderivativeStep("-a");
         assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.inputStatusProperty().get());
     }
 

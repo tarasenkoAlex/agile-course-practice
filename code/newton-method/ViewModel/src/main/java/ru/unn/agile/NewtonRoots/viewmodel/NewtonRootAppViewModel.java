@@ -17,7 +17,7 @@ import ru.unn.agile.NewtonRoots.Model.MathFunction;
 public class NewtonRootAppViewModel  {
     private final StringProperty leftPoint;
     private final StringProperty rightPoint;
-    private final StringProperty maxIterations;
+    private final StringProperty derivativeStep;
     private final StringProperty accuracy;
     private final StringProperty function;
     private final StringProperty solverReport;
@@ -29,7 +29,7 @@ public class NewtonRootAppViewModel  {
     public NewtonRootAppViewModel()  {
         leftPoint = new SimpleStringProperty("");
         rightPoint = new SimpleStringProperty("");
-        maxIterations = new SimpleStringProperty("");
+        derivativeStep = new SimpleStringProperty("");
         accuracy = new SimpleStringProperty("");
         function = new SimpleStringProperty("");
         findRootButtonDisable = new SimpleBooleanProperty(true);
@@ -38,7 +38,7 @@ public class NewtonRootAppViewModel  {
 
         BooleanBinding couldFindRoot = new BooleanBinding() {
             {
-                super.bind(leftPoint, rightPoint, maxIterations, accuracy, function);
+                super.bind(leftPoint, rightPoint, derivativeStep, accuracy, function);
             }
             @Override
             protected boolean computeValue() {
@@ -50,7 +50,7 @@ public class NewtonRootAppViewModel  {
         final List<StringProperty> fields = new ArrayList<StringProperty>() { {
             add(leftPoint);
             add(rightPoint);
-            add(maxIterations);
+            add(derivativeStep);
             add(accuracy);
             add(function);
         } };
@@ -82,14 +82,14 @@ public class NewtonRootAppViewModel  {
         rightPoint.set(value);
     }
 
-    public StringProperty maxIterationsProperty()  {
-        return maxIterations;
+    public StringProperty derivativeStepProperty()  {
+        return derivativeStep;
     }
-    public String getMaxIterations() {
-        return maxIterations.get();
+    public String getderivativeStep() {
+        return derivativeStep.get();
     }
-    public void setMaxIterations(final String value) {
-        maxIterations.set(value);
+    public void setderivativeStep(final String value) {
+        derivativeStep.set(value);
     }
 
     public StringProperty accuracyProperty()  {
@@ -144,7 +144,7 @@ public class NewtonRootAppViewModel  {
 
     InputStatus checkInput()  {
         if (leftPoint.get().isEmpty() || rightPoint.get().isEmpty()
-                || accuracy.get().isEmpty() || maxIterations.get().isEmpty()
+                || accuracy.get().isEmpty() || derivativeStep.get().isEmpty()
                 || function.get().isEmpty()) {
             return InputStatus.WAITING;
         }
@@ -160,7 +160,7 @@ public class NewtonRootAppViewModel  {
             Double.parseDouble(leftPoint.get());
             Double.parseDouble(rightPoint.get());
             Double.parseDouble(accuracy.get());
-            Integer.parseUnsignedInt(maxIterations.get());
+            Double.parseDouble(derivativeStep.get());
         } catch (NumberFormatException nfe) {
             return InputStatus.BAD_FORMAT;
         }
@@ -172,7 +172,8 @@ public class NewtonRootAppViewModel  {
         }
 
         if (Double.parseDouble(leftPoint.get()) >= Double.parseDouble(rightPoint.get())
-                || Double.parseDouble(accuracy.get()) <= 0) {
+                || Double.parseDouble(accuracy.get()) <= 0
+                || Double.parseDouble(derivativeStep.get()) <= 0) {
             return InputStatus.BAD_PARAMETERS;
         }
 
@@ -194,7 +195,7 @@ public class NewtonRootAppViewModel  {
 
         try {
             NewtonMethod method = new NewtonMethod(Double.parseDouble(accuracy.get()),
-                    Double.parseDouble(accuracy.get()) / 2);
+                    Double.parseDouble(derivativeStep.get()));
             MathFunction functionObj = new MathFunction(function.get());
             double left = Double.parseDouble(leftPoint.get());
             double right = Double.parseDouble(rightPoint.get());

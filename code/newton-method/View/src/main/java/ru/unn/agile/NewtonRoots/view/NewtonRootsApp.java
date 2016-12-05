@@ -14,7 +14,7 @@ public class NewtonRootsApp  {
     @FXML
     private TextField rightPointText;
     @FXML
-    private TextField maxIterationsText;
+    private TextField derivativeStepText;
     @FXML
     private TextField accuracyText;
     @FXML
@@ -28,9 +28,9 @@ public class NewtonRootsApp  {
     private void initialize() {
         leftPointText.textProperty().bindBidirectional(viewModel.leftPointProperty());
         rightPointText.textProperty().bindBidirectional(viewModel.rightPointProperty());
-        maxIterationsText.textProperty().bindBidirectional(viewModel.maxIterationsProperty());
+        derivativeStepText.textProperty().bindBidirectional(viewModel.derivativeStepProperty());
         accuracyText.textProperty().bindBidirectional(viewModel.accuracyProperty());
-        functionText.textProperty().bindBidirectional(viewModel.accuracyProperty());
+        functionText.textProperty().bindBidirectional(viewModel.functionProperty());
         reportTextField.textProperty().bindBidirectional(viewModel.solverReportProperty());
 
         findRootButton.setOnAction(value -> viewModel.findRoot());
