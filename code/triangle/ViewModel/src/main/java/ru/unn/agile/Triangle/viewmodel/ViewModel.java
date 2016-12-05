@@ -5,6 +5,12 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import ru.unn.agile.Triangle.model.Circle;
+import ru.unn.agile.Triangle.model.Point2D;
+import ru.unn.agile.Triangle.model.Triangle;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class ViewModel {
     private final StringProperty ax = new SimpleStringProperty();
@@ -58,7 +64,30 @@ public class ViewModel {
     }
 
     public void calculate() {
+        Point2D a = new Point2D(Double.parseDouble(ax.get()), Double.parseDouble(ay.get()));
+        Point2D b = new Point2D(Double.parseDouble(bx.get()), Double.parseDouble(by.get()));
+        Point2D c = new Point2D(Double.parseDouble(cx.get()), Double.parseDouble(cy.get()));
 
+        Triangle triangle = new Triangle(a, b, c);
+
+        DecimalFormat df = new DecimalFormat("###.###");
+
+        area.set(df.format(triangle.area()));
+        perimeter.set(df.format(triangle.perimeter()));
+
+        Circle circumcircle = triangle.getCircumcircle();
+        circumcircleRadius.set(df.format(circumcircle.getRadius()));
+
+        Point2D circumcircleCenter = circumcircle.getCenter();
+        circumcircleCenterX.setValue(df.format(circumcircleCenter.getX()));
+        circumcircleCenterY.setValue(df.format(circumcircleCenter.getY()));
+
+        Circle incircle = triangle.getIncircle();
+        incircleRadius.set(df.format(incircle.getRadius()));
+
+        Point2D incircleCenter = incircle.getCenter();
+        incircleCenterX.setValue(df.format(incircleCenter.getX()));
+        incircleCenterY.setValue(df.format(incircleCenter.getY()));
     }
 
     public StringProperty axProperty() {
@@ -129,9 +158,7 @@ public class ViewModel {
         return incircleCenterX;
     }
 
-    public String getIncircleCenterX() {
-        return incircleCenterX.get();
-    }
+    public String getIncircleCenterX() { return incircleCenterX.get(); }
 
     public StringProperty incircleCenterYProperty() {
         return incircleCenterY;
@@ -172,8 +199,8 @@ public class ViewModel {
 
         return inputStatus;
     }
-}
 
-enum Status {
-    WAITING, READY, BAD_FORMAT
+    enum Status {
+        WAITING, READY, BAD_FORMAT
+    }
 }

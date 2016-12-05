@@ -1,9 +1,11 @@
-package ru.unn.agile.Triangle.Model;
+package ru.unn.agile.Triangle.model;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+
+import ru.unn.agile.Triangle.model.*;
 
 public class TriangleTest {
     private static final double DELTA = 0.001;

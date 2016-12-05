@@ -1,4 +1,4 @@
-package ru.unn.agile.Triangle.Model;
+package ru.unn.agile.Triangle.model;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +46,7 @@ public class WhenCalculatingInscribedOrCircumscribedCircle {
     private static Object[][] getTestDataInscribedCircle() {
         return new Object[][]{
                 {
-                        getPoint(0.292, 0.292), 0.292, SIMPLE_TRIANGLE.getIncircle()
+                        getPoint(0.293, 0.293), 0.293, SIMPLE_TRIANGLE.getIncircle()
                 },
                 {
                         getPoint(0.579, -0.729), 0.944, DIFFICULT_TRIANGLE.getIncircle()

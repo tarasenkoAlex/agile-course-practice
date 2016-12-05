@@ -66,6 +66,21 @@ public class ViewModelTests {
         assertTrue(viewModel.getCalculationDisabled());
     }
 
+    @Test
+    public void canCalculateResultsWithCorrectInput() {
+        setInputData();
+        viewModel.calculate();
+
+        assertEquals("0.5", viewModel.getArea());
+        assertEquals("3.414", viewModel.getPerimeter());
+        assertEquals("0.707", viewModel.getCircumcircleRadius());
+        assertEquals("0.5", viewModel.getCircumcircleCenterX());
+        assertEquals("0.5", viewModel.getCircumcircleCenterY());
+        assertEquals("0.293", viewModel.getIncircleRadius());
+        assertEquals("0.293", viewModel.getIncircleCenterX());
+        assertEquals("0.293", viewModel.getIncircleCenterY());
+    }
+
     private void setInputData() {
         viewModel.axProperty().set("0.0");
         viewModel.ayProperty().set("0.0");

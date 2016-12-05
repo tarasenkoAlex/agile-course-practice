@@ -40,10 +40,10 @@
             <VBox prefHeight="93.0" prefWidth="100.0">
                <children>
                   <Label text="Perimeter:" />
-                  <Label text="PerimeterVal" />
+                  <Label text="${viewModel.perimeter}" />
                   <Separator orientation="VERTICAL" prefHeight="9.0" prefWidth="97.0" />
                   <Label text="Area:" />
-                  <Label text="AreaValue" />
+                  <Label text="${viewModel.area}" />
                </children>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="89.0" prefWidth="51.0" />
@@ -52,13 +52,13 @@
                   <Label text="Circumcircle:" />
                   <Separator orientation="VERTICAL" prefHeight="10.0" prefWidth="96.0" />
                   <Label text="Radius:" />
-                  <Label text="RadiusVal" />
+                  <Label text="${viewModel.incircleRadius}" />
                   <Separator orientation="VERTICAL" prefHeight="10.0" prefWidth="96.0" />
                   <Label text="X:" />
-                  <Label text="Xval" />
+                  <Label text="${viewModel.incircleCenterX}" />
                   <Separator orientation="VERTICAL" prefHeight="10.0" prefWidth="96.0" />
                   <Label text="Y:" />
-                  <Label text="Yval" />
+                  <Label text="${viewModel.incircleCenterY}" />
                </children>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="176.0" prefWidth="50.0" />
@@ -67,13 +67,13 @@
                   <Label text="Circumcircle:" />
                   <Separator orientation="VERTICAL" prefHeight="10.0" prefWidth="96.0" />
                   <Label text="Radius:" />
-                  <Label text="RadiusVal" />
+                  <Label text="${viewModel.circumcircleRadius}" />
                   <Separator orientation="VERTICAL" prefHeight="10.0" prefWidth="96.0" />
                   <Label text="X:" />
-                  <Label text="Xval" />
+                  <Label text="${viewModel.circumcircleCenterX}" />
                   <Separator orientation="VERTICAL" prefHeight="10.0" prefWidth="96.0" />
                   <Label text="Y:" />
-                  <Label text="Yval" />
+                  <Label text="${viewModel.circumcircleCenterY}" />
                </children>
             </VBox>
          </children>
