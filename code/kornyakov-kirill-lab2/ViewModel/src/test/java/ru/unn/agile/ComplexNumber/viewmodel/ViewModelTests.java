@@ -135,7 +135,7 @@ public class ViewModelTests {
     public void operationMulHasCorrectResult() {
         viewModel.re1Property().set("2");
         viewModel.im1Property().set("3");
-        viewModel.re2Property().set("1");STATUS:
+        viewModel.re2Property().set("1");
         viewModel.im2Property().set("2");
         viewModel.operationProperty().set(Operation.MULTIPLY);
 
