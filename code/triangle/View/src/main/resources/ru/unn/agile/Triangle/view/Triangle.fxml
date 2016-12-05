@@ -4,29 +4,33 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
+<?import ru.unn.agile.Triangle.viewmodel.*?>
 <AnchorPane prefHeight="243.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.agile.Triangle.view.Triangle">
+   <fx:define>
+      <ViewModel fx:id="viewModel" />
+   </fx:define>
    <children>
       <HBox prefHeight="143.0" prefWidth="403.0">
          <children>
             <VBox prefHeight="126.0" prefWidth="185.0">
                <children>
                   <Label text="Ax" />
-                  <TextField prefHeight="25.0" prefWidth="100.0" />
+                  <TextField fx:id="txtAx" prefHeight="25.0" prefWidth="100.0" />
                   <Label text="Bx" />
-                  <TextField prefHeight="25.0" prefWidth="100.0" />
+                  <TextField fx:id="txtBx" prefHeight="25.0" prefWidth="100.0" />
                   <Label text="Cx" />
-                  <TextField prefHeight="25.0" prefWidth="100.0" />
+                  <TextField fx:id="txtCx" prefHeight="25.0" prefWidth="100.0" />
                </children>
             </VBox>
             <Separator prefHeight="0.0" prefWidth="31.0" />
             <VBox prefHeight="126.0" prefWidth="185.0">
                <children>
                   <Label text="Ay" />
-                  <TextField prefHeight="25.0" prefWidth="100.0" />
+                  <TextField fx:id="txtAy" prefHeight="25.0" prefWidth="100.0" />
                   <Label text="By" />
-                  <TextField prefHeight="25.0" prefWidth="100.0" />
+                  <TextField fx:id="txtBy" prefHeight="25.0" prefWidth="100.0" />
                   <Label text="Cy" />
-                  <TextField prefHeight="25.0" prefWidth="100.0" />
+                  <TextField fx:id="txtCy" prefHeight="25.0" prefWidth="100.0" />
                </children>
             </VBox>
          </children>
@@ -74,6 +78,7 @@
             </VBox>
          </children>
       </HBox>
-      <Button layoutX="115.0" layoutY="143.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Calculate" />
+      <Button fx:id="btnCalculate" layoutX="115.0" layoutY="143.0" mnemonicParsing="false"
+              disable="${viewModel.calculationDisabled}" prefHeight="25.0" prefWidth="185.0" text="Calculate" />
    </children>
 </AnchorPane>

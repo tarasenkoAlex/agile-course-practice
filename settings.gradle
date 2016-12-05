@@ -122,6 +122,8 @@ include "code/triangle/Model"
 project(":code/triangle/Model").name = "triangle-Model"
 include "code/triangle/View"
 project(":code/triangle/View").name = "triangle-View"
+include "code/triangle/ViewModel"
+project(":code/triangle/ViewModel").name = "triangle-ViewModel"
 
 // Кукушкин Даниил
 include "code/kukushkin-daniil"
