@@ -24,7 +24,8 @@ public class NewtonRootAppViewModelTests {
         viewModel.setRightPoint("1");
         viewModel.setAccuracy("0.001");
         viewModel.setFunction("x");
-        viewModel.setderivativeStep("0.001");
+        viewModel.setDerivativeStep("0.001");
+        viewModel.setStartPoint("0.1");
     }
 
     @Test
@@ -54,9 +55,9 @@ public class NewtonRootAppViewModelTests {
     }
 
     @Test
-    public void setBadDerivativeStep() {
+    public void setBadFormattedDerivativeStep() {
         setValidViewModelInputState();
-        viewModel.setderivativeStep("-a");
+        viewModel.setDerivativeStep("-a");
         assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.inputStatusProperty().get());
     }
 
@@ -64,6 +65,13 @@ public class NewtonRootAppViewModelTests {
     public void setBadFormattedFunction() {
         setValidViewModelInputState();
         viewModel.setFunction("a");
+        assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.inputStatusProperty().get());
+    }
+
+    @Test
+    public void setBadFormattedStartPoint() {
+        setValidViewModelInputState();
+        viewModel.setStartPoint("a");
         assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.inputStatusProperty().get());
     }
 
@@ -88,6 +96,22 @@ public class NewtonRootAppViewModelTests {
     public void setBadAccuracy() {
         setValidViewModelInputState();
         viewModel.setAccuracy("0");
+        assertEquals(InputStatus.BAD_PARAMETERS.toString(),
+                viewModel.inputStatusProperty().get());
+    }
+
+    @Test
+    public void setStartPointOutsideOfInterval() {
+        setValidViewModelInputState();
+        viewModel.setStartPoint("1000");
+        assertEquals(InputStatus.BAD_PARAMETERS.toString(),
+                viewModel.inputStatusProperty().get());
+    }
+
+    @Test
+    public void setBadDerivativeStep() {
+        setValidViewModelInputState();
+        viewModel.setDerivativeStep("0");
         assertEquals(InputStatus.BAD_PARAMETERS.toString(),
                 viewModel.inputStatusProperty().get());
     }
