@@ -47,7 +47,7 @@ public class ViewModelTests {
     public void whenInputIsEnteredCalculateButtonIsEnabled() {
         setInputData();
 
-        assertFalse(viewModel.getCalculationDisabled());
+        assertFalse(viewModel.calculationDisabledProperty().get());
     }
 
     @Test
@@ -55,7 +55,7 @@ public class ViewModelTests {
         setInputData();
         viewModel.axProperty().set("");
 
-        assertTrue(viewModel.getCalculationDisabled());
+        assertTrue(viewModel.calculationDisabledProperty().get());
     }
 
     @Test
@@ -63,7 +63,7 @@ public class ViewModelTests {
         setInputData();
         viewModel.axProperty().set("atata");
 
-        assertTrue(viewModel.getCalculationDisabled());
+        assertTrue(viewModel.calculationDisabledProperty().get());
     }
 
     @Test
@@ -71,14 +71,14 @@ public class ViewModelTests {
         setInputData();
         viewModel.calculate();
 
-        assertEquals("0.5", viewModel.getArea());
-        assertEquals("3.414", viewModel.getPerimeter());
-        assertEquals("0.707", viewModel.getCircumcircleRadius());
-        assertEquals("0.5", viewModel.getCircumcircleCenterX());
-        assertEquals("0.5", viewModel.getCircumcircleCenterY());
-        assertEquals("0.293", viewModel.getIncircleRadius());
-        assertEquals("0.293", viewModel.getIncircleCenterX());
-        assertEquals("0.293", viewModel.getIncircleCenterY());
+        assertEquals("0.5", viewModel.areaProperty().get());
+        assertEquals("3.414", viewModel.perimeterProperty().get());
+        assertEquals("0.707", viewModel.circumcircleRadiusProperty().get());
+        assertEquals("0.5", viewModel.circumcircleCenterXProperty().get());
+        assertEquals("0.5", viewModel.circumcircleCenterYProperty().get());
+        assertEquals("0.293", viewModel.incircleRadiusProperty().get());
+        assertEquals("0.293", viewModel.incircleCenterXProperty().get());
+        assertEquals("0.293", viewModel.incircleCenterYProperty().get());
     }
 
     private void setInputData() {
