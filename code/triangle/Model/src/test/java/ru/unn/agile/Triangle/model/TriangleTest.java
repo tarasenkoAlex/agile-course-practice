@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import ru.unn.agile.Triangle.model.*;
-
 public class TriangleTest {
     private static final double DELTA = 0.001;
     private Point2D simpleA;
