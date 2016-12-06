@@ -38,7 +38,6 @@ public class ViewModel {
         cy.set("");
 
         calculationDisabled.setValue(true);
-        Status status = Status.WAITING;
         BooleanBinding couldCalculate = new BooleanBinding() {
             {
                 super.bind(ax, ay, bx, by, cx, cy);
@@ -70,15 +69,9 @@ public class ViewModel {
 
         DecimalFormat df = new DecimalFormat("###.###");
 
-        area.set(df.format(triangle.area()));
+        double areaValue = triangle.area();
+        area.set(df.format(areaValue));
         perimeter.set(df.format(triangle.perimeter()));
-
-        Circle circumcircle = triangle.getCircumcircle();
-        circumcircleRadius.set(df.format(circumcircle.getRadius()));
-
-        Point2D circumcircleCenter = circumcircle.getCenter();
-        circumcircleCenterX.setValue(df.format(circumcircleCenter.getX()));
-        circumcircleCenterY.setValue(df.format(circumcircleCenter.getY()));
 
         Circle incircle = triangle.getIncircle();
         incircleRadius.set(df.format(incircle.getRadius()));
@@ -86,6 +79,19 @@ public class ViewModel {
         Point2D incircleCenter = incircle.getCenter();
         incircleCenterX.setValue(df.format(incircleCenter.getX()));
         incircleCenterY.setValue(df.format(incircleCenter.getY()));
+
+        if (areaValue == 0) {
+            circumcircleRadius.set("undefined");
+            circumcircleCenterX.set("undefined");
+            circumcircleCenterY.set("undefined");
+        } else {
+            Circle circumcircle = triangle.getCircumcircle();
+            circumcircleRadius.set(df.format(circumcircle.getRadius()));
+
+            Point2D circumcircleCenter = circumcircle.getCenter();
+            circumcircleCenterX.setValue(df.format(circumcircleCenter.getX()));
+            circumcircleCenterY.setValue(df.format(circumcircleCenter.getY()));
+        }
     }
 
     public StringProperty axProperty() {

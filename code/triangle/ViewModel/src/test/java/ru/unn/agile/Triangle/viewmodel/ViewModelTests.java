@@ -81,6 +81,27 @@ public class ViewModelTests {
         assertEquals("0.293", viewModel.incircleCenterYProperty().get());
     }
 
+    @Test
+    public void canProcessCaseWhenTriangleIsDegenerate() {
+        viewModel.axProperty().set("2.0");
+        viewModel.ayProperty().set("0.0");
+        viewModel.bxProperty().set("2.0");
+        viewModel.byProperty().set("0.0");
+        viewModel.cxProperty().set("0.0");
+        viewModel.cyProperty().set("0.0");
+
+        viewModel.calculate();
+
+        assertEquals("0", viewModel.areaProperty().get());
+        assertEquals("4", viewModel.perimeterProperty().get());
+        assertEquals("0", viewModel.incircleRadiusProperty().get());
+        assertEquals("2", viewModel.incircleCenterXProperty().get());
+        assertEquals("0", viewModel.incircleCenterYProperty().get());
+        assertEquals("undefined", viewModel.circumcircleRadiusProperty().get());
+        assertEquals("undefined", viewModel.circumcircleCenterXProperty().get());
+        assertEquals("undefined", viewModel.circumcircleCenterYProperty().get());
+    }
+
     private void setInputData() {
         viewModel.axProperty().set("0.0");
         viewModel.ayProperty().set("0.0");
