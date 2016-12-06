@@ -85,8 +85,8 @@ project(":code/MortgageCalculator/ViewModel").name = "MortgageCalculatorViewMode
 
 // Еланов Артем
 // Зайдуллова Алина
-include "code/zaydullova-alina"
-project(":code/zaydullova-alina").name = "zaydullova-alina-Model"
+include "code/TreeSort/Model"
+project(":code/TreeSort/Model").name = "TreeSort-Model"
 
 // Зырин Илья
 // Ильин Иван
@@ -238,3 +238,7 @@ project(":code/Polynomial/ViewModel").name = "Polynomial-ViewModel"
 // Шургалин Петр
 include "code/shurgalin-pyotr"
 project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
+include "code/TreeSort/ViewModel"
+project(":code/TreeSort/ViewModel").name = "TreeSort-ViewModel"
+include "code/TreeSort/View"
+project(":code/TreeSort/View").name = "TreeSort-View"
