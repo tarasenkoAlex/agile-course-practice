@@ -2,9 +2,11 @@ package ru.unn.agile.NewtonRoots.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ru.unn.agile.NewtonRoots.viewmodel.NewtonRootAppViewModel;
+import ru.unn.agile.NewtonRoots.Model.NewtonMethod.StoppingCriterion;
 
 public class NewtonRootsApp  {
     @FXML
@@ -23,6 +25,10 @@ public class NewtonRootsApp  {
     private TextArea reportTextField;
     @FXML
     private Button findRootButton;
+    @FXML
+    private TextField startPointText;
+    @FXML
+    private ChoiceBox<StoppingCriterion> stopCriterionSelector;
 
     @FXML
     private void initialize() {
@@ -32,6 +38,9 @@ public class NewtonRootsApp  {
         accuracyText.textProperty().bindBidirectional(viewModel.accuracyProperty());
         functionText.textProperty().bindBidirectional(viewModel.functionProperty());
         reportTextField.textProperty().bindBidirectional(viewModel.solverReportProperty());
+        startPointText.textProperty().bindBidirectional(viewModel.startPointProperty());
+
+        stopCriterionSelector.valueProperty().bindBidirectional(viewModel.stopCriterionProperty());
 
         findRootButton.setOnAction(value -> viewModel.findRoot());
     }
