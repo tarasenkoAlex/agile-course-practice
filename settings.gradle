@@ -122,12 +122,12 @@ project(":code/Pozdeev-Anton").name = "pozdeev-anton-model"
 include "code/ponomarev-nikita/Model"
 project(":code/ponomarev-nikita/Model").name = "ponomarev-nikita-Model"
 // Редькин Михаил
-include "code/Redkin-Michail/Model"
-project(":code/Redkin-Michail/Model").name = "Redkin-Michail-Model"
-include "code/Redkin-Michail/ViewModel"
-project(":code/Redkin-Michail/ViewModel").name = "Redkin-Michail-ViewModel"
-include "code/Redkin-Michail/View"
-project(":code/Redkin-Michail/View").name = "Redkin-Michail-View"
+include "code/Deque/Model"
+project(":code/Deque/Model").name = "Yevtushin-Valery-Model"
+include "code/Deque/ViewModel"
+project(":code/Deque/ViewModel").name = "Yevtushin-Valery-ViewModel"
+include "code/Deque/View"
+project(":code/Deque/View").name = "Yevtushin-Valery-View"
 
 // Рыбаков Антон
 // Рыбин Валентин
