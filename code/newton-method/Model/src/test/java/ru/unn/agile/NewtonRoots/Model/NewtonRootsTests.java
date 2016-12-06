@@ -150,4 +150,20 @@ public class NewtonRootsTests {
     public void setNegativeDerivativeStep() throws Exception {
         newtonMethod.setDerivativeStep(-1e-2);
     }
+
+    @Test
+    public void iterationsCounterNonZeroAfterSolving() {
+        FunctionInterface func = createFunction("x - 1");
+
+        double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
+        assertTrue(newtonMethod.getIterationsCounter() > 0);
+    }
+
+    @Test
+    public void achievedAccuracyLessThanInStopCriterion()  {
+        FunctionInterface func = createFunction("x - 1");
+
+        double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
+        assertTrue(newtonMethod.getFinalAccuracy() < newtonMethod.getAccuracyEps());
+    }
 }

@@ -10,15 +10,23 @@ public class NewtonMethod {
     private ResultStatus resultStatus;
     private double accuracyEps;
     private double derivativeStep;
+    private int iterationsCounter;
+    private double finalAccuracy;
     public static final double DEFAULT_EPS = 1e-10;
     public static final double DEFAULT_DERIVATIVE_STEP = 1e-10;
     public static final double MONOTONIC_CHECK_STEP = 1e-5;
     private final StoppingCriterion defaultStoppingCriterion = StoppingCriterion.FunctionModule;
 
     private final StoppingCriterionInterface stoppingCriterionAsFunctionModule =
-            (func, x, xPrev, eps) -> Math.abs(func.compute(x)) < eps;
+            (func, x, xPrev, eps) ->  {
+                finalAccuracy = Math.abs(func.compute(x));
+                return finalAccuracy < eps;
+            };
     private final StoppingCriterionInterface stoppingCriterionAsDiffBetweenApprox =
-            (func, x, xPrev, eps) -> Math.abs(x - xPrev) < eps;
+            (func, x, xPrev, eps) -> {
+                finalAccuracy = Math.abs(x - xPrev);
+                return finalAccuracy < eps;
+            };
     private StoppingCriterionInterface currentStoppingCriterionFunction;
 
     private interface StoppingCriterionInterface {
@@ -31,7 +39,7 @@ public class NewtonMethod {
         currentStoppingCriterionFunction = stoppingCriterionAsFunctionModule;
     }
 
-    static public boolean isMonotonicFunctionOnInterval(final FunctionInterface func,
+    public static boolean isMonotonicFunctionOnInterval(final FunctionInterface func,
                                                   final double intervalStart,
                                                   final double intervalEnd) {
         double x = intervalStart;
@@ -62,6 +70,7 @@ public class NewtonMethod {
 
     public double findRoot(final FunctionInterface func, final double initialPoint,
                     final double intervalStart, final double intervalEnd) {
+        iterationsCounter = 0;
         double x0 = initialPoint;
         double x = x0;
         double xPrev = x0;
@@ -90,6 +99,7 @@ public class NewtonMethod {
         }
 
         do {
+            iterationsCounter++;
             x = x - func.compute(x) / (func.compute(x + h) - func.compute(x)) * h;
             while (x < intervalStart || x > intervalEnd) {
                 x = (x + xPrev) / 2;
@@ -98,6 +108,14 @@ public class NewtonMethod {
         } while (!currentStoppingCriterionFunction.check(func, x, xPrev, accuracyEps));
         resultStatus = ResultStatus.RootSuccessfullyFound;
         return x;
+    }
+
+    public int getIterationsCounter()  {
+        return iterationsCounter;
+    }
+
+    public double getFinalAccuracy()  {
+        return finalAccuracy;
     }
 
     public void setStoppingCriterion(final StoppingCriterion newStoppingCriterion) {
