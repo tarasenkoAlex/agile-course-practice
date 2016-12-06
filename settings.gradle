@@ -170,8 +170,12 @@ project(":code/Vector3D/View").name = "Vector3D-View"
 include "code/sirotin-nikita"
 project(":code/sirotin-nikita").name = "sirotin-nikita-Model"
 // Скребков Артём
-include "code/skrebkov-artem"
-project(":code/skrebkov-artem").name = "skrebkov-artem-Model"
+include "code/TemperatureConverter/Model"
+project(":code/TemperatureConverter/Model").name = "Temperature-Converter-Model"
+include "code/TemperatureConverter/ViewModel"
+project(":code/TemperatureConverter/ViewModel").name = "Temperature-Converter-ViewModel"
+include "code/TemperatureConverter/View"
+project(":code/TemperatureConverter/View").name = "Temperature-Converter-View"
 
 // Соврасов Владислав
 include "code/sovrasov-vlad"
