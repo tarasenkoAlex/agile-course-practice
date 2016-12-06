@@ -1,18 +1,18 @@
 package ru.unn.agile.NewtonRoots.viewmodel;
 
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import ru.unn.agile.NewtonRoots.Model.NewtonMethod;
 import ru.unn.agile.NewtonRoots.Model.MathFunction;
+import ru.unn.agile.NewtonRoots.Model.NewtonMethod.StoppingCriterion;
 
 public class NewtonRootAppViewModel  {
     private final StringProperty leftPoint;
@@ -24,6 +24,10 @@ public class NewtonRootAppViewModel  {
     private final BooleanProperty findRootButtonDisable;
     private final StringProperty inputStatus;
     private final StringProperty startPoint;
+
+    private final ObjectProperty<ObservableList<StoppingCriterion>> stopCiterions =
+            new SimpleObjectProperty<>(FXCollections.observableArrayList(StoppingCriterion.values()));
+    private final ObjectProperty<StoppingCriterion> stopCriterion = new SimpleObjectProperty<>();
 
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
 
@@ -37,10 +41,11 @@ public class NewtonRootAppViewModel  {
         solverReport = new SimpleStringProperty("");
         startPoint = new SimpleStringProperty("");
         inputStatus = new SimpleStringProperty(InputStatus.WAITING.toString());
+        stopCriterion.set(StoppingCriterion.FunctionModule);
 
         BooleanBinding couldFindRoot = new BooleanBinding() {
             {
-                super.bind(leftPoint, rightPoint, derivativeStep, accuracy, function);
+                super.bind(leftPoint, rightPoint, derivativeStep, accuracy, function, startPoint);
             }
             @Override
             protected boolean computeValue() {
@@ -155,6 +160,20 @@ public class NewtonRootAppViewModel  {
         startPoint.set(value);
     }
 
+
+    public ObjectProperty<ObservableList<StoppingCriterion>> stopCriterionsProperty() {
+        return stopCiterions;
+    }
+    public final ObservableList<StoppingCriterion> getStopCriterions() {
+        return stopCiterions.get();
+    }
+    public ObjectProperty<StoppingCriterion> stopCriterionProperty() {
+        return stopCriterion;
+    }
+    public void setStopCriterion(final StoppingCriterion value) {
+        stopCriterion.set(value);
+    }
+
     private boolean checkInputFormat()  {
         try {
             Double.parseDouble(leftPoint.get());
@@ -216,7 +235,8 @@ public class NewtonRootAppViewModel  {
     private InputStatus checkInput()  {
         if (leftPoint.get().isEmpty() || rightPoint.get().isEmpty()
                 || accuracy.get().isEmpty() || derivativeStep.get().isEmpty()
-                || function.get().isEmpty() || startPoint.get().isEmpty()) {
+                || function.get().isEmpty() || startPoint.get().isEmpty()
+                || stopCriterion.get() == null) {
             return InputStatus.WAITING;
         }
 
@@ -251,6 +271,7 @@ public class NewtonRootAppViewModel  {
         try {
             NewtonMethod method = new NewtonMethod(Double.parseDouble(accuracy.get()),
                     Double.parseDouble(derivativeStep.get()));
+            method.setStoppingCriterion(stopCriterion.get());
             MathFunction functionObj = new MathFunction(function.get());
             double left = Double.parseDouble(leftPoint.get());
             double right = Double.parseDouble(rightPoint.get());
@@ -258,7 +279,9 @@ public class NewtonRootAppViewModel  {
             if (Double.isNaN(root))  {
                 throw new Exception();
             } else  {
-                setSolverReport("Root: " + Double.toString(root));
+                setSolverReport("Root: " + Double.toString(root)
+                + "\nIterations performed: " + Integer.toString(method.getIterationsCounter())
+                + "\nReached accuracy: " + Double.toString(method.getFinalAccuracy()));
                 inputStatus.set(InputStatus.SUCCESS.toString());
             }
         } catch (Exception e)  {
