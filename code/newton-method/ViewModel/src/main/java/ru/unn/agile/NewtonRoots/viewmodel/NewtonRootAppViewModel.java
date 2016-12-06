@@ -203,13 +203,9 @@ public class NewtonRootAppViewModel  {
             return false;
         }
 
-        if (!NewtonMethod.isMonotonicFunctionOnInterval(testFunction,
+        return NewtonMethod.isMonotonicFunctionOnInterval(testFunction,
                 Double.parseDouble(leftPoint.get()),
-                Double.parseDouble(rightPoint.get())))  {
-            return false;
-        }
-
-        return true;
+                Double.parseDouble(rightPoint.get()));
     }
 
     private boolean checkMethodParameters()  {
@@ -225,13 +221,10 @@ public class NewtonRootAppViewModel  {
         double accuracyValue = Double.parseDouble(accuracy.get());
         double derivativeStepValue = Double.parseDouble(derivativeStep.get());
         double intervalLen = rightPointValue - leftPointValue;
+        boolean isAccuracyAndStepIncorrect = accuracyValue <= 0 || accuracyValue > intervalLen
+                || derivativeStepValue <= 0 || derivativeStepValue > intervalLen;
 
-        if (accuracyValue <= 0 || accuracyValue > intervalLen
-                || derivativeStepValue <= 0 || derivativeStepValue > intervalLen)  {
-            return false;
-        }
-
-        return true;
+        return !isAccuracyAndStepIncorrect;
     }
 
     private InputStatus checkInput()  {
