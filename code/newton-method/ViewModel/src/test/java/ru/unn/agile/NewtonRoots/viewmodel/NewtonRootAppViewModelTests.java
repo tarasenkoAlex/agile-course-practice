@@ -39,6 +39,7 @@ public class NewtonRootAppViewModelTests {
         assertEquals("", viewModel.getFunction());
         assertEquals(true, viewModel.getFindRootButtonDisable());
         assertEquals("", viewModel.getSolverReport());
+        assertEquals("", viewModel.getStartPoint());
     }
 
     @Test

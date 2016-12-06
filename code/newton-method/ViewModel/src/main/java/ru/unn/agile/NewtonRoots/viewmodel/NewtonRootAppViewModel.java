@@ -25,8 +25,9 @@ public class NewtonRootAppViewModel  {
     private final StringProperty inputStatus;
     private final StringProperty startPoint;
 
-    private final ObjectProperty<ObservableList<StoppingCriterion>> stopCiterions =
-            new SimpleObjectProperty<>(FXCollections.observableArrayList(StoppingCriterion.values()));
+    private final ObjectProperty<ObservableList<StoppingCriterion>> stopCriterions =
+            new SimpleObjectProperty<>(
+                    FXCollections.observableArrayList(StoppingCriterion.values()));
     private final ObjectProperty<StoppingCriterion> stopCriterion = new SimpleObjectProperty<>();
 
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
@@ -162,10 +163,10 @@ public class NewtonRootAppViewModel  {
 
 
     public ObjectProperty<ObservableList<StoppingCriterion>> stopCriterionsProperty() {
-        return stopCiterions;
+        return stopCriterions;
     }
     public final ObservableList<StoppingCriterion> getStopCriterions() {
-        return stopCiterions.get();
+        return stopCriterions.get();
     }
     public ObjectProperty<StoppingCriterion> stopCriterionProperty() {
         return stopCriterion;
@@ -223,9 +224,10 @@ public class NewtonRootAppViewModel  {
 
         double accuracyValue = Double.parseDouble(accuracy.get());
         double derivativeStepValue = Double.parseDouble(derivativeStep.get());
+        double intervalLen = rightPointValue - leftPointValue;
 
-        if (accuracyValue <= 0 || accuracyValue > 0.1
-                || derivativeStepValue <= 0 || derivativeStepValue > 0.1)  {
+        if (accuracyValue <= 0 || accuracyValue > intervalLen
+                || derivativeStepValue <= 0 || derivativeStepValue > intervalLen)  {
             return false;
         }
 
@@ -275,7 +277,8 @@ public class NewtonRootAppViewModel  {
             MathFunction functionObj = new MathFunction(function.get());
             double left = Double.parseDouble(leftPoint.get());
             double right = Double.parseDouble(rightPoint.get());
-            double root = method.findRoot(functionObj, Double.parseDouble(startPoint.get()), left, right);
+            double root = method.findRoot(functionObj,
+                    Double.parseDouble(startPoint.get()), left, right);
             if (Double.isNaN(root))  {
                 throw new Exception();
             } else  {
