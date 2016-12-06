@@ -1,4 +1,4 @@
-import main.java.Deque;
+package ru.unn.agile.MyDeque.Model;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -8,8 +8,7 @@ public class WhenAddDeleteElementToDeque {
 
     @Before
     public void setUp() throws  Exception {
-        deque = new Deque();
-
+            deque = new Deque();
     }
 
     @Test

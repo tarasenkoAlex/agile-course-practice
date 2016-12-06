@@ -1,4 +1,4 @@
-package main.java;
+package ru.unn.agile.MyDeque.Model;
 
 public class Deque {
     public static final int START_SIZE = 100;
