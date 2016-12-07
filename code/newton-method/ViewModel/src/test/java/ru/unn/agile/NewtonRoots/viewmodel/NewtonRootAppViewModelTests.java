@@ -47,43 +47,43 @@ public class NewtonRootAppViewModelTests {
         setValidViewModelInputState();
         viewModel.setRightPoint("-a");
         viewModel.setLeftPoint("b");
-        assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.BAD_FORMAT.toString(), viewModel.getApplicationStatus());
     }
 
     @Test
     public void setBadFormattedAccuracy() {
         setValidViewModelInputState();
         viewModel.setAccuracy("-a");
-        assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.BAD_FORMAT.toString(), viewModel.getApplicationStatus());
     }
 
     @Test
     public void setBadFormattedDerivativeStep() {
         setValidViewModelInputState();
         viewModel.setDerivativeStep("-a");
-        assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.BAD_FORMAT.toString(), viewModel.getApplicationStatus());
     }
 
     @Test
     public void setBadFormattedFunction() {
         setValidViewModelInputState();
         viewModel.setFunction("a");
-        assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.BAD_FORMAT.toString(), viewModel.getApplicationStatus());
     }
 
     @Test
     public void setBadFormattedStartPoint() {
         setValidViewModelInputState();
         viewModel.setStartPoint("a");
-        assertEquals(InputStatus.BAD_FORMAT.toString(), viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.BAD_FORMAT.toString(), viewModel.getApplicationStatus());
     }
 
     @Test
     public void setNonMonotonicFiction() {
         setValidViewModelInputState();
         viewModel.setFunction("x^2");
-        assertEquals(InputStatus.NON_MONOTONIC_FUNCTION.toString(),
-                viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.NON_MONOTONIC_FUNCTION.toString(),
+                viewModel.getApplicationStatus());
     }
 
     @Test
@@ -91,55 +91,55 @@ public class NewtonRootAppViewModelTests {
         setValidViewModelInputState();
         viewModel.setLeftPoint("-1");
         viewModel.setRightPoint("-2");
-        assertEquals(InputStatus.BAD_PARAMETERS.toString(),
-                viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.BAD_PARAMETERS.toString(),
+                viewModel.getApplicationStatus());
     }
 
     @Test
     public void setBadAccuracy() {
         setValidViewModelInputState();
         viewModel.setAccuracy("0");
-        assertEquals(InputStatus.BAD_PARAMETERS.toString(),
-                viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.BAD_PARAMETERS.toString(),
+                viewModel.getApplicationStatus());
     }
 
     @Test
     public void setStartPointOutsideOfInterval() {
         setValidViewModelInputState();
         viewModel.setStartPoint("1000");
-        assertEquals(InputStatus.BAD_PARAMETERS.toString(),
-                viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.BAD_PARAMETERS.toString(),
+                viewModel.getApplicationStatus());
     }
 
     @Test
     public void setBadDerivativeStep() {
         setValidViewModelInputState();
         viewModel.setDerivativeStep("0");
-        assertEquals(InputStatus.BAD_PARAMETERS.toString(),
-                viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.BAD_PARAMETERS.toString(),
+                viewModel.getApplicationStatus());
     }
 
     @Test
     public void waitingStatusWhenOneFieldIsEmpty() {
         setValidViewModelInputState();
         viewModel.setAccuracy("");
-        assertEquals(InputStatus.WAITING.toString(),
-                viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.WAITING.toString(),
+                viewModel.getApplicationStatus());
     }
 
     @Test
     public void readyStatusWhenParametersAreOK() {
         setValidViewModelInputState();
-        assertEquals(InputStatus.READY.toString(),
-                viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.READY.toString(),
+                viewModel.getApplicationStatus());
     }
 
     @Test
     public void successStatusWhenRootFound() {
         setValidViewModelInputState();
         viewModel.findRoot();
-        assertEquals(InputStatus.SUCCESS.toString(),
-                viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.SUCCESS.toString(),
+                viewModel.getApplicationStatus());
     }
 
     @Test
@@ -154,8 +154,8 @@ public class NewtonRootAppViewModelTests {
         setValidViewModelInputState();
         viewModel.setFunction("x+100");
         viewModel.findRoot();
-        assertEquals(InputStatus.FAILED.toString(),
-                viewModel.getInputStatus());
+        assertEquals(ApplicationStatus.FAILED.toString(),
+                viewModel.getApplicationStatus());
     }
 
     @Test

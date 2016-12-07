@@ -47,6 +47,6 @@
             </AnchorPane>
         </content>
       </TitledPane>
-      <Label fx:id="statusLabel" layoutX="102.0" layoutY="270.0" text="${viewModel.inputStatus}" />
+      <Label fx:id="statusLabel" layoutX="102.0" layoutY="270.0" text="${viewModel.applicationStatus}" />
    </children>
 </AnchorPane>

@@ -22,7 +22,7 @@ public class NewtonRootAppViewModel  {
     private final StringProperty function;
     private final StringProperty solverReport;
     private final BooleanProperty findRootButtonDisable;
-    private final StringProperty inputStatus;
+    private final StringProperty applicationStatus;
     private final StringProperty startPoint;
 
     private final ObjectProperty<ObservableList<StoppingCriterion>> stopCriterions =
@@ -41,7 +41,7 @@ public class NewtonRootAppViewModel  {
         findRootButtonDisable = new SimpleBooleanProperty(true);
         solverReport = new SimpleStringProperty("");
         startPoint = new SimpleStringProperty("");
-        inputStatus = new SimpleStringProperty(InputStatus.WAITING.toString());
+        applicationStatus = new SimpleStringProperty(ApplicationStatus.WAITING.toString());
         stopCriterion.set(StoppingCriterion.FunctionModule);
 
         BooleanBinding couldFindRoot = new BooleanBinding() {
@@ -50,7 +50,7 @@ public class NewtonRootAppViewModel  {
             }
             @Override
             protected boolean computeValue() {
-                return checkInput() == InputStatus.READY;
+                return checkInput() == ApplicationStatus.READY;
             }
         };
         findRootButtonDisable.bind(couldFindRoot.not());
@@ -141,14 +141,14 @@ public class NewtonRootAppViewModel  {
         solverReport.set(value);
     }
 
-    public StringProperty inputStatusProperty()  {
-        return inputStatus;
+    public StringProperty applicationStatusProperty()  {
+        return applicationStatus;
     }
-    public String getInputStatus() {
-        return inputStatus.get();
+    public String getApplicationStatus() {
+        return applicationStatus.get();
     }
-    public void setInputStatus(final String value) {
-        inputStatus.set(value);
+    public void setApplicationStatus(final String value) {
+        applicationStatus.set(value);
     }
 
     public StringProperty startPointProperty()  {
@@ -224,34 +224,34 @@ public class NewtonRootAppViewModel  {
         return !isAccuracyAndStepIncorrect;
     }
 
-    private InputStatus checkInput()  {
+    private ApplicationStatus checkInput()  {
         if (leftPoint.get().isEmpty() || rightPoint.get().isEmpty()
                 || accuracy.get().isEmpty() || derivativeStep.get().isEmpty()
                 || function.get().isEmpty() || startPoint.get().isEmpty()
                 || stopCriterion.get() == null) {
-            return InputStatus.WAITING;
+            return ApplicationStatus.WAITING;
         }
 
         if (!checkInputFormat()) {
-            return InputStatus.BAD_FORMAT;
+            return ApplicationStatus.BAD_FORMAT;
         }
 
         if (!checkMonotonic())  {
-            return InputStatus.NON_MONOTONIC_FUNCTION;
+            return ApplicationStatus.NON_MONOTONIC_FUNCTION;
         }
 
         if (!checkMethodParameters()) {
-            return InputStatus.BAD_PARAMETERS;
+            return ApplicationStatus.BAD_PARAMETERS;
         }
 
-        return InputStatus.READY;
+        return ApplicationStatus.READY;
     }
 
     private class ValueChangeListener implements ChangeListener<String> {
         @Override
         public void changed(final ObservableValue<? extends String> observable,
                             final String oldValue, final String newValue) {
-            inputStatus.set(checkInput().toString());
+            applicationStatus.set(checkInput().toString());
         }
     }
 
@@ -275,15 +275,15 @@ public class NewtonRootAppViewModel  {
                 setSolverReport("Root: " + Double.toString(root)
                 + "\nIterations performed: " + Integer.toString(method.getIterationsCounter())
                 + "\nReached accuracy: " + Double.toString(method.getFinalAccuracy()));
-                inputStatus.set(InputStatus.SUCCESS.toString());
+                applicationStatus.set(ApplicationStatus.SUCCESS.toString());
             }
         } catch (Exception e)  {
-            inputStatus.set(InputStatus.FAILED.toString());
+            applicationStatus.set(ApplicationStatus.FAILED.toString());
         }
     }
 }
 
-enum InputStatus {
+enum ApplicationStatus {
     WAITING("Please provide input data"),
     READY("Press 'Find root'"),
     NON_MONOTONIC_FUNCTION("The function is not monotonic"),
@@ -293,7 +293,7 @@ enum InputStatus {
     FAILED("Root not found");
 
     private final String name;
-    InputStatus(final String name) {
+    ApplicationStatus(final String name) {
         this.name = name;
     }
     public String toString() {
