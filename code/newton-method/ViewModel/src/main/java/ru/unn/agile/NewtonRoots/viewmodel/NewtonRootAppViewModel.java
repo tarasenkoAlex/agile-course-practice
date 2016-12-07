@@ -1,6 +1,5 @@
 package ru.unn.agile.NewtonRoots.viewmodel;
 
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -43,17 +42,6 @@ public class NewtonRootAppViewModel  {
         startPoint = new SimpleStringProperty("");
         applicationStatus = new SimpleStringProperty(ApplicationStatus.WAITING.toString());
         stopCriterion.set(StoppingCriterion.FunctionModule);
-
-        BooleanBinding couldFindRoot = new BooleanBinding() {
-            {
-                super.bind(leftPoint, rightPoint, derivativeStep, accuracy, function, startPoint);
-            }
-            @Override
-            protected boolean computeValue() {
-                return checkInput() == ApplicationStatus.READY;
-            }
-        };
-        findRootButtonDisable.bind(couldFindRoot.not());
 
         final List<StringProperty> fields = new ArrayList<StringProperty>() { {
             add(leftPoint);
@@ -252,6 +240,9 @@ public class NewtonRootAppViewModel  {
         public void changed(final ObservableValue<? extends String> observable,
                             final String oldValue, final String newValue) {
             applicationStatus.set(checkInput().toString());
+            ApplicationStatus status = checkInput();
+            applicationStatus.set(status.toString());
+            findRootButtonDisable.set(status != ApplicationStatus.READY);
         }
     }
 
