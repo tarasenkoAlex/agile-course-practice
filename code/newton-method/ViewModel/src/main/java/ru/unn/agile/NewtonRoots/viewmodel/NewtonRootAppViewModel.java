@@ -182,12 +182,9 @@ public class NewtonRootAppViewModel  {
             Double.parseDouble(accuracy.get());
             Double.parseDouble(derivativeStep.get());
             Double.parseDouble(startPoint.get());
+            MathFunction testFunction = new MathFunction(function.get());
         } catch (NumberFormatException nfe) {
             return false;
-        }
-
-        try {
-            MathFunction testFunction = new MathFunction(function.get());
         } catch (Exception e)  {
             return false;
         }
@@ -303,4 +300,3 @@ enum InputStatus {
         return name;
     }
 }
-
