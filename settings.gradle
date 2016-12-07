@@ -224,9 +224,14 @@ project(":code/MultisystemCalculator/View").name = "MultiSystemCalculatorView"
 // Чугунов Евгений
 // Шадрунов Артем
 
+// Ширяева Вера (lab1); Тарасенко Алексей (lab2)
+include "code/RomanArabicConverter/Model"
+project(":code/RomanArabicConverter/Model").name = "RomanArabicConverter-Model"
+include "code/RomanArabicConverter/View"
+project(":code/RomanArabicConverter/View").name = "RomanArabicConverter-View"
+include "code/RomanArabicConverter/ViewModel"
+project(":code/RomanArabicConverter/ViewModel").name = "RomanArabicConverter-ViewModel"
 // Ширяева Вера
-include "code/shiryaeva-vera"
-project(":code/shiryaeva-vera").name = "shiryaeva-vera-Model"
 include "code/MassConverter/Model"
 project(":code/MassConverter/Model").name = "shiryaeva-vera-lab2-Model"
 include "code/MassConverter/ViewModel"
