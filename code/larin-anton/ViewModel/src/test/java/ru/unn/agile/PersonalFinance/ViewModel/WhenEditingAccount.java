@@ -49,7 +49,7 @@ public class WhenEditingAccount {
     }
 
     @Test
-    public void andItIsNotAbleChangeBalance() throws Exception {
-
+    public void andBalanceCanNotBeChanged() throws Exception {
+        // TODO
     }
 }

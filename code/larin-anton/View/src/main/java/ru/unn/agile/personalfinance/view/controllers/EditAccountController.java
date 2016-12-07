@@ -28,29 +28,31 @@ public class EditAccountController extends DataContextController {
         WindowsManager.getInstance().goBack();
     }
 
-
     @Override
     protected void removeBindings(final Object oldDataContext) {
-        final AccountViewModel oldAccount = (AccountViewModel) oldDataContext;
-        Bindings.unbindBidirectional(nameField.textProperty(), oldAccount.nameProperty());
-        Bindings.unbindBidirectional(balanceField.textProperty(), oldAccount.balanceProperty());
+        final AccountViewModel account = (AccountViewModel) oldDataContext;
+        account.cancelEditing();
+
+        Bindings.unbindBidirectional(nameField.textProperty(), account.nameProperty());
+        Bindings.unbindBidirectional(balanceField.textProperty(), account.balanceProperty());
         addButton.disableProperty().unbind();
     }
 
     @Override
     protected void addBindings(final Object newDataContext) {
-        final AccountViewModel newAccount = (AccountViewModel) newDataContext;
+        final AccountViewModel account = (AccountViewModel) newDataContext;
+        account.startEditing();
 
         /* nameField.text <-> account.name */
-        Bindings.bindBidirectional(nameField.textProperty(), newAccount.nameProperty());
+        Bindings.bindBidirectional(nameField.textProperty(), account.nameProperty());
 
             /* balanceField.text <-> account.balance */
         Bindings.bindBidirectional(
                 balanceField.textProperty(),
-                newAccount.balanceProperty(),
+                account.balanceProperty(),
                 new CurrencyStringConverter());
 
             /* account.isAbleToSave -> addButton.disabled */
-        addButton.disableProperty().bind(newAccount.isAbleToSaveProperty().not());
+        addButton.disableProperty().bind(account.isAbleToSaveProperty().not());
     }
 }

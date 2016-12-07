@@ -19,6 +19,9 @@ public class WhenSavingExternalTransaction {
     public void setUp() throws Exception {
         ledger = new LedgerViewModel();
         account = new AccountViewModel(ledger);
+        account.setName("Debit card");
+        account.setBalance(10000);
+
         initialCategory = new CategoryViewModel(INITIAL_CATEGORY_NAME);
 
         account.save();

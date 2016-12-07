@@ -81,7 +81,8 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
     protected void saveInternal() {
         AccountViewModel parentAccount = parentLedger.getSelectedAccount();
         if (parentAccount == null) {
-            throw new UnsupportedOperationException("Account should be selected before saving");
+            throw new UnsupportedOperationException("Account should be selected "
+                    + "before saving transaction");
         }
 
         modelExternalTransaction = buildExternalTransaction();
@@ -90,6 +91,11 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
 
     @Override
     protected void updateInternal() {
+
+    }
+
+    @Override
+    protected void deleteInternal() {
 
     }
 

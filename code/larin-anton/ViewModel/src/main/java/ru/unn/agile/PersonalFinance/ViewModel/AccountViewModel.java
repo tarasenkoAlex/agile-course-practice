@@ -1,5 +1,7 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,9 +9,11 @@ import ru.unn.agile.PersonalFinance.Model.Account;
 import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.GregorianCalendarHelper;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.SavableObject;
+import ru.unn.agile.PersonalFinance.ViewModel.utils.StringHelper;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Objects;
 
 public class AccountViewModel extends SavableObject {
@@ -21,8 +25,8 @@ public class AccountViewModel extends SavableObject {
     private final ListProperty<TransactionViewModel> transactionsProperty =
             new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
 
-    private boolean isSaved;
     private Account modelAccount;
+    private Account savedState;
     private final LedgerViewModel parentLedger;
 
     public AccountViewModel(final LedgerViewModel parentLedger) {
@@ -81,26 +85,31 @@ public class AccountViewModel extends SavableObject {
     protected void saveInternal() {
         modelAccount = new Account(getBalance(), getName());
         parentLedger.addAccount(this);
-        isSaved = true;
     }
 
     @Override
     protected void updateInternal() {
+        modelAccount.changeName(getName());
+    }
 
+    @Override
+    protected void deleteInternal() {
+        parentLedger.deleteAccount(this);
     }
 
     @Override
     protected void saveState() {
-
+        savedState = new Account(getBalance(), getName());
     }
 
     @Override
     protected void recoverState() {
-
+        setName(savedState.getName());
+        setBalance(savedState.getBalance());
     }
 
     void addExternalTransaction(final ExternalTransactionViewModel transaction) {
-        if (!isSaved) {
+        if (!isSaved()) {
             throw new UnsupportedOperationException("Account should be "
                     + "saved before adding new transaction");
         }
@@ -145,14 +154,18 @@ public class AccountViewModel extends SavableObject {
     }
 
     private void setUpBindings() {
-        nameProperty.addListener((observable, oldValue, newValue) -> {
-            String newAccountName = newValue.trim();
-            boolean isAccountNameUnique = !parentLedger.isAccountNameExists(newAccountName);
-            setIsAbleToSave(isAccountNameUnique);
-        });
+        BooleanBinding isAccountNameExists = Bindings.createBooleanBinding(() ->
+                hasAccountWithName(getName()), parentLedger.accountsProperty(), nameProperty);
 
+        isAbleToSaveProperty.bind(isAccountNameExists.not());
     }
 
-    public void delete() {
+    private boolean hasAccountWithName(final String accountName) {
+        List<AccountViewModel> accounts = parentLedger.getAccounts();
+        return accounts.stream().anyMatch((account) -> {
+            boolean namesEqual = StringHelper.areEqualTrimmed(
+                    account.getName(), accountName);
+            return account != this && namesEqual;
+        });
     }
 }

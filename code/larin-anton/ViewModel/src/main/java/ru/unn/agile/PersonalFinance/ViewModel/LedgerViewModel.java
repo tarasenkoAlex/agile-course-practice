@@ -79,14 +79,14 @@ public class LedgerViewModel {
         accountsProperty.add(account);
     }
 
+    void deleteAccount(final AccountViewModel account) {
+        modelLedger.deleteAccount(account.getModelAccount());
+        accountsProperty.remove(account);
+    }
+
     void registerTransfer(final TransferViewModel transferViewModel) {
         AccountViewModel accountFrom = transferViewModel.getAccountFrom();
         accountFrom.addTransfer(transferViewModel);
-    }
-
-    boolean isAccountNameExists(final String accountName) {
-        return getAccounts().stream().anyMatch(account ->
-                account.getName().equals(accountName));
     }
 
     private void setUpBindings() {

@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 public abstract class SavableObject {
     private boolean isSaved;
     private boolean isEditing;
+    private boolean isDeleted;
 
     protected BooleanProperty isAbleToSaveProperty = new SimpleBooleanProperty();
 
@@ -35,7 +36,12 @@ public abstract class SavableObject {
 
     public final boolean isEditing() { return isEditing; }
 
+    public final boolean isDeleted() {
+        return isDeleted;
+    }
+
     public final void save() {
+        checkForDeletion();
         if (isSaved) {
             updateInternal();
         } else {
@@ -45,21 +51,37 @@ public abstract class SavableObject {
         isEditing = false;
     }
 
+    public final void delete() {
+        checkForDeletion();
+        deleteInternal();
+        isDeleted = true;
+    }
+
     public final void startEditing() {
-        if (!isSaved) {
-            throw new UnsupportedOperationException("Object should be saved before editing");
+        checkForDeletion();
+        if (isSaved) {
+            saveState();
+            isEditing = true;
         }
-        saveState();
-        isEditing = true;
     }
 
     public final void cancelEditing() {
-        recoverState();
-        isEditing = false;
+        checkForDeletion();
+        if (isEditing) {
+            recoverState();
+            isEditing = false;
+        }
     }
 
     protected abstract void saveInternal();
     protected abstract void updateInternal();
+    protected abstract void deleteInternal();
     protected abstract void saveState();
     protected abstract void recoverState();
+
+    private void checkForDeletion() {
+        if (isDeleted) {
+            throw new UnsupportedOperationException("Object was deleted");
+        }
+    }
 }

@@ -49,12 +49,6 @@ public class WhenSavingAccount {
         assertEquals(account.getBalance(), accountBalance);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void andDoubleSavingCauseFail() throws Exception {
-        accountViewModel.save();
-        accountViewModel.save();
-    }
-
     @Test
     public void andCanAddTransferPropertyChangesToTrueIfAtLeastTwoAccounts() throws Exception {
         AccountViewModel cacheAccount = new AccountViewModel(ledgerViewModel);

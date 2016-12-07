@@ -57,6 +57,11 @@ public class TransferViewModel extends TransactionViewModel {
     }
 
     @Override
+    protected void deleteInternal() {
+
+    }
+
+    @Override
     protected void saveState() {
 
     }
