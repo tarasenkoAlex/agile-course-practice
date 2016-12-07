@@ -118,8 +118,12 @@ include "code/Stack/View"
 project(":code/Stack/View").name = "Stack-View"
 
 // Кудрявцев Никита
-include "code/kudriavtsev-nikita"
-project(":code/kudriavtsev-nikita").name = "kudriavtsev-nikita-lab1-Model"
+include "code/triangle/Model"
+project(":code/triangle/Model").name = "triangle-Model"
+include "code/triangle/View"
+project(":code/triangle/View").name = "triangle-View"
+include "code/triangle/ViewModel"
+project(":code/triangle/ViewModel").name = "triangle-ViewModel"
 
 // Кукушкин Даниил
 include "code/kukushkin-daniil"
