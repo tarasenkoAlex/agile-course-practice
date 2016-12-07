@@ -28,24 +28,6 @@ public class HomeScreenController extends DataContextController {
     @FXML
     private Button addTransactionButton;
 
-    @FXML
-    protected void handleAddAccountAction(final ActionEvent event) {
-        AccountViewModel newAccount = new AccountViewModel(ledger);
-        WindowsManager.getInstance().showEditAccountView(newAccount);
-    }
-
-    @FXML
-    protected void handleAddTransactionAction(final ActionEvent actionEvent) {
-        ExternalTransactionViewModel transaction = new ExternalTransactionViewModel(ledger);
-        WindowsManager.getInstance().showEditExternalTransactionView(transaction);
-    }
-
-    @FXML
-    protected void handleAddTransferAction(final ActionEvent actionEvent) {
-        TransferViewModel newTransfer = new TransferViewModel(ledger);
-        WindowsManager.getInstance().showAddTransferView(newTransfer);
-    }
-
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         setUpBindings(ViewModelService.getViewModel());
@@ -77,9 +59,29 @@ public class HomeScreenController extends DataContextController {
                 transactionsList.itemsProperty().bind(newValue.transactionsProperty());
             } else {
                 transactionsList.itemsProperty().unbind();
+                transactionsList.setItems(null);
             }
         });
     }
+
+    @FXML
+    protected void handleAddAccountAction(final ActionEvent event) {
+        AccountViewModel newAccount = new AccountViewModel(ledger);
+        WindowsManager.getInstance().showEditAccountView(newAccount);
+    }
+
+    @FXML
+    protected void handleAddTransactionAction(final ActionEvent actionEvent) {
+        ExternalTransactionViewModel transaction = new ExternalTransactionViewModel(ledger);
+        WindowsManager.getInstance().showEditExternalTransactionView(transaction);
+    }
+
+    @FXML
+    protected void handleAddTransferAction(final ActionEvent actionEvent) {
+        TransferViewModel newTransfer = new TransferViewModel(ledger);
+        WindowsManager.getInstance().showAddTransferView(newTransfer);
+    }
+
 
     @FXML
     private void handleDeleteAccountAction(final ActionEvent actionEvent) {
@@ -88,9 +90,7 @@ public class HomeScreenController extends DataContextController {
 
     @FXML
     private void handleEditAccountAction(final ActionEvent actionEvent) {
-        AccountViewModel selectedAccount = getSelectedAccount();
-        selectedAccount.startEditing();
-        WindowsManager.getInstance().showEditAccountView(selectedAccount);
+        WindowsManager.getInstance().showEditAccountView(getSelectedAccount());
     }
 
     @FXML

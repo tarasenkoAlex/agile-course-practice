@@ -1,6 +1,5 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
-import javafx.collections.ObservableList;
 import org.junit.Before;
 import org.junit.Test;
 
