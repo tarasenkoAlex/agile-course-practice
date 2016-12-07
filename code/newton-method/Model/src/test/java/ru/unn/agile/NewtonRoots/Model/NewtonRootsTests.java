@@ -25,7 +25,7 @@ public class NewtonRootsTests {
     @Test
     public void findRootIfExistInIntervalWithFunctionModuleStopping() {
         newtonMethod.setStoppingCriterion(NewtonMethod.StoppingCriterion.FunctionModule);
-        FunctionInterface func = createFunction("x - 1");
+        FunctionInterface func = createFunction("x^2 - 1");
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
 
@@ -36,7 +36,7 @@ public class NewtonRootsTests {
     public void findRootIfExistInIntervalWithDifferenceBetweenApproxStopping() {
         newtonMethod.setStoppingCriterion(
                 NewtonMethod.StoppingCriterion.DifferenceBetweenApproximates);
-        FunctionInterface func = createFunction("x - 1");
+        FunctionInterface func = createFunction("x^2 - 1");
 
         double root = newtonMethod.findRoot(func, initialPoint, intervalStart, intervalEnd);
 

@@ -100,11 +100,11 @@ public class NewtonMethod {
 
         do {
             iterationsCounter++;
+            xPrev = x;
             x = x - func.compute(x) / (func.compute(x + h) - func.compute(x)) * h;
             while (x < intervalStart || x > intervalEnd) {
                 x = (x + xPrev) / 2;
             }
-            xPrev = x;
         } while (!currentStoppingCriterionFunction.check(func, x, xPrev, accuracyEps));
         resultStatus = ResultStatus.RootSuccessfullyFound;
         return x;
