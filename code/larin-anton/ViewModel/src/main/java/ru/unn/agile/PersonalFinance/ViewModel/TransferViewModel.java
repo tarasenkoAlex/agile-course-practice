@@ -1,6 +1,8 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.binding.StringBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -15,6 +17,7 @@ public class TransferViewModel extends TransactionViewModel {
 
     public TransferViewModel(final LedgerViewModel parentLedger) {
         this.parentLedger = parentLedger;
+        setDisplayTitle("Transfer");
         setUpBindings();
     }
 
@@ -96,5 +99,34 @@ public class TransferViewModel extends TransactionViewModel {
                 accountsNotNull.and(
                 accountsNotEqual).and(
                 isAmountPositive));
+
+        isIncomeProperty.addListener((observable, oldValue, newValue) ->
+                updateDisplayCounterparty());
+
+        accountToProperty.addListener((observable, oldValue, newValue) ->
+                updateDisplayCounterparty());
+
+        accountFromProperty.addListener((observable, oldValue, newValue) ->
+                updateDisplayCounterparty());
+    }
+
+    private void updateDisplayCounterparty() {
+        if (getIsIncome()) {
+            setDisplayCounterpartyFromAccount(getAccountFrom());
+        } else {
+            setDisplayCounterpartyFromAccount(getAccountTo());
+        }
+    }
+
+    private void setDisplayCounterpartyFromAccount(final AccountViewModel account) {
+        displayCounterpartyProperty.unbind();
+        isCounterpartyMarkedAsDeletedProperty.unbind();
+
+        if (account == null) {
+            setDisplayCounterparty(null);
+        } else {
+            displayCounterpartyProperty.bind(account.nameProperty());
+            isCounterpartyMarkedAsDeletedProperty.bind(account.isDeletedProperty());
+        }
     }
 }

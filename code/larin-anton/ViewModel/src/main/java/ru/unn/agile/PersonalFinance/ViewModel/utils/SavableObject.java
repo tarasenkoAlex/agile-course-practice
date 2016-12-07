@@ -1,18 +1,20 @@
 package ru.unn.agile.PersonalFinance.ViewModel.utils;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 public abstract class SavableObject {
     private boolean isSaved;
     private boolean isEditing;
-    private boolean isDeleted;
 
     protected BooleanProperty isAbleToSaveProperty = new SimpleBooleanProperty();
 
+    private BooleanProperty isDeletedProperty = new SimpleBooleanProperty();
+
     // region Properties for Bindings
 
-    public final BooleanProperty isAbleToSaveProperty() {
+    public final ReadOnlyBooleanProperty isAbleToSaveProperty() {
         return this.isAbleToSaveProperty;
     }
 
@@ -20,8 +22,20 @@ public abstract class SavableObject {
         return this.isAbleToSaveProperty.get();
     }
 
-    protected void setIsAbleToSave(final boolean isAbleToSave) {
+    protected final void setIsAbleToSave(final boolean isAbleToSave) {
         this.isAbleToSaveProperty.set(isAbleToSave);
+    }
+
+    public final ReadOnlyBooleanProperty isDeletedProperty() {
+        return isDeletedProperty;
+    }
+
+    public final boolean isDeleted() {
+        return isDeletedProperty.get();
+    }
+
+    private void markAsDeleted() {
+        isDeletedProperty.set(true);
     }
 
     // endregion
@@ -35,10 +49,6 @@ public abstract class SavableObject {
     }
 
     public final boolean isEditing() { return isEditing; }
-
-    public final boolean isDeleted() {
-        return isDeleted;
-    }
 
     public final void save() {
         checkForDeletion();
@@ -54,7 +64,7 @@ public abstract class SavableObject {
     public final void delete() {
         checkForDeletion();
         deleteInternal();
-        isDeleted = true;
+        markAsDeleted();
     }
 
     public final void startEditing() {
@@ -80,7 +90,7 @@ public abstract class SavableObject {
     protected abstract void recoverState();
 
     private void checkForDeletion() {
-        if (isDeleted) {
+        if (isDeleted()) {
             throw new UnsupportedOperationException("Object was deleted");
         }
     }

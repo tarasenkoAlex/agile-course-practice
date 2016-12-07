@@ -3,18 +3,21 @@ package ru.unn.agile.personalfinance.view.controllers;
 import com.cathive.fonts.fontawesome.FontAwesomeIcon;
 import com.cathive.fonts.fontawesome.FontAwesomeIconView;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.util.converter.CurrencyStringConverter;
 import javafx.util.converter.LocalDateStringConverter;
-import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
 
 public class TransactionListCellController extends DataContextController {
+
     @FXML
-    public FontAwesomeIconView directionIcon;
+    private FontAwesomeIconView directionIcon;
+
+    @FXML
+    private Label deletedMarkerLabel;
 
     @FXML
     private Label counterpartyLabel;
@@ -31,36 +34,17 @@ public class TransactionListCellController extends DataContextController {
     @FXML
     private GridPane root;
 
+    private ChangeListener<Boolean> styleUpdater =
+            (observable, oldValue, newValue) -> updateStyleClasses();
+
     @Override
     protected void addBindings(final Object newDataContext) {
         TransactionViewModel transaction = (TransactionViewModel) newDataContext;
-        addCommonBindings(transaction);
 
-        if (transaction.getIsIncome()) {
-            root.getStyleClass().add("income");
-            directionIcon.setIcon(FontAwesomeIcon.ICON_ARROW_LEFT);
-        } else {
-            root.getStyleClass().add("expense");
-            directionIcon.setIcon(FontAwesomeIcon.ICON_ARROW_RIGHT);
-        }
+        transaction.isIncomeProperty().addListener(styleUpdater);
+        transaction.isCounterpartyMarkedAsDeletedProperty().addListener(styleUpdater);
+        updateStyleClasses();
 
-        if (transaction instanceof ExternalTransactionViewModel) {
-            addExternalTransactionBindings((ExternalTransactionViewModel) newDataContext);
-        } else if (transaction instanceof TransferViewModel) {
-            addTransferBindings((TransferViewModel) newDataContext);
-        }
-    }
-
-    @Override
-    protected void removeBindings(final Object oldDataContext) {
-        TransactionViewModel transaction = (TransactionViewModel) oldDataContext;
-
-        root.getStyleClass().clear();
-
-        removeCommonBindings(transaction);
-    }
-
-    private void addCommonBindings(final TransactionViewModel transaction) {
         /* amountLabel.text <-> transaction.amount */
         Bindings.bindBidirectional(
                 amountLabel.textProperty(),
@@ -72,9 +56,21 @@ public class TransactionListCellController extends DataContextController {
                 dateLabel.textProperty(),
                 transaction.dateProperty(),
                 new LocalDateStringConverter());
+
+        /* transaction.counterparty -> counterpartyLabel.text */
+        counterpartyLabel.textProperty().bind(transaction.displayCounterpartyProperty());
+
+        /* transaction.description -> descriptionLabel.text */
+        descriptionLabel.textProperty().bind(transaction.displayTitleProperty());
     }
 
-    private void removeCommonBindings(final TransactionViewModel transaction) {
+    @Override
+    protected void removeBindings(final Object oldDataContext) {
+        TransactionViewModel transaction = (TransactionViewModel) oldDataContext;
+
+        transaction.isIncomeProperty().removeListener(styleUpdater);
+        transaction.isDeletedProperty().removeListener(styleUpdater);
+
         descriptionLabel.textProperty().unbind();
         counterpartyLabel.textProperty().unbind();
 
@@ -87,23 +83,23 @@ public class TransactionListCellController extends DataContextController {
                 transaction.dateProperty());
     }
 
-    private void addExternalTransactionBindings(final ExternalTransactionViewModel transaction) {
-        /* transaction.counterparty -> counterpartyLabel.text */
-        counterpartyLabel.textProperty().bind(transaction.counterpartyProperty());
+    private void updateStyleClasses() {
+        TransactionViewModel transaction = (TransactionViewModel) getDataContext();
 
-        /* transaction.description -> descriptionLabel.text */
-        descriptionLabel.textProperty().bind(transaction.descriptionProperty());
-    }
+        root.getStyleClass().clear();
 
-    private void addTransferBindings(final TransferViewModel transfer) {
-        if (transfer.getIsIncome()) {
-            counterpartyLabel.textProperty().bind(
-                    transfer.getAccountFrom().nameProperty());
+        if (transaction.getIsIncome()) {
+            root.getStyleClass().add("income");
+            directionIcon.setIcon(FontAwesomeIcon.ICON_ARROW_LEFT);
         } else {
-            counterpartyLabel.textProperty().bind(
-                    transfer.getAccountTo().nameProperty());
+            root.getStyleClass().add("expense");
+            directionIcon.setIcon(FontAwesomeIcon.ICON_ARROW_RIGHT);
         }
 
-        descriptionLabel.setText("Transfer");
+        if (transaction.isCounterpartyMarkedAsDeleted()) {
+            root.getStyleClass().add("deleted");
+        } else {
+            root.getStyleClass().add("normal");
+        }
     }
 }

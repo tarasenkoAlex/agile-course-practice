@@ -1,19 +1,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.MenuItem?>
-<GridPane xmlns:fx="http://javafx.com/fxml" vgap="5" onContextMenuRequested="#showContextMenu"
-          fx:id="root"
+<GridPane xmlns:fx="http://javafx.com/fxml" vgap="5"
           fx:controller="ru.unn.agile.personalfinance.view.controllers.AccountListCellController">
-    <fx:define>
-        <ContextMenu fx:id="contextMenu">
-            <items>
-                <MenuItem text="Edit" />
-                <MenuItem text="Delete" />
-            </items>
-        </ContextMenu>
-    </fx:define>
     <Label fx:id="nameLabel" GridPane.rowIndex="0" />
     <HBox GridPane.rowIndex="1">
         <Label text="Balance: " />

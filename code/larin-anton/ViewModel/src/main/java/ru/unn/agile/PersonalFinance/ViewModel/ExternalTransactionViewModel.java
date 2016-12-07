@@ -141,6 +141,10 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
                 .and(categoryProperty().isNotNull());
 
         isAbleToSaveProperty.bind(isAbleToSaveBinding);
+
+        displayCounterpartyProperty.bind(counterpartyProperty);
+
+        displayTitleProperty.bind(descriptionProperty);
     }
 
     private void setDefaults() {

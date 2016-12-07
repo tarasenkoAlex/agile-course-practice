@@ -15,8 +15,9 @@ public class DataContextController implements Initializable {
 
     public void setDataContext(final Object dataContext) {
         if (this.dataContext != dataContext) {
-            updateDataContext(this.dataContext, dataContext);
+            Object oldDataContext = this.dataContext;
             this.dataContext = dataContext;
+            updateDataContext(oldDataContext, dataContext);
         }
     }
 

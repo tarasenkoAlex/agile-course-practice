@@ -16,3 +16,15 @@
 .income .direction {
     -fx-text-fill: green;
 }
+
+.deleted-marker {
+    -fx-text-fill: gray;
+}
+
+.normal .deleted-marker {
+    visibility: hidden;
+}
+
+.deleted .deleted-marker {
+    visibility: visible;
+}
