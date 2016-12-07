@@ -128,7 +128,7 @@ public class NewtonRootAppViewModelTests {
     }
 
     @Test
-    public void readyStatusWhenParametersIsOK() {
+    public void readyStatusWhenParametersAreOK() {
         setValidViewModelInputState();
         assertEquals(InputStatus.READY.toString(),
                 viewModel.getInputStatus());
@@ -156,5 +156,13 @@ public class NewtonRootAppViewModelTests {
         viewModel.findRoot();
         assertEquals(InputStatus.FAILED.toString(),
                 viewModel.getInputStatus());
+    }
+
+    @Test
+    public void findRootDoesNothingIfFindButtonIsDisabled()  {
+      setValidViewModelInputState();
+      viewModel.setDerivativeStep("z"); //set illegal value to disable findRoot button
+      viewModel.findRoot();
+      assertTrue(viewModel.getSolverReport().isEmpty());
     }
 }
