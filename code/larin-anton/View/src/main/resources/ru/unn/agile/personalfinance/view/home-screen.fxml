@@ -2,11 +2,9 @@
 
 <?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
 <?import com.jfoenix.controls.*?>
-<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.MenuItem?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
             fx:controller="ru.unn.agile.personalfinance.view.controllers.HomeScreenController">
     <left>

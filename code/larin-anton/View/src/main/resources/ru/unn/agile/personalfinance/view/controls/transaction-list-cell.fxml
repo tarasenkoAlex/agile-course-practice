@@ -1,5 +1,5 @@
 <?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <GridPane xmlns:fx="http://javafx.com/fxml" fx:id="root"
           fx:controller="ru.unn.agile.personalfinance.view.controllers.TransactionListCellController"
