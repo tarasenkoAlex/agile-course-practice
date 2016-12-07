@@ -88,6 +88,21 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
         parentAccount.addExternalTransaction(this);
     }
 
+    @Override
+    protected void updateInternal() {
+
+    }
+
+    @Override
+    protected void saveState() {
+
+    }
+
+    @Override
+    protected void recoverState() {
+
+    }
+
     private ExternalTransaction buildExternalTransaction() {
         ExternalTransaction.Builder transactionBuilder = getIsIncome()
                 ? ExternalTransaction.incomeBuilder(getAmount())

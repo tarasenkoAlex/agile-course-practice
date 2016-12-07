@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 public abstract class SavableObject {
     private boolean isSaved;
+    private boolean isEditing;
+
     protected BooleanProperty isAbleToSaveProperty = new SimpleBooleanProperty();
 
     // region Properties for Bindings
@@ -31,13 +33,33 @@ public abstract class SavableObject {
         return isSaved;
     }
 
+    public final boolean isEditing() { return isEditing; }
+
     public final void save() {
         if (isSaved) {
-            throw new UnsupportedOperationException("Object has been already saved");
+            updateInternal();
+        } else {
+            saveInternal();
+            markAsSaved();
         }
-        saveInternal();
-        markAsSaved();
+        isEditing = false;
+    }
+
+    public final void startEditing() {
+        if (!isSaved) {
+            throw new UnsupportedOperationException("Object should be saved before editing");
+        }
+        saveState();
+        isEditing = true;
+    }
+
+    public final void cancelEditing() {
+        recoverState();
+        isEditing = false;
     }
 
     protected abstract void saveInternal();
+    protected abstract void updateInternal();
+    protected abstract void saveState();
+    protected abstract void recoverState();
 }

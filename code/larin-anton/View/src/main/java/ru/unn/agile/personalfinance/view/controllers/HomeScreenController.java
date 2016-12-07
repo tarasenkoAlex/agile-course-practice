@@ -80,4 +80,24 @@ public class HomeScreenController extends DataContextController {
             }
         });
     }
+
+    @FXML
+    private void handleDeleteAccountAction(final ActionEvent actionEvent) {
+        getSelectedAccount().delete();
+    }
+
+    @FXML
+    private void handleEditAccountAction(final ActionEvent actionEvent) {
+        AccountViewModel selectedAccount = getSelectedAccount();
+        selectedAccount.startEditing();
+        WindowsManager.getInstance().showEditAccountView(selectedAccount);
+    }
+
+    @FXML
+    private void handleDeleteTransactionAction(final ActionEvent actionEvent) {
+    }
+
+    private AccountViewModel getSelectedAccount() {
+        return accountsList.getSelectionModel().getSelectedItem();
+    }
 }

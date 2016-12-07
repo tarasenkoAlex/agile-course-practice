@@ -84,6 +84,21 @@ public class AccountViewModel extends SavableObject {
         isSaved = true;
     }
 
+    @Override
+    protected void updateInternal() {
+
+    }
+
+    @Override
+    protected void saveState() {
+
+    }
+
+    @Override
+    protected void recoverState() {
+
+    }
+
     void addExternalTransaction(final ExternalTransactionViewModel transaction) {
         if (!isSaved) {
             throw new UnsupportedOperationException("Account should be "
@@ -136,5 +151,8 @@ public class AccountViewModel extends SavableObject {
             setIsAbleToSave(isAccountNameUnique);
         });
 
+    }
+
+    public void delete() {
     }
 }

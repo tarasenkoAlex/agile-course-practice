@@ -46,8 +46,23 @@ public class TransferViewModel extends TransactionViewModel {
 
     // endregion
 
+    @Override
     protected void saveInternal() {
         parentLedger.registerTransfer(this);
+    }
+
+    @Override
+    protected void updateInternal() {
+
+    }
+
+    @Override
+    protected void saveState() {
+
+    }
+
+    @Override
+    protected void recoverState() {
     }
 
     TransferViewModel copy() {

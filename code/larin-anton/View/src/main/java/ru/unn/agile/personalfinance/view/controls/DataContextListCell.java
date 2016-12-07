@@ -2,7 +2,7 @@ package ru.unn.agile.personalfinance.view.controls;
 
 import com.jfoenix.controls.JFXListCell;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.scene.Parent;
 import ru.unn.agile.personalfinance.view.controllers.DataContextController;
 
 import java.io.IOException;
@@ -24,9 +24,7 @@ public class DataContextListCell<T> extends JFXListCell<T> {
             setGraphic(null);
         } else {
             FXMLLoader loader = getLoader(item);
-
-            Node root = loader.getRoot();
-            root.setMouseTransparent(true);
+            Parent root = loader.getRoot();
 
             setText(null);
             setGraphic(root);
@@ -48,6 +46,13 @@ public class DataContextListCell<T> extends JFXListCell<T> {
             throw new RuntimeException("We can't find template for object of type "
                     + item.getClass().getName());
         }
+
+        // Disable mouse event handlers in children elements
+        // to use ripple effect in JFXListCell
+        Parent root = fxmlLoader.getRoot();
+        root.setMouseTransparent(true);
+
         return fxmlLoader;
     }
+
 }
