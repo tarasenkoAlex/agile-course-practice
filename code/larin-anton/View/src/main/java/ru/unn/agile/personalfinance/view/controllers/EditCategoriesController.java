@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EditCategoriesController extends DataContextController {
-    private final static StringListCellFactory<CategoryViewModel> categoryListCellFactory =
+    private static final StringListCellFactory<CategoryViewModel> CATEGORY_LIST_CELL_FACTORY =
             new StringListCellFactory<>(category -> category.getName());
 
     private final CategoriesManagerViewModel categoriesManager =
@@ -37,7 +37,7 @@ public class EditCategoriesController extends DataContextController {
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
-        categoriesList.setCellFactory(categoryListCellFactory);
+        categoriesList.setCellFactory(CATEGORY_LIST_CELL_FACTORY);
 
         /* categoriesManager.categories -> categoriesList.items */
         categoriesList.itemsProperty().bind(categoriesManager.categoriesProperty());

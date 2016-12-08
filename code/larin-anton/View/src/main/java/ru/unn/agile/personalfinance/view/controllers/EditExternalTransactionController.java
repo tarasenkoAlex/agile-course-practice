@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EditExternalTransactionController extends DataContextController {
-    private final static StringListCellFactory<CategoryViewModel> categoryListCellFactory =
+    private static final StringListCellFactory<CategoryViewModel> CATEGORY_LIST_CELL_FACTORY =
             new StringListCellFactory<>(category -> category.getName());
 
     @FXML
@@ -62,7 +62,7 @@ public class EditExternalTransactionController extends DataContextController {
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
-        categoryComboBox.setCellFactory(categoryListCellFactory);
+        categoryComboBox.setCellFactory(CATEGORY_LIST_CELL_FACTORY);
         categoryComboBox.setConverter(Converters.getCategoryToStringConverter());
 
         /* categories -> categoryComboBox.items */

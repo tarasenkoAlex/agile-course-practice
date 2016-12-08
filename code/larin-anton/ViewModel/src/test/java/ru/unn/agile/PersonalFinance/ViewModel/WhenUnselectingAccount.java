@@ -6,8 +6,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class WhenUnselectingAccount {
-    AccountViewModel account;
-    LedgerViewModel ledger;
+    private AccountViewModel account;
+    private LedgerViewModel ledger;
 
     @Before
     public void setUp() throws Exception {

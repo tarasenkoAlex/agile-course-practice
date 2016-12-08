@@ -6,8 +6,7 @@ import javafx.beans.property.StringProperty;
 
 public final class StringHelper {
     static boolean isNullOrEmpty(final String value) {
-        return value == null ||
-               value.trim().isEmpty();
+        return value == null || value.trim().isEmpty();
     }
 
     public static boolean isEqual(final String lhs, final String rhs) {

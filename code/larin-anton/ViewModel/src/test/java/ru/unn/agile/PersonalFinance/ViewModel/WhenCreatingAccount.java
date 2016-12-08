@@ -7,8 +7,8 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 public class WhenCreatingAccount {
-    private final static String EXISTING_ACCOUNT_NAME = "Debit card";
-    private final static String ANOTHER_ACCOUNT_NAME = "Yet another debit card";
+    private static final String EXISTING_ACCOUNT_NAME = "Debit card";
+    private static final String ANOTHER_ACCOUNT_NAME = "Yet another debit card";
 
     private ViewModelObjectsMaker maker;
 

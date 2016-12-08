@@ -55,11 +55,11 @@ public class HomeScreenController extends DataContextController {
 
         /* ledger.selected.transactions -> transactionsList.items */
         ledger.selectedAccountProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                transactionsList.itemsProperty().bind(newValue.transactionsProperty());
-            } else {
+            if (newValue == null) {
                 transactionsList.itemsProperty().unbind();
                 transactionsList.setItems(null);
+            } else {
+                transactionsList.itemsProperty().bind(newValue.transactionsProperty());
             }
         });
     }

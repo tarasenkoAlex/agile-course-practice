@@ -1,7 +1,6 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
 import javafx.beans.property.*;
-import ru.unn.agile.PersonalFinance.Model.Transaction;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.SavableObject;
 
 import java.time.LocalDate;
@@ -9,23 +8,35 @@ import java.time.LocalDate;
 public abstract class TransactionViewModel extends SavableObject {
     private static final int DEFAULT_AMOUNT = 100;
 
-    protected final IntegerProperty amountProperty = new SimpleIntegerProperty();
+    private final IntegerProperty amountProperty = new SimpleIntegerProperty();
 
-    protected final BooleanProperty isIncomeProperty = new SimpleBooleanProperty();
+    private final BooleanProperty isIncomeProperty = new SimpleBooleanProperty();
 
-    protected final ObjectProperty<LocalDate> dateProperty =
+    private final ObjectProperty<LocalDate> dateProperty =
             new SimpleObjectProperty<>();
 
-    protected final StringProperty displayTitleProperty = new SimpleStringProperty();
+    private final StringProperty displayTitleProperty = new SimpleStringProperty();
 
-    protected final StringProperty displayCounterpartyProperty = new SimpleStringProperty();
+    private final StringProperty displayCounterpartyProperty = new SimpleStringProperty();
 
-    protected final BooleanProperty isCounterpartyMarkedAsDeletedProperty =
+    private final BooleanProperty isCounterpartyMarkedAsDeletedProperty =
             new SimpleBooleanProperty();
 
     public TransactionViewModel() {
         setDate(LocalDate.now());
         setAmount(DEFAULT_AMOUNT);
+    }
+
+    protected StringProperty displayTitleMutableProperty() {
+        return displayTitleProperty;
+    }
+
+    protected StringProperty displayCounterpartyMutableProperty() {
+        return displayCounterpartyProperty;
+    }
+
+    protected BooleanProperty isCounterpartyMarkedAsDeletedMutableProperty() {
+        return isCounterpartyMarkedAsDeletedProperty;
     }
 
     // region Properties for Binding

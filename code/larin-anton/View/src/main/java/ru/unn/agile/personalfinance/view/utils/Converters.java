@@ -5,43 +5,18 @@ import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.CategoryViewModel;
 
 public final class Converters {
-    private static StringConverter<AccountViewModel> accountToStringConverter;
-    private static StringConverter<CategoryViewModel> categoryToStringConverter;
+    private static final Lazy<AccountViewModelNameExtractor> ACCOUNT_TO_STRING_CONVERTER =
+            new Lazy<>(() -> new AccountViewModelNameExtractor());
+
+    private static final Lazy<CategoryViewModelNameExtractor> CATEGORY_TO_STRING_CONVERTER =
+            new Lazy<>(() -> new CategoryViewModelNameExtractor());
 
     public static StringConverter<AccountViewModel> getAccountToStringConverter() {
-        if (accountToStringConverter == null) {
-            accountToStringConverter = new StringConverter<AccountViewModel>() {
-                @Override
-                public String toString(AccountViewModel object) {
-                    return object.getName();
-                }
-
-                @Override
-                public AccountViewModel fromString(String string) {
-                    // NOTE: Need only one side conversion, from object to string
-                    return null;
-                }
-            };
-        }
-        return accountToStringConverter;
+        return ACCOUNT_TO_STRING_CONVERTER.get();
     }
 
     public static StringConverter<CategoryViewModel> getCategoryToStringConverter() {
-        if (categoryToStringConverter == null) {
-            categoryToStringConverter = new StringConverter<CategoryViewModel>() {
-                @Override
-                public String toString(CategoryViewModel object) {
-                    return object.getName();
-                }
-
-                @Override
-                public CategoryViewModel fromString(String string) {
-                    // NOTE: Need only one side conversion, from object to string
-                    return null;
-                }
-            };
-        }
-        return categoryToStringConverter;
+        return CATEGORY_TO_STRING_CONVERTER.get();
     }
 
     private Converters() {

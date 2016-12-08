@@ -7,8 +7,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class WhenCreatingTransfer {
-    private final static String SOURCE_ACCOUNT_NAME = "Debit card";
-    private final static String TARGET_ACCOUNT_NAME = "Cash";
+    private static final String SOURCE_ACCOUNT_NAME = "Debit card";
+    private static final String TARGET_ACCOUNT_NAME = "Cash";
 
     private ViewModelObjectsMaker maker;
     private TransferViewModel transfer;

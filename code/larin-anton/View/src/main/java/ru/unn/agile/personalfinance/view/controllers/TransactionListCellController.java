@@ -34,7 +34,7 @@ public class TransactionListCellController extends DataContextController {
     @FXML
     private GridPane root;
 
-    private ChangeListener<Boolean> styleUpdater =
+    private final ChangeListener<Boolean> styleUpdater =
             (observable, oldValue, newValue) -> updateStyleClasses();
 
     @Override

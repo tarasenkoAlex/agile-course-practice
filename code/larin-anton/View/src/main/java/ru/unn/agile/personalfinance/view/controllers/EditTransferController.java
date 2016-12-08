@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EditTransferController extends DataContextController {
-    private final static StringListCellFactory<AccountViewModel> accountListCellFactory =
+    private static final StringListCellFactory<AccountViewModel> ACCOUNT_LIST_CELL_FACTORY =
             new StringListCellFactory<>(account -> account.getName());
 
     @FXML
@@ -36,7 +36,7 @@ public class EditTransferController extends DataContextController {
     private TextField amountField;
 
     @FXML
-    public Button addButton;
+    private Button addButton;
 
     @FXML
     protected void handleAddButtonAction(final ActionEvent actionEvent) {
@@ -107,7 +107,7 @@ public class EditTransferController extends DataContextController {
     }
 
     private void setUpAccountComboBox(final ComboBox<AccountViewModel> comboBox) {
-        comboBox.setCellFactory(accountListCellFactory);
+        comboBox.setCellFactory(ACCOUNT_LIST_CELL_FACTORY);
         comboBox.setConverter(Converters.getAccountToStringConverter());
     }
 }

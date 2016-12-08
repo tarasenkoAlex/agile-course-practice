@@ -10,8 +10,6 @@ import static org.junit.Assert.assertEquals;
 import static ru.unn.agile.PersonalFinance.ViewModel.AssertHelper.assertContains;
 
 public class WhenSavingAccount {
-
-
     private ViewModelObjectsMaker maker;
     private LedgerViewModel ledger;
     private AccountViewModel account;

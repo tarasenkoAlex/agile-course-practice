@@ -8,9 +8,13 @@ public abstract class SavableObject {
     private boolean isSaved;
     private boolean isEditing;
 
-    protected BooleanProperty isAbleToSaveProperty = new SimpleBooleanProperty();
+    private final BooleanProperty isAbleToSaveProperty = new SimpleBooleanProperty();
 
-    private BooleanProperty isDeletedProperty = new SimpleBooleanProperty();
+    private final BooleanProperty isDeletedProperty = new SimpleBooleanProperty();
+
+    protected BooleanProperty isAbleToSaveMutableProperty() {
+        return isAbleToSaveProperty;
+    }
 
     // region Properties for Bindings
 
@@ -34,21 +38,23 @@ public abstract class SavableObject {
         return isDeletedProperty.get();
     }
 
-    protected void markAsDeleted() {
-        isDeletedProperty.set(true);
-    }
-
     // endregion
 
     protected final void markAsSaved() {
         isSaved = true;
     }
 
+    protected final void markAsDeleted() {
+        isDeletedProperty.set(true);
+    }
+
     public final boolean isSaved() {
         return isSaved;
     }
 
-    public final boolean isEditing() { return isEditing; }
+    public final boolean isEditing() {
+        return isEditing;
+    }
 
     public final void save() {
         checkForDeletion();

@@ -8,7 +8,6 @@ import javafx.beans.property.StringProperty;
 import ru.unn.agile.PersonalFinance.Model.Account;
 import ru.unn.agile.PersonalFinance.Model.Category;
 import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
-import ru.unn.agile.PersonalFinance.Model.Transaction;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.GregorianCalendarHelper;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.StringHelper;
 
@@ -146,11 +145,11 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
                 .and(isDescriptionEmptyBinding.not())
                 .and(categoryProperty().isNotNull());
 
-        isAbleToSaveProperty.bind(isAbleToSaveBinding);
+        isAbleToSaveMutableProperty().bind(isAbleToSaveBinding);
 
-        displayCounterpartyProperty.bind(counterpartyProperty);
+        displayCounterpartyMutableProperty().bind(counterpartyProperty);
 
-        displayTitleProperty.bind(descriptionProperty);
+        displayTitleMutableProperty().bind(descriptionProperty);
     }
 
     private void setDefaults() {

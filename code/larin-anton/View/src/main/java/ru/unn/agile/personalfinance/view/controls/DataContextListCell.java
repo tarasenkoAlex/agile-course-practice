@@ -44,7 +44,7 @@ public class DataContextListCell<T> extends JFXListCell<T> {
             fxmlLoader.load();
         } catch (IOException ex) {
             throw new RuntimeException("We can't find template for object of type "
-                    + item.getClass().getName());
+                    + item.getClass().getName(), ex);
         }
 
         // Disable mouse event handlers in children elements

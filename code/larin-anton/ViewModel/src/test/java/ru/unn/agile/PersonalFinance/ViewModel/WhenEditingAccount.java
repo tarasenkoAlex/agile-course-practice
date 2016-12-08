@@ -6,8 +6,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class WhenEditingAccount {
-    private final static String INITIAL_ACCOUNT_NAME = "Initial account name";
-    private final static String CHANGED_ACCOUNT_NAME = "Changed account name";
+    private static final String INITIAL_ACCOUNT_NAME = "Initial account name";
+    private static final String CHANGED_ACCOUNT_NAME = "Changed account name";
 
     private AccountViewModel account;
 

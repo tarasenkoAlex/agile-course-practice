@@ -74,27 +74,28 @@ public class TransferViewModel extends TransactionViewModel {
 
     @Override
     protected void updateInternal() {
-
+        // TODO
     }
 
     @Override
     protected void deleteInternal() {
-        isDeleting = true;
+        startDeletion();
         sharedState.delete();
-        if (!linkedTransfer.isDeleting) {
+        if (!linkedTransfer.isDeleting()) {
             linkedTransfer.delete();
         }
         associatedAccount.unregisterTransaction(this);
-        isDeleting = false;
+        endDeletion();
     }
 
     @Override
     protected void saveState() {
-
+        // TODO
     }
 
     @Override
     protected void recoverState() {
+        // TODO
     }
 
     TransferViewModel duplicate() {
@@ -121,14 +122,14 @@ public class TransferViewModel extends TransactionViewModel {
                 accountToProperty);
 
         BooleanBinding isAmountPositive =
-                amountProperty.greaterThan(0);
+                amountProperty().greaterThan(0);
 
-        isAbleToSaveProperty.bind(
+        isAbleToSaveMutableProperty().bind(
                 accountsNotNull.and(
                 accountsNotEqual).and(
                 isAmountPositive));
 
-        isIncomeProperty.addListener((observable, oldValue, newValue) ->
+        isIncomeProperty().addListener((observable, oldValue, newValue) ->
                 updateDisplayCounterparty());
 
         accountToProperty.addListener((observable, oldValue, newValue) ->
@@ -147,14 +148,14 @@ public class TransferViewModel extends TransactionViewModel {
     }
 
     private void setDisplayCounterpartyFromAccount(final AccountViewModel account) {
-        displayCounterpartyProperty.unbind();
-        isCounterpartyMarkedAsDeletedProperty.unbind();
+        displayCounterpartyMutableProperty().unbind();
+        isCounterpartyMarkedAsDeletedMutableProperty().unbind();
 
         if (account == null) {
             setDisplayCounterparty(null);
         } else {
-            displayCounterpartyProperty.bind(account.nameProperty());
-            isCounterpartyMarkedAsDeletedProperty.bind(account.isDeletedProperty());
+            displayCounterpartyMutableProperty().bind(account.nameProperty());
+            isCounterpartyMarkedAsDeletedMutableProperty().bind(account.isDeletedProperty());
         }
     }
 
@@ -168,5 +169,17 @@ public class TransferViewModel extends TransactionViewModel {
         associatedAccount = getAccountFrom();
         this.setIsIncome(false);
         return this;
+    }
+
+    private void startDeletion() {
+        isDeleting = true;
+    }
+
+    private boolean isDeleting() {
+        return isDeleting;
+    }
+
+    private void endDeletion() {
+        isDeleting = false;
     }
 }

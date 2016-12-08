@@ -6,14 +6,10 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ru.unn.agile.PersonalFinance.Model.Account;
-import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
-import ru.unn.agile.PersonalFinance.Model.Transaction;
-import ru.unn.agile.PersonalFinance.ViewModel.utils.GregorianCalendarHelper;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.SavableObject;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.StringHelper;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -133,7 +129,7 @@ public class AccountViewModel extends SavableObject {
         BooleanBinding isAccountNameExists = Bindings.createBooleanBinding(() ->
                 hasAccountWithName(getName()), parentLedger.accountsProperty(), nameProperty);
 
-        isAbleToSaveProperty.bind(isAccountNameExists.not());
+        isAbleToSaveMutableProperty().bind(isAccountNameExists.not());
     }
 
     private void updateBalance() {

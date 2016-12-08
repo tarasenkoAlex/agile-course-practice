@@ -1,20 +1,20 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
 final class ViewModelObjectsMaker {
-    private final static String DEFAULT_ACCOUNT_NAME = "Default account";
-    private final static String DEFAULT_CATEGORY_NAME = "Default category";
-    private final static String DEFAULT_COUNTERPARTY_NAME = "Default counterparty";
-    private final static String DEFAULT_DESCRIPTION = "Default description";
-    private final static String DEFAULT_SOURCE_ACCOUNT_NAME = "Default source account";
-    private final static String DEFAULT_TARGET_ACCOUNT_NAME = "Default target account";
+    private static final String DEFAULT_ACCOUNT_NAME = "Default account";
+    private static final String DEFAULT_CATEGORY_NAME = "Default category";
+    private static final String DEFAULT_COUNTERPARTY_NAME = "Default counterparty";
+    private static final String DEFAULT_DESCRIPTION = "Default description";
+    private static final String DEFAULT_SOURCE_ACCOUNT_NAME = "Default source account";
+    private static final String DEFAULT_TARGET_ACCOUNT_NAME = "Default target account";
 
-    private final static int DEFAULT_ACCOUNT_BALANCE = 10000;
-    private final static int DEFAULT_AMOUNT = 1000;
+    private static final int DEFAULT_ACCOUNT_BALANCE = 10000;
+    private static final int DEFAULT_AMOUNT = 1000;
 
     private int accountsCounter = 0;
     private int transferCounter = 0;
 
-    private final CategoryViewModel DEFAULT_CATEGORY =
+    private static final CategoryViewModel DEFAULT_CATEGORY =
             new CategoryViewModel(DEFAULT_CATEGORY_NAME);
 
     private final LedgerViewModel ledger = new LedgerViewModel();
