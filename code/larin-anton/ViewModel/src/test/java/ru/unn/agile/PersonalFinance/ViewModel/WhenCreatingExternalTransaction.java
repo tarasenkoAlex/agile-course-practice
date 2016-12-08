@@ -7,16 +7,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class WhenCreatingExternalTransaction {
+    private ViewModelObjectsMaker maker;
     private ExternalTransactionViewModel transaction;
 
     @Before
     public void setUp() throws Exception {
-        LedgerViewModel ledger = new LedgerViewModel();
-        transaction = new ExternalTransactionViewModel(ledger);
-
-        transaction.setCategory(new CategoryViewModel("Initial category"));
-        transaction.setCounterparty("Initial counterparty");
-        transaction.setDescription("Initial description");
+        maker = new ViewModelObjectsMaker();
+        AccountViewModel account = maker.makeAccount();
+        transaction = maker.makeExternalTransaction(account);
     }
 
     @Test(expected = NullPointerException.class)

@@ -6,21 +6,21 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class WhenSelectingAccount {
-    AccountViewModel accountViewModel;
-    LedgerViewModel ledgerViewModel;
+    private AccountViewModel account;
+    private LedgerViewModel ledger;
 
     @Before
     public void setUp() throws Exception {
-        ledgerViewModel = new LedgerViewModel();
-        accountViewModel = new AccountViewModel(ledgerViewModel);
-        accountViewModel.save();
+        ViewModelObjectsMaker maker = new ViewModelObjectsMaker();
+        ledger = maker.getLedger();
+        account = maker.makeAccountSaved();
     }
 
     @Test
     public void andCanAddTransactionPropertyChangesToTrue() throws Exception {
-        ledgerViewModel.setSelectedAccount(accountViewModel);
+        ledger.setSelectedAccount(account);
 
-        boolean canAddTransaction = ledgerViewModel.getCanAddTransaction();
+        boolean canAddTransaction = ledger.getCanAddTransaction();
         assertEquals(true, canAddTransaction);
     }
 }

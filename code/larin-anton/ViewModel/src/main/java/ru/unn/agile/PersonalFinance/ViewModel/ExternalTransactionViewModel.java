@@ -5,6 +5,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import ru.unn.agile.PersonalFinance.Model.Account;
 import ru.unn.agile.PersonalFinance.Model.Category;
 import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.GregorianCalendarHelper;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class ExternalTransactionViewModel extends TransactionViewModel {
-    private final LedgerViewModel parentLedger;
+    private final AccountViewModel parentAccount;
     private ExternalTransaction modelExternalTransaction;
 
     private final StringProperty descriptionProperty = new SimpleStringProperty();
@@ -22,9 +23,9 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
     private final ObjectProperty<CategoryViewModel> categoryProperty =
             new SimpleObjectProperty<>();
 
-    public ExternalTransactionViewModel(final LedgerViewModel parentLedger) {
-        Objects.requireNonNull(parentLedger);
-        this.parentLedger = parentLedger;
+    public ExternalTransactionViewModel(final AccountViewModel parentAccount) {
+        Objects.requireNonNull(parentAccount);
+        this.parentAccount = parentAccount;
         setUpBindings();
         setDefaults();
     }
@@ -79,10 +80,9 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
 
     @Override
     protected void saveInternal() {
-        AccountViewModel parentAccount = parentLedger.getSelectedAccount();
-        if (parentAccount == null) {
-            throw new UnsupportedOperationException("Account should be selected "
-                    + "before saving transaction");
+        if (!parentAccount.isSaved()) {
+            throw new UnsupportedOperationException("Parent account should be "
+                    + "saved before saving the transaction");
         }
 
         modelExternalTransaction = buildExternalTransaction();

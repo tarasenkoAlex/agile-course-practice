@@ -63,11 +63,23 @@ public abstract class SavableObject {
 
     public final void delete() {
         checkForDeletion();
+
+        if (!isSaved) {
+            throw new UnsupportedOperationException(
+                    "Object should be saved before deletion");
+        }
+
+        if (isEditing) {
+            throw new UnsupportedOperationException(
+                    "Object is in modifiable state, save or revert "
+                    + "changes before deletion");
+        }
+
         deleteInternal();
         markAsDeleted();
     }
 
-    public final void startEditing() {
+    public final void startChanging() {
         checkForDeletion();
         if (isSaved) {
             saveState();
@@ -75,7 +87,7 @@ public abstract class SavableObject {
         }
     }
 
-    public final void cancelEditing() {
+    public final void revertChanges() {
         checkForDeletion();
         if (isEditing) {
             recoverState();

@@ -7,30 +7,18 @@ import static org.junit.Assert.assertNotEquals;
 import static ru.unn.agile.PersonalFinance.ViewModel.AssertHelper.assertContains;
 
 public class WhenSavingExternalTransaction {
-    private static final String INITIAL_COUNTERPARTY_NAME = "Initial counterparty";
-    private static final String INITIAL_CATEGORY_NAME = "Initial category";
-    private static final String INITIAL_DESCRIPTION = "Initial description";
-
-    private LedgerViewModel ledger;
+    private ViewModelObjectsMaker maker;
     private AccountViewModel account;
-    private CategoryViewModel initialCategory;
 
     @Before
     public void setUp() throws Exception {
-        ledger = new LedgerViewModel();
-        account = new AccountViewModel(ledger);
-        account.setName("Debit card");
-        account.setBalance(10000);
-
-        initialCategory = new CategoryViewModel(INITIAL_CATEGORY_NAME);
-
-        account.save();
-        ledger.setSelectedAccount(account);
+        maker = new ViewModelObjectsMaker();
+        account = maker.makeAccountSaved();
     }
 
     @Test
     public void andItIsAddedToTransactionsList() throws Exception {
-        TransactionViewModel transaction = createExternalTransaction();
+        TransactionViewModel transaction = maker.makeExternalTransaction(account);
 
         transaction.save();
 
@@ -39,7 +27,7 @@ public class WhenSavingExternalTransaction {
 
     @Test
     public void andAccountBalanceChanges() throws Exception {
-        TransactionViewModel transaction = createExternalTransaction();
+        TransactionViewModel transaction = maker.makeExternalTransaction(account);
         transaction.setAmount(10);
         int balanceBeforeTransaction = account.getBalance();
 
@@ -50,27 +38,9 @@ public class WhenSavingExternalTransaction {
 
     @Test(expected = UnsupportedOperationException.class)
     public void andIfAccountWasNotSavedItCauseFail() throws Exception {
-        AccountViewModel unsavedAccount = new AccountViewModel(ledger);
-        ledger.setSelectedAccount(unsavedAccount);
-        TransactionViewModel transaction = createExternalTransaction();
+        AccountViewModel unsavedAccount = maker.makeAccount();
+        TransactionViewModel transaction = maker.makeExternalTransaction(unsavedAccount);
 
         transaction.save();
-    }
-
-    @Test(expected = UnsupportedOperationException.class)
-    public void andIfAccountWasNotSelectedItCauseFail() throws Exception {
-        ledger.setSelectedAccount(null);
-        TransactionViewModel transactionVM = createExternalTransaction();
-
-        transactionVM.save();
-    }
-
-    private TransactionViewModel createExternalTransaction() {
-        ExternalTransactionViewModel transaction =
-                new ExternalTransactionViewModel(ledger);
-        transaction.setCounterparty(INITIAL_COUNTERPARTY_NAME);
-        transaction.setDescription(INITIAL_DESCRIPTION);
-        transaction.setCategory(initialCategory);
-        return transaction;
     }
 }

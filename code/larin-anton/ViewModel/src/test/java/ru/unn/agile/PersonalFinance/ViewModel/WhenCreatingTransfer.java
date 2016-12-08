@@ -7,22 +7,21 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class WhenCreatingTransfer {
+    private final static String SOURCE_ACCOUNT_NAME = "Debit card";
+    private final static String TARGET_ACCOUNT_NAME = "Cash";
+
+    private ViewModelObjectsMaker maker;
     private TransferViewModel transfer;
-    private LedgerViewModel ledger;
 
     @Before
     public void setUp() throws Exception {
-        ledger = new LedgerViewModel();
-        transfer = new TransferViewModel(ledger);
-
-        transfer.setAccountFrom(new AccountViewModel(ledger));
-        transfer.setAccountTo(new AccountViewModel(ledger));
-        transfer.setAmount(1000);
+        maker = new ViewModelObjectsMaker();
+        transfer = maker.makeTransfer();
     }
 
     @Test
     public void andItCanNotBeSavedIfSourceAndTargetAreSame() throws Exception {
-        AccountViewModel account = new AccountViewModel(ledger);
+        AccountViewModel account = maker.makeAccount();
 
         transfer.setAccountFrom(account);
         transfer.setAccountTo(account);
@@ -46,8 +45,8 @@ public class WhenCreatingTransfer {
 
     @Test
     public void andItCanBeSavedIfSourceAndTargetAccountsAreDifferent() throws Exception {
-        AccountViewModel sourceAccount = new AccountViewModel(ledger);
-        AccountViewModel targetAccount = new AccountViewModel(ledger);
+        AccountViewModel sourceAccount = maker.makeAccount(SOURCE_ACCOUNT_NAME);
+        AccountViewModel targetAccount = maker.makeAccount(TARGET_ACCOUNT_NAME);
 
         transfer.setAccountFrom(sourceAccount);
         transfer.setAccountTo(targetAccount);

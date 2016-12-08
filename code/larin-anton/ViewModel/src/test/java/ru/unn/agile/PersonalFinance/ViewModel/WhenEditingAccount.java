@@ -13,13 +13,9 @@ public class WhenEditingAccount {
 
     @Before
     public void setUp() throws Exception {
-        LedgerViewModel ledger = new LedgerViewModel();
-        account = new AccountViewModel(ledger);
-        account.setName(INITIAL_ACCOUNT_NAME);
-        account.setBalance(10000);
-        account.save();
-
-        account.startEditing();
+        ViewModelObjectsMaker maker = new ViewModelObjectsMaker();
+        account = maker.makeAccountSaved(INITIAL_ACCOUNT_NAME);
+        account.startChanging();
     }
 
     @Test
@@ -34,7 +30,7 @@ public class WhenEditingAccount {
     @Test
     public void andItsNameRecoversIfChangesWasNotApplied() throws Exception {
         account.setName(CHANGED_ACCOUNT_NAME);
-        account.cancelEditing();
+        account.revertChanges();
 
         assertEquals(account.getName(), INITIAL_ACCOUNT_NAME);
     }
@@ -42,7 +38,7 @@ public class WhenEditingAccount {
     @Test
     public void andModelAccountNameRecoversIfChangesWasNotApplied() throws Exception {
         account.setName(CHANGED_ACCOUNT_NAME);
-        account.cancelEditing();
+        account.revertChanges();
 
         String modelAccountName = account.getModelAccount().getName();
         assertEquals(modelAccountName, INITIAL_ACCOUNT_NAME);

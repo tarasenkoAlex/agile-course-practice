@@ -72,7 +72,8 @@ public class HomeScreenController extends DataContextController {
 
     @FXML
     protected void handleAddTransactionAction(final ActionEvent actionEvent) {
-        ExternalTransactionViewModel transaction = new ExternalTransactionViewModel(ledger);
+        ExternalTransactionViewModel transaction =
+                new ExternalTransactionViewModel(getSelectedAccount());
         WindowsManager.getInstance().showEditExternalTransactionView(transaction);
     }
 

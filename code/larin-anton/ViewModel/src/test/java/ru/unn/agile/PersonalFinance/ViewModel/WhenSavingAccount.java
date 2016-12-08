@@ -10,54 +10,58 @@ import static org.junit.Assert.assertEquals;
 import static ru.unn.agile.PersonalFinance.ViewModel.AssertHelper.assertContains;
 
 public class WhenSavingAccount {
-    private LedgerViewModel ledgerViewModel;
-    private AccountViewModel accountViewModel;
+
+
+    private ViewModelObjectsMaker maker;
+    private LedgerViewModel ledger;
+    private AccountViewModel account;
 
     @Before
     public void setUp() throws Exception {
-        ledgerViewModel = new LedgerViewModel();
-        accountViewModel = new AccountViewModel(ledgerViewModel);
+        maker = new ViewModelObjectsMaker();
+        ledger = maker.getLedger();
+        account = maker.makeAccount();
     }
 
     @Test
     public void andItIsAddedToAccountList() throws Exception {
-        accountViewModel.save();
+        account.save();
 
-        List<AccountViewModel> accountVMs = ledgerViewModel.getAccounts();
-        assertContains(accountVMs, accountViewModel);
+        List<AccountViewModel> accounts = ledger.getAccounts();
+        assertContains(accounts, account);
     }
 
     @Test
     public void andModelAccountNameEqualsToViewModelAccountName() throws Exception {
         String accountName = "Cash";
-        accountViewModel.setName(accountName);
+        account.setName(accountName);
 
-        accountViewModel.save();
+        account.save();
 
-        Account account = accountViewModel.getModelAccount();
-        assertEquals(account.getName(), accountName);
+        Account modelAccount = this.account.getModelAccount();
+        assertEquals(modelAccount.getName(), accountName);
     }
 
     @Test
     public void andModelAccountBalanceEqualsToViewModelAccountBalance() throws Exception {
         int accountBalance = 10000;
-        accountViewModel.setBalance(accountBalance);
+        account.setBalance(accountBalance);
 
-        accountViewModel.save();
+        account.save();
 
-        Account account = accountViewModel.getModelAccount();
-        assertEquals(account.getBalance(), accountBalance);
+        Account modelAccount = this.account.getModelAccount();
+        assertEquals(modelAccount.getBalance(), accountBalance);
     }
 
     @Test
     public void andCanAddTransferPropertyChangesToTrueIfAtLeastTwoAccounts() throws Exception {
-        AccountViewModel cacheAccount = new AccountViewModel(ledgerViewModel);
-        AccountViewModel debitCardAccount = new AccountViewModel(ledgerViewModel);
+        AccountViewModel cacheAccount = maker.makeAccount("Cash");
+        AccountViewModel debitCardAccount = maker.makeAccount("Debit card");
 
         cacheAccount.save();
         debitCardAccount.save();
 
-        boolean canAddTransfer = ledgerViewModel.getCanAddTransfer();
+        boolean canAddTransfer = ledger.getCanAddTransfer();
         assertEquals(true, canAddTransfer);
     }
 }

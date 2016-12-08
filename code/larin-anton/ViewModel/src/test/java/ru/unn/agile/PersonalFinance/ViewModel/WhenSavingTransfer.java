@@ -3,29 +3,25 @@ package ru.unn.agile.PersonalFinance.ViewModel;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static ru.unn.agile.PersonalFinance.ViewModel.AssertHelper.assertContains;
 
 public class WhenSavingTransfer {
-    private LedgerViewModel ledgerViewModel;
+    private ViewModelObjectsMaker maker;
     private AccountViewModel cacheAccount;
     private AccountViewModel debitCardAccount;
 
     @Before
     public void setUp() throws Exception {
-        ledgerViewModel = new LedgerViewModel();
-        cacheAccount = new AccountViewModel(ledgerViewModel);
-        debitCardAccount = new AccountViewModel(ledgerViewModel);
-        cacheAccount.save();
-        debitCardAccount.save();
+        maker = new ViewModelObjectsMaker();
+        cacheAccount = maker.makeAccountSaved("Cash");
+        debitCardAccount = maker.makeAccountSaved("Debit card");
     }
 
     @Test
     public void andItIsAddedToTransactionsList() throws Exception {
-        TransferViewModel transfer =
-                new TransferViewModel(ledgerViewModel);
-        transfer.setAccountFrom(cacheAccount);
-        transfer.setAccountTo(debitCardAccount);
+        TransferViewModel transfer = maker.makeTransfer(cacheAccount, debitCardAccount);
 
         transfer.save();
 
@@ -34,17 +30,17 @@ public class WhenSavingTransfer {
 
     @Test
     public void andAccountsBalanceChanges() throws Exception {
-        TransferViewModel transfer =
-                new TransferViewModel(ledgerViewModel);
-        transfer.setAccountFrom(cacheAccount);
-        transfer.setAccountTo(debitCardAccount);
-        transfer.setAmount(10);
+        TransferViewModel transfer = maker.makeTransfer(cacheAccount, debitCardAccount);
+        int transferAmount = 100;
+        transfer.setAmount(transferAmount);
         int cacheBalanceBeforeTransaction = cacheAccount.getBalance();
-        int debitCardBalanceBeforeTransaction = debitCardAccount.getBalance();
+        int cardBalanceBeforeTransaction = debitCardAccount.getBalance();
 
         transfer.save();
 
-        assertNotEquals(cacheBalanceBeforeTransaction, cacheAccount.getBalance());
-        assertNotEquals(debitCardBalanceBeforeTransaction, debitCardAccount.getBalance());
+        int cacheBalanceAfterTransaction = cacheBalanceBeforeTransaction - transferAmount;
+        int cardBalanceAfterTransaction = cardBalanceBeforeTransaction + transferAmount;
+        assertEquals(cacheBalanceAfterTransaction, cacheAccount.getBalance());
+        assertEquals(cardBalanceAfterTransaction, debitCardAccount.getBalance());
     }
 }

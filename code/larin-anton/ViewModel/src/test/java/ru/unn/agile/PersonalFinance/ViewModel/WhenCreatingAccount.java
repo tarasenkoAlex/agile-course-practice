@@ -10,15 +10,12 @@ public class WhenCreatingAccount {
     private final static String EXISTING_ACCOUNT_NAME = "Debit card";
     private final static String ANOTHER_ACCOUNT_NAME = "Yet another debit card";
 
-    private LedgerViewModel ledger;
+    private ViewModelObjectsMaker maker;
 
     @Before
     public void setUp() throws Exception {
-        ledger = new LedgerViewModel();
-
-        AccountViewModel account = new AccountViewModel(ledger);
-        account.setName(EXISTING_ACCOUNT_NAME);
-        account.save();
+        maker = new ViewModelObjectsMaker();
+        maker.makeAccountSaved(EXISTING_ACCOUNT_NAME);
     }
 
     @Test(expected = NullPointerException.class)
@@ -28,16 +25,16 @@ public class WhenCreatingAccount {
 
     @Test
     public void andItCanNotBeSavedIfAccountWithSameNameAlreadyExists() throws Exception {
-        AccountViewModel accountWithExistingName = new AccountViewModel(ledger);
-        accountWithExistingName.setName(EXISTING_ACCOUNT_NAME);
+        AccountViewModel accountWithExistingName =
+                maker.makeAccount(EXISTING_ACCOUNT_NAME);
 
         assertFalse(accountWithExistingName.getIsIsAbleToSave());
     }
 
     @Test
     public void andItCanBeSavedIfAccountWithSameNameDoesNotExist() throws Exception {
-        AccountViewModel accountWithNewName = new AccountViewModel(ledger);
-        accountWithNewName.setName(ANOTHER_ACCOUNT_NAME);
+        AccountViewModel accountWithNewName =
+                maker.makeAccount(ANOTHER_ACCOUNT_NAME);
 
         assertTrue(accountWithNewName.getIsIsAbleToSave());
     }

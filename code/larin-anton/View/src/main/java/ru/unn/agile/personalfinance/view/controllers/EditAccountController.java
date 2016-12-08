@@ -31,7 +31,7 @@ public class EditAccountController extends DataContextController {
     @Override
     protected void removeBindings(final Object oldDataContext) {
         final AccountViewModel account = (AccountViewModel) oldDataContext;
-        account.cancelEditing();
+        account.revertChanges();
 
         Bindings.unbindBidirectional(nameField.textProperty(), account.nameProperty());
         Bindings.unbindBidirectional(balanceField.textProperty(), account.balanceProperty());
@@ -41,7 +41,7 @@ public class EditAccountController extends DataContextController {
     @Override
     protected void addBindings(final Object newDataContext) {
         final AccountViewModel account = (AccountViewModel) newDataContext;
-        account.startEditing();
+        account.startChanging();
 
         /* nameField.text <-> account.name */
         Bindings.bindBidirectional(nameField.textProperty(), account.nameProperty());
