@@ -8,8 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.util.converter.CurrencyStringConverter;
-import javafx.util.converter.LocalDateStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
+import ru.unn.agile.personalfinance.view.utils.Converters;
 
 public class TransactionListCellController extends DataContextController {
 
@@ -55,7 +55,7 @@ public class TransactionListCellController extends DataContextController {
         Bindings.bindBidirectional(
                 dateLabel.textProperty(),
                 transaction.dateProperty(),
-                new LocalDateStringConverter());
+                Converters.getLocalDateToStringConverter());
 
         /* transaction.counterparty -> counterpartyLabel.text */
         counterpartyLabel.textProperty().bind(transaction.displayCounterpartyProperty());
