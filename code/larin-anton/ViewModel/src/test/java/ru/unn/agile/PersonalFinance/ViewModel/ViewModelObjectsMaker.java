@@ -1,15 +1,18 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
 final class ViewModelObjectsMaker {
-    private final String DEFAULT_ACCOUNT_NAME = "Default account";
-    private final String DEFAULT_CATEGORY_NAME = "Default category";
-    private final String DEFAULT_COUNTERPARTY_NAME = "Default counterparty";
-    private final String DEFAULT_DESCRIPTION = "Default description";
-    private final String DEFAULT_SOURCE_ACCOUNT_NAME = "Default source account";
-    private final String DEFAULT_TARGET_ACCOUNT_NAME = "Default target account";
+    private final static String DEFAULT_ACCOUNT_NAME = "Default account";
+    private final static String DEFAULT_CATEGORY_NAME = "Default category";
+    private final static String DEFAULT_COUNTERPARTY_NAME = "Default counterparty";
+    private final static String DEFAULT_DESCRIPTION = "Default description";
+    private final static String DEFAULT_SOURCE_ACCOUNT_NAME = "Default source account";
+    private final static String DEFAULT_TARGET_ACCOUNT_NAME = "Default target account";
 
-    private final int DEFAULT_ACCOUNT_BALANCE = 10000;
-    private final int DEFAULT_AMOUNT = 1000;
+    private final static int DEFAULT_ACCOUNT_BALANCE = 10000;
+    private final static int DEFAULT_AMOUNT = 1000;
+
+    private int accountsCounter = 0;
+    private int transferCounter = 0;
 
     private final CategoryViewModel DEFAULT_CATEGORY =
             new CategoryViewModel(DEFAULT_CATEGORY_NAME);
@@ -28,7 +31,8 @@ final class ViewModelObjectsMaker {
     }
 
     AccountViewModel makeAccount() {
-        return makeAccount(DEFAULT_ACCOUNT_NAME);
+        accountsCounter++;
+        return makeAccount(DEFAULT_ACCOUNT_NAME + " " + accountsCounter);
     }
 
     AccountViewModel makeAccountSaved(final String name) {
@@ -71,9 +75,10 @@ final class ViewModelObjectsMaker {
     }
 
     TransferViewModel makeTransfer() {
+        transferCounter++;
         return makeTransfer(
-                makeAccount(DEFAULT_SOURCE_ACCOUNT_NAME),
-                makeAccount(DEFAULT_TARGET_ACCOUNT_NAME));
+                makeAccount(DEFAULT_SOURCE_ACCOUNT_NAME + " " + transferCounter),
+                makeAccount(DEFAULT_TARGET_ACCOUNT_NAME + " " + transferCounter));
     }
 
     TransferViewModel makeTransferSaved(final AccountViewModel sourceAccount,
