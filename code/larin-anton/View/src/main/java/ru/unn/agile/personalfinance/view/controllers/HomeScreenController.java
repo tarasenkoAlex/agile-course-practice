@@ -79,7 +79,7 @@ public class HomeScreenController extends DataContextController {
 
     @FXML
     protected void handleAddTransferAction(final ActionEvent actionEvent) {
-        TransferViewModel newTransfer = new TransferViewModel(ledger);
+        TransferViewModel newTransfer = new TransferViewModel();
         WindowsManager.getInstance().showAddTransferView(newTransfer);
     }
 

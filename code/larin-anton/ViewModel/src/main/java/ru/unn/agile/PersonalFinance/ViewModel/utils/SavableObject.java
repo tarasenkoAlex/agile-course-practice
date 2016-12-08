@@ -34,7 +34,7 @@ public abstract class SavableObject {
         return isDeletedProperty.get();
     }
 
-    private void markAsDeleted() {
+    protected void markAsDeleted() {
         isDeletedProperty.set(true);
     }
 

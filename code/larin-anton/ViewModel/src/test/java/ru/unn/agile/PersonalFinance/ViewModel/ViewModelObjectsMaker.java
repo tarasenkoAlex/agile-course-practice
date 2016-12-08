@@ -67,7 +67,7 @@ final class ViewModelObjectsMaker {
 
     TransferViewModel makeTransfer(final AccountViewModel sourceAccount,
                                    final AccountViewModel targetAccount) {
-        TransferViewModel transfer = new TransferViewModel(ledger);
+        TransferViewModel transfer = new TransferViewModel();
         transfer.setAmount(DEFAULT_AMOUNT);
         transfer.setAccountFrom(sourceAccount);
         transfer.setAccountTo(targetAccount);

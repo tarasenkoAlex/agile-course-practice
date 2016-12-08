@@ -3,10 +3,17 @@ package ru.unn.agile.PersonalFinance.ViewModel;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import ru.unn.agile.PersonalFinance.Model.Transaction;
+import ru.unn.agile.PersonalFinance.Model.Account;
+import ru.unn.agile.PersonalFinance.Model.Transfer;
+import ru.unn.agile.PersonalFinance.ViewModel.utils.GregorianCalendarHelper;
+
+import java.util.GregorianCalendar;
 
 public class TransferViewModel extends TransactionViewModel {
-    private final LedgerViewModel parentLedger;
+    private TransferViewModelSharedState sharedState;
+    private AccountViewModel associatedAccount;
+    private TransferViewModel linkedTransfer;
+    private boolean isDeleting;
 
     private final ObjectProperty<AccountViewModel> accountFromProperty =
             new SimpleObjectProperty<>();
@@ -14,8 +21,7 @@ public class TransferViewModel extends TransactionViewModel {
     private final ObjectProperty<AccountViewModel> accountToProperty =
             new SimpleObjectProperty<>();
 
-    public TransferViewModel(final LedgerViewModel parentLedger) {
-        this.parentLedger = parentLedger;
+    public TransferViewModel() {
         setDisplayTitle("Transfer");
         setUpBindings();
     }
@@ -50,7 +56,20 @@ public class TransferViewModel extends TransactionViewModel {
 
     @Override
     protected void saveInternal() {
-        parentLedger.registerTransfer(this);
+        AccountViewModel accountFrom = getAccountFrom();
+        AccountViewModel accountTo = getAccountTo();
+        Account modelAccountFrom = accountFrom.getModelAccount();
+        Account modelAccountTo = accountTo.getModelAccount();
+
+        GregorianCalendar transferDate =
+                GregorianCalendarHelper.convertFromLocalDate(getDate());
+        Transfer modelTransfer = modelAccountFrom.transferTo(
+                modelAccountTo, getAmount(), transferDate);
+
+        sharedState = new TransferViewModelSharedState(modelTransfer, modelAccountFrom);
+
+        accountFrom.registerTransaction(this.asOutcoming());
+        accountTo.registerTransaction(this.duplicate().asIncoming());
     }
 
     @Override
@@ -60,7 +79,13 @@ public class TransferViewModel extends TransactionViewModel {
 
     @Override
     protected void deleteInternal() {
-
+        isDeleting = true;
+        sharedState.delete();
+        if (!linkedTransfer.isDeleting) {
+            linkedTransfer.delete();
+        }
+        associatedAccount.unregisterTransaction(this);
+        isDeleting = false;
     }
 
     @Override
@@ -72,13 +97,17 @@ public class TransferViewModel extends TransactionViewModel {
     protected void recoverState() {
     }
 
-    TransferViewModel copy() {
-        TransferViewModel other = new TransferViewModel(parentLedger);
+    TransferViewModel duplicate() {
+        TransferViewModel other = new TransferViewModel();
         other.setAmount(getAmount());
         other.setDate(getDate());
         other.setIsIncome(getIsIncome());
         other.setAccountFrom(getAccountFrom());
         other.setAccountTo(getAccountTo());
+        other.sharedState = sharedState;
+        other.linkedTransfer = this;
+        linkedTransfer = other;
+        other.markAsSaved();
         return other;
     }
 
@@ -127,5 +156,17 @@ public class TransferViewModel extends TransactionViewModel {
             displayCounterpartyProperty.bind(account.nameProperty());
             isCounterpartyMarkedAsDeletedProperty.bind(account.isDeletedProperty());
         }
+    }
+
+    private TransferViewModel asIncoming() {
+        associatedAccount = getAccountTo();
+        this.setIsIncome(true);
+        return this;
+    }
+
+    private TransferViewModel asOutcoming() {
+        associatedAccount = getAccountFrom();
+        this.setIsIncome(false);
+        return this;
     }
 }

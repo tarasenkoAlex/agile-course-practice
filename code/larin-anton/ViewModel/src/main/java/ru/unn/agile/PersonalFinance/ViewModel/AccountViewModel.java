@@ -109,25 +109,6 @@ public class AccountViewModel extends SavableObject {
         setBalance(savedState.getBalance());
     }
 
-    void addTransfer(final TransferViewModel transfer) {
-        if (transfer.getAccountFrom() != this) {
-            throw new UnsupportedOperationException("Transfer source should be equal "
-                    + "to the account which transfer will be added");
-        }
-
-        AccountViewModel accountFrom = transfer.getAccountFrom();
-        AccountViewModel accountTo = transfer.getAccountTo();
-        Account modelAccountFrom = getModelAccount();
-        Account modelAccountTo = accountTo.getModelAccount();
-
-        GregorianCalendar transferDate =
-                GregorianCalendarHelper.convertFromLocalDate(transfer.getDate());
-        modelAccountFrom.transferTo(modelAccountTo, transfer.getAmount(), transferDate);
-
-        accountFrom.registerTransferAsOutcoming(transfer);
-        accountTo.registerTransferAsIncoming(transfer.copy());
-    }
-
     void registerTransaction(final TransactionViewModel transaction) {
         getTransactions().add(transaction);
         updateBalance();

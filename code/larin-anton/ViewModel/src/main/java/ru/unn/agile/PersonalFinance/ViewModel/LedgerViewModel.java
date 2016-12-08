@@ -84,11 +84,6 @@ public class LedgerViewModel {
         accountsProperty.remove(account);
     }
 
-    void registerTransfer(final TransferViewModel transferViewModel) {
-        AccountViewModel accountFrom = transferViewModel.getAccountFrom();
-        accountFrom.addTransfer(transferViewModel);
-    }
-
     private void setUpBindings() {
         ReadOnlyIntegerProperty accountsSizeProperties = accountsProperty.sizeProperty();
         canAddTransferProperty.bind(accountsSizeProperties.greaterThan(1));
