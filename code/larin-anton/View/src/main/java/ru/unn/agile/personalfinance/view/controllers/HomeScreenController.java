@@ -96,9 +96,14 @@ public class HomeScreenController extends DataContextController {
 
     @FXML
     private void handleDeleteTransactionAction(final ActionEvent actionEvent) {
+        getSelectedTransaction().delete();
     }
 
     private AccountViewModel getSelectedAccount() {
         return accountsList.getSelectionModel().getSelectedItem();
+    }
+
+    private TransactionViewModel getSelectedTransaction() {
+        return transactionsList.getSelectionModel().getSelectedItem();
     }
 }

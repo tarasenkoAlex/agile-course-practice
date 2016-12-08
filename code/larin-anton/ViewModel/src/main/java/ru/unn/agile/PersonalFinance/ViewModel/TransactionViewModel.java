@@ -1,6 +1,7 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
 import javafx.beans.property.*;
+import ru.unn.agile.PersonalFinance.Model.Transaction;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.SavableObject;
 
 import java.time.LocalDate;
@@ -102,5 +103,4 @@ public abstract class TransactionViewModel extends SavableObject {
     }
 
     // endregion
-
 }

@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ru.unn.agile.PersonalFinance.Model.Account;
 import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
+import ru.unn.agile.PersonalFinance.Model.Transaction;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.GregorianCalendarHelper;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.SavableObject;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.StringHelper;
@@ -108,21 +109,10 @@ public class AccountViewModel extends SavableObject {
         setBalance(savedState.getBalance());
     }
 
-    void addExternalTransaction(final ExternalTransactionViewModel transaction) {
-        if (!isSaved()) {
-            throw new UnsupportedOperationException("Account should be "
-                    + "saved before adding new transaction");
-        }
-
-        ExternalTransaction modelTransaction = transaction.getModelExternalTransaction();
-        modelAccount.addExternalTransaction(modelTransaction);
-        registerTransaction(transaction);
-    }
-
     void addTransfer(final TransferViewModel transfer) {
         if (transfer.getAccountFrom() != this) {
             throw new UnsupportedOperationException("Transfer source should be equal "
-                    + "to the account where transfer will be added");
+                    + "to the account which transfer will be added");
         }
 
         AccountViewModel accountFrom = transfer.getAccountFrom();
@@ -138,9 +128,14 @@ public class AccountViewModel extends SavableObject {
         accountTo.registerTransferAsIncoming(transfer.copy());
     }
 
-    private void registerTransaction(final TransactionViewModel transactionVM) {
-        getTransactions().add(transactionVM);
-        setBalance(modelAccount.getBalance());
+    void registerTransaction(final TransactionViewModel transaction) {
+        getTransactions().add(transaction);
+        updateBalance();
+    }
+
+    void unregisterTransaction(final TransactionViewModel transaction) {
+        getTransactions().remove(transaction);
+        updateBalance();
     }
 
     private void registerTransferAsIncoming(final TransferViewModel transfer) {
@@ -158,6 +153,10 @@ public class AccountViewModel extends SavableObject {
                 hasAccountWithName(getName()), parentLedger.accountsProperty(), nameProperty);
 
         isAbleToSaveProperty.bind(isAccountNameExists.not());
+    }
+
+    private void updateBalance() {
+        setBalance(modelAccount.getBalance());
     }
 
     private boolean hasAccountWithName(final String accountName) {

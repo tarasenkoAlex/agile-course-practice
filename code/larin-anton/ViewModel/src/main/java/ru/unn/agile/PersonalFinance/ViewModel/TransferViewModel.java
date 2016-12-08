@@ -3,6 +3,7 @@ package ru.unn.agile.PersonalFinance.ViewModel;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import ru.unn.agile.PersonalFinance.Model.Transaction;
 
 public class TransferViewModel extends TransactionViewModel {
     private final LedgerViewModel parentLedger;

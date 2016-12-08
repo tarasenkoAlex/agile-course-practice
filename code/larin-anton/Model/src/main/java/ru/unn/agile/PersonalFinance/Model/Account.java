@@ -32,18 +32,20 @@ public class Account {
         addTransactionKeepingOrder(transactions, expense);
     }
 
-    public void transferTo(final Account other, final int amount,
+    public Transfer transferTo(final Account other, final int amount,
                            final GregorianCalendar date) {
         if (amount < 0) {
             throw new IllegalArgumentException(
                     "Consider adding a transfer in opposite direction");
         }
 
-        addTransfer(new Transfer(amount, this, other, date));
+        Transfer transfer = new Transfer(amount, this, other, date);
+        addTransfer(transfer);
+        return transfer;
     }
 
-    public void transferTo(final Account other, final int amount) {
-        transferTo(other, amount, null);
+    public Transfer transferTo(final Account other, final int amount) {
+        return transferTo(other, amount, null);
     }
 
     public void deleteTransaction(final Transaction transaction) {

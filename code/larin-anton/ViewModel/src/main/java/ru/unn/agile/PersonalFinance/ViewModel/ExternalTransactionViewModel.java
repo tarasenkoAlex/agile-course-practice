@@ -8,6 +8,7 @@ import javafx.beans.property.StringProperty;
 import ru.unn.agile.PersonalFinance.Model.Account;
 import ru.unn.agile.PersonalFinance.Model.Category;
 import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
+import ru.unn.agile.PersonalFinance.Model.Transaction;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.GregorianCalendarHelper;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.StringHelper;
 
@@ -86,27 +87,32 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
         }
 
         modelExternalTransaction = buildExternalTransaction();
-        parentAccount.addExternalTransaction(this);
+
+        Account modelAccount = parentAccount.getModelAccount();
+        modelAccount.addExternalTransaction(modelExternalTransaction);
+        parentAccount.registerTransaction(this);
     }
 
     @Override
     protected void updateInternal() {
-
+        // TODO
     }
 
     @Override
     protected void deleteInternal() {
-
+        Account modelAccount = parentAccount.getModelAccount();
+        modelAccount.deleteTransaction(modelExternalTransaction);
+        parentAccount.unregisterTransaction(this);
     }
 
     @Override
     protected void saveState() {
-
+        // TODO
     }
 
     @Override
     protected void recoverState() {
-
+        // TODO
     }
 
     private ExternalTransaction buildExternalTransaction() {
@@ -150,4 +156,5 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
     private void setDefaults() {
         setDate(LocalDate.now());
     }
+
 }
