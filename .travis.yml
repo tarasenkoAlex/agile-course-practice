@@ -12,6 +12,6 @@ script:
   - gradle -v
   - gradle check jacocoTestReport
 after_success:
-  - gradle jacocoRootReport coveralls
+  - gradle jacocoRootReport coveralls --stacktrace
 notifications:
   email: false
