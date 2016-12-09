@@ -10,6 +10,7 @@ import ru.unn.agile.Triangle.model.Point2D;
 import ru.unn.agile.Triangle.model.Triangle;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 public class ViewModel {
     private final StringProperty ax = new SimpleStringProperty();
@@ -67,7 +68,9 @@ public class ViewModel {
 
         Triangle triangle = new Triangle(a, b, c);
 
-        DecimalFormat df = new DecimalFormat("###.###");
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("###.###", dfs);
 
         double areaValue = triangle.area();
         area.set(df.format(areaValue));
