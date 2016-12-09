@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Locale;
+
 import static org.junit.Assert.*;
 
 public class ViewModelTests {
@@ -100,6 +102,18 @@ public class ViewModelTests {
         assertEquals("undefined", viewModel.circumcircleRadiusProperty().get());
         assertEquals("undefined", viewModel.circumcircleCenterXProperty().get());
         assertEquals("undefined", viewModel.circumcircleCenterYProperty().get());
+    }
+
+    @Test
+    public void canUsePointOnlyAsDecimalSeparatorForOutputDespiteLocale() {
+        Locale locale = new Locale("de");
+        Locale.setDefault(locale);
+
+        setInputData();
+
+        viewModel.calculate();
+
+        assertEquals("0.5", viewModel.areaProperty().get());
     }
 
     private void setInputData() {
