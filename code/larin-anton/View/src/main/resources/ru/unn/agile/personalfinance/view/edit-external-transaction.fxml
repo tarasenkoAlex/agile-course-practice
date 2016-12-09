@@ -72,7 +72,7 @@
 
     <!-- Buttons -->
     <HBox AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="20" spacing="10">
-        <JFXButton fx:id="addButton" text="Add" styleClass="button-raised"
+        <JFXButton fx:id="addButton" text="Save" styleClass="button-raised"
                    onAction="#handleAddButtonAction" prefWidth="100"/>
         <JFXButton text="Cancel" onAction="#handleCancelButtonAction" prefWidth="100"/>
     </HBox>

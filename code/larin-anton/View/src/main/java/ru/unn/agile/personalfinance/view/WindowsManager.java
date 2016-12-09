@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
+import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
 import ru.unn.agile.personalfinance.view.controllers.DataContextController;
 
@@ -57,6 +58,10 @@ public final class WindowsManager {
     }
 
     public void showEditAccountView(final AccountViewModel account) {
+        if (account == null) {
+            return;
+        }
+
         getView("edit-account.fxml")
                 .title("Add new account")
                 .width(EDIT_ACCOUNT_WINDOW_WIDTH)
@@ -65,22 +70,19 @@ public final class WindowsManager {
                 .show();
     }
 
-    public void showEditExternalTransactionView(final ExternalTransactionViewModel transaction) {
-        getView("edit-external-transaction.fxml")
-                .title("Add new transaction")
-                .width(EDIT_EXTERNAL_TRANSACTION_WINDOW_WIDTH)
-                .height(EDIT_EXTERNAL_TRANSACTION_WINDOW_HEIGHT)
-                .data(transaction)
-                .show();
-    }
+    public void showEditTransactionView(final TransactionViewModel transaction) {
+        if (transaction == null) {
+            return;
+        }
 
-    public void showAddTransferView(final TransferViewModel transfer) {
-        getView("edit-transfer.fxml")
-                .title("Add new transfer")
-                .width(EDIT_TRANSFER_WINDOW_WIDTH)
-                .height(EDIT_TRANSFER_WINDOW_HEIGHT)
-                .data(transfer)
-                .show();
+        if (transaction instanceof ExternalTransactionViewModel) {
+            showEditExternalTransactionView((ExternalTransactionViewModel) transaction);
+        } else if (transaction instanceof TransferViewModel) {
+            showEditTransferView((TransferViewModel) transaction);
+        } else {
+            throw new IllegalArgumentException("We don't know how to present transaction of type "
+                    + transaction.getClass().getName());
+        }
     }
 
     public void showEditCategoriesView() {
@@ -94,6 +96,24 @@ public final class WindowsManager {
     public void goBack() {
         Stage currentStage = stagesHistory.peek();
         currentStage.close();
+    }
+
+    private void showEditExternalTransactionView(final ExternalTransactionViewModel transaction) {
+        getView("edit-external-transaction.fxml")
+                .title("Add new transaction")
+                .width(EDIT_EXTERNAL_TRANSACTION_WINDOW_WIDTH)
+                .height(EDIT_EXTERNAL_TRANSACTION_WINDOW_HEIGHT)
+                .data(transaction)
+                .show();
+    }
+
+    private void showEditTransferView(final TransferViewModel transfer) {
+        getView("edit-transfer.fxml")
+                .title("Add new transfer")
+                .width(EDIT_TRANSFER_WINDOW_WIDTH)
+                .height(EDIT_TRANSFER_WINDOW_HEIGHT)
+                .data(transfer)
+                .show();
     }
 
     private ViewBuilder getView(final String fxmlSource) {

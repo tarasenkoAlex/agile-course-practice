@@ -27,6 +27,7 @@
                 <contextMenu>
                     <ContextMenu>
                         <items>
+                            <MenuItem text="Edit" onAction="#handleEditTransactionAction" />
                             <MenuItem text="Delete" onAction="#handleDeleteTransactionAction" />
                         </items>
                     </ContextMenu>

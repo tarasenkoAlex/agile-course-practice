@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomeScreenController extends DataContextController {
+    private final WindowsManager windowsManager = WindowsManager.getInstance();
     private final LedgerViewModel ledger = ViewModelService.getViewModel();
 
     @FXML
@@ -65,24 +66,23 @@ public class HomeScreenController extends DataContextController {
     }
 
     @FXML
-    protected void handleAddAccountAction(final ActionEvent event) {
+    private void handleAddAccountAction(final ActionEvent event) {
         AccountViewModel newAccount = new AccountViewModel(ledger);
-        WindowsManager.getInstance().showEditAccountView(newAccount);
+        windowsManager.showEditAccountView(newAccount);
     }
 
     @FXML
-    protected void handleAddTransactionAction(final ActionEvent actionEvent) {
+    private void handleAddTransactionAction(final ActionEvent actionEvent) {
         ExternalTransactionViewModel transaction =
                 new ExternalTransactionViewModel(getSelectedAccount());
-        WindowsManager.getInstance().showEditExternalTransactionView(transaction);
+        windowsManager.showEditTransactionView(transaction);
     }
 
     @FXML
-    protected void handleAddTransferAction(final ActionEvent actionEvent) {
+    private void handleAddTransferAction(final ActionEvent actionEvent) {
         TransferViewModel newTransfer = new TransferViewModel();
-        WindowsManager.getInstance().showAddTransferView(newTransfer);
+        windowsManager.showEditTransactionView(newTransfer);
     }
-
 
     @FXML
     private void handleDeleteAccountAction(final ActionEvent actionEvent) {
@@ -91,12 +91,17 @@ public class HomeScreenController extends DataContextController {
 
     @FXML
     private void handleEditAccountAction(final ActionEvent actionEvent) {
-        WindowsManager.getInstance().showEditAccountView(getSelectedAccount());
+        windowsManager.showEditAccountView(getSelectedAccount());
     }
 
     @FXML
     private void handleDeleteTransactionAction(final ActionEvent actionEvent) {
         getSelectedTransaction().delete();
+    }
+
+    @FXML
+    private void handleEditTransactionAction(final ActionEvent actionEvent) {
+        windowsManager.showEditTransactionView(getSelectedTransaction());
     }
 
     private AccountViewModel getSelectedAccount() {
