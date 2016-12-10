@@ -105,7 +105,7 @@ public class WhenEditingExternalTransaction {
         LocalDate dateAfterChange = dateBeforeChange.plusDays(1);
 
         transaction.setDate(dateAfterChange);
-        transaction.save();
+        transaction.revertChanges();
 
         assertTrue(dateBeforeChange.isEqual(transaction.getDate()));
     }
@@ -116,7 +116,7 @@ public class WhenEditingExternalTransaction {
         LocalDate dateAfterChange = dateBeforeChange.plusDays(1);
 
         transaction.setDate(dateAfterChange);
-        transaction.save();
+        transaction.revertChanges();
 
         ExternalTransaction modelTransaction = transaction.getModelExternalTransaction();
         assertTrue(GregorianCalendarHelper.compareToLocalDate(
@@ -128,7 +128,7 @@ public class WhenEditingExternalTransaction {
         String counterpartyBeforeChange = transaction.getCounterparty();
 
         transaction.setCounterparty(CHANGED_COUNTERPARTY);
-        transaction.save();
+        transaction.revertChanges();
 
         assertEquals(counterpartyBeforeChange, transaction.getCounterparty());
     }
@@ -138,7 +138,7 @@ public class WhenEditingExternalTransaction {
         String counterpartyBeforeChange = transaction.getCounterparty();
 
         transaction.setCounterparty(CHANGED_COUNTERPARTY);
-        transaction.save();
+        transaction.revertChanges();
 
         ExternalTransaction modelTransaction = transaction.getModelExternalTransaction();
         assertEquals(counterpartyBeforeChange, modelTransaction.getCounterparty());
@@ -149,7 +149,7 @@ public class WhenEditingExternalTransaction {
         String descriptionBeforeChange = transaction.getDescription();
 
         transaction.setDescription(CHANGED_DESCRIPTION);
-        transaction.save();
+        transaction.revertChanges();
 
         assertEquals(descriptionBeforeChange, transaction.getDescription());
     }
@@ -159,7 +159,7 @@ public class WhenEditingExternalTransaction {
         String descriptionBeforeChange = transaction.getDescription();
 
         transaction.setDescription(CHANGED_DESCRIPTION);
-        transaction.save();
+        transaction.revertChanges();
 
         ExternalTransaction modelTransaction = transaction.getModelExternalTransaction();
         assertEquals(descriptionBeforeChange, modelTransaction.getDescription());
@@ -170,7 +170,7 @@ public class WhenEditingExternalTransaction {
         CategoryViewModel categoryBeforeChange = transaction.getCategory();
 
         transaction.setCategory(new CategoryViewModel(CHANGED_CATEGORY));
-        transaction.save();
+        transaction.revertChanges();
 
         assertEquals(categoryBeforeChange.getName(), transaction.getCategory().getName());
     }
@@ -180,7 +180,7 @@ public class WhenEditingExternalTransaction {
         Category categoryModelBeforeChange = transaction.getModelExternalTransaction().getCategory();
 
         transaction.setCategory(new CategoryViewModel(CHANGED_CATEGORY));
-        transaction.save();
+        transaction.revertChanges();
 
         ExternalTransaction modelTransaction = transaction.getModelExternalTransaction();
         assertEquals(categoryModelBeforeChange.getName(), modelTransaction.getCategory().getName());

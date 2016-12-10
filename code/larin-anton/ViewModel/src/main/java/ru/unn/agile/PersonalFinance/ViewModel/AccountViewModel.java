@@ -115,6 +115,10 @@ public class AccountViewModel extends SavableObject {
         updateBalance();
     }
 
+    void forceUpdateBalance() {
+        updateBalance();
+    }
+
     private void registerTransferAsIncoming(final TransferViewModel transfer) {
         transfer.setIsIncome(true);
         registerTransaction(transfer);

@@ -16,10 +16,14 @@ import java.util.Objects;
 
 public class ExternalTransactionViewModel extends TransactionViewModel {
     private final AccountViewModel parentAccount;
+
     private ExternalTransaction modelExternalTransaction;
+    private ExternalTransactionViewModelState savedState;
 
     private final StringProperty descriptionProperty = new SimpleStringProperty();
+
     private final StringProperty counterpartyProperty = new SimpleStringProperty();
+
     private final ObjectProperty<CategoryViewModel> categoryProperty =
             new SimpleObjectProperty<>();
 
@@ -94,7 +98,11 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
 
     @Override
     protected void updateInternal() {
-        // TODO
+        Account modelAccount = parentAccount.getModelAccount();
+        modelAccount.deleteTransaction(modelExternalTransaction);
+        modelExternalTransaction = buildExternalTransaction();
+        modelAccount.addExternalTransaction(modelExternalTransaction);
+        parentAccount.forceUpdateBalance();
     }
 
     @Override
@@ -106,12 +114,12 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
 
     @Override
     protected void saveState() {
-        // TODO
+        savedState = ExternalTransactionViewModelState.save(this);
     }
 
     @Override
     protected void recoverState() {
-        // TODO
+        savedState.recover(this);
     }
 
     private ExternalTransaction buildExternalTransaction() {

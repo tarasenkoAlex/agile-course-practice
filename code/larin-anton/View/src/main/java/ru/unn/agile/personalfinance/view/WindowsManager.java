@@ -22,7 +22,7 @@ public final class WindowsManager {
     private static final int EDIT_ACCOUNT_WINDOW_WIDTH = 400;
     private static final int EDIT_ACCOUNT_WINDOW_HEIGHT = 200;
     private static final int EDIT_EXTERNAL_TRANSACTION_WINDOW_WIDTH = 500;
-    private static final int EDIT_EXTERNAL_TRANSACTION_WINDOW_HEIGHT = 350;
+    private static final int EDIT_EXTERNAL_TRANSACTION_WINDOW_HEIGHT = 400;
     private static final int EDIT_TRANSFER_WINDOW_WIDTH = 500;
     private static final int EDIT_TRANSFER_WINDOW_HEIGHT = 250;
     private static final int EDIT_CATEGORIES_WINDOW_WIDTH = 300;

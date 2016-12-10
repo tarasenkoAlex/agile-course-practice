@@ -31,11 +31,12 @@ public class EditAccountController extends DataContextController {
     @Override
     protected void removeBindings(final Object oldDataContext) {
         final AccountViewModel account = (AccountViewModel) oldDataContext;
-        account.revertChanges();
 
         Bindings.unbindBidirectional(nameField.textProperty(), account.nameProperty());
         Bindings.unbindBidirectional(balanceField.textProperty(), account.balanceProperty());
         addButton.disableProperty().unbind();
+
+        account.revertChanges();
     }
 
     @Override

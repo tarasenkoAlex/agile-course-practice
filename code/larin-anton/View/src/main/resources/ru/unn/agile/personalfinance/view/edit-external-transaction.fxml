@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import ru.unn.agile.personalfinance.view.ViewModelSource?>
+<?import javafx.scene.text.Text?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
             fx:controller="ru.unn.agile.personalfinance.view.controllers.EditExternalTransactionController">
     <GridPane vgap="10"
@@ -30,12 +31,13 @@
         </columnConstraints>
 
         <!-- Income or Expense -->
-        <HBox GridPane.rowIndex="0" GridPane.columnIndex="1">
-            <fx:define>
-                <ToggleGroup fx:id="incomeOrExpenseGroup"/>
-            </fx:define>
-            <JFXRadioButton fx:id="incomeRBtn" text="Income" toggleGroup="$incomeOrExpenseGroup"/>
-            <JFXRadioButton text="Expense" toggleGroup="$incomeOrExpenseGroup" selected="true" />
+        <HBox GridPane.rowIndex="0" GridPane.columnIndex="1" spacing="10">
+            <padding>
+                <Insets left="10" />
+            </padding>
+            <Label text="Expense" maxHeight="Infinity" alignment="CENTER" />
+            <JFXToggleButton fx:id="incomeToggleButton" />
+            <Label text="Income" maxHeight="Infinity" alignment="CENTER" />
         </HBox>
 
         <!-- Amount -->

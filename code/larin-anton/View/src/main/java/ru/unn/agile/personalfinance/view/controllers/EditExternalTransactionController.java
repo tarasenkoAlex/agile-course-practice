@@ -1,6 +1,8 @@
 package ru.unn.agile.personalfinance.view.controllers;
 
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyListProperty;
@@ -22,7 +24,6 @@ import java.util.ResourceBundle;
 public class EditExternalTransactionController extends DataContextController {
     private static final StringListCellFactory<CategoryViewModel> CATEGORY_LIST_CELL_FACTORY =
             new StringListCellFactory<>(category -> category.getName());
-
     @FXML
     private JFXDatePicker datePicker;
 
@@ -39,10 +40,10 @@ public class EditExternalTransactionController extends DataContextController {
     private ComboBox<CategoryViewModel> categoryComboBox;
 
     @FXML
-    private RadioButton incomeRBtn;
+    private TextField transactionAmountField;
 
     @FXML
-    private TextField transactionAmountField;
+    private JFXToggleButton incomeToggleButton;
 
     @FXML
     protected void handleAddButtonAction(final ActionEvent actionEvent) {
@@ -73,39 +74,11 @@ public class EditExternalTransactionController extends DataContextController {
     }
 
     @Override
-    protected void removeBindings(final Object oldDataContext) {
-        final ExternalTransactionViewModel transaction =
-                (ExternalTransactionViewModel) oldDataContext;
-
-        Bindings.unbindBidirectional(
-                transactionAmountField.textProperty(),
-                transaction.amountProperty());
-
-        Bindings.unbindBidirectional(
-                incomeRBtn.selectedProperty(),
-                transaction.isIncomeProperty());
-
-        Bindings.unbindBidirectional(
-                descriptionTextArea.textProperty(),
-                transaction.descriptionProperty());
-
-        transaction.categoryProperty().unbind();
-
-        Bindings.unbindBidirectional(
-                counterpartyField.textProperty(),
-                transaction.counterpartyProperty());
-
-        Bindings.unbindBidirectional(
-                datePicker.valueProperty(),
-                transaction.dateProperty());
-
-        addButton.disableProperty().unbind();
-    }
-
-    @Override
     protected void addBindings(final Object newDataContext) {
         final ExternalTransactionViewModel transaction =
                 (ExternalTransactionViewModel) newDataContext;
+
+        transaction.startChanging();
 
         /* transactionAmountField.text <-> transaction.amount */
         Bindings.bindBidirectional(
@@ -113,9 +86,9 @@ public class EditExternalTransactionController extends DataContextController {
                 transaction.amountProperty(),
                 new CurrencyStringConverter());
 
-        /* incomeRBtn.isSelected <-> transaction.isIncome */
+        /* incomeToggleButton.isSelected <-> transaction.isIncome */
         Bindings.bindBidirectional(
-                incomeRBtn.selectedProperty(),
+                incomeToggleButton.selectedProperty(),
                 transaction.isIncomeProperty());
 
         /* descriptionTextArea.text <-> transaction.description */
@@ -140,7 +113,42 @@ public class EditExternalTransactionController extends DataContextController {
         /* !transaction.isAbleToSave -> addButton.disabled  */
         addButton.disableProperty().bind(transaction.isAbleToSaveProperty().not());
 
-        categoryComboBox.getSelectionModel().selectFirst();
+        if (transaction.getCategory() == null) {
+            categoryComboBox.getSelectionModel().selectFirst();
+        } else {
+            categoryComboBox.getSelectionModel().select(transaction.getCategory());
+        }
     }
 
+    @Override
+    protected void removeBindings(final Object oldDataContext) {
+        final ExternalTransactionViewModel transaction =
+                (ExternalTransactionViewModel) oldDataContext;
+
+        Bindings.unbindBidirectional(
+                transactionAmountField.textProperty(),
+                transaction.amountProperty());
+
+        Bindings.unbindBidirectional(
+                incomeToggleButton.selectedProperty(),
+                transaction.isIncomeProperty());
+
+        Bindings.unbindBidirectional(
+                descriptionTextArea.textProperty(),
+                transaction.descriptionProperty());
+
+        transaction.categoryProperty().unbind();
+
+        Bindings.unbindBidirectional(
+                counterpartyField.textProperty(),
+                transaction.counterpartyProperty());
+
+        Bindings.unbindBidirectional(
+                datePicker.valueProperty(),
+                transaction.dateProperty());
+
+        addButton.disableProperty().unbind();
+
+        transaction.revertChanges();
+    }
 }
