@@ -17,9 +17,9 @@ public class SquareCalculator {
 
     }
 
-    public double getConeSquare(final double radius, double rulingofcone) {
-        checkParams("Radius and Ruling Of Cone must not be negative!",radius ,rulingofcone);
-        return Math.PI * radius * ( radius + rulingofcone );
+    public double getConeSquare(final double radius,final double rulingofcone) {
+        checkParams("Radius and Ruling Of Cone must not be negative!", radius , rulingofcone);
+        return Math.PI * radius * (radius + rulingofcone);
     }
 
     public double getCubeSquare(double lenght) {
