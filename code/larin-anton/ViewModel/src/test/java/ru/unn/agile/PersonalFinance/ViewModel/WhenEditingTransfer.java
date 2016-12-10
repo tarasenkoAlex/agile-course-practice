@@ -19,6 +19,7 @@ public class WhenEditingTransfer {
     public void setUp() throws Exception {
         ViewModelObjectsMaker maker = new ViewModelObjectsMaker();
         transfer = maker.makeSavedTransfer();
+        transfer.startChanging();
     }
 
     @Test
@@ -50,7 +51,7 @@ public class WhenEditingTransfer {
         int amountAfterChange = amountBeforeChange + AMOUNT_CHANGE;
 
         transfer.setAmount(amountAfterChange);
-        transfer.save();
+        transfer.revertChanges();
 
         assertEquals(amountBeforeChange, transfer.getAmount());
     }
@@ -61,7 +62,7 @@ public class WhenEditingTransfer {
         int amountAfterChange = amountBeforeChange + AMOUNT_CHANGE;
 
         transfer.setAmount(amountAfterChange);
-        transfer.save();
+        transfer.revertChanges();
 
         Transfer modelTransfer = this.transfer.getModelTransfer();
         assertEquals(amountBeforeChange, modelTransfer.getAmount());
@@ -99,7 +100,7 @@ public class WhenEditingTransfer {
         transfer.setAmount(transfer.getAmount() + AMOUNT_CHANGE);
         transfer.save();
 
-        assertEquals(sourceAccountBalance - AMOUNT_CHANGE, transfer.getAmount());
+        assertEquals(sourceAccountBalance - AMOUNT_CHANGE, sourceAccount.getBalance());
     }
 
     @Test
@@ -110,6 +111,6 @@ public class WhenEditingTransfer {
         transfer.setAmount(transfer.getAmount() + AMOUNT_CHANGE);
         transfer.save();
 
-        assertEquals(targetAccountBalance + AMOUNT_CHANGE, transfer.getAmount());
+        assertEquals(targetAccountBalance + AMOUNT_CHANGE, targetAccount.getBalance());
     }
 }

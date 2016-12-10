@@ -4,23 +4,24 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import ru.unn.agile.PersonalFinance.Model.Account;
-import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
 import ru.unn.agile.PersonalFinance.Model.Transfer;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.GregorianCalendarHelper;
 
 import java.util.GregorianCalendar;
 
 public class TransferViewModel extends TransactionViewModel {
-    private TransferViewModelSharedState sharedState;
-    private AccountViewModel associatedAccount;
-    private TransferViewModel linkedTransfer;
-    private boolean isDeleting;
-
     private final ObjectProperty<AccountViewModel> accountFromProperty =
             new SimpleObjectProperty<>();
 
     private final ObjectProperty<AccountViewModel> accountToProperty =
             new SimpleObjectProperty<>();
+
+    private Transfer modelTransfer;
+    private AccountViewModel associatedAccount;
+    private TransferViewModel linkedTransfer;
+    private TransferViewModelState savedState;
+
+    private boolean isInProcessOfDeletion;
 
     public TransferViewModel() {
         setDisplayTitle("Transfer");
@@ -56,11 +57,68 @@ public class TransferViewModel extends TransactionViewModel {
     // endregion
 
     Transfer getModelTransfer() {
-        return sharedState.getModelTransfer();
+        return modelTransfer;
     }
 
     @Override
     protected void saveInternal() {
+        modelTransfer = buildModelTransfer();
+        getAccountFrom().registerTransaction(this.asOutcoming());
+        getAccountTo().registerTransaction(this.duplicate().asIncoming());
+    }
+
+    @Override
+    protected void updateInternal() {
+        deleteModelTransfer();
+        modelTransfer = buildModelTransfer();
+        getAccountFrom().forceUpdateBalance();
+        getAccountTo().forceUpdateBalance();
+        synchronizeStateWithLinkedTransfer();
+    }
+
+    @Override
+    protected void deleteInternal() {
+        startProcessOfDeletion();
+        if (!linkedTransfer.isInProcessOfDeletion()) {
+            deleteModelTransfer();
+            linkedTransfer.delete();
+        }
+        associatedAccount.unregisterTransaction(this);
+        endProcessOfDeletion();
+    }
+
+    @Override
+    protected void saveState() {
+        savedState = TransferViewModelState.save(this);
+    }
+
+    @Override
+    protected void recoverState() {
+        savedState.recover(this);
+    }
+
+    private TransferViewModel duplicate() {
+        TransferViewModel other = new TransferViewModel();
+        other.setAmount(getAmount());
+        other.setIsIncome(getIsIncome());
+        other.setDate(getDate());
+        other.setAccountFrom(getAccountFrom());
+        other.setAccountTo(getAccountTo());
+        other.modelTransfer = modelTransfer;
+        other.linkedTransfer = this;
+        linkedTransfer = other;
+        other.markAsSaved();
+        return other;
+    }
+
+    private void synchronizeStateWithLinkedTransfer() {
+        linkedTransfer.setAmount(getAmount());
+        linkedTransfer.setDate(getDate());
+        linkedTransfer.modelTransfer = modelTransfer;
+    }
+
+    private Transfer buildModelTransfer() {
+
         AccountViewModel accountFrom = getAccountFrom();
         AccountViewModel accountTo = getAccountTo();
         Account modelAccountFrom = accountFrom.getModelAccount();
@@ -68,53 +126,8 @@ public class TransferViewModel extends TransactionViewModel {
 
         GregorianCalendar transferDate =
                 GregorianCalendarHelper.convertFromLocalDate(getDate());
-        Transfer modelTransfer = modelAccountFrom.transferTo(
+        return modelAccountFrom.transferTo(
                 modelAccountTo, getAmount(), transferDate);
-
-        sharedState = new TransferViewModelSharedState(modelTransfer, modelAccountFrom);
-
-        accountFrom.registerTransaction(this.asOutcoming());
-        accountTo.registerTransaction(this.duplicate().asIncoming());
-    }
-
-    @Override
-    protected void updateInternal() {
-        // TODO
-    }
-
-    @Override
-    protected void deleteInternal() {
-        startDeletion();
-        sharedState.delete();
-        if (!linkedTransfer.isDeleting()) {
-            linkedTransfer.delete();
-        }
-        associatedAccount.unregisterTransaction(this);
-        endDeletion();
-    }
-
-    @Override
-    protected void saveState() {
-        // TODO
-    }
-
-    @Override
-    protected void recoverState() {
-        // TODO
-    }
-
-    private TransferViewModel duplicate() {
-        TransferViewModel other = new TransferViewModel();
-        other.setAmount(getAmount());
-        other.setDate(getDate());
-        other.setIsIncome(getIsIncome());
-        other.setAccountFrom(getAccountFrom());
-        other.setAccountTo(getAccountTo());
-        other.sharedState = sharedState;
-        other.linkedTransfer = this;
-        linkedTransfer = other;
-        other.markAsSaved();
-        return other;
     }
 
     private void setUpBindings() {
@@ -176,15 +189,18 @@ public class TransferViewModel extends TransactionViewModel {
         return this;
     }
 
-    private void startDeletion() {
-        isDeleting = true;
+    private void deleteModelTransfer() {
+        Account modelAccountFrom = getAccountFrom().getModelAccount();
+        modelAccountFrom.deleteTransaction(modelTransfer);
     }
 
-    private boolean isDeleting() {
-        return isDeleting;
+    private void startProcessOfDeletion() {
+        isInProcessOfDeletion = true;
     }
-
-    private void endDeletion() {
-        isDeleting = false;
+    private boolean isInProcessOfDeletion() {
+        return isInProcessOfDeletion;
+    }
+    private void endProcessOfDeletion() {
+        isInProcessOfDeletion = false;
     }
 }
