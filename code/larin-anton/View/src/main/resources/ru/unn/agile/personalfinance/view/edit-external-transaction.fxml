@@ -2,7 +2,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
             fx:controller="ru.unn.agile.personalfinance.view.controllers.EditExternalTransactionController">
     <GridPane vgap="10"
