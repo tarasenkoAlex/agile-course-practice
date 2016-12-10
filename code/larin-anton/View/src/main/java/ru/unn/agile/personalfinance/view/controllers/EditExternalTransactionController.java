@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.CategoryViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
@@ -51,18 +50,18 @@ public class EditExternalTransactionController
     private JFXToggleButton incomeToggleButton;
 
     @FXML
-    protected void handleAddButtonAction(final ActionEvent actionEvent) {
+    private void handleAddButtonAction(final ActionEvent actionEvent) {
         getDataContext().save();
         WindowsManager.getInstance().goBack();
     }
 
     @FXML
-    protected void handleCancelButtonAction(final ActionEvent actionEvent) {
+    private void handleCancelButtonAction(final ActionEvent actionEvent) {
         WindowsManager.getInstance().goBack();
     }
 
     @FXML
-    protected void handleMangeButtonAction(final ActionEvent actionEvent) {
+    private void handleMangeButtonAction(final ActionEvent actionEvent) {
         WindowsManager.getInstance().showEditCategoriesView();
     }
 
@@ -86,7 +85,7 @@ public class EditExternalTransactionController
         Bindings.bindBidirectional(
                 transactionAmountField.textProperty(),
                 transaction.amountProperty(),
-                new CurrencyStringConverter());
+                Converters.getCurrencyStringConverter());
 
         /* incomeToggleButton.isSelected <-> transaction.isIncome */
         Bindings.bindBidirectional(

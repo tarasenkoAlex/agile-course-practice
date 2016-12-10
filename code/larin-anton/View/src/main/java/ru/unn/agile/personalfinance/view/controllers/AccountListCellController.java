@@ -15,10 +15,10 @@ public class AccountListCellController extends DataContextController<AccountView
 
     @Override
     protected void addBindings(final AccountViewModel account) {
-        /* */
+        /* account.name -> nameLabel.text */
         nameLabel.textProperty().bind(account.nameProperty());
 
-        /* */
+        /* balanceLabel.text <-> account.balance */
         Bindings.bindBidirectional(
                 balanceLabel.textProperty(),
                 account.balanceProperty(),

@@ -17,9 +17,6 @@ public class TransactionListCellController extends DataContextController {
     private FontAwesomeIconView directionIcon;
 
     @FXML
-    private Label deletedMarkerLabel;
-
-    @FXML
     private Label counterpartyLabel;
 
     @FXML

@@ -5,9 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.personalfinance.view.WindowsManager;
+import ru.unn.agile.personalfinance.view.utils.Converters;
 
 public class EditAccountController extends DataContextController<AccountViewModel> {
     @FXML
@@ -19,12 +19,14 @@ public class EditAccountController extends DataContextController<AccountViewMode
     @FXML
     private Button addButton;
 
-    public void handleAddButton(final ActionEvent actionEvent) {
+    @FXML
+    private void handleAddButton(final ActionEvent actionEvent) {
         getDataContext().save();
         WindowsManager.getInstance().goBack();
     }
 
-    public void handleCancelButton(final ActionEvent actionEvent) {
+    @FXML
+    private void handleCancelButton(final ActionEvent actionEvent) {
         WindowsManager.getInstance().goBack();
     }
 
@@ -49,7 +51,7 @@ public class EditAccountController extends DataContextController<AccountViewMode
         Bindings.bindBidirectional(
                 balanceField.textProperty(),
                 account.balanceProperty(),
-                new CurrencyStringConverter());
+                Converters.getCurrencyStringConverter());
 
         /* account.changingProperty -> balanceField.disabled */
         balanceField.disableProperty().bind(account.changingProperty());

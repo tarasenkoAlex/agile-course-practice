@@ -10,10 +10,10 @@ public class DataContextController<T> implements Initializable {
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
-        // Do nothing
+        // Empty implementation
     }
 
-    public void setDataContext(final T dataContext) {
+    public final void setDataContext(final T dataContext) {
         if (this.dataContext != dataContext) {
             T oldDataContext = this.dataContext;
             this.dataContext = dataContext;
@@ -21,7 +21,7 @@ public class DataContextController<T> implements Initializable {
         }
     }
 
-    protected T getDataContext() {
+    protected final T getDataContext() {
         return dataContext;
     }
 
@@ -37,10 +37,10 @@ public class DataContextController<T> implements Initializable {
     }
 
     protected void removeBindings(final T oldDataContext) {
-        // Do nothing
+        // Empty implementation
     }
 
     protected void addBindings(final T newDataContext) {
-        // Do nothing
+        // Empty implementation
     }
 }

@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
@@ -41,13 +40,13 @@ public class EditTransferController extends DataContextController<TransferViewMo
     private Button addButton;
 
     @FXML
-    protected void handleSaveTransferButtonAction(final ActionEvent actionEvent) {
+    private void handleSaveTransferButtonAction(final ActionEvent actionEvent) {
         getDataContext().save();
         WindowsManager.getInstance().goBack();
     }
 
     @FXML
-    protected void handleCancelButtonAction(final ActionEvent actionEvent) {
+    private void handleCancelButtonAction(final ActionEvent actionEvent) {
         WindowsManager.getInstance().goBack();
     }
 
@@ -91,7 +90,7 @@ public class EditTransferController extends DataContextController<TransferViewMo
         Bindings.bindBidirectional(
                 amountField.textProperty(),
                 transfer.amountProperty(),
-                new CurrencyStringConverter());
+                Converters.getCurrencyStringConverter());
 
         /* accountFromComboBox.selected -> transfer.accountFrom */
         ReadOnlyObjectProperty<AccountViewModel> selectedAccountFromProperty =
