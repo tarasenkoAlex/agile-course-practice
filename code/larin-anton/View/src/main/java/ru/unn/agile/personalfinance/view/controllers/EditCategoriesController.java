@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import ru.unn.agile.PersonalFinance.ViewModel.CategoriesManagerViewModel;
@@ -39,6 +40,11 @@ public class EditCategoriesController extends DataContextController {
     public void initialize(final URL location, final ResourceBundle resources) {
         categoriesList.setCellFactory(CATEGORY_LIST_CELL_FACTORY);
 
+        /* categoriesList.selectedItem -> categoriesManager.selectedCategory */
+        ReadOnlyObjectProperty<CategoryViewModel> selectedItemProperty =
+                categoriesList.getSelectionModel().selectedItemProperty();
+        categoriesManager.selectedCategoryProperty().bind(selectedItemProperty);
+
         /* categoriesManager.categories -> categoriesList.items */
         categoriesList.itemsProperty().bind(categoriesManager.categoriesProperty());
 
@@ -51,4 +57,8 @@ public class EditCategoriesController extends DataContextController {
                 categoriesManager.newCategoryNameProperty());
     }
 
+    @FXML
+    private void handleDeleteCategoryAction(final ActionEvent actionEvent) {
+        categoriesManager.deleteSelectedCategory();
+    }
 }

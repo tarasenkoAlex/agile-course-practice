@@ -77,7 +77,9 @@ public class CategoriesManagerViewModel {
     }
 
     public void deleteSelectedCategory() {
-        // TODO
+        if (getSelectedCategory() != null) {
+            categoriesProperty.remove(getSelectedCategory());
+        }
     }
 
     private void setUpBindings() {

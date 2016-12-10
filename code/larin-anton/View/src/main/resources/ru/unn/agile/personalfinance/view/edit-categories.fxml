@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
             fx:controller="ru.unn.agile.personalfinance.view.controllers.EditCategoriesController">
     <GridPane vgap="10"
@@ -28,6 +30,14 @@
 
         <!-- Categories -->
         <JFXListView fx:id="categoriesList" styleClass="categories-list-view"
-                     GridPane.rowIndex="1" />
+                     GridPane.rowIndex="1">
+            <contextMenu>
+                <ContextMenu>
+                    <items>
+                        <MenuItem text="Delete" onAction="#handleDeleteCategoryAction" />
+                    </items>
+                </ContextMenu>
+            </contextMenu>
+        </JFXListView>
     </GridPane>
 </AnchorPane>
