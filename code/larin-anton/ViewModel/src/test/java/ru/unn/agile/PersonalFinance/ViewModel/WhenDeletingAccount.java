@@ -14,7 +14,7 @@ public class WhenDeletingAccount {
     public void setUp() throws Exception {
         ViewModelObjectsMaker maker = new ViewModelObjectsMaker();
         ledger = maker.getLedger();
-        account = maker.makeAccountSaved();
+        account = maker.makeSavedAccount();
     }
 
     @Test

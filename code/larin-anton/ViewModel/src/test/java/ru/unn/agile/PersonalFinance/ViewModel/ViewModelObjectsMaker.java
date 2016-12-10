@@ -1,10 +1,10 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
 final class ViewModelObjectsMaker {
-    private static final String DEFAULT_ACCOUNT_NAME = "Default account";
-    private static final String DEFAULT_CATEGORY_NAME = "Default category";
-    private static final String DEFAULT_COUNTERPARTY_NAME = "Default counterparty";
-    private static final String DEFAULT_DESCRIPTION = "Default description";
+    private static final String DEFAULT_ACCOUNT_NAME        = "Default account";
+    private static final String DEFAULT_CATEGORY_NAME       = "Default category";
+    private static final String DEFAULT_COUNTERPARTY_NAME   = "Default counterparty";
+    private static final String DEFAULT_DESCRIPTION         = "Default description";
     private static final String DEFAULT_SOURCE_ACCOUNT_NAME = "Default source account";
     private static final String DEFAULT_TARGET_ACCOUNT_NAME = "Default target account";
 
@@ -35,13 +35,13 @@ final class ViewModelObjectsMaker {
         return makeAccount(DEFAULT_ACCOUNT_NAME + " " + accountsCounter);
     }
 
-    AccountViewModel makeAccountSaved(final String name) {
+    AccountViewModel makeSavedAccount(final String name) {
         AccountViewModel account = makeAccount(name);
         account.save();
         return account;
     }
 
-    AccountViewModel makeAccountSaved() {
+    AccountViewModel makeSavedAccount() {
         AccountViewModel account = makeAccount();
         account.save();
         return account;
@@ -58,9 +58,19 @@ final class ViewModelObjectsMaker {
         return transaction;
     }
 
-    ExternalTransactionViewModel makeExternalTransactionSaved(
+    ExternalTransactionViewModel makeExternalTransaction() {
+        return makeExternalTransaction(makeSavedAccount());
+    }
+
+    ExternalTransactionViewModel makeSavedExternalTransaction(
             final AccountViewModel account) {
         ExternalTransactionViewModel transaction = makeExternalTransaction(account);
+        transaction.save();
+        return transaction;
+    }
+
+    ExternalTransactionViewModel makeSavedExternalTransaction() {
+        ExternalTransactionViewModel transaction = makeExternalTransaction();
         transaction.save();
         return transaction;
     }
@@ -81,14 +91,14 @@ final class ViewModelObjectsMaker {
                 makeAccount(DEFAULT_TARGET_ACCOUNT_NAME + " " + transferCounter));
     }
 
-    TransferViewModel makeTransferSaved(final AccountViewModel sourceAccount,
+    TransferViewModel makeSavedTransfer(final AccountViewModel sourceAccount,
                                         final AccountViewModel targetAccount) {
         TransferViewModel transfer = makeTransfer(sourceAccount, targetAccount);
         transfer.save();
         return transfer;
     }
 
-    TransferViewModel makeTransferSaved() {
+    TransferViewModel makeSavedTransfer() {
         TransferViewModel transfer = makeTransfer();
         transfer.save();
         return transfer;

@@ -3,28 +3,49 @@ package ru.unn.agile.PersonalFinance.ViewModel;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class WhenCreatingExternalTransaction {
-    private ViewModelObjectsMaker maker;
     private ExternalTransactionViewModel transaction;
 
     @Before
     public void setUp() throws Exception {
-        maker = new ViewModelObjectsMaker();
-        AccountViewModel account = maker.makeAccount();
-        transaction = maker.makeExternalTransaction(account);
+        ViewModelObjectsMaker maker = new ViewModelObjectsMaker();
+        transaction = maker.makeExternalTransaction();
     }
 
     @Test(expected = NullPointerException.class)
-    public void andIfLedgerModelIsNullItCauseFail() throws Exception {
+    public void andIfLedgerModelIsNullItCausesFail() throws Exception {
         new ExternalTransactionViewModel(null);
     }
 
     @Test
     public void andItCanBeSavedIfCounterpartyIsNormalString() throws Exception {
         transaction.setCounterparty("Tesla Motors");
+
+        assertTrue(transaction.getIsIsAbleToSave());
+    }
+
+    @Test
+    public void andItCanBeSavedIfDescriptionIsNormalString() throws Exception {
+        transaction.setDescription("Tesla Model S");
+
+        assertTrue(transaction.getIsIsAbleToSave());
+    }
+
+    @Test
+    public void andItCanBeSavedIfDateIsNotNull() throws Exception {
+        transaction.setDate(LocalDate.now());
+
+        assertTrue(transaction.getIsIsAbleToSave());
+    }
+
+    @Test
+    public void andItCanBeSavedIfAmountIsPositive() throws Exception {
+        transaction.setAmount(100);
 
         assertTrue(transaction.getIsIsAbleToSave());
     }
@@ -48,13 +69,6 @@ public class WhenCreatingExternalTransaction {
         transaction.setCounterparty("    ");
 
         assertFalse(transaction.getIsIsAbleToSave());
-    }
-
-    @Test
-    public void andItCanBeSavedIfAmountIsPositive() throws Exception {
-        transaction.setAmount(100);
-
-        assertTrue(transaction.getIsIsAbleToSave());
     }
 
     @Test
@@ -98,12 +112,4 @@ public class WhenCreatingExternalTransaction {
 
         assertFalse(transaction.getIsIsAbleToSave());
     }
-
-    @Test
-    public void andItCanNotBeSavedIfDescriptionIsNormalString() throws Exception {
-        transaction.setDescription("Tesla Model S");
-
-        assertTrue(transaction.getIsIsAbleToSave());
-    }
-
 }

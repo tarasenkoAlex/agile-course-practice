@@ -13,7 +13,7 @@ public class WhenSavingExternalTransaction {
     @Before
     public void setUp() throws Exception {
         maker = new ViewModelObjectsMaker();
-        account = maker.makeAccountSaved();
+        account = maker.makeSavedAccount();
     }
 
     @Test

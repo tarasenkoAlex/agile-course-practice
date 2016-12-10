@@ -11,11 +11,11 @@ public abstract class Transaction implements Comparable<Transaction> {
         this.date = date;
     }
 
-    int getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    GregorianCalendar getDate() {
+    public GregorianCalendar getDate() {
         return date;
     }
 

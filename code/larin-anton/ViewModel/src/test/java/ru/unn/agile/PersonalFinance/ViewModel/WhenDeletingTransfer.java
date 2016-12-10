@@ -13,9 +13,9 @@ public class WhenDeletingTransfer {
     @Before
     public void setUp() throws Exception {
         ViewModelObjectsMaker maker = new ViewModelObjectsMaker();
-        sourceAccount = maker.makeAccountSaved();
-        targetAccount = maker.makeAccountSaved();
-        transfer = maker.makeTransferSaved(sourceAccount, targetAccount);
+        sourceAccount = maker.makeSavedAccount();
+        targetAccount = maker.makeSavedAccount();
+        transfer = maker.makeSavedTransfer(sourceAccount, targetAccount);
     }
 
     @Test

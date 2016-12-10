@@ -1,26 +1,37 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class WhenCreatingLedger {
-    @Test
-    public void andCanAddTransactionPropertyIsFalse() throws Exception {
-        LedgerViewModel ledger = new LedgerViewModel();
+    private ViewModelObjectsMaker maker;
 
-        boolean canAddTransaction = ledger.getCanAddTransaction();
-
-        assertEquals(false, canAddTransaction);
+    @Before
+    public void setUp() throws Exception {
+        maker = new ViewModelObjectsMaker();
     }
 
     @Test
-    public void andCanAddTransferPropertyIsFalse() throws Exception {
-        LedgerViewModel ledger = new LedgerViewModel();
+    public void andTransactionCanNotBeAddedIfTransactionsListIsEmpty() throws Exception {
+        LedgerViewModel ledger = maker.getLedger();
 
-        boolean canAddTransfer = ledger.getCanAddTransfer();
-
-        assertEquals(false, canAddTransfer);
+        assertFalse(ledger.getCanAddTransaction());
     }
 
+    @Test
+    public void andTransferCanNotBeAddedIfTransactionsListIsEmpty() throws Exception {
+        LedgerViewModel ledger = maker.getLedger();
+
+        assertFalse(ledger.getCanAddTransfer());
+    }
+
+    @Test
+    public void andTransferCanNotBeAddedIfTransactionsListHasOnlyAccount() throws Exception {
+        maker.makeSavedAccount();
+        LedgerViewModel ledger = maker.getLedger();
+
+        assertFalse(ledger.getCanAddTransfer());
+    }
 }

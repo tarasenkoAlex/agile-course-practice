@@ -19,6 +19,12 @@ public final class GregorianCalendarHelper {
         return convertFromLocalDate(LocalDate.now());
     }
 
+    public static boolean compareToLocalDate(final GregorianCalendar oneDate,
+                                             final LocalDate otherDate) {
+        LocalDate localOneDate = convertToLocalDate(oneDate);
+        return localOneDate.isEqual(otherDate);
+    }
+
     private GregorianCalendarHelper() {
     }
 }

@@ -12,8 +12,8 @@ public class WhenDeletingExternalTransaction {
     @Before
     public void setUp() throws Exception {
         ViewModelObjectsMaker maker = new ViewModelObjectsMaker();
-        account = maker.makeAccountSaved();
-        transaction = maker.makeExternalTransactionSaved(account);
+        account = maker.makeSavedAccount();
+        transaction = maker.makeSavedExternalTransaction(account);
     }
 
     @Test

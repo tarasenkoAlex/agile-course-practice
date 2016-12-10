@@ -15,11 +15,11 @@ public class WhenCreatingAccount {
     @Before
     public void setUp() throws Exception {
         maker = new ViewModelObjectsMaker();
-        maker.makeAccountSaved(EXISTING_ACCOUNT_NAME);
+        maker.makeSavedAccount(EXISTING_ACCOUNT_NAME);
     }
 
     @Test(expected = NullPointerException.class)
-    public void andIfLedgerModelIsNullItCauseFail() throws Exception {
+    public void andIfLedgerModelIsNullItCausesFail() throws Exception {
         new AccountViewModel(null);
     }
 

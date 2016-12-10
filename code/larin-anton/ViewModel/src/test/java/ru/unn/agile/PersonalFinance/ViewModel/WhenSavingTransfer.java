@@ -14,8 +14,8 @@ public class WhenSavingTransfer {
     @Before
     public void setUp() throws Exception {
         maker = new ViewModelObjectsMaker();
-        cacheAccount = maker.makeAccountSaved("Cash");
-        debitCardAccount = maker.makeAccountSaved("Debit card");
+        cacheAccount = maker.makeSavedAccount("Cash");
+        debitCardAccount = maker.makeSavedAccount("Debit card");
     }
 
     @Test

@@ -14,7 +14,7 @@ public class WhenEditingAccount {
     @Before
     public void setUp() throws Exception {
         ViewModelObjectsMaker maker = new ViewModelObjectsMaker();
-        account = maker.makeAccountSaved(INITIAL_ACCOUNT_NAME);
+        account = maker.makeSavedAccount(INITIAL_ACCOUNT_NAME);
         account.startChanging();
     }
 
@@ -28,7 +28,7 @@ public class WhenEditingAccount {
     }
 
     @Test
-    public void andItsNameRecoversIfChangesWasNotApplied() throws Exception {
+    public void andItsNameRecoversIfChangesWereNotApplied() throws Exception {
         account.setName(CHANGED_ACCOUNT_NAME);
         account.revertChanges();
 
@@ -36,7 +36,7 @@ public class WhenEditingAccount {
     }
 
     @Test
-    public void andModelAccountNameRecoversIfChangesWasNotApplied() throws Exception {
+    public void andModelAccountNameRecoversIfChangesWereNotApplied() throws Exception {
         account.setName(CHANGED_ACCOUNT_NAME);
         account.revertChanges();
 
