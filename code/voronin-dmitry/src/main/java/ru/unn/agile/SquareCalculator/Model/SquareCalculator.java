@@ -18,25 +18,25 @@ public class SquareCalculator {
     }
 
     public double getConeSquare(final double radius, final double rulingofcone) {
-        checkParams("Radius and Ruling Of Cone must not be negative!", radius , rulingofcone);
+        checkParams("Radius and Ruling Of Cone must not be negative!", radius, rulingofcone);
         return Math.PI * radius * (radius + rulingofcone);
     }
 
-    public double getCubeSquare(double lenght) {
-        checkParams("Lenght must not be negative!" , lenght);
+    public double getCubeSquare(final double lenght) {
+        checkParams("Lenght must not be negative!", lenght);
         return CUBE_CONST * lenght * lenght;
     }
 
 
 
-    public double getCylinderSquare(final double radius , double height) {
-        checkParams("Radius and height must not be negative!", radius , height);
-        return CYLINDER_CONST * Math.PI * radius * ( radius + height );
+    public double getCylinderSquare(final double radius, final double height) {
+        checkParams("Radius and height must not be negative!", radius, height);
+        return CYLINDER_CONST * Math.PI * radius * (radius + height);
     }
 
-    public double getParallelepipedSquare(double height, double lenght, double width) {
+    public double getParallelepipedSquare(final double height, final double lenght, final double width) {
         checkParams("height , lenght and width must not be negative!", height, lenght, width);
-        return PARALLELEPIPED_CONST * ( height * lenght + height * width + lenght * width );
+        return PARALLELEPIPED_CONST * (height * lenght + height * width + lenght * width);
     }
 
 
