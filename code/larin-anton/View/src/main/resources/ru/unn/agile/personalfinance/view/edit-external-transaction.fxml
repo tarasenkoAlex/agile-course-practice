@@ -2,7 +2,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import ru.unn.agile.personalfinance.view.ViewModelSource?>
+
 <AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
             fx:controller="ru.unn.agile.personalfinance.view.controllers.EditExternalTransactionController">
     <GridPane vgap="10"
@@ -10,10 +10,6 @@
               AnchorPane.leftAnchor="10"
               AnchorPane.rightAnchor="10"
               AnchorPane.topAnchor="10">
-
-        <fx:define>
-            <ViewModelSource fx:id="vmSource"/>
-        </fx:define>
 
         <rowConstraints>
             <RowConstraints vgrow="NEVER"/>

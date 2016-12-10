@@ -11,7 +11,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
+import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
+import ru.unn.agile.personalfinance.view.ViewModelService;
 import ru.unn.agile.personalfinance.view.WindowsManager;
 import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
 import ru.unn.agile.personalfinance.view.utils.Converters;
@@ -77,6 +79,13 @@ public class EditTransferController extends DataContextController<TransferViewMo
     @Override
     protected void addBindings(final TransferViewModel transfer) {
         transfer.startChanging();
+
+        /* ledger.accounts -> accountFromComboBox.items */
+        LedgerViewModel ledger = ViewModelService.getViewModel();
+        accountFromComboBox.itemsProperty().bind(ledger.accountsProperty());
+
+        /* ledger.accounts -> accountToComboBox.items */
+        accountToComboBox.itemsProperty().bind(ledger.accountsProperty());
 
         /* amountField.text <-> transfer.amount */
         Bindings.bindBidirectional(
