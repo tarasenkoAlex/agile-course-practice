@@ -106,10 +106,16 @@ project(":code/matrix-operations/View").name = "matrix-operations-View"
 include "code/matrix-operations/ViewModel"
 project(":code/matrix-operations/ViewModel").name = "matrix-operations-ViewModel"
 // Кокошников Алексей
+
 // Колистратова Дарья
+include "code/CreditCalculator/View"
+project(":code/CreditCalculator/View").name = "credit-calculator-View"
+include "code/CreditCalculator/ViewModel"
+project(":code/CreditCalculator/ViewModel").name = "credit-calculator-ViewModel"
+include "code/CreditCalculator/Model"
+project(":code/CreditCalculator/Model").name = "credit-calculator-Model"
+
 // Кочетов Павел
-include "code/kochetov-pavel"
-project(":code/kochetov-pavel").name = "kochetov-pavel-Model"
 include "code/Stack/Model"
 project(":code/Stack/Model").name = "Stack-Model"
 include "code/Stack/ViewModel"
