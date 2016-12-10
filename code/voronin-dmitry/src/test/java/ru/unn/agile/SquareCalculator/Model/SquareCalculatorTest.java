@@ -2,7 +2,7 @@ package ru.unn.agile.SquareCalculator.Model;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.omg.CORBA.PUBLIC_MEMBER;
+
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,7 +17,6 @@ public class SquareCalculatorTest {
 
     @Before
     public void setUp() {
-		
         calculator = new SquareCalculator();
     }
 
