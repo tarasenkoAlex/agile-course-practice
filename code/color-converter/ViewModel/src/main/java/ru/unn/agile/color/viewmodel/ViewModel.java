@@ -38,4 +38,21 @@ public class ViewModel {
     public void convert() {
 
     }
+
+    enum Status {
+        WAITING("Please enter coefficients of Quadratic Equation"),
+        READY("Press 'Solve' for solving Quadratic Equation"),
+        BAD_FORMAT("Entered coefficients are incorrect!"),
+        SUCCESS("Success");
+
+        private final String name;
+
+        Status(final String name) {
+            this.name = name;
+        }
+
+        public String toString() {
+            return name;
+        }
+    }
 }
