@@ -16,10 +16,7 @@ public class CategoriesManagerViewModel {
             new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
 
     CategoriesManagerViewModel() {
-        categoriesProperty.add(new CategoryViewModel("Category 1"));
-        categoriesProperty.add(new CategoryViewModel("Category 2"));
-        categoriesProperty.add(new CategoryViewModel("Category 3"));
-        categoriesProperty.add(new CategoryViewModel("Category 4"));
+        makeDefaultCategories();
         setUpBindings();
     }
 
@@ -76,5 +73,32 @@ public class CategoriesManagerViewModel {
     private boolean hasCategoryWithName(final String categoryName) {
         return categoriesProperty.stream().anyMatch(category ->
                 StringHelper.areEqualTrimmed(category.getName(), categoryName));
+    }
+
+    private void makeDefaultCategories() {
+        String[] categoryNames = {
+                "Bad debts",
+                "Business taxes, fees, licences",
+                "Delivery, freight, and express",
+                "Fuel costs",
+                "Insurance",
+                "Interest",
+                "Maintenance and repairs",
+                "Management and administration fees",
+                "Meals and entertainment",
+                "Motor vehicle expenses (automobile)",
+                "Office expenses",
+                "Prepaid expenses",
+                "Property taxes",
+                "Rent",
+                "Salaries, wages, and benefits",
+                "Supplies",
+                "Telephone and utilities",
+                "Travel",
+                "Other expenses"
+        };
+        for (String name : categoryNames) {
+            categoriesProperty.add(new CategoryViewModel(name));
+        }
     }
 }
