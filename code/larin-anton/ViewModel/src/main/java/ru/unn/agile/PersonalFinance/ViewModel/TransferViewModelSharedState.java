@@ -18,11 +18,14 @@ class TransferViewModelSharedState {
         this.modelTransfer = modelTransfer;
     }
 
+    Transfer getModelTransfer() {
+        return modelTransfer;
+    }
+
     void delete() {
         if (!isDeleted) {
             associatedModelAccount.deleteTransaction(modelTransfer);
             isDeleted = true;
         }
     }
-
 }

@@ -100,6 +100,8 @@ final class ViewModelObjectsMaker {
 
     TransferViewModel makeSavedTransfer() {
         TransferViewModel transfer = makeTransfer();
+        transfer.getAccountFrom().save();
+        transfer.getAccountTo().save();
         transfer.save();
         return transfer;
     }

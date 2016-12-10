@@ -4,6 +4,7 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import ru.unn.agile.PersonalFinance.Model.Account;
+import ru.unn.agile.PersonalFinance.Model.ExternalTransaction;
 import ru.unn.agile.PersonalFinance.Model.Transfer;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.GregorianCalendarHelper;
 
@@ -54,6 +55,10 @@ public class TransferViewModel extends TransactionViewModel {
 
     // endregion
 
+    Transfer getModelTransfer() {
+        return sharedState.getModelTransfer();
+    }
+
     @Override
     protected void saveInternal() {
         AccountViewModel accountFrom = getAccountFrom();
@@ -98,7 +103,7 @@ public class TransferViewModel extends TransactionViewModel {
         // TODO
     }
 
-    TransferViewModel duplicate() {
+    private TransferViewModel duplicate() {
         TransferViewModel other = new TransferViewModel();
         other.setAmount(getAmount());
         other.setDate(getDate());

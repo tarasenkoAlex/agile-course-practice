@@ -112,7 +112,7 @@ public class WhenEditingExternalTransaction {
     }
 
     @Test
-    public void andModelTransactionDateWasChangedIfChangesWereNotApplied() throws Exception {
+    public void andModelTransactionDateWasNotChangedIfChangesWereNotApplied() throws Exception {
         LocalDate dateBeforeChange = transaction.getDate();
         LocalDate dateAfterChange = dateBeforeChange.plusDays(1);
 
