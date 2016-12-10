@@ -6,14 +6,14 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ru.unn.agile.PersonalFinance.Model.Account;
-import ru.unn.agile.PersonalFinance.ViewModel.utils.SavableObject;
+import ru.unn.agile.PersonalFinance.ViewModel.utils.SavableViewModelObject;
 import ru.unn.agile.PersonalFinance.ViewModel.utils.StringHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class AccountViewModel extends SavableObject {
+public class AccountViewModel extends SavableViewModelObject {
     private static final int DEFAULT_ACCOUNT_BALANCE = 10000;
     private static final String DEFAULT_ACCOUNT_NAME = "New Account";
 
@@ -133,7 +133,7 @@ public class AccountViewModel extends SavableObject {
         BooleanBinding isAccountNameExists = Bindings.createBooleanBinding(() ->
                 hasAccountWithName(getName()), parentLedger.accountsProperty(), nameProperty);
 
-        isAbleToSaveMutableProperty().bind(isAccountNameExists.not());
+        ableToSaveMutableProperty().bind(isAccountNameExists.not());
     }
 
     private void updateBalance() {

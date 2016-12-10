@@ -26,21 +26,21 @@ public class WhenCreatingTransfer {
         transfer.setAccountFrom(account);
         transfer.setAccountTo(account);
 
-        assertFalse(transfer.getIsIsAbleToSave());
+        assertFalse(transfer.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIsSourceAccountIsNull() throws Exception {
         transfer.setAccountFrom(null);
 
-        assertFalse(transfer.getIsIsAbleToSave());
+        assertFalse(transfer.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIsTargetAccountIsNull() throws Exception {
         transfer.setAccountTo(null);
 
-        assertFalse(transfer.getIsIsAbleToSave());
+        assertFalse(transfer.isAbleToSave());
     }
 
     @Test
@@ -51,27 +51,27 @@ public class WhenCreatingTransfer {
         transfer.setAccountFrom(sourceAccount);
         transfer.setAccountTo(targetAccount);
 
-        assertTrue(transfer.getIsIsAbleToSave());
+        assertTrue(transfer.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIfAmountIsNegative() throws Exception {
         transfer.setAmount(-100);
 
-        assertFalse(transfer.getIsIsAbleToSave());
+        assertFalse(transfer.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIfAmountIsZero() throws Exception {
         transfer.setAmount(0);
 
-        assertFalse(transfer.getIsIsAbleToSave());
+        assertFalse(transfer.isAbleToSave());
     }
 
     @Test
     public void andItCanBeSavedIfAmountIsPositive() throws Exception {
         transfer.setAmount(100);
 
-        assertTrue(transfer.getIsIsAbleToSave());
+        assertTrue(transfer.isAbleToSave());
     }
 }

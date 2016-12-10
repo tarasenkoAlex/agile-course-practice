@@ -26,90 +26,90 @@ public class WhenCreatingExternalTransaction {
     public void andItCanBeSavedIfCounterpartyIsNormalString() throws Exception {
         transaction.setCounterparty("Tesla Motors");
 
-        assertTrue(transaction.getIsIsAbleToSave());
+        assertTrue(transaction.isAbleToSave());
     }
 
     @Test
     public void andItCanBeSavedIfDescriptionIsNormalString() throws Exception {
         transaction.setDescription("Tesla Model S");
 
-        assertTrue(transaction.getIsIsAbleToSave());
+        assertTrue(transaction.isAbleToSave());
     }
 
     @Test
     public void andItCanBeSavedIfDateIsNotNull() throws Exception {
         transaction.setDate(LocalDate.now());
 
-        assertTrue(transaction.getIsIsAbleToSave());
+        assertTrue(transaction.isAbleToSave());
     }
 
     @Test
     public void andItCanBeSavedIfAmountIsPositive() throws Exception {
         transaction.setAmount(100);
 
-        assertTrue(transaction.getIsIsAbleToSave());
+        assertTrue(transaction.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIfCounterpartyIsNull() throws Exception {
         transaction.setCounterparty(null);
 
-        assertFalse(transaction.getIsIsAbleToSave());
+        assertFalse(transaction.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIfCounterpartyIsEmpty() throws Exception {
         transaction.setCounterparty("");
 
-        assertFalse(transaction.getIsIsAbleToSave());
+        assertFalse(transaction.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIfCounterpartyIsWhitespacesString() throws Exception {
         transaction.setCounterparty("    ");
 
-        assertFalse(transaction.getIsIsAbleToSave());
+        assertFalse(transaction.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIfAmountIsNegative() throws Exception {
         transaction.setAmount(-100);
 
-        assertFalse(transaction.getIsIsAbleToSave());
+        assertFalse(transaction.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIfAmountIsZero() throws Exception {
         transaction.setAmount(0);
 
-        assertFalse(transaction.getIsIsAbleToSave());
+        assertFalse(transaction.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIfCategoryIsNull() throws Exception {
         transaction.setCategory(null);
 
-        assertFalse(transaction.getIsIsAbleToSave());
+        assertFalse(transaction.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIfDescriptionIsNull() throws Exception {
         transaction.setDescription(null);
 
-        assertFalse(transaction.getIsIsAbleToSave());
+        assertFalse(transaction.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIfDescriptionIsEmpty() throws Exception {
         transaction.setDescription("");
 
-        assertFalse(transaction.getIsIsAbleToSave());
+        assertFalse(transaction.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIfDescriptionIsWhitespacesString() throws Exception {
         transaction.setDescription("   ");
 
-        assertFalse(transaction.getIsIsAbleToSave());
+        assertFalse(transaction.isAbleToSave());
     }
 }

@@ -4,38 +4,49 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
-public abstract class SavableObject {
+public abstract class SavableViewModelObject {
+    private final BooleanProperty ableToSaveProperty = new SimpleBooleanProperty();
+    private final BooleanProperty changingProperty = new SimpleBooleanProperty();
+    private final BooleanProperty deletedProperty = new SimpleBooleanProperty();
+
     private boolean isSaved;
-    private boolean isEditing;
 
-    private final BooleanProperty isAbleToSaveProperty = new SimpleBooleanProperty();
-
-    private final BooleanProperty isDeletedProperty = new SimpleBooleanProperty();
-
-    protected BooleanProperty isAbleToSaveMutableProperty() {
-        return isAbleToSaveProperty;
+    protected BooleanProperty ableToSaveMutableProperty() {
+        return ableToSaveProperty;
     }
 
     // region Properties for Bindings
 
-    public final ReadOnlyBooleanProperty isAbleToSaveProperty() {
-        return this.isAbleToSaveProperty;
+    public final ReadOnlyBooleanProperty ableToSaveProperty() {
+        return this.ableToSaveProperty;
     }
 
-    public final boolean getIsIsAbleToSave() {
-        return this.isAbleToSaveProperty.get();
+    public final boolean isAbleToSave() {
+        return this.ableToSaveProperty.get();
     }
 
     protected final void setIsAbleToSave(final boolean isAbleToSave) {
-        this.isAbleToSaveProperty.set(isAbleToSave);
+        this.ableToSaveProperty.set(isAbleToSave);
     }
 
-    public final ReadOnlyBooleanProperty isDeletedProperty() {
-        return isDeletedProperty;
+    public final ReadOnlyBooleanProperty changingProperty() {
+        return changingProperty;
+    }
+
+    public final boolean isChanging() {
+        return changingProperty.get();
+    }
+
+    private void setIsChanging(final boolean isChanging) {
+        changingProperty.set(isChanging);
+    }
+
+    public final ReadOnlyBooleanProperty deletedProperty() {
+        return deletedProperty;
     }
 
     public final boolean isDeleted() {
-        return isDeletedProperty.get();
+        return deletedProperty.get();
     }
 
     // endregion
@@ -45,18 +56,19 @@ public abstract class SavableObject {
     }
 
     protected final void markAsDeleted() {
-        isDeletedProperty.set(true);
+        deletedProperty.set(true);
     }
 
     public final boolean isSaved() {
         return isSaved;
     }
 
-    public final boolean isEditing() {
-        return isEditing;
-    }
-
     public final void save() {
+        if (!isAbleToSave()) {
+            throw new UnsupportedOperationException("Object is in the "
+                    + "unsavable state, isAbleToSave property is false");
+        }
+
         checkForDeletion();
         if (isSaved) {
             updateInternal();
@@ -64,7 +76,7 @@ public abstract class SavableObject {
             saveInternal();
             markAsSaved();
         }
-        isEditing = false;
+        setIsChanging(false);
     }
 
     public final void delete() {
@@ -75,9 +87,9 @@ public abstract class SavableObject {
                     "Object should be saved before deletion");
         }
 
-        if (isEditing) {
+        if (isChanging()) {
             throw new UnsupportedOperationException(
-                    "Object is in modifiable state, save or revert "
+                    "Object is in the modifiable state, save or revert "
                     + "changes before deletion");
         }
 
@@ -89,15 +101,15 @@ public abstract class SavableObject {
         checkForDeletion();
         if (isSaved) {
             saveState();
-            isEditing = true;
+            setIsChanging(true);
         }
     }
 
     public final void revertChanges() {
         checkForDeletion();
-        if (isEditing) {
+        if (isChanging()) {
             recoverState();
-            isEditing = false;
+            setIsChanging(false);
         }
     }
 
@@ -109,7 +121,7 @@ public abstract class SavableObject {
 
     private void checkForDeletion() {
         if (isDeleted()) {
-            throw new UnsupportedOperationException("Object was deleted");
+            throw new UnsupportedOperationException("Object has already been deleted");
         }
     }
 }

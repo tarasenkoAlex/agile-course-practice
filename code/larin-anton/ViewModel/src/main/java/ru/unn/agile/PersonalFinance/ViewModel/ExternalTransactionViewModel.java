@@ -153,7 +153,7 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
                 .and(isDescriptionEmptyBinding.not())
                 .and(categoryProperty().isNotNull());
 
-        isAbleToSaveMutableProperty().bind(isAbleToSaveBinding);
+        ableToSaveMutableProperty().bind(isAbleToSaveBinding);
 
         displayCounterpartyMutableProperty().bind(counterpartyProperty);
 

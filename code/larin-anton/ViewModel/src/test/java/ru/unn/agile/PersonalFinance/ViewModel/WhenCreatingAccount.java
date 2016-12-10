@@ -28,7 +28,7 @@ public class WhenCreatingAccount {
         AccountViewModel accountWithExistingName =
                 maker.makeAccount(EXISTING_ACCOUNT_NAME);
 
-        assertFalse(accountWithExistingName.getIsIsAbleToSave());
+        assertFalse(accountWithExistingName.isAbleToSave());
     }
 
     @Test
@@ -36,6 +36,6 @@ public class WhenCreatingAccount {
         AccountViewModel accountWithNewName =
                 maker.makeAccount(ANOTHER_ACCOUNT_NAME);
 
-        assertTrue(accountWithNewName.getIsIsAbleToSave());
+        assertTrue(accountWithNewName.isAbleToSave());
     }
 }

@@ -1,7 +1,6 @@
 package ru.unn.agile.personalfinance.view.controllers;
 
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -111,7 +110,7 @@ public class EditExternalTransactionController extends DataContextController {
                 transaction.dateProperty());
 
         /* !transaction.isAbleToSave -> addButton.disabled  */
-        addButton.disableProperty().bind(transaction.isAbleToSaveProperty().not());
+        addButton.disableProperty().bind(transaction.ableToSaveProperty().not());
 
         if (transaction.getCategory() == null) {
             categoryComboBox.getSelectionModel().selectFirst();

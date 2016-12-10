@@ -69,7 +69,7 @@ public class TransactionListCellController extends DataContextController {
         TransactionViewModel transaction = (TransactionViewModel) oldDataContext;
 
         transaction.isIncomeProperty().removeListener(styleUpdater);
-        transaction.isDeletedProperty().removeListener(styleUpdater);
+        transaction.deletedProperty().removeListener(styleUpdater);
 
         descriptionLabel.textProperty().unbind();
         counterpartyLabel.textProperty().unbind();

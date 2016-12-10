@@ -34,6 +34,7 @@ public class EditAccountController extends DataContextController {
 
         Bindings.unbindBidirectional(nameField.textProperty(), account.nameProperty());
         Bindings.unbindBidirectional(balanceField.textProperty(), account.balanceProperty());
+        balanceField.disableProperty().unbind();
         addButton.disableProperty().unbind();
 
         account.revertChanges();
@@ -47,13 +48,16 @@ public class EditAccountController extends DataContextController {
         /* nameField.text <-> account.name */
         Bindings.bindBidirectional(nameField.textProperty(), account.nameProperty());
 
-            /* balanceField.text <-> account.balance */
+        /* balanceField.text <-> account.balance */
         Bindings.bindBidirectional(
                 balanceField.textProperty(),
                 account.balanceProperty(),
                 new CurrencyStringConverter());
 
-            /* account.isAbleToSave -> addButton.disabled */
-        addButton.disableProperty().bind(account.isAbleToSaveProperty().not());
+        /* account.changingProperty -> balanceField.disabled */
+        balanceField.disableProperty().bind(account.changingProperty());
+
+        /* account.isAbleToSave -> addButton.disabled */
+        addButton.disableProperty().bind(account.ableToSaveProperty().not());
     }
 }

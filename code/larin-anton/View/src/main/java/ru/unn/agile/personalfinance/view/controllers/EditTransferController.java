@@ -72,11 +72,14 @@ public class EditTransferController extends DataContextController {
                 transfer.dateProperty());
 
         addButton.disableProperty().unbind();
+
+        transfer.revertChanges();
     }
 
     @Override
     protected void addBindings(final Object newDataContext) {
         final TransferViewModel transfer = (TransferViewModel) newDataContext;
+        transfer.startChanging();
 
         /* amountField.text <-> transfer.amount */
         Bindings.bindBidirectional(
@@ -100,10 +103,21 @@ public class EditTransferController extends DataContextController {
                 transfer.dateProperty());
 
         /* transfer.isAbleToSave -> addButton.disabled */
-        addButton.disableProperty().bind(transfer.isAbleToSaveProperty().not());
+        addButton.disableProperty().bind(transfer.ableToSaveProperty().not());
 
-        accountFromComboBox.getSelectionModel().select(0);
-        accountToComboBox.getSelectionModel().select(1);
+        /* transfer.changing -> accountToComboBox.disabled */
+        accountToComboBox.disableProperty().bind(transfer.changingProperty());
+
+        /* transfer.changing -> accountFromComboBox.disabled */
+        accountFromComboBox.disableProperty().bind(transfer.changingProperty());
+
+        if (transfer.getAccountFrom() == null && transfer.getAccountTo() == null) {
+            accountFromComboBox.getSelectionModel().select(0);
+            accountToComboBox.getSelectionModel().select(1);
+        } else {
+            accountFromComboBox.getSelectionModel().select(transfer.getAccountFrom());
+            accountToComboBox.getSelectionModel().select(transfer.getAccountTo());
+        }
     }
 
     private void setUpAccountComboBox(final ComboBox<AccountViewModel> comboBox) {

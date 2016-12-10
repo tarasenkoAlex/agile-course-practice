@@ -124,7 +124,7 @@ public class TransferViewModel extends TransactionViewModel {
         BooleanBinding isAmountPositive =
                 amountProperty().greaterThan(0);
 
-        isAbleToSaveMutableProperty().bind(
+        ableToSaveMutableProperty().bind(
                 accountsNotNull.and(
                 accountsNotEqual).and(
                 isAmountPositive));
@@ -155,7 +155,7 @@ public class TransferViewModel extends TransactionViewModel {
             setDisplayCounterparty(null);
         } else {
             displayCounterpartyMutableProperty().bind(account.nameProperty());
-            isCounterpartyMarkedAsDeletedMutableProperty().bind(account.isDeletedProperty());
+            isCounterpartyMarkedAsDeletedMutableProperty().bind(account.deletedProperty());
         }
     }
 

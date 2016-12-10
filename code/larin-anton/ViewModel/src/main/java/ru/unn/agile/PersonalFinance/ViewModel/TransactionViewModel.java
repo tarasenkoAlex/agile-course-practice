@@ -1,11 +1,11 @@
 package ru.unn.agile.PersonalFinance.ViewModel;
 
 import javafx.beans.property.*;
-import ru.unn.agile.PersonalFinance.ViewModel.utils.SavableObject;
+import ru.unn.agile.PersonalFinance.ViewModel.utils.SavableViewModelObject;
 
 import java.time.LocalDate;
 
-public abstract class TransactionViewModel extends SavableObject {
+public abstract class TransactionViewModel extends SavableViewModelObject {
     private static final int DEFAULT_AMOUNT = 100;
 
     private final IntegerProperty amountProperty = new SimpleIntegerProperty();
