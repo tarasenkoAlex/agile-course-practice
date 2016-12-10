@@ -62,7 +62,7 @@ public final class WindowsManager {
         }
 
         getView("edit-account.fxml")
-                .title("Add new account")
+                .title("Edit account")
                 .width(EDIT_ACCOUNT_WINDOW_WIDTH)
                 .height(EDIT_ACCOUNT_WINDOW_HEIGHT)
                 .data(account)
@@ -99,7 +99,7 @@ public final class WindowsManager {
 
     private void showEditExternalTransactionView(final ExternalTransactionViewModel transaction) {
         getView("edit-external-transaction.fxml")
-                .title("Add new transaction")
+                .title("Edit transaction")
                 .width(EDIT_EXTERNAL_TRANSACTION_WINDOW_WIDTH)
                 .height(EDIT_EXTERNAL_TRANSACTION_WINDOW_HEIGHT)
                 .data(transaction)
@@ -108,7 +108,7 @@ public final class WindowsManager {
 
     private void showEditTransferView(final TransferViewModel transfer) {
         getView("edit-transfer.fxml")
-                .title("Add new transfer")
+                .title("Edit transfer")
                 .width(EDIT_TRANSFER_WINDOW_WIDTH)
                 .height(EDIT_TRANSFER_WINDOW_HEIGHT)
                 .data(transfer)

@@ -13,7 +13,7 @@
             <contextMenu>
                 <ContextMenu prefWidth="200">
                     <items>
-                        <MenuItem text="Edit" onAction="#handleEditAccountAction" />
+                        <MenuItem text="Rename" onAction="#handleEditAccountAction" />
                         <MenuItem text="Delete" onAction="#handleDeleteAccountAction" />
                     </items>
                 </ContextMenu>
