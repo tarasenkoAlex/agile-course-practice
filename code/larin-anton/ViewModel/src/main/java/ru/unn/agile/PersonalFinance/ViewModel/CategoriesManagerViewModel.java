@@ -12,8 +12,12 @@ import java.util.ArrayList;
 public class CategoriesManagerViewModel {
     private final StringProperty newCategoryNameProperty = new SimpleStringProperty();
     private final BooleanProperty ableToAddNewCategoryProperty = new SimpleBooleanProperty();
+
     private final ListProperty<CategoryViewModel> categoriesProperty =
             new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
+
+    private final ObjectProperty<CategoryViewModel> selectedCategoryProperty =
+            new SimpleObjectProperty<>();
 
     CategoriesManagerViewModel() {
         makeDefaultCategories();
@@ -50,12 +54,30 @@ public class CategoriesManagerViewModel {
         return categoriesProperty.get();
     }
 
+    public final ObjectProperty<CategoryViewModel> selectedCategoryProperty() {
+        return selectedCategoryProperty;
+    }
+
+    public final CategoryViewModel getSelectedCategory() {
+        return selectedCategoryProperty.get();
+    }
+
+    public final void setSelectedCategory(final CategoryViewModel category) {
+        selectedCategoryProperty.set(category);
+    }
+
     // endregion
 
-    public void saveCategory() {
+    public CategoryViewModel saveCategory() {
         String newCategoryName = getNewCategoryName().trim();
-        categoriesProperty.add(new CategoryViewModel(newCategoryName));
+        CategoryViewModel newCategory = new CategoryViewModel(newCategoryName);
+        categoriesProperty.add(newCategory);
         setNewCategoryName(null);
+        return newCategory;
+    }
+
+    public void deleteSelectedCategory() {
+        // TODO
     }
 
     private void setUpBindings() {
