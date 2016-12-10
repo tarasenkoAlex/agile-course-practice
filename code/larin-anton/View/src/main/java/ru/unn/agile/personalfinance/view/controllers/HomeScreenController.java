@@ -13,7 +13,7 @@ import ru.unn.agile.personalfinance.view.controls.DataContextListCell;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HomeScreenController extends DataContextController {
+public class HomeScreenController extends DataContextController<LedgerViewModel> {
     private final WindowsManager windowsManager = WindowsManager.getInstance();
     private final LedgerViewModel ledger = ViewModelService.getViewModel();
 

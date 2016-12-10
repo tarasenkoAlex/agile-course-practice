@@ -5,28 +5,28 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DataContextController implements Initializable {
-    private Object dataContext;
+public class DataContextController<T> implements Initializable {
+    private T dataContext;
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         // Do nothing
     }
 
-    public void setDataContext(final Object dataContext) {
+    public void setDataContext(final T dataContext) {
         if (this.dataContext != dataContext) {
-            Object oldDataContext = this.dataContext;
+            T oldDataContext = this.dataContext;
             this.dataContext = dataContext;
             updateDataContext(oldDataContext, dataContext);
         }
     }
 
-    protected Object getDataContext() {
+    protected T getDataContext() {
         return dataContext;
     }
 
-    protected void updateDataContext(final Object oldDataContext,
-                                     final Object newDataContext) {
+    protected void updateDataContext(final T oldDataContext,
+                                     final T newDataContext) {
         if (oldDataContext != null) {
             removeBindings(oldDataContext);
         }
@@ -36,11 +36,11 @@ public class DataContextController implements Initializable {
         }
     }
 
-    protected void removeBindings(final Object oldDataContext) {
+    protected void removeBindings(final T oldDataContext) {
         // Do nothing
     }
 
-    protected void addBindings(final Object newDataContext) {
+    protected void addBindings(final T newDataContext) {
         // Do nothing
     }
 }

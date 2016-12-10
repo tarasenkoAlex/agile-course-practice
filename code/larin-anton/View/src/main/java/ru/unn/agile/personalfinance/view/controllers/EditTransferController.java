@@ -19,7 +19,7 @@ import ru.unn.agile.personalfinance.view.utils.Converters;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EditTransferController extends DataContextController {
+public class EditTransferController extends DataContextController<TransferViewModel> {
     private static final StringListCellFactory<AccountViewModel> ACCOUNT_LIST_CELL_FACTORY =
             new StringListCellFactory<>(account -> account.getName());
 
@@ -39,8 +39,8 @@ public class EditTransferController extends DataContextController {
     private Button addButton;
 
     @FXML
-    protected void handleAddButtonAction(final ActionEvent actionEvent) {
-        ((TransferViewModel) getDataContext()).save();
+    protected void handleSaveTransferButtonAction(final ActionEvent actionEvent) {
+        getDataContext().save();
         WindowsManager.getInstance().goBack();
     }
 
@@ -56,9 +56,7 @@ public class EditTransferController extends DataContextController {
     }
 
     @Override
-    protected void removeBindings(final Object oldDataContext) {
-        final TransferViewModel transfer = (TransferViewModel) oldDataContext;
-
+    protected void removeBindings(final TransferViewModel transfer) {
         Bindings.unbindBidirectional(
                 amountField.textProperty(),
                 transfer.amountProperty());
@@ -77,8 +75,7 @@ public class EditTransferController extends DataContextController {
     }
 
     @Override
-    protected void addBindings(final Object newDataContext) {
-        final TransferViewModel transfer = (TransferViewModel) newDataContext;
+    protected void addBindings(final TransferViewModel transfer) {
         transfer.startChanging();
 
         /* amountField.text <-> transfer.amount */

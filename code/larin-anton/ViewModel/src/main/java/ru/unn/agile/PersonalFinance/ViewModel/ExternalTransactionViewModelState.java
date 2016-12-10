@@ -2,7 +2,7 @@ package ru.unn.agile.PersonalFinance.ViewModel;
 
 import java.time.LocalDate;
 
-class ExternalTransactionViewModelState {
+final class ExternalTransactionViewModelState {
     private final int amount;
     private final boolean isIncome;
     private final LocalDate date;

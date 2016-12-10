@@ -9,7 +9,7 @@ import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.personalfinance.view.WindowsManager;
 
-public class EditAccountController extends DataContextController {
+public class EditAccountController extends DataContextController<AccountViewModel> {
     @FXML
     private TextField nameField;
 
@@ -20,7 +20,7 @@ public class EditAccountController extends DataContextController {
     private Button addButton;
 
     public void handleAddButton(final ActionEvent actionEvent) {
-        ((AccountViewModel) getDataContext()).save();
+        getDataContext().save();
         WindowsManager.getInstance().goBack();
     }
 
@@ -29,9 +29,7 @@ public class EditAccountController extends DataContextController {
     }
 
     @Override
-    protected void removeBindings(final Object oldDataContext) {
-        final AccountViewModel account = (AccountViewModel) oldDataContext;
-
+    protected void removeBindings(final AccountViewModel account) {
         Bindings.unbindBidirectional(nameField.textProperty(), account.nameProperty());
         Bindings.unbindBidirectional(balanceField.textProperty(), account.balanceProperty());
         balanceField.disableProperty().unbind();
@@ -41,8 +39,7 @@ public class EditAccountController extends DataContextController {
     }
 
     @Override
-    protected void addBindings(final Object newDataContext) {
-        final AccountViewModel account = (AccountViewModel) newDataContext;
+    protected void addBindings(final AccountViewModel account) {
         account.startChanging();
 
         /* nameField.text <-> account.name */

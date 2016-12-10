@@ -7,7 +7,10 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.CategoryViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
@@ -20,9 +23,12 @@ import ru.unn.agile.personalfinance.view.utils.Converters;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EditExternalTransactionController extends DataContextController {
+public class EditExternalTransactionController
+        extends DataContextController<ExternalTransactionViewModel> {
+
     private static final StringListCellFactory<CategoryViewModel> CATEGORY_LIST_CELL_FACTORY =
             new StringListCellFactory<>(category -> category.getName());
+
     @FXML
     private JFXDatePicker datePicker;
 
@@ -46,7 +52,7 @@ public class EditExternalTransactionController extends DataContextController {
 
     @FXML
     protected void handleAddButtonAction(final ActionEvent actionEvent) {
-        ((ExternalTransactionViewModel) getDataContext()).save();
+        getDataContext().save();
         WindowsManager.getInstance().goBack();
     }
 
@@ -73,10 +79,7 @@ public class EditExternalTransactionController extends DataContextController {
     }
 
     @Override
-    protected void addBindings(final Object newDataContext) {
-        final ExternalTransactionViewModel transaction =
-                (ExternalTransactionViewModel) newDataContext;
-
+    protected void addBindings(final ExternalTransactionViewModel transaction) {
         transaction.startChanging();
 
         /* transactionAmountField.text <-> transaction.amount */
@@ -120,10 +123,7 @@ public class EditExternalTransactionController extends DataContextController {
     }
 
     @Override
-    protected void removeBindings(final Object oldDataContext) {
-        final ExternalTransactionViewModel transaction =
-                (ExternalTransactionViewModel) oldDataContext;
-
+    protected void removeBindings(final ExternalTransactionViewModel transaction) {
         Bindings.unbindBidirectional(
                 transactionAmountField.textProperty(),
                 transaction.amountProperty());

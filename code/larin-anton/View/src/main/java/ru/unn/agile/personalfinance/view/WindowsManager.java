@@ -6,12 +6,10 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.TransactionViewModel;
-import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
+import ru.unn.agile.PersonalFinance.ViewModel.*;
 import ru.unn.agile.personalfinance.view.controllers.DataContextController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Stack;
@@ -32,7 +30,7 @@ public final class WindowsManager {
     private static WindowsManager windowsManager;
 
     private final Stack<Stage> stagesHistory = new Stack<>();
-    private final HashMap<URL, Pair<Scene, DataContextController>> scenesCache = new HashMap<>();
+    private final HashMap<URL, Pair<Scene, DataContextController<?>>> scenesCache = new HashMap<>();
 
     private WindowsManager() {
     }
@@ -48,13 +46,14 @@ public final class WindowsManager {
         return windowsManager;
     }
 
-    public void showHomeScreenView(final Stage rootStage) {
+    public void showHomeScreenView(final Stage rootStage, final LedgerViewModel ledger) {
         getView("home-screen.fxml")
                 .title("My Wallet")
                 .width(HOME_SCREEN_WINDOW_WIDTH)
                 .height(HOME_SCREEN_WINDOW_HEIGHT)
                 .userStage(rootStage)
-                .show();
+                .data(ledger)
+                .<LedgerViewModel>show();
     }
 
     public void showEditAccountView(final AccountViewModel account) {
@@ -67,7 +66,7 @@ public final class WindowsManager {
                 .width(EDIT_ACCOUNT_WINDOW_WIDTH)
                 .height(EDIT_ACCOUNT_WINDOW_HEIGHT)
                 .data(account)
-                .show();
+                .<AccountViewModel>show();
     }
 
     public void showEditTransactionView(final TransactionViewModel transaction) {
@@ -104,7 +103,7 @@ public final class WindowsManager {
                 .width(EDIT_EXTERNAL_TRANSACTION_WINDOW_WIDTH)
                 .height(EDIT_EXTERNAL_TRANSACTION_WINDOW_HEIGHT)
                 .data(transaction)
-                .show();
+                .<ExternalTransactionViewModel>show();
     }
 
     private void showEditTransferView(final TransferViewModel transfer) {
@@ -113,7 +112,7 @@ public final class WindowsManager {
                 .width(EDIT_TRANSFER_WINDOW_WIDTH)
                 .height(EDIT_TRANSFER_WINDOW_HEIGHT)
                 .data(transfer)
-                .show();
+                .<TransferViewModel>show();
     }
 
     private ViewBuilder getView(final String fxmlSource) {
@@ -157,27 +156,27 @@ public final class WindowsManager {
             return this;
         }
 
-        void show() {
+        <T> void show() {
             if (scenesCache.containsKey(rootUrl)) {
-                Pair<Scene, DataContextController> sceneAndController = scenesCache.get(rootUrl);
-                showScene(sceneAndController.getKey(), sceneAndController.getValue());
+                Pair<Scene, DataContextController<?>> sceneAndController = scenesCache.get(rootUrl);
+                this.<T>showScene(sceneAndController.getKey(), sceneAndController.getValue());
             } else {
                 try {
                     FXMLLoader loader = new FXMLLoader(rootUrl);
                     loader.load();
                     Parent root = loader.getRoot();
-                    DataContextController controller = loader.getController();
+                    DataContextController<?> controller = loader.getController();
 
                     Scene scene = new Scene(root);
                     scenesCache.put(rootUrl, new Pair<>(scene, controller));
-                    showScene(scene, controller);
-                } catch (Exception ex) {
+                    this.<T>showScene(scene, controller);
+                } catch (IOException ex) {
                     handleWindowCreatingException(ex);
                 }
             }
         }
 
-        private void showScene(final Scene scene, final DataContextController controller) {
+        private <T> void showScene(final Scene scene, final DataContextController<?> controller) {
             Stage stage = getStage();
 
             if (!stagesHistory.isEmpty()) {
@@ -196,7 +195,26 @@ public final class WindowsManager {
                 controller.setDataContext(null);
             });
             stage.show();
-            controller.setDataContext(dataObject);
+
+            this.<T>setupDataContext(controller);
+        }
+
+        private <T> void setupDataContext(final DataContextController<?> controller) {
+            try {
+                // Typecast is save here, we assume each view defined within
+                // FXML should be associated with DataContextController
+
+                @SuppressWarnings("unchecked")
+                DataContextController<T> typedController = (DataContextController<T>) controller;
+
+                @SuppressWarnings("unchecked")
+                T typedDataObject = (T) dataObject;
+
+                typedController.setDataContext(typedDataObject);
+            } catch (ClassCastException ex) {
+                throw new RuntimeException("Can't associate given data object "
+                        + "with loaded data context controller", ex);
+            }
         }
 
         private Stage getStage() {

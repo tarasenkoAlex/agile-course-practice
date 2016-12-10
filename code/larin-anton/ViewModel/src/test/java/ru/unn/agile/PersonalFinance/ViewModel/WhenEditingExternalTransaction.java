@@ -39,14 +39,14 @@ public class WhenEditingExternalTransaction {
 
     @Test
     public void andModelTransactionDateWasChangedIfItWasSaved() throws Exception {
-        LocalDate changedDate = transaction.getDate().plusDays(1);
+        LocalDate dateAfterChange = transaction.getDate().plusDays(1);
 
-        transaction.setDate(changedDate );
+        transaction.setDate(dateAfterChange);
         transaction.save();
 
         ExternalTransaction modelTransaction = transaction.getModelExternalTransaction();
         assertTrue(GregorianCalendarHelper.compareToLocalDate(
-                modelTransaction.getDate(), changedDate));
+                modelTransaction.getDate(), dateAfterChange));
     }
 
     @Test
@@ -88,7 +88,8 @@ public class WhenEditingExternalTransaction {
     }
 
     @Test
-    public void andModelTransactionAmountWasNotChangedIfChangesWereNotApplied() throws Exception {
+    public void andModelTransactionAmountWasNotChangedIfChangesWereNotApplied()
+            throws Exception {
         int amountBeforeChange = transaction.getAmount();
         int amountAfterChange = amountBeforeChange + AMOUNT_CHANGE;
 
@@ -124,7 +125,8 @@ public class WhenEditingExternalTransaction {
     }
 
     @Test
-    public void andTransactionCounterpartyWasNotChangedIfChangesWereNotApplied() throws Exception {
+    public void andTransactionCounterpartyWasNotChangedIfChangesWereNotApplied()
+            throws Exception {
         String counterpartyBeforeChange = transaction.getCounterparty();
 
         transaction.setCounterparty(CHANGED_COUNTERPARTY);
@@ -134,7 +136,8 @@ public class WhenEditingExternalTransaction {
     }
 
     @Test
-    public void andModelTransactionCounterpartyWasChangedIfChangesWereNotApplied() throws Exception {
+    public void andModelTransactionCounterpartyWasChangedIfChangesWereNotApplied()
+            throws Exception {
         String counterpartyBeforeChange = transaction.getCounterparty();
 
         transaction.setCounterparty(CHANGED_COUNTERPARTY);
@@ -145,7 +148,8 @@ public class WhenEditingExternalTransaction {
     }
 
     @Test
-    public void andTransactionDescriptionWasNotChangedIfChangesWereNotApplied() throws Exception {
+    public void andTransactionDescriptionWasNotChangedIfChangesWereNotApplied()
+            throws Exception {
         String descriptionBeforeChange = transaction.getDescription();
 
         transaction.setDescription(CHANGED_DESCRIPTION);
@@ -155,7 +159,8 @@ public class WhenEditingExternalTransaction {
     }
 
     @Test
-    public void andModelTransactionDescriptionWasNotChangedIfChangesWereNotApplied() throws Exception {
+    public void andModelTransactionDescriptionWasNotChangedIfChangesWereNotApplied()
+            throws Exception {
         String descriptionBeforeChange = transaction.getDescription();
 
         transaction.setDescription(CHANGED_DESCRIPTION);
@@ -166,7 +171,8 @@ public class WhenEditingExternalTransaction {
     }
 
     @Test
-    public void andTransactionCategoryWasNotChangedIfChangesWereNotApplied() throws Exception {
+    public void andTransactionCategoryWasNotChangedIfChangesWereNotApplied()
+            throws Exception {
         CategoryViewModel categoryBeforeChange = transaction.getCategory();
 
         transaction.setCategory(new CategoryViewModel(CHANGED_CATEGORY));
@@ -176,13 +182,17 @@ public class WhenEditingExternalTransaction {
     }
 
     @Test
-    public void andModelTransactionCategoryWasNotChangedIfChangesWereNotApplied() throws Exception {
-        Category categoryModelBeforeChange = transaction.getModelExternalTransaction().getCategory();
+    public void andModelTransactionCategoryWasNotChangedIfChangesWereNotApplied()
+            throws Exception {
+        Category categoryModelBeforeChange =
+                transaction.getModelExternalTransaction().getCategory();
 
         transaction.setCategory(new CategoryViewModel(CHANGED_CATEGORY));
         transaction.revertChanges();
 
-        ExternalTransaction modelTransaction = transaction.getModelExternalTransaction();
-        assertEquals(categoryModelBeforeChange.getName(), modelTransaction.getCategory().getName());
+        ExternalTransaction modelTransaction =
+                transaction.getModelExternalTransaction();
+        assertEquals(categoryModelBeforeChange.getName(),
+                modelTransaction.getCategory().getName());
     }
 }

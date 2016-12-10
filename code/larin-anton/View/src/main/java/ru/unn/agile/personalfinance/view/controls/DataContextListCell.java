@@ -29,7 +29,7 @@ public class DataContextListCell<T> extends JFXListCell<T> {
             setText(null);
             setGraphic(root);
 
-            DataContextController controller = loader.getController();
+            DataContextController<T> controller = loader.getController();
             controller.setDataContext(item);
         }
     }

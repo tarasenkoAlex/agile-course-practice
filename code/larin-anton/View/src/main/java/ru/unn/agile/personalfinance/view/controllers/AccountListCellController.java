@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 
-public class AccountListCellController extends DataContextController {
+public class AccountListCellController extends DataContextController<AccountViewModel> {
     @FXML
     private Label nameLabel;
 
@@ -14,9 +14,7 @@ public class AccountListCellController extends DataContextController {
     private Label balanceLabel;
 
     @Override
-    protected void addBindings(final Object newDataContext) {
-        AccountViewModel account = (AccountViewModel) newDataContext;
-
+    protected void addBindings(final AccountViewModel account) {
         /* */
         nameLabel.textProperty().bind(account.nameProperty());
 
@@ -28,9 +26,7 @@ public class AccountListCellController extends DataContextController {
     }
 
     @Override
-    protected void removeBindings(final Object oldDataContext) {
-        AccountViewModel account = (AccountViewModel) oldDataContext;
-
+    protected void removeBindings(final AccountViewModel account) {
         nameLabel.textProperty().unbind();
 
         Bindings.unbindBidirectional(
