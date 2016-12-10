@@ -75,20 +75,12 @@ public abstract class TransactionViewModel extends SavableViewModelObject {
         return displayTitleProperty;
     }
 
-    public final String getDisplayTitle() {
-        return displayTitleProperty.get();
-    }
-
     protected final void setDisplayTitle(final String displayTitle) {
         displayTitleProperty.set(displayTitle);
     }
 
     public final ReadOnlyStringProperty displayCounterpartyProperty() {
         return displayCounterpartyProperty;
-    }
-
-    public final String getDisplayCounterparty() {
-        return displayCounterpartyProperty.get();
     }
 
     protected final void setDisplayCounterparty(final String displayCounterparty) {

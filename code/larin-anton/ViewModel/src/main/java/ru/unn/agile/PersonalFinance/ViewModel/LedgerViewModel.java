@@ -36,20 +36,12 @@ public class LedgerViewModel {
         return accountsProperty.get();
     }
 
-    public final ReadOnlyObjectProperty<CategoriesManagerViewModel> categoriesManagerProperty() {
-        return this.categoriesManagerProperty;
-    }
-
     public final CategoriesManagerViewModel getCategoriesManager() {
         return categoriesManagerProperty.get();
     }
 
     public final ObjectProperty<AccountViewModel> selectedAccountProperty() {
         return selectedAccountProperty;
-    }
-
-    public final AccountViewModel getSelectedAccount() {
-        return selectedAccountProperty.get();
     }
 
     public final void setSelectedAccount(final AccountViewModel selectedAccount) {
