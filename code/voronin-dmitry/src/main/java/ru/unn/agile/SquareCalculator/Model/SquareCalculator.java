@@ -9,7 +9,7 @@ public class SquareCalculator {
     public static final int CYLINDER_CONST = 2;
     public static final int PARALLELEPIPED_CONST = 2;
 
-    public double getSphereSquare(double radius) {
+    public double getSphereSquare(final double radius) {
 
         checkParams("Radius must not be negative!", radius);
 
@@ -17,7 +17,7 @@ public class SquareCalculator {
 
     }
 
-    public double getConeSquare(double radius, double rulingofcone) {
+    public double getConeSquare(final double radius, double rulingofcone) {
         checkParams("Radius and Ruling Of Cone must not be negative!", radius , rulingofcone);
         return Math.PI * radius * ( radius + rulingofcone );
     }
@@ -29,7 +29,7 @@ public class SquareCalculator {
 
 
 
-    public double getCylinderSquare(double radius , double height) {
+    public double getCylinderSquare(final double radius , double height) {
         checkParams("Radius and height must not be negative!", radius , height);
         return CYLINDER_CONST * Math.PI * radius * ( radius + height );
     }
