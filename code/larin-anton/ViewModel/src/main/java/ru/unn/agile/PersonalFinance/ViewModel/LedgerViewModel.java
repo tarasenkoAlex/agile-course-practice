@@ -8,10 +8,8 @@ import ru.unn.agile.PersonalFinance.Model.Ledger;
 import java.util.ArrayList;
 
 public class LedgerViewModel {
-    private final Ledger modelLedger = new Ledger();
-
-    private final BooleanProperty canAddTransactionProperty = new SimpleBooleanProperty();
-    private final BooleanProperty canAddTransferProperty = new SimpleBooleanProperty();
+    private final BooleanProperty ableToAddTransactionProperty = new SimpleBooleanProperty();
+    private final BooleanProperty ableToAddTransferProperty = new SimpleBooleanProperty();
 
     private final ListProperty<AccountViewModel> accountsProperty =
             new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
@@ -22,18 +20,20 @@ public class LedgerViewModel {
     private final ObjectProperty<CategoriesManagerViewModel> categoriesManagerProperty =
             new SimpleObjectProperty<>(new CategoriesManagerViewModel());
 
+    private final Ledger modelLedger = new Ledger();
+
     public LedgerViewModel() {
         setUpBindings();
     }
 
-    // region Properties for Binding
+    // region Properties
 
     public final ListProperty<AccountViewModel> accountsProperty() {
-        return this.accountsProperty;
+        return accountsProperty;
     }
 
     public final ObservableList<AccountViewModel> getAccounts() {
-        return this.accountsProperty.get();
+        return accountsProperty.get();
     }
 
     public final ReadOnlyObjectProperty<CategoriesManagerViewModel> categoriesManagerProperty() {
@@ -45,31 +45,31 @@ public class LedgerViewModel {
     }
 
     public final ObjectProperty<AccountViewModel> selectedAccountProperty() {
-        return this.selectedAccountProperty;
+        return selectedAccountProperty;
     }
 
     public final AccountViewModel getSelectedAccount() {
-        return this.selectedAccountProperty.get();
+        return selectedAccountProperty.get();
     }
 
-    public final void setSelectedAccount(final AccountViewModel selectedAccountProperty) {
-        this.selectedAccountProperty.set(selectedAccountProperty);
+    public final void setSelectedAccount(final AccountViewModel selectedAccount) {
+        selectedAccountProperty.set(selectedAccount);
     }
 
-    public final BooleanProperty canAddTransactionProperty() {
-        return this.canAddTransactionProperty;
+    public final BooleanProperty ableToAddTransactionProperty() {
+        return ableToAddTransactionProperty;
     }
 
-    public final boolean getCanAddTransaction() {
-        return this.canAddTransactionProperty.get();
+    public final boolean isAbleToAddTransaction() {
+        return ableToAddTransactionProperty.get();
     }
 
-    public final BooleanProperty canAddTransferProperty() {
-        return this.canAddTransferProperty;
+    public final BooleanProperty ableToAddTransferProperty() {
+        return ableToAddTransferProperty;
     }
 
-    public final boolean getCanAddTransfer() {
-        return this.canAddTransferProperty.get();
+    public final boolean isAbleToAddTransfer() {
+        return ableToAddTransferProperty.get();
     }
 
     // endregion
@@ -86,8 +86,8 @@ public class LedgerViewModel {
 
     private void setUpBindings() {
         ReadOnlyIntegerProperty accountsSizeProperties = accountsProperty.sizeProperty();
-        canAddTransferProperty.bind(accountsSizeProperties.greaterThan(1));
+        ableToAddTransferProperty.bind(accountsSizeProperties.greaterThan(1));
 
-        canAddTransactionProperty.bind(selectedAccountProperty().isNotNull());
+        ableToAddTransactionProperty.bind(selectedAccountProperty().isNotNull());
     }
 }

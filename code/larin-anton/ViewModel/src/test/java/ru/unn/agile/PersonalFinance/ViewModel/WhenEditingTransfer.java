@@ -94,7 +94,7 @@ public class WhenEditingTransfer {
 
     @Test
     public void andSourceAccountBalanceChanged() throws Exception {
-        AccountViewModel sourceAccount = transfer.getAccountFrom();
+        AccountViewModel sourceAccount = transfer.getSourceAccount();
         int sourceAccountBalance = sourceAccount.getBalance();
 
         transfer.setAmount(transfer.getAmount() + AMOUNT_CHANGE);
@@ -105,7 +105,7 @@ public class WhenEditingTransfer {
 
     @Test
     public void andTargetAccountBalanceChanged() throws Exception {
-        AccountViewModel targetAccount = transfer.getAccountTo();
+        AccountViewModel targetAccount = transfer.getTargetAccount();
         int targetAccountBalance = targetAccount.getBalance();
 
         transfer.setAmount(transfer.getAmount() + AMOUNT_CHANGE);

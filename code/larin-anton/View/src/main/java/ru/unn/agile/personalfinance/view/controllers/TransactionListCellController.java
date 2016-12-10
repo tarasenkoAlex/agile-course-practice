@@ -42,7 +42,7 @@ public class TransactionListCellController extends DataContextController {
         TransactionViewModel transaction = (TransactionViewModel) newDataContext;
 
         transaction.isIncomeProperty().addListener(styleUpdater);
-        transaction.isCounterpartyMarkedAsDeletedProperty().addListener(styleUpdater);
+        transaction.counterpartyMarkedAsDeletedProperty().addListener(styleUpdater);
         updateStyleClasses();
 
         /* amountLabel.text <-> transaction.amount */
@@ -88,7 +88,7 @@ public class TransactionListCellController extends DataContextController {
 
         root.getStyleClass().clear();
 
-        if (transaction.getIsIncome()) {
+        if (transaction.isIncome()) {
             root.getStyleClass().add("income");
             directionIcon.setIcon(FontAwesomeIcon.ICON_ARROW_LEFT);
         } else {

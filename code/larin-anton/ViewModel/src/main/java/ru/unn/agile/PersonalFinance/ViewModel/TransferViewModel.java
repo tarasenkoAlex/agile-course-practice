@@ -28,30 +28,30 @@ public class TransferViewModel extends TransactionViewModel {
         setUpBindings();
     }
 
-    // region Properties for Binding
+    // region Properties
 
     public final ObjectProperty<AccountViewModel> accountFromProperty() {
-        return this.accountFromProperty;
+        return accountFromProperty;
     }
 
-    public final AccountViewModel getAccountFrom() {
-        return this.accountFromProperty.get();
+    public final AccountViewModel getSourceAccount() {
+        return accountFromProperty.get();
     }
 
-    public final void setAccountFrom(final AccountViewModel account) {
-        this.accountFromProperty.set(account);
+    public final void setSourceAccount(final AccountViewModel account) {
+        accountFromProperty.set(account);
     }
 
     public final ObjectProperty<AccountViewModel> accountToProperty() {
-        return this.accountToProperty;
+        return accountToProperty;
     }
 
-    public final AccountViewModel getAccountTo() {
-        return this.accountToProperty.get();
+    public final AccountViewModel getTargetAccount() {
+        return accountToProperty.get();
     }
 
-    public final void setAccountTo(final AccountViewModel account) {
-        this.accountToProperty.set(account);
+    public final void setTargetAccount(final AccountViewModel account) {
+        accountToProperty.set(account);
     }
 
     // endregion
@@ -63,16 +63,16 @@ public class TransferViewModel extends TransactionViewModel {
     @Override
     protected void saveInternal() {
         modelTransfer = buildModelTransfer();
-        getAccountFrom().registerTransaction(this.asOutcoming());
-        getAccountTo().registerTransaction(this.duplicate().asIncoming());
+        getSourceAccount().registerTransaction(this.asOutcoming());
+        getTargetAccount().registerTransaction(this.duplicate().asIncoming());
     }
 
     @Override
     protected void updateInternal() {
         deleteModelTransfer();
         modelTransfer = buildModelTransfer();
-        getAccountFrom().forceUpdateBalance();
-        getAccountTo().forceUpdateBalance();
+        getSourceAccount().forceUpdateBalance();
+        getTargetAccount().forceUpdateBalance();
         synchronizeStateWithLinkedTransfer();
     }
 
@@ -100,10 +100,10 @@ public class TransferViewModel extends TransactionViewModel {
     private TransferViewModel duplicate() {
         TransferViewModel other = new TransferViewModel();
         other.setAmount(getAmount());
-        other.setIsIncome(getIsIncome());
+        other.setIsIncome(isIncome());
         other.setDate(getDate());
-        other.setAccountFrom(getAccountFrom());
-        other.setAccountTo(getAccountTo());
+        other.setSourceAccount(getSourceAccount());
+        other.setTargetAccount(getTargetAccount());
         other.modelTransfer = modelTransfer;
         other.linkedTransfer = this;
         linkedTransfer = other;
@@ -118,16 +118,14 @@ public class TransferViewModel extends TransactionViewModel {
     }
 
     private Transfer buildModelTransfer() {
-
-        AccountViewModel accountFrom = getAccountFrom();
-        AccountViewModel accountTo = getAccountTo();
-        Account modelAccountFrom = accountFrom.getModelAccount();
-        Account modelAccountTo = accountTo.getModelAccount();
+        AccountViewModel sourceAccount = getSourceAccount();
+        AccountViewModel targetAccount = getTargetAccount();
+        Account modelSourceAccount = sourceAccount.getModelAccount();
+        Account modelTargetAccount = targetAccount.getModelAccount();
 
         GregorianCalendar transferDate =
                 GregorianCalendarHelper.convertFromLocalDate(getDate());
-        return modelAccountFrom.transferTo(
-                modelAccountTo, getAmount(), transferDate);
+        return modelSourceAccount.transferTo(modelTargetAccount, getAmount(), transferDate);
     }
 
     private void setUpBindings() {
@@ -139,8 +137,7 @@ public class TransferViewModel extends TransactionViewModel {
                 accountFromProperty.isNotEqualTo(
                 accountToProperty);
 
-        BooleanBinding isAmountPositive =
-                amountProperty().greaterThan(0);
+        BooleanBinding isAmountPositive = amountProperty().greaterThan(0);
 
         ableToSaveMutableProperty().bind(
                 accountsNotNull.and(
@@ -158,40 +155,40 @@ public class TransferViewModel extends TransactionViewModel {
     }
 
     private void updateDisplayCounterparty() {
-        if (getIsIncome()) {
-            setDisplayCounterpartyFromAccount(getAccountFrom());
+        if (isIncome()) {
+            setDisplayCounterpartyFromAccount(getSourceAccount());
         } else {
-            setDisplayCounterpartyFromAccount(getAccountTo());
+            setDisplayCounterpartyFromAccount(getTargetAccount());
         }
     }
 
     private void setDisplayCounterpartyFromAccount(final AccountViewModel account) {
         displayCounterpartyMutableProperty().unbind();
-        isCounterpartyMarkedAsDeletedMutableProperty().unbind();
+        counterpartyMarkedAsDeletedMutableProperty().unbind();
 
         if (account == null) {
             setDisplayCounterparty(null);
         } else {
             displayCounterpartyMutableProperty().bind(account.nameProperty());
-            isCounterpartyMarkedAsDeletedMutableProperty().bind(account.deletedProperty());
+            counterpartyMarkedAsDeletedMutableProperty().bind(account.deletedProperty());
         }
     }
 
     private TransferViewModel asIncoming() {
-        associatedAccount = getAccountTo();
+        associatedAccount = getTargetAccount();
         this.setIsIncome(true);
         return this;
     }
 
     private TransferViewModel asOutcoming() {
-        associatedAccount = getAccountFrom();
+        associatedAccount = getSourceAccount();
         this.setIsIncome(false);
         return this;
     }
 
     private void deleteModelTransfer() {
-        Account modelAccountFrom = getAccountFrom().getModelAccount();
-        modelAccountFrom.deleteTransaction(modelTransfer);
+        Account modelSourceAccount = getSourceAccount().getModelAccount();
+        modelSourceAccount.deleteTransaction(modelTransfer);
     }
 
     private void startProcessOfDeletion() {

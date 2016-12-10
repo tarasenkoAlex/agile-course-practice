@@ -23,22 +23,22 @@ public class WhenCreatingTransfer {
     public void andItCanNotBeSavedIfSourceAndTargetAreSame() throws Exception {
         AccountViewModel account = maker.makeAccount();
 
-        transfer.setAccountFrom(account);
-        transfer.setAccountTo(account);
+        transfer.setSourceAccount(account);
+        transfer.setTargetAccount(account);
 
         assertFalse(transfer.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIsSourceAccountIsNull() throws Exception {
-        transfer.setAccountFrom(null);
+        transfer.setSourceAccount(null);
 
         assertFalse(transfer.isAbleToSave());
     }
 
     @Test
     public void andItCanNotBeSavedIsTargetAccountIsNull() throws Exception {
-        transfer.setAccountTo(null);
+        transfer.setTargetAccount(null);
 
         assertFalse(transfer.isAbleToSave());
     }
@@ -48,8 +48,8 @@ public class WhenCreatingTransfer {
         AccountViewModel sourceAccount = maker.makeAccount(SOURCE_ACCOUNT_NAME);
         AccountViewModel targetAccount = maker.makeAccount(TARGET_ACCOUNT_NAME);
 
-        transfer.setAccountFrom(sourceAccount);
-        transfer.setAccountTo(targetAccount);
+        transfer.setSourceAccount(sourceAccount);
+        transfer.setTargetAccount(targetAccount);
 
         assertTrue(transfer.isAbleToSave());
     }

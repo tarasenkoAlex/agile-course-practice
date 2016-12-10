@@ -108,12 +108,12 @@ public class EditTransferController extends DataContextController<TransferViewMo
         /* transfer.changing -> accountFromComboBox.disabled */
         accountFromComboBox.disableProperty().bind(transfer.changingProperty());
 
-        if (transfer.getAccountFrom() == null && transfer.getAccountTo() == null) {
+        if (transfer.getSourceAccount() == null && transfer.getTargetAccount() == null) {
             accountFromComboBox.getSelectionModel().select(0);
             accountToComboBox.getSelectionModel().select(1);
         } else {
-            accountFromComboBox.getSelectionModel().select(transfer.getAccountFrom());
-            accountToComboBox.getSelectionModel().select(transfer.getAccountTo());
+            accountFromComboBox.getSelectionModel().select(transfer.getSourceAccount());
+            accountToComboBox.getSelectionModel().select(transfer.getTargetAccount());
         }
     }
 

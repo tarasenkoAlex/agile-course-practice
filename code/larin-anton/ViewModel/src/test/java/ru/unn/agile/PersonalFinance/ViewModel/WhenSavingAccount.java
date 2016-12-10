@@ -59,7 +59,7 @@ public class WhenSavingAccount {
         cacheAccount.save();
         debitCardAccount.save();
 
-        boolean canAddTransfer = ledger.getCanAddTransfer();
+        boolean canAddTransfer = ledger.isAbleToAddTransfer();
         assertEquals(true, canAddTransfer);
     }
 }

@@ -44,7 +44,7 @@ public class EditCategoriesController extends DataContextController {
 
         /* categoriesManager.isAbleToAddNewCategory -> addCategoryButton.disabled */
         addCategoryButton.disableProperty().bind(
-                categoriesManager.isAbleToAddNewCategoryProperty().not());
+                categoriesManager.ableToAddNewCategoryProperty().not());
 
         /* categoriesManager.newCategoryName <-> newCategoryField.text */
         Bindings.bindBidirectional(newCategoryField.textProperty(),

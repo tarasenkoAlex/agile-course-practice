@@ -15,17 +15,14 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class ExternalTransactionViewModel extends TransactionViewModel {
-    private final AccountViewModel parentAccount;
-
-    private ExternalTransaction modelExternalTransaction;
-    private ExternalTransactionViewModelState savedState;
-
     private final StringProperty descriptionProperty = new SimpleStringProperty();
-
     private final StringProperty counterpartyProperty = new SimpleStringProperty();
-
     private final ObjectProperty<CategoryViewModel> categoryProperty =
             new SimpleObjectProperty<>();
+
+    private final AccountViewModel parentAccount;
+    private ExternalTransaction modelExternalTransaction;
+    private ExternalTransactionViewModelState savedState;
 
     public ExternalTransactionViewModel(final AccountViewModel parentAccount) {
         Objects.requireNonNull(parentAccount);
@@ -34,42 +31,42 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
         setDefaults();
     }
 
-    // region Properties for Binding
+    // region Properties
 
     public final String getDescription() {
-        return this.descriptionProperty.get();
+        return descriptionProperty.get();
     }
 
     public final StringProperty descriptionProperty() {
-        return this.descriptionProperty;
+        return descriptionProperty;
     }
 
     public final void setDescription(final String description) {
-        this.descriptionProperty.set(description);
+        descriptionProperty.set(description);
     }
 
     public final StringProperty counterpartyProperty() {
-        return this.counterpartyProperty;
+        return counterpartyProperty;
     }
 
     public final String getCounterparty() {
-        return this.counterpartyProperty.get();
+        return counterpartyProperty.get();
     }
 
     public final void setCounterparty(final String counterparty) {
-        this.counterpartyProperty.set(counterparty);
+        counterpartyProperty.set(counterparty);
     }
 
     public final ObjectProperty<CategoryViewModel> categoryProperty() {
-        return this.categoryProperty;
+        return categoryProperty;
     }
 
     public final CategoryViewModel getCategory() {
-        return this.categoryProperty.get();
+        return categoryProperty.get();
     }
 
     public final void setCategory(final CategoryViewModel category) {
-        this.categoryProperty.set(category);
+        categoryProperty.set(category);
     }
 
     // endregion
@@ -77,7 +74,7 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
     ExternalTransaction getModelExternalTransaction() {
         if (modelExternalTransaction == null) {
             throw new UnsupportedOperationException("Transaction should be "
-                    + "saved before getting model transaction");
+                    + "saved before getting the model transaction");
         }
         return modelExternalTransaction;
     }
@@ -123,7 +120,7 @@ public class ExternalTransactionViewModel extends TransactionViewModel {
     }
 
     private ExternalTransaction buildExternalTransaction() {
-        ExternalTransaction.Builder transactionBuilder = getIsIncome()
+        ExternalTransaction.Builder transactionBuilder = isIncome()
                 ? ExternalTransaction.incomeBuilder(getAmount())
                 : ExternalTransaction.expenseBuilder(getAmount());
 

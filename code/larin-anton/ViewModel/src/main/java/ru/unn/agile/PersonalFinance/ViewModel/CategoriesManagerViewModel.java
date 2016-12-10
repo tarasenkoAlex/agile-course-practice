@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class CategoriesManagerViewModel {
     private final StringProperty newCategoryNameProperty = new SimpleStringProperty();
-    private final BooleanProperty isAbleToAddNewCategoryProperty = new SimpleBooleanProperty();
+    private final BooleanProperty ableToAddNewCategoryProperty = new SimpleBooleanProperty();
     private final ListProperty<CategoryViewModel> categoriesProperty =
             new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
 
@@ -23,7 +23,7 @@ public class CategoriesManagerViewModel {
         setUpBindings();
     }
 
-    // region Properties for Binding
+    // region Properties
 
     public final StringProperty newCategoryNameProperty() {
         return newCategoryNameProperty;
@@ -37,16 +37,12 @@ public class CategoriesManagerViewModel {
         newCategoryNameProperty.set(newCategoryName);
     }
 
-    public final ReadOnlyBooleanProperty isAbleToAddNewCategoryProperty() {
-        return isAbleToAddNewCategoryProperty;
+    public final ReadOnlyBooleanProperty ableToAddNewCategoryProperty() {
+        return ableToAddNewCategoryProperty;
     }
 
     public final boolean isAbleToAddNewCategory() {
-        return isAbleToAddNewCategoryProperty.get();
-    }
-
-    private void setIsAbleToAddNewCategory(final boolean isAbleToAddNewCategory) {
-        isAbleToAddNewCategoryProperty.set(isAbleToAddNewCategory);
+        return ableToAddNewCategoryProperty.get();
     }
 
     public final ReadOnlyListProperty<CategoryViewModel> categoriesProperty() {
@@ -72,7 +68,7 @@ public class CategoriesManagerViewModel {
         BooleanBinding isNewCategoryNameEmpty =
                 StringHelper.isNullOrEmpty(newCategoryNameProperty);
 
-        isAbleToAddNewCategoryProperty.bind(Bindings.and(
+        ableToAddNewCategoryProperty.bind(Bindings.and(
                 isNewCategoryNameEmpty.not(),
                 isCategoryExists.not()));
     }

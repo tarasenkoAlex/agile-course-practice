@@ -12,7 +12,7 @@ final class ExternalTransactionViewModelState {
 
     private ExternalTransactionViewModelState(final ExternalTransactionViewModel transaction) {
         amount = transaction.getAmount();
-        isIncome = transaction.getIsIncome();
+        isIncome = transaction.isIncome();
         date = transaction.getDate();
         category = transaction.getCategory();
         counterparty = transaction.getCounterparty();

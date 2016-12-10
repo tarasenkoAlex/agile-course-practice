@@ -15,18 +15,18 @@ public abstract class SavableViewModelObject {
         return ableToSaveProperty;
     }
 
-    // region Properties for Bindings
+    // region Properties
 
     public final ReadOnlyBooleanProperty ableToSaveProperty() {
-        return this.ableToSaveProperty;
+        return ableToSaveProperty;
     }
 
     public final boolean isAbleToSave() {
-        return this.ableToSaveProperty.get();
+        return ableToSaveProperty.get();
     }
 
     protected final void setIsAbleToSave(final boolean isAbleToSave) {
-        this.ableToSaveProperty.set(isAbleToSave);
+        ableToSaveProperty.set(isAbleToSave);
     }
 
     public final ReadOnlyBooleanProperty changingProperty() {

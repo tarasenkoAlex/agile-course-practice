@@ -15,10 +15,6 @@ public final class GregorianCalendarHelper {
         return GregorianCalendar.from(zonedDateTime);
     }
 
-    public static GregorianCalendar now() {
-        return convertFromLocalDate(LocalDate.now());
-    }
-
     public static boolean compareToLocalDate(final GregorianCalendar oneDate,
                                              final LocalDate otherDate) {
         LocalDate localOneDate = convertToLocalDate(oneDate);

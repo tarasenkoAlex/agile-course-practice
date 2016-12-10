@@ -12,7 +12,7 @@ public class CategoryViewModel {
         setName(name);
     }
 
-    // region Properties for Binding
+    // region Properties
 
     public final StringProperty nameProperty() {
         return nameProperty;

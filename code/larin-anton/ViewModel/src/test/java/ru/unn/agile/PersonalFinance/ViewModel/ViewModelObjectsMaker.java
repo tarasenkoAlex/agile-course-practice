@@ -79,8 +79,8 @@ final class ViewModelObjectsMaker {
                                    final AccountViewModel targetAccount) {
         TransferViewModel transfer = new TransferViewModel();
         transfer.setAmount(DEFAULT_AMOUNT);
-        transfer.setAccountFrom(sourceAccount);
-        transfer.setAccountTo(targetAccount);
+        transfer.setSourceAccount(sourceAccount);
+        transfer.setTargetAccount(targetAccount);
         return transfer;
     }
 
@@ -100,8 +100,8 @@ final class ViewModelObjectsMaker {
 
     TransferViewModel makeSavedTransfer() {
         TransferViewModel transfer = makeTransfer();
-        transfer.getAccountFrom().save();
-        transfer.getAccountTo().save();
+        transfer.getSourceAccount().save();
+        transfer.getTargetAccount().save();
         transfer.save();
         return transfer;
     }

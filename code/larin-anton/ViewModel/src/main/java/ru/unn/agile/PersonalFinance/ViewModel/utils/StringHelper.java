@@ -9,13 +9,6 @@ public final class StringHelper {
         return value == null || value.trim().isEmpty();
     }
 
-    public static boolean isEqual(final String lhs, final String rhs) {
-        if (lhs != null && rhs != null) {
-            return lhs.equals(rhs);
-        }
-        return lhs == null && rhs == null;
-    }
-
     public static boolean areEqualTrimmed(final String lhs, final String rhs) {
         if (lhs != null && rhs != null) {
             return lhs.trim().equals(rhs.trim());

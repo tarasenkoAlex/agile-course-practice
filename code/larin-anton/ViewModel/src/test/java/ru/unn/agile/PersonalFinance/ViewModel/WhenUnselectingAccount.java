@@ -21,7 +21,7 @@ public class WhenUnselectingAccount {
     public void andCanAddTransactionPropertyChangesToFalse() throws Exception {
         ledger.setSelectedAccount(null);
 
-        boolean canAddTransaction = ledger.getCanAddTransaction();
+        boolean canAddTransaction = ledger.isAbleToAddTransaction();
         assertEquals(false, canAddTransaction);
     }
 }

@@ -46,10 +46,10 @@ public class HomeScreenController extends DataContextController<LedgerViewModel>
         ledger.selectedAccountProperty().bind(selectedItemProperty);
 
         /* ledger.canAddTransaction -> addTransactionButton.disabled */
-        addTransactionButton.disableProperty().bind(ledger.canAddTransactionProperty().not());
+        addTransactionButton.disableProperty().bind(ledger.ableToAddTransactionProperty().not());
 
         /* ledger.canAddTransfer-> addTransferButton.disabled */
-        addTransferButton.disableProperty().bind(ledger.canAddTransferProperty().not());
+        addTransferButton.disableProperty().bind(ledger.ableToAddTransferProperty().not());
 
         /* ledger.accounts -> accountsList.items */
         accountsList.itemsProperty().bind(ledger.accountsProperty());

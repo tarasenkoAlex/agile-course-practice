@@ -9,17 +9,11 @@ public abstract class TransactionViewModel extends SavableViewModelObject {
     private static final int DEFAULT_AMOUNT = 100;
 
     private final IntegerProperty amountProperty = new SimpleIntegerProperty();
-
     private final BooleanProperty isIncomeProperty = new SimpleBooleanProperty();
-
-    private final ObjectProperty<LocalDate> dateProperty =
-            new SimpleObjectProperty<>();
-
+    private final ObjectProperty<LocalDate> dateProperty = new SimpleObjectProperty<>();
     private final StringProperty displayTitleProperty = new SimpleStringProperty();
-
     private final StringProperty displayCounterpartyProperty = new SimpleStringProperty();
-
-    private final BooleanProperty isCounterpartyMarkedAsDeletedProperty =
+    private final BooleanProperty counterpartyMarkedAsDeletedProperty =
             new SimpleBooleanProperty();
 
     public TransactionViewModel() {
@@ -35,46 +29,46 @@ public abstract class TransactionViewModel extends SavableViewModelObject {
         return displayCounterpartyProperty;
     }
 
-    protected BooleanProperty isCounterpartyMarkedAsDeletedMutableProperty() {
-        return isCounterpartyMarkedAsDeletedProperty;
+    protected BooleanProperty counterpartyMarkedAsDeletedMutableProperty() {
+        return counterpartyMarkedAsDeletedProperty;
     }
 
-    // region Properties for Binding
+    // region Properties
 
     public final IntegerProperty amountProperty() {
         return amountProperty;
     }
 
     public final int getAmount() {
-        return this.amountProperty.get();
+        return amountProperty.get();
     }
 
     public final void setAmount(final int amount) {
-        this.amountProperty.set(amount);
+        amountProperty.set(amount);
     }
 
     public final ObjectProperty<LocalDate> dateProperty() {
-        return this.dateProperty;
+        return dateProperty;
     }
 
     public final LocalDate getDate() {
-        return this.dateProperty.get();
+        return dateProperty.get();
     }
 
     public final void setDate(final LocalDate date) {
-        this.dateProperty.set(date);
+        dateProperty.set(date);
     }
 
     public final BooleanProperty isIncomeProperty() {
-        return this.isIncomeProperty;
+        return isIncomeProperty;
     }
 
-    public final boolean getIsIncome() {
-        return this.isIncomeProperty.get();
+    public final boolean isIncome() {
+        return isIncomeProperty.get();
     }
 
-    public final void setIsIncome(final boolean isIncomeProperty) {
-        this.isIncomeProperty.set(isIncomeProperty);
+    public final void setIsIncome(final boolean isIncome) {
+        isIncomeProperty.set(isIncome);
     }
 
     public final ReadOnlyStringProperty displayTitleProperty() {
@@ -101,16 +95,12 @@ public abstract class TransactionViewModel extends SavableViewModelObject {
         displayCounterpartyProperty.set(displayCounterparty);
     }
 
-    public final ReadOnlyBooleanProperty isCounterpartyMarkedAsDeletedProperty() {
-        return isCounterpartyMarkedAsDeletedProperty;
+    public final ReadOnlyBooleanProperty counterpartyMarkedAsDeletedProperty() {
+        return counterpartyMarkedAsDeletedProperty;
     }
 
     public final boolean isCounterpartyMarkedAsDeleted() {
-        return isCounterpartyMarkedAsDeletedProperty.get();
-    }
-
-    protected final void markCounterpartyAsDeleted() {
-        isCounterpartyMarkedAsDeletedProperty.set(true);
+        return counterpartyMarkedAsDeletedProperty.get();
     }
 
     // endregion

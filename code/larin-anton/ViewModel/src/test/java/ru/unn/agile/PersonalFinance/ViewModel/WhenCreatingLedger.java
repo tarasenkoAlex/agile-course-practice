@@ -17,14 +17,14 @@ public class WhenCreatingLedger {
     public void andTransactionCanNotBeAddedIfTransactionsListIsEmpty() throws Exception {
         LedgerViewModel ledger = maker.getLedger();
 
-        assertFalse(ledger.getCanAddTransaction());
+        assertFalse(ledger.isAbleToAddTransaction());
     }
 
     @Test
     public void andTransferCanNotBeAddedIfTransactionsListIsEmpty() throws Exception {
         LedgerViewModel ledger = maker.getLedger();
 
-        assertFalse(ledger.getCanAddTransfer());
+        assertFalse(ledger.isAbleToAddTransfer());
     }
 
     @Test
@@ -32,6 +32,6 @@ public class WhenCreatingLedger {
         maker.makeSavedAccount();
         LedgerViewModel ledger = maker.getLedger();
 
-        assertFalse(ledger.getCanAddTransfer());
+        assertFalse(ledger.isAbleToAddTransfer());
     }
 }

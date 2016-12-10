@@ -20,7 +20,7 @@ public class WhenSelectingAccount {
     public void andCanAddTransactionPropertyChangesToTrue() throws Exception {
         ledger.setSelectedAccount(account);
 
-        boolean canAddTransaction = ledger.getCanAddTransaction();
+        boolean canAddTransaction = ledger.isAbleToAddTransaction();
         assertEquals(true, canAddTransaction);
     }
 }

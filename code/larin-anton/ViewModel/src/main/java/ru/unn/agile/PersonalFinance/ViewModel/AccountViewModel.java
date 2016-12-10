@@ -34,7 +34,7 @@ public class AccountViewModel extends SavableViewModelObject {
         setBalance(DEFAULT_ACCOUNT_BALANCE);
     }
 
-    // region Properties for Binding
+    // region Properties
 
     public final StringProperty nameProperty() {
         return nameProperty;
@@ -73,7 +73,7 @@ public class AccountViewModel extends SavableViewModelObject {
     Account getModelAccount() {
         if (modelAccount == null) {
             throw new UnsupportedOperationException("Account should be "
-                    + "saved before getting model account");
+                    + "saved before getting the model account");
         }
         return modelAccount;
     }
@@ -119,19 +119,10 @@ public class AccountViewModel extends SavableViewModelObject {
         updateBalance();
     }
 
-    private void registerTransferAsIncoming(final TransferViewModel transfer) {
-        transfer.setIsIncome(true);
-        registerTransaction(transfer);
-    }
-
-    private void registerTransferAsOutcoming(final TransferViewModel transfer) {
-        transfer.setIsIncome(false);
-        registerTransaction(transfer);
-    }
-
     private void setUpBindings() {
-        BooleanBinding isAccountNameExists = Bindings.createBooleanBinding(() ->
-                hasAccountWithName(getName()), parentLedger.accountsProperty(), nameProperty);
+        BooleanBinding isAccountNameExists = Bindings.createBooleanBinding(
+                this::checkIfAnotherAccountWithSameNameExists,
+                parentLedger.accountsProperty(), nameProperty);
 
         ableToSaveMutableProperty().bind(isAccountNameExists.not());
     }
@@ -140,11 +131,10 @@ public class AccountViewModel extends SavableViewModelObject {
         setBalance(modelAccount.getBalance());
     }
 
-    private boolean hasAccountWithName(final String accountName) {
+    private boolean checkIfAnotherAccountWithSameNameExists() {
         List<AccountViewModel> accounts = parentLedger.getAccounts();
         return accounts.stream().anyMatch((account) -> {
-            boolean namesEqual = StringHelper.areEqualTrimmed(
-                    account.getName(), accountName);
+            boolean namesEqual = StringHelper.areEqualTrimmed(account.getName(), getName());
             return account != this && namesEqual;
         });
     }
