@@ -34,7 +34,7 @@ public class SquareCalculator {
         return CYLINDER_CONST * Math.PI * radius * (radius + height);
     }
 
-    public double getParallelepipedSquare(final double height, final double lenght, final double width) {
+    public double getParallelSquare(final double height, final double lenght, final double width) { // for parallelepiped square
         checkParams("height , lenght and width must not be negative!", height, lenght, width);
         return PARALLELEPIPED_CONST * (height * lenght + height * width + lenght * width);
     }

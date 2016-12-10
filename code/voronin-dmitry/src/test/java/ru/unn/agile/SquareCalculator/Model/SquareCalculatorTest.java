@@ -188,7 +188,7 @@ public class SquareCalculatorTest {
     @Test
     public void calculSquareParallelepipedWhenHeight0Lenght0Width0(){
 
-        double result = calculator.getParallelepipedSquare(0, 0, 0);
+        double result = calculator.getParallelSquare(0, 0, 0);
 
         assertEquals(0, result , DELTA );
 
@@ -197,7 +197,7 @@ public class SquareCalculatorTest {
     @Test
     public void calculSquareParallelepipedWhenHeight0Lenght2Width2(){
 
-        double result = calculator.getParallelepipedSquare(0, 2, 2);
+        double result = calculator.getParallelSquare(0, 2, 2);
 
         assertEquals(8, result , DELTA );
 
@@ -206,7 +206,7 @@ public class SquareCalculatorTest {
     @Test
     public void calculSquareParallelepipedWhenHeight2Lenght0Width2(){
 
-        double result = calculator.getParallelepipedSquare(2, 0, 2);
+        double result = calculator.getParallelSquare(2, 0, 2);
 
         assertEquals(8, result , DELTA );
 
@@ -215,7 +215,7 @@ public class SquareCalculatorTest {
     @Test
     public void calculSquareParallelepipedWhenHeight2Lenght2Width0(){
 
-        double result = calculator.getParallelepipedSquare(2, 2, 0);
+        double result = calculator.getParallelSquare(2, 2, 0);
 
         assertEquals(8, result , DELTA );
 
@@ -224,49 +224,49 @@ public class SquareCalculatorTest {
     @Test(expected = IllegalArgumentException.class)
     public void calculSquareParallelepipedWhenHeightNegativeLenght2Width2(){
 
-        calculator.getParallelepipedSquare(-2, 2, 2);
+        calculator.getParallelSquare(-2, 2, 2);
 
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculSquareParallelepipedWhenHeight2eLenghtNegativeWidth2(){
 
-        calculator.getParallelepipedSquare(2, -2, 2);
+        calculator.getParallelSquare(2, -2, 2);
 
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculSquareParallelepipedWhenHeight2Lenght2WidthNegative(){
 
-        calculator.getParallelepipedSquare(2, 2, -2);
+        calculator.getParallelSquare(2, 2, -2);
 
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculSquareParallelepipedWhenHeighAndLenghtNegativeWidth2(){
 
-        calculator.getParallelepipedSquare(-2, -2, 2);
+        calculator.getParallelSquare(-2, -2, 2);
 
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculSquareParallelepipedWhenHeight2LenghtAndWidthNegative(){
 
-        calculator.getParallelepipedSquare(2, -2, -2);
+        calculator.getParallelSquare(2, -2, -2);
 
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculSquareParallelepipedWhenHeightAndWidthNegativeLenght2(){
 
-        calculator.getParallelepipedSquare(-2, 2, -2);
+        calculator.getParallelSquare(-2, 2, -2);
 
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void calculSquareParallelepipedWhenHeightLenghtWidthNegative(){
 
-        calculator.getParallelepipedSquare(-2, -2, -2);
+        calculator.getParallelSquare(-2, -2, -2);
 
     }
 }
