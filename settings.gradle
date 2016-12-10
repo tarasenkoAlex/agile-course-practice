@@ -64,6 +64,8 @@ include "code/volkov-denis"
 project(":code/volkov-denis").name = "volkov-denis-Model"
 
 // Воронин Дмитрий
+include "code/voronin-dmitry"
+project(":code/voronin-dmitry").name = "voronin-dmitry-Model"
 // Грошева Людмила
 include "code/grosheva-ludmila"
 project(":code/grosheva-ludmila").name = "grosheva-ludmila-Model"
