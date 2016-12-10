@@ -4,11 +4,16 @@ package ru.unn.agile.SquareCalculator.Model;
  * Created by Дмитрий on 20.11.2016.
  */
 public class SquareCalculator {
+    public static final  int SPHERE_CONST = 4;
+    public  static final int CUBE_CONST = 6;
+    public static final int CYLINDER_CONST = 2;
+    public static final int PARALLELEPIPED_CONST = 2;
+
     public double getSphereSquare(double radius) {
 
         checkParams("Radius must not be negative!", radius);
 
-        return SquareCalculatorConstants.SPHERECONST * Math.PI * radius * radius;
+        return SPHERE_CONST * Math.PI * radius * radius;
 
     }
 
@@ -19,19 +24,19 @@ public class SquareCalculator {
 
     public double getCubeSquare(double lenght) {
         checkParams("Lenght must not be negative!" , lenght);
-        return SquareCalculatorConstants.CUBECONST * lenght * lenght;
+        return CUBE_CONST * lenght * lenght;
     }
 
 
 
     public double getCylinderSquare(double radius , double height) {
         checkParams("Radius and height must not be negative!", radius , height);
-        return SquareCalculatorConstants.CYLINDERCONST * Math.PI * radius * ( radius + height );
+        return CYLINDER_CONST * Math.PI * radius * ( radius + height );
     }
 
     public double getParallelepipedSquare(double height, double lenght, double width) {
         checkParams("height , lenght and width must not be negative!", height, lenght, width);
-        return SquareCalculatorConstants.PARALLELEPIPEDCONST * ( height * lenght + height * width + lenght * width );
+        return PARALLELEPIPED_CONST * ( height * lenght + height * width + lenght * width );
     }
 
 
