@@ -86,7 +86,9 @@ public class HomeScreenController extends DataContextController<LedgerViewModel>
 
     @FXML
     private void handleDeleteAccountAction(final ActionEvent actionEvent) {
-        getSelectedAccount().delete();
+        if (getSelectedAccount() != null) {
+            getSelectedAccount().delete();
+        }
     }
 
     @FXML
@@ -96,7 +98,9 @@ public class HomeScreenController extends DataContextController<LedgerViewModel>
 
     @FXML
     private void handleDeleteTransactionAction(final ActionEvent actionEvent) {
-        getSelectedTransaction().delete();
+        if (getSelectedTransaction() != null) {
+            getSelectedTransaction().delete();
+        }
     }
 
     @FXML

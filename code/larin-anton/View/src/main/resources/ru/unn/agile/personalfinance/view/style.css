@@ -2,9 +2,13 @@
     -fx-background-color: white;
 }
 
-.list-view,
-.accounts-list-view {
+.list-view {
     -fx-background-insets: 0;
+}
+
+.accounts-list-view {
+    -fx-background-color: #cdcfd3, white;
+    -fx-background-insets: 0, 0 1 0 0;
 }
 
 .transactions-list-view .list-cell,
