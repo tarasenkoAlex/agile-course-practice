@@ -1,12 +1,23 @@
-package com.unn.agile.color;
+package ru.unn.agile.color.model;
 
-import static com.unn.agile.color.Constants.*;
+import static ru.unn.agile.color.model.Constants.*;
 
-final class CheckParameters {
+public final class CheckParameters {
     private CheckParameters() {
 
     }
-    static void checkParametersRGB(final double[] params) {
+
+    public static void checkParameters(ColorSpaces colorSpaces, final double[] params) {
+        if (colorSpaces == ColorSpaces.HSV) {
+            checkParametersHSV(params);
+        } else if (colorSpaces == ColorSpaces.LAB) {
+            checkParametersLAB(params);
+        } else {
+            checkParametersRGB(params);
+        }
+    }
+
+    private static void checkParametersRGB(final double[] params) {
         if (!checkNumberParameters(params)) {
             return;
         }
@@ -20,7 +31,7 @@ final class CheckParameters {
         }
     }
 
-    static void checkParametersHSV(final double[] params) {
+    private static void checkParametersHSV(final double[] params) {
         if (!checkNumberParameters(params)) {
             return;
         }
@@ -38,7 +49,7 @@ final class CheckParameters {
         }
     }
 
-    static void checkParametersLAB(final double[] params) {
+    private static void checkParametersLAB(final double[] params) {
         if (!checkNumberParameters(params)) {
             return;
         }
@@ -52,7 +63,7 @@ final class CheckParameters {
             throw new IllegalArgumentException();
         }
     }
-    static boolean checkNumberParameters(final double[] params) {
+    private static boolean checkNumberParameters(final double[] params) {
         if (params != null && params.length == THREEPZ) {
             return true;
         } else {

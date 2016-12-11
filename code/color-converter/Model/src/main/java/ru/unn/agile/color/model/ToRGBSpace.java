@@ -1,6 +1,6 @@
-package com.unn.agile.color;
+package ru.unn.agile.color.model;
 
-import static com.unn.agile.color.Constants.*;
+import static ru.unn.agile.color.model.Constants.*;
 
 final class ToRGBSpace {
     private ToRGBSpace() {

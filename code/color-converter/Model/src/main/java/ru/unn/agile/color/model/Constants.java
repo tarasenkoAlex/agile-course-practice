@@ -1,4 +1,4 @@
-package com.unn.agile.color;
+package ru.unn.agile.color.model;
 
 final class Constants {
 
