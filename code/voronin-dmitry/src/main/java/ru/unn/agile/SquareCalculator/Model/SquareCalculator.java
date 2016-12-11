@@ -1,8 +1,6 @@
 package ru.unn.agile.SquareCalculator.Model;
 
-/**
- * Created by Дмитрий on 20.11.2016.
- */
+
 public class SquareCalculator {
     public static final  int SPHERE_CONST = 4;
     public  static final int CUBE_CONST = 6;

@@ -6,9 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by Дмитрий on 20.11.2016.
- */
+
 public class SquareCalculatorTest {
 
     private static final double DELTA = 0.0000001;
