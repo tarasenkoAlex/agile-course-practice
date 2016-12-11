@@ -18,7 +18,7 @@ public class WhenCreatingExternalTransaction {
     }
 
     @Test(expected = NullPointerException.class)
-    public void andIfLedgerModelIsNullItCausesFail() throws Exception {
+    public void andIfAccountIsNullItCausesFail() throws Exception {
         new ExternalTransactionViewModel(null);
     }
 

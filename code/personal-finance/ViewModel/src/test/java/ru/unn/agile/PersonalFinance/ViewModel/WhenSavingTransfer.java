@@ -8,38 +8,39 @@ import static ru.unn.agile.PersonalFinance.ViewModel.AssertHelper.assertContains
 
 public class WhenSavingTransfer {
     private ViewModelObjectsMaker maker;
-    private AccountViewModel cacheAccount;
+    private AccountViewModel stashAccount;
     private AccountViewModel debitCardAccount;
 
     @Before
     public void setUp() throws Exception {
         maker = new ViewModelObjectsMaker();
-        cacheAccount = maker.makeSavedAccount("Cash");
+        stashAccount = maker.makeSavedAccount("Stash");
         debitCardAccount = maker.makeSavedAccount("Debit card");
     }
 
     @Test
     public void andItIsAddedToTransactionsList() throws Exception {
-        TransferViewModel transfer = maker.makeTransfer(cacheAccount, debitCardAccount);
+        TransferViewModel transfer = maker.makeTransfer(stashAccount, debitCardAccount);
 
         transfer.save();
 
-        assertContains(cacheAccount.getTransactions(), transfer);
+        assertContains(stashAccount.getTransactions(), transfer);
+        assertContains(debitCardAccount.getTransactions(), transfer.getLinkedTransfer());
     }
 
     @Test
     public void andAccountsBalanceChanges() throws Exception {
-        TransferViewModel transfer = maker.makeTransfer(cacheAccount, debitCardAccount);
+        TransferViewModel transfer = maker.makeTransfer(stashAccount, debitCardAccount);
         int transferAmount = 100;
         transfer.setAmount(transferAmount);
-        int cacheBalanceBeforeTransaction = cacheAccount.getBalance();
+        int cacheBalanceBeforeTransaction = stashAccount.getBalance();
         int cardBalanceBeforeTransaction = debitCardAccount.getBalance();
 
         transfer.save();
 
         int cacheBalanceAfterTransaction = cacheBalanceBeforeTransaction - transferAmount;
         int cardBalanceAfterTransaction = cardBalanceBeforeTransaction + transferAmount;
-        assertEquals(cacheBalanceAfterTransaction, cacheAccount.getBalance());
+        assertEquals(cacheBalanceAfterTransaction, stashAccount.getBalance());
         assertEquals(cardBalanceAfterTransaction, debitCardAccount.getBalance());
     }
 }

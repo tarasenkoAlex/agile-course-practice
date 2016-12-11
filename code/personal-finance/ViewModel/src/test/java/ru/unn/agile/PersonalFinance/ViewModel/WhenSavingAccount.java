@@ -7,6 +7,7 @@ import ru.unn.agile.PersonalFinance.Model.Account;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static ru.unn.agile.PersonalFinance.ViewModel.AssertHelper.assertContains;
 
 public class WhenSavingAccount {
@@ -60,6 +61,6 @@ public class WhenSavingAccount {
         debitCardAccount.save();
 
         boolean canAddTransfer = ledger.isAbleToAddTransfer();
-        assertEquals(true, canAddTransfer);
+        assertTrue(canAddTransfer);
     }
 }

@@ -30,14 +30,14 @@ public class WhenCreatingTransfer {
     }
 
     @Test
-    public void andItCanNotBeSavedIsSourceAccountIsNull() throws Exception {
+    public void andItCanNotBeSavedIfSourceAccountIsNull() throws Exception {
         transfer.setSourceAccount(null);
 
         assertFalse(transfer.isAbleToSave());
     }
 
     @Test
-    public void andItCanNotBeSavedIsTargetAccountIsNull() throws Exception {
+    public void andItCanNotBeSavedIfTargetAccountIsNull() throws Exception {
         transfer.setTargetAccount(null);
 
         assertFalse(transfer.isAbleToSave());

@@ -60,6 +60,10 @@ public class TransferViewModel extends TransactionViewModel {
         return modelTransfer;
     }
 
+    TransferViewModel getLinkedTransfer() {
+        return linkedTransfer;
+    }
+
     @Override
     protected void saveInternal() {
         modelTransfer = buildModelTransfer();

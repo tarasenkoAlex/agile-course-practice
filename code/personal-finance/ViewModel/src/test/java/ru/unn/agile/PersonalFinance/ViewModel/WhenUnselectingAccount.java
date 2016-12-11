@@ -3,17 +3,16 @@ package ru.unn.agile.PersonalFinance.ViewModel;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class WhenUnselectingAccount {
-    private AccountViewModel account;
     private LedgerViewModel ledger;
 
     @Before
     public void setUp() throws Exception {
         ViewModelObjectsMaker maker = new ViewModelObjectsMaker();
         ledger = maker.getLedger();
-        account = maker.makeSavedAccount();
+        AccountViewModel account = maker.makeSavedAccount();
         ledger.setSelectedAccount(account);
     }
 
@@ -22,6 +21,6 @@ public class WhenUnselectingAccount {
         ledger.setSelectedAccount(null);
 
         boolean canAddTransaction = ledger.isAbleToAddTransaction();
-        assertEquals(false, canAddTransaction);
+        assertFalse(canAddTransaction);
     }
 }

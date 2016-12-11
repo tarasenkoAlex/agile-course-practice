@@ -14,21 +14,21 @@ public class WhenCreatingLedger {
     }
 
     @Test
-    public void andTransactionCanNotBeAddedIfTransactionsListIsEmpty() throws Exception {
+    public void andTransactionCanNotBeAddedIfAccountListIsEmpty() throws Exception {
         LedgerViewModel ledger = maker.getLedger();
 
         assertFalse(ledger.isAbleToAddTransaction());
     }
 
     @Test
-    public void andTransferCanNotBeAddedIfTransactionsListIsEmpty() throws Exception {
+    public void andTransferCanNotBeAddedIfAccountListIsEmpty() throws Exception {
         LedgerViewModel ledger = maker.getLedger();
 
         assertFalse(ledger.isAbleToAddTransfer());
     }
 
     @Test
-    public void andTransferCanNotBeAddedIfTransactionsListHasOnlyAccount() throws Exception {
+    public void andTransferCanNotBeAddedIfAccountListHasOnlyAccount() throws Exception {
         maker.makeSavedAccount();
         LedgerViewModel ledger = maker.getLedger();
 

@@ -43,9 +43,4 @@ public class WhenEditingAccount {
         String modelAccountName = account.getModelAccount().getName();
         assertEquals(modelAccountName, INITIAL_ACCOUNT_NAME);
     }
-
-    @Test
-    public void andBalanceCanNotBeChanged() throws Exception {
-        // TODO
-    }
 }
