@@ -34,7 +34,7 @@ public class SquareCalculatorTest {
 
         double result = calculator.getSphereSquare(5.1);
 
-        assertEquals(326.851299679482, result, DELTA );
+        assertEquals(326.851299679482, result, DELTA);
 
     }
 
@@ -50,7 +50,7 @@ public class SquareCalculatorTest {
 
         double result = calculator.getConeSquare(0, 5);
 
-        assertEquals(0, result, DELTA );
+        assertEquals(0, result, DELTA);
 
     }
 
@@ -59,7 +59,7 @@ public class SquareCalculatorTest {
 
         double result = calculator.getConeSquare(5, 0);
 
-        assertEquals(78.53981633974483, result, DELTA );
+        assertEquals(78.53981633974483, result, DELTA);
 
     }
 
@@ -68,16 +68,16 @@ public class SquareCalculatorTest {
 
         double result = calculator.getConeSquare(0, 0);
 
-        assertEquals(0, result, DELTA );
+        assertEquals(0, result, DELTA);
 
     }
 
     @Test
     public void calculSquareConeWhenRad1Dot1AndRulOfCone10Dot1() {
 
-        double result = calculator.getConeSquare(1.1 , 10.1);
+        double result = calculator.getConeSquare(1.1, 10.1);
 
-        assertEquals(38.70442149222625, result, DELTA );
+        assertEquals(38.70442149222625, result, DELTA);
 
     }
 
@@ -107,7 +107,7 @@ public class SquareCalculatorTest {
 
         double result = calculator.getCubeSquare(0);
 
-        assertEquals(0, result, DELTA );
+        assertEquals(0, result, DELTA);
 
     }
 
