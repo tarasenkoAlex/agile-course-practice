@@ -140,12 +140,12 @@ include "code/newton-method/ViewModel"
 project(":code/newton-method/ViewModel").name = "newton-method-viewmodel"
 
 // Ларин Антон
-include  "code/larin-anton/Model"
-project(":code/larin-anton/Model").name = "larin-anton-Model"
-include  "code/larin-anton/ViewModel"
-project(":code/larin-anton/ViewModel").name = "larin-anton-ViewModel"
-include  "code/larin-anton/View"
-project(":code/larin-anton/View").name = "larin-anton-View"
+include  "code/personal-finance/Model"
+project(":code/personal-finance/Model").name = "personal-finance-Model"
+include  "code/personal-finance/ViewModel"
+project(":code/personal-finance/ViewModel").name = "personal-finance-ViewModel"
+include  "code/personal-finance/View"
+project(":code/personal-finance/View").name = "personal-finance-View"
 
 // Лачинов Дмитрий
 // Луковников Илья
