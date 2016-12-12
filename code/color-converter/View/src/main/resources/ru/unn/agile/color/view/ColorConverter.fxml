@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import ru.unn.agile.color.viewmodel.ViewModel?>
+<?import ru.unn.agile.color.viewmodel.*?>
 <AnchorPane minHeight="254.0" opacity="1.0" prefHeight="254.0" prefWidth="518.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.unn.agile.color.view.ColorConverter">
     <fx:define>
         <ViewModel fx:id="viewModel" />
@@ -10,17 +10,17 @@
     <children>
         <AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="254.0" prefWidth="518.9998779296875">
             <children>
-                <Button fx:id="convertButton" layoutX="221.0" layoutY="205.0" mnemonicParsing="false" text="Convert" disable="${viewModel.convertingDisabled}"/>
+                <Button fx:id="convertButton" defaultButton="true" layoutX="221.0" layoutY="205.0" mnemonicParsing="false" text="Convert" disable="${viewModel.convertingDisabled}"/>
                 <ComboBox fx:id="fromSomeColor" layoutX="89.0" layoutY="151.0" items="${viewModel.colorSpaces}">
                 </ComboBox>
                 <ComboBox fx:id="toSomeColor" layoutX="324.0" layoutY="151.0" items="${viewModel.colorSpaces}">
                 </ComboBox>
-                <TextField fx:id="firstValueResult" layoutX="82.0" layoutY="35.0" prefWidth="84.0" />
-                <TextField fx:id="secondValueResult" layoutX="82.0" layoutY="77.0" prefWidth="84.0" />
-                <TextField fx:id="thirdValueResult" layoutX="82.0" layoutY="116.0" prefWidth="84.0" />
-                <TextField layoutX="318.0" layoutY="116.0" prefWidth="84.0" disable="true"/>
-                <TextField layoutX="318.0" layoutY="77.0" prefWidth="84.0" disable="true"/>
-                <TextField layoutX="318.0" layoutY="35.0" prefWidth="84.0" disable="true"/>
+                <TextField fx:id="firstValue" layoutX="82.0" layoutY="35.0" prefWidth="84.0" />
+                <TextField fx:id="secondValue" layoutX="82.0" layoutY="77.0" prefWidth="84.0" />
+                <TextField fx:id="thirdValue" layoutX="82.0" layoutY="116.0" prefWidth="84.0" />
+                <TextField fx:id="thirdValueResult" layoutX="318.0" layoutY="116.0" prefWidth="84.0" editable="false" text="${viewModel.thirdValueResult}"/>
+                <TextField fx:id="secondValueResult" layoutX="318.0" layoutY="77.0" prefWidth="84.0" editable="false" text="${viewModel.secondValueResult}"/>
+                <TextField fx:id="firstValueResult" layoutX="318.0" layoutY="35.0" prefWidth="84.0"  editable="false" text="${viewModel.firstValueResult}"/>
             </children>
         </AnchorPane>
     </children>

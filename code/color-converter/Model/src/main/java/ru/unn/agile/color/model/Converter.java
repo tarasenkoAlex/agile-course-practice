@@ -21,6 +21,8 @@ public final class Converter {
             return labToRGB(color);
         } else if (fromColorSpace == ColorSpaces.LAB && toColorSpace == ColorSpaces.HSV) {
             return labToHSV(color);
+        } else if (fromColorSpace == toColorSpace) {
+            return color;
         }
         throw new IllegalArgumentException("Color space not found");
     }

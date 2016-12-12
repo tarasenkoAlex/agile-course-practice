@@ -12,11 +12,11 @@ import ru.unn.agile.color.viewmodel.ViewModel;
 
 public class ColorConverter {
    @FXML
-   private TextField firstValueResult;
+   private TextField firstValue;
    @FXML
-   private TextField secondValueResult;
+   private TextField secondValue;
    @FXML
-   private TextField thirdValueResult;
+   private TextField thirdValue;
    @FXML
    private ComboBox<ColorSpaces> toSomeColor;
    @FXML
@@ -31,9 +31,9 @@ public class ColorConverter {
 
    @FXML
    void initialize() {
-      firstValueResult.textProperty().bindBidirectional(viewModel.getFirstValueProperty());
-      secondValueResult.textProperty().bindBidirectional(viewModel.getSecondValueProperty());
-      thirdValueResult.textProperty().bindBidirectional(viewModel.getThirdValueProperty());
+      firstValue.textProperty().bindBidirectional(viewModel.getFirstValueProperty());
+      secondValue.textProperty().bindBidirectional(viewModel.getSecondValueProperty());
+      thirdValue.textProperty().bindBidirectional(viewModel.getThirdValueProperty());
       fromSomeColor.valueProperty().bindBidirectional(viewModel.getFromColorSpace());
       toSomeColor.valueProperty().bindBidirectional(viewModel.getToColorSpace());
       convertButton.setOnAction(new EventHandler<ActionEvent>() {
