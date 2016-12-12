@@ -60,6 +60,8 @@ include "code/quadratic-equation-solver/Model"
 project(":code/quadratic-equation-solver/Model").name = "quadratic-equation-solver-Model"
 
 // Воронин Дмитрий
+include "code/voronin-dmitry"
+project(":code/voronin-dmitry").name = "voronin-dmitry-Model1"
 // Грошева Людмила
 include "code/Statistics/Model"
 project(":code/Statistics/Model").name = "Statistics-Model"
