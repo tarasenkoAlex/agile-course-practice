@@ -24,7 +24,17 @@ public class ViewModel {
     private final StringProperty firstValueResult = new SimpleStringProperty();
     private final StringProperty secondValueResult = new SimpleStringProperty();
     private final StringProperty thirdValueResult = new SimpleStringProperty();
-    public final BooleanProperty convertingDisabled = new SimpleBooleanProperty();
+
+    public String getStatusProperty() {
+        return this.statusProperty.get();
+    }
+
+    public StringProperty statusPropertyProperty() {
+        return this.statusProperty;
+    }
+
+    private final StringProperty statusProperty = new SimpleStringProperty();
+    private final BooleanProperty convertingDisabled = new SimpleBooleanProperty();
     private final ObjectProperty<ColorSpaces> fromColorSpace = new SimpleObjectProperty<ColorSpaces>();
     private final ObjectProperty<ColorSpaces> toColorSpace = new SimpleObjectProperty<ColorSpaces>();
     private final ObjectProperty<ObservableList<ColorSpaces>> colorSpaces =
@@ -40,26 +50,29 @@ public class ViewModel {
         thirdValueResult.set("");
         fromColorSpace.set(ColorSpaces.LAB);
         toColorSpace.set(ColorSpaces.HSV);
+        statusProperty.set(Status.WAITING.toString());
         BooleanBinding couldConvert = new BooleanBinding() {
             {
-                super.bind(firstValue, secondValue, thirdValue);
+                super.bind(firstValue, secondValue, thirdValue, fromColorSpace);
             }
             @Override
             protected boolean computeValue() {
-                final Status[] status = new Status[1];
-                fromColorSpace.addListener(new ChangeListener<ColorSpaces>() {
-                    @Override
-                    public void changed(ObservableValue<? extends ColorSpaces> observable,
-                                        ColorSpaces oldValue, ColorSpaces newValue) {
-                        status[0] = getInputStatus();
-                    }
-                });
-                return getInputStatus() == Status.READY || status[0] == Status.READY;
+                return getInputStatus() == Status.READY;
             }
         };
         convertingDisabled.bind(couldConvert.not());
 
+        final List<StringProperty> fields = new ArrayList<StringProperty>() { {
+            add(firstValue);
+            add(secondValue);
+            add(thirdValue);
+        }};
 
+        for (StringProperty field : fields) {
+            final ValueChangeListener listener = new ValueChangeListener();
+            field.addListener(listener);
+            valueChangedListeners.add(listener);
+        }
     }
 
     private Status getInputStatus() {
@@ -157,15 +170,13 @@ public class ViewModel {
         firstValueResult.set(String.valueOf(roots[0]));
         secondValueResult.set(String.valueOf(roots[1]));
         thirdValueResult.set(String.valueOf(roots[2]));
-        System.out.println(roots[0] + " | " + roots[1] + " | " + roots[2]);
-        //resultProperty.set(buildResultString(roots));
-        //statusProperty.set(Status.SUCCESS.toString());
+        statusProperty.set(Status.SUCCESS.toString());
     }
 
     private class ValueChangeListener implements ChangeListener<String> {
         @Override
         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            getInputStatus().toString();
+            statusProperty.set(getInputStatus().toString());
         }
     }
 

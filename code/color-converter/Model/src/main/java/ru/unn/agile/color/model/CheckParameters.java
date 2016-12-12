@@ -63,7 +63,7 @@ public final class CheckParameters {
             throw new IllegalArgumentException();
         }
     }
-    private static boolean checkNumberParameters(final double[] params) {
+    static boolean checkNumberParameters(final double[] params) {
         if (params != null && params.length == THREEPZ) {
             return true;
         } else {
