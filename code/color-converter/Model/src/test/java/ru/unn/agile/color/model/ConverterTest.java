@@ -128,7 +128,7 @@ public class ConverterTest {
     }
     @Test
     public void convert4FromRGBToLAB() {
-        double[] hsv = Converter.convert(RGB, LAB,new double[]{255, 255, 255});
+        double[] hsv = Converter.convert(RGB, LAB, new double[]{255, 255, 255});
         assertEquals(true, Arrays.equals(new double[]{100, 0.005, -0.01}, hsv));
     }
 }

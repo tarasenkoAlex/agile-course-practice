@@ -60,6 +60,8 @@ include "code/quadratic-equation-solver/Model"
 project(":code/quadratic-equation-solver/Model").name = "quadratic-equation-solver-Model"
 
 // Воронин Дмитрий
+include "code/voronin-dmitry"
+project(":code/voronin-dmitry").name = "voronin-dmitry-Model1"
 // Грошева Людмила
 include "code/Statistics/Model"
 project(":code/Statistics/Model").name = "Statistics-Model"
@@ -85,8 +87,8 @@ project(":code/MortgageCalculator/ViewModel").name = "MortgageCalculatorViewMode
 
 // Еланов Артем
 // Зайдуллова Алина
-include "code/zaydullova-alina"
-project(":code/zaydullova-alina").name = "zaydullova-alina-Model"
+include "code/TreeSort/Model"
+project(":code/TreeSort/Model").name = "TreeSort-Model"
 
 // Зырин Илья
 // Ильин Иван
@@ -106,10 +108,16 @@ project(":code/matrix-operations/View").name = "matrix-operations-View"
 include "code/matrix-operations/ViewModel"
 project(":code/matrix-operations/ViewModel").name = "matrix-operations-ViewModel"
 // Кокошников Алексей
+
 // Колистратова Дарья
+include "code/CreditCalculator/View"
+project(":code/CreditCalculator/View").name = "credit-calculator-View"
+include "code/CreditCalculator/ViewModel"
+project(":code/CreditCalculator/ViewModel").name = "credit-calculator-ViewModel"
+include "code/CreditCalculator/Model"
+project(":code/CreditCalculator/Model").name = "credit-calculator-Model"
+
 // Кочетов Павел
-include "code/kochetov-pavel"
-project(":code/kochetov-pavel").name = "kochetov-pavel-Model"
 include "code/Stack/Model"
 project(":code/Stack/Model").name = "Stack-Model"
 include "code/Stack/ViewModel"
@@ -126,8 +134,12 @@ include "code/triangle/ViewModel"
 project(":code/triangle/ViewModel").name = "triangle-ViewModel"
 
 // Кукушкин Даниил
-include "code/kukushkin-daniil"
-project(":code/kukushkin-daniil").name = "kukushkin-daniil-Model"
+include "code/newton-method/Model"
+project(":code/newton-method/Model").name = "newton-method-Model"
+include "code/newton-method/View"
+project(":code/newton-method/View").name = "newton-method-View"
+include "code/newton-method/ViewModel"
+project(":code/newton-method/ViewModel").name = "newton-method-viewmodel"
 // Ларин Антон
 include "code/larin-anton"
 project(":code/larin-anton").name = "larin-anton-Model"
@@ -255,3 +267,7 @@ project(":code/Polynomial/ViewModel").name = "Polynomial-ViewModel"
 // Шургалин Петр
 include "code/shurgalin-pyotr"
 project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
+include "code/TreeSort/ViewModel"
+project(":code/TreeSort/ViewModel").name = "TreeSort-ViewModel"
+include "code/TreeSort/View"
+project(":code/TreeSort/View").name = "TreeSort-View"

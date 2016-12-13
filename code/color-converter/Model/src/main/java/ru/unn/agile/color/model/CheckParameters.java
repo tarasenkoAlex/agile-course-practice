@@ -7,7 +7,7 @@ public final class CheckParameters {
 
     }
 
-    public static void checkParameters(ColorSpaces colorSpaces, final double[] params) {
+    public static void checkParameters(final ColorSpaces colorSpaces, final double[] params) {
         if (colorSpaces == ColorSpaces.HSV) {
             checkParametersHSV(params);
         } else if (colorSpaces == ColorSpaces.LAB) {

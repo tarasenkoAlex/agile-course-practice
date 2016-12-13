@@ -24,19 +24,10 @@ public class ViewModel {
     private final StringProperty firstValueResult = new SimpleStringProperty();
     private final StringProperty secondValueResult = new SimpleStringProperty();
     private final StringProperty thirdValueResult = new SimpleStringProperty();
-
-    public String getStatusProperty() {
-        return this.statusProperty.get();
-    }
-
-    public StringProperty statusPropertyProperty() {
-        return this.statusProperty;
-    }
-
-    private final StringProperty statusProperty = new SimpleStringProperty();
+    private final StringProperty status = new SimpleStringProperty();
     private final BooleanProperty convertingDisabled = new SimpleBooleanProperty();
-    private final ObjectProperty<ColorSpaces> fromColorSpace = new SimpleObjectProperty<ColorSpaces>();
-    private final ObjectProperty<ColorSpaces> toColorSpace = new SimpleObjectProperty<ColorSpaces>();
+    private final ObjectProperty<ColorSpaces> fromColorSpace = new SimpleObjectProperty<>();
+    private final ObjectProperty<ColorSpaces> toColorSpace = new SimpleObjectProperty<>();
     private final ObjectProperty<ObservableList<ColorSpaces>> colorSpaces =
             new SimpleObjectProperty<>(FXCollections.observableArrayList(ColorSpaces.values()));
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
@@ -50,7 +41,7 @@ public class ViewModel {
         thirdValueResult.set("");
         fromColorSpace.set(ColorSpaces.LAB);
         toColorSpace.set(ColorSpaces.HSV);
-        statusProperty.set(Status.WAITING.toString());
+        status.set(Status.WAITING.toString());
         BooleanBinding couldConvert = new BooleanBinding() {
             {
                 super.bind(firstValue, secondValue, thirdValue, fromColorSpace);
@@ -157,6 +148,40 @@ public class ViewModel {
         return thirdValueResult;
     }
 
+    public String getStatus() {
+        return this.status.get();
+    }
+
+    public StringProperty statusProperty() {
+        return this.status;
+    }
+
+    public String getFirstValue() {
+        return firstValue.get();
+    }
+
+    public StringProperty firstValueProperty() {
+        return firstValue;
+    }
+
+    public String getSecondValue() {
+        return secondValue.get();
+    }
+
+    public StringProperty secondValueProperty() {
+        return secondValue;
+    }
+
+    public String getThirdValue() {
+        return thirdValue.get();
+    }
+
+    public StringProperty thirdValueProperty() {
+        return thirdValue;
+    }
+
+
+
     public void convert() {
         if (convertingDisabled.get()) {
             return;
@@ -170,19 +195,20 @@ public class ViewModel {
         firstValueResult.set(String.valueOf(roots[0]));
         secondValueResult.set(String.valueOf(roots[1]));
         thirdValueResult.set(String.valueOf(roots[2]));
-        statusProperty.set(Status.SUCCESS.toString());
+        status.set(Status.SUCCESS.toString());
     }
 
     private class ValueChangeListener implements ChangeListener<String> {
         @Override
-        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            statusProperty.set(getInputStatus().toString());
+        public void changed(final ObservableValue<? extends String> observable,
+                            final String oldValue, final String newValue) {
+            status.set(getInputStatus().toString());
         }
     }
 
     enum Status {
-        WAITING("Please enter coefficients of Quadratic Equation"),
-        READY("Press 'Solve' for solving Quadratic Equation"),
+        WAITING("Please enter coefficients of color space"),
+        READY("Press 'Convert' for converting"),
         BAD_FORMAT("Entered coefficients are incorrect!"),
         SUCCESS("Success");
 
