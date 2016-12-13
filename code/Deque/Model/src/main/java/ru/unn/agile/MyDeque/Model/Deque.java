@@ -70,4 +70,12 @@ public class Deque {
             this.deque = newDeque;
         }
     }
+
+    public String toString() {
+        String printedDeque = "";
+        for (int i = 0; i < this.currentSize; i++) {
+            printedDeque += this.deque[i];
+        }
+        return printedDeque;
+    }
 }
