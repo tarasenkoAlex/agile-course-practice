@@ -21,7 +21,7 @@
                 <TextField fx:id="thirdValueResult" layoutX="318.0" layoutY="116.0" prefWidth="84.0" editable="false" text="${viewModel.thirdValueResult}"/>
                 <TextField fx:id="secondValueResult" layoutX="318.0" layoutY="77.0" prefWidth="84.0" editable="false" text="${viewModel.secondValueResult}"/>
                 <TextField fx:id="firstValueResult" layoutX="318.0" layoutY="35.0" prefWidth="84.0"  editable="false" text="${viewModel.firstValueResult}"/>
-                <Label fx:id="messageLb" layoutX="82.0" layoutY="250.0" text="${viewModel.status}"/>
+                <Label fx:id="messageLb" layoutX="82.0" layoutY="250.0" text="${viewModel.statusMessage}"/>
             </children>
         </AnchorPane>
     </children>

@@ -24,7 +24,7 @@ public class ViewModel {
     private final StringProperty firstValueResult = new SimpleStringProperty();
     private final StringProperty secondValueResult = new SimpleStringProperty();
     private final StringProperty thirdValueResult = new SimpleStringProperty();
-    private final StringProperty status = new SimpleStringProperty();
+    private final StringProperty statusMessage = new SimpleStringProperty();
     private final BooleanProperty convertingDisabled = new SimpleBooleanProperty();
     private final ObjectProperty<ColorSpaces> fromColorSpace = new SimpleObjectProperty<>();
     private final ObjectProperty<ColorSpaces> toColorSpace = new SimpleObjectProperty<>();
@@ -41,7 +41,7 @@ public class ViewModel {
         thirdValueResult.set("");
         fromColorSpace.set(ColorSpaces.LAB);
         toColorSpace.set(ColorSpaces.HSV);
-        status.set(Status.WAITING.toString());
+        statusMessage.set(Status.WAITING.toString());
         BooleanBinding couldConvert = new BooleanBinding() {
             {
                 super.bind(firstValue, secondValue, thirdValue, fromColorSpace);
@@ -148,12 +148,12 @@ public class ViewModel {
         return thirdValueResult;
     }
 
-    public String getStatus() {
-        return this.status.get();
+    public String getStatusMessage() {
+        return this.statusMessage.get();
     }
 
-    public StringProperty statusProperty() {
-        return this.status;
+    public StringProperty statusMessageProperty() {
+        return this.statusMessage;
     }
 
     public String getFirstValue() {
@@ -195,14 +195,14 @@ public class ViewModel {
         firstValueResult.set(String.valueOf(roots[0]));
         secondValueResult.set(String.valueOf(roots[1]));
         thirdValueResult.set(String.valueOf(roots[2]));
-        status.set(Status.SUCCESS.toString());
+        statusMessage.set(Status.SUCCESS.toString());
     }
 
     private class ValueChangeListener implements ChangeListener<String> {
         @Override
         public void changed(final ObservableValue<? extends String> observable,
                             final String oldValue, final String newValue) {
-            status.set(getInputStatus().toString());
+            statusMessage.set(getInputStatus().toString());
         }
     }
 
