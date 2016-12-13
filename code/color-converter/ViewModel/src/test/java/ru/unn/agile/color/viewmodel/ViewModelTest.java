@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.swing.text.View;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -16,6 +18,11 @@ public class ViewModelTest {
     @Before
     public void setUp() {
         viewModel = new ViewModel();
+        viewModel.firstValueProperty().set("23");
+        viewModel.secondValueProperty().set("24");
+        viewModel.thirdValueProperty().set("25");
+        viewModel.getFromColorSpace().set(RGB);
+        viewModel.getToColorSpace().set(HSV);
     }
     @After
     public void tearDown() {
@@ -24,41 +31,39 @@ public class ViewModelTest {
 
     @Test
     public void canSetDefaultValues() {
-        assertEquals("", viewModel.getFirstValueProperty().getValue());
-        assertEquals("", viewModel.getSecondValueProperty().getValue());
-        assertEquals("", viewModel.getThirdValueProperty().getValue());
-        assertEquals(LAB, viewModel.getFromColorSpace().get());
-        assertEquals(HSV, viewModel.getToColorSpace().get());
-        assertEquals("", viewModel.getFirstValueResult());
-        assertEquals("", viewModel.getSecondValueResult());
-        assertEquals("", viewModel.getThirdValueResult());
-        assertEquals(WAITING.toString(), viewModel.statusProperty().get());
+        ViewModel testViewModel = new ViewModel();
+        assertEquals("", testViewModel.getFirstValueProperty().getValue());
+        assertEquals("", testViewModel.getSecondValueProperty().getValue());
+        assertEquals("", testViewModel.getThirdValueProperty().getValue());
+        assertEquals(LAB, testViewModel.getFromColorSpace().get());
+        assertEquals(HSV, testViewModel.getToColorSpace().get());
+        assertEquals("", testViewModel.getFirstValueResult());
+        assertEquals("", testViewModel.getSecondValueResult());
+        assertEquals("", testViewModel.getThirdValueResult());
+        assertEquals(WAITING.toString(), testViewModel.statusProperty().get());
     }
     @Test
     public void canMessageWaitingFormatWithEmptyColorSpaceValues() {
-        viewModel.convert();
-        assertEquals(WAITING.toString(), viewModel.statusProperty().get());
+        ViewModel testViewModel = new ViewModel();
+        testViewModel.convert();
+        assertEquals(WAITING.toString(), testViewModel.statusProperty().get());
     }
     @Test
     public void canMessageReadyFormatWithFilledValues() {
-        setInputData();
         assertEquals(READY.toString(), viewModel.statusProperty().get());
     }
     @Test
     public void canMessageSuccessFormatAfterConvert() {
-        setInputData();
         viewModel.convert();
         assertEquals(SUCCESS.toString(), viewModel.statusProperty().get());
     }
     @Test
     public void canMessageBadFormat() {
-        setInputData();
         viewModel.firstValueProperty().set("one");
         assertEquals(BAD_FORMAT.toString(), viewModel.statusProperty().get());
     }
     @Test
     public void canMessageBadFormatFormatForNegativeValue() {
-        setInputData();
         viewModel.firstValueProperty().set("-78");
         assertEquals(BAD_FORMAT.toString(), viewModel.statusProperty().get());
     }
@@ -94,16 +99,14 @@ public class ViewModelTest {
     }
     @Test
     public void checkDisabledButtonForEmptyValues() {
-        assertTrue(viewModel.convertingDisabledProperty().get());
+        assertTrue(new ViewModel().convertingDisabledProperty().get());
     }
     @Test
     public void checkDisabledButtonForCorrectValues() {
-        setInputData();
         assertFalse(viewModel.convertingDisabledProperty().get());
     }
     @Test
     public void checkDisabledButtonForIncorrectValue() {
-        setInputData();
         viewModel.firstValueProperty().set("Two");
         assertTrue(viewModel.convertingDisabledProperty().get());
     }
@@ -114,7 +117,6 @@ public class ViewModelTest {
     }
     @Test
     public void checkDisabledButtonAfterConvert() {
-        setInputData();
         viewModel.convert();
         assertFalse(viewModel.convertingDisabledProperty().get());
     }
@@ -144,7 +146,6 @@ public class ViewModelTest {
     }
     @Test
     public void checkStringResultingValue() {
-        setInputData();
         viewModel.convert();
         assertEquals("210.0", viewModel.getFirstValueResult());
         assertEquals("8.0", viewModel.getSecondValueResult());
@@ -152,20 +153,11 @@ public class ViewModelTest {
     }
     @Test
     public void checkStringMessage() {
-        setInputData();
         viewModel.convert();
         assertEquals(SUCCESS.toString(), viewModel.getStatus());
     }
     @Test
     public void isButtonDisabledWithEmptyData() {
-        assertTrue(viewModel.isConvertingDisabled());
-    }
-
-    public void setInputData() {
-        viewModel.firstValueProperty().set("23");
-        viewModel.secondValueProperty().set("24");
-        viewModel.thirdValueProperty().set("25");
-        viewModel.getFromColorSpace().set(RGB);
-        viewModel.getToColorSpace().set(HSV);
+        assertTrue(new ViewModel().isConvertingDisabled());
     }
 }
