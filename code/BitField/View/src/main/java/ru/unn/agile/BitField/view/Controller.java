@@ -5,11 +5,15 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ru.unn.agile.BitField.viewmodel.ViewModel;
 
 public class Controller {
     ObservableList<String> numBitList = FXCollections.observableArrayList("0", "1", "2", "3", "4", "5", "6", "7");
+
+    @FXML
+    private ViewModel viewModel;
 
     // Field A
 
@@ -29,6 +33,9 @@ public class Controller {
     private Button getBitAButton;
 
     @FXML
+    private Button clearBitAButton;
+
+    @FXML
     private TextField showATextField;
 
     @FXML
@@ -36,6 +43,9 @@ public class Controller {
 
     @FXML
     private Button notAButton;
+
+    @FXML
+    private TextArea errorATextArea;
 
     // Field B
 
@@ -55,6 +65,9 @@ public class Controller {
     private Button getBitBButton;
 
     @FXML
+    private Button clearBitBButton;
+
+    @FXML
     private TextField showBTextField;
 
     @FXML
@@ -62,6 +75,9 @@ public class Controller {
 
     @FXML
     private Button notBButton;
+
+    @FXML
+    private TextArea errorBTextArea;
 
     // Logic operations
 
@@ -77,13 +93,6 @@ public class Controller {
     @FXML
     private TextField showResultLogicTextField;
 
-    //
-
-    //ViewModel viewModel = new ViewModel();
-
-    @FXML
-    private ViewModel viewModel;
-
     @FXML
     void initialize() {
         setBitAComboBox.setItems(numBitList);
@@ -92,14 +101,4 @@ public class Controller {
         setBitAComboBox.setValue("0");
         setBitBComboBox.setValue("0");
     }
-
-    /*
-    private void backBind(int numOfField) {
-        viewModel.setBitField(inputATextField.getText(), numOfField);
-    }
-
-    private void bind(int numOfField) {
-        inputAButton.setDisable(viewModel.isInputAButtonEnabled(numOfField));
-    }
-    */
 }
