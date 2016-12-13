@@ -1,4 +1,4 @@
-package main.java;
+package ru.unn.agile.BitField.model;
 
 public class BitField {
     private final int bitLen;
