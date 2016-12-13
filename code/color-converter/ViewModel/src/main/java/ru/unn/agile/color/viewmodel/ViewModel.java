@@ -26,8 +26,8 @@ public class ViewModel {
     private final StringProperty thirdValueResult = new SimpleStringProperty();
     private final StringProperty status = new SimpleStringProperty();
     private final BooleanProperty convertingDisabled = new SimpleBooleanProperty();
-    private final ObjectProperty<ColorSpaces> fromColorSpace = new SimpleObjectProperty<ColorSpaces>();
-    private final ObjectProperty<ColorSpaces> toColorSpace = new SimpleObjectProperty<ColorSpaces>();
+    private final ObjectProperty<ColorSpaces> fromColorSpace = new SimpleObjectProperty<>();
+    private final ObjectProperty<ColorSpaces> toColorSpace = new SimpleObjectProperty<>();
     private final ObjectProperty<ObservableList<ColorSpaces>> colorSpaces =
             new SimpleObjectProperty<>(FXCollections.observableArrayList(ColorSpaces.values()));
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
@@ -200,7 +200,8 @@ public class ViewModel {
 
     private class ValueChangeListener implements ChangeListener<String> {
         @Override
-        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+        public void changed(final ObservableValue<? extends String> observable,
+                            final String oldValue, final String newValue) {
             status.set(getInputStatus().toString());
         }
     }

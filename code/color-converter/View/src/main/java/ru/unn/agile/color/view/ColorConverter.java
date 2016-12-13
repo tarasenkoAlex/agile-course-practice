@@ -22,12 +22,9 @@ public class ColorConverter {
    @FXML
    private ComboBox<ColorSpaces> fromSomeColor;
    @FXML
-   Button convertButton;
+   private Button convertButton;
    @FXML
    private ViewModel viewModel;
-
-   public ColorConverter() {
-   }
 
    @FXML
    void initialize() {
@@ -38,7 +35,7 @@ public class ColorConverter {
       toSomeColor.valueProperty().bindBidirectional(viewModel.getToColorSpace());
       convertButton.setOnAction(new EventHandler<ActionEvent>() {
          @Override
-         public void handle(ActionEvent event) {
+         public void handle(final ActionEvent event) {
             viewModel.convert();
          }
       });
