@@ -8,7 +8,7 @@ public class ViewModel {
     private String status;
     private Operations operation;
     private boolean isAcceptButtonEnabled;
-    Deque deque = new Deque();
+    private final Deque deque = new Deque();
 
     public ViewModel() {
         value = "";
@@ -54,26 +54,23 @@ public class ViewModel {
         }
 
         switch (operation) {
-            case PUSH_HEAD: {
+            case PUSH_HEAD:
                 deque.pushHeadElement(Integer.parseInt(value));
                 result = deque.toString();
-            }
             break;
-            case PUSH_TAIL: {
+            case PUSH_TAIL:
                 deque.pushTailElement(Integer.parseInt(value));
                 result = deque.toString();
-            }
             break;
-            case POP_HEAD: {
+            case POP_HEAD:
                 result = Integer.toString(deque.popHeadElement());
-            }
-            break;
-            case POP_TAIL: {
+                break;
+            case POP_TAIL:
                 result = Integer.toString(deque.popTailElement());
-            }
-            break;
+                break;
             default:
-                throw new IllegalArgumentException("Only can only use push & pop operations for head & tail elements");
+                throw new IllegalArgumentException(
+                        "Only can only use push & pop operations for head & tail elements");
         }
 
         status = Status.SUCCESS;
