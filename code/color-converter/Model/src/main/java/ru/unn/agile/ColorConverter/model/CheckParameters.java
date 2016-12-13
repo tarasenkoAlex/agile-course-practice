@@ -1,14 +1,16 @@
 package ru.unn.agile.ColorConverter.model;
 
+import static ru.unn.agile.ColorConverter.model.ColorSpaces.*;
+
 public final class CheckParameters {
     private CheckParameters() {
 
     }
 
     public static void checkParameters(final ColorSpaces colorSpaces, final double[] params) {
-        if (colorSpaces == ColorSpaces.HSV) {
+        if (colorSpaces == HSV) {
             checkParametersHSV(params);
-        } else if (colorSpaces == ColorSpaces.LAB) {
+        } else if (colorSpaces == LAB) {
             checkParametersLAB(params);
         } else {
             checkParametersRGB(params);

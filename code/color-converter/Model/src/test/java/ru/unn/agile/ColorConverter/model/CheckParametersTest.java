@@ -1,5 +1,7 @@
 package ru.unn.agile.ColorConverter.model;
 
+import static ru.unn.agile.ColorConverter.model.ColorSpaces.*;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -23,71 +25,71 @@ public class CheckParametersTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectNumberParametersRGB() {
-        CheckParameters.checkParameters(ColorSpaces.RGB, new double[]{-1, 100, 100, 100});
+        CheckParameters.checkParameters(RGB, new double[]{-1, 100, 100, 100});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersRGB1() {
-        CheckParameters.checkParameters(ColorSpaces.RGB, new double[]{-1, 100, 100});
+        CheckParameters.checkParameters(RGB, new double[]{-1, 100, 100});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersRGB2() {
-        CheckParameters.checkParameters(ColorSpaces.RGB, new double[]{100, 100, 256});
+        CheckParameters.checkParameters(RGB, new double[]{100, 100, 256});
     }
 
     @Test(expected = NumberFormatException.class)
     public void checkIncorrectParametersRGB3() {
-        CheckParameters.checkParameters(ColorSpaces.RGB, new double[]{255, 255, 244.1});
+        CheckParameters.checkParameters(RGB, new double[]{255, 255, 244.1});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectNumberParametersLAB() {
-        CheckParameters.checkParameters(ColorSpaces.LAB, new double[]{-1, 100, 100, 200});
+        CheckParameters.checkParameters(LAB, new double[]{-1, 100, 100, 200});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersLAB1() {
-        CheckParameters.checkParameters(ColorSpaces.LAB, new double[]{-1, 100, 100});
+        CheckParameters.checkParameters(LAB, new double[]{-1, 100, 100});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersLAB2() {
-        CheckParameters.checkParameters(ColorSpaces.LAB, new double[]{99, 100, -256});
+        CheckParameters.checkParameters(LAB, new double[]{99, 100, -256});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersLAB3() {
-        CheckParameters.checkParameters(ColorSpaces.LAB, new double[]{0, -128, 129});
+        CheckParameters.checkParameters(LAB, new double[]{0, -128, 129});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersLAB4() {
-        CheckParameters.checkParameters(ColorSpaces.LAB, new double[]{0, -129, 128});
+        CheckParameters.checkParameters(LAB, new double[]{0, -129, 128});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectNumberParametersHSV() {
-        CheckParameters.checkParameters(ColorSpaces.HSV, new double[]{-1, 100, 100, 100});
+        CheckParameters.checkParameters(HSV, new double[]{-1, 100, 100, 100});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersHSV1() {
-        CheckParameters.checkParameters(ColorSpaces.HSV, new double[]{-1, 100, 100});
+        CheckParameters.checkParameters(HSV, new double[]{-1, 100, 100});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersHSV2() {
-        CheckParameters.checkParameters(ColorSpaces.HSV, new double[]{100, 100, 361});
+        CheckParameters.checkParameters(HSV, new double[]{100, 100, 361});
     }
 
     @Test(expected = NumberFormatException.class)
     public void checkIncorrectParametersHSV3() {
-        CheckParameters.checkParameters(ColorSpaces.HSV, new double[]{1.2, 255, 1});
+        CheckParameters.checkParameters(HSV, new double[]{1.2, 255, 1});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIncorrectParametersHSV4() {
-        CheckParameters.checkParameters(ColorSpaces.HSV, new double[]{10, 255, 1});
+        CheckParameters.checkParameters(HSV, new double[]{10, 255, 1});
     }
 }
