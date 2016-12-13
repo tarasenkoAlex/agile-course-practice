@@ -2,6 +2,8 @@ package ru.unn.agile.BitField.view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -100,5 +102,40 @@ public class Controller {
 
         setBitAComboBox.setValue("0");
         setBitBComboBox.setValue("0");
+
+        inputAButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.setBitFieldStringA(inputATextField.getText());
+            }
+        });
+
+        setBitAButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.setBitFieldBitA(setBitAComboBox.getValue());
+            }
+        });
+
+        clearBitAButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.clearBitFieldBitA(setBitAComboBox.getValue());
+            }
+        });
+
+        getBitAButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.getBitFieldBitA(setBitAComboBox.getValue());
+            }
+        });
+
+        notAButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.logicNotA();
+            }
+        });
     }
 }

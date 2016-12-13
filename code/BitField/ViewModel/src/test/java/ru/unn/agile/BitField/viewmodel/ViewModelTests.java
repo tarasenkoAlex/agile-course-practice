@@ -22,120 +22,127 @@ public class ViewModelTests {
     // Field A Tests
 
     @Test
-    public void byDefaultAField_InputAButtonIsDisabled() {
-        assertTrue(viewModel.getInputAButtonDisabled());
+    public void byDefaultFieldA_InputButtonIsDisabledA() {
+        assertTrue(viewModel.getInputButtonDisabledA());
     }
 
     @Test
-    public void byDefaultAField_FieldAString() {
-        assertEquals("00000000", viewModel.getBitFieldAString());
+    public void byDefaultFieldA_FieldAString() {
+        assertEquals("00000000", viewModel.getBitFieldStringA());
     }
 
     @Test
-    public void whenEnterAField_InputAButtonIsEnabled() {
-        viewModel.inputABitField("1");
+    public void whenEnterFieldA_InputAButtonIsEnabled() {
+        viewModel.inputBitFieldA("1");
 
-        assertFalse(viewModel.getInputAButtonDisabled());
+        assertFalse(viewModel.getInputButtonDisabledA());
     }
 
     @Test
-    public void whenClearAField_InputAButtonIsDisabled() {
-        viewModel.inputABitField("1");
-        viewModel.inputABitField("");
+    public void whenClearFieldA_InputAButtonIsDisabled() {
+        viewModel.inputBitFieldA("1");
+        viewModel.inputBitFieldA("");
 
-        assertTrue(viewModel.getInputAButtonDisabled());
+        assertTrue(viewModel.getInputButtonDisabledA());
     }
 
     @Test
-    public void whenEnterAFieldWrongData_InputAButtonIsDisabled() {
-        viewModel.inputABitField("2");
+    public void whenEnterFieldWrongDataA_InputAButtonIsDisabled() {
+        viewModel.inputBitFieldA("2");
 
-        assertTrue(viewModel.getInputAButtonDisabled());
+        assertTrue(viewModel.getInputButtonDisabledA());
     }
 
     @Test
-    public void whenEnterAFieldWrongData_ErrorText() {
-        viewModel.inputABitField("2");
+    public void whenEnterFieldWrongDataA_ErrorText() {
+        viewModel.inputBitFieldA("2");
 
         assertEquals("Only 0 and 1", viewModel.getTextErrorA());
     }
 
     @Test
-    public void inputABitField_LengthEqualEight() {
-        viewModel.setABitFieldString("01010101");
+    public void inputBitFieldA_LengthMoreEight_ErrorText() {
+        viewModel.inputBitFieldA("111111111");
 
-        assertEquals("01010101", viewModel.getBitFieldAString());
+        assertEquals("Length of BitField must be less or equal 8", viewModel.getTextErrorA());
     }
 
     @Test
-    public void inputABitField_LengthLessEight() {
-        viewModel.setABitFieldString("1111");
+    public void inputBitFieldA_LengthMoreEight_nputAButtonIsDisabled() {
+        viewModel.inputBitFieldA("111111111");
 
-        assertEquals("00001111", viewModel.getBitFieldAString());
+        assertTrue(viewModel.getInputButtonDisabledA());
     }
 
     @Test
-    public void inputABitField_LengtMoreEight() {
-        viewModel.setABitFieldString("111111111");
+    public void setBitFieldA_LengthEqualEight() {
+        viewModel.setBitFieldStringA("01010101");
 
-        assertEquals("Lenght of BitField must be less or equal 8", viewModel.getTextErrorA());
+        assertEquals("01010101", viewModel.getBitFieldStringA());
     }
 
     @Test
-    public void setABitFieldBit() {
-        viewModel.setABitFieldBit("5");
+    public void setBitFieldA_LengthLessEight() {
+        viewModel.setBitFieldStringA("1111");
 
-        assertEquals("00000100", viewModel.getBitFieldAString());
+        assertEquals("00001111", viewModel.getBitFieldStringA());
     }
 
     @Test
-    public void setABitFieldBit_3Bits() {
-        viewModel.setABitFieldBit("1");
-        viewModel.setABitFieldBit("2");
-        viewModel.setABitFieldBit("7");
+    public void setBitFieldBitA() {
+        viewModel.setBitFieldBitA("5");
 
-        assertEquals("01100001", viewModel.getBitFieldAString());
+        assertEquals("00000100", viewModel.getBitFieldStringA());
     }
 
     @Test
-    public void clearABitFieldBit() {
-        viewModel.setABitFieldString("11111111");
-        viewModel.clearABitFieldBit("5");
+    public void setBitFieldBitA_3Bits() {
+        viewModel.setBitFieldBitA("1");
+        viewModel.setBitFieldBitA("2");
+        viewModel.setBitFieldBitA("7");
 
-        assertEquals("11111011", viewModel.getBitFieldAString());
+        assertEquals("01100001", viewModel.getBitFieldStringA());
     }
 
     @Test
-    public void clearABitFieldBit_3Bits() {
-        viewModel.setABitFieldString("11111111");
-        viewModel.clearABitFieldBit("1");
-        viewModel.clearABitFieldBit("2");
-        viewModel.clearABitFieldBit("7");
+    public void clearBitFieldBitA() {
+        viewModel.setBitFieldStringA("11111111");
+        viewModel.clearBitFieldBitA("5");
 
-        assertEquals("10011110", viewModel.getBitFieldAString());
+        assertEquals("11111011", viewModel.getBitFieldStringA());
     }
 
     @Test
-    public void getABitFieldBit_One() {
-        viewModel.setABitFieldString("00001111");
-        viewModel.getABitFieldBit("4");
+    public void clearBitFieldBitA_3Bits() {
+        viewModel.setBitFieldStringA("11111111");
+        viewModel.clearBitFieldBitA("1");
+        viewModel.clearBitFieldBitA("2");
+        viewModel.clearBitFieldBitA("7");
+
+        assertEquals("10011110", viewModel.getBitFieldStringA());
+    }
+
+    @Test
+    public void getBitFieldBitA_One() {
+        viewModel.setBitFieldStringA("00001111");
+        viewModel.getBitFieldBitA("4");
 
         assertEquals("1", viewModel.getChooseBitA());
     }
 
     @Test
-    public void getABitFieldBit_Zero() {
-        viewModel.setABitFieldString("00001111");
-        viewModel.getABitFieldBit("3");
+    public void getBitFieldBitA_Zero() {
+        viewModel.setBitFieldStringA("00001111");
+        viewModel.getBitFieldBitA("3");
 
         assertEquals("0", viewModel.getChooseBitA());
     }
 
     @Test
     public void notA() {
-        viewModel.setABitFieldString("00010111");
+        viewModel.setBitFieldStringA("00010111");
         viewModel.logicNotA();
 
-        assertEquals("11101000", viewModel.getBitFieldAString());
+        assertEquals("11101000", viewModel.getBitFieldStringA());
     }
 }
