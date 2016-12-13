@@ -1,4 +1,4 @@
-package ru.unn.agile.color.view;
+package ru.unn.agile.ColorConverter.view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -6,8 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import ru.unn.agile.color.model.ColorSpaces;
-import ru.unn.agile.color.viewmodel.ViewModel;
+import ru.unn.agile.ColorConverter.model.ColorSpaces;
+import ru.unn.agile.ColorConverter.viewmodel.ViewModel;
 
 
 public class ColorConverter {

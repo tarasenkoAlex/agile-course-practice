@@ -1,14 +1,14 @@
-package ru.unn.agile.color.viewmodel;
+package ru.unn.agile.ColorConverter.viewmodel;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static ru.unn.agile.color.model.ColorSpaces.*;
-import static ru.unn.agile.color.viewmodel.ViewModel.Status.*;
+import static ru.unn.agile.ColorConverter.model.ColorSpaces.*;
 
 public class ViewModelTest {
     private ViewModel viewModel;
@@ -38,32 +38,32 @@ public class ViewModelTest {
         assertEquals("", testViewModel.getFirstValueResult());
         assertEquals("", testViewModel.getSecondValueResult());
         assertEquals("", testViewModel.getThirdValueResult());
-        assertEquals(WAITING.toString(), testViewModel.statusMessageProperty().get());
+        Assert.assertEquals(ViewModel.Status.WAITING.toString(), testViewModel.statusMessageProperty().get());
     }
     @Test
     public void canMessageWaitingFormatWithEmptyColorSpaceValues() {
         ViewModel testViewModel = new ViewModel();
         testViewModel.convert();
-        assertEquals(WAITING.toString(), testViewModel.statusMessageProperty().get());
+        Assert.assertEquals(ViewModel.Status.WAITING.toString(), testViewModel.statusMessageProperty().get());
     }
     @Test
     public void canMessageReadyFormatWithFilledValues() {
-        assertEquals(READY.toString(), viewModel.statusMessageProperty().get());
+        Assert.assertEquals(ViewModel.Status.READY.toString(), viewModel.statusMessageProperty().get());
     }
     @Test
     public void canMessageSuccessFormatAfterConvert() {
         viewModel.convert();
-        assertEquals(SUCCESS.toString(), viewModel.statusMessageProperty().get());
+        Assert.assertEquals(ViewModel.Status.SUCCESS.toString(), viewModel.statusMessageProperty().get());
     }
     @Test
     public void canMessageBadFormat() {
         viewModel.firstValueProperty().set("one");
-        assertEquals(BAD_FORMAT.toString(), viewModel.statusMessageProperty().get());
+        Assert.assertEquals(ViewModel.Status.BAD_FORMAT.toString(), viewModel.statusMessageProperty().get());
     }
     @Test
     public void canMessageBadFormatFormatForNegativeValue() {
         viewModel.firstValueProperty().set("-78");
-        assertEquals(BAD_FORMAT.toString(), viewModel.statusMessageProperty().get());
+        Assert.assertEquals(ViewModel.Status.BAD_FORMAT.toString(), viewModel.statusMessageProperty().get());
     }
     @Test
     public void canSetRGBFromColorSpace() {
@@ -152,7 +152,7 @@ public class ViewModelTest {
     @Test
     public void checkStringMessage() {
         viewModel.convert();
-        assertEquals(SUCCESS.toString(), viewModel.getStatusMessage());
+        Assert.assertEquals(ViewModel.Status.SUCCESS.toString(), viewModel.getStatusMessage());
     }
     @Test
     public void isButtonDisabledWithEmptyData() {

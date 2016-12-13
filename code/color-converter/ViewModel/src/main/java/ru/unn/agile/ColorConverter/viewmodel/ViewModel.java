@@ -1,19 +1,19 @@
-package ru.unn.agile.color.viewmodel;
+package ru.unn.agile.ColorConverter.viewmodel;
 
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import ru.unn.agile.color.model.ColorSpaces;
+import ru.unn.agile.ColorConverter.model.ColorSpaces;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import ru.unn.agile.color.model.Converter;
+import ru.unn.agile.ColorConverter.model.Converter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.unn.agile.color.model.CheckParameters.*;
+import static ru.unn.agile.ColorConverter.model.CheckParameters.*;
 
 
 public class ViewModel {
@@ -149,11 +149,11 @@ public class ViewModel {
     }
 
     public String getStatusMessage() {
-        return this.statusMessage.get();
+        return statusMessage.get();
     }
 
     public StringProperty statusMessageProperty() {
-        return this.statusMessage;
+        return statusMessage;
     }
 
     public String getFirstValue() {

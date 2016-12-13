@@ -1,6 +1,4 @@
-package ru.unn.agile.color.model;
-
-import static ru.unn.agile.color.model.Constants.*;
+package ru.unn.agile.ColorConverter.model;
 
 public final class CheckParameters {
     private CheckParameters() {
@@ -22,10 +20,10 @@ public final class CheckParameters {
             return;
         }
         for (int i = 0; i < params.length; i++) {
-            if (params[i] < 0 || params[i] > TWOHUNDREDFF) {
+            if (params[i] < 0 || params[i] > Constants.TWOHUNDREDFF) {
                 throw new IllegalArgumentException();
             }
-            if (params[i] % ONE != 0) {
+            if (params[i] % Constants.ONE != 0) {
                 throw new NumberFormatException();
             }
         }
@@ -35,16 +33,16 @@ public final class CheckParameters {
         if (!checkNumberParameters(params)) {
             return;
         }
-        if (params[0] < 0 || params[0] > THS) {
+        if (params[0] < 0 || params[0] > Constants.THS) {
             throw new IllegalArgumentException();
         }
-        if (params[0] % ONE != 0) {
+        if (params[0] % Constants.ONE != 0) {
             throw new NumberFormatException();
         }
-        if (params[1] < 0 || params[1] > ONEHUNDRED) {
+        if (params[1] < 0 || params[1] > Constants.ONEHUNDRED) {
                 throw new IllegalArgumentException();
         }
-        if (params[2] < 0 || params[2] > ONEHUNDRED) {
+        if (params[2] < 0 || params[2] > Constants.ONEHUNDRED) {
             throw new IllegalArgumentException();
         }
     }
@@ -53,18 +51,18 @@ public final class CheckParameters {
         if (!checkNumberParameters(params)) {
             return;
         }
-        if (params[0] < 0 || params[0] > ONEHUNDRED) {
+        if (params[0] < 0 || params[0] > Constants.ONEHUNDRED) {
             throw new IllegalArgumentException();
         }
-        if (params[1] < -OHTE || params[1] > OHTE) {
+        if (params[1] < -Constants.OHTE || params[1] > Constants.OHTE) {
             throw new IllegalArgumentException();
         }
-        if (params[2] < -OHTE || params[2] > OHTE) {
+        if (params[2] < -Constants.OHTE || params[2] > Constants.OHTE) {
             throw new IllegalArgumentException();
         }
     }
     static boolean checkNumberParameters(final double[] params) {
-        if (params != null && params.length == THREEPZ) {
+        if (params != null && params.length == Constants.THREEPZ) {
             return true;
         } else {
             throw new IllegalArgumentException();

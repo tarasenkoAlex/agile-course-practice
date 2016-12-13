@@ -1,6 +1,4 @@
-package ru.unn.agile.color.model;
-
-import static ru.unn.agile.color.model.ColorSpaces.*;
+package ru.unn.agile.ColorConverter.model;
 
 public final class Converter {
     private Converter() {
@@ -28,33 +26,33 @@ public final class Converter {
     }
 
     private static double[] rgbToHSV(final double[] rgb) {
-        CheckParameters.checkParameters(RGB, rgb);
+        CheckParameters.checkParameters(ColorSpaces.RGB, rgb);
         return  FromRGBSpace.convertToHSV(rgb);
     }
 
     private static double[] rgbToLAB(final double[] rgb) {
-        CheckParameters.checkParameters(RGB, rgb);
+        CheckParameters.checkParameters(ColorSpaces.RGB, rgb);
         return  FromRGBSpace.convertToLAB(rgb);
     }
 
     private static double[] labToRGB(final double[] lab) {
-        CheckParameters.checkParameters(LAB, lab);
+        CheckParameters.checkParameters(ColorSpaces.LAB, lab);
         return ToRGBSpace.converterLABtoRGB(lab);
     }
 
     private static double[] labToHSV(final double[] lab) {
-        CheckParameters.checkParameters(LAB, lab);
+        CheckParameters.checkParameters(ColorSpaces.LAB, lab);
         double[] rgb = ToRGBSpace.converterLABtoRGB(lab);
         return  FromRGBSpace.convertToHSV(rgb);
     }
 
     private static double[] hsvToRGB(final double[] hsv) {
-        CheckParameters.checkParameters(HSV, hsv);
+        CheckParameters.checkParameters(ColorSpaces.HSV, hsv);
         return  ToRGBSpace.converterHSVtoRGB(hsv);
     }
 
     private static double[] hsvToLAB(final double[] hsv) {
-        CheckParameters.checkParameters(HSV, hsv);
+        CheckParameters.checkParameters(ColorSpaces.HSV, hsv);
         double[] rgb = ToRGBSpace.converterHSVtoRGB(hsv);
         return  FromRGBSpace.convertToLAB(rgb);
     }

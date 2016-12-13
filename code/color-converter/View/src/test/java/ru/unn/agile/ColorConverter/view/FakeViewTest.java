@@ -1,4 +1,4 @@
-package ru.unn.agile.color.view;
+package ru.unn.agile.ColorConverter.view;
 
 import org.junit.Ignore;
 import org.junit.Test;

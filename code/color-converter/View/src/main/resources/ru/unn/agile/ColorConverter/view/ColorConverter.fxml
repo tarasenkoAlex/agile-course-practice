@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import ru.unn.agile.color.viewmodel.*?>
-<AnchorPane minHeight="254.0" opacity="1.0" prefHeight="300.0" prefWidth="518.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.unn.agile.color.view.ColorConverter">
+<?import ru.unn.agile.ColorConverter.viewmodel.*?>
+<AnchorPane minHeight="254.0" opacity="1.0" prefHeight="300.0" prefWidth="518.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.unn.agile.ColorConverter.view.ColorConverter">
     <fx:define>
         <ViewModel fx:id="viewModel" />
     </fx:define>

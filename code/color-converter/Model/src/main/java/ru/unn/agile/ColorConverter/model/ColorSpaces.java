@@ -1,4 +1,4 @@
-package ru.unn.agile.color.model;
+package ru.unn.agile.ColorConverter.model;
 
 public enum ColorSpaces {
     RGB, LAB, HSV
