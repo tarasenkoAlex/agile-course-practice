@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.InputMethodEvent;
 import ru.unn.agile.BitField.viewmodel.ViewModel;
 
 public class Controller {
@@ -110,10 +112,24 @@ public class Controller {
             }
         });
 
+        inputBButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.setBitFieldStringB(inputBTextField.getText());
+            }
+        });
+
         setBitAButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent event) {
                 viewModel.setBitFieldBitA(setBitAComboBox.getValue());
+            }
+        });
+
+        setBitBButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.setBitFieldBitB(setBitBComboBox.getValue());
             }
         });
 
@@ -124,10 +140,24 @@ public class Controller {
             }
         });
 
+        clearBitBButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.clearBitFieldBitB(setBitBComboBox.getValue());
+            }
+        });
+
         getBitAButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent event) {
                 viewModel.getBitFieldBitA(setBitAComboBox.getValue());
+            }
+        });
+
+        getBitBButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.getBitFieldBitB(setBitBComboBox.getValue());
             }
         });
 
@@ -137,5 +167,37 @@ public class Controller {
                 viewModel.logicNotA();
             }
         });
+
+        notBButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.logicNotB();
+            }
+        });
+
+        // Logic operations
+
+        logicAndButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.logicAAndB();
+            }
+        });
+
+        logicOrButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.logicAOrB();
+            }
+        });
+
+        logicXorButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                viewModel.logicAXorB();
+            }
+        });
+
+        inputATextField.textProperty().bindBidirectional(viewModel.bitFieldStringAProperty());
     }
 }

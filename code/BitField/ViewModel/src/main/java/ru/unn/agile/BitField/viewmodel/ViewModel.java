@@ -16,23 +16,29 @@ import java.util.List;
 public class ViewModel {
     private BitField bitFieldA = new BitField(8);
     private BitField bitFieldB = new BitField(8);
+    private BitField bitFieldResult = new BitField(8);
 
     private final BooleanProperty inputButtonDisabledA = new SimpleBooleanProperty();
     private final StringProperty bitFieldStringA = new SimpleStringProperty();
     private final StringProperty chooseBitA = new SimpleStringProperty();
     private final StringProperty textErrorA = new SimpleStringProperty();
-/*
-    private final BooleanProperty inputBButtonDisabled = new SimpleBooleanProperty();
-    private final StringProperty bitFieldBString = new SimpleStringProperty();
+
+    private final BooleanProperty inputButtonDisabledB = new SimpleBooleanProperty();
+    private final StringProperty bitFieldStringB = new SimpleStringProperty();
     private final StringProperty chooseBitB = new SimpleStringProperty();
     private final StringProperty textErrorB = new SimpleStringProperty();
-*/
+
+    private final StringProperty resultText = new SimpleStringProperty();
+
     public ViewModel() {
         inputButtonDisabledA.set(true);
+        inputButtonDisabledB.set(true);
+
         bitFieldStringA.set(bitFieldA.toString());
+        bitFieldStringB.set(bitFieldB.toString());
     }
 
-    // Field A Methods
+    // Methods
 
     public void setBitFieldStringA(String bitField) {
         String correctBitField = CorrectionBitField(bitField);
@@ -41,48 +47,43 @@ public class ViewModel {
         bitFieldStringA.set(bitFieldA.toString());
     }
 
+    public void setBitFieldStringB(String bitField) {
+        String correctBitField = CorrectionBitField(bitField);
+
+        bitFieldB = BitField.fromString(correctBitField);
+        bitFieldStringB.set(bitFieldB.toString());
+    }
+
     public void inputBitFieldA(String bitField) {
-        if(bitField.equals("")) {
-            inputButtonDisabledA.set(true);
-            return;
-        }
+        inputBitFieldCur(bitField, inputButtonDisabledA, textErrorA);
+    }
 
-        if(!bitField.matches("[01]+")) {
-            inputButtonDisabledA.set(true);
-            textErrorA.set("Only 0 and 1");
-            return;
-        }
-
-        int lenBitField = bitField.length();
-        if(lenBitField > 8) {
-            inputButtonDisabledA.set(true);
-            textErrorA.set("Length of BitField must be less or equal 8");
-            return;
-        }
-
-        textErrorA.set("");
-        inputButtonDisabledA.set(false);
+    public void inputBitFieldB(String bitField) {
+        inputBitFieldCur(bitField, inputButtonDisabledB, textErrorB);
     }
 
     public void setBitFieldBitA(String numOfBit) {
-        int numOfBitInt = Integer.parseInt(numOfBit);
-        bitFieldA.setBit(numOfBitInt);
+        setBitFieldBitCur(numOfBit, bitFieldA, bitFieldStringA);
+    }
 
-        bitFieldStringA.set(bitFieldA.toString());
+    public void setBitFieldBitB(String numOfBit) {
+        setBitFieldBitCur(numOfBit, bitFieldB, bitFieldStringB);
     }
 
     public void clearBitFieldBitA(String numOfBit) {
-        int numOfBitInt = Integer.parseInt(numOfBit);
-        bitFieldA.clrBit(numOfBitInt);
+        clearBitFieldBitCur(numOfBit, bitFieldA, bitFieldStringA);
+    }
 
-        bitFieldStringA.set(bitFieldA.toString());
+    public void clearBitFieldBitB(String numOfBit) {
+        clearBitFieldBitCur(numOfBit, bitFieldB, bitFieldStringB);
     }
 
     public void getBitFieldBitA(String numOfBit) {
-        int numOfBitInt = Integer.parseInt(numOfBit);
-        int chooseBit = bitFieldA.getBit(numOfBitInt);
+        getBitFieldBitCur(numOfBit, bitFieldA, chooseBitA);
+    }
 
-        chooseBitA.set(Integer.toString(chooseBit));
+    public void getBitFieldBitB(String numOfBit) {
+        getBitFieldBitCur(numOfBit, bitFieldB, chooseBitB);
     }
 
     public void logicNotA() {
@@ -91,6 +92,15 @@ public class ViewModel {
 
         bitFieldStringA.set(bitFieldA.toString());
     }
+
+    public void logicNotB() {
+        BitField field = new BitField(bitFieldB);
+        bitFieldB = field.not();
+
+        bitFieldStringB.set(bitFieldB.toString());
+    }
+
+    //
 
     private String CorrectionBitField(final String bitField) {
         String correctBitField = new String();
@@ -103,38 +113,147 @@ public class ViewModel {
         return correctBitField;
     }
 
-    // Property Getters Field A
+    public void inputBitFieldCur(String bitField, BooleanProperty inputButtonDisabledCur, StringProperty textErrorCur) {
+        if(bitField.equals("")) {
+            inputButtonDisabledCur.set(true);
+            return;
+        }
+
+        if(!bitField.matches("[01]+")) {
+            inputButtonDisabledCur.set(true);
+            textErrorCur.set("Only 0 and 1");
+            return;
+        }
+
+        int lenBitField = bitField.length();
+        if(lenBitField > 8) {
+            inputButtonDisabledCur.set(true);
+            textErrorCur.set("Length of BitField must be less or equal 8");
+            return;
+        }
+
+        textErrorCur.set("");
+        inputButtonDisabledCur.set(false);
+    }
+
+    public void setBitFieldBitCur(String numOfBit, BitField bitFieldCur, StringProperty bitFieldStringCur) {
+        int numOfBitInt = Integer.parseInt(numOfBit);
+        bitFieldCur.setBit(numOfBitInt);
+
+        bitFieldStringCur.set(bitFieldCur.toString());
+    }
+
+    public void clearBitFieldBitCur(String numOfBit, BitField bitFieldCur, StringProperty bitFieldStringCur) {
+        int numOfBitInt = Integer.parseInt(numOfBit);
+        bitFieldCur.clrBit(numOfBitInt);
+
+        bitFieldStringCur.set(bitFieldCur.toString());
+    }
+
+    public void getBitFieldBitCur(String numOfBit, BitField bitFieldCur, StringProperty chooseBitCur) {
+        int numOfBitInt = Integer.parseInt(numOfBit);
+        int chooseBit = bitFieldCur.getBit(numOfBitInt);
+
+        chooseBitCur.set(Integer.toString(chooseBit));
+    }
+
+    //
+
+    public void logicAAndB() {
+        bitFieldResult = new BitField(bitFieldA);
+        bitFieldResult = bitFieldA.and(bitFieldB);
+
+        resultText.set(bitFieldResult.toString());
+    }
+
+    public void logicAOrB() {
+        bitFieldResult = new BitField(bitFieldA);
+        bitFieldResult = bitFieldA.or(bitFieldB);
+
+        resultText.set(bitFieldResult.toString());
+    }
+
+    public void logicAXorB() {
+        bitFieldResult = new BitField(bitFieldA);
+        bitFieldResult = bitFieldA.xor(bitFieldB);
+
+        resultText.set(bitFieldResult.toString());
+    }
+
+    // Property Getters Fields
 
     public BooleanProperty inputButtonDisabledAProperty() {
         return inputButtonDisabledA;
+    }
+
+    public BooleanProperty inputButtonDisabledBProperty() {
+        return inputButtonDisabledB;
     }
 
     public StringProperty bitFieldStringAProperty() {
         return bitFieldStringA;
     }
 
+    public StringProperty bitFieldStringBProperty() {
+        return bitFieldStringB;
+    }
+
     public StringProperty chooseBitAProperty() {
         return chooseBitA;
+    }
+
+    public StringProperty chooseBitBProperty() {
+        return chooseBitB;
     }
 
     public StringProperty textErrorAProperty() {
         return textErrorA;
     }
 
+    public StringProperty textErrorBProperty() {
+        return textErrorB;
+    }
+
+    public StringProperty resultTextProperty() {
+        return resultText;
+    }
+
+    // Getters Fields
+
     public final boolean getInputButtonDisabledA() {
         return inputButtonDisabledA.get();
+    }
+
+    public final boolean getInputButtonDisabledB() {
+        return inputButtonDisabledB.get();
     }
 
     public final String getBitFieldStringA() {
         return bitFieldStringA.get();
     }
 
+    public final String getBitFieldStringB() {
+        return bitFieldStringB.get();
+    }
+
     public final String getChooseBitA() {
         return chooseBitA.get();
     }
 
+    public final String getChooseBitB() {
+        return chooseBitB.get();
+    }
+
     public final String getTextErrorA() {
         return textErrorA.get();
+    }
+
+    public final String getTextErrorB() {
+        return textErrorB.get();
+    }
+
+    public final String getResultText() {
+        return resultText.get();
     }
 }
 
