@@ -49,7 +49,6 @@ public final class DequeForm {
         txtValue.addKeyListener(keyListener);
     }
 
-
     public static void main(final String[] args) {
         JFrame frame = new JFrame("DequeForm");
         frame.setContentPane(new DequeForm(new ViewModel()).mainPanel);
