@@ -3,7 +3,9 @@ package ru.unn.agile.MyDeque.viewmodel;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
-import ru.unn.agile.MyDeque.viewmodel.ViewModel.Status;
+
+import static ru.unn.agile.MyDeque.viewmodel.ViewModel.Status.*;
+import static ru.unn.agile.MyDeque.viewmodel.ViewModel.Operations.*;
 
 import static org.junit.Assert.*;
 
@@ -24,13 +26,13 @@ public class ViewModelTests {
     @Test
     public void canSetDefaultValues() {
         assertEquals("", viewmodel.getValue());
-        assertEquals(Status.WAITING, viewmodel.getStatus());
+        assertEquals(WAITING, viewmodel.getStatus());
         assertEquals("", viewmodel.getResult());
     }
 
     @Test
     public void isWaitingStatusInTheBeginning() {
-        assertEquals(Status.WAITING, viewmodel.getStatus());
+        assertEquals(WAITING, viewmodel.getStatus());
     }
 
     @Test
@@ -38,7 +40,7 @@ public class ViewModelTests {
         viewmodel.setValue("qwe");
         viewmodel.textFieldKey(KeyboardsKeys.ANY);
 
-        assertEquals(Status.BAD_FORMAT, viewmodel.getStatus());
+        assertEquals(BAD_FORMAT, viewmodel.getStatus());
     }
 
     @Test
@@ -48,7 +50,7 @@ public class ViewModelTests {
         viewmodel.setValue("3");
         viewmodel.textFieldKey(KeyboardsKeys.ANY);
 
-        assertEquals(Status.READY, viewmodel.getStatus());
+        assertEquals(READY, viewmodel.getStatus());
     }
 
     @Test
@@ -57,7 +59,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void isCalculateButtonDisabledWhenFormatIsBad() {
+    public void isAcceptButtonDisabledWhenFormatIsBad() {
         inputField();
         viewmodel.textFieldKey(KeyboardsKeys.ANY);
         assertEquals(true, viewmodel.isAcceptButtonEnabled());
@@ -74,56 +76,44 @@ public class ViewModelTests {
 
     @Test
     public void canGetOperationName() {
-        String addName = ViewModel.Operations.PUSH_HEAD.toString();
+        String addName = PUSH_HEAD.toString();
         assertEquals("Push head", addName);
     }
 
     @Test
     public void canGetQuantityOfOperations() {
-        int quantityOfOperations = ViewModel.Operations.values().length;
+        int quantityOfOperations = values().length;
         assertEquals(4, quantityOfOperations);
     }
 
     @Test
-    public void canCreateListingOfOperations() {
-        ViewModel.Operations[] operations = ViewModel.Operations.values();
-        ViewModel.Operations[] currentOperations = new ViewModel.Operations[]{
-                ViewModel.Operations.PUSH_HEAD,
-                ViewModel.Operations.POP_HEAD,
-                ViewModel.Operations.PUSH_TAIL,
-                ViewModel.Operations.POP_TAIL};
-
-        assertArrayEquals(currentOperations, operations);
-    }
-
-    @Test
     public void canCompareOperationsByName() {
-        assertEquals(ViewModel.Operations.PUSH_HEAD, ViewModel.Operations.PUSH_HEAD);
-        assertNotEquals(ViewModel.Operations.POP_HEAD, ViewModel.Operations.POP_TAIL);
+        assertEquals(PUSH_HEAD, PUSH_HEAD);
+        assertNotEquals(POP_HEAD, POP_TAIL);
     }
 
     @Test
     public void canSetPushHeadOperation() {
-        viewmodel.setOperation(ViewModel.Operations.PUSH_HEAD);
-        assertEquals(ViewModel.Operations.PUSH_HEAD, viewmodel.getOperation());
+        viewmodel.setOperation(PUSH_HEAD);
+        assertEquals(PUSH_HEAD, viewmodel.getOperation());
     }
 
     @Test
     public void canSetPushTailOperation() {
-        viewmodel.setOperation(ViewModel.Operations.PUSH_TAIL);
-        assertEquals(ViewModel.Operations.PUSH_TAIL, viewmodel.getOperation());
+        viewmodel.setOperation(PUSH_TAIL);
+        assertEquals(PUSH_TAIL, viewmodel.getOperation());
     }
 
     @Test
     public void canSetPopHeadOperation() {
-        viewmodel.setOperation(ViewModel.Operations.POP_HEAD);
-        assertEquals(ViewModel.Operations.POP_HEAD, viewmodel.getOperation());
+        viewmodel.setOperation(POP_HEAD);
+        assertEquals(POP_HEAD, viewmodel.getOperation());
     }
 
     @Test
     public void canSetPopTailOperation() {
-        viewmodel.setOperation(ViewModel.Operations.POP_TAIL);
-        assertEquals(ViewModel.Operations.POP_TAIL, viewmodel.getOperation());
+        viewmodel.setOperation(POP_TAIL);
+        assertEquals(POP_TAIL, viewmodel.getOperation());
     }
 
     @Test
@@ -132,13 +122,13 @@ public class ViewModelTests {
 
         viewmodel.accept();
 
-        assertEquals(Status.SUCCESS, viewmodel.getStatus());
+        assertEquals(SUCCESS, viewmodel.getStatus());
     }
 
     @Test
     public void canPerformPushTailAction() {
         viewmodel.setValue("6");
-        viewmodel.setOperation(ViewModel.Operations.PUSH_TAIL);
+        viewmodel.setOperation(PUSH_TAIL);
 
         viewmodel.accept();
 
@@ -148,7 +138,7 @@ public class ViewModelTests {
     @Test
     public void canPerformPushHeadAction() {
         viewmodel.setValue("7");
-        viewmodel.setOperation(ViewModel.Operations.PUSH_HEAD);
+        viewmodel.setOperation(PUSH_HEAD);
 
         viewmodel.accept();
 
@@ -157,27 +147,28 @@ public class ViewModelTests {
 
     @Test
     public void canPerformPushToHeadAndPopFromHead() {
-        viewmodel.setOperation(ViewModel.Operations.PUSH_HEAD);
+        viewmodel.setOperation(PUSH_HEAD);
         for (int i = 4; i < 6; i++) {
             viewmodel.setValue(Integer.toString(i));
             viewmodel.accept();
         }
 
-        viewmodel.setOperation(ViewModel.Operations.POP_HEAD);
+        viewmodel.setOperation(POP_HEAD);
 
         viewmodel.accept();
 
         assertEquals("5", viewmodel.getResult());
     }
 
+    @Test
     public void canPerformPushToHeadAndPopFromTail() {
-        viewmodel.setOperation(ViewModel.Operations.PUSH_HEAD);
+        viewmodel.setOperation(PUSH_HEAD);
         for (int i = 7; i < 9; i++) {
             viewmodel.setValue(Integer.toString(i));
             viewmodel.accept();
         }
 
-        viewmodel.setOperation(ViewModel.Operations.POP_TAIL);
+        viewmodel.setOperation(POP_TAIL);
 
         viewmodel.accept();
 

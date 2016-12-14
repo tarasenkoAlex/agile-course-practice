@@ -2,6 +2,11 @@ package ru.unn.agile.MyDeque.viewmodel;
 
 import ru.unn.agile.MyDeque.Model.Deque;
 
+import static java.lang.Integer.parseInt;
+import static ru.unn.agile.MyDeque.viewmodel.ViewModel.Status.*;
+import static ru.unn.agile.MyDeque.viewmodel.ViewModel.Operations.*;
+import static ru.unn.agile.MyDeque.viewmodel.KeyboardsKeys.*;
+
 public class ViewModel {
     private String value;
     private String result;
@@ -12,9 +17,9 @@ public class ViewModel {
 
     public ViewModel() {
         value = "";
-        status = Status.WAITING;
+        status = WAITING;
         result = "";
-        operation = Operations.PUSH_HEAD;
+        operation = PUSH_HEAD;
         isAcceptButtonEnabled = false;
     }
 
@@ -37,7 +42,7 @@ public class ViewModel {
     public void textFieldKey(final int codeKey) {
         parseInput();
 
-        if (codeKey == KeyboardsKeys.ENTER) {
+        if (codeKey == ENTER) {
             enterPressed();
         }
     }
@@ -55,13 +60,13 @@ public class ViewModel {
 
         switch (operation) {
             case PUSH_HEAD:
-                deque.pushHeadElement(Integer.parseInt(value));
+                deque.pushHeadElement(parseInt(value));
                 result = deque.toString();
-            break;
+                break;
             case PUSH_TAIL:
-                deque.pushTailElement(Integer.parseInt(value));
+                deque.pushTailElement(parseInt(value));
                 result = deque.toString();
-            break;
+                break;
             case POP_HEAD:
                 result = Integer.toString(deque.popHeadElement());
                 break;
@@ -73,7 +78,7 @@ public class ViewModel {
                         "Only can only use push & pop operations for head & tail elements");
         }
 
-        status = Status.SUCCESS;
+        status = SUCCESS;
     }
 
     public String getResult() {
@@ -87,19 +92,19 @@ public class ViewModel {
     private boolean parseInput() {
         try {
             if (!value.isEmpty()) {
-                Integer.parseInt(value);
+                parseInt(value);
             }
         } catch (Exception e) {
-            status = Status.BAD_FORMAT;
+            status = BAD_FORMAT;
             isAcceptButtonEnabled = false;
             return false;
         }
 
         isAcceptButtonEnabled = isInputAvailable();
         if (isAcceptButtonEnabled) {
-            status = Status.READY;
+            status = READY;
         } else {
-            status = Status.WAITING;
+            status = WAITING;
         }
 
         return isAcceptButtonEnabled;

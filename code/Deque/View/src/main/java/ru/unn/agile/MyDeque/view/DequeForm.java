@@ -12,16 +12,12 @@ public final class DequeForm {
 
     private JPanel mainPanel;
     private JButton acceptButton;
-    private ViewModel viewmodel;
+    private final ViewModel viewmodel;
 
     private JTextField txtValue;
     private JComboBox<ViewModel.Operations> cbOperationChoice;
     private JLabel lbStatus;
     private JTextField txtResult;
-
-    private DequeForm() {
-
-    }
 
     private DequeForm(final ViewModel viewmodel) {
         this.viewmodel = viewmodel;
@@ -38,12 +34,9 @@ public final class DequeForm {
             }
         });
 
-        cbOperationChoice.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent actionEvent) {
-                bind();
-                backBind();
-            }
+        cbOperationChoice.addActionListener(actionEvent -> {
+            bind();
+            backBind();
         });
 
         KeyAdapter keyListener = new KeyAdapter() {
