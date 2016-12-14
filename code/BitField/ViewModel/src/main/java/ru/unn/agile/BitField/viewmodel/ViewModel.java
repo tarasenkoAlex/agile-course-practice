@@ -1,22 +1,15 @@
 package ru.unn.agile.BitField.viewmodel;
 
-import com.sun.xml.internal.fastinfoset.algorithm.IntegerEncodingAlgorithm;
-import com.sun.xml.internal.ws.server.ServerRtException;
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import ru.unn.agile.BitField.model.BitField;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class ViewModel {
-    private BitField bitFieldA = new BitField(8);
-    private BitField bitFieldB = new BitField(8);
-    private BitField bitFieldResult = new BitField(8);
+    private static final int LENGTH_BIT_FIELD = 8;
+
+    private BitField bitFieldA = new BitField(LENGTH_BIT_FIELD);
+    private BitField bitFieldB = new BitField(LENGTH_BIT_FIELD);
+    private BitField bitFieldResult = new BitField(LENGTH_BIT_FIELD);
 
     private final StringProperty bitFieldStringA = new SimpleStringProperty();
     private final StringProperty chooseBitA = new SimpleStringProperty();
@@ -35,49 +28,49 @@ public class ViewModel {
 
     // Methods
 
-    public void setBitFieldStringA(String bitField) {
-        if(canInputBitFieldCur(bitField, textErrorA) == false) {
+    public void setBitFieldStringA(final String bitField) {
+        if (!canInputBitFieldCur(bitField, textErrorA)) {
             return;
         }
 
-        String correctBitField = CorrectionBitField(bitField);
+        String correctBitField = correctionBitField(bitField);
 
         bitFieldA = BitField.fromString(correctBitField);
         bitFieldStringA.set(bitFieldA.toString());
     }
 
-    public void setBitFieldStringB(String bitField) {
-        if(canInputBitFieldCur(bitField, textErrorB) == false) {
+    public void setBitFieldStringB(final String bitField) {
+        if (!canInputBitFieldCur(bitField, textErrorB)) {
             return;
         }
 
-        String correctBitField = CorrectionBitField(bitField);
+        String correctBitField = correctionBitField(bitField);
 
         bitFieldB = BitField.fromString(correctBitField);
         bitFieldStringB.set(bitFieldB.toString());
     }
 
-    public void setBitFieldBitA(String numOfBit) {
+    public void setBitFieldBitA(final String numOfBit) {
         setBitFieldBitCur(numOfBit, bitFieldA, bitFieldStringA);
     }
 
-    public void setBitFieldBitB(String numOfBit) {
+    public void setBitFieldBitB(final String numOfBit) {
         setBitFieldBitCur(numOfBit, bitFieldB, bitFieldStringB);
     }
 
-    public void clearBitFieldBitA(String numOfBit) {
+    public void clearBitFieldBitA(final String numOfBit) {
         clearBitFieldBitCur(numOfBit, bitFieldA, bitFieldStringA);
     }
 
-    public void clearBitFieldBitB(String numOfBit) {
+    public void clearBitFieldBitB(final String numOfBit) {
         clearBitFieldBitCur(numOfBit, bitFieldB, bitFieldStringB);
     }
 
-    public void getBitFieldBitA(String numOfBit) {
+    public void getBitFieldBitA(final String numOfBit) {
         getBitFieldBitCur(numOfBit, bitFieldA, chooseBitA);
     }
 
-    public void getBitFieldBitB(String numOfBit) {
+    public void getBitFieldBitB(final String numOfBit) {
         getBitFieldBitCur(numOfBit, bitFieldB, chooseBitB);
     }
 
@@ -95,30 +88,31 @@ public class ViewModel {
         bitFieldStringB.set(bitFieldB.toString());
     }
 
-    private String CorrectionBitField(final String bitField) {
+    private String correctionBitField(final String bitField) {
         String correctBitField = new String();
         int lenBitField = bitField.length();
 
-        for(int i = 0; i < 8 - lenBitField; i++)
+        for (int i = 0; i < LENGTH_BIT_FIELD - lenBitField; i++) {
             correctBitField += "0";
+        }
 
         correctBitField += bitField;
         return correctBitField;
     }
 
-    private boolean canInputBitFieldCur(String bitField, StringProperty textErrorCur) {
-        if(bitField.equals("")) {
+    private boolean canInputBitFieldCur(final String bitField, final StringProperty textErrorCur) {
+        if ("".equals(bitField)) {
             textErrorCur.set("Text Field is Empty");
             return false;
         }
 
-        if(!bitField.matches("[01]+")) {
+        if (!bitField.matches("[01]+")) {
             textErrorCur.set("Only 0 and 1");
             return false;
         }
 
         int lenBitField = bitField.length();
-        if(lenBitField > 8) {
+        if (lenBitField > LENGTH_BIT_FIELD) {
             textErrorCur.set("Length of BitField must be less or equal 8");
             return false;
         }
@@ -127,21 +121,24 @@ public class ViewModel {
         return true;
     }
 
-    public void setBitFieldBitCur(String numOfBit, BitField bitFieldCur, StringProperty bitFieldStringCur) {
+    public void setBitFieldBitCur(final String numOfBit, final BitField bitFieldCur,
+                                  final StringProperty bitFieldStringCur) {
         int numOfBitInt = Integer.parseInt(numOfBit);
         bitFieldCur.setBit(numOfBitInt);
 
         bitFieldStringCur.set(bitFieldCur.toString());
     }
 
-    public void clearBitFieldBitCur(String numOfBit, BitField bitFieldCur, StringProperty bitFieldStringCur) {
+    public void clearBitFieldBitCur(final String numOfBit, final BitField bitFieldCur,
+                                    final StringProperty bitFieldStringCur) {
         int numOfBitInt = Integer.parseInt(numOfBit);
         bitFieldCur.clrBit(numOfBitInt);
 
         bitFieldStringCur.set(bitFieldCur.toString());
     }
 
-    public void getBitFieldBitCur(String numOfBit, BitField bitFieldCur, StringProperty chooseBitCur) {
+    public void getBitFieldBitCur(final String numOfBit, final BitField bitFieldCur,
+                                  final StringProperty chooseBitCur) {
         int numOfBitInt = Integer.parseInt(numOfBit);
         int chooseBit = bitFieldCur.getBit(numOfBitInt);
 

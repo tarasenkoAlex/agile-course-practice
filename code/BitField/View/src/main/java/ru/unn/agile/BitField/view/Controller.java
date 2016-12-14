@@ -9,12 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputEvent;
-import javafx.scene.input.InputMethodEvent;
+
 import ru.unn.agile.BitField.viewmodel.ViewModel;
 
 public class Controller {
-    ObservableList<String> numBitList = FXCollections.observableArrayList("0", "1", "2", "3", "4", "5", "6", "7");
+    private final ObservableList<String> numBitList =
+            FXCollections.observableArrayList("0", "1", "2", "3", "4", "5", "6", "7");
 
     @FXML
     private ViewModel viewModel;

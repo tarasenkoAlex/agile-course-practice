@@ -20,24 +20,24 @@ public class ViewModelTests {
     }
 
     @Test
-    public void byDefaultFieldA_FieldStringA() {
+    public void byDefaultFieldA() {
         assertEquals("00000000", viewModel.getBitFieldStringA());
     }
 
     @Test
-    public void byDefaultFieldB_FieldStringB() {
+    public void byDefaultFieldB() {
         assertEquals("00000000", viewModel.getBitFieldStringB());
     }
 
     @Test
-    public void whenEnterEmptyA_ErrorText() {
+    public void whenEnterEmptyAErrorText() {
         viewModel.setBitFieldStringA("");
 
         assertEquals("Text Field is Empty", viewModel.getTextErrorA());
     }
 
     @Test
-    public void whenEnterEmptyB_ErrorText() {
+    public void whenEnterEmptyBErrorText() {
         viewModel.setBitFieldStringB("");
 
         assertEquals("Text Field is Empty", viewModel.getTextErrorB());
@@ -45,56 +45,56 @@ public class ViewModelTests {
 
 
     @Test
-    public void whenEnterFieldWrongDataA_ErrorText() {
+    public void whenEnterFieldWrongDataAErrorText() {
         viewModel.setBitFieldStringA("2");
 
         assertEquals("Only 0 and 1", viewModel.getTextErrorA());
     }
 
     @Test
-    public void whenEnterFieldWrongDataB_ErrorText() {
+    public void whenEnterFieldWrongDataBErrorText() {
         viewModel.setBitFieldStringB("a");
 
         assertEquals("Only 0 and 1", viewModel.getTextErrorB());
     }
 
     @Test
-    public void inputBitFieldA_LengthMoreEight_ErrorText() {
+    public void inputBitFieldALengthMoreLengthBitFieldErrorText() {
         viewModel.setBitFieldStringA("111111111");
 
         assertEquals("Length of BitField must be less or equal 8", viewModel.getTextErrorA());
     }
 
     @Test
-    public void inputBitFieldB_LengthMoreEight_ErrorText() {
+    public void inputBitFieldBLengthMoreLengthBitFieldErrorText() {
         viewModel.setBitFieldStringB("000000000");
 
         assertEquals("Length of BitField must be less or equal 8", viewModel.getTextErrorB());
     }
 
     @Test
-    public void setBitFieldA_LengthEqualEight() {
+    public void setBitFieldALengthEqualLengthBitField() {
         viewModel.setBitFieldStringA("01010101");
 
         assertEquals("01010101", viewModel.getBitFieldStringA());
     }
 
     @Test
-    public void setBitFieldB_LengthEqualEight() {
+    public void setBitFieldBLengthEqualLengthBitField() {
         viewModel.setBitFieldStringB("10101010");
 
         assertEquals("10101010", viewModel.getBitFieldStringB());
     }
 
     @Test
-    public void setBitFieldA_LengthLessEight() {
+    public void setBitFieldALengthLessLengthBitField() {
         viewModel.setBitFieldStringA("1111");
 
         assertEquals("00001111", viewModel.getBitFieldStringA());
     }
 
     @Test
-    public void setBitFieldB_LengthLessEight() {
+    public void setBitFieldBLengthLessLengthBitField() {
         viewModel.setBitFieldStringB("111100");
 
         assertEquals("00111100", viewModel.getBitFieldStringB());
@@ -115,7 +115,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void setBitFieldBitA_3Bits() {
+    public void setBitFieldBitA3Bits() {
         viewModel.setBitFieldBitA("1");
         viewModel.setBitFieldBitA("2");
         viewModel.setBitFieldBitA("7");
@@ -124,7 +124,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void setBitFieldBitB_3Bits() {
+    public void setBitFieldBitB3Bits() {
         viewModel.setBitFieldBitB("0");
         viewModel.setBitFieldBitB("3");
         viewModel.setBitFieldBitB("6");
@@ -149,7 +149,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void clearBitFieldBitA_3Bits() {
+    public void clearBitFieldBitA3Bits() {
         viewModel.setBitFieldStringA("11111111");
         viewModel.clearBitFieldBitA("1");
         viewModel.clearBitFieldBitA("2");
@@ -159,7 +159,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void clearBitFieldBitB_3Bits() {
+    public void clearBitFieldBitB3Bits() {
         viewModel.setBitFieldStringB("11111111");
         viewModel.clearBitFieldBitB("0");
         viewModel.clearBitFieldBitB("3");
@@ -169,7 +169,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void getBitFieldBitA_One() {
+    public void getBitFieldBitAOne() {
         viewModel.setBitFieldStringA("00001111");
         viewModel.getBitFieldBitA("4");
 
@@ -177,7 +177,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void getBitFieldBitB_One() {
+    public void getBitFieldBitBOne() {
         viewModel.setBitFieldStringB("00001111");
         viewModel.getBitFieldBitB("5");
 
@@ -185,7 +185,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void getBitFieldBitA_Zero() {
+    public void getBitFieldBitAZero() {
         viewModel.setBitFieldStringA("00001111");
         viewModel.getBitFieldBitA("3");
 
@@ -193,7 +193,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void getBitFieldBitB_Zero() {
+    public void getBitFieldBitBZero() {
         viewModel.setBitFieldStringB("00001111");
         viewModel.getBitFieldBitB("2");
 
@@ -226,7 +226,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void resultAAndB_2() {
+    public void resultAAndB2() {
         viewModel.setBitFieldStringA("10101010");
         viewModel.setBitFieldStringB("01010101");
         viewModel.logicAAndB();
@@ -244,7 +244,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void resultAOrB_2() {
+    public void resultAOrB2() {
         viewModel.setBitFieldStringA("10101010");
         viewModel.setBitFieldStringB("01010101");
         viewModel.logicAOrB();
@@ -262,7 +262,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void resultAXorB_2() {
+    public void resultAXorB2() {
         viewModel.setBitFieldStringA("10101010");
         viewModel.setBitFieldStringB("01010101");
         viewModel.logicAXorB();
