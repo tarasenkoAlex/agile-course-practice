@@ -18,12 +18,10 @@ public class ViewModel {
     private BitField bitFieldB = new BitField(8);
     private BitField bitFieldResult = new BitField(8);
 
-    private final BooleanProperty inputButtonDisabledA = new SimpleBooleanProperty();
     private final StringProperty bitFieldStringA = new SimpleStringProperty();
     private final StringProperty chooseBitA = new SimpleStringProperty();
     private final StringProperty textErrorA = new SimpleStringProperty();
 
-    private final BooleanProperty inputButtonDisabledB = new SimpleBooleanProperty();
     private final StringProperty bitFieldStringB = new SimpleStringProperty();
     private final StringProperty chooseBitB = new SimpleStringProperty();
     private final StringProperty textErrorB = new SimpleStringProperty();
@@ -31,9 +29,6 @@ public class ViewModel {
     private final StringProperty resultText = new SimpleStringProperty();
 
     public ViewModel() {
-        inputButtonDisabledA.set(true);
-        inputButtonDisabledB.set(true);
-
         bitFieldStringA.set(bitFieldA.toString());
         bitFieldStringB.set(bitFieldB.toString());
     }
@@ -41,6 +36,10 @@ public class ViewModel {
     // Methods
 
     public void setBitFieldStringA(String bitField) {
+        if(canInputBitFieldCur(bitField, textErrorA) == false) {
+            return;
+        }
+
         String correctBitField = CorrectionBitField(bitField);
 
         bitFieldA = BitField.fromString(correctBitField);
@@ -48,18 +47,14 @@ public class ViewModel {
     }
 
     public void setBitFieldStringB(String bitField) {
+        if(canInputBitFieldCur(bitField, textErrorB) == false) {
+            return;
+        }
+
         String correctBitField = CorrectionBitField(bitField);
 
         bitFieldB = BitField.fromString(correctBitField);
         bitFieldStringB.set(bitFieldB.toString());
-    }
-
-    public void inputBitFieldA(String bitField) {
-        inputBitFieldCur(bitField, inputButtonDisabledA, textErrorA);
-    }
-
-    public void inputBitFieldB(String bitField) {
-        inputBitFieldCur(bitField, inputButtonDisabledB, textErrorB);
     }
 
     public void setBitFieldBitA(String numOfBit) {
@@ -100,8 +95,6 @@ public class ViewModel {
         bitFieldStringB.set(bitFieldB.toString());
     }
 
-    //
-
     private String CorrectionBitField(final String bitField) {
         String correctBitField = new String();
         int lenBitField = bitField.length();
@@ -113,27 +106,25 @@ public class ViewModel {
         return correctBitField;
     }
 
-    public void inputBitFieldCur(String bitField, BooleanProperty inputButtonDisabledCur, StringProperty textErrorCur) {
+    private boolean canInputBitFieldCur(String bitField, StringProperty textErrorCur) {
         if(bitField.equals("")) {
-            inputButtonDisabledCur.set(true);
-            return;
+            textErrorCur.set("Text Field is Empty");
+            return false;
         }
 
         if(!bitField.matches("[01]+")) {
-            inputButtonDisabledCur.set(true);
             textErrorCur.set("Only 0 and 1");
-            return;
+            return false;
         }
 
         int lenBitField = bitField.length();
         if(lenBitField > 8) {
-            inputButtonDisabledCur.set(true);
             textErrorCur.set("Length of BitField must be less or equal 8");
-            return;
+            return false;
         }
 
         textErrorCur.set("");
-        inputButtonDisabledCur.set(false);
+        return true;
     }
 
     public void setBitFieldBitCur(String numOfBit, BitField bitFieldCur, StringProperty bitFieldStringCur) {
@@ -157,8 +148,6 @@ public class ViewModel {
         chooseBitCur.set(Integer.toString(chooseBit));
     }
 
-    //
-
     public void logicAAndB() {
         bitFieldResult = new BitField(bitFieldA);
         bitFieldResult = bitFieldA.and(bitFieldB);
@@ -181,14 +170,6 @@ public class ViewModel {
     }
 
     // Property Getters Fields
-
-    public BooleanProperty inputButtonDisabledAProperty() {
-        return inputButtonDisabledA;
-    }
-
-    public BooleanProperty inputButtonDisabledBProperty() {
-        return inputButtonDisabledB;
-    }
 
     public StringProperty bitFieldStringAProperty() {
         return bitFieldStringA;
@@ -219,14 +200,6 @@ public class ViewModel {
     }
 
     // Getters Fields
-
-    public final boolean getInputButtonDisabledA() {
-        return inputButtonDisabledA.get();
-    }
-
-    public final boolean getInputButtonDisabledB() {
-        return inputButtonDisabledB.get();
-    }
 
     public final String getBitFieldStringA() {
         return bitFieldStringA.get();

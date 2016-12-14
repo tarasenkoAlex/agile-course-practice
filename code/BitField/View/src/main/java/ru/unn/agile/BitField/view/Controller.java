@@ -197,7 +197,5 @@ public class Controller {
                 viewModel.logicAXorB();
             }
         });
-
-        inputATextField.textProperty().bindBidirectional(viewModel.bitFieldStringAProperty());
     }
 }

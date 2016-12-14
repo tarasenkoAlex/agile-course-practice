@@ -17,7 +17,7 @@
          <children>
             <Label layoutX="20.0" layoutY="20.0" text="Field A :" />
             <TextField fx:id="inputATextField" layoutX="70.0" layoutY="18.0" prefHeight="25.0" prefWidth="120.0" />
-            <Button fx:id="inputAButton" disable="${viewModel.inputButtonDisabledA}" layoutX="206.0" layoutY="18.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Input A" />
+            <Button fx:id="inputAButton" layoutX="206.0" layoutY="18.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Input A" />
             <ComboBox fx:id="setBitAComboBox" layoutX="317.0" layoutY="18.0" prefHeight="25.0" prefWidth="103.0" promptText="Choose Bit" />
             <Button fx:id="setBitAButton" layoutX="435.0" layoutY="18.0" mnemonicParsing="false" text="Set Bit" />
             <Button fx:id="getBitAButton" layoutX="500.0" layoutY="18.0" mnemonicParsing="false" text="Get Bit" />

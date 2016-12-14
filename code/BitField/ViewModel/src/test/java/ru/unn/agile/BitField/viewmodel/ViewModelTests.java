@@ -20,16 +20,6 @@ public class ViewModelTests {
     }
 
     @Test
-    public void byDefaultFieldA_InputButtonIsDisabledA() {
-        assertTrue(viewModel.getInputButtonDisabledA());
-    }
-
-    @Test
-    public void byDefaultFieldB_InputButtonIsDisabledB() {
-        assertTrue(viewModel.getInputButtonDisabledB());
-    }
-
-    @Test
     public void byDefaultFieldA_FieldStringA() {
         assertEquals("00000000", viewModel.getBitFieldStringA());
     }
@@ -40,89 +30,46 @@ public class ViewModelTests {
     }
 
     @Test
-    public void whenEnterFieldA_InputAButtonIsEnabled() {
-        viewModel.inputBitFieldA("1");
+    public void whenEnterEmptyA_ErrorText() {
+        viewModel.setBitFieldStringA("");
 
-        assertFalse(viewModel.getInputButtonDisabledA());
+        assertEquals("Text Field is Empty", viewModel.getTextErrorA());
     }
 
     @Test
-    public void whenEnterFieldB_InputAButtonIsEnabled() {
-        viewModel.inputBitFieldB("0");
+    public void whenEnterEmptyB_ErrorText() {
+        viewModel.setBitFieldStringB("");
 
-        assertFalse(viewModel.getInputButtonDisabledB());
+        assertEquals("Text Field is Empty", viewModel.getTextErrorB());
     }
 
-    @Test
-    public void whenClearFieldA_InputAButtonIsDisabled() {
-        viewModel.inputBitFieldA("1");
-        viewModel.inputBitFieldA("");
-
-        assertTrue(viewModel.getInputButtonDisabledA());
-    }
-
-    @Test
-    public void whenClearFieldB_InputAButtonIsDisabled() {
-        viewModel.inputBitFieldB("0");
-        viewModel.inputBitFieldB("");
-
-        assertTrue(viewModel.getInputButtonDisabledB());
-    }
-
-    @Test
-    public void whenEnterFieldWrongDataA_InputAButtonIsDisabled() {
-        viewModel.inputBitFieldA("2");
-
-        assertTrue(viewModel.getInputButtonDisabledA());
-    }
-
-    @Test
-    public void whenEnterFieldWrongDataB_InputAButtonIsDisabled() {
-        viewModel.inputBitFieldB("a");
-
-        assertTrue(viewModel.getInputButtonDisabledB());
-    }
 
     @Test
     public void whenEnterFieldWrongDataA_ErrorText() {
-        viewModel.inputBitFieldA("2");
+        viewModel.setBitFieldStringA("2");
 
         assertEquals("Only 0 and 1", viewModel.getTextErrorA());
     }
 
     @Test
     public void whenEnterFieldWrongDataB_ErrorText() {
-        viewModel.inputBitFieldB("a");
+        viewModel.setBitFieldStringB("a");
 
         assertEquals("Only 0 and 1", viewModel.getTextErrorB());
     }
 
     @Test
     public void inputBitFieldA_LengthMoreEight_ErrorText() {
-        viewModel.inputBitFieldA("111111111");
+        viewModel.setBitFieldStringA("111111111");
 
         assertEquals("Length of BitField must be less or equal 8", viewModel.getTextErrorA());
     }
 
     @Test
     public void inputBitFieldB_LengthMoreEight_ErrorText() {
-        viewModel.inputBitFieldB("000000000");
+        viewModel.setBitFieldStringB("000000000");
 
         assertEquals("Length of BitField must be less or equal 8", viewModel.getTextErrorB());
-    }
-
-    @Test
-    public void inputBitFieldA_LengthMoreEight_nputAButtonIsDisabled() {
-        viewModel.inputBitFieldA("111111111");
-
-        assertTrue(viewModel.getInputButtonDisabledA());
-    }
-
-    @Test
-    public void inputBitFieldB_LengthMoreEight_nputAButtonIsDisabled() {
-        viewModel.inputBitFieldB("0000000000");
-
-        assertTrue(viewModel.getInputButtonDisabledB());
     }
 
     @Test
