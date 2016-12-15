@@ -169,8 +169,13 @@ project(":code/Pozdeev-Anton").name = "pozdeev-anton-model"
 include "code/ponomarev-nikita/Model"
 project(":code/ponomarev-nikita/Model").name = "ponomarev-nikita-Model"
 // Редькин Михаил
-include "code/Redkin-Michail"
-project(":code/Redkin-Michail").name = "Redkin-Michail-Model"
+include "code/Deque/Model"
+project(":code/Deque/Model").name = "Yevtushin-Valery-Model"
+include "code/Deque/ViewModel"
+project(":code/Deque/ViewModel").name = "Yevtushin-Valery-ViewModel"
+include "code/Deque/View"
+project(":code/Deque/View").name = "Yevtushin-Valery-View"
+
 // Рыбаков Антон
 // Рыбин Валентин
 include "code/Polynomial/Model"
