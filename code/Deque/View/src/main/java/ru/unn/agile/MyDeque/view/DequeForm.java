@@ -29,7 +29,7 @@ public final class DequeForm {
             @Override
             public void actionPerformed(final ActionEvent actionEvent) {
                 bind();
-                DequeForm.this.viewmodel.accept();
+                viewmodel.accept();
                 backBind();
             }
         });
@@ -42,7 +42,7 @@ public final class DequeForm {
         KeyAdapter keyListener = new KeyAdapter() {
             public void keyReleased(final KeyEvent e) {
                 bind();
-                DequeForm.this.viewmodel.textFieldKey(e.getKeyCode());
+                viewmodel.textFieldKey(e.getKeyCode());
                 backBind();
             }
         };
