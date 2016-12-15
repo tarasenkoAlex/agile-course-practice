@@ -88,7 +88,6 @@ public class ViewModelTests {
 
     @Test
     public void canCompareOperationsByName() {
-        assertEquals(PUSH_HEAD, PUSH_HEAD);
         assertNotEquals(POP_HEAD, POP_TAIL);
     }
 
