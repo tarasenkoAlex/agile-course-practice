@@ -1,6 +1,5 @@
-package test.java;
+package ru.unn.agile.BitField.model;
 
-import main.java.BitField;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

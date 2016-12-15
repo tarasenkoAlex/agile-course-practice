@@ -266,9 +266,17 @@ include "code/Polynomial/ViewModel"
 project(":code/Polynomial/ViewModel").name = "Polynomial-ViewModel"
 
 // Шургалин Петр
-include "code/shurgalin-pyotr"
-project(":code/shurgalin-pyotr").name = "shurgalin-pyotr-lab1-BitField"
+include "code/BitField/Model"
+project(":code/BitField/Model").name = "BitField-Model"
+include "code/BitField/View"
+project(":code/BitField/View").name = "BitField-View"
+include "code/BitField/ViewModel"
+project(":code/BitField/ViewModel").name = "BitField-ViewModel"
+
 include "code/TreeSort/ViewModel"
 project(":code/TreeSort/ViewModel").name = "TreeSort-ViewModel"
 include "code/TreeSort/View"
 project(":code/TreeSort/View").name = "TreeSort-View"
+
+
+
