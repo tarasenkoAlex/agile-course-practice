@@ -1,7 +1,6 @@
 package ru.unn.agile.personalfinance.view.utils;
 
 import javafx.util.StringConverter;
-import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.CategoryViewModel;
 

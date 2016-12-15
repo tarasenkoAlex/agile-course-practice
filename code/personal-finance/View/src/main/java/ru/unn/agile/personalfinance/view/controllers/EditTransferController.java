@@ -8,12 +8,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.TransferViewModel;
 import ru.unn.agile.personalfinance.view.ViewModelService;
 import ru.unn.agile.personalfinance.view.WindowsManager;
+import ru.unn.agile.personalfinance.view.controls.CurrencyTextField;
 import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
 import ru.unn.agile.personalfinance.view.utils.Converters;
 
@@ -34,7 +34,7 @@ public class EditTransferController extends DataContextController<TransferViewMo
     private JFXComboBox<AccountViewModel> accountToComboBox;
 
     @FXML
-    private TextField amountField;
+    private CurrencyTextField amountField;
 
     @FXML
     private Button addButton;
@@ -86,11 +86,10 @@ public class EditTransferController extends DataContextController<TransferViewMo
         /* ledger.accounts -> accountToComboBox.items */
         accountToComboBox.itemsProperty().bind(ledger.accountsProperty());
 
-        /* amountField.text <-> transfer.amount */
+        /* amountField.value <-> transfer.amount */
         Bindings.bindBidirectional(
-                amountField.textProperty(),
-                transfer.amountProperty(),
-                Converters.getCurrencyStringConverter());
+                amountField.valueProperty(),
+                transfer.amountProperty());
 
         /* accountFromComboBox.selected -> transfer.accountFrom */
         ReadOnlyObjectProperty<AccountViewModel> selectedAccountFromProperty =
@@ -108,7 +107,9 @@ public class EditTransferController extends DataContextController<TransferViewMo
                 transfer.dateProperty());
 
         /* transfer.isAbleToSave -> addButton.disabled */
-        addButton.disableProperty().bind(transfer.ableToSaveProperty().not());
+        addButton.disableProperty().bind(Bindings.or(
+                transfer.ableToSaveProperty().not(),
+                amountField.valueValidProperty().not()));
 
         /* transfer.changing -> accountToComboBox.disabled */
         accountToComboBox.disableProperty().bind(transfer.changingProperty());

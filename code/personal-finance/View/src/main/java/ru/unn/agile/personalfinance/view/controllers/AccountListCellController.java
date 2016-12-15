@@ -3,8 +3,8 @@ package ru.unn.agile.personalfinance.view.controllers;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.util.converter.CurrencyStringConverter;
 import ru.unn.agile.PersonalFinance.ViewModel.AccountViewModel;
+import ru.unn.agile.personalfinance.view.utils.Converters;
 
 public class AccountListCellController extends DataContextController<AccountViewModel> {
     @FXML
@@ -22,7 +22,7 @@ public class AccountListCellController extends DataContextController<AccountView
         Bindings.bindBidirectional(
                 balanceLabel.textProperty(),
                 account.balanceProperty(),
-                new CurrencyStringConverter());
+                Converters.getCurrencyStringConverter());
     }
 
     @Override

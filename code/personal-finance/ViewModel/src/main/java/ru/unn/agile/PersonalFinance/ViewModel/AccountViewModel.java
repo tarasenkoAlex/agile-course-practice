@@ -41,11 +41,11 @@ public class AccountViewModel extends SavableViewModelObject {
     }
 
     public final String getName() {
-        return nameProperty.getValue();
+        return nameProperty.get();
     }
 
     public final void setName(final String name) {
-        nameProperty.setValue(name);
+        nameProperty.set(name);
     }
 
     public final IntegerProperty balanceProperty() {
@@ -53,19 +53,19 @@ public class AccountViewModel extends SavableViewModelObject {
     }
 
     public final int getBalance() {
-        return balanceProperty.getValue();
+        return balanceProperty.get();
     }
 
     public final void setBalance(final int balance) {
-        balanceProperty.setValue(balance);
+        balanceProperty.set(balance);
     }
 
     public final ListProperty<TransactionViewModel> transactionsProperty() {
-        return this.transactionsProperty;
+        return transactionsProperty;
     }
 
     public final ObservableList<TransactionViewModel> getTransactions() {
-        return this.transactionsProperty.get();
+        return transactionsProperty.get();
     }
 
     // endregion

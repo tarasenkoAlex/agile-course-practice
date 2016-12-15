@@ -2,6 +2,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 
+<?import ru.unn.agile.personalfinance.view.controls.CurrencyTextField?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
             fx:controller="ru.unn.agile.personalfinance.view.controllers.EditTransferController">
     <GridPane vgap="10"
@@ -34,8 +35,8 @@
 
         <!-- Amount -->
         <Label text="Amount" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <JFXTextField fx:id="amountField" GridPane.rowIndex="2" GridPane.columnIndex="1"
-                      maxWidth="Infinity"/>
+        <CurrencyTextField fx:id="amountField" GridPane.rowIndex="2" GridPane.columnIndex="1"
+                           maxWidth="Infinity"/>
 
         <!-- Date -->
         <Label text="Date" GridPane.rowIndex="3" GridPane.columnIndex="0"/>

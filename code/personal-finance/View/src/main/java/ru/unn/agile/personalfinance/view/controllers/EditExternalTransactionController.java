@@ -16,6 +16,7 @@ import ru.unn.agile.PersonalFinance.ViewModel.ExternalTransactionViewModel;
 import ru.unn.agile.PersonalFinance.ViewModel.LedgerViewModel;
 import ru.unn.agile.personalfinance.view.ViewModelService;
 import ru.unn.agile.personalfinance.view.WindowsManager;
+import ru.unn.agile.personalfinance.view.controls.CurrencyTextField;
 import ru.unn.agile.personalfinance.view.controls.StringListCellFactory;
 import ru.unn.agile.personalfinance.view.utils.Converters;
 
@@ -44,7 +45,7 @@ public class EditExternalTransactionController
     private ComboBox<CategoryViewModel> categoryComboBox;
 
     @FXML
-    private TextField transactionAmountField;
+    private CurrencyTextField transactionAmountField;
 
     @FXML
     private JFXToggleButton incomeToggleButton;
@@ -81,11 +82,10 @@ public class EditExternalTransactionController
     protected void addBindings(final ExternalTransactionViewModel transaction) {
         transaction.startChanging();
 
-        /* transactionAmountField.text <-> transaction.amount */
+        /* transactionAmountField.value <-> transaction.amount */
         Bindings.bindBidirectional(
-                transactionAmountField.textProperty(),
-                transaction.amountProperty(),
-                Converters.getCurrencyStringConverter());
+                transactionAmountField.valueProperty(),
+                transaction.amountProperty());
 
         /* incomeToggleButton.isSelected <-> transaction.isIncome */
         Bindings.bindBidirectional(
@@ -112,7 +112,9 @@ public class EditExternalTransactionController
                 transaction.dateProperty());
 
         /* !transaction.isAbleToSave -> addButton.disabled  */
-        addButton.disableProperty().bind(transaction.ableToSaveProperty().not());
+        addButton.disableProperty().bind(Bindings.or(
+                transaction.ableToSaveProperty().not(),
+                transactionAmountField.valueValidProperty().not()));
 
         if (transaction.getCategory() == null) {
             categoryComboBox.getSelectionModel().selectFirst();

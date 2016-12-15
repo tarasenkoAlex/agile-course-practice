@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import ru.unn.agile.personalfinance.view.controls.CurrencyTextField?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
             fx:controller="ru.unn.agile.personalfinance.view.controllers.EditExternalTransactionController">
     <GridPane vgap="10"
@@ -37,8 +38,8 @@
 
         <!-- Amount -->
         <Label text="Amount" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <JFXTextField fx:id="transactionAmountField" maxWidth="Infinity"
-                      GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <CurrencyTextField fx:id="transactionAmountField" maxWidth="Infinity"
+                           GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
         <!-- Counterparty -->
         <Label text="Counterparty" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
