@@ -1,7 +1,7 @@
 apply from:   rootDir.getAbsolutePath() + '/code/config/scripts/javafx.plugin'
 
 dependencies {
-    compile project(':credit-calculator-ViewModel')
+    compile project(':Credit-ViewModel')
 }
 
 sourceSets {

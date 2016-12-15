@@ -5,5 +5,5 @@ javafx {
 }
 
 dependencies {
-    compile project(':credit-calculator-Model')
+    compile project(':Credit-Model')
 }
