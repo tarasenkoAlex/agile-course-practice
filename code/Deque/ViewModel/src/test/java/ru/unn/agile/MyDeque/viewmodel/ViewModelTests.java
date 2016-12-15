@@ -61,9 +61,6 @@ public class ViewModelTests {
     @Test
     public void isAcceptButtonDisabledWhenFormatIsBad() {
         inputField();
-        viewmodel.textFieldKey(KeyboardsKeys.ANY);
-        assertEquals(true, viewmodel.isAcceptButtonEnabled());
-
         viewmodel.setValue("trash");
         viewmodel.textFieldKey(KeyboardsKeys.ANY);
 
