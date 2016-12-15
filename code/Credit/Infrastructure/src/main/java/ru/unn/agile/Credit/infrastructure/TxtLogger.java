@@ -1,6 +1,6 @@
-package ru.unn.agile.ComplexNumber.infrastructure_lab3_legacy;
+package ru.unn.agile.Credit.infrastructure;
 
-import ru.unn.agile.ComplexNumber.viewmodel_lab3_legacy.ILogger;
+import ru.unn.agile.Credit.viewmodel.ILogger;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,28 +17,30 @@ public class TxtLogger implements ILogger {
     private final BufferedWriter writer;
     private final String filename;
 
+    BufferedWriter getWriter() {
+        return writer;
+    }
     private static String now() {
-        Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW, Locale.ENGLISH);
-        return sdf.format(cal.getTime());
+        return sdf.format(Calendar.getInstance().getTime());
     }
 
     public TxtLogger(final String filename) {
         this.filename = filename;
 
-        BufferedWriter logWriter = null;
+        BufferedWriter writer = null;
         try {
-            logWriter = new BufferedWriter(new FileWriter(filename));
+            writer = new BufferedWriter(new FileWriter(this.filename));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        writer = logWriter;
+        this.writer = writer;
     }
 
     @Override
-    public void log(final String s) {
+    public void log(final String string) {
         try {
-            writer.write(now() + " > " + s);
+            writer.write(now() + " > " + string);
             writer.newLine();
             writer.flush();
         } catch (Exception e) {
@@ -46,12 +48,16 @@ public class TxtLogger implements ILogger {
         }
     }
 
-    @Override
-    public List<String> getLog() {
+    List<String> getLog(final boolean isTesting) {
         BufferedReader reader;
-        ArrayList<String> log = new ArrayList<String>();
+        ArrayList<String> log = new ArrayList<>();
+
         try {
-            reader = new BufferedReader(new FileReader(filename));
+            if (isTesting) {
+                reader = null;
+            } else {
+                reader = new BufferedReader(new FileReader(filename));
+            }
             String line = reader.readLine();
 
             while (line != null) {
@@ -59,10 +65,15 @@ public class TxtLogger implements ILogger {
                 line = reader.readLine();
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return log;
+    }
+
+    @Override
+    public List<String> getLog() {
+        return getLog(false);
     }
 
 }

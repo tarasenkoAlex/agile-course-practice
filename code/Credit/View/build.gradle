@@ -2,6 +2,7 @@ apply from:   rootDir.getAbsolutePath() + '/code/config/scripts/javafx.plugin'
 
 dependencies {
     compile project(':Credit-ViewModel')
+    compile project(':Credit-Infrastructure')
 }
 
 sourceSets {

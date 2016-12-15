@@ -38,12 +38,14 @@ public class ViewModel {
     private final StringProperty payment = new SimpleStringProperty();
     private final StringProperty overpayment = new SimpleStringProperty();
     private final StringProperty totalSum = new SimpleStringProperty();
+    private final StringProperty logs = new SimpleStringProperty();
 
     private final BooleanProperty calculationDisabled = new SimpleBooleanProperty();
 
     private final StringProperty status = new SimpleStringProperty();
 
-    private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
+    private final List<ValueCachingChangeListener> valueChangedListeners = new ArrayList<>();
+    private ILogger logger;
 
     // FXML needs default c-tor for binding
     public ViewModel() {
@@ -53,6 +55,7 @@ public class ViewModel {
         payment.set("");
         overpayment.set("");
         totalSum.set("");
+        logs.set("");
         status.set(Status.WAITING.toString());
 
         BooleanBinding couldCalculate = new BooleanBinding() {
@@ -74,10 +77,12 @@ public class ViewModel {
         } };
 
         for (StringProperty field : fields) {
-            final ValueChangeListener listener = new ValueChangeListener();
+            final ValueCachingChangeListener listener = new ValueCachingChangeListener();
             field.addListener(listener);
             valueChangedListeners.add(listener);
         }
+
+
     }
 
     public void calculate() {
@@ -100,7 +105,73 @@ public class ViewModel {
                 overpayment.set("");
                 totalSum.set("");
             }
+
+            StringBuilder message = new StringBuilder(LogMessages.CALCULATE_WAS_PRESSED);
+            message.append("Arguments")
+                    .append(": Sum = ").append(sum.get())
+                    .append("; Months = ").append(months.get())
+                    .append("; Percent = ").append(percent.get());
+            logger.log(message.toString());
+            updateLogs();
         }
+    }
+
+    public void onFocusChanged(final Boolean isOldValue, final Boolean isNewValue) {
+        if (!isOldValue && isNewValue) {
+            return;
+        }
+
+        for (ValueCachingChangeListener listener : valueChangedListeners) {
+            if (listener.isChanged()) {
+                StringBuilder message = new StringBuilder(LogMessages.EDITING_FINISHED);
+                message.append("Input arguments are: [")
+                        .append(sum.get()).append("; ")
+                        .append(months.get()).append("; ")
+                        .append(percent.get()).append("]");
+                logger.log(message.toString());
+                updateLogs();
+
+                listener.cache();
+                break;
+            }
+        }
+    }
+
+    public String getLogs() {
+        return logs.get();
+    }
+
+    public StringProperty logsProperty() {
+        return logs;
+    }
+
+    private class ValueCachingChangeListener implements ChangeListener<String> {
+        private String prevValue = new String();
+        private String currentValue = new String();
+        @Override
+        public void changed(final ObservableValue<? extends String> observable,
+                            final String oldValue, final String newValue) {
+            if (oldValue.equals(newValue)) {
+                return;
+            }
+            status.set(getInputStatus().toString());
+            currentValue = newValue;
+        }
+        public boolean isChanged() {
+            return !prevValue.equals(currentValue);
+        }
+        public void cache() {
+            prevValue = currentValue;
+        }
+    }
+
+    private void updateLogs() {
+        List<String> fullLog = logger.getLog();
+        String record = new String();
+        for (String log : fullLog) {
+            record += log + "\n";
+        }
+        logs.set(record);
     }
 
     public StringProperty sumProperty() {
@@ -168,6 +239,16 @@ public class ViewModel {
         months.set("");
         percent.set("");
         status.set(Status.WAITING.toString());
+        StringBuilder message = new StringBuilder(LogMessages.CLEAR_WAS_PRESSED);
+        logger.log(message.toString());
+        updateLogs();
+    }
+
+    public void setLogger(final ILogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger parameter can't be null");
+        }
+        this.logger = logger;
     }
 
     private class ValueChangeListener implements ChangeListener<String> {
@@ -179,3 +260,11 @@ public class ViewModel {
     }
 }
 
+
+final class LogMessages {
+    public static final String CALCULATE_WAS_PRESSED = "Calculate. ";
+    public static final String CLEAR_WAS_PRESSED = "Clear. ";
+    public static final String EDITING_FINISHED = "Updated input. ";
+
+    private LogMessages() { }
+}
