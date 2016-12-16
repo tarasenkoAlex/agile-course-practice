@@ -197,8 +197,6 @@ project(":code/Vector3D/View").name = "Vector3D-View"
 // Рябинкин Евгений
 // Сахаров Алексей
 // Сиротин Никита
-include "code/sirotin-nikita"
-project(":code/sirotin-nikita").name = "sirotin-nikita-Model"
 // Скребков Артём
 include "code/TemperatureConverter/Model"
 project(":code/TemperatureConverter/Model").name = "Temperature-Converter-Model"
