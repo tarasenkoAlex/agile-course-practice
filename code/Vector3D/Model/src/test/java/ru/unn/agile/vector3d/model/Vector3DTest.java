@@ -91,9 +91,16 @@ public class Vector3DTest {
         assertEquals(vector, new Vector3D(0.0, 0.0, 0.0));
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test
     public void isCorrectEqualsNotNullObjectWithNullObject() {
         firstVec = new Vector3D();
+        try {
+            firstVec.equals(null);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Comparing vector cannot be null", e.getMessage());
+        } catch (Exception e) {
+            fail("Unexpected exception");
+        }
 
         assert firstVec.equals(null);
     }

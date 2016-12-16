@@ -6,6 +6,9 @@ import org.junit.After;
 import ru.unn.agile.vector3d.model.Vector3D;
 import ru.unn.agile.vector3d.viewmodel.ViewModel.OperationTab;
 
+import java.util.Iterator;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class ViewModelTest {
@@ -15,7 +18,8 @@ public class ViewModelTest {
 
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        TestLoggerImpl logger = new TestLoggerImpl();
+        viewModel = new ViewModel(logger);
     }
 
     @After
@@ -508,5 +512,42 @@ public class ViewModelTest {
     @Test
     public void canAccessButtonDisabledProperty() {
         assertNotNull(viewModel.buttonDisabledProperty());
+    }
+
+    @Test
+    public void testCreateViewModelWithLogger() {
+        TestLoggerImpl logger = new TestLoggerImpl();
+        ViewModel vm = new ViewModel(logger);
+
+        assertNotNull(vm);
+    }
+
+    @Test
+    public void testCreateViewModelWithNullLogger() {
+        try {
+            ViewModel vm = new ViewModel(null);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Logger can't be null", e.getMessage());
+        } catch (Exception ex) {
+            fail("Invalid exception type");
+        }
+    }
+
+    @Test
+    public void testLoggerIsEmpty() {
+        AbstractLogger logger = viewModel.getLogger();
+        Iterator<String> it = logger.iterator();
+        assertFalse(it.hasNext());
+    }
+
+    @Test
+    public void testLoggerNotEmptyAfterCalculate() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setActiveTab(OperationTab.NORM);
+        viewModel.calculate();
+
+        AbstractLogger logger = viewModel.getLogger();
+        Iterator<String> it = logger.iterator();
+        assertTrue(it.hasNext());
     }
 }

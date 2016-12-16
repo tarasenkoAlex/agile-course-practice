@@ -15,7 +15,7 @@
     </fx:define>
     <HBox>
         <Label text="Введите вектор: "/>
-        <TextField fx:id="vectorTextField" maxWidth="Infinity" HBox.hgrow="always"/>
+        <TextField fx:id="vectorTextField" maxWidth="Infinity" HBox.hgrow="always" promptText="1.0, 2.0, -3.5"/>
     </HBox>
     <TabPane fx:id="opsTabPane" TabClosingPolicy="UNAVAILABLE">
         <Tab fx:id="normTab" text="Норма">

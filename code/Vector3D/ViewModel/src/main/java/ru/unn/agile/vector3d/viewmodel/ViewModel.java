@@ -23,7 +23,15 @@ public class ViewModel {
     private final StringProperty statusText = new SimpleStringProperty();
     private final BooleanProperty buttonDisabled = new SimpleBooleanProperty();
 
-    public ViewModel() {
+    private AbstractLogger logger;
+
+    public ViewModel(final AbstractLogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger can't be null");
+        }
+
+        this.logger = logger;
+
         ChangeListener<Object> stateListener = new ChangeListener<Object>() {
             @Override
             public void changed(final ObservableValue<? extends Object> ov,
@@ -143,6 +151,10 @@ public class ViewModel {
 
     public String getStatusText() {
         return statusText.get();
+    }
+
+    public AbstractLogger getLogger() {
+        return logger;
     }
 
     boolean validate(final String text) {

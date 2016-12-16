@@ -68,6 +68,10 @@ public class Vector3D {
     }
 
     public boolean equals(final Vector3D vec) {
+        if (vec == null) {
+            throw new IllegalArgumentException("Comparing vector cannot be null");
+        }
+
         return equals(vec.x, vec.y, vec.z);
     }
 
