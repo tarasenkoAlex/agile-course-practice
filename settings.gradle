@@ -162,8 +162,12 @@ project(":code/notation-converter/View").name = "notation-converter-View"
 // Пауль Эдуард
 // Песков Дмитрий
 // Поздеев Антон
-include "code/Pozdeev-Anton"
-project(":code/Pozdeev-Anton").name = "pozdeev-anton-model"
+include "code/color-converter/Model"
+project(":code/color-converter/Model").name = "color-converter-model"
+include "code/color-converter/View"
+project(":code/color-converter/View").name = "color-converter-view"
+include "code/color-converter/ViewModel"
+project(":code/color-converter/ViewModel").name = "color-converter-viewmodel"
 // Пономарев Георгий
 // Пономарев Никита
 include "code/ponomarev-nikita/Model"
