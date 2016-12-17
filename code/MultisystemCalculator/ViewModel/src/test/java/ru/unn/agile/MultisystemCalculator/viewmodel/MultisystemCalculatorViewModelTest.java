@@ -36,6 +36,11 @@ public class MultisystemCalculatorViewModelTest {
     }
 
     @Test
+    public void canCreateObjectWithDefaultConstructor() {
+        assertNotNull(new CalculatorViewModel());
+    }
+
+    @Test
     public void testCanInputWrongFormat() {
         viewModel.firstArgProperty().set("3a5");
         viewModel.secondArgProperty().set("1a3");
