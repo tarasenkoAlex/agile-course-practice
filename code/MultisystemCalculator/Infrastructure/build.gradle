@@ -1,8 +1,6 @@
-apply from:   rootDir.getAbsolutePath() + '/code/config/scripts/javafx.plugin'
-
 dependencies {
     compile project(':MultiSystemCalculatorViewModel')
-    compile project(':MultisystemCalculatorInfrastructure')
+    testCompile project(':MultiSystemCalculatorViewModel').sourceSets.test.output
 }
 
 sourceSets {

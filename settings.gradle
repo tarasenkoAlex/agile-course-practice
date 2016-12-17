@@ -256,6 +256,8 @@ include "code/MultisystemCalculator/ViewModel"
 project(":code/MultisystemCalculator/ViewModel").name = "MultiSystemCalculatorViewModel"
 include "code/MultisystemCalculator/View"
 project(":code/MultisystemCalculator/View").name = "MultiSystemCalculatorView"
+include "code/MultisystemCalculator/Infrastructure"
+project(":code/MultisystemCalculator/Infrastructure").name = "MultisystemCalculatorInfrastructure"
 
 
 // Цыганов Алексей
