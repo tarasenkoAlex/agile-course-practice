@@ -15,7 +15,7 @@ public class MultisystemCalculatorViewModelTest {
     private CalculatorViewModel viewModel;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         viewModel = new CalculatorViewModel(new FakeLogger());
     }
 
