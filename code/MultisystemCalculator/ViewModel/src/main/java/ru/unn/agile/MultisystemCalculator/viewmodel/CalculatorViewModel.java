@@ -1,7 +1,6 @@
 package ru.unn.agile.MultisystemCalculator.viewmodel;
 
 import com.google.common.collect.ImmutableList;
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,9 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Дарья on 23.11.2016.
- */
 public class CalculatorViewModel {
     private HashMap<Operation, CalculatorInterface.BinaryOperation<Integer, String,
             String>> operationsMap;

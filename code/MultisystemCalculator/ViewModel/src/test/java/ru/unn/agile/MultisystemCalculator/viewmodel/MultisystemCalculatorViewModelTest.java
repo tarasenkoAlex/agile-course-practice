@@ -7,9 +7,7 @@ import ru.unn.agile.MultisystemCalculator.Model.Format;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import static ru.unn.agile.MultisystemCalculator.viewmodel.CalculatorViewModel.LogMessages.*;
 
 public class MultisystemCalculatorViewModelTest {

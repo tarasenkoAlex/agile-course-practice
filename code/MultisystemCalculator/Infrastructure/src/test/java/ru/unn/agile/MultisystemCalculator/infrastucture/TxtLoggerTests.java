@@ -1,6 +1,6 @@
 package ru.unn.agile.MultisystemCalculator.infrastucture;
 
-/* import org.junit.Before;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -11,10 +11,10 @@ import java.util.List;
 import static junit.framework.TestCase.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
-import static ru.unn.agile.MultisystemCalculator.infrastucture.RegexMatcher.matchesPattern; */
+import static ru.unn.agile.MultisystemCalculator.infrastucture.RegexMatcher.matchesPattern;
 
 public class TxtLoggerTests {
-    /* private static final String FILENAME = "./TxtLogger_Tests-lab3.log";
+    private static final String FILENAME = "./TxtLogger_Tests-lab3.log";
     private TxtLogger txtLogger;
 
     @Before
@@ -67,5 +67,5 @@ public class TxtLoggerTests {
 
         String message = txtLogger.getLog().get(0);
         assertThat(message, matchesPattern("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
-    } */
+    }
 }
