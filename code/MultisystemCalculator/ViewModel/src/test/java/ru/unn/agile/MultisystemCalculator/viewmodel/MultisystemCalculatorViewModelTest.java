@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.unn.agile.MultisystemCalculator.Model.Format;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -141,14 +142,14 @@ public class MultisystemCalculatorViewModelTest {
     }
 
     @Test
-    public void logIsEmptyInTheBeginning() {
+    public void logIsEmptyInTheBeginning() throws IOException {
         List<String> log = viewModel.getLog();
 
         assertTrue(log.isEmpty());
     }
 
     @Test
-    public void logContainsProperMessageAfterCalculation() {
+    public void logContainsProperMessageAfterCalculation() throws IOException {
         setInputData();
         viewModel.calculate();
         String message = viewModel.getLog().get(0);
@@ -157,7 +158,7 @@ public class MultisystemCalculatorViewModelTest {
     }
 
     @Test
-    public void logContainsInputArgumentsAfterCalculation() {
+    public void logContainsInputArgumentsAfterCalculation() throws IOException {
         setInputData();
 
         viewModel.calculate();
@@ -168,7 +169,7 @@ public class MultisystemCalculatorViewModelTest {
     }
 
     @Test
-    public void argumentsInfoIssProperlyFormatted() {
+    public void argumentsInfoIssProperlyFormatted() throws IOException {
         setInputData();
 
         viewModel.calculate();
@@ -181,7 +182,7 @@ public class MultisystemCalculatorViewModelTest {
     }
 
     @Test
-    public void operationTypeIsMentionedInTheLog() {
+    public void operationTypeIsMentionedInTheLog() throws IOException {
         setInputData();
 
         viewModel.calculate();
@@ -191,7 +192,7 @@ public class MultisystemCalculatorViewModelTest {
     }
 
     @Test
-    public void canPutSeveralLogMessages() {
+    public void canPutSeveralLogMessages() throws IOException {
         setInputData();
 
         viewModel.calculate();
@@ -202,7 +203,7 @@ public class MultisystemCalculatorViewModelTest {
     }
 
     @Test
-    public void canSeeOperationChangeInLog() {
+    public void canSeeOperationChangeInLog() throws IOException {
         setInputData();
 
         viewModel.onOperationChanged(Operation.ADDITION, Operation.DIVISION);
@@ -212,7 +213,7 @@ public class MultisystemCalculatorViewModelTest {
     }
 
     @Test
-    public void operationIsNotLoggedIfNotChanged() {
+    public void operationIsNotLoggedIfNotChanged() throws IOException {
         viewModel.onOperationChanged(Operation.ADDITION, Operation.DIVISION);
 
         viewModel.onOperationChanged(Operation.ADDITION, Operation.ADDITION);
@@ -221,7 +222,7 @@ public class MultisystemCalculatorViewModelTest {
     }
 
     @Test
-    public void argumentsAreCorrectlyLogged() {
+    public void argumentsAreCorrectlyLogged() throws IOException {
         setInputData();
 
         viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
@@ -234,14 +235,14 @@ public class MultisystemCalculatorViewModelTest {
     }
 
     @Test
-    public void calculateIsNotCalledWhenButtonIsDisabled() {
+    public void calculateIsNotCalledWhenButtonIsDisabled() throws IOException {
         viewModel.calculate();
 
         assertTrue(viewModel.getLog().isEmpty());
     }
 
     @Test
-    public void doNotLogSameParametersTwiceWithPartialInput() {
+    public void doNotLogSameParametersTwiceWithPartialInput() throws IOException {
         viewModel.firstArgProperty().set("0b01");
         viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
         viewModel.firstArgProperty().set("0b01");

@@ -2,10 +2,7 @@ package ru.unn.agile.MultisystemCalculator.infrastucture;
 
 import ru.unn.agile.MultisystemCalculator.viewmodel.ILogger;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,45 +20,32 @@ public class TxtLogger implements ILogger {
         return sdf.format(cal.getTime());
     }
 
-    public TxtLogger(final String filename) {
+    public TxtLogger(final String filename) throws IOException {
         this.filename = filename;
 
         BufferedWriter logWriter = null;
-        try {
-            logWriter = new BufferedWriter(new FileWriter(filename));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        logWriter = new BufferedWriter(new FileWriter(filename));
         writer = logWriter;
     }
 
     @Override
-    public void log(final String s) {
-        try {
-            writer.write(now() + " > " + s);
-            writer.newLine();
-            writer.flush();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public void log(final String s) throws IOException {
+        writer.write(now() + " > " + s);
+        writer.newLine();
+        writer.flush();
     }
 
     @Override
-    public List<String> getLog() {
+    public List<String> getLog() throws IOException {
         BufferedReader reader;
         ArrayList<String> log = new ArrayList<String>();
-        try {
-            reader = new BufferedReader(new FileReader(filename));
-            String line = reader.readLine();
+        reader = new BufferedReader(new FileReader(filename));
+        String line = reader.readLine();
 
-            while (line != null) {
-                log.add(line);
-                line = reader.readLine();
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        while (line != null) {
+            log.add(line);
+            line = reader.readLine();
         }
-
         return log;
     }
 }

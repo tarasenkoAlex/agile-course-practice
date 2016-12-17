@@ -14,6 +14,7 @@ import ru.unn.agile.MultisystemCalculator.Model.NumberConverter;
 import ru.unn.agile.MultisystemCalculator.Model.NumeralSystemsData;
 import ru.unn.agile.MultisystemCalculator.viewmodel.impl.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -163,11 +164,11 @@ public class CalculatorViewModel {
         return logs;
     }
 
-    public final List<String> getLog() {
+    public final List<String> getLog() throws IOException {
         return logger.getLog();
     }
 
-    private void updateLogs() {
+    private void updateLogs() throws IOException {
         List<String> fullLog = logger.getLog();
         String record = new String();
         for (String log : fullLog) {
@@ -176,7 +177,8 @@ public class CalculatorViewModel {
         logs.set(record);
     }
 
-    public void onOperationChanged(final Operation oldValue, final Operation newValue) {
+    public void onOperationChanged(final Operation oldValue,
+                                   final Operation newValue) throws IOException {
         if (oldValue.equals(newValue)) {
             return;
         }
@@ -187,7 +189,7 @@ public class CalculatorViewModel {
     }
 
 
-    public void onFocusChanged(final Boolean oldValue, final Boolean newValue) {
+    public void onFocusChanged(final Boolean oldValue, final Boolean newValue) throws IOException {
         if (!oldValue && newValue) {
             return;
         }

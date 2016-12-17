@@ -13,6 +13,8 @@ import ru.unn.agile.MultisystemCalculator.infrastucture.TxtLogger;
 import ru.unn.agile.MultisystemCalculator.viewmodel.CalculatorViewModel;
 import ru.unn.agile.MultisystemCalculator.viewmodel.Operation;
 
+import java.io.IOException;
+
 /**
  * Created by Дарья on 28.11.2016.
  */
@@ -31,7 +33,7 @@ public class CalculatorView {
     private Button computeBtn;
 
     @FXML
-    void initialize() {
+    void initialize() throws IOException {
 
         // Two-way binding hasn't supported by FXML yet, so place it in code-behind
         viewModel.setLogger(new TxtLogger("./TxtLogger-lab3.log"));
@@ -39,7 +41,11 @@ public class CalculatorView {
             @Override
             public void changed(final ObservableValue<? extends Boolean> observable,
                                 final Boolean oldValue, final Boolean newValue) {
-                viewModel.onFocusChanged(oldValue, newValue);
+                try {
+                    viewModel.onFocusChanged(oldValue, newValue);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         };
         firstArg.textProperty().bindBidirectional(viewModel.firstArgProperty());
@@ -52,7 +58,11 @@ public class CalculatorView {
             public void changed(final ObservableValue<? extends Operation> observable,
                                 final Operation oldValue,
                                 final Operation newValue) {
-                viewModel.onOperationChanged(oldValue, newValue);
+                try {
+                    viewModel.onOperationChanged(oldValue, newValue);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
         computeBtn.setOnAction(new EventHandler<ActionEvent>() {

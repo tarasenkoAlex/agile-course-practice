@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
@@ -18,7 +19,7 @@ public class TxtLoggerTests {
     private TxtLogger txtLogger;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         txtLogger = new TxtLogger(FILENAME);
     }
 
@@ -37,7 +38,7 @@ public class TxtLoggerTests {
     }
 
     @Test
-    public void canWriteLogMessage() {
+    public void canWriteLogMessage() throws IOException {
         String testMessage = "Test message";
 
         txtLogger.log(testMessage);
@@ -47,7 +48,7 @@ public class TxtLoggerTests {
     }
 
     @Test
-    public void canWriteSeveralLogMessage() {
+    public void canWriteSeveralLogMessage() throws IOException {
         String[] messages = {"Test message 1", "Test message 2"};
 
         txtLogger.log(messages[0]);
@@ -60,7 +61,7 @@ public class TxtLoggerTests {
     }
 
     @Test
-    public void doesLogContainDateAndTime() {
+    public void doesLogContainDateAndTime() throws IOException {
         String testMessage = "Test message";
 
         txtLogger.log(testMessage);
