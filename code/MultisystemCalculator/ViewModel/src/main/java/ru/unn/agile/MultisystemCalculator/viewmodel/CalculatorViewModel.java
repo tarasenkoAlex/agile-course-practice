@@ -231,5 +231,7 @@ public class CalculatorViewModel {
         public static final String OPERATION_WAS_CHANGED = "Operation was changed to ";
         public static final String EDITING_FINISHED = "Updated input. ";
 
+        private LogMessages() {}
+
     }
 }
