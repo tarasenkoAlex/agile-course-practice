@@ -254,6 +254,14 @@ public class TemperatureConverterViewModelTest {
                 + viewModel.getSecondScale() + LogMsg.CONVERT_SUCCESS + ".*"));
     }
     @Test
+    public void logContainsRightMsgAfterConvertSecondToFirst() {
+        viewModel.setSecondValue("50");
+        viewModel.convertSecondToFirstValue();
+        String msg = viewModel.getLog().get(1);
+        assertTrue(msg.matches(".*" + viewModel.getSecondScale() + " to "
+                + viewModel.getFirstScale() + LogMsg.CONVERT_SUCCESS + ".*"));
+    }
+    @Test
     public void noLogIfFirstValueNotChanged() {
         viewModel.firstValueChanged("1", "1");
         assertEquals(0, viewModel.getLog().size());
@@ -277,5 +285,10 @@ public class TemperatureConverterViewModelTest {
     public void noLogIfSetSameValue() {
         viewModel.setSecondValue("");
         assertEquals(0, viewModel.getLog().size());
+    }
+    @Test
+    public void xanLogMsgCreate() {
+        LogMsg logMsg = new LogMsg();
+        assertNotNull(logMsg);
     }
 }
