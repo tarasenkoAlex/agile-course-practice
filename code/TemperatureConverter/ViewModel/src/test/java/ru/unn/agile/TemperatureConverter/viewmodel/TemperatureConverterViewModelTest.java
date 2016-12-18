@@ -3,6 +3,7 @@ package ru.unn.agile.TemperatureConverter.viewmodel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import ru.unn.agile.TemperatureConverter.model.TemperatureConverter;
 import ru.unn.agile.TemperatureConverter.model.TemperatureScale;
 
 import java.util.List;
@@ -23,11 +24,21 @@ public class TemperatureConverterViewModelTest {
         }
     }
 
+    @Test
+    public void canCreateViewModelWithoutLogger() {
+        TemperatureConverterViewModel viewModel = new TemperatureConverterViewModel();
+        assertNotNull(viewModel);
+    }
     @After
     public void tearDown() {
         viewModel = null;
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void msgWhenSetNullLogger() {
+        DummyLogger nullLogger = null;
+        viewModel = new TemperatureConverterViewModel(nullLogger);
+    }
     @Test
     public void setDefaultValuesOfTemperatureFields() {
         assertEquals("", viewModel.getFirstValue());
@@ -236,11 +247,31 @@ public class TemperatureConverterViewModelTest {
         assertEquals(3, viewModel.getLog().size());
     }
     @Test
-    public void logContainsRightMsgAfterConvert() {
+    public void logContainsRightMsgAfterConvertFirstToSecond() {
         viewModel.setFirstValue("50");
         viewModel.convertFirstToSecondValue();
         String msg = viewModel.getLog().get(1);
         assertTrue(msg.matches(".*" + viewModel.getFirstScale() + " to "
                 + viewModel.getSecondScale() + LogMsg.CONVERT_SUCCESS + ".*"));
+    }
+    @Test
+    public void noLogIfFirstValueNotChanged() {
+        viewModel.firstValueChanged("1", "1");
+        assertEquals(0, viewModel.getLog().size());
+    }
+    @Test
+    public void noLogIfSecondValueNotChanged() {
+        viewModel.secondValueChanged("1", "1");
+        assertEquals(0, viewModel.getLog().size());
+    }
+    @Test
+    public void noLogIfFirstScaleNotChanged() {
+        viewModel.firstScaleChanged("FAHRENHEIT", "FAHRENHEIT");
+        assertEquals(0, viewModel.getLog().size());
+    }
+    @Test
+    public void noLogIfSecondScaleNotChanged() {
+        viewModel.secondScaleChanged("FAHRENHEIT", "FAHRENHEIT");
+        assertEquals(0, viewModel.getLog().size());
     }
 }
