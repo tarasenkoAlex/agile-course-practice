@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 public class VolumeCalculatorViewModelTest {
 
     private VolumeCalculatorViewModel viewModel;
+    private double delta = 0.01;
     public void setExternalViewModel(final VolumeCalculatorViewModel viewModel) {
         this.viewModel = viewModel;
     }
@@ -299,5 +300,35 @@ public class VolumeCalculatorViewModelTest {
         viewModel.calculate();
 
         assertNotEquals("", viewModel.getResultVolumeProperty().getValue());
+    }
+    @Test
+    public void getCube() {
+        double value = EVolumeTypes.CUBE.getVolume(3);
+        assertEquals(27, value, 0.01);
+    }
+    @Test
+    public void getCone() {
+        double value = EVolumeTypes.CONE.getVolume(2, 3);
+        assertEquals(12.56, value, delta);
+    }
+    @Test
+    public void getCylinder() {
+        double value = EVolumeTypes.CYLINDER.getVolume(2, 3);
+        assertEquals(37.69, value, 0.01);
+    }
+    @Test
+    public void getPyramid() {
+        double value = EVolumeTypes.PYRAMID.getVolume(4, 3);
+        assertEquals(3.99, value, delta);
+    }
+    @Test
+    public void getTetrahedron() {
+        double value = EVolumeTypes.TETRAHEDRON.getVolume(2);
+        assertEquals(0.94, value, 0.01);
+    }
+    @Test
+    public void getSphere() {
+        double value = EVolumeTypes.SPHERE.getVolume(1);
+        assertEquals(4.18, value, delta);
     }
 }
