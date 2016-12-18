@@ -310,8 +310,8 @@ public class VolumeCalculatorViewModel {
         }
         logs.set(record);
     }
-    public void onOperationChanged(final EVolumeTypes oldValue, final EVolumeTypes newValue) {
-        if (oldValue.equals(newValue)) {
+    public void onVolumeTypeChanged(final EVolumeTypes oldValue, final EVolumeTypes newValue) {
+        if (oldValue != null && oldValue.equals(newValue)) {
             return;
         }
         StringBuilder message = new StringBuilder(LogMessages.OPERATION_WAS_CHANGED);

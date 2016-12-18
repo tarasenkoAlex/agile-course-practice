@@ -73,7 +73,7 @@ public class VolumeCalculator {
             public void changed(final ObservableValue<? extends EVolumeTypes> observable,
                                 final EVolumeTypes oldValue,
                                 final EVolumeTypes newValue) {
-                viewModel.onOperationChanged(oldValue, newValue);
+                viewModel.onVolumeTypeChanged(oldValue, newValue);
             }
         });
 
