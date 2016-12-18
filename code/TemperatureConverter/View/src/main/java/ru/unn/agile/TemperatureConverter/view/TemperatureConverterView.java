@@ -1,10 +1,12 @@
 package ru.unn.agile.TemperatureConverter.view;
 
 import ru.unn.agile.TemperatureConverter.viewmodel.TemperatureConverterViewModel;
+import ru.unn.agile.TemperatureConverter.infrastructure.TxtLogger;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public final class TemperatureConverterView {
     private TemperatureConverterViewModel tempConverterViewModel;
@@ -14,6 +16,7 @@ public final class TemperatureConverterView {
     private JComboBox firstComboBoxScales;
     private JComboBox secondComboBoxScales;
     private JLabel warningLabel;
+    private JList<String> lstLog;
 
     private TemperatureConverterView() {
     }
@@ -46,7 +49,6 @@ public final class TemperatureConverterView {
             @Override
             public void actionPerformed(final ActionEvent actionEvent) {
                 bindFirstScale();
-                tempConverterViewModel.convertSecondToFirstValue();
                 backBindFirstValue();
             }
         });
@@ -55,17 +57,23 @@ public final class TemperatureConverterView {
             @Override
             public void actionPerformed(final ActionEvent actionEvent) {
                 bindSecondScale();
-                tempConverterViewModel.convertFirstToSecondValue();
                 backBindSecondValue();
             }
         });
     }
 
+    private void getLog() {
+        List<String> log = tempConverterViewModel.getLog();
+        String[] str = log.toArray(new String[log.size()]);
+        lstLog.setListData(str);
+    }
+
     public static void main(final String[] args) {
         JFrame frame = new JFrame("TemperatureConverterView");
-        TemperatureConverterViewModel tempConverterViewModel = new TemperatureConverterViewModel();
 
-        frame.setContentPane(new TemperatureConverterView(tempConverterViewModel).mainPanel);
+        TxtLogger logger = new TxtLogger("./Converter.log");
+        frame.setContentPane(new TemperatureConverterView(
+                new TemperatureConverterViewModel(logger)).mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -78,6 +86,7 @@ public final class TemperatureConverterView {
     private void backBindSecondValue() {
         secondTextField.setText(tempConverterViewModel.getSecondValue());
         warningLabel.setText(tempConverterViewModel.getWarningLabelText());
+        getLog();
     }
 
     private void bindSecondValue() {
@@ -87,6 +96,7 @@ public final class TemperatureConverterView {
     private void backBindFirstValue() {
         firstTextField.setText(tempConverterViewModel.getFirstValue());
         warningLabel.setText(tempConverterViewModel.getWarningLabelText());
+        getLog();
     }
 
     private void bindFirstScale() {

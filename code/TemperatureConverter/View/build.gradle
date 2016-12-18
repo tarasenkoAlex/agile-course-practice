@@ -1,5 +1,6 @@
 dependencies {
     compile project(':Temperature-Converter-ViewModel')
+    compile project(':Temperature-Converter-Infrastructure')
 }
 
 sourceSets {

@@ -5,14 +5,22 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.unn.agile.TemperatureConverter.model.TemperatureScale;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class TemperatureConverterViewModelTest {
     private TemperatureConverterViewModel viewModel;
 
+    public void setNewViewModel(final TemperatureConverterViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
     @Before
     public void setUp() {
-        viewModel = new TemperatureConverterViewModel();
+        if (viewModel == null) {
+            viewModel = new TemperatureConverterViewModel(new DummyLogger());
+        }
     }
 
     @After
@@ -190,5 +198,49 @@ public class TemperatureConverterViewModelTest {
         viewModel.convertSecondToFirstValue();
 
         assertEquals("283.15", viewModel.getFirstValue());
+    }
+    @Test
+    public void logIsEmptyWhenStarted() {
+        List<String> log = viewModel.getLog();
+        assertTrue(log.isEmpty());
+    }
+    @Test
+    public void logContainsRightMsgWhenFirstScaleChanged() {
+        viewModel.firstScaleChanged("CELSIUS", "FAHRENHEIT");
+        String msg = viewModel.getLog().get(0);
+        assertTrue(msg.matches(".*" + LogMsg.FIRST_SCALE_WAS_CHANGED + "FAHRENHEIT"));
+    }
+    @Test
+    public void logContainsRightMsgWhenSecondScaleChanged() {
+        viewModel.secondScaleChanged("CELSIUS", "FAHRENHEIT");
+        String msg = viewModel.getLog().get(0);
+        assertTrue(msg.matches(".*" + LogMsg.SECOND_SCALE_WAS_CHANGED + "FAHRENHEIT"));
+    }
+    @Test
+    public void logContainsRightMsgWhenFirstValueChanged() {
+        viewModel.firstValueChanged("1", "2");
+        String msg = viewModel.getLog().get(0);
+        assertTrue(msg.matches(".*" + LogMsg.FIRST_VALUE_WAS_CHANGED + "2"));
+    }
+    @Test
+    public void logContainsRightMsgWhenSecondValueChanged() {
+        viewModel.secondValueChanged("1", "2");
+        String msg = viewModel.getLog().get(0);
+        assertTrue(msg.matches(".*" + LogMsg.SECOND_VALUE_WAS_CHANGED + "2"));
+    }
+    @Test
+    public void canWriteThreeLogs() {
+        viewModel.secondScaleChanged("CELSIUS", "FAHRENHEIT");
+        viewModel.secondScaleChanged("CELSIUS", "FAHRENHEIT");
+        viewModel.secondScaleChanged("CELSIUS", "FAHRENHEIT");
+        assertEquals(3, viewModel.getLog().size());
+    }
+    @Test
+    public void logContainsRightMsgAfterConvert() {
+        viewModel.setFirstValue("50");
+        viewModel.convertFirstToSecondValue();
+        String msg = viewModel.getLog().get(1);
+        assertTrue(msg.matches(".*" + viewModel.getFirstScale() + " to "
+                + viewModel.getSecondScale() + LogMsg.CONVERT_SUCCESS + ".*"));
     }
 }

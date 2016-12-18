@@ -3,6 +3,8 @@ package ru.unn.agile.TemperatureConverter.viewmodel;
 import ru.unn.agile.TemperatureConverter.model.TemperatureConverter;
 import ru.unn.agile.TemperatureConverter.model.TemperatureScale;
 
+import java.util.List;
+
 public class TemperatureConverterViewModel {
     private static String emptyString = "";
     private String firstValue;
@@ -11,12 +13,33 @@ public class TemperatureConverterViewModel {
     private TemperatureScale secondScale;
     private String warningLabelText;
 
-    public TemperatureConverterViewModel() {
+    private ILogger logger;
+
+    private void init() {
         firstValue = "";
         secondValue = "";
         warningLabelText = "";
         firstScale = TemperatureScale.CELSIUS;
         secondScale = TemperatureScale.CELSIUS;
+    }
+    public TemperatureConverterViewModel() {
+        init();
+    }
+
+    public TemperatureConverterViewModel(final ILogger logger) {
+        init();
+        setLogger(logger);
+    }
+
+    private void setLogger(final ILogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Error! Logger can't be null!");
+        }
+        this.logger = logger;
+    }
+
+    public List<String> getLog() {
+        return logger.getLog();
     }
 
     public String getFirstValue() {
@@ -28,10 +51,18 @@ public class TemperatureConverterViewModel {
     }
 
     public void setFirstValue(final String firstValue) {
+        if (firstValue.equals(this.firstValue)) {
+            return;
+        }
+        firstValueChanged(this.firstValue, firstValue);
         this.firstValue = firstValue;
     }
 
     public void setSecondValue(final String secondValue) {
+        if (secondValue.equals(this.secondValue)) {
+            return;
+        }
+        secondValueChanged(this.secondValue, secondValue);
         this.secondValue = secondValue;
     }
 
@@ -56,7 +87,7 @@ public class TemperatureConverterViewModel {
             double dSecondValue =
                     TemperatureConverter.convert(dFirstValue, firstScale, secondScale);
             warningLabelText = "";
-
+            logger.log(firstScale + " to " + secondScale + LogMsg.CONVERT_SUCCESS);
             return Double.toString(dSecondValue);
         } catch (Exception e) {
             warningLabelText = "We wrote incorrect value of temperature!";
@@ -74,12 +105,22 @@ public class TemperatureConverterViewModel {
     }
 
     public void setFirstScale(final String firstScale) {
+        if (firstScale.equals(this.firstScale.toString())) {
+            return;
+        }
+        firstScaleChanged(this.firstScale.toString(), firstScale);
         this.firstScale = setScaleValue(firstScale);
     }
 
     public void setSecondScale(final String secondScale) {
+
+        if (secondScale.equals(this.secondScale.toString())) {
+            return;
+        }
+        secondScaleChanged(this.secondScale.toString(), secondScale);
         this.secondScale = setScaleValue(secondScale);
     }
+
 
     private TemperatureScale setScaleValue(final String value) {
         try {
@@ -93,4 +134,42 @@ public class TemperatureConverterViewModel {
     public String getWarningLabelText() {
         return warningLabelText;
     }
+
+    public void firstScaleChanged(final String oldScale,
+                                  final String newScale) {
+        if (oldScale.equals(newScale)) {
+            return;
+        }
+        logger.log(LogMsg.FIRST_SCALE_WAS_CHANGED + newScale);
+    }
+    public void secondScaleChanged(final String oldScale,
+                                   final String newScale) {
+        if (oldScale.equals(newScale)) {
+            return;
+        }
+        logger.log(LogMsg.SECOND_SCALE_WAS_CHANGED + newScale);
+   }
+    public void firstValueChanged(final String oldValue,
+                                  final String newValue) {
+        if (oldValue.equals(newValue)) {
+            return;
+        }
+        logger.log(LogMsg.FIRST_VALUE_WAS_CHANGED + newValue);
+    }
+    public void secondValueChanged(final String oldValue,
+                                   final String newValue) {
+        if (oldValue.equals(newValue)) {
+            return;
+        }
+        logger.log(LogMsg.SECOND_VALUE_WAS_CHANGED + newValue);
+    }
+}
+final class LogMsg {
+    public static final String FIRST_SCALE_WAS_CHANGED = "First Scale was changed to ";
+    public static final String SECOND_SCALE_WAS_CHANGED = "Second Scale was changed to ";
+    public static final String CONVERT_SUCCESS = " convert success";
+    public static final String FIRST_VALUE_WAS_CHANGED = "First Value was changed to ";
+    public static final String SECOND_VALUE_WAS_CHANGED = "Second Value was changed to ";
+
+    private LogMsg() { }
 }
