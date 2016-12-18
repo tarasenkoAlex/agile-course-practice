@@ -286,9 +286,4 @@ public class TemperatureConverterViewModelTest {
         viewModel.setSecondValue("");
         assertEquals(0, viewModel.getLog().size());
     }
-    @Test
-    public void xanLogMsgCreate() {
-        LogMsg logMsg = new LogMsg();
-        assertNotNull(logMsg);
-    }
 }
