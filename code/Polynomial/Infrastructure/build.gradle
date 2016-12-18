@@ -1,8 +1,6 @@
-apply from:   rootDir.getAbsolutePath() + '/code/config/scripts/javafx.plugin'
-
 dependencies {
     compile project(':Polynomial-ViewModel')
-    compile project(':Polynomial-Infrastructure')
+    testCompile project(':Polynomial-ViewModel').sourceSets.test.output
 }
 
 sourceSets {
