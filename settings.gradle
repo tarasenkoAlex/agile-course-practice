@@ -228,7 +228,7 @@ project(":code/Fraction/View").name = "Fraction-View"
 
 // Старлытов Евгений
 // Степыкин Илья
-// Тарасенко Алексей (лаб. №1), Пономарев Никита (лаб. №2)
+// Тарасенко Алексей (лаб. №1), Пономарев Никита (лаб. №2), Малойкина Елена (лаб. №3)
 include "code/volumeCalculator/Model"
 project(":code/volumeCalculator/Model").name = "VolumeCalculator-Model"
 
@@ -237,6 +237,9 @@ project(":code/volumeCalculator/View").name = "VolumeCalculator-View"
 
 include "code/volumeCalculator/ViewModel"
 project(":code/volumeCalculator/ViewModel").name = "VolumeCalculator-ViewModel"
+
+include "code/volumeCalculator/Infrastructure"
+project(":code/volumeCalculator/Infrastructure").name = "VolumeCalculator-Infrastructure"
 // Тропичева Дарья
 include "code/ComplexNumberCalculator/Model"
 project(":code/ComplexNumberCalculator/Model").name = "ComplexNumberCalculator-Model"
