@@ -1,8 +1,8 @@
 package ru.unn.agile.VolumeCalculator.infrastructure;
 
-import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,10 +10,9 @@ import java.io.FileReader;
 import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
-import static ru.unn.agile.VolumeCalculator.infrastructure.RegexMatcher.matchesPattern;
+import static org.hamcrest.MatcherAssert.assertThat;
 
+import static ru.unn.agile.VolumeCalculator.infrastructure.RegexMatcher.matchesPattern;
 /**
  * Created by Elena on 12/18/2016.
  */
@@ -58,8 +57,7 @@ public class TxtLoggerTests {
 
         List<String> actualMessages = txtLogger.getLog();
         for (int i = 0; i < actualMessages.size(); i++) {
-            MatcherAssert.assertThat(actualMessages.get(i),
-                    matchesPattern(".*" + messages[i] + "$"));
+            assertThat(actualMessages.get(i), matchesPattern(".*" + messages[i] + "$"));
         }
     }
     @Test
@@ -69,7 +67,7 @@ public class TxtLoggerTests {
         txtLogger.log(testMessage);
 
         String message = txtLogger.getLog().get(0);
-        MatcherAssert.assertThat(message,
+        assertThat(message,
                 matchesPattern("^\\[\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\] : .*"));
     }
 }

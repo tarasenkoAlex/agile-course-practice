@@ -1,7 +1,6 @@
 package ru.unn.agile.VolumeCalculator.infrastructure;
 
 import ru.unn.agile.VolumeCalculator.viewModel.ILogger;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
 /**
  * Created by Elena on 12/18/2016.
  */

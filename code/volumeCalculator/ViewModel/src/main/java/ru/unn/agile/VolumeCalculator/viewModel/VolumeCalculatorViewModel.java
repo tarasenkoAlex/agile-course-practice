@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class VolumeCalculatorViewModel {
 
@@ -25,9 +26,25 @@ public class VolumeCalculatorViewModel {
     private final StringProperty param2Value = new SimpleStringProperty();
     private final StringProperty validationMsg = new SimpleStringProperty("");
 
+    private final StringProperty logs = new SimpleStringProperty();
+    private ILogger logger;
+    private List<ValueCachingChangeListener> valueChangedListeners;
+
+    public final void setLogger(final ILogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger parameter can't be null");
+        }
+        this.logger = logger;
+    }
 
     public VolumeCalculatorViewModel() {
-
+        init();
+    }
+    public VolumeCalculatorViewModel(final ILogger logger) {
+        setLogger(logger);
+        init();
+    }
+    private void init() {
         selectedVolumeItem.addListener(new ChangeListener<EVolumeTypes>() {
             @Override
             public void changed(final ObservableValue<? extends EVolumeTypes> observable,
@@ -42,7 +59,16 @@ public class VolumeCalculatorViewModel {
 
         param1Value.addListener(new ParamFieldListener());
         param2Value.addListener(new ParamFieldListener());
-
+        final List<StringProperty> vals = new ArrayList<StringProperty>() { {
+            add(param1Value);
+            add(param2Value);
+        } };
+        valueChangedListeners = new ArrayList<>();
+        for (StringProperty val : vals) {
+            final ValueCachingChangeListener listener = new ValueCachingChangeListener();
+            val.addListener(listener);
+            valueChangedListeners.add(listener);
+        }
     }
 
     public BooleanProperty getCalculateDisableProperty() {
@@ -190,6 +216,18 @@ public class VolumeCalculatorViewModel {
         double param2 = tryParseDouble(getParam2ValueProperty().getValue());
         double result = selectedVolumeItem.get().getVolume(param1, param2);
         setResultVolumeProperty(String.valueOf(result));
+
+        StringBuilder message = new StringBuilder(LogMessages.CALCULATE_WAS_PRESSED);
+        message.append("Arguments");
+        if (getParam1VisibleProperty().get()) {
+            message.append(": param1 = ").append(param1);
+        }
+        if (getParam2VisibleProperty().get()) {
+            message.append("; param2 = ").append(param2);
+        }
+        message.append(" Volume Type: ").append(selectedVolumeItem.get().toString()).append(".");
+        logger.log(message.toString());
+        updateLogs();
     }
 
     private double tryParseDouble(final String s) {
@@ -254,6 +292,81 @@ public class VolumeCalculatorViewModel {
         setValidationMsgProperty("");
         return false;
     }
+    public StringProperty logsProperty() {
+        return logs;
+    }
+    public final List<String> getLog() {
+        return logger.getLog();
+    }
+    public final String getLogs() {
+        return logs.get();
+    }
 
+    private void updateLogs() {
+        List<String> fullLog = logger.getLog();
+        String record = new String();
+        for (String log : fullLog) {
+            record += log + "\n";
+        }
+        logs.set(record);
+    }
+    public void onOperationChanged(final EVolumeTypes oldValue, final EVolumeTypes newValue) {
+        if (oldValue.equals(newValue)) {
+            return;
+        }
+        StringBuilder message = new StringBuilder(LogMessages.OPERATION_WAS_CHANGED);
+        message.append(newValue.toString());
+        logger.log(message.toString());
+        updateLogs();
+    }
+    public void onFocusChanged(final Boolean oldValue, final Boolean newValue) {
+        if (!oldValue && newValue) {
+            return;
+        }
+
+        for (ValueCachingChangeListener listener : valueChangedListeners) {
+            if (listener.isChanged()) {
+                StringBuilder message = new StringBuilder(LogMessages.EDITING_FINISHED);
+                message.append("Input arguments are: [");
+                if (getParam1VisibleProperty().get()) {
+                    message.append(param1Value.get()).append("; ");
+                }
+                if (getParam2VisibleProperty().get()) {
+                    message.append(param2Value.get()).append("]");
+                }
+                logger.log(message.toString());
+                updateLogs();
+
+                listener.cache();
+                break;
+            }
+        }
+    }
+
+    private class ValueCachingChangeListener implements ChangeListener<String> {
+        private String prevValue = new String();
+        private String curValue = new String();
+        @Override
+        public void changed(final ObservableValue<? extends String> observable,
+                            final String oldValue, final String newValue) {
+            if (oldValue != null && oldValue.equals(newValue)) {
+                return;
+            }
+            curValue = newValue;
+        }
+        public boolean isChanged() {
+            return !prevValue.equals(curValue);
+        }
+        public void cache() {
+            prevValue = curValue;
+        }
+    }
 }
 
+final class LogMessages {
+    public static final String CALCULATE_WAS_PRESSED = "Calculate. ";
+    public static final String OPERATION_WAS_CHANGED = "Operation was changed to ";
+    public static final String EDITING_FINISHED = "Updated input. ";
+
+    private LogMessages() { }
+}

@@ -3,7 +3,6 @@ package ru.unn.agile.VolumeCalculator.infrastructure;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-
 /**
  * Created by Elena on 12/18/2016.
  */
