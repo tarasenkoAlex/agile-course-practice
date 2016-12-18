@@ -3,7 +3,6 @@ package ru.unn.agile.TemperatureConverter.viewmodel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.unn.agile.TemperatureConverter.model.TemperatureConverter;
 import ru.unn.agile.TemperatureConverter.model.TemperatureScale;
 
 import java.util.List;
