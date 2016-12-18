@@ -301,34 +301,134 @@ public class VolumeCalculatorViewModelTest {
 
         assertNotEquals("", viewModel.getResultVolumeProperty().getValue());
     }
+
     @Test
     public void getCube() {
-        double value = EVolumeTypes.CUBE.getVolume(3);
+        double value = EVolumeTypes.CUBE.getVolume(3.0);
         assertEquals(27, value, 0.01);
     }
+
     @Test
     public void getCone() {
-        double value = EVolumeTypes.CONE.getVolume(2, 3);
+        double value = EVolumeTypes.CONE.getVolume(2.0, 3.0);
         assertEquals(12.56, value, delta);
     }
+
     @Test
     public void getCylinder() {
-        double value = EVolumeTypes.CYLINDER.getVolume(2, 3);
+        double value = EVolumeTypes.CYLINDER.getVolume(2.0, 3.0);
         assertEquals(37.69, value, 0.01);
     }
+
     @Test
     public void getPyramid() {
-        double value = EVolumeTypes.PYRAMID.getVolume(4, 3);
+        double value = EVolumeTypes.PYRAMID.getVolume(4.0, 3.0);
         assertEquals(3.99, value, delta);
     }
+
     @Test
     public void getTetrahedron() {
-        double value = EVolumeTypes.TETRAHEDRON.getVolume(2);
+        double value = EVolumeTypes.TETRAHEDRON.getVolume(2.0);
         assertEquals(0.94, value, 0.01);
     }
+
     @Test
     public void getSphere() {
-        double value = EVolumeTypes.SPHERE.getVolume(1);
+        double value = EVolumeTypes.SPHERE.getVolume(1.0);
         assertEquals(4.18, value, delta);
+    }
+
+    @Test
+    public void viewModelConstructorThrowsExceptionWithNullLogger() {
+        try {
+            new VolumeCalculatorViewModel(null);
+            fail("Exception wasn't thrown");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("Logger parameter can't be null", ex.getMessage());
+        } catch (Exception ex) {
+            fail("Invalid exception type");
+        }
+    }
+
+    @Test
+    public void emptyLogInTheBeginning() {
+        assertTrue(viewModel.getLog().isEmpty());
+    }
+
+    @Test
+    public void logContainsCalWasPressedMessageAfterCalculation() {
+        setInputData();
+        viewModel.calculate();
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + LogMessages.CALCULATE_WAS_PRESSED + ".*"));
+    }
+
+    @Test
+    public void canMessageWhenOperationWasChangedInLog() {
+        setInputData();
+        viewModel.onVolumeTypeChanged(EVolumeTypes.SPHERE, EVolumeTypes.CONE);
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + LogMessages.OPERATION_WAS_CHANGED + "Cone.*"));
+    }
+
+    @Test
+    public void inputCorrectArgumentsLogged() {
+        setInputData();
+        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + LogMessages.EDITING_FINISHED
+                + "Input arguments are: \\["
+                + viewModel.getParam1ValueProperty().get() + "; "
+                + viewModel.getParam2ValueProperty().get() + "\\]"));
+    }
+
+    @Test
+    public void checkOperationIsNotLoggedIfNotChanged() {
+        viewModel.onVolumeTypeChanged(EVolumeTypes.CONE, EVolumeTypes.CYLINDER);
+        viewModel.onVolumeTypeChanged(EVolumeTypes.CYLINDER, EVolumeTypes.CYLINDER);
+
+        assertEquals(1, viewModel.getLog().size());
+    }
+
+    @Test
+    public void canPutSeveralLogMessages() {
+        setInputData();
+        viewModel.calculate();
+        viewModel.calculate();
+
+        assertEquals(2, viewModel.getLog().size());
+    }
+
+    @Test
+    public void checkArgumentsInLogMessage() {
+        setInputData();
+        viewModel.calculate();
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*Arguments"
+                + ": param1 = " + viewModel.getParam1ValueProperty().get()
+                + "; param2 = " + viewModel.getParam2ValueProperty().get() + ".*"));
+    }
+
+    @Test
+    public void checkOperationTypeInTheLog() {
+        setInputData();
+        viewModel.calculate();
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*Pyramid.*"));
+    }
+
+    @Test
+    public void logMessageWithInputArgumentsAfterCalculation() {
+        setInputData();
+        viewModel.calculate();
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + viewModel.getParam1ValueProperty().get()
+                + ".*" + viewModel.getParam2ValueProperty().get() + ".*"));
+    }
+
+    public void setInputData() {
+        viewModel.setSelectedVolumeItem(EVolumeTypes.PYRAMID);
+        viewModel.setParam1ValueProperty("2.0");
+        viewModel.setParam2ValueProperty("3.0");
     }
 }
