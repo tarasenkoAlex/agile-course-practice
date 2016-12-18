@@ -259,6 +259,20 @@ public class ViewModelTests {
     }
 
     @Test
+    public void whenViewModelInitializeWithoutParamsLoggerIsNull() {
+        ViewModel vm = new ViewModel();
+        ILogger logger = vm.getLogger();
+        assertNull(logger);
+    }
+
+    @Test
+    public void getLogsWhenLogSmth() {
+        viewModel.setRBArabToRomChooseProperty(false);
+        String log = viewModel.getLogs();
+        assertTrue(log.matches(".*Convert from roman number chosen\n.*"));
+    }
+
+    @Test
     public void logWhenConvertSideChangeToArabic() {
         viewModel.setRBArabToRomChooseProperty(false);
         viewModel.setRBArabToRomChooseProperty(true);
@@ -315,5 +329,10 @@ public class ViewModelTests {
             viewModel.setRomanNumberProperty(inputNumber);
         }
         viewModel.convertNumber();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenLoggerIsNull() {
+        ViewModel vm = new ViewModel(null);
     }
 }

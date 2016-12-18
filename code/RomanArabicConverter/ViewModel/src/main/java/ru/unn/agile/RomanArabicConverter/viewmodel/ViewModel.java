@@ -179,14 +179,6 @@ public class ViewModel {
         arabicNumberValue.set(value);
     }
 
-    public final StringProperty getArabicNumberValue() {
-        return arabicNumberValue;
-    }
-
-    public void setArabicNumberValue(final String value) {
-        arabicNumberValue.set(value);
-    }
-
     public boolean validateArabicNumber(final String arabicNumber) {
         Integer aramicNum = 0;
         try {
@@ -221,14 +213,6 @@ public class ViewModel {
 
     public final BooleanProperty getTFArabDisableProperty() {
         return tfArabDisableValue;
-    }
-
-    public final BooleanProperty getFocusRomanTfProperty() {
-        return focusRomanTfProperty;
-    }
-
-    public final BooleanProperty getFocusArabicTfProperty() {
-        return focusArabicTfProperty;
     }
 
     public void setFocusRomanTfProperty(final boolean value) {
