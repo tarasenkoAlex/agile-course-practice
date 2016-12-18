@@ -273,4 +273,9 @@ public class TemperatureConverterViewModelTest {
         viewModel.secondScaleChanged("FAHRENHEIT", "FAHRENHEIT");
         assertEquals(0, viewModel.getLog().size());
     }
+    @Test
+    public void noLogIfSetSameValue() {
+        viewModel.setSecondValue("");
+        assertEquals(0, viewModel.getLog().size());
+    }
 }
