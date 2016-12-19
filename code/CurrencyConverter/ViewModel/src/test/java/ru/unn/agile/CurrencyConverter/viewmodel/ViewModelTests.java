@@ -13,11 +13,18 @@ public class ViewModelTests {
 
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        if (viewModel == null) {
+            viewModel = new ViewModel(new FakeLogger());
+        }
     }
     @After
     public void tearDown() {
         viewModel = null;
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void catchExceptionWithNullLogger() {
+        viewModel = new ViewModel(null);
     }
 
     @Test
@@ -216,5 +223,72 @@ public class ViewModelTests {
         viewModel.amountProperty().set("2");
         viewModel.fromCurrencyProperty().set(Constants.DOLLAR);
         viewModel.toCurrencyProperty().set(Constants.RUBLE);
+    }
+
+    @Test
+    public void emptyLog() {
+        assertNotEquals(null, viewModel.getLog());
+        assertTrue(viewModel.getLog().isEmpty());
+    }
+
+    @Test
+    public void logChangedValue() {
+        viewModel.amountProperty().set("2");
+        assertEquals(1, viewModel.getLog().size());
+    }
+
+    @Test
+    public void logConvert() {
+        viewModel.amountProperty().set("2");
+        viewModel.convert();
+        assertEquals(2, viewModel.getLog().size());
+    }
+
+    @Test
+    public void checkLogMessage() {
+        setInputData();
+        assertTrue(viewModel.getLog().get(0).contains("Value changed to 2"));
+    }
+
+    @Test
+    public void checkLogMessageAfterConvert() {
+        setInputData();
+        viewModel.convert();
+        assertTrue(viewModel.getLog().get(viewModel.getLog().size() - 1)
+                .contains("Converted 2 DOLLAR to 125.24 RUBLE"));
+    }
+
+    @Test
+    public void logFromCurrency() {
+        viewModel.fromCurrencyProperty().set(Constants.DOLLAR);
+        assertEquals(1, viewModel.getLog().size());
+    }
+
+    @Test
+    public void checkLogMessageAfterFromCurrencyChanged() {
+        viewModel.fromCurrencyProperty().set(Constants.DOLLAR);
+        assertTrue(viewModel.getLog().get(0).contains("FromCurrency changed to DOLLAR"));
+    }
+
+    @Test
+    public void checkLogMessageAfterToCurrencyChanged() {
+        viewModel.toCurrencyProperty().set(Constants.EURO);
+        assertTrue(viewModel.getLog().get(0).contains("ToCurrency changed to EURO"));
+    }
+
+    public void setExternalViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    @Test
+    public void getLogProperty() {
+        setInputData();
+        assertTrue(viewModel.logsProperty().toString().contains("Value changed to 2"));
+    }
+
+    @Test
+    public void getLogs() {
+        setInputData();
+        assertTrue(viewModel.getLogs().contains("Value changed to 2"));
     }
 }

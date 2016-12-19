@@ -77,6 +77,9 @@ include "code/CurrencyConverter/View"
 project(":code/CurrencyConverter/View").name = "CurrencyConverter-View"
 include "code/CurrencyConverter/ViewModel"
 project(":code/CurrencyConverter/ViewModel").name = "CurrencyConverter-ViewModel"
+include "code/CurrencyConverter/Infrastructure"
+project(":code/CurrencyConverter/Infrastructure").name = "CurrencyConverter-Infrastructure"
+
 // Евтюшин Валерий
 include "code/MortgageCalculator/Model"
 project(":code/MortgageCalculator/Model").name = "MortgageCalculatorModel"

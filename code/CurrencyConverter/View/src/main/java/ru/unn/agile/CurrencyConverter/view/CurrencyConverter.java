@@ -8,6 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import ru.unn.agile.CurrencyConverter.model.Constants;
 import ru.unn.agile.CurrencyConverter.viewmodel.ViewModel;
+import ru.unn.agile.CurrencyConverter.infrastructure.TxtLogger;
 
 public class CurrencyConverter {
     @FXML
@@ -23,8 +24,9 @@ public class CurrencyConverter {
 
     @FXML
     void initialize() {
-        amountLb.textProperty().bindBidirectional(viewModel.amountProperty());
+        viewModel.setLogger(new TxtLogger("./TxtLogger.log"));
 
+        amountLb.textProperty().bindBidirectional(viewModel.amountProperty());
         fromCurrencyBox.valueProperty().bindBidirectional(viewModel.fromCurrencyProperty());
         toCurrencyBox.valueProperty().bindBidirectional(viewModel.toCurrencyProperty());
 
