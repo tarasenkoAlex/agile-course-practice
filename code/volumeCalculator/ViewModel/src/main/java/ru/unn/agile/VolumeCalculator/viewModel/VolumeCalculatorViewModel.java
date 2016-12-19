@@ -329,11 +329,12 @@ public class VolumeCalculatorViewModel {
                 StringBuilder message = new StringBuilder(LogMessages.EDITING_FINISHED);
                 message.append("Input arguments are: [");
                 if (getParam1VisibleProperty().get()) {
-                    message.append(param1Value.get()).append("; ");
+                    message.append(param1Value.get());
                 }
                 if (getParam2VisibleProperty().get()) {
-                    message.append(param2Value.get()).append("]");
+                    message.append("; ").append(param2Value.get());
                 }
+                message.append("]");
                 logger.log(message.toString());
                 updateLogs();
 

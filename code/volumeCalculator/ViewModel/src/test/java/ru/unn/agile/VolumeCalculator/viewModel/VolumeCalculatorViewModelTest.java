@@ -339,6 +339,32 @@ public class VolumeCalculatorViewModelTest {
     }
 
     @Test
+    public void whenLogMessageIsEmpty() {
+        setInputData();
+        assertEquals(null, viewModel.getLogs());
+    }
+
+    @Test
+    public void whenLogPropertyMessageIsEmpty() {
+        setInputData();
+        assertEquals(null, viewModel.logsProperty().getValue());
+    }
+
+    @Test
+    public void whenLogMessageIsNotEmpty() {
+        setInputData();
+        viewModel.calculate();
+        assertFalse(viewModel.getLogs().isEmpty());
+    }
+
+    @Test
+    public void whenLogPropertyMessageIsNotEmpty() {
+        setInputData();
+        viewModel.calculate();
+        assertFalse(viewModel.logsProperty().getValue().isEmpty());
+    }
+
+    @Test
     public void viewModelConstructorThrowsExceptionWithNullLogger() {
         try {
             new VolumeCalculatorViewModel(null);
@@ -424,6 +450,11 @@ public class VolumeCalculatorViewModelTest {
         String message = viewModel.getLog().get(0);
         assertTrue(message.matches(".*" + viewModel.getParam1ValueProperty().get()
                 + ".*" + viewModel.getParam2ValueProperty().get() + ".*"));
+    }
+    @Test
+    public void getSelectedItemProperty() {
+        setInputData();
+        assertEquals("Pyramid", viewModel.getSelectedItemProperty().get().toString());
     }
 
     public void setInputData() {
