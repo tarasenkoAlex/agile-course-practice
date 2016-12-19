@@ -89,6 +89,12 @@ project(":code/MortgageCalculator/ViewModel").name = "MortgageCalculatorViewMode
 // Зайдуллова Алина
 include "code/TreeSort/Model"
 project(":code/TreeSort/Model").name = "TreeSort-Model"
+include "code/matrix-operations/View"
+project(":code/matrix-operations/View").name = "matrix-operations-View"
+include "code/matrix-operations/ViewModel"
+project(":code/matrix-operations/ViewModel").name = "matrix-operations-ViewModel"
+include "code/Vector3D/Infrastructure"
+project(":code/Vector3D/Infrastructure").name = "Vector3D-Infrastructure"
 
 // Зырин Илья
 // Ильин Иван
@@ -103,10 +109,6 @@ project(":code/todo-list/ViewModel").name = "todo-list-viewmodel"
 // Карчков Денис
 include "code/matrix-operations/Model"
 project(":code/matrix-operations/Model").name = "matrix-operations-Model"
-include "code/matrix-operations/View"
-project(":code/matrix-operations/View").name = "matrix-operations-View"
-include "code/matrix-operations/ViewModel"
-project(":code/matrix-operations/ViewModel").name = "matrix-operations-ViewModel"
 // Кокошников Алексей
 
 // Колистратова Дарья

@@ -97,12 +97,10 @@ public class Vector3DTest {
         try {
             firstVec.equals(null);
         } catch (IllegalArgumentException e) {
-            assertEquals("Comparing vector cannot be null", e.getMessage());
+            assertEquals(e.getMessage(), "Comparing vector cannot be null", e.getMessage());
         } catch (Exception e) {
             fail("Unexpected exception");
         }
-
-        assert firstVec.equals(null);
     }
 
     @Test

@@ -23,11 +23,42 @@ public class ViewModel {
     private final StringProperty statusText = new SimpleStringProperty();
     private final BooleanProperty buttonDisabled = new SimpleBooleanProperty();
 
-    private AbstractLogger logger;
+    private final AbstractLogger logger;
+
+    public static class LogMessages {
+        public static final String INIT
+                = "Initialization started...";
+        public static final String INIT_END
+                = "Initialization completed";
+        public static final String STATUS_CHANGED
+                = "Status changed to '{0}'";
+        public static final String CALCULATION_AVAILABLE
+                = "calculation available: {0}";
+        public static final String FIRST_VECTOR_CHANGED
+                = "Value of first vector changed from '{0}' to '{1}'";
+        public static final String SECOND_VECTOR_DOT_CHANGED
+                = "Value of second vector (dot product) changed from '{0}' to '{1}'";
+        public static final String SECOND_VECTOR_CROSS_CHANGED
+                = "Value of second vector (cross product) changed from '{0}' to '{1}'";
+        public static final String TAB_INDEX_CHANGED
+                = "Tab index changed from '{0}' to '{1}'";
+        public static final String CALCULATE_PRESSED
+                = "'Calculate' button was pressed";
+        public static final String CALCULATE_END
+                = "Calculation completed";
+        public static final String NORM_CALCULATE
+                = "Vector norm calculation";
+        public static final String NORMALIZE_CALCULATE
+                = "Normalized vector calculation";
+        public static final String DOT_CALCULATE
+                = "Dot product vectors calculation";
+        public static final String CROSS_CALCULATE
+                = "Cross product vectors calculation";
+    }
 
     public abstract class ValueChangeListener implements ChangeListener<Object> {
-        abstract public void logChange(final ObservableValue<? extends Object> ov,
-                                  final Object oldValue, final Object newValue);
+        public abstract void logChange(ObservableValue<? extends Object> ov,
+                                  Object oldValue, Object newValue);
 
         @Override
         public void changed(final ObservableValue<? extends Object> ov,
@@ -35,11 +66,11 @@ public class ViewModel {
             logChange(ov, oldValue, newValue);
 
             String strStatus = getStatus().toString();
-            ViewModel.this.logger.putLog("Статус изменился на '" + strStatus + "'");
+            ViewModel.this.logger.putLog(LogMessages.STATUS_CHANGED, strStatus);
             ViewModel.this.statusText.set(strStatus);
 
             boolean btnDisabledVal = !canCalculate();
-            ViewModel.this.logger.putLog("Расчет возможен: " + String.valueOf(!btnDisabledVal));
+            ViewModel.this.logger.putLog(LogMessages.CALCULATION_AVAILABLE, !btnDisabledVal);
             ViewModel.this.buttonDisabled.set(btnDisabledVal);
         }
     }
@@ -51,33 +82,40 @@ public class ViewModel {
 
         this.logger = logger;
 
-        this.logger.putLog("Инициализация калькулятора...");
+        this.logger.putLog(LogMessages.INIT);
 
         vectorText.addListener(new ValueChangeListener() {
             @Override
-            public void logChange(ObservableValue<? extends Object> ov, Object oldValue, Object newValue) {
-                ViewModel.this.logger.putLog("Значение первого вектора изменилось с '" + oldValue + "' на '" + newValue + "'");
+            public void logChange(final ObservableValue<? extends Object> ov,
+                                  final Object oldValue, final Object newValue) {
+                ViewModel.this.logger.putLog(LogMessages.FIRST_VECTOR_CHANGED,
+                        oldValue, newValue);
             }
         });
 
         dotProductOperandText.addListener(new ValueChangeListener() {
             @Override
-            public void logChange(ObservableValue<? extends Object> ov, Object oldValue, Object newValue) {
-                ViewModel.this.logger.putLog("Значение второго вектора (скалярное произведение) изменилось с '" + oldValue + "' на '" + newValue + "'");
+            public void logChange(final ObservableValue<? extends Object> ov,
+                                  final Object oldValue, final Object newValue) {
+                ViewModel.this.logger.putLog(LogMessages.SECOND_VECTOR_DOT_CHANGED,
+                        oldValue, newValue);
             }
         });
 
         crossProductOperandText.addListener(new ValueChangeListener() {
             @Override
-            public void logChange(ObservableValue<? extends Object> ov, Object oldValue, Object newValue) {
-                ViewModel.this.logger.putLog("Значение второго вектора (векторное произведение) изменилось с '" + oldValue + "' на '" + newValue + "'");
+            public void logChange(final ObservableValue<? extends Object> ov,
+                                  final Object oldValue, final Object newValue) {
+                ViewModel.this.logger.putLog(LogMessages.SECOND_VECTOR_CROSS_CHANGED,
+                        oldValue, newValue);
             }
         });
 
         activeTabIndex.addListener(new ValueChangeListener() {
             @Override
-            public void logChange(ObservableValue<? extends Object> ov, Object oldValue, Object newValue) {
-                ViewModel.this.logger.putLog("Значение индекса таба изменилось с '" + oldValue + "' на '" + newValue + "'");
+            public void logChange(final ObservableValue<? extends Object> ov,
+                                  final Object oldValue, final Object newValue) {
+                ViewModel.this.logger.putLog(LogMessages.TAB_INDEX_CHANGED, oldValue, newValue);
             }
         });
 
@@ -90,7 +128,7 @@ public class ViewModel {
         normalizationResultText.set("");
         dotProductResultText.set("");
         crossProductResultText.set("");
-        this.logger.putLog("Инициализация калькулятора завершена");
+        this.logger.putLog(LogMessages.INIT_END);
     }
 
     public IntegerProperty activeTabIndexProperty() {
@@ -240,26 +278,26 @@ public class ViewModel {
     }
 
     public void calculate() {
-        logger.putLog("Кнопка 'Рассчитать' нажата");
+        logger.putLog(LogMessages.CALCULATE_PRESSED);
 
         Vector3D vector = vectorFromString(vectorText.get());
         switch (getActiveTab()) {
             case NORM:
-                logger.putLog("Расчет нормы вектора");
+                logger.putLog(LogMessages.NORM_CALCULATE);
                 normResultText.set(new Double(vector.getNorm()).toString());
                 break;
             case NORMALIZATION:
-                logger.putLog("Расчет нормированного вектора");
+                logger.putLog(LogMessages.NORMALIZE_CALCULATE);
                 normalizationResultText.set(vector.normalize().toString());
                 break;
             case DOTPRODUCT:
-                logger.putLog("Расчет скалярного произведения");
+                logger.putLog(LogMessages.DOT_CALCULATE);
                 Vector3D dotProductOperand = vectorFromString(dotProductOperandText.get());
                 Double dotProductResult = vector.dot(dotProductOperand);
                 dotProductResultText.set(dotProductResult.toString());
                 break;
             case CROSSPRODUCT:
-                logger.putLog("Расчет векторного произведения");
+                logger.putLog(LogMessages.CROSS_CALCULATE);
                 Vector3D crossProductOperand = vectorFromString(crossProductOperandText.get());
                 Vector3D crossProductResult = vector.cross(crossProductOperand);
                 crossProductResultText.set(crossProductResult.toString());
@@ -267,7 +305,7 @@ public class ViewModel {
             default:
                 break;
         }
-        logger.putLog("Расчет выполнен");
+        logger.putLog(LogMessages.CALCULATE_END);
     }
 
     public enum OperationTab {

@@ -7,7 +7,6 @@ import ru.unn.agile.vector3d.model.Vector3D;
 import ru.unn.agile.vector3d.viewmodel.ViewModel.OperationTab;
 
 import java.util.Iterator;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -535,7 +534,7 @@ public class ViewModelTest {
 
     @Test
     public void testLoggerAfterInit() {
-        findRequiredText(viewModel.getLogger(), "Инициализация калькулятора завершена");
+        findRequiredText(viewModel.getLogger(), ViewModel.LogMessages.INIT_END);
     }
 
     @Test
@@ -543,7 +542,7 @@ public class ViewModelTest {
         viewModel.setVectorText(validVectorString);
         viewModel.setActiveTab(OperationTab.NORM);
         viewModel.calculate();
-        findRequiredText(viewModel.getLogger(), "Расчет нормы вектора");
+        findRequiredText(viewModel.getLogger(), ViewModel.LogMessages.NORM_CALCULATE);
     }
 
     @Test
@@ -551,7 +550,7 @@ public class ViewModelTest {
         viewModel.setVectorText(validVectorString);
         viewModel.setActiveTab(OperationTab.NORMALIZATION);
         viewModel.calculate();
-        findRequiredText(viewModel.getLogger(), "Расчет нормированного вектора");
+        findRequiredText(viewModel.getLogger(), ViewModel.LogMessages.NORMALIZE_CALCULATE);
     }
 
     @Test
@@ -560,7 +559,7 @@ public class ViewModelTest {
         viewModel.setDotProductOperandText(validVectorString);
         viewModel.setActiveTab(OperationTab.DOTPRODUCT);
         viewModel.calculate();
-        findRequiredText(viewModel.getLogger(), "Расчет скалярного произведения");
+        findRequiredText(viewModel.getLogger(), ViewModel.LogMessages.DOT_CALCULATE);
     }
 
     @Test
@@ -569,10 +568,10 @@ public class ViewModelTest {
         viewModel.setCrossProductOperandText(validVectorString);
         viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
         viewModel.calculate();
-        findRequiredText(viewModel.getLogger(), "Расчет векторного произведения");
+        findRequiredText(viewModel.getLogger(), ViewModel.LogMessages.CROSS_CALCULATE);
     }
 
-    private void findRequiredText(AbstractLogger logger, final String requiredText) {
+    private void findRequiredText(final AbstractLogger logger, final String requiredText) {
         boolean textFound = false;
 
         Iterator<String> it = logger.iterator();
