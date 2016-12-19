@@ -1,5 +1,7 @@
 package ru.unn.agile.CurrencyConverter.view;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -29,8 +31,41 @@ public class CurrencyConverter {
         viewModel.setLogger(new TxtLogger("./TxtLogger.log"));
 
         amountLb.textProperty().bindBidirectional(viewModel.amountProperty());
+        amountLb.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> observable,
+                                final String oldValue, final String newValue) {
+                try {
+                    viewModel.onAmountChanged(oldValue, newValue);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         fromCurrencyBox.valueProperty().bindBidirectional(viewModel.fromCurrencyProperty());
+        fromCurrencyBox.valueProperty().addListener(new ChangeListener<Constants>() {
+            @Override
+            public void changed(final ObservableValue<? extends Constants> observable,
+                                final Constants oldValue, final Constants newValue) {
+                try {
+                    viewModel.onFromCurrencyChanged(oldValue, newValue);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         toCurrencyBox.valueProperty().bindBidirectional(viewModel.toCurrencyProperty());
+        toCurrencyBox.valueProperty().addListener(new ChangeListener<Constants>() {
+            @Override
+            public void changed(final ObservableValue<? extends Constants> observable,
+                                final Constants oldValue, final Constants newValue) {
+                try {
+                    viewModel.onToCurrencyChanged(oldValue, newValue);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         convertButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

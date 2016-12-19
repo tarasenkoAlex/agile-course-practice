@@ -63,50 +63,46 @@ public class ViewModel {
             public void changed(final ObservableValue<? extends String> observable,
                                 final String oldValue, final String newValue) {
                 message.set(getInputMessage().getValue());
-                try {
-                    logger.log("Value changed to " + amount.get());
-                    updateLogs();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         });
-
         fromCurrency.addListener(new CurrencyChangeListener());
-        fromCurrency.addListener(new ChangeListener<Constants>() {
-            @Override
-            public void changed(final ObservableValue<? extends Constants> observable,
-                                final Constants oldValue, final Constants newValue) {
-                try {
-                    logger.log("FromCurrency changed to " + fromCurrency.get().toString());
-                    updateLogs();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
         toCurrency.addListener(new CurrencyChangeListener());
-        toCurrency.addListener(new ChangeListener<Constants>() {
-            @Override
-            public void changed(final ObservableValue<? extends Constants> observable,
-                                final Constants oldValue, final Constants newValue) {
-                try {
-                    logger.log("ToCurrency changed to " + toCurrency.get().toString());
-                    updateLogs();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     private void updateLogs() throws IOException {
         List<String> fullLog = logger.getLog();
-        String record = new String();
+        String record = "";
         for (String log : fullLog) {
             record += log + "\n";
         }
         logs.set(record);
+    }
+
+    public final void onAmountChanged(final String oldValue,
+                                      final String newValue) throws IOException {
+        if (oldValue.equals(newValue)) {
+            return;
+        }
+        logger.log("Value changed to " + amount.get());
+        updateLogs();
+    }
+
+    public final void onFromCurrencyChanged(final Constants oldValue,
+                                            final Constants newValue) throws IOException {
+        if (oldValue.equals(newValue)) {
+            return;
+        }
+        logger.log("FromCurrency changed to " + fromCurrency.get().toString());
+        updateLogs();
+    }
+
+    public final void onToCurrencyChanged(final Constants oldValue,
+                                          final Constants newValue) throws IOException {
+        if (oldValue.equals(newValue)) {
+            return;
+        }
+        logger.log("ToCurrency changed to " + toCurrency.get().toString());
+        updateLogs();
     }
 
     private class CurrencyChangeListener implements ChangeListener<Constants> {

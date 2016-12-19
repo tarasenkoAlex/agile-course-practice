@@ -238,20 +238,21 @@ public class ViewModelTests {
 
     @Test
     public void logChangedValue() throws IOException {
-        viewModel.amountProperty().set("2");
+        viewModel.onAmountChanged("", "2");
         assertEquals(1, viewModel.getLog().size());
     }
 
     @Test
     public void logConvert() throws IOException {
-        viewModel.amountProperty().set("2");
+        setInputData();
         viewModel.convert();
-        assertEquals(2, viewModel.getLog().size());
+        assertEquals(1, viewModel.getLog().size());
     }
 
     @Test
     public void checkLogMessage() throws IOException {
         setInputData();
+        viewModel.onAmountChanged("", "2");
         assertTrue(viewModel.getLog().get(0).contains("Value changed to 2"));
     }
 
@@ -265,19 +266,21 @@ public class ViewModelTests {
 
     @Test
     public void logFromCurrency() throws IOException {
-        viewModel.fromCurrencyProperty().set(Constants.DOLLAR);
+        viewModel.onFromCurrencyChanged(Constants.RUBLE, Constants.DOLLAR);
         assertEquals(1, viewModel.getLog().size());
     }
 
     @Test
     public void checkLogMessageAfterFromCurrencyChanged() throws IOException {
         viewModel.fromCurrencyProperty().set(Constants.DOLLAR);
+        viewModel.onFromCurrencyChanged(Constants.RUBLE, Constants.DOLLAR);
         assertTrue(viewModel.getLog().get(0).contains("FromCurrency changed to DOLLAR"));
     }
 
     @Test
     public void checkLogMessageAfterToCurrencyChanged() throws IOException {
         viewModel.toCurrencyProperty().set(Constants.EURO);
+        viewModel.onToCurrencyChanged(Constants.DOLLAR, Constants.EURO);
         assertTrue(viewModel.getLog().get(0).contains("ToCurrency changed to EURO"));
     }
 
@@ -286,14 +289,24 @@ public class ViewModelTests {
     }
 
     @Test
-    public void getLogProperty() {
-        setInputData();
+    public void getLogProperty() throws IOException {
+        viewModel.amountProperty().set("2");
+        viewModel.onAmountChanged("", "2");
         assertTrue(viewModel.logsProperty().toString().contains("Value changed to 2"));
     }
 
     @Test
-    public void getLogs() {
-        setInputData();
+    public void getLogs() throws IOException {
+        viewModel.amountProperty().set("2");
+        viewModel.onAmountChanged("", "2");
         assertTrue(viewModel.getLogs().contains("Value changed to 2"));
+    }
+
+    @Test
+    public void noLogIfNoChange() throws IOException {
+        viewModel.onAmountChanged("", "");
+        viewModel.onToCurrencyChanged(Constants.DOLLAR, Constants.DOLLAR);
+        viewModel.onFromCurrencyChanged(Constants.DOLLAR, Constants.DOLLAR);
+        assertTrue(viewModel.getLog().isEmpty());
     }
 }
