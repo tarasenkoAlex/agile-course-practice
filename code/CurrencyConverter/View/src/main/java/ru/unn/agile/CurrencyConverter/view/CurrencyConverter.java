@@ -10,6 +10,8 @@ import ru.unn.agile.CurrencyConverter.model.Constants;
 import ru.unn.agile.CurrencyConverter.viewmodel.ViewModel;
 import ru.unn.agile.CurrencyConverter.infrastructure.TxtLogger;
 
+import java.io.IOException;
+
 public class CurrencyConverter {
     @FXML
     private ViewModel viewModel;
@@ -23,7 +25,7 @@ public class CurrencyConverter {
     private Button convertButton;
 
     @FXML
-    void initialize() {
+    void initialize() throws IOException {
         viewModel.setLogger(new TxtLogger("./TxtLogger.log"));
 
         amountLb.textProperty().bindBidirectional(viewModel.amountProperty());
@@ -33,7 +35,11 @@ public class CurrencyConverter {
         convertButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent event) {
-                viewModel.convert();
+                try {
+                    viewModel.convert();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

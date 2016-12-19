@@ -8,6 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ru.unn.agile.CurrencyConverter.model.Constants;
 import ru.unn.agile.CurrencyConverter.model.Converter;
+
+import java.io.IOException;
 import java.util.List;
 
 public class ViewModel {
@@ -61,8 +63,12 @@ public class ViewModel {
             public void changed(final ObservableValue<? extends String> observable,
                                 final String oldValue, final String newValue) {
                 message.set(getInputMessage().getValue());
-                logger.log("Value changed to " + amount.get());
-                updateLogs();
+                try {
+                    logger.log("Value changed to " + amount.get());
+                    updateLogs();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -71,8 +77,12 @@ public class ViewModel {
             @Override
             public void changed(final ObservableValue<? extends Constants> observable,
                                 final Constants oldValue, final Constants newValue) {
-                logger.log("FromCurrency changed to " + fromCurrency.get().toString());
-                updateLogs();
+                try {
+                    logger.log("FromCurrency changed to " + fromCurrency.get().toString());
+                    updateLogs();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
         toCurrency.addListener(new CurrencyChangeListener());
@@ -80,13 +90,17 @@ public class ViewModel {
             @Override
             public void changed(final ObservableValue<? extends Constants> observable,
                                 final Constants oldValue, final Constants newValue) {
-                logger.log("ToCurrency changed to " + toCurrency.get().toString());
-                updateLogs();
+                try {
+                    logger.log("ToCurrency changed to " + toCurrency.get().toString());
+                    updateLogs();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    private void updateLogs() {
+    private void updateLogs() throws IOException {
         List<String> fullLog = logger.getLog();
         String record = new String();
         for (String log : fullLog) {
@@ -137,7 +151,7 @@ public class ViewModel {
     public final ObservableList<Constants> getCurrencies() {
         return currencies.get();
     }
-    public List<String> getLog() {
+    public List<String> getLog() throws IOException {
         return logger.getLog();
     }
     public StringProperty logsProperty() {
@@ -147,7 +161,7 @@ public class ViewModel {
         return logs.get();
     }
 
-    public void convert() {
+    public void convert() throws IOException {
         if (convertionDisabled.get()) {
             return;
         }

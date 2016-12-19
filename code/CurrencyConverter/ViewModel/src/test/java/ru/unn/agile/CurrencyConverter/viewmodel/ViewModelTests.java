@@ -6,20 +6,25 @@ import org.junit.Test;
 import ru.unn.agile.CurrencyConverter.model.*;
 import ru.unn.agile.CurrencyConverter.viewmodel.ViewModel.*;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class ViewModelTests {
     private ViewModel viewModel;
 
     @Before
-    public void setUp() {
-        if (viewModel == null) {
-            viewModel = new ViewModel(new FakeLogger());
-        }
+    public void setUp() throws IOException {
+        viewModel = new ViewModel(new FakeLogger());
     }
     @After
     public void tearDown() {
         viewModel = null;
+    }
+
+    @Test
+    public void canCreateViewModelWithDefaultConstructor() {
+        assertNotNull(new ViewModel());
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -36,7 +41,7 @@ public class ViewModelTests {
         assertEquals(MessageStatus.WAITING.getValue(), viewModel.messageProperty().get());
     }
     @Test
-    public void canMessageWaitingFormatWithEmptyAmount() {
+    public void canMessageWaitingFormatWithEmptyAmount() throws IOException {
         viewModel.convert();
         assertEquals(MessageStatus.WAITING.getValue(), viewModel.messageProperty().get());
     }
@@ -46,7 +51,7 @@ public class ViewModelTests {
         assertEquals(MessageStatus.READY.getValue(), viewModel.messageProperty().get());
     }
     @Test
-    public void canMessageSuccessFormatAfterConvert() {
+    public void canMessageSuccessFormatAfterConvert() throws IOException {
         setInputData();
         viewModel.convert();
         assertEquals(MessageStatus.SUCCESS.getValue(), viewModel.messageProperty().get());
@@ -141,13 +146,13 @@ public class ViewModelTests {
         assertTrue(viewModel.convertionDisabledProperty().get());
     }
     @Test
-    public void checkDisabledButtonAfterConvert() {
+    public void checkDisabledButtonAfterConvert() throws IOException {
         viewModel.amountProperty().set("32");
         viewModel.convert();
         assertFalse(viewModel.convertionDisabledProperty().get());
     }
     @Test
-    public void convertFromRubleToDollar() {
+    public void convertFromRubleToDollar() throws IOException {
         viewModel.amountProperty().set("125.24");
         viewModel.fromCurrencyProperty().set(Constants.RUBLE);
         viewModel.toCurrencyProperty().set(Constants.DOLLAR);
@@ -203,13 +208,13 @@ public class ViewModelTests {
         assertEquals(Constants.values()[5], viewModel.currenciesProperty().get().get(5));
     }
     @Test
-    public void checkStringResultingValue() {
+    public void checkStringResultingValue() throws IOException {
         setInputData();
         viewModel.convert();
         assertEquals("125.24", viewModel.getResultingValue());
     }
     @Test
-    public void checkStringMessage() {
+    public void checkStringMessage() throws IOException {
         setInputData();
         viewModel.convert();
         assertEquals(MessageStatus.SUCCESS.getValue(), viewModel.getMessage());
@@ -226,32 +231,32 @@ public class ViewModelTests {
     }
 
     @Test
-    public void emptyLog() {
+    public void emptyLog() throws IOException {
         assertNotEquals(null, viewModel.getLog());
         assertTrue(viewModel.getLog().isEmpty());
     }
 
     @Test
-    public void logChangedValue() {
+    public void logChangedValue() throws IOException {
         viewModel.amountProperty().set("2");
         assertEquals(1, viewModel.getLog().size());
     }
 
     @Test
-    public void logConvert() {
+    public void logConvert() throws IOException {
         viewModel.amountProperty().set("2");
         viewModel.convert();
         assertEquals(2, viewModel.getLog().size());
     }
 
     @Test
-    public void checkLogMessage() {
+    public void checkLogMessage() throws IOException {
         setInputData();
         assertTrue(viewModel.getLog().get(0).contains("Value changed to 2"));
     }
 
     @Test
-    public void checkLogMessageAfterConvert() {
+    public void checkLogMessageAfterConvert() throws IOException {
         setInputData();
         viewModel.convert();
         assertTrue(viewModel.getLog().get(viewModel.getLog().size() - 1)
@@ -259,19 +264,19 @@ public class ViewModelTests {
     }
 
     @Test
-    public void logFromCurrency() {
+    public void logFromCurrency() throws IOException {
         viewModel.fromCurrencyProperty().set(Constants.DOLLAR);
         assertEquals(1, viewModel.getLog().size());
     }
 
     @Test
-    public void checkLogMessageAfterFromCurrencyChanged() {
+    public void checkLogMessageAfterFromCurrencyChanged() throws IOException {
         viewModel.fromCurrencyProperty().set(Constants.DOLLAR);
         assertTrue(viewModel.getLog().get(0).contains("FromCurrency changed to DOLLAR"));
     }
 
     @Test
-    public void checkLogMessageAfterToCurrencyChanged() {
+    public void checkLogMessageAfterToCurrencyChanged() throws IOException {
         viewModel.toCurrencyProperty().set(Constants.EURO);
         assertTrue(viewModel.getLog().get(0).contains("ToCurrency changed to EURO"));
     }

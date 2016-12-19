@@ -20,41 +20,29 @@ public class TxtLogger implements ILogger {
         return simpleDateFormat.format(calendar.getTime());
     }
 
-    public TxtLogger(final String filename) {
+    public TxtLogger(final String filename) throws IOException {
         this.filename = filename;
         BufferedWriter bufferedWriter = null;
-        try {
-            bufferedWriter = new BufferedWriter(new FileWriter(filename));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        bufferedWriter = new BufferedWriter(new FileWriter(filename));
         writer = bufferedWriter;
     }
 
     @Override
-    public void log(final String s) {
-        try {
-            writer.write(now() + " > " + s);
-            writer.newLine();
-            writer.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void log(final String s) throws IOException {
+        writer.write(now() + " > " + s);
+        writer.newLine();
+        writer.flush();
     }
 
     @Override
-    public List<String> getLog() {
+    public List<String> getLog() throws IOException {
         BufferedReader reader;
         ArrayList<String> log = new ArrayList<>();
-        try {
-            reader = new BufferedReader(new FileReader(filename));
-            String line = reader.readLine();
-            while (line != null) {
-                log.add(line);
-                line = reader.readLine();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        reader = new BufferedReader(new FileReader(filename));
+        String line = reader.readLine();
+        while (line != null) {
+            log.add(line);
+            line = reader.readLine();
         }
         return log;
     }
