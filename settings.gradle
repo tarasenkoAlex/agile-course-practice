@@ -237,6 +237,8 @@ include "code/ComplexNumberCalculator/ViewModel"
 project(":code/ComplexNumberCalculator/ViewModel").name = "ComplexNumberCalculator-ViewModel"
 include "code/ComplexNumberCalculator/View"
 project(":code/ComplexNumberCalculator/View").name = "ComplexNumberCalculator-View"
+include "code/ComplexNumberCalculator/Infrastructure"
+project(":code/ComplexNumberCalculator/Infrastructure").name = "ComplexNumberCalculator-Infrastructure"
 // Федосов Александр
 include "code/MultisystemCalculator/Model"
 project(":code/MultisystemCalculator/Model").name = "MultiSystemCalculatorModel"
