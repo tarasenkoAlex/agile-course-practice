@@ -25,6 +25,25 @@ public class ViewModel {
 
     private AbstractLogger logger;
 
+    public abstract class ValueChangeListener implements ChangeListener<Object> {
+        abstract public void logChange(final ObservableValue<? extends Object> ov,
+                                  final Object oldValue, final Object newValue);
+
+        @Override
+        public void changed(final ObservableValue<? extends Object> ov,
+                            final Object oldValue, final Object newValue) {
+            logChange(ov, oldValue, newValue);
+
+            String strStatus = getStatus().toString();
+            ViewModel.this.logger.putLog("Статус изменился на '" + strStatus + "'");
+            ViewModel.this.statusText.set(strStatus);
+
+            boolean btnDisabledVal = !canCalculate();
+            ViewModel.this.logger.putLog("Расчет возможен: " + String.valueOf(!btnDisabledVal));
+            ViewModel.this.buttonDisabled.set(btnDisabledVal);
+        }
+    }
+
     public ViewModel(final AbstractLogger logger) {
         if (logger == null) {
             throw new IllegalArgumentException("Logger can't be null");
@@ -32,19 +51,35 @@ public class ViewModel {
 
         this.logger = logger;
 
-        ChangeListener<Object> stateListener = new ChangeListener<Object>() {
-            @Override
-            public void changed(final ObservableValue<? extends Object> ov,
-                                final Object oldo, final Object newo) {
-                statusText.set(getStatus().toString());
-                buttonDisabled.set(!canCalculate());
-            }
-        };
+        this.logger.putLog("Инициализация калькулятора...");
 
-        vectorText.addListener(stateListener);
-        dotProductOperandText.addListener(stateListener);
-        crossProductOperandText.addListener(stateListener);
-        activeTabIndex.addListener(stateListener);
+        vectorText.addListener(new ValueChangeListener() {
+            @Override
+            public void logChange(ObservableValue<? extends Object> ov, Object oldValue, Object newValue) {
+                ViewModel.this.logger.putLog("Значение первого вектора изменилось с '" + oldValue + "' на '" + newValue + "'");
+            }
+        });
+
+        dotProductOperandText.addListener(new ValueChangeListener() {
+            @Override
+            public void logChange(ObservableValue<? extends Object> ov, Object oldValue, Object newValue) {
+                ViewModel.this.logger.putLog("Значение второго вектора (скалярное произведение) изменилось с '" + oldValue + "' на '" + newValue + "'");
+            }
+        });
+
+        crossProductOperandText.addListener(new ValueChangeListener() {
+            @Override
+            public void logChange(ObservableValue<? extends Object> ov, Object oldValue, Object newValue) {
+                ViewModel.this.logger.putLog("Значение второго вектора (векторное произведение) изменилось с '" + oldValue + "' на '" + newValue + "'");
+            }
+        });
+
+        activeTabIndex.addListener(new ValueChangeListener() {
+            @Override
+            public void logChange(ObservableValue<? extends Object> ov, Object oldValue, Object newValue) {
+                ViewModel.this.logger.putLog("Значение индекса таба изменилось с '" + oldValue + "' на '" + newValue + "'");
+            }
+        });
 
         activeTabIndex.set(OperationTab.NORM.ordinal());
         vectorText.set("");
@@ -55,6 +90,7 @@ public class ViewModel {
         normalizationResultText.set("");
         dotProductResultText.set("");
         crossProductResultText.set("");
+        this.logger.putLog("Инициализация калькулятора завершена");
     }
 
     public IntegerProperty activeTabIndexProperty() {
@@ -204,21 +240,26 @@ public class ViewModel {
     }
 
     public void calculate() {
-        Vector3D vector = vectorFromString(vectorText.get());
+        logger.putLog("Кнопка 'Рассчитать' нажата");
 
+        Vector3D vector = vectorFromString(vectorText.get());
         switch (getActiveTab()) {
             case NORM:
+                logger.putLog("Расчет нормы вектора");
                 normResultText.set(new Double(vector.getNorm()).toString());
                 break;
             case NORMALIZATION:
+                logger.putLog("Расчет нормированного вектора");
                 normalizationResultText.set(vector.normalize().toString());
                 break;
             case DOTPRODUCT:
+                logger.putLog("Расчет скалярного произведения");
                 Vector3D dotProductOperand = vectorFromString(dotProductOperandText.get());
                 Double dotProductResult = vector.dot(dotProductOperand);
                 dotProductResultText.set(dotProductResult.toString());
                 break;
             case CROSSPRODUCT:
+                logger.putLog("Расчет векторного произведения");
                 Vector3D crossProductOperand = vectorFromString(crossProductOperandText.get());
                 Vector3D crossProductResult = vector.cross(crossProductOperand);
                 crossProductResultText.set(crossProductResult.toString());
@@ -226,6 +267,7 @@ public class ViewModel {
             default:
                 break;
         }
+        logger.putLog("Расчет выполнен");
     }
 
     public enum OperationTab {

@@ -534,20 +534,55 @@ public class ViewModelTest {
     }
 
     @Test
-    public void testLoggerIsEmpty() {
-        AbstractLogger logger = viewModel.getLogger();
-        Iterator<String> it = logger.iterator();
-        assertFalse(it.hasNext());
+    public void testLoggerAfterInit() {
+        findRequiredText(viewModel.getLogger(), "Инициализация калькулятора завершена");
     }
 
     @Test
-    public void testLoggerNotEmptyAfterCalculate() {
+    public void testLoggerAfterNormCalculate() {
         viewModel.setVectorText(validVectorString);
         viewModel.setActiveTab(OperationTab.NORM);
         viewModel.calculate();
+        findRequiredText(viewModel.getLogger(), "Расчет нормы вектора");
+    }
 
-        AbstractLogger logger = viewModel.getLogger();
+    @Test
+    public void testLoggerAfterNormalizationCalculate() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setActiveTab(OperationTab.NORMALIZATION);
+        viewModel.calculate();
+        findRequiredText(viewModel.getLogger(), "Расчет нормированного вектора");
+    }
+
+    @Test
+    public void testLoggerAfterDotProductCalculate() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setDotProductOperandText(validVectorString);
+        viewModel.setActiveTab(OperationTab.DOTPRODUCT);
+        viewModel.calculate();
+        findRequiredText(viewModel.getLogger(), "Расчет скалярного произведения");
+    }
+
+    @Test
+    public void testLoggerAfterCrossProductCalculate() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setCrossProductOperandText(validVectorString);
+        viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
+        viewModel.calculate();
+        findRequiredText(viewModel.getLogger(), "Расчет векторного произведения");
+    }
+
+    private void findRequiredText(AbstractLogger logger, final String requiredText) {
+        boolean textFound = false;
+
         Iterator<String> it = logger.iterator();
-        assertTrue(it.hasNext());
+        while (it.hasNext()) {
+            if (requiredText.equals(it.next())) {
+                textFound = true;
+                break;
+            }
+        }
+
+        assertTrue(textFound);
     }
 }
