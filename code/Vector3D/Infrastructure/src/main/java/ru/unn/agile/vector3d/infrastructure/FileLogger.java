@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Locale;
 
-public class FileLogger implements AbstractLogger {
+public class FileLogger extends AbstractLogger {
     private static final String LOG_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private final BufferedWriter fileWritter;
     private final BufferedReader fileReader;
@@ -40,10 +40,14 @@ public class FileLogger implements AbstractLogger {
     @Override
     public void putLog(final String message, final Object... args) {
         try {
-            String str = MessageFormat.format(message, args);
-            fileWritter.write(getTimestamp() + " > " + MessageFormat.format(message, args));
+            String str = getTimestamp() + " > " + MessageFormat.format(message, args);
+            fileWritter.write(str);
             fileWritter.newLine();
             fileWritter.flush();
+
+            for (LoggerListener listener : listeners) {
+                listener.onLogAdded(str);
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class TestLoggerImpl implements AbstractLogger {
+public class TestLoggerImpl extends AbstractLogger {
     private final Collection<String> records;
 
     public TestLoggerImpl() {

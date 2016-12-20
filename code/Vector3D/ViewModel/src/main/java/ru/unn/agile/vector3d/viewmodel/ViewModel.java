@@ -8,7 +8,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+
+import java.util.Iterator;
 import java.util.regex.Pattern;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import ru.unn.agile.vector3d.model.Vector3D;
 
 public class ViewModel {
@@ -22,8 +27,10 @@ public class ViewModel {
     private final StringProperty crossProductResultText = new SimpleStringProperty();
     private final StringProperty statusText = new SimpleStringProperty();
     private final BooleanProperty buttonDisabled = new SimpleBooleanProperty();
+    private final ObservableList<String> logsList = FXCollections.observableArrayList();
+    AbstractLogger.LoggerListener loggerLister;
 
-    private final AbstractLogger logger;
+    private AbstractLogger logger;
 
     public static class LogMessages {
         public static final String INIT
@@ -56,6 +63,17 @@ public class ViewModel {
                 = "Cross product vectors calculation";
     }
 
+    private static class FakeLogger extends AbstractLogger {
+
+        @Override
+        public void putLog(String message, Object... args) {}
+
+        @Override
+        public Iterator<String> iterator() {
+            return null;
+        }
+    }
+
     public abstract class ValueChangeListener implements ChangeListener<Object> {
         public abstract void logChange(ObservableValue<? extends Object> ov,
                                   Object oldValue, Object newValue);
@@ -74,61 +92,21 @@ public class ViewModel {
             ViewModel.this.buttonDisabled.set(btnDisabledVal);
         }
     }
+    public ViewModel() {
+        this(new FakeLogger());
+    }
 
     public ViewModel(final AbstractLogger logger) {
         if (logger == null) {
             throw new IllegalArgumentException("Logger can't be null");
         }
-
         this.logger = logger;
+        init();
+    }
 
-        this.logger.putLog(LogMessages.INIT);
-
-        vectorText.addListener(new ValueChangeListener() {
-            @Override
-            public void logChange(final ObservableValue<? extends Object> ov,
-                                  final Object oldValue, final Object newValue) {
-                ViewModel.this.logger.putLog(LogMessages.FIRST_VECTOR_CHANGED,
-                        oldValue, newValue);
-            }
-        });
-
-        dotProductOperandText.addListener(new ValueChangeListener() {
-            @Override
-            public void logChange(final ObservableValue<? extends Object> ov,
-                                  final Object oldValue, final Object newValue) {
-                ViewModel.this.logger.putLog(LogMessages.SECOND_VECTOR_DOT_CHANGED,
-                        oldValue, newValue);
-            }
-        });
-
-        crossProductOperandText.addListener(new ValueChangeListener() {
-            @Override
-            public void logChange(final ObservableValue<? extends Object> ov,
-                                  final Object oldValue, final Object newValue) {
-                ViewModel.this.logger.putLog(LogMessages.SECOND_VECTOR_CROSS_CHANGED,
-                        oldValue, newValue);
-            }
-        });
-
-        activeTabIndex.addListener(new ValueChangeListener() {
-            @Override
-            public void logChange(final ObservableValue<? extends Object> ov,
-                                  final Object oldValue, final Object newValue) {
-                ViewModel.this.logger.putLog(LogMessages.TAB_INDEX_CHANGED, oldValue, newValue);
-            }
-        });
-
-        activeTabIndex.set(OperationTab.NORM.ordinal());
-        vectorText.set("");
-        dotProductOperandText.set("");
-        crossProductOperandText.set("");
-
-        normResultText.set("");
-        normalizationResultText.set("");
-        dotProductResultText.set("");
-        crossProductResultText.set("");
-        this.logger.putLog(LogMessages.INIT_END);
+    public void setLogger(final AbstractLogger logger) {
+        this.logger = logger;
+        this.logger.addListener(loggerLister);
     }
 
     public IntegerProperty activeTabIndexProperty() {
@@ -231,6 +209,10 @@ public class ViewModel {
         return logger;
     }
 
+    public ObservableList<String> logsItems() {
+        return logsList;
+    }
+
     boolean validate(final String text) {
         String coordPattern = "[\\+-]?[0-9]+(\\.[0-9]+)?";
         String vectorPattern = " *" + coordPattern + ", *"
@@ -328,6 +310,64 @@ public class ViewModel {
             }
         }
     };
+
+    private void init() {
+        loggerLister = new AbstractLogger.LoggerListener() {
+            @Override
+            public void onLogAdded(final String message) {
+                ViewModel.this.logsItems().add(message);
+            }
+        };
+        this.logger.addListener(loggerLister);
+
+        this.logger.putLog(LogMessages.INIT);
+
+        vectorText.addListener(new ValueChangeListener() {
+            @Override
+            public void logChange(final ObservableValue<? extends Object> ov,
+                                  final Object oldValue, final Object newValue) {
+                ViewModel.this.logger.putLog(LogMessages.FIRST_VECTOR_CHANGED,
+                        oldValue, newValue);
+            }
+        });
+
+        dotProductOperandText.addListener(new ValueChangeListener() {
+            @Override
+            public void logChange(final ObservableValue<? extends Object> ov,
+                                  final Object oldValue, final Object newValue) {
+                ViewModel.this.logger.putLog(LogMessages.SECOND_VECTOR_DOT_CHANGED,
+                        oldValue, newValue);
+            }
+        });
+
+        crossProductOperandText.addListener(new ValueChangeListener() {
+            @Override
+            public void logChange(final ObservableValue<? extends Object> ov,
+                                  final Object oldValue, final Object newValue) {
+                ViewModel.this.logger.putLog(LogMessages.SECOND_VECTOR_CROSS_CHANGED,
+                        oldValue, newValue);
+            }
+        });
+
+        activeTabIndex.addListener(new ValueChangeListener() {
+            @Override
+            public void logChange(final ObservableValue<? extends Object> ov,
+                                  final Object oldValue, final Object newValue) {
+                ViewModel.this.logger.putLog(LogMessages.TAB_INDEX_CHANGED, oldValue, newValue);
+            }
+        });
+
+        activeTabIndex.set(OperationTab.NORM.ordinal());
+        vectorText.set("");
+        dotProductOperandText.set("");
+        crossProductOperandText.set("");
+
+        normResultText.set("");
+        normalizationResultText.set("");
+        dotProductResultText.set("");
+        crossProductResultText.set("");
+        this.logger.putLog(LogMessages.INIT_END);
+    }
 }
 
 enum Status {

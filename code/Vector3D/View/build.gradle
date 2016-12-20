@@ -4,6 +4,7 @@ compileJava.options.encoding = 'UTF-8'
 
 dependencies {
     compile project(':Vector3D-ViewModel')
+    compile project(':Vector3D-Infrastructure')
 }
 
 // For validation of FXML
