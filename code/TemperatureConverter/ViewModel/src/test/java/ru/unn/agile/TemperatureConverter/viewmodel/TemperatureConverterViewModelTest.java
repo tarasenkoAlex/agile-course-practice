@@ -218,25 +218,25 @@ public class TemperatureConverterViewModelTest {
     public void logContainsRightMsgWhenFirstScaleChanged() {
         viewModel.firstScaleChanged("CELSIUS", "FAHRENHEIT");
         String msg = viewModel.getLog().get(0);
-        assertTrue(msg.matches(".*" + LogMsg.FIRST_SCALE_WAS_CHANGED + "FAHRENHEIT"));
+        assertTrue(msg.matches(".*First Scale was changed to FAHRENHEIT"));
     }
     @Test
     public void logContainsRightMsgWhenSecondScaleChanged() {
         viewModel.secondScaleChanged("CELSIUS", "FAHRENHEIT");
         String msg = viewModel.getLog().get(0);
-        assertTrue(msg.matches(".*" + LogMsg.SECOND_SCALE_WAS_CHANGED + "FAHRENHEIT"));
+        assertTrue(msg.matches(".*Second Scale was changed to FAHRENHEIT"));
     }
     @Test
     public void logContainsRightMsgWhenFirstValueChanged() {
         viewModel.firstValueChanged("1", "2");
         String msg = viewModel.getLog().get(0);
-        assertTrue(msg.matches(".*" + LogMsg.FIRST_VALUE_WAS_CHANGED + "2"));
+        assertTrue(msg.matches(".*First Value was changed to 2"));
     }
     @Test
     public void logContainsRightMsgWhenSecondValueChanged() {
         viewModel.secondValueChanged("1", "2");
         String msg = viewModel.getLog().get(0);
-        assertTrue(msg.matches(".*" + LogMsg.SECOND_VALUE_WAS_CHANGED + "2"));
+        assertTrue(msg.matches(".*Second Value was changed to 2"));
     }
     @Test
     public void canWriteThreeLogs() {
@@ -251,7 +251,7 @@ public class TemperatureConverterViewModelTest {
         viewModel.convertFirstToSecondValue();
         String msg = viewModel.getLog().get(1);
         assertTrue(msg.matches(".*" + viewModel.getFirstScale() + " to "
-                + viewModel.getSecondScale() + LogMsg.CONVERT_SUCCESS + ".*"));
+                + viewModel.getSecondScale() + " convert success"));
     }
     @Test
     public void logContainsRightMsgAfterConvertSecondToFirst() {
@@ -259,7 +259,7 @@ public class TemperatureConverterViewModelTest {
         viewModel.convertSecondToFirstValue();
         String msg = viewModel.getLog().get(1);
         assertTrue(msg.matches(".*" + viewModel.getSecondScale() + " to "
-                + viewModel.getFirstScale() + LogMsg.CONVERT_SUCCESS + ".*"));
+                + viewModel.getFirstScale() + " convert success"));
     }
     @Test
     public void noLogIfFirstValueNotChanged() {

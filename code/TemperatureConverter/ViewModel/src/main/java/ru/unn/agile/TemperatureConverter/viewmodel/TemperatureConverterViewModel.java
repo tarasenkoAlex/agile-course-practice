@@ -87,7 +87,7 @@ public class TemperatureConverterViewModel {
             double dSecondValue =
                     TemperatureConverter.convert(dFirstValue, firstScale, secondScale);
             warningLabelText = "";
-            logger.log(firstScale + " to " + secondScale + LogMsg.CONVERT_SUCCESS);
+            logger.log(firstScale + " to " + secondScale + " convert success");
             return Double.toString(dSecondValue);
         } catch (Exception e) {
             warningLabelText = "We wrote incorrect value of temperature!";
@@ -140,36 +140,27 @@ public class TemperatureConverterViewModel {
         if (oldScale.equals(newScale)) {
             return;
         }
-        logger.log(LogMsg.FIRST_SCALE_WAS_CHANGED + newScale);
+        logger.log("First Scale was changed to " + newScale);
     }
     public void secondScaleChanged(final String oldScale,
                                    final String newScale) {
         if (oldScale.equals(newScale)) {
             return;
         }
-        logger.log(LogMsg.SECOND_SCALE_WAS_CHANGED + newScale);
+        logger.log("Second Scale was changed to " + newScale);
    }
     public void firstValueChanged(final String oldValue,
                                   final String newValue) {
         if (oldValue.equals(newValue)) {
             return;
         }
-        logger.log(LogMsg.FIRST_VALUE_WAS_CHANGED + newValue);
+        logger.log("First Value was changed to " + newValue);
     }
     public void secondValueChanged(final String oldValue,
                                    final String newValue) {
         if (oldValue.equals(newValue)) {
             return;
         }
-        logger.log(LogMsg.SECOND_VALUE_WAS_CHANGED + newValue);
+        logger.log("Second Value was changed to " + newValue);
     }
-}
-final class LogMsg {
-    public static final String FIRST_SCALE_WAS_CHANGED = "First Scale was changed to ";
-    public static final String SECOND_SCALE_WAS_CHANGED = "Second Scale was changed to ";
-    public static final String CONVERT_SUCCESS = " convert success";
-    public static final String FIRST_VALUE_WAS_CHANGED = "First Value was changed to ";
-    public static final String SECOND_VALUE_WAS_CHANGED = "Second Value was changed to ";
-
-    private LogMsg() { }
 }

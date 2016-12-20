@@ -11,14 +11,18 @@ import static ru.unn.agile.TemperatureConverter.model.TemperatureScale.*;
 @RunWith(Parameterized.class)
 public class TemperatureConverterExceptionTest {
     private static final double DELTA = 0.000001;
+    public static final double CELSIUS_IN_ABSOLUTE = -273.15;
+    public static final double KELVIN_IN_ABSOLUTE = 0.0;
+    public static final double NEWTON_IN_ABSOLUTE = -90.14;
+    public static final double FAHRENHEIT_IN_ABSOLUTE = -459.67;
 
     @Parameterized.Parameters(name = "{index}: from {0} {1}")
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {AbsoluteZero.CELSIUS - DELTA, CELSIUS},
-                {AbsoluteZero.KELVIN - DELTA, KELVIN},
-                {AbsoluteZero.NEWTON - DELTA, NEWTON},
-                {AbsoluteZero.FAHRENHEIT - DELTA, FAHRENHEIT},
+                {CELSIUS_IN_ABSOLUTE - DELTA, CELSIUS},
+                {KELVIN_IN_ABSOLUTE - DELTA, KELVIN},
+                {NEWTON_IN_ABSOLUTE - DELTA, NEWTON},
+                {FAHRENHEIT_IN_ABSOLUTE - DELTA, FAHRENHEIT},
         });
     }
 
