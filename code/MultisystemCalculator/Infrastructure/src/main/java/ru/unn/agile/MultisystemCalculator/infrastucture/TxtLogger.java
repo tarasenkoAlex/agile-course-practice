@@ -10,21 +10,21 @@ import java.util.List;
 import java.util.Locale;
 
 public class TxtLogger implements ILogger {
-    private static final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private final BufferedWriter writer;
-    private final String filename;
+    private final String pathToFile;
 
     private static String now() {
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW, Locale.ENGLISH);
-        return sdf.format(cal.getTime());
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
+        return simpleDateFormat.format(calendar.getTime());
     }
 
-    public TxtLogger(final String filename) throws IOException {
-        this.filename = filename;
+    public TxtLogger(final String pathToFile) throws IOException {
+        this.pathToFile = pathToFile;
 
         BufferedWriter logWriter = null;
-        logWriter = new BufferedWriter(new FileWriter(filename));
+        logWriter = new BufferedWriter(new FileWriter(pathToFile));
         writer = logWriter;
     }
 
@@ -39,7 +39,7 @@ public class TxtLogger implements ILogger {
     public List<String> getLog() throws IOException {
         BufferedReader reader;
         ArrayList<String> log = new ArrayList<String>();
-        reader = new BufferedReader(new FileReader(filename));
+        reader = new BufferedReader(new FileReader(pathToFile));
         String line = reader.readLine();
 
         while (line != null) {

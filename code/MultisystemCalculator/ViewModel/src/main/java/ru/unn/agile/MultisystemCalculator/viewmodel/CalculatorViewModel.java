@@ -36,7 +36,7 @@ public class CalculatorViewModel {
             new SimpleObjectProperty<>(FXCollections.observableArrayList(Format.values()));
     private final ObjectProperty<Format> selectedFormat = new SimpleObjectProperty<>();
     private final StringProperty logs = new SimpleStringProperty();
-    private ILogger logger;
+    private ILogger multySystemLogger;
     private List<ValueCachingChangeListener> valueChangedListeners;
 
     private final MultisystemCalculatorWrapper calculator = new MultisystemCalculatorWrapper();
@@ -47,15 +47,15 @@ public class CalculatorViewModel {
     }
 
     public CalculatorViewModel(final ILogger logger) {
-        setLogger(logger);
+        setMultySystemLogger(logger);
         init();
     }
 
-    public final void setLogger(final ILogger logger) {
-        if (logger == null) {
+    public final void setMultySystemLogger(final ILogger multySystemLogger) {
+        if (multySystemLogger == null) {
             throw new IllegalArgumentException("Logger parameter can't be null");
         }
-        this.logger = logger;
+        this.multySystemLogger = multySystemLogger;
     }
 
     private void init() {
@@ -108,7 +108,7 @@ public class CalculatorViewModel {
                     .append(": first argument = ").append(arg1.get())
                     .append("; second argument = ").append(arg2.get())
                     .append(" Operation: ").append(selectedOperation.get().toString()).append(".");
-            logger.log(message.toString());
+            multySystemLogger.log(message.toString());
             updateLogs();
         } catch (Exception e) {
             output = e.getMessage();
@@ -165,11 +165,11 @@ public class CalculatorViewModel {
     }
 
     public final List<String> getLog() throws IOException {
-        return logger.getLog();
+        return multySystemLogger.getLog();
     }
 
     private void updateLogs() throws IOException {
-        List<String> fullLog = logger.getLog();
+        List<String> fullLog = multySystemLogger.getLog();
         String record = new String();
         for (String log : fullLog) {
             record += log + "\n";
@@ -184,7 +184,7 @@ public class CalculatorViewModel {
         }
         StringBuilder message = new StringBuilder(LogMessages.OPERATION_WAS_CHANGED);
         message.append(newValue.toString());
-        logger.log(message.toString());
+        multySystemLogger.log(message.toString());
         updateLogs();
     }
 
@@ -194,37 +194,37 @@ public class CalculatorViewModel {
             return;
         }
 
-        for (ValueCachingChangeListener listener : valueChangedListeners) {
-            if (listener.isChanged()) {
+        for (ValueCachingChangeListener ValueCachingChangeListener : valueChangedListeners) {
+            if (ValueCachingChangeListener.isChanged()) {
                 StringBuilder message = new StringBuilder(LogMessages.EDITING_FINISHED);
                 message.append("Input arguments are: [")
                         .append(arg1.get()).append("; ")
                         .append(arg2.get()).append("]");
-                logger.log(message.toString());
+                multySystemLogger.log(message.toString());
                 updateLogs();
 
-                listener.cache();
+                ValueCachingChangeListener.cache();
                 break;
             }
         }
     }
 
     private class ValueCachingChangeListener implements ChangeListener<String> {
-        private String prevValue = new String();
-        private String curValue = new String();
+        private String previousValueParam = new String();
+        private String currentValueParam = new String();
         @Override
-        public void changed(final ObservableValue<? extends String> observable,
-                            final String oldValue, final String newValue) {
-            if (oldValue.equals(newValue)) {
+        public void changed(final ObservableValue<? extends String> observableValue,
+                            final String oldValueParam, final String newValueParam) {
+            if (oldValueParam.equals(newValueParam)) {
                 return;
             }
-            curValue = newValue;
+            currentValueParam = newValueParam;
         }
         public boolean isChanged() {
-            return !prevValue.equals(curValue);
+            return !previousValueParam.equals(currentValueParam);
         }
         public void cache() {
-            prevValue = curValue;
+            previousValueParam = currentValueParam;
         }
     }
 

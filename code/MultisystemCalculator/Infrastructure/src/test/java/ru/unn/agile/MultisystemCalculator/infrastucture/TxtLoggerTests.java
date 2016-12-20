@@ -16,16 +16,16 @@ import static ru.unn.agile.MultisystemCalculator.infrastucture.RegexMatcher.matc
 
 public class TxtLoggerTests {
     private static final String FILENAME = "./TxtLogger_Tests-lab3.log";
-    private TxtLogger txtLogger;
+    private TxtLogger logger;
 
     @Before
     public void setUp() throws IOException {
-        txtLogger = new TxtLogger(FILENAME);
+        logger = new TxtLogger(FILENAME);
     }
 
     @Test
     public void canCreateLoggerWithFileName() {
-        assertNotNull(txtLogger);
+        assertNotNull(logger);
     }
 
     @Test
@@ -41,22 +41,22 @@ public class TxtLoggerTests {
     public void canWriteLogMessage() throws IOException {
         String testMessage = "Test message";
 
-        txtLogger.log(testMessage);
+        logger.log(testMessage);
 
-        String message = txtLogger.getLog().get(0);
+        String message = logger.getLog().get(0);
         assertThat(message, matchesPattern(".*" + testMessage + "$"));
     }
 
     @Test
     public void canWriteSeveralLogMessage() throws IOException {
-        String[] messages = {"Test message 1", "Test message 2"};
+        String[] messages = {"One message", "Two message"};
 
-        txtLogger.log(messages[0]);
-        txtLogger.log(messages[1]);
+        logger.log(messages[0]);
+        logger.log(messages[1]);
 
-        List<String> actualMessages = txtLogger.getLog();
-        for (int i = 0; i < actualMessages.size(); i++) {
-            assertThat(actualMessages.get(i), matchesPattern(".*" + messages[i] + "$"));
+        List<String> currentMessages = logger.getLog();
+        for (int i = 0; i < currentMessages.size(); i++) {
+            assertThat(currentMessages.get(i), matchesPattern(".*" + messages[i] + "$"));
         }
     }
 
@@ -64,9 +64,9 @@ public class TxtLoggerTests {
     public void doesLogContainDateAndTime() throws IOException {
         String testMessage = "Test message";
 
-        txtLogger.log(testMessage);
+        logger.log(testMessage);
 
-        String message = txtLogger.getLog().get(0);
+        String message = logger.getLog().get(0);
         assertThat(message, matchesPattern("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
     }
 }

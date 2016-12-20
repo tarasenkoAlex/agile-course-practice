@@ -36,7 +36,7 @@ public class CalculatorView {
     void initialize() throws IOException {
 
         // Two-way binding hasn't supported by FXML yet, so place it in code-behind
-        viewModel.setLogger(new TxtLogger("./TxtLogger-lab3.log"));
+        viewModel.setMultySystemLogger(new TxtLogger("./TxtLogger-lab3.log"));
         final ChangeListener<Boolean> focusChangeListener = new ChangeListener<Boolean>() {
             @Override
             public void changed(final ObservableValue<? extends Boolean> observable,
