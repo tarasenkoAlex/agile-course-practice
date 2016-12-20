@@ -1,6 +1,5 @@
 package ru.unn.agile.VolumeCalculator.viewModel;
 
-
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,25 +11,29 @@ import java.util.Arrays;
 import java.util.List;
 
 public class VolumeCalculatorViewModel {
-
-    private final BooleanProperty isCalculateDisable = new SimpleBooleanProperty(true);
     private final BooleanProperty isParam1Visible = new SimpleBooleanProperty(false);
     private final BooleanProperty isParam2Visible = new SimpleBooleanProperty(false);
-    private final StringProperty resultVolume = new SimpleStringProperty("");
+
     private final StringProperty param1Name = new SimpleStringProperty("Param1");
     private final StringProperty param2Name = new SimpleStringProperty("Param2");
+    private final StringProperty param1Value = new SimpleStringProperty();
+    private final StringProperty param2Value = new SimpleStringProperty();
+
     private final ObjectProperty<EVolumeTypes> selectedVolumeItem = new SimpleObjectProperty<>();
     private final ObjectProperty<ObservableList<EVolumeTypes>> volumeTypeListItems =
             new SimpleObjectProperty<>(FXCollections.observableArrayList(EVolumeTypes.values()));
-    private final StringProperty param1Value = new SimpleStringProperty();
-    private final StringProperty param2Value = new SimpleStringProperty();
+
+    private final BooleanProperty isCalculateDisable = new SimpleBooleanProperty(true);
+
+    private final StringProperty resultVolume = new SimpleStringProperty("");
     private final StringProperty validationMsg = new SimpleStringProperty("");
 
     private final StringProperty logs = new SimpleStringProperty();
-    private ILogger logger;
+    private IVolumeCalculatorLogger logger;
+
     private List<ValueCachingChangeListener> valueChangedListeners;
 
-    public final void setLogger(final ILogger logger) {
+    public final void setLogger(final IVolumeCalculatorLogger logger) {
         if (logger == null) {
             throw new IllegalArgumentException("Logger parameter can't be null");
         }
@@ -40,14 +43,16 @@ public class VolumeCalculatorViewModel {
     public VolumeCalculatorViewModel() {
         init();
     }
-    public VolumeCalculatorViewModel(final ILogger logger) {
+
+    public VolumeCalculatorViewModel(final IVolumeCalculatorLogger logger) {
         setLogger(logger);
         init();
     }
+
     private void init() {
         selectedVolumeItem.addListener(new ChangeListener<EVolumeTypes>() {
             @Override
-            public void changed(final ObservableValue<? extends EVolumeTypes> observable,
+            public void changed(final ObservableValue<? extends EVolumeTypes> observableValue,
                                 final  EVolumeTypes oldValue, final  EVolumeTypes newValue) {
                 setParam1ValueProperty(null);
                 setParam2ValueProperty(null);
@@ -59,52 +64,66 @@ public class VolumeCalculatorViewModel {
 
         param1Value.addListener(new ParamFieldListener());
         param2Value.addListener(new ParamFieldListener());
-        final List<StringProperty> vals = new ArrayList<StringProperty>() { {
+
+        final List<StringProperty> values = new ArrayList<StringProperty>() { {
             add(param1Value);
             add(param2Value);
         } };
+
         valueChangedListeners = new ArrayList<>();
-        for (StringProperty val : vals) {
+        for (StringProperty value : values) {
             final ValueCachingChangeListener listener = new ValueCachingChangeListener();
-            val.addListener(listener);
+            value.addListener(listener);
             valueChangedListeners.add(listener);
         }
-    }
-
-    public BooleanProperty getCalculateDisableProperty() {
-        return isCalculateDisable;
-    }
-
-    public final void setCalculateDisableProperty(final Boolean value) {
-        isCalculateDisable.setValue(value);
-    }
-
-    public BooleanProperty getParam1VisibleProperty() {
-        return isParam1Visible;
-    }
-
-    public BooleanProperty getParam2VisibleProperty() {
-        return isParam2Visible;
     }
 
     public final void setParam1VisibleProperty(final boolean value) {
         isParam1Visible.setValue(value);
     }
 
+    public BooleanProperty getParam1VisibleProperty() {
+        return isParam1Visible;
+    }
+
     public final void setParam2VisibleProperty(final boolean value) {
         isParam2Visible.setValue(value);
     }
 
-    public StringProperty getResultVolumeProperty() {
-        return resultVolume;
+    public BooleanProperty getParam2VisibleProperty() {
+        return isParam2Visible;
     }
 
-    public final void setResultVolumeProperty(final String value) {
-        resultVolume.setValue(value);
+    public void setParam1Name(final String value) {
+        param1Name.setValue(value);
     }
 
-    public ObjectProperty<ObservableList<EVolumeTypes>> getVolumeTypeListItemsProperty() {
-        return volumeTypeListItems;
+    public StringProperty getParam1Name() {
+        return param1Name;
+    }
+
+    public void setParam2Name(final String value) {
+        param2Name.setValue(value);
+    }
+
+    public StringProperty getParam2Name() {
+        return param2Name;
+    }
+
+    public void setParam1ValueProperty(final String value) {
+        param1Value.setValue(value);
+    }
+
+    public StringProperty getParam1ValueProperty() {
+        return param1Value;
+    }
+
+    public void setParam2ValueProperty(final String value) {
+        param2Value.setValue(value);
+    }
+
+    public StringProperty getParam2ValueProperty() {
+        return param2Value;
     }
 
     public final void setSelectedVolumeItem(final EVolumeTypes item) {
@@ -115,50 +134,56 @@ public class VolumeCalculatorViewModel {
         return selectedVolumeItem.getValue();
     }
 
-    public StringProperty getParam1Name() {
-        return param1Name;
+    public ObjectProperty<EVolumeTypes> getSelectedItemProperty() {
+        return selectedVolumeItem;
     }
 
-    public StringProperty getParam2Name() {
-        return param2Name;
-    }
-
-    public void setParam1Name(final String value) {
-        param1Name.setValue(value);
-    }
-
-    public void setParam2Name(final String value) {
-        param2Name.setValue(value);
+    public ObjectProperty<ObservableList<EVolumeTypes>> getVolumeTypeListItemsProperty() {
+        return volumeTypeListItems;
     }
 
     public final ObservableList<EVolumeTypes> getVolumeTypeListItems() {
         return volumeTypeListItems.get();
     }
 
-    public ObjectProperty<EVolumeTypes> getSelectedItemProperty() {
-        return selectedVolumeItem;
+    public final void setCalculateDisableProperty(final Boolean value) {
+        isCalculateDisable.setValue(value);
     }
 
-    public StringProperty getParam1ValueProperty() {
-        return param1Value;
+    public BooleanProperty getCalculateDisableProperty() {
+        return isCalculateDisable;
     }
 
-    public StringProperty getParam2ValueProperty() {
-        return param2Value;
+    public final void setResultVolumeProperty(final String value) {
+        resultVolume.setValue(value);
     }
 
-    public void setParam1ValueProperty(final String value) {
-        param1Value.setValue(value);
+    public StringProperty getResultVolumeProperty() {
+        return resultVolume;
     }
 
-    public void setParam2ValueProperty(final String value) {
-        param2Value.setValue(value);
+    public void setValidationMsgProperty(final String value) {
+        validationMsg.setValue(value);
+    }
+
+    public StringProperty getValidationMsgProperty() {
+        return validationMsg;
+    }
+
+    public StringProperty logsProperty() {
+        return logs;
+    }
+
+    public final String getLogs() {
+        return logs.get();
+    }
+
+    public final List<String> getLog() {
+        return logger.getLog();
     }
 
     private void changeParametersVisible(final EVolumeTypes newValue) {
-
         switch (newValue) {
-
             case TETRAHEDRON:
             case CUBE:
             case SPHERE:
@@ -203,12 +228,14 @@ public class VolumeCalculatorViewModel {
         }
     }
 
-    public StringProperty getValidationMsgProperty() {
-        return validationMsg;
-    }
-
-    public void setValidationMsgProperty(final String value) {
-        validationMsg.setValue(value);
+    private double tryParseDouble(final String s) {
+        double result = 0;
+        try {
+            result = Double.parseDouble(s);
+        } catch (Exception e) {
+            return 0;
+        }
+        return result;
     }
 
     public void calculate() {
@@ -226,24 +253,13 @@ public class VolumeCalculatorViewModel {
             message.append("; param2 = ").append(param2);
         }
         message.append(" Volume Type: ").append(selectedVolumeItem.get().toString()).append(".");
-        logger.log(message.toString());
+        logger.addLog(message.toString());
         updateLogs();
     }
 
-    private double tryParseDouble(final String s) {
-        double result = 0;
-        try {
-            result = Double.parseDouble(s);
-        } catch (Exception e) {
-            return 0;
-        }
-        return result;
-    }
-
     private class ParamFieldListener implements ChangeListener<String> {
-
         @Override
-        public void changed(final ObservableValue<? extends String> observable,
+        public void changed(final ObservableValue<? extends String> observableValue,
                             final String oldValue, final String newValue) {
             setCalculateDisableProperty(!validation());
         }
@@ -256,7 +272,6 @@ public class VolumeCalculatorViewModel {
                         EVolumeTypes.CUBE,
                         EVolumeTypes.TETRAHEDRON
                         ));
-
         try {
             if (getParam1ValueProperty().getValue() != null
                     && getParam1ValueProperty().getValue() != ""
@@ -268,7 +283,6 @@ public class VolumeCalculatorViewModel {
             if (typesWithOneParameter.contains(getSelectedVolumeItem())) {
                 return true;
             }
-
         } catch (Exception e) {
             setValidationMsgProperty(getParam1Name().getValue() + " is not valid");
             return false;
@@ -292,15 +306,6 @@ public class VolumeCalculatorViewModel {
         setValidationMsgProperty("");
         return false;
     }
-    public StringProperty logsProperty() {
-        return logs;
-    }
-    public final List<String> getLog() {
-        return logger.getLog();
-    }
-    public final String getLogs() {
-        return logs.get();
-    }
 
     private void updateLogs() {
         List<String> fullLog = logger.getLog();
@@ -310,17 +315,19 @@ public class VolumeCalculatorViewModel {
         }
         logs.set(record);
     }
+
     public void onVolumeTypeChanged(final EVolumeTypes oldValue, final EVolumeTypes newValue) {
         if (oldValue != null && oldValue.equals(newValue)) {
             return;
         }
         StringBuilder message = new StringBuilder(LogMessages.OPERATION_WAS_CHANGED);
         message.append(newValue.toString());
-        logger.log(message.toString());
+        logger.addLog(message.toString());
         updateLogs();
     }
+
     public void onFocusChanged(final Boolean oldValue, final Boolean newValue) {
-        if (!oldValue && newValue) {
+        if (oldValue != null && !oldValue && newValue) {
             return;
         }
 
@@ -335,9 +342,8 @@ public class VolumeCalculatorViewModel {
                     message.append("; ").append(param2Value.get());
                 }
                 message.append("]");
-                logger.log(message.toString());
+                logger.addLog(message.toString());
                 updateLogs();
-
                 listener.cache();
                 break;
             }
@@ -345,10 +351,10 @@ public class VolumeCalculatorViewModel {
     }
 
     private class ValueCachingChangeListener implements ChangeListener<String> {
-        private String prevValue = new String();
         private String curValue = new String();
+        private String prevValue = new String();
         @Override
-        public void changed(final ObservableValue<? extends String> observable,
+        public void changed(final ObservableValue<? extends String> observableValue,
                             final String oldValue, final String newValue) {
             if (oldValue != null && oldValue.equals(newValue)) {
                 return;

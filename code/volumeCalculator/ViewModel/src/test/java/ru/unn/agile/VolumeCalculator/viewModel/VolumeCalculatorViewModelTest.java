@@ -9,16 +9,17 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class VolumeCalculatorViewModelTest {
-
     private VolumeCalculatorViewModel viewModel;
     private double delta = 0.01;
+
     public void setExternalViewModel(final VolumeCalculatorViewModel viewModel) {
         this.viewModel = viewModel;
     }
+
     @Before
     public void setUp() {
         if (viewModel == null) {
-            viewModel = new VolumeCalculatorViewModel(new FakeLogger());
+            viewModel = new VolumeCalculatorViewModel(new FakeVolumeCalculatorLogger());
         }
     }
 
@@ -303,51 +304,50 @@ public class VolumeCalculatorViewModelTest {
     }
 
     @Test
-    public void getCube() {
+    public void getVolumeCube() {
         double value = EVolumeTypes.CUBE.getVolume(3.0);
-        assertEquals(27, value, 0.01);
+        assertEquals(27.0, value, delta);
     }
 
     @Test
-    public void getCone() {
+    public void getVolumeCone() {
         double value = EVolumeTypes.CONE.getVolume(2.0, 3.0);
         assertEquals(12.56, value, delta);
     }
 
     @Test
-    public void getCylinder() {
+    public void getVolumeCylinder() {
         double value = EVolumeTypes.CYLINDER.getVolume(2.0, 3.0);
-        assertEquals(37.69, value, 0.01);
+        assertEquals(37.69, value, delta);
     }
 
     @Test
-    public void getPyramid() {
+    public void getVolumePyramid() {
         double value = EVolumeTypes.PYRAMID.getVolume(4.0, 3.0);
         assertEquals(3.99, value, delta);
     }
 
     @Test
-    public void getTetrahedron() {
+    public void getVolumeTetrahedron() {
         double value = EVolumeTypes.TETRAHEDRON.getVolume(2.0);
-        assertEquals(0.94, value, 0.01);
+        assertEquals(0.94, value, delta);
     }
 
     @Test
-    public void getSphere() {
+    public void getVolumeSphere() {
         double value = EVolumeTypes.SPHERE.getVolume(1.0);
         assertEquals(4.18, value, delta);
+    }
+
+    @Test
+    public void emptyLogInTheBeginning() {
+        assertTrue(viewModel.getLog().isEmpty());
     }
 
     @Test
     public void whenLogMessageIsEmpty() {
         setInputData();
         assertEquals(null, viewModel.getLogs());
-    }
-
-    @Test
-    public void whenLogPropertyMessageIsEmpty() {
-        setInputData();
-        assertEquals(null, viewModel.logsProperty().getValue());
     }
 
     @Test
@@ -358,6 +358,12 @@ public class VolumeCalculatorViewModelTest {
     }
 
     @Test
+    public void whenLogPropertyMessageIsEmpty() {
+        setInputData();
+        assertEquals(null, viewModel.logsProperty().getValue());
+    }
+
+    @Test
     public void whenLogPropertyMessageIsNotEmpty() {
         setInputData();
         viewModel.calculate();
@@ -365,7 +371,7 @@ public class VolumeCalculatorViewModelTest {
     }
 
     @Test
-    public void viewModelConstructorThrowsExceptionWithNullLogger() {
+    public void viewModelConstructorThrowsExceptionWithNullVCLogger() {
         try {
             new VolumeCalculatorViewModel(null);
             fail("Exception wasn't thrown");
@@ -377,12 +383,7 @@ public class VolumeCalculatorViewModelTest {
     }
 
     @Test
-    public void emptyLogInTheBeginning() {
-        assertTrue(viewModel.getLog().isEmpty());
-    }
-
-    @Test
-    public void logContainsCalWasPressedMessageAfterCalculation() {
+    public void logContainsCalculateMessageAfterCalculation() {
         setInputData();
         viewModel.calculate();
         String message = viewModel.getLog().get(0);
@@ -398,7 +399,7 @@ public class VolumeCalculatorViewModelTest {
     }
 
     @Test
-    public void inputCorrectArgumentsLogged() {
+    public void whenCorrectArgumentsLogged() {
         setInputData();
         viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
         String message = viewModel.getLog().get(0);
@@ -412,7 +413,6 @@ public class VolumeCalculatorViewModelTest {
     public void checkOperationIsNotLoggedIfNotChanged() {
         viewModel.onVolumeTypeChanged(EVolumeTypes.CONE, EVolumeTypes.CYLINDER);
         viewModel.onVolumeTypeChanged(EVolumeTypes.CYLINDER, EVolumeTypes.CYLINDER);
-
         assertEquals(1, viewModel.getLog().size());
     }
 
@@ -421,7 +421,6 @@ public class VolumeCalculatorViewModelTest {
         setInputData();
         viewModel.calculate();
         viewModel.calculate();
-
         assertEquals(2, viewModel.getLog().size());
     }
 
@@ -451,6 +450,7 @@ public class VolumeCalculatorViewModelTest {
         assertTrue(message.matches(".*" + viewModel.getParam1ValueProperty().get()
                 + ".*" + viewModel.getParam2ValueProperty().get() + ".*"));
     }
+
     @Test
     public void getSelectedItemProperty() {
         setInputData();

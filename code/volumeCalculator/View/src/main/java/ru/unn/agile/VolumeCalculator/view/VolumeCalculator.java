@@ -9,9 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import ru.unn.agile.VolumeCalculator.infrastructure.VolumeCalculatorLogger;
 import ru.unn.agile.VolumeCalculator.viewModel.EVolumeTypes;
 import ru.unn.agile.VolumeCalculator.viewModel.VolumeCalculatorViewModel;
-import ru.unn.agile.VolumeCalculator.infrastructure.TxtLogger;
 
 /**
  * Created by ponom on 24.11.2016.
@@ -38,16 +38,14 @@ public class VolumeCalculator {
 
     @FXML
     void initialize() {
-        viewModel.setLogger(new TxtLogger("./TxtLogger-lab3.log"));
-
-        final ChangeListener<Boolean> focusChangeListener = new ChangeListener<Boolean>() {
+        viewModel.setLogger(new VolumeCalculatorLogger("./lab3-Volume-Calculator-Logger.log"));
+        final ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
             @Override
-            public void changed(final ObservableValue<? extends Boolean> observable,
+            public void changed(final ObservableValue<? extends Boolean> observableValue,
                                 final Boolean oldValue, final Boolean newValue) {
                 viewModel.onFocusChanged(oldValue, newValue);
             }
         };
-
         calculateButton.disableProperty()
                 .bindBidirectional(viewModel.getCalculateDisableProperty());
 
@@ -55,22 +53,24 @@ public class VolumeCalculator {
         param1TextField.visibleProperty().bindBidirectional(viewModel.getParam1VisibleProperty());
         param1TextField.textProperty().bindBidirectional(viewModel.getParam1ValueProperty());
         param1Label.textProperty().bindBidirectional(viewModel.getParam1Name());
-        param1TextField.focusedProperty().addListener(focusChangeListener);
+
+        param1TextField.focusedProperty().addListener(listener);
 
         param2Label.visibleProperty().bindBidirectional(viewModel.getParam2VisibleProperty());
         param2TextField.visibleProperty().bindBidirectional(viewModel.getParam2VisibleProperty());
         param2TextField.textProperty().bindBidirectional(viewModel.getParam2ValueProperty());
         param2Label.textProperty().bindBidirectional(viewModel.getParam2Name());
-        param2TextField.focusedProperty().addListener(focusChangeListener);
+
+        param2TextField.focusedProperty().addListener(listener);
 
         validationMsg.textProperty().bindBidirectional(viewModel.getValidationMsgProperty());
-
         volumeResultTextField.textProperty().bindBidirectional(viewModel.getResultVolumeProperty());
 
         volumeTypeListBox.valueProperty().bindBidirectional(viewModel.getSelectedItemProperty());
+
         volumeTypeListBox.valueProperty().addListener(new ChangeListener<EVolumeTypes>() {
             @Override
-            public void changed(final ObservableValue<? extends EVolumeTypes> observable,
+            public void changed(final ObservableValue<? extends EVolumeTypes> observableValue,
                                 final EVolumeTypes oldValue,
                                 final EVolumeTypes newValue) {
                 viewModel.onVolumeTypeChanged(oldValue, newValue);
