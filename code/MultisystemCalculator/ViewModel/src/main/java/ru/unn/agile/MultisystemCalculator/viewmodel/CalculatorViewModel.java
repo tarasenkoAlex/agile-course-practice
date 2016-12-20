@@ -194,8 +194,8 @@ public class CalculatorViewModel {
             return;
         }
 
-        for (ValueCachingChangeListener ValueCachingChangeListener : valueChangedListeners) {
-            if (ValueCachingChangeListener.isChanged()) {
+        for (ValueCachingChangeListener valueCachingChangeListener : valueChangedListeners) {
+            if (valueCachingChangeListener.isChanged()) {
                 StringBuilder message = new StringBuilder(LogMessages.EDITING_FINISHED);
                 message.append("Input arguments are: [")
                         .append(arg1.get()).append("; ")
@@ -203,7 +203,7 @@ public class CalculatorViewModel {
                 multySystemLogger.log(message.toString());
                 updateLogs();
 
-                ValueCachingChangeListener.cache();
+                valueCachingChangeListener.cache();
                 break;
             }
         }
