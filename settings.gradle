@@ -206,6 +206,8 @@ include "code/TemperatureConverter/ViewModel"
 project(":code/TemperatureConverter/ViewModel").name = "Temperature-Converter-ViewModel"
 include "code/TemperatureConverter/View"
 project(":code/TemperatureConverter/View").name = "Temperature-Converter-View"
+include "code/TemperatureConverter/Infrastructure"
+project(":code/TemperatureConverter/Infrastructure").name = "Temperature-Converter-Infrastructure"
 
 // Соврасов Владислав
 include "code/sovrasov-vlad"
