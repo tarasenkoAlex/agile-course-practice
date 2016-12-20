@@ -518,6 +518,21 @@ public class ViewModelTest {
     }
 
     @Test
+    public void testCreateWithFakeLogger() {
+        try {
+            ViewModel vm = new ViewModel();
+        } catch (Exception e) {
+            fail("Exception on empty ViewModel creration");
+        }
+    }
+
+    @Test
+    public void testNullIteratorWithFakeLogger() {
+        ViewModel vm = new ViewModel();
+        assertNull(vm.getLogger().iterator());
+    }
+
+    @Test
     public void testCreateViewModelWithLogger() {
         TestLoggerImpl logger = new TestLoggerImpl();
         ViewModel vm = new ViewModel(logger);
