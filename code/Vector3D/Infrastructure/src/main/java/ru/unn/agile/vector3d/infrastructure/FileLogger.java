@@ -45,7 +45,7 @@ public class FileLogger extends AbstractLogger {
             fileWritter.newLine();
             fileWritter.flush();
 
-            for (LoggerListener listener : listeners) {
+            for (LoggerListener listener : getListeners()) {
                 listener.onLogAdded(str);
             }
         } catch (Exception e) {

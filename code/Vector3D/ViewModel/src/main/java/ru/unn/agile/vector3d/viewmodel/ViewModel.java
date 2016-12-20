@@ -28,7 +28,7 @@ public class ViewModel {
     private final StringProperty statusText = new SimpleStringProperty();
     private final BooleanProperty buttonDisabled = new SimpleBooleanProperty();
     private final ObservableList<String> logsList = FXCollections.observableArrayList();
-    AbstractLogger.LoggerListener loggerLister;
+    private AbstractLogger.LoggerListener loggerLister;
 
     private AbstractLogger logger;
 
@@ -66,7 +66,9 @@ public class ViewModel {
     private static class FakeLogger extends AbstractLogger {
 
         @Override
-        public void putLog(String message, Object... args) {}
+        public void putLog(final String message, final Object... args) {
+            //not implemented
+        }
 
         @Override
         public Iterator<String> iterator() {

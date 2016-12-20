@@ -4,7 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public abstract class AbstractLogger implements Iterable<String> {
-    protected Set<LoggerListener> listeners = new LinkedHashSet<>();
+    private final Set<LoggerListener> listeners = new LinkedHashSet<>();
 
     public interface LoggerListener {
         void onLogAdded(String message);
@@ -12,11 +12,15 @@ public abstract class AbstractLogger implements Iterable<String> {
 
     public abstract void putLog(String message, Object... args);
 
-    public void addListener(LoggerListener listener) {
+    public void addListener(final LoggerListener listener) {
         listeners.add(listener);
     }
 
-    public void removeListener(LoggerListener listener) {
+    public void removeListener(final LoggerListener listener) {
         listeners.remove(listener);
+    }
+
+    protected Set<LoggerListener> getListeners() {
+        return listeners;
     }
 }

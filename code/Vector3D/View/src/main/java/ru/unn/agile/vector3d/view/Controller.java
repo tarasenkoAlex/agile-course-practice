@@ -24,7 +24,7 @@ public class Controller {
     @FXML
     private Button calculateButton;
     @FXML
-    private ListView logsList;
+    private ListView<String> logsList;
 
     @FXML
     void initialize() {
