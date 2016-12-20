@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Locale;
@@ -25,8 +24,8 @@ public class FileLogger implements AbstractLogger {
         BufferedWriter writer = null;
         BufferedReader reader = null;
         try {
-            writer = new BufferedWriter(new FileWriter(fileName));
-            reader = new BufferedReader(new FileReader(fileName));
+            writer = new BufferedWriter(new FileWriter(this.fileName));
+            reader = new BufferedReader(new FileReader(this.fileName));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,9 +33,14 @@ public class FileLogger implements AbstractLogger {
         fileReader = reader;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
     @Override
-    public void putLog(String message, Object... args) {
+    public void putLog(final String message, final Object... args) {
         try {
+            String str = MessageFormat.format(message, args);
             fileWritter.write(getTimestamp() + " > " + MessageFormat.format(message, args));
             fileWritter.newLine();
             fileWritter.flush();

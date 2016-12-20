@@ -15,6 +15,10 @@ public class ViewModelTest {
     private final String validVectorString = "-5.6, 8, +0.003";
     private final String invalidVectorString = "-5.6, 8, 5dcfd";
 
+    public void setViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
     @Before
     public void setUp() {
         TestLoggerImpl logger = new TestLoggerImpl();
@@ -571,7 +575,7 @@ public class ViewModelTest {
         findRequiredText(viewModel.getLogger(), ViewModel.LogMessages.CROSS_CALCULATE);
     }
 
-    private void findRequiredText(final AbstractLogger logger, final String requiredText) {
+    protected void findRequiredText(final AbstractLogger logger, final String requiredText) {
         boolean textFound = false;
 
         Iterator<String> it = logger.iterator();

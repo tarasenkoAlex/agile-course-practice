@@ -31,17 +31,17 @@ public class ViewModel {
         public static final String INIT_END
                 = "Initialization completed";
         public static final String STATUS_CHANGED
-                = "Status changed to '{0}'";
+                = "Status changed to ''{0}''";
         public static final String CALCULATION_AVAILABLE
                 = "calculation available: {0}";
         public static final String FIRST_VECTOR_CHANGED
-                = "Value of first vector changed from '{0}' to '{1}'";
+                = "Value of first vector changed from ''{0}'' to ''{1}''";
         public static final String SECOND_VECTOR_DOT_CHANGED
-                = "Value of second vector (dot product) changed from '{0}' to '{1}'";
+                = "Value of second vector (dot product) changed from ''{0}'' to ''{1}''";
         public static final String SECOND_VECTOR_CROSS_CHANGED
-                = "Value of second vector (cross product) changed from '{0}' to '{1}'";
+                = "Value of second vector (cross product) changed from ''{0}'' to ''{1}''";
         public static final String TAB_INDEX_CHANGED
-                = "Tab index changed from '{0}' to '{1}'";
+                = "Tab index changed from ''{0}'' to ''{1}''";
         public static final String CALCULATE_PRESSED
                 = "'Calculate' button was pressed";
         public static final String CALCULATE_END
