@@ -24,7 +24,7 @@ public class NumberConverterLoggerTest {
     }
 
     @Test
-    public void canCreateLogFileOnDisk() {
+    public void canCreateLogFile() {
         try {
             new BufferedReader(new FileReader(FILENAME));
         } catch (FileNotFoundException e) {
@@ -33,12 +33,12 @@ public class NumberConverterLoggerTest {
     }
 
     @Test
-    public void canWriteLogMessage() {
-        String testMessage = "Test message";
-        logger.log(testMessage);
+    public void canWriteLogMessageInFile() {
+        String mes = "Message";
+        logger.log(mes);
 
         String message = logger.getLog().get(0);
-        assertTrue(message.matches(".*Test message.*"));
+        assertTrue(message.matches(".*Message.*"));
     }
 
     @Test

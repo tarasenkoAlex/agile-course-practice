@@ -15,36 +15,36 @@ import java.util.*;
 public class NumberConverterLogger implements ILogger {
 
     private static final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
-    private final BufferedWriter writer;
+    private final BufferedWriter logWriter;
     private final String filename;
     private final BooleanProperty addedNewLogProperty = new SimpleBooleanProperty(false);
 
 
-    private static String now() {
+    private static String dateTimeNow() {
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW, Locale.ENGLISH);
-        return sdf.format(cal.getTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT_NOW, Locale.ENGLISH);
+        return simpleDateFormat.format(cal.getTime());
     }
 
     public NumberConverterLogger(final String filename) {
         this.filename = filename;
 
-        BufferedWriter logWriter = null;
+        BufferedWriter bufferedWriter = null;
         try {
-            logWriter = new BufferedWriter(new FileWriter(filename));
+            bufferedWriter = new BufferedWriter(new FileWriter(filename));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        writer = logWriter;
+        logWriter = bufferedWriter;
     }
 
     @Override
     public void log(final String s) {
         addedNewLogProperty.set(false);
         try {
-            writer.write(now() + " > " + s);
-            writer.newLine();
-            writer.flush();
+            logWriter.write(dateTimeNow() + " > " + s);
+            logWriter.newLine();
+            logWriter.flush();
             addedNewLogProperty.set(true);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -53,21 +53,21 @@ public class NumberConverterLogger implements ILogger {
 
     @Override
     public List<String> getLog() {
-        BufferedReader reader;
-        ArrayList<String> log = new ArrayList<String>();
+        BufferedReader bufferedReader;
+        ArrayList<String> allLogs = new ArrayList<String>();
         try {
-            reader = new BufferedReader(new FileReader(filename));
-            String line = reader.readLine();
+            bufferedReader = new BufferedReader(new FileReader(filename));
+            String line = bufferedReader.readLine();
 
             while (line != null) {
-                log.add(line);
-                line = reader.readLine();
+                allLogs.add(line);
+                line = bufferedReader.readLine();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
-        return log;
+        return allLogs;
     }
 
 
