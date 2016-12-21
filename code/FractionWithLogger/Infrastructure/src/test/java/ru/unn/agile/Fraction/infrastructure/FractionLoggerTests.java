@@ -48,7 +48,7 @@ public class FractionLoggerTests {
     }
 
     @Test
-    public void canWriteSeveralLogMessage() throws IOException {
+    public void canWriteSeveralLogggerMessages() throws IOException {
         String[] messages = {"Test message 1", "Test message 2"};
 
         txtLogger.log(messages[0]);
@@ -61,7 +61,7 @@ public class FractionLoggerTests {
     }
 
     @Test
-    public void doesLogContainDateAndTime() throws IOException {
+    public void doesLoggerContainDateAndTime() throws IOException {
         String testMessage = "Test message";
 
         txtLogger.log(testMessage);

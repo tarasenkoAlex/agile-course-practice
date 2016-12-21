@@ -5,23 +5,23 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
 public class RegMatcher extends BaseMatcher {
-    private final String regex;
+    private final String reg;
 
-    public RegMatcher(final String regex) {
-        this.regex = regex;
+    public RegMatcher(final String reg) {
+        this.reg = reg;
     }
 
     public boolean matches(final Object o) {
-        return ((String) o).matches(regex);
+        return ((String) o).matches(reg);
     }
 
     public void describeTo(final Description description) {
         description.appendText("matches regex = ");
-        description.appendText(regex);
+        description.appendText(reg);
     }
 
-    public static Matcher<? super String> matchesPattern(final String regex) {
-        RegMatcher matcher = new RegMatcher(regex);
+    public static Matcher<? super String> matchesPattern(final String reg) {
+        RegMatcher matcher = new RegMatcher(reg);
         @SuppressWarnings (value = "unchecked")
         Matcher<? super String> castedMatcher = (Matcher<? super String>)   matcher;
         return castedMatcher;
