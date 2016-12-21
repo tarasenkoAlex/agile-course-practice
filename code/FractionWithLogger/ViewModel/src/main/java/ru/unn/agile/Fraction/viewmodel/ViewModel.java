@@ -109,7 +109,8 @@ public class ViewModel {
         updateLogs();
     }
 
-    public void onOperationChanged(final Operation oldValue, final Operation newValue) throws IOException {
+    public void onOperationChanged(final Operation oldValue,
+                                   final Operation newValue) throws IOException {
         if (oldValue.equals(newValue)) {
             return;
         }
@@ -273,5 +274,7 @@ final class Messages {
         public static final String OPERATION_WAS_CHANGED = "Operation was changed to ";
         public static final String EDITING_FINISHED = "Updated input. ";
 
-        public Messages() { }
+        Messages() {
+
+        }
 }
