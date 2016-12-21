@@ -223,7 +223,9 @@ public class ViewModel {
 
     private void updateLogs() throws IOException {
         List<String> fullLog = logger.getLog();
+
         String record = new String();
+
         for (String log : fullLog) {
             record += log + "\n";
         }
