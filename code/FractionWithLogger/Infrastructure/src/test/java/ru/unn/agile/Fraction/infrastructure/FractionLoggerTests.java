@@ -16,16 +16,16 @@ import static ru.unn.agile.Fraction.infrastructure.RegMatcher.matchesPattern;
 
 public class FractionLoggerTests {
     private static final String FILENAME = "./TxtLogger_Tests.log";
-    private FractionLogger txtLogger;
+    private FractionLogger fractionLogger;
 
     @Before
     public void setUp() throws IOException {
-        txtLogger = new FractionLogger(FILENAME);
+        fractionLogger = new FractionLogger(FILENAME);
     }
 
     @Test
     public void canCreateLoggerWithFileName() {
-        assertNotNull(txtLogger);
+        assertNotNull(fractionLogger);
     }
 
     @Test
@@ -41,22 +41,22 @@ public class FractionLoggerTests {
     public void canWriteLogMessage() throws IOException {
         String testMessage = "Test message";
 
-        txtLogger.log(testMessage);
+        fractionLogger.log(testMessage);
 
-        String message = txtLogger.getLog().get(0);
+        String message = fractionLogger.getLog().get(0);
         assertThat(message, matchesPattern(".*" + testMessage + "$"));
     }
 
     @Test
-    public void canWriteSeveralLogggerMessages() throws IOException {
-        String[] messages = {"Test message 1", "Test message 2"};
+    public void canWriteSeveralTextLogMessages() throws IOException {
+        String[] fractionMessages = {"Test message #1", "Test message #2"};
 
-        txtLogger.log(messages[0]);
-        txtLogger.log(messages[1]);
+        fractionLogger.log(fractionMessages[0]);
+        fractionLogger.log(fractionMessages[1]);
 
-        List<String> actualMessages = txtLogger.getLog();
-        for (int i = 0; i < actualMessages.size(); i++) {
-            assertThat(actualMessages.get(i), matchesPattern(".*" + messages[i] + "$"));
+        List<String> actualFractionMessages = fractionLogger.getLog();
+        for (int i = 0; i < actualFractionMessages.size(); i++) {
+            assertThat(actualFractionMessages.get(i), matchesPattern(".*" + fractionMessages[i] + "$"));
         }
     }
 
@@ -64,9 +64,9 @@ public class FractionLoggerTests {
     public void doesLoggerContainDateAndTime() throws IOException {
         String testMessage = "Test message";
 
-        txtLogger.log(testMessage);
+        fractionLogger.log(testMessage);
 
-        String message = txtLogger.getLog().get(0);
+        String message = fractionLogger.getLog().get(0);
         assertThat(message, matchesPattern("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
     }
 }
