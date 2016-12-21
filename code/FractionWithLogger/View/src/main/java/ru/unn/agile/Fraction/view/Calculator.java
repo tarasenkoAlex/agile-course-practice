@@ -8,9 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import ru.unn.agile.Fraction.infrastructure.FractionLogger;
 import ru.unn.agile.Fraction.model.Operation;
 import ru.unn.agile.Fraction.viewmodel.ViewModel;
-import ru.unn.agile.Fraction.infrastructure.TxtLogger;
 
 import java.io.IOException;
 
@@ -28,7 +28,7 @@ public class Calculator {
 
     @FXML
     void initialize() throws IOException {
-        viewModel.setLogger(new TxtLogger("./TxtLogger.log"));
+        viewModel.setLogger(new FractionLogger("./FractionLogger.log"));
 
         final ChangeListener<Boolean> focusChangeListener = new ChangeListener<Boolean>() {
             @Override

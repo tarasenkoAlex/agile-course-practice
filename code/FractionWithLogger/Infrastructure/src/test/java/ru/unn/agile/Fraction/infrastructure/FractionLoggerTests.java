@@ -14,13 +14,13 @@ import static junit.framework.TestCase.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static ru.unn.agile.Fraction.infrastructure.RegMatcher.matchesPattern;
 
-public class TxtLoggerTests {
+public class FractionLoggerTests {
     private static final String FILENAME = "./TxtLogger_Tests.log";
-    private TxtLogger txtLogger;
+    private FractionLogger txtLogger;
 
     @Before
     public void setUp() throws IOException {
-        txtLogger = new TxtLogger(FILENAME);
+        txtLogger = new FractionLogger(FILENAME);
     }
 
     @Test

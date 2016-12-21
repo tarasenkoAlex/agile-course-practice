@@ -8,8 +8,8 @@ import java.io.IOException;
 public class ViewModelWithTxtLoggerTests extends ViewModelTests {
     @Override
     public void setUp() throws IOException {
-        TxtLogger realLogger =
-            new TxtLogger("./ViewModelWithTxtLoggerTests.log");
+        FractionLogger realLogger =
+            new FractionLogger("./ViewModelWithTxtLoggerTests.log");
         super.setViewModel(new ViewModel(realLogger));
     }
 }

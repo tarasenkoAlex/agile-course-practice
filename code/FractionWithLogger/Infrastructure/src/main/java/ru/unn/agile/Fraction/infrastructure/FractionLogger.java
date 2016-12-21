@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class TxtLogger implements ILogger {
+public class FractionLogger implements ILogger {
     private static final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
     private final BufferedWriter writer;
     private final String filename;
@@ -20,7 +20,7 @@ public class TxtLogger implements ILogger {
         return sdf.format(cal.getTime());
     }
 
-    public TxtLogger(final String filename) throws IOException {
+    public FractionLogger(final String filename) throws IOException {
         this.filename = filename;
         BufferedWriter logWriter = null;
         logWriter = new BufferedWriter(new FileWriter(filename));
