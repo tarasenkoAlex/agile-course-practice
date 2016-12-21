@@ -28,7 +28,7 @@ public class FractionLogger implements ILogger {
     }
 
     @Override
-    public void log(final String s) throws IOException {
+    public void toLog(final String s) throws IOException {
             writer.write(now() + " > " + s);
             writer.newLine();
             writer.flush();

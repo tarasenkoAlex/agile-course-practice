@@ -41,18 +41,18 @@ public class FractionLoggerTests {
     public void canWriteLogMessage() throws IOException {
         String testMessage = "Test message";
 
-        fractionLogger.log(testMessage);
+        fractionLogger.toLog(testMessage);
 
         String message = fractionLogger.getLog().get(0);
         assertThat(message, matchesPattern(".*" + testMessage + "$"));
     }
 
     @Test
-    public void canWriteSeveralTextLogMessages() throws IOException {
+    public void canWriteSeveralFractionLogMessages() throws IOException {
         String[] fractionMessages = {"Test message #1", "Test message #2"};
 
-        fractionLogger.log(fractionMessages[0]);
-        fractionLogger.log(fractionMessages[1]);
+        fractionLogger.toLog(fractionMessages[0]);
+        fractionLogger.toLog(fractionMessages[1]);
 
         List<String> actualFractionMessages = fractionLogger.getLog();
         for (int i = 0; i < actualFractionMessages.size(); i++) {
@@ -64,7 +64,7 @@ public class FractionLoggerTests {
     public void doesLoggerContainDateAndTime() throws IOException {
         String testMessage = "Test message";
 
-        fractionLogger.log(testMessage);
+        fractionLogger.toLog(testMessage);
 
         String message = fractionLogger.getLog().get(0);
         assertThat(message, matchesPattern("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));

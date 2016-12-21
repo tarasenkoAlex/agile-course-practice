@@ -105,7 +105,7 @@ public class FractionViewModel {
                 .append(": Frac1 = ").append(frac1.get())
                 .append("; Frac2 = ").append(frac2.get())
                 .append(" Operation: ").append(operation.get().toString()).append(".");
-        logger.log(message.toString());
+        logger.toLog(message.toString());
         updateLogs();
     }
 
@@ -116,7 +116,7 @@ public class FractionViewModel {
         }
         StringBuilder message = new StringBuilder(Messages.OPERATION_WAS_CHANGED);
         message.append(newValue.toString());
-        logger.log(message.toString());
+        logger.toLog(message.toString());
         updateLogs();
     }
 
@@ -131,7 +131,7 @@ public class FractionViewModel {
                 message.append("Input arguments are: [")
                         .append(frac1.get()).append("; ")
                         .append(frac2.get()).append("]");
-                logger.log(message.toString());
+                logger.toLog(message.toString());
                 updateLogs();
 
                 listener.cache();
