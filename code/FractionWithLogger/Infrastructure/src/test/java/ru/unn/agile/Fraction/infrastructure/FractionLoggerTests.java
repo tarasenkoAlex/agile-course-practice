@@ -56,7 +56,8 @@ public class FractionLoggerTests {
 
         List<String> actualFractionMessages = fractionLogger.getLog();
         for (int i = 0; i < actualFractionMessages.size(); i++) {
-            assertThat(actualFractionMessages.get(i), matchesPattern(".*" + fractionMessages[i] + "$"));
+            assertThat(actualFractionMessages.get(i),
+                    matchesPattern(".*" + fractionMessages[i] + "$"));
         }
     }
 
