@@ -4,14 +4,21 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class ViewModelTests {
     private ViewModel viewModel;
 
+    public void setExternalViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        ILogger logger = new FakeLogger();
+        viewModel = new ViewModel(logger);
     }
 
     @After
@@ -227,5 +234,105 @@ public class ViewModelTests {
         viewModel.setRomanNumberProperty("QWERTY");
         viewModel.convertNumber();
         assertEquals(Status.BAD_FORMAT.toString(), viewModel.getStatusProperty().get());
+    }
+
+    @Test
+    public void canCreateViewModelWithLogger() {
+        FakeLogger logger = new FakeLogger();
+        ViewModel viewModelLogged = new ViewModel(logger);
+
+        assertNotNull(viewModelLogged);
+    }
+
+    @Test
+    public void isLogEmptyInBegining() {
+        List<String> logs = viewModel.getLogger().getLog();
+        assertEquals(true, logs.isEmpty());
+    }
+
+    @Test
+    public void logWhenConvertSideChangeToRoman() {
+        viewModel.setRBArabToRomChooseProperty(false);
+        List<String> logs = viewModel.getLogger().getLog();
+        String log = !logs.isEmpty() ? logs.get(0) : "";
+        assertTrue(log.matches(".*Convert from roman number chosen.*"));
+    }
+
+    @Test
+    public void whenViewModelInitializeWithoutParamsLoggerIsNull() {
+        ViewModel vm = new ViewModel();
+        ILogger logger = vm.getLogger();
+        assertNull(logger);
+    }
+
+    @Test
+    public void getLogsWhenLogSmth() {
+        viewModel.setRBArabToRomChooseProperty(false);
+        String log = viewModel.getLogs();
+        assertTrue(log.matches(".*Convert from roman number chosen\n.*"));
+    }
+
+    @Test
+    public void logWhenConvertSideChangeToArabic() {
+        viewModel.setRBArabToRomChooseProperty(false);
+        viewModel.setRBArabToRomChooseProperty(true);
+        List<String> logs = viewModel.getLogger().getLog();
+        String log = !logs.isEmpty() ? logs.get(logs.size() - 1) : "";
+        assertTrue(log.matches(".*Convert from arabic number chosen.*"));
+    }
+
+    @Test
+    public void whenRomanTfLoseFocusLog() {
+        viewModel.setFocusRomanTfProperty(true);
+        viewModel.setRomanNumberProperty("XII");
+        viewModel.setFocusRomanTfProperty(false);
+
+        List<String> logs = viewModel.getLogger().getLog();
+        String log = !logs.isEmpty() ? logs.get(0) : "";
+        assertTrue(log.matches(".*User input roman number XII.*"));
+    }
+
+    @Test
+    public void whenArabicTfLoseFocusLog() {
+        viewModel.setFocusArabicTfProperty(true);
+        viewModel.setArabicNumberProperty("XII");
+        viewModel.setFocusArabicTfProperty(false);
+
+        List<String> logs = viewModel.getLogger().getLog();
+        String log = !logs.isEmpty() ? logs.get(0) : "";
+        assertTrue(log.matches(".*User input arabic number XII.*"));
+    }
+
+    @Test
+    public void whenConvertToRomanBtnClicked() {
+        actionChainForConvert(true, "1234");
+
+        List<String> logs = viewModel.getLogger().getLog();
+        String log = !logs.isEmpty() ? logs.get(logs.size() - 1) : "";
+        assertTrue(log.matches(".*Converted from arabic to roman. Result MCCXXXIV.*"));
+    }
+
+    @Test
+    public void whenConvertToArabicBtnClicked() {
+        actionChainForConvert(false, "MCCXXXIV");
+
+        List<String> logs = viewModel.getLogger().getLog();
+        String log = !logs.isEmpty() ? logs.get(logs.size() - 1) : "";
+        assertTrue(log.matches(".*Converted from roman to arabic. Result 1234.*"));
+    }
+
+    private void actionChainForConvert(final boolean arabToRomanChosen, final String inputNumber) {
+        viewModel.setRBArabToRomChooseProperty(arabToRomanChosen);
+        if (arabToRomanChosen) {
+            viewModel.setArabicNumberProperty(inputNumber);
+        } else {
+            viewModel.setRomanNumberProperty(inputNumber);
+        }
+        viewModel.convertNumber();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenLoggerIsNull() {
+        ViewModel vm = new ViewModel(null);
     }
 }

@@ -10,6 +10,8 @@ import ru.unn.agile.RomanArabicConverter.Model.RomanNumberValidator;
 import ru.unn.agile.RomanArabicConverter.Model.ArabicToRomanNumberConverter;
 import ru.unn.agile.RomanArabicConverter.Model.RomanToArabicNumberConverter;
 
+import java.util.List;
+
 import static ru.unn.agile.RomanArabicConverter.Model.MapData.MAX_NUMBER;
 
 public class ViewModel {
@@ -23,22 +25,51 @@ public class ViewModel {
     private final BooleanProperty tfArabDisableValue = new SimpleBooleanProperty(false);
     private final BooleanProperty tfRomDisableValue = new SimpleBooleanProperty(true);
     private final StringProperty statusValue = new SimpleStringProperty(Status.WAITING.toString());
+    private final BooleanProperty focusRomanTfProperty = new SimpleBooleanProperty(false);
+    private final BooleanProperty focusArabicTfProperty = new SimpleBooleanProperty(false);
+    private final StringProperty logs = new SimpleStringProperty();
+    private ILogger logger;
 
+
+    public ViewModel(final ILogger logger) {
+
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger parameter can't be null");
+        }
+
+        this.logger = logger;
+
+        this.logger.setListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(final ObservableValue<? extends Boolean> observable,
+                                final Boolean oldValue, final Boolean newValue) {
+                if (newValue) {
+                    updateLogs();
+                }
+            }
+        });
+
+        init();
+    }
 
     public ViewModel() {
+        init();
+    }
+
+    private void init() {
         romanNumberValue.addListener(new ChangeListener<String>() {
             @Override
             public void changed(final ObservableValue<? extends String> observable,
-                                      final String oldValue, final String newValue) {
-               boolean isValid = validateRomanNumber(newValue);
-               setConverterBtnDisableProperty(!isValid);
-               statusValue.set(getInputStatus().toString());
+                                final String oldValue, final String newValue) {
+                boolean isValid = validateRomanNumber(newValue);
+                setConverterBtnDisableProperty(!isValid);
+                statusValue.set(getInputStatus().toString());
             }
         });
         arabicNumberValue.addListener(new ChangeListener<String>() {
             @Override
             public void changed(final ObservableValue<? extends String> observable,
-                                      final String oldValue, final String newValue) {
+                                final String oldValue, final String newValue) {
                 boolean isValid = validateArabicNumber(newValue);
                 setConverterBtnDisableProperty(!isValid);
                 statusValue.set(getInputStatus().toString());
@@ -47,21 +78,63 @@ public class ViewModel {
         rbArabToRomChooseValue.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(final ObservableValue<? extends Boolean> observable,
-                                      final Boolean oldValue, final Boolean newValue) {
+                                final Boolean oldValue, final Boolean newValue) {
                 setTFArabDisableProperty(!newValue);
                 setTFRomDisableProperty(newValue);
+                String logMessage;
+
+                if (newValue) {
+                    logMessage = "Convert from arabic number chosen";
+                } else {
+                    logMessage = "Convert from roman number chosen";
+                }
+
+                logger.log(logMessage);
                 statusValue.set(getInputStatus().toString());
             }
         });
         rbRomToArabChooseValue.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(final ObservableValue<? extends Boolean> observable,
-                                      final Boolean oldValue, final Boolean newValue) {
+                                final Boolean oldValue, final Boolean newValue) {
                 setTFRomDisableProperty(!newValue);
                 setTFArabDisableProperty(newValue);
                 statusValue.set(getInputStatus().toString());
             }
         });
+
+        focusRomanTfProperty.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(final ObservableValue<? extends Boolean> observable,
+                                final Boolean oldValue, final Boolean newValue) {
+                String inputNumber = getRomanNumberProperty().get();
+                if (!newValue && inputNumber != "") {
+                    String log = "User input roman number " + inputNumber;
+                    logger.log(log);
+                }
+            }
+        });
+
+        focusArabicTfProperty.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(final ObservableValue<? extends Boolean> observable,
+                                final Boolean oldValue, final Boolean newValue) {
+                String inputNumber = getArabicNumberProperty().get();
+                if (!newValue && inputNumber != "") {
+                    String log = "User input arabic number " + inputNumber;
+                    logger.log(log);
+                }
+            }
+        });
+    }
+
+    private void updateLogs() {
+        List<String> allLogs = logger.getLog();
+        String log = new String();
+        for (String l : allLogs) {
+            log += l + "\n";
+        }
+        logs.set(log);
     }
 
     private void setTFRomDisableProperty(final Boolean value) {
@@ -106,14 +179,6 @@ public class ViewModel {
         arabicNumberValue.set(value);
     }
 
-    public final StringProperty getArabicNumberValue() {
-        return arabicNumberValue;
-    }
-
-    public void setArabicNumberValue(final String value) {
-        arabicNumberValue.set(value);
-    }
-
     public boolean validateArabicNumber(final String arabicNumber) {
         Integer aramicNum = 0;
         try {
@@ -150,8 +215,24 @@ public class ViewModel {
         return tfArabDisableValue;
     }
 
+    public void setFocusRomanTfProperty(final boolean value) {
+        focusRomanTfProperty.setValue(value);
+    }
+
+    public void setFocusArabicTfProperty(final boolean value) {
+        focusArabicTfProperty.set(value);
+    }
+
     public final StringProperty getStatusProperty() {
         return statusValue;
+    }
+
+    public StringProperty logsProperty() {
+        return logs;
+    }
+
+    public final String getLogs() {
+        return logs.get();
     }
 
     private Status getInputStatus() {
@@ -184,34 +265,36 @@ public class ViewModel {
         if (convertButtonDisable.get()) {
             return;
         }
+        String result;
 
         if (rbArabToRomChooseValue.get()) {
             ArabicToRomanNumberConverter arabRomConverter
                     = new ArabicToRomanNumberConverter();
-            romanNumberValue.set(arabRomConverter
-                    .convert(Integer.parseInt(arabicNumberValue.get())));
+
+            result = arabRomConverter
+                    .convert(Integer.parseInt(arabicNumberValue.get()));
+
+            romanNumberValue.set(result);
+
+            logger.log("Converted from arabic to roman. Result " + result);
+
         } else {
             RomanToArabicNumberConverter romArabConverter
                     = new RomanToArabicNumberConverter();
-            arabicNumberValue.set(String
-                    .valueOf(romArabConverter.convert(romanNumberValue.get())));
+
+            result = String
+                    .valueOf(romArabConverter.convert(romanNumberValue.get()));
+
+            arabicNumberValue.set(result);
+
+            logger.log("Converted from roman to arabic. Result " + result);
         }
 
         statusValue.set(Status.SUCCESS.toString());
     }
-}
 
-enum Status {
-    WAITING("Please provide input data"),
-    READY("Press 'Convert' or 'Enter'"),
-    BAD_FORMAT("Bad format"),
-    SUCCESS("Success");
-
-    private final String name;
-    Status(final String name) {
-        this.name = name;
-    }
-    public String toString() {
-        return name;
+    public ILogger getLogger() {
+        return logger;
     }
 }
+
