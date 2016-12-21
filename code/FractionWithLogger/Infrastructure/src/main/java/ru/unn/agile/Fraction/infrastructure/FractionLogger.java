@@ -10,35 +10,35 @@ import java.util.List;
 import java.util.Locale;
 
 public class FractionLogger implements ILogger {
-    private static final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
-    private final BufferedWriter writer;
-    private final String filename;
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private final BufferedWriter bufWriter;
+    private final String fileName;
 
     private static String now() {
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW, Locale.ENGLISH);
-        return sdf.format(cal.getTime());
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpledf = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
+        return simpledf.format(calendar.getTime());
     }
 
     public FractionLogger(final String filename) throws IOException {
-        this.filename = filename;
+        this.fileName = filename;
         BufferedWriter logWriter = null;
         logWriter = new BufferedWriter(new FileWriter(filename));
-        writer = logWriter;
+        bufWriter = logWriter;
     }
 
     @Override
     public void toLog(final String s) throws IOException {
-            writer.write(now() + " > " + s);
-            writer.newLine();
-            writer.flush();
+            bufWriter.write(now() + " > " + s);
+            bufWriter.newLine();
+            bufWriter.flush();
     }
 
     @Override
     public List<String> getLog() throws IOException {
         BufferedReader reader;
         ArrayList<String> log = new ArrayList<String>();
-            reader = new BufferedReader(new FileReader(filename));
+            reader = new BufferedReader(new FileReader(fileName));
             String line = reader.readLine();
 
             while (line != null) {
