@@ -1,8 +1,6 @@
-apply from:   rootDir.getAbsolutePath() + '/code/config/scripts/javafx.plugin'
-
 dependencies {
     compile project(':VolumeCalculator-ViewModel')
-    compile project(':VolumeCalculator-Infrastructure')
+    testCompile project(':VolumeCalculator-ViewModel').sourceSets.test.output
 }
 
 sourceSets {
