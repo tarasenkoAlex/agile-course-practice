@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import ru.unn.agile.Fraction.model.Fraction;
 import ru.unn.agile.Fraction.model.Operation;
 
 import java.io.IOException;
@@ -291,7 +290,7 @@ public class ViewModelTests {
         viewModel.calculate();
         String message = viewModel.getLog().get(0);
 
-        assertTrue(message.matches(".*" + LogMessages.CALCULATE_WAS_PRESSED + ".*"));
+        assertTrue(message.matches(".*" + Messages.CALCULATE_WAS_PRESSED + ".*"));
     }
 
     @Test
@@ -345,7 +344,7 @@ public class ViewModelTests {
         viewModel.onOperationChanged(Operation.ADD, Operation.MULTIPLY);
 
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + LogMessages.OPERATION_WAS_CHANGED + "Mul.*"));
+        assertTrue(message.matches(".*" + Messages.OPERATION_WAS_CHANGED + "Mul.*"));
     }
 
     @Test
@@ -364,7 +363,7 @@ public class ViewModelTests {
         viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
 
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + LogMessages.EDITING_FINISHED
+        assertTrue(message.matches(".*" + Messages.EDITING_FINISHED
                 + "Input arguments are: \\["
                 + viewModel.frac1Property().get() + "; "
                 + viewModel.frac2Property().get() + "\\]"));
@@ -470,22 +469,22 @@ public class ViewModelTests {
 
     @Test
     public void canGetLogCalculateWasPressedMessages() throws IOException {
-        assertEquals("Calculate. ", LogMessages.CALCULATE_WAS_PRESSED);
+        assertEquals("Calculate. ", Messages.CALCULATE_WAS_PRESSED);
     }
 
     @Test
     public void canGetLogOperationWasChangedMessages() throws IOException {
-        assertEquals("Operation was changed to ", LogMessages.OPERATION_WAS_CHANGED);
+        assertEquals("Operation was changed to ", Messages.OPERATION_WAS_CHANGED);
     }
 
     @Test
     public void canGetLogEditingFinishedMessages() {
-        assertEquals("Updated input. ", LogMessages.EDITING_FINISHED);
+        assertEquals("Updated input. ", Messages.EDITING_FINISHED);
     }
 
     @Test
     public void canCreateLogMessages() {
-        assertNotNull(new LogMessages());
+        assertNotNull(new Messages());
     }
 
     private void setInputData() {

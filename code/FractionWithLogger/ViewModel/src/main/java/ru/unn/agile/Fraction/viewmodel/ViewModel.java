@@ -100,7 +100,7 @@ public class ViewModel {
             }
         }
 
-        StringBuilder message = new StringBuilder(LogMessages.CALCULATE_WAS_PRESSED);
+        StringBuilder message = new StringBuilder(Messages.CALCULATE_WAS_PRESSED);
         message.append("Arguments")
                 .append(": Frac1 = ").append(frac1.get())
                 .append("; Frac2 = ").append(frac2.get())
@@ -113,7 +113,7 @@ public class ViewModel {
         if (oldValue.equals(newValue)) {
             return;
         }
-        StringBuilder message = new StringBuilder(LogMessages.OPERATION_WAS_CHANGED);
+        StringBuilder message = new StringBuilder(Messages.OPERATION_WAS_CHANGED);
         message.append(newValue.toString());
         logger.log(message.toString());
         updateLogs();
@@ -126,7 +126,7 @@ public class ViewModel {
 
         for (ValueCachingChangeListener listener : valueChangedListeners) {
             if (listener.isChanged()) {
-                StringBuilder message = new StringBuilder(LogMessages.EDITING_FINISHED);
+                StringBuilder message = new StringBuilder(Messages.EDITING_FINISHED);
                 message.append("Input arguments are: [")
                         .append(frac1.get()).append("; ")
                         .append(frac2.get()).append("]");
@@ -268,10 +268,10 @@ enum Status {
     }
 }
 
-final class LogMessages {
+final class Messages {
         public static final String CALCULATE_WAS_PRESSED = "Calculate. ";
         public static final String OPERATION_WAS_CHANGED = "Operation was changed to ";
         public static final String EDITING_FINISHED = "Updated input. ";
 
-        public LogMessages() { }
+        public Messages() { }
 }

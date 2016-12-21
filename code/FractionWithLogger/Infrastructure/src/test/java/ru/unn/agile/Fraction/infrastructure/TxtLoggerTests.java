@@ -12,7 +12,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.unn.agile.Fraction.infrastructure.RegexMatcher.matchesPattern;
+import static ru.unn.agile.Fraction.infrastructure.RegMatcher.matchesPattern;
 
 public class TxtLoggerTests {
     private static final String FILENAME = "./TxtLogger_Tests.log";
