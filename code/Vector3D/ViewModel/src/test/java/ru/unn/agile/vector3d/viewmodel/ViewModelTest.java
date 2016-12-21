@@ -533,6 +533,14 @@ public class ViewModelTest {
     }
 
     @Test
+    public void testSetLogger() {
+        ViewModel vm = new ViewModel();
+        TestLoggerImpl logger = new TestLoggerImpl();
+        vm.setLogger(logger);
+        assertEquals(logger, vm.getLogger());
+    }
+
+    @Test
     public void testCreateViewModelWithLogger() {
         TestLoggerImpl logger = new TestLoggerImpl();
         ViewModel vm = new ViewModel(logger);
@@ -588,6 +596,37 @@ public class ViewModelTest {
         viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
         viewModel.calculate();
         findRequiredText(viewModel.getLogger(), ViewModel.LogMessages.CROSS_CALCULATE);
+    }
+
+    @Test
+    public void testGetLogItems() {
+        assertFalse(viewModel.logsItems().isEmpty());
+    }
+
+    @Test
+    public void testOperationTabFromIndex() {
+        assertNull(OperationTab.fromIndex(-1));
+    }
+
+    @Test
+    public void testLogMessagesConstructor() {
+        ViewModel.LogMessages lm = new ViewModel.LogMessages();
+        assertNotNull(lm);
+    }
+
+    @Test
+    public void testRemoveLogListener() {
+        AbstractLogger.LoggerListener listener = new AbstractLogger.LoggerListener() {
+            @Override
+            public void onLogAdded(final String message) {
+                // do nothing
+            }
+        };
+
+        viewModel.getLogger().addListener(listener);
+        int count = viewModel.getLogger().getListeners().size();
+        viewModel.getLogger().removeListener(listener);
+        assertEquals(count - 1, viewModel.getLogger().getListeners().size());
     }
 
     protected void findRequiredText(final AbstractLogger logger, final String requiredText) {

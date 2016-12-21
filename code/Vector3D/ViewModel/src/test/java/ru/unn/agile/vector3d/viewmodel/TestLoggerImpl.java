@@ -14,7 +14,11 @@ public class TestLoggerImpl extends AbstractLogger {
 
     @Override
     public void putLog(final String message, final Object... args) {
-        records.add(MessageFormat.format(message, args));
+        String msg = MessageFormat.format(message, args);
+        records.add(msg);
+        for (LoggerListener listener : getListeners()) {
+            listener.onLogAdded(msg);
+        }
     }
 
     @Override
