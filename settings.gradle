@@ -173,6 +173,13 @@ include "code/color-converter/View"
 project(":code/color-converter/View").name = "color-converter-view"
 include "code/color-converter/ViewModel"
 project(":code/color-converter/ViewModel").name = "color-converter-viewmodel"
+
+include "code/Queue/Model"
+project(":code/Queue/Model").name = "Queue-Model"
+include "code/Queue/View"
+project(":code/Queue/View").name = "Queue-View"
+include "code/Queue/ViewModel"
+project(":code/Queue/ViewModel").name = "Queue-ViewModel"
 // Пономарев Георгий
 // Пономарев Никита
 include "code/ponomarev-nikita/Model"
@@ -197,8 +204,6 @@ project(":code/Vector3D/View").name = "Vector3D-View"
 // Рябинкин Евгений
 // Сахаров Алексей
 // Сиротин Никита
-include "code/sirotin-nikita"
-project(":code/sirotin-nikita").name = "sirotin-nikita-Model"
 // Скребков Артём
 include "code/TemperatureConverter/Model"
 project(":code/TemperatureConverter/Model").name = "Temperature-Converter-Model"
