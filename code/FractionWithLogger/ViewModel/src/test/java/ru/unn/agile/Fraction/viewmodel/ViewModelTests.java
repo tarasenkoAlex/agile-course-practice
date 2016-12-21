@@ -31,8 +31,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void canCreateDefaultViewModel()
-    {
+    public void canCreateDefaultViewModel() {
         assertNotNull(new ViewModel());
     }
 
