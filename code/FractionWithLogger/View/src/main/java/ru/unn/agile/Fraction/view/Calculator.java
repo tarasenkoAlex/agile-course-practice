@@ -32,7 +32,7 @@ public class Calculator {
 
         final ChangeListener<Boolean> focusChangeListener = new ChangeListener<Boolean>() {
             @Override
-            public void changed (final ObservableValue<? extends Boolean> observable,
+            public void changed(final ObservableValue<? extends Boolean> observable,
                                 final Boolean oldValue, final Boolean newValue) {
                 try {
                 viewModel.onFocusChanged(oldValue, newValue);
@@ -51,7 +51,7 @@ public class Calculator {
         cbOperation.valueProperty().bindBidirectional(viewModel.operationProperty());
         cbOperation.valueProperty().addListener(new ChangeListener<Operation>() {
             @Override
-            public void changed(ObservableValue<? extends Operation> observable,
+            public void changed(final ObservableValue<? extends Operation> observable,
                                 final Operation oldValue,
                                 final Operation newValue) {
                 try {
@@ -64,7 +64,7 @@ public class Calculator {
 
         btnCalc.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle (final ActionEvent event) {
+            public void handle(final ActionEvent event) {
                 try {
                 viewModel.calculate();
                 } catch (IOException e) {
