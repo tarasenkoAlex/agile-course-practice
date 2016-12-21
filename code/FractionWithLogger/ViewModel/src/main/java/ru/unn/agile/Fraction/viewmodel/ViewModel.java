@@ -45,7 +45,7 @@ public class ViewModel {
         this.logger = logger;
     }
 
-    public void init() {
+    private void init() {
         frac1.set("");
         frac2.set("");
         operation.set(Operation.ADD);
