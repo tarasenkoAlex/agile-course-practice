@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewModel {
+public class FractionViewModel {
     private final StringProperty frac1 = new SimpleStringProperty();
     private final StringProperty frac2 = new SimpleStringProperty();
 
@@ -29,11 +29,11 @@ public class ViewModel {
 
     private ILogger logger;
 
-    public ViewModel() {
+    public FractionViewModel() {
         init();
     }
 
-    public ViewModel(final ILogger logger) {
+    public FractionViewModel(final ILogger logger) {
         setLogger(logger);
         init();
     }

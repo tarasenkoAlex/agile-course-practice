@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Calculator.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FractionCalculator.fxml"));
         primaryStage.setTitle("Calculator");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

@@ -10,13 +10,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import ru.unn.agile.Fraction.infrastructure.FractionLogger;
 import ru.unn.agile.Fraction.model.Operation;
-import ru.unn.agile.Fraction.viewmodel.ViewModel;
+import ru.unn.agile.Fraction.viewmodel.FractionViewModel;
 
 import java.io.IOException;
 
-public class Calculator {
+public class FractionCalculator {
     @FXML
-    private ViewModel viewModel;
+    private FractionViewModel fractionViewModel;
     @FXML
     private TextField txtFrac1;
     @FXML
@@ -28,34 +28,34 @@ public class Calculator {
 
     @FXML
     void initialize() throws IOException {
-        viewModel.setLogger(new FractionLogger("./FractionLogger.log"));
+        fractionViewModel.setLogger(new FractionLogger("./FractionLogger.log"));
 
         final ChangeListener<Boolean> focusChangeListener = new ChangeListener<Boolean>() {
             @Override
             public void changed(final ObservableValue<? extends Boolean> observable,
                                 final Boolean oldValue, final Boolean newValue) {
                 try {
-                viewModel.onFocusChanged(oldValue, newValue);
+                fractionViewModel.onFocusChanged(oldValue, newValue);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         };
 
-        txtFrac1.textProperty().bindBidirectional(viewModel.frac1Property());
+        txtFrac1.textProperty().bindBidirectional(fractionViewModel.frac1Property());
         txtFrac1.focusedProperty().addListener(focusChangeListener);
 
-        txtFrac2.textProperty().bindBidirectional(viewModel.frac2Property());
+        txtFrac2.textProperty().bindBidirectional(fractionViewModel.frac2Property());
         txtFrac2.focusedProperty().addListener(focusChangeListener);
 
-        cbOperation.valueProperty().bindBidirectional(viewModel.operationProperty());
+        cbOperation.valueProperty().bindBidirectional(fractionViewModel.operationProperty());
         cbOperation.valueProperty().addListener(new ChangeListener<Operation>() {
             @Override
             public void changed(final ObservableValue<? extends Operation> observable,
                                 final Operation oldValue,
                                 final Operation newValue) {
                 try {
-                    viewModel.onOperationChanged(oldValue, newValue);
+                    fractionViewModel.onOperationChanged(oldValue, newValue);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -66,7 +66,7 @@ public class Calculator {
             @Override
             public void handle(final ActionEvent event) {
                 try {
-                viewModel.calculate();
+                fractionViewModel.calculate();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
