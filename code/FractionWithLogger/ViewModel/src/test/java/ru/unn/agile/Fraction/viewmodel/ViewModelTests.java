@@ -482,11 +482,6 @@ public class ViewModelTests {
         assertEquals("Updated input. ", Messages.EDITING_FINISHED);
     }
 
-    @Test
-    public void canCreateLogMessages() {
-        assertNotNull(new Messages());
-    }
-
     private void setInputData() {
         viewModel.frac1Property().set("1");
         viewModel.frac2Property().set("2");

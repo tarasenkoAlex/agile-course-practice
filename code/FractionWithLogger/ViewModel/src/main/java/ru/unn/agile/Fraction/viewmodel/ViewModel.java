@@ -274,7 +274,7 @@ final class Messages {
         public static final String OPERATION_WAS_CHANGED = "Operation was changed to ";
         public static final String EDITING_FINISHED = "Updated input. ";
 
-        Messages() {
+        private Messages() {
 
         }
 }
