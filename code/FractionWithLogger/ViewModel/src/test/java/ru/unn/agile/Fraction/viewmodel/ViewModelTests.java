@@ -448,7 +448,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void statusIsBadWhenDivByZero() throws IOException {
+    public void getBadStatusWhenDivByZero() throws IOException {
         viewModel.frac1Property().set("1/2");
         viewModel.frac2Property().set("0");
         viewModel.operationProperty().set(Operation.DIVISION);
@@ -458,7 +458,7 @@ public class ViewModelTests {
 
     @Test
     public void canGetBadStatusWhenDivByZero() throws IOException {
-        viewModel.frac1Property().set("1/2");
+        viewModel.frac1Property().set("3/2");
         viewModel.frac2Property().set("0");
         viewModel.operationProperty().set(Operation.DIVISION);
 
