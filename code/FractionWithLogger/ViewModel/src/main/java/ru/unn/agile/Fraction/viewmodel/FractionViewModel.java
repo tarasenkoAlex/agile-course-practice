@@ -25,7 +25,7 @@ public class FractionViewModel {
     private final StringProperty result = new SimpleStringProperty();
     private final StringProperty status = new SimpleStringProperty();
 
-    private List<ValueCachingChangeListener> valueChangedListeners;
+    private List<ValueCacheChangeListener> valueChangedListeners;
 
     private ILogger logger;
 
@@ -76,7 +76,7 @@ public class FractionViewModel {
         };
         valueChangedListeners = new ArrayList<>();
         for (StringProperty field : fields) {
-            final ValueCachingChangeListener listener = new ValueCachingChangeListener();
+            final ValueCacheChangeListener listener = new ValueCacheChangeListener();
             field.addListener(listener);
             valueChangedListeners.add(listener);
         }
@@ -125,8 +125,8 @@ public class FractionViewModel {
             return;
         }
 
-        for (ValueCachingChangeListener listener : valueChangedListeners) {
-            if (listener.isChanged()) {
+        for (ValueCacheChangeListener listener : valueChangedListeners) {
+            if (listener.wasChanged()) {
                 StringBuilder message = new StringBuilder(Messages.EDITING_FINISHED);
                 message.append("Input arguments are: [")
                         .append(frac1.get()).append("; ")
@@ -134,7 +134,7 @@ public class FractionViewModel {
                 logger.toLog(message.toString());
                 updateLogs();
 
-                listener.cache();
+                listener.toCache();
                 break;
             }
         }
@@ -232,9 +232,9 @@ public class FractionViewModel {
         logs.set(record);
     }
 
-    private class ValueCachingChangeListener implements ChangeListener<String> {
-        private String prevValue = new String();
-        private String curValue = new String();
+    private class ValueCacheChangeListener implements ChangeListener<String> {
+        private String previousValue = new String();
+        private String currentValue = new String();
         @Override
         public void changed(final ObservableValue<? extends String> observable,
                             final String oldValue, final String newValue) {
@@ -242,13 +242,13 @@ public class FractionViewModel {
                 return;
             }
             status.set(getInputStatus().toString());
-            curValue = newValue;
+            currentValue = newValue;
         }
-        public boolean isChanged() {
-            return !prevValue.equals(curValue);
+        public boolean wasChanged() {
+            return !previousValue.equals(currentValue);
         }
-        public void cache() {
-            prevValue = curValue;
+        public void toCache() {
+            previousValue = currentValue;
         }
     }
 }
