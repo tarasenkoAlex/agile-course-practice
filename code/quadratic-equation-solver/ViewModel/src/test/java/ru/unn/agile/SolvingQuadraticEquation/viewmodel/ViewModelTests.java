@@ -241,4 +241,21 @@ public class ViewModelTests {
         assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
                 + "Input coefficients are: \\[0; 2; 1\\]"));
     }
+
+    @Test
+    public void createViewModelWithNullLogger() {
+        try {
+            new ViewModel(null);
+        } catch (IllegalArgumentException ex) {
+            assertEquals("Logger parameter must be not null", ex.getMessage());
+        }
+    }
+
+    @Test
+    public void inputWithoutChangeField() {
+        fillFields("a");
+        viewModel.onFocusFieldChanged(Boolean.FALSE, Boolean.TRUE);
+        fillFields("a2");
+        assertEquals(0, viewModel.getLog().size());
+    }
 }
