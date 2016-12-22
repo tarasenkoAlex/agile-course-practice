@@ -97,9 +97,6 @@ public class ViewModel {
     public final boolean getSolvingDisabled() {
         return solvingDisabled.get();
     }
-    public StringProperty logsProperty() {
-        return log;
-    }
     public final String getLogs() {
         return log.get();
     }

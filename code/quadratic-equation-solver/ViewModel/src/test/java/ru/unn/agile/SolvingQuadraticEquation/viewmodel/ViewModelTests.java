@@ -101,6 +101,7 @@ public class ViewModelTests {
         fillFields("not a number");
 
         assertTrue(viewModel.solvingDisabledProperty().get());
+        assertTrue(viewModel.getSolvingDisabled());
     }
 
     @Test
