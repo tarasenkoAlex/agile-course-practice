@@ -14,44 +14,43 @@ import java.util.Locale;
 
 public class TxtLogger implements ILogger {
     private static final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
-    private final BufferedWriter writer;
-    private final String filename;
+    private final BufferedWriter fileWriter;
+    private final String fileName;
 
     private static String now() {
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW, Locale.ENGLISH);
-        return sdf.format(cal.getTime());
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT_NOW, Locale.ENGLISH);
+        return simpleDateFormat.format(calendar.getTime());
     }
 
-    public TxtLogger(final String filename) {
-        this.filename = filename;
+    public TxtLogger(final String fileName) {
+        this.fileName = fileName;
 
         BufferedWriter logWriter = null;
         try {
-            logWriter = new BufferedWriter(new FileWriter(filename));
+            logWriter = new BufferedWriter(new FileWriter(fileName));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        writer = logWriter;
+        fileWriter = logWriter;
     }
 
     @Override
     public void makeLog(final String s) {
         try {
-            writer.write(now() + " > " + s);
-            writer.newLine();
-            writer.flush();
+            fileWriter.write(now() + " > " + s);
+            fileWriter.newLine();
+            fileWriter.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    @Override
     public List<String> getLog() {
         BufferedReader reader;
         ArrayList<String> log = new ArrayList<String>();
         try {
-            reader = new BufferedReader(new FileReader(filename));
+            reader = new BufferedReader(new FileReader(fileName));
             String line = reader.readLine();
 
             while (line != null) {

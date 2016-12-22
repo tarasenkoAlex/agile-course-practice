@@ -19,7 +19,7 @@ public class ViewModel {
     private final BooleanProperty solvingDisabled = new SimpleBooleanProperty();
     private final StringProperty resultProperty = new SimpleStringProperty();
     private final StringProperty statusProperty = new SimpleStringProperty();
-    private final StringProperty logs = new SimpleStringProperty();
+    private final StringProperty log = new SimpleStringProperty();
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
     private ILogger logger;
 
@@ -27,7 +27,7 @@ public class ViewModel {
         init();
     }
 
-    public final void setLogger(final ILogger logger) {
+    public final void setUpLogger(final ILogger logger) {
         if (logger == null) {
             throw new IllegalArgumentException("Logger parameter must be not null");
         }
@@ -35,17 +35,17 @@ public class ViewModel {
     }
 
     public ViewModel(final ILogger logger) {
-        setLogger(logger);
+        setUpLogger(logger);
         init();
     }
 
-    private void logsUpdate() {
+    private void logUpdate() {
         List<String> fullLog = logger.getLog();
         String record = new String();
         for (String log : fullLog) {
             record += log + "\n";
         }
-        logs.set(record);
+        log.set(record);
     }
 
     public final List<String> getLog() {
@@ -98,10 +98,10 @@ public class ViewModel {
         return solvingDisabled.get();
     }
     public StringProperty logsProperty() {
-        return logs;
+        return log;
     }
     public final String getLogs() {
-        return logs.get();
+        return log.get();
     }
     public StringProperty resultProperty() {
         return resultProperty;
@@ -153,7 +153,7 @@ public class ViewModel {
                 .append("; b = ").append(bProperty.get())
                 .append("; c = ").append(cProperty.get()).append(".");
         logger.makeLog(message.toString());
-        logsUpdate();
+        logUpdate();
     }
 
     public void onFocusFieldChanged(final Boolean prevValue, final Boolean nextValue) {
@@ -169,7 +169,7 @@ public class ViewModel {
                         .append(bProperty.get()).append("; ")
                         .append(cProperty.get()).append("]");
                 logger.makeLog(message.toString());
-                logsUpdate();
+                logUpdate();
 
                 listener.cache();
                 break;

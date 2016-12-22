@@ -24,7 +24,7 @@ public class Solver {
 
     @FXML
     void initialize() {
-        viewModel.setLogger(new TxtLogger("./TxtLogger-lab3.makeLog"));
+        viewModel.setUpLogger(new TxtLogger("./TxtLogger-quadraticEquationSolver.makeLog"));
 
         final ChangeListener<Boolean> focusChangeListener = new ChangeListener<Boolean>() {
             @Override

@@ -15,16 +15,16 @@ public class RegexMatcher extends BaseMatcher {
         return ((String) o).matches(regex);
     }
 
-    public void describeTo(final Description description) {
-        description.appendText("matches regex = ");
-        description.appendText(regex);
+    public void describeTo(final Description descript) {
+        descript.appendText("matches regex = ");
+        descript.appendText(regex);
     }
 
     public static Matcher<? super String> matchesPattern(final String regex) {
-        RegexMatcher matcher = new RegexMatcher(regex);
+        RegexMatcher regexMatcher = new RegexMatcher(regex);
         //NOTE: this ugly cast is needed to workaround 'unchecked' Java warning
         @SuppressWarnings (value = "unchecked")
-        Matcher<? super String> castedMatcher = (Matcher<? super String>)   matcher;
+        Matcher<? super String> castedMatcher = (Matcher<? super String>)   regexMatcher;
         return castedMatcher;
     }
 }

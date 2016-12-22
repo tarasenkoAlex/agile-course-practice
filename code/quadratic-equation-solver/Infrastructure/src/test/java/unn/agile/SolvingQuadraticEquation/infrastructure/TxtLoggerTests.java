@@ -38,7 +38,7 @@ public class TxtLoggerTests {
 
     @Test
     public void writeLogMessage() {
-        String testMessage = "Test message";
+        String testMessage = "message";
 
         logger.makeLog(testMessage);
 
@@ -48,7 +48,7 @@ public class TxtLoggerTests {
 
     @Test
     public void writeSeveralLogMessage() {
-        String[] messages = {"Test message 1", "Test message 2"};
+        String[] messages = {"message 1", "message 2"};
 
         logger.makeLog(messages[0]);
         logger.makeLog(messages[1]);
@@ -61,7 +61,7 @@ public class TxtLoggerTests {
 
     @Test
     public void checkLogContainDateAndTime() {
-        String messageForTest = "Test message";
+        String messageForTest = "message";
 
         logger.makeLog(messageForTest);
 
