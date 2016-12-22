@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import ru.unn.agile.SolvingQuadraticEquation.viewmodel.ViewModel;
-import unn.agile.SolvingQuadraticEquation.infrastructure.FileLogger;
+import unn.agile.SolvingQuadraticEquation.infrastructure.FileQuadraticEquationSolverLogger;
 
 public class Solver {
     @FXML
@@ -24,7 +24,7 @@ public class Solver {
 
     @FXML
     void initialize() {
-        viewModel.setUpLogger(new FileLogger("./FileLogger-quadraticEquationSolver.makeLog"));
+        viewModel.setUpLogger(new FileQuadraticEquationSolverLogger("./FileQuadraticEquationSolverLogger-quadraticEquationSolver.makeLog"));
 
         final ChangeListener<Boolean> focusChangeListener = new ChangeListener<Boolean>() {
             @Override

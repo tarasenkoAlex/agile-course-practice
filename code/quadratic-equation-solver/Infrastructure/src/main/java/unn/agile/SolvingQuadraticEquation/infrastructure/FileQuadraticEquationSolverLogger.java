@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class FileLogger implements IQuadraticEquationSolverLogger {
+public class FileQuadraticEquationSolverLogger implements IQuadraticEquationSolverLogger {
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private final BufferedWriter fileWriter;
     private final String fileName;
@@ -23,7 +23,7 @@ public class FileLogger implements IQuadraticEquationSolverLogger {
         return simpleDateFormat.format(calendar.getTime());
     }
 
-    public FileLogger(final String fileName) {
+    public FileQuadraticEquationSolverLogger(final String fileName) {
         this.fileName = fileName;
 
         BufferedWriter logWriter = null;
@@ -47,15 +47,15 @@ public class FileLogger implements IQuadraticEquationSolverLogger {
     }
 
     public List<String> getLog() {
-        BufferedReader reader;
+        BufferedReader fileBufferedReader;
         ArrayList<String> log = new ArrayList<String>();
         try {
-            reader = new BufferedReader(new FileReader(fileName));
-            String line = reader.readLine();
+            fileBufferedReader = new BufferedReader(new FileReader(fileName));
+            String line = fileBufferedReader.readLine();
 
             while (line != null) {
                 log.add(line);
-                line = reader.readLine();
+                line = fileBufferedReader.readLine();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

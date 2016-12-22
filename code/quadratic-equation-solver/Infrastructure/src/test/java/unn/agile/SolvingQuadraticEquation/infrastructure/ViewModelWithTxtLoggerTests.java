@@ -7,8 +7,8 @@ import ru.unn.agile.SolvingQuadraticEquation.viewmodel.ViewModelTests;
 public class ViewModelWithTxtLoggerTests extends ViewModelTests {
     @Override
     public void setUp() {
-        FileLogger logger =
-                new FileLogger("./ViewModel_with_FileLogger_Tests-quadraticEquationSolver.makeLog");
+        FileQuadraticEquationSolverLogger logger =
+                new FileQuadraticEquationSolverLogger("./ViewModel_with_FileLogger_Tests-quadraticEquationSolver.makeLog");
         super.setExteriorlViewModel(new ViewModel(logger));
     }
 }

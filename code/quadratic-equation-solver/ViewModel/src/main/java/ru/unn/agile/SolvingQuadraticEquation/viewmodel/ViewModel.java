@@ -162,23 +162,23 @@ public class ViewModel {
         }
 
         for (ValueChangeListener listener : valueChangedListeners) {
-            if (listener.isChanged()) {
-                StringBuilder message = new StringBuilder(LogsMessages.INPUT_IN_FIELD_FINISHED);
-                message.append("Input arguments are: [")
+            if (listener.isBeenChanged()) {
+                StringBuilder messageToLog = new StringBuilder(LogsMessages.INPUT_IN_FIELD_FINISHED);
+                messageToLog.append("Input coefficients are: [")
                         .append(aProperty.get()).append("; ")
                         .append(bProperty.get()).append("; ")
                         .append(cProperty.get()).append("]");
-                logger.makeLog(message.toString());
+                logger.makeLog(messageToLog.toString());
                 logUpdate();
 
                 if (statusProperty.get().equals(Status.BAD_FORMAT.toString())) {
-                    message = new StringBuilder("Error: ");
-                    message.append(LogsMessages.INCORRECT_INPUT);
-                    logger.makeLog(message.toString());
+                    messageToLog = new StringBuilder("Error: ");
+                    messageToLog.append(LogsMessages.INCORRECT_INPUT);
+                    logger.makeLog(messageToLog.toString());
                     logUpdate();
                 }
 
-                listener.cache();
+                listener.doCache();
                 break;
             }
         }
@@ -210,10 +210,10 @@ public class ViewModel {
             statusProperty.set(getInputStatus().toString());
             currentValue = nextValue;
         }
-        public boolean isChanged() {
+        public boolean isBeenChanged() {
             return !previousValue.equals(currentValue);
         }
-        public void cache() {
+        public void doCache() {
             previousValue = currentValue;
         }
     }

@@ -219,7 +219,7 @@ public class ViewModelTests {
 
         String message = viewModel.getLog().get(0);
         assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
-                + "Input arguments are: \\[0; 2; 1\\]"));
+                + "Input coefficients are: \\[0; 2; 1\\]"));
     }
 
     @Test
@@ -232,12 +232,12 @@ public class ViewModelTests {
         viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
         String message = viewModel.getLog().get(0);
         assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
-                + "Input arguments are: \\[0; ; \\]"));
+                + "Input coefficients are: \\[0; ; \\]"));
         message = viewModel.getLog().get(1);
         assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
-                + "Input arguments are: \\[0; 2; \\]"));
+                + "Input coefficients are: \\[0; 2; \\]"));
         message = viewModel.getLog().get(2);
         assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
-                + "Input arguments are: \\[0; 2; 1\\]"));
+                + "Input coefficients are: \\[0; 2; 1\\]"));
     }
 }

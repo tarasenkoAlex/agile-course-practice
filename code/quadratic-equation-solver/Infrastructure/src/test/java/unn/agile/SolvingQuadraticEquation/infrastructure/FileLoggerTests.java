@@ -17,14 +17,14 @@ import static junit.framework.TestCase.assertNotNull;
 
 
 public class FileLoggerTests {
-    private Pattern messagePattern;
-    private Matcher messageMatcher;
+    private Pattern messageLogPattern;
+    private Matcher messageLogMatcher;
     private static final String FILE_NAME_FOR_LOG = "./TxtLogger_Tests-quadraticEquationSolver.makeLog";
-    private FileLogger fileLogger;
+    private FileQuadraticEquationSolverLogger fileLogger;
 
     @Before
     public void setUp() {
-        fileLogger = new FileLogger(FILE_NAME_FOR_LOG);
+        fileLogger = new FileQuadraticEquationSolverLogger(FILE_NAME_FOR_LOG);
     }
 
     @Test
@@ -48,24 +48,24 @@ public class FileLoggerTests {
         fileLogger.makeLog(testMessage);
 
         String messageFromFile = fileLogger.getLog().get(0);
-        messagePattern = Pattern.compile(".*" + testMessage + "$");
-        messageMatcher = messagePattern.matcher(messageFromFile);
-        assertTrue(messageMatcher.matches());
+        messageLogPattern = Pattern.compile(".*" + testMessage + "$");
+        messageLogMatcher = messageLogPattern.matcher(messageFromFile);
+        assertTrue(messageLogMatcher.matches());
     }
 
     @Test
     public void writeSeveralLogMessages() {
-        String[] messages = {"message 1", "message 2", "message 3"};
+        String[] messagesForTest = {"message 1", "message 2", "message 3"};
 
-        fileLogger.makeLog(messages[0]);
-        fileLogger.makeLog(messages[1]);
-        fileLogger.makeLog(messages[2]);
+        fileLogger.makeLog(messagesForTest[0]);
+        fileLogger.makeLog(messagesForTest[1]);
+        fileLogger.makeLog(messagesForTest[2]);
 
         List<String> actualMessages = fileLogger.getLog();
         for (int i = 0; i < actualMessages.size(); i++) {
-            messagePattern = Pattern.compile(".*" + messages[i] + "$");
-            messageMatcher = messagePattern.matcher(actualMessages.get(i));
-            assertTrue(messageMatcher.matches());
+            messageLogPattern = Pattern.compile(".*" + messagesForTest[i] + "$");
+            messageLogMatcher = messageLogPattern.matcher(actualMessages.get(i));
+            assertTrue(messageLogMatcher.matches());
         }
     }
 
@@ -76,8 +76,8 @@ public class FileLoggerTests {
         fileLogger.makeLog(messageForTest);
 
         String message = fileLogger.getLog().get(0);
-        messagePattern = Pattern.compile("^\\[\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\] > .*");
-        messageMatcher = messagePattern.matcher(message);
-        assertTrue(messageMatcher.matches());
+        messageLogPattern = Pattern.compile("^\\[\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\] > .*");
+        messageLogMatcher = messageLogPattern.matcher(message);
+        assertTrue(messageLogMatcher.matches());
     }
 }
