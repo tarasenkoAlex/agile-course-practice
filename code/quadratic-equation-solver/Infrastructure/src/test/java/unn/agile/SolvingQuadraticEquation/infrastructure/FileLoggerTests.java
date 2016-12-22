@@ -19,7 +19,8 @@ import static junit.framework.TestCase.assertNotNull;
 public class FileLoggerTests {
     private Pattern messageLogPattern;
     private Matcher messageLogMatcher;
-    private static final String FILE_NAME_FOR_LOG = "./TxtLogger_Tests-quadraticEquationSolver.makeLog";
+    private static final String FILE_NAME_FOR_LOG =
+            "./TxtLogger_Tests-quadraticEquationSolver.makeLog";
     private FileQuadraticEquationSolverLogger fileLogger;
 
     @Before
@@ -76,7 +77,8 @@ public class FileLoggerTests {
         fileLogger.makeLog(messageForTest);
 
         String message = fileLogger.getLog().get(0);
-        messageLogPattern = Pattern.compile("^\\[\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\] > .*");
+        messageLogPattern =
+                Pattern.compile("^\\[\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\] > .*");
         messageLogMatcher = messageLogPattern.matcher(message);
         assertTrue(messageLogMatcher.matches());
     }

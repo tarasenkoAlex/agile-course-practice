@@ -163,7 +163,8 @@ public class ViewModel {
 
         for (ValueChangeListener listener : valueChangedListeners) {
             if (listener.isBeenChanged()) {
-                StringBuilder messageToLog = new StringBuilder(LogsMessages.INPUT_IN_FIELD_FINISHED);
+                StringBuilder messageToLog =
+                        new StringBuilder(LogsMessages.INPUT_IN_FIELD_FINISHED);
                 messageToLog.append("Input coefficients are: [")
                         .append(aProperty.get()).append("; ")
                         .append(bProperty.get()).append("; ")
