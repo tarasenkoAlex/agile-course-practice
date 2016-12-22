@@ -4,13 +4,17 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.Before;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class ViewModelTests {
 
     private ViewModel viewModel;
+
+    public void setExternalViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
 
     private void fillFields(final String a, final String b, final String c) {
         viewModel.aCoefProperty().setValue(a);
@@ -32,7 +36,8 @@ public class ViewModelTests {
 
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        FakeLogger logger = new FakeLogger();
+        viewModel = new ViewModel(logger);
     }
 
     @After
@@ -146,5 +151,85 @@ public class ViewModelTests {
         viewModel.solve();
 
         assertEquals("No Solutions", viewModel.resultProperty().get());
+    }
+
+    @Test
+    public void createLoggerOnViewModel() {
+        FakeLogger logger = new FakeLogger();
+        ViewModel viewModelLogged = new ViewModel(logger);
+
+        assertNotNull(viewModelLogged);
+    }
+
+    @Test
+    public void logIsEmptyOnStart() {
+        List<String> log = viewModel.getLog();
+
+        assertTrue(log.isEmpty());
+    }
+
+    @Test
+    public void logContainsMessageAfterSolve() {
+        fillFields("0", "0", "1");
+        viewModel.solve();
+        String message = viewModel.getLog().get(0);
+
+        assertTrue(message.matches(".*" + LogMessages.CALCULATE_WAS_PRESSED + ".*"));
+    }
+
+    @Test
+    public void checkLogMessageFormatWhenPressSolve() {
+        fillFields("0", "2", "1");
+
+        viewModel.solve();
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + "Calculate. Arguments: a = 0; b = 2; c = 1."));
+    }
+
+    @Test
+    public void canPutSeveralLogMessages() {
+        fillFields("0", "2", "1");
+
+        viewModel.solve();
+        viewModel.solve();
+
+        assertEquals(2, viewModel.getLog().size());
+    }
+
+    @Test
+    public void solveIsNotCalledWhenButtonIsDisabled() {
+        viewModel.solve();
+
+        assertTrue(viewModel.getLog().isEmpty());
+    }
+
+    @Test
+    public void checkLogMessageFormatWhenInputArguments() {
+        fillFields("0", "2", "1");
+
+        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + LogMessages.EDITING_FINISHED
+                + "Input arguments are: \\[0; 2; 1\\]"));
+    }
+
+    @Test
+    public void checkLogMessageFormatWhenManyActions() {
+        fillFields("0");
+        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        fillFields("0", "2");
+        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        fillFields("0", "2", "1");
+        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + LogMessages.EDITING_FINISHED
+                + "Input arguments are: \\[0; ; \\]"));
+        message = viewModel.getLog().get(1);
+        assertTrue(message.matches(".*" + LogMessages.EDITING_FINISHED
+                + "Input arguments are: \\[0; 2; \\]"));
+        message = viewModel.getLog().get(2);
+        assertTrue(message.matches(".*" + LogMessages.EDITING_FINISHED
+                + "Input arguments are: \\[0; 2; 1\\]"));
     }
 }
