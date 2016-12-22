@@ -1,12 +1,14 @@
 package ru.unn.agile.MyDeque.view;
 
+import ru.unn.agile.MyDeque.infrastructure.TxtLogger;
 import ru.unn.agile.MyDeque.viewmodel.ViewModel;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public final class DequeForm {
 
@@ -19,19 +21,20 @@ public final class DequeForm {
     private JLabel lbStatus;
     private JTextField txtResult;
 
+    private final List<String> lstLog;
+
     private DequeForm(final ViewModel viewmodel) {
         this.viewmodel = viewmodel;
+        viewmodel.setLogger(new TxtLogger("./TxtLogger-lab3.log"));
+        lstLog = new ArrayList<>();
         backBind();
 
         getOperationsList();
 
-        acceptButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent actionEvent) {
-                bind();
-                viewmodel.accept();
-                backBind();
-            }
+        acceptButton.addActionListener(actionEvent -> {
+            bind();
+            viewmodel.accept();
+            backBind();
         });
 
         cbOperationChoice.addActionListener(actionEvent -> {
@@ -57,6 +60,12 @@ public final class DequeForm {
         frame.setVisible(true);
     }
 
+    private void getLog() {
+        List<String> log = viewmodel.getLog();
+        String[] str = log.toArray(new String[log.size()]);
+        lstLog.addAll(Arrays.asList(str));
+    }
+
     private void bind() {
         viewmodel.setValue(txtValue.getText());
         viewmodel.setOperation((ViewModel.Operations) cbOperationChoice.getSelectedItem());
@@ -72,6 +81,8 @@ public final class DequeForm {
 
         txtResult.setText(viewmodel.getResult());
         lbStatus.setText(viewmodel.getStatus());
+
+        getLog();
     }
 
 }

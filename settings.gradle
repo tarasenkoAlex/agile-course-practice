@@ -196,6 +196,8 @@ include "code/Deque/ViewModel"
 project(":code/Deque/ViewModel").name = "Yevtushin-Valery-ViewModel"
 include "code/Deque/View"
 project(":code/Deque/View").name = "Yevtushin-Valery-View"
+include "code/Deque/Infrastructure"
+project(":code/Deque/Infrastructure").name = "Deque-Infrastructure"
 
 // Рыбаков Антон
 // Рыбин Валентин
