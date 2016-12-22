@@ -32,7 +32,25 @@ public class ViewModel {
             new SimpleObjectProperty<>(FXCollections.observableArrayList(ColorSpaces.values()));
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
 
+
     public ViewModel() {
+        init();
+    }
+
+    public ViewModel(final IColorConverterLogger logger) {
+        setLogger(logger);
+        init();
+    }
+
+    public final void setLogger(final IColorConverterLogger logger) {
+        IColorConverterLogger log;
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger parameter can't be null");
+        }
+        log = logger;
+    }
+
+    private void init() {
         firstValue.set("");
         secondValue.set("");
         thirdValue.set("");
@@ -46,6 +64,7 @@ public class ViewModel {
             {
                 super.bind(firstValue, secondValue, thirdValue, fromColorSpace);
             }
+
             @Override
             protected boolean computeValue() {
                 return getInputStatus() == Status.READY;
@@ -53,11 +72,13 @@ public class ViewModel {
         };
         convertingDisabled.bind(couldConvert.not());
 
-        final List<StringProperty> fields = new ArrayList<StringProperty>() { {
-            add(firstValue);
-            add(secondValue);
-            add(thirdValue);
-        }};
+        final List<StringProperty> fields = new ArrayList<StringProperty>() {
+            {
+                add(firstValue);
+                add(secondValue);
+                add(thirdValue);
+            }
+        };
 
         for (StringProperty field : fields) {
             final ValueChangeListener listener = new ValueChangeListener();
@@ -65,6 +86,7 @@ public class ViewModel {
             valueChangedListeners.add(listener);
         }
     }
+
 
     private Status getInputStatus() {
         Status inputStatus = Status.READY;
@@ -76,8 +98,8 @@ public class ViewModel {
             if (!firstValue.get().isEmpty() && !secondValue.get().isEmpty()
                     && !thirdValue.get().isEmpty()) {
                 double[] params = {Double.parseDouble(firstValue.get()),
-                    Double.parseDouble(secondValue.get()),
-                    Double.parseDouble(thirdValue.get())};
+                        Double.parseDouble(secondValue.get()),
+                        Double.parseDouble(thirdValue.get())};
                 checkParameters(fromColorSpace.getValue(), params);
             }
         } catch (IllegalArgumentException ex) {
@@ -181,7 +203,6 @@ public class ViewModel {
     }
 
 
-
     public void convert() {
         if (convertingDisabled.get()) {
             return;
@@ -223,3 +244,5 @@ public class ViewModel {
         }
     }
 }
+
+

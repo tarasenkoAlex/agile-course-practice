@@ -1,0 +1,9 @@
+dependencies {
+    compile project(':color-converter-viewmodel')
+    testCompile project(':color-converter-viewmodel').sourceSets.test.output
+}
+
+sourceSets {
+    main.java.srcDir 'src/main/java'
+    test.java.srcDir 'src/test/java'
+}

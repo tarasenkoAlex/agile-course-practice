@@ -184,6 +184,8 @@ include "code/color-converter/View"
 project(":code/color-converter/View").name = "color-converter-view"
 include "code/color-converter/ViewModel"
 project(":code/color-converter/ViewModel").name = "color-converter-viewmodel"
+include "code/color-converter/Infrastructure"
+project(":code/color-converter/Infrastructure").name = "color-converter-Infrastructure"
 
 include "code/Queue/Model"
 project(":code/Queue/Model").name = "Queue-Model"
