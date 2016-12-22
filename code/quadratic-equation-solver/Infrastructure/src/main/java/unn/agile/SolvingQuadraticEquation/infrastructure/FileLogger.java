@@ -1,6 +1,6 @@
 package unn.agile.SolvingQuadraticEquation.infrastructure;
 
-import ru.unn.agile.SolvingQuadraticEquation.viewmodel.ILogger;
+import ru.unn.agile.SolvingQuadraticEquation.viewmodel.IQuadraticEquationSolverLogger;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class FileLogger implements ILogger {
+public class FileLogger implements IQuadraticEquationSolverLogger {
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private final BufferedWriter fileWriter;
     private final String fileName;
@@ -38,7 +38,7 @@ public class FileLogger implements ILogger {
     @Override
     public void makeLog(final String s) {
         try {
-            fileWriter.write(nowTime() + " > " + s);
+            fileWriter.write("[" + nowTime() + "] > " + s);
             fileWriter.newLine();
             fileWriter.flush();
         } catch (Exception e) {

@@ -21,20 +21,20 @@ public class ViewModel {
     private final StringProperty statusProperty = new SimpleStringProperty();
     private final StringProperty log = new SimpleStringProperty();
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
-    private ILogger logger;
+    private IQuadraticEquationSolverLogger logger;
 
     public ViewModel() {
         init();
     }
 
-    public final void setUpLogger(final ILogger logger) {
+    public final void setUpLogger(final IQuadraticEquationSolverLogger logger) {
         if (logger == null) {
             throw new IllegalArgumentException("Logger parameter must be not null");
         }
         this.logger = logger;
     }
 
-    public ViewModel(final ILogger logger) {
+    public ViewModel(final IQuadraticEquationSolverLogger logger) {
         setUpLogger(logger);
         init();
     }
@@ -147,12 +147,12 @@ public class ViewModel {
         resultProperty.set(buildResultString(roots));
         statusProperty.set(Status.SUCCESS.toString());
 
-        StringBuilder message = new StringBuilder(LogMessages.SOLVE_WAS_PRESSED);
-        message.append("Arguments")
+        StringBuilder messageToLog = new StringBuilder(LogMessages.SOLVE_WAS_PRESSED);
+        messageToLog.append("Arguments")
                 .append(": a = ").append(aProperty.get())
                 .append("; b = ").append(bProperty.get())
                 .append("; c = ").append(cProperty.get()).append(".");
-        logger.makeLog(message.toString());
+        logger.makeLog(messageToLog.toString());
         logUpdate();
     }
 

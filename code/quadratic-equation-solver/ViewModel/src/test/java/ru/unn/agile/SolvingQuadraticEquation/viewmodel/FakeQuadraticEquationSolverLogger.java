@@ -3,7 +3,7 @@ package ru.unn.agile.SolvingQuadraticEquation.viewmodel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FakeLogger implements ILogger {
+public class FakeQuadraticEquationSolverLogger implements IQuadraticEquationSolverLogger {
     private final ArrayList<String> fakeLog = new ArrayList<>();
 
     @Override

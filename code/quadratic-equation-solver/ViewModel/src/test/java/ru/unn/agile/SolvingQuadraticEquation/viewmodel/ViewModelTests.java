@@ -36,7 +36,7 @@ public class ViewModelTests {
 
     @Before
     public void setUp() {
-        FakeLogger logger = new FakeLogger();
+        FakeQuadraticEquationSolverLogger logger = new FakeQuadraticEquationSolverLogger();
         viewModel = new ViewModel(logger);
     }
 
@@ -155,7 +155,7 @@ public class ViewModelTests {
 
     @Test
     public void createLoggerOnViewModel() {
-        FakeLogger logger = new FakeLogger();
+        FakeQuadraticEquationSolverLogger logger = new FakeQuadraticEquationSolverLogger();
         ViewModel viewModelLogged = new ViewModel(logger);
 
         assertNotNull(viewModelLogged);
