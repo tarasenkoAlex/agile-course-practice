@@ -287,6 +287,13 @@ public class ViewModelTests {
         assertTrue(viewmodel.getLog().isEmpty());
     }
 
+    @Test
+    public void enterPressedTest() {
+        viewmodel.setValue("11");
+        viewmodel.textFieldKey(KeyboardsKeys.ENTER);
+        assertEquals(SUCCESS, viewmodel.getStatus());
+    }
+
     private void setInputData() {
         viewmodel.setValue("4");
         viewmodel.setOperation(PUSH_HEAD);
