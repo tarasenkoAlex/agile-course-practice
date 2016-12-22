@@ -14,58 +14,58 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static unn.agile.SolvingQuadraticEquation.infrastructure.RegexMatcher.matchesPattern;
 
 public class TxtLoggerTests {
-    private static final String FILENAME = "./TxtLogger_Tests-lab3.log";
-    private TxtLogger txtLogger;
+    private static final String FILE_NAME_FOR_LOG = "./TxtLogger_Tests-lab3.makeLog";
+    private TxtLogger logger;
 
     @Before
     public void setUp() {
-        txtLogger = new TxtLogger(FILENAME);
+        logger = new TxtLogger(FILE_NAME_FOR_LOG);
     }
 
     @Test
-    public void canCreateLoggerWithFileName() {
-        assertNotNull(txtLogger);
+    public void makeLoggerWithFileName() {
+        assertNotNull(logger);
     }
 
     @Test
-    public void canCreateLogFileOnDisk() {
+    public void makeFileOnDiskForLog() {
         try {
-            new BufferedReader(new FileReader(FILENAME));
+            new BufferedReader(new FileReader(FILE_NAME_FOR_LOG));
         } catch (FileNotFoundException e) {
-            fail("File " + FILENAME + " wasn't found!");
+            fail("File " + FILE_NAME_FOR_LOG + " wasn't found!");
         }
     }
 
     @Test
-    public void canWriteLogMessage() {
+    public void writeLogMessage() {
         String testMessage = "Test message";
 
-        txtLogger.log(testMessage);
+        logger.makeLog(testMessage);
 
-        String message = txtLogger.getLog().get(0);
+        String message = logger.getLog().get(0);
         assertThat(message, matchesPattern(".*" + testMessage + "$"));
     }
 
     @Test
-    public void canWriteSeveralLogMessage() {
+    public void writeSeveralLogMessage() {
         String[] messages = {"Test message 1", "Test message 2"};
 
-        txtLogger.log(messages[0]);
-        txtLogger.log(messages[1]);
+        logger.makeLog(messages[0]);
+        logger.makeLog(messages[1]);
 
-        List<String> actualMessages = txtLogger.getLog();
+        List<String> actualMessages = logger.getLog();
         for (int i = 0; i < actualMessages.size(); i++) {
             assertThat(actualMessages.get(i), matchesPattern(".*" + messages[i] + "$"));
         }
     }
 
     @Test
-    public void doesLogContainDateAndTime() {
-        String testMessage = "Test message";
+    public void checkLogContainDateAndTime() {
+        String messageForTest = "Test message";
 
-        txtLogger.log(testMessage);
+        logger.makeLog(messageForTest);
 
-        String message = txtLogger.getLog().get(0);
+        String message = logger.getLog().get(0);
         assertThat(message, matchesPattern("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
     }
 }

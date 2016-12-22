@@ -29,7 +29,7 @@ public class ViewModel {
 
     public final void setLogger(final ILogger logger) {
         if (logger == null) {
-            throw new IllegalArgumentException("Logger parameter can't be null");
+            throw new IllegalArgumentException("Logger parameter must be not null");
         }
         this.logger = logger;
     }
@@ -39,7 +39,7 @@ public class ViewModel {
         init();
     }
 
-    private void updateLogs() {
+    private void logsUpdate() {
         List<String> fullLog = logger.getLog();
         String record = new String();
         for (String log : fullLog) {
@@ -147,29 +147,29 @@ public class ViewModel {
         resultProperty.set(buildResultString(roots));
         statusProperty.set(Status.SUCCESS.toString());
 
-        StringBuilder message = new StringBuilder(LogMessages.CALCULATE_WAS_PRESSED);
+        StringBuilder message = new StringBuilder(LogMessages.SOLVE_WAS_PRESSED);
         message.append("Arguments")
                 .append(": a = ").append(aProperty.get())
                 .append("; b = ").append(bProperty.get())
                 .append("; c = ").append(cProperty.get()).append(".");
-        logger.log(message.toString());
-        updateLogs();
+        logger.makeLog(message.toString());
+        logsUpdate();
     }
 
-    public void onFocusChanged(final Boolean oldValue, final Boolean newValue) {
-        if (!oldValue && newValue) {
+    public void onFocusFieldChanged(final Boolean prevValue, final Boolean nextValue) {
+        if (!prevValue && nextValue) {
             return;
         }
 
         for (ValueChangeListener listener : valueChangedListeners) {
             if (listener.isChanged()) {
-                StringBuilder message = new StringBuilder(LogMessages.EDITING_FINISHED);
+                StringBuilder message = new StringBuilder(LogMessages.INPUT_IN_FIELD_FINISHED);
                 message.append("Input arguments are: [")
                         .append(aProperty.get()).append("; ")
                         .append(bProperty.get()).append("; ")
                         .append(cProperty.get()).append("]");
-                logger.log(message.toString());
-                updateLogs();
+                logger.makeLog(message.toString());
+                logsUpdate();
 
                 listener.cache();
                 break;
@@ -192,22 +192,22 @@ public class ViewModel {
     }
 
     private class ValueChangeListener implements ChangeListener<String> {
-        private String prevValue = new String();
-        private String curValue = new String();
+        private String previousValue = new String();
+        private String currentValue = new String();
         @Override
         public void changed(final ObservableValue<? extends String> observable,
-                            final String oldValue, final String newValue) {
-            if (oldValue.equals(newValue)) {
+                            final String prevValue, final String nextValue) {
+            if (prevValue.equals(nextValue)) {
                 return;
             }
             statusProperty.set(getInputStatus().toString());
-            curValue = newValue;
+            currentValue = nextValue;
         }
         public boolean isChanged() {
-            return !prevValue.equals(curValue);
+            return !previousValue.equals(currentValue);
         }
         public void cache() {
-            prevValue = curValue;
+            previousValue = currentValue;
         }
     }
 }
@@ -228,9 +228,8 @@ enum Status {
 }
 
 final class LogMessages {
-    public static final String CALCULATE_WAS_PRESSED = "Calculate. ";
-    public static final String OPERATION_WAS_CHANGED = "Operation was changed to ";
-    public static final String EDITING_FINISHED = "Updated input. ";
+    public static final String SOLVE_WAS_PRESSED = "Calculate. ";
+    public static final String INPUT_IN_FIELD_FINISHED = "Updated input. ";
 
     private LogMessages() { }
 }

@@ -24,13 +24,13 @@ public class Solver {
 
     @FXML
     void initialize() {
-        viewModel.setLogger(new TxtLogger("./TxtLogger-lab3.log"));
+        viewModel.setLogger(new TxtLogger("./TxtLogger-lab3.makeLog"));
 
         final ChangeListener<Boolean> focusChangeListener = new ChangeListener<Boolean>() {
             @Override
             public void changed(final ObservableValue<? extends Boolean> observable,
                                 final Boolean oldValue, final Boolean newValue) {
-                viewModel.onFocusChanged(oldValue, newValue);
+                viewModel.onFocusFieldChanged(oldValue, newValue);
             }
         };
 

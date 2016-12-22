@@ -36,7 +36,7 @@ public class TxtLogger implements ILogger {
     }
 
     @Override
-    public void log(final String s) {
+    public void makeLog(final String s) {
         try {
             writer.write(now() + " > " + s);
             writer.newLine();

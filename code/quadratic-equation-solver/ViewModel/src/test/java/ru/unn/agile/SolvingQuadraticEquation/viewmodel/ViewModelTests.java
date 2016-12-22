@@ -12,7 +12,7 @@ public class ViewModelTests {
 
     private ViewModel viewModel;
 
-    public void setExternalViewModel(final ViewModel viewModel) {
+    public void setExteriorlViewModel(final ViewModel viewModel) {
         this.viewModel = viewModel;
     }
 
@@ -174,7 +174,7 @@ public class ViewModelTests {
         viewModel.solve();
         String message = viewModel.getLog().get(0);
 
-        assertTrue(message.matches(".*" + LogMessages.CALCULATE_WAS_PRESSED + ".*"));
+        assertTrue(message.matches(".*" + LogMessages.SOLVE_WAS_PRESSED + ".*"));
     }
 
     @Test
@@ -207,29 +207,29 @@ public class ViewModelTests {
     public void checkLogMessageFormatWhenInputArguments() {
         fillFields("0", "2", "1");
 
-        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
 
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + LogMessages.EDITING_FINISHED
+        assertTrue(message.matches(".*" + LogMessages.INPUT_IN_FIELD_FINISHED
                 + "Input arguments are: \\[0; 2; 1\\]"));
     }
 
     @Test
     public void checkLogMessageFormatWhenManyActions() {
         fillFields("0");
-        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
         fillFields("0", "2");
-        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
         fillFields("0", "2", "1");
-        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + LogMessages.EDITING_FINISHED
+        assertTrue(message.matches(".*" + LogMessages.INPUT_IN_FIELD_FINISHED
                 + "Input arguments are: \\[0; ; \\]"));
         message = viewModel.getLog().get(1);
-        assertTrue(message.matches(".*" + LogMessages.EDITING_FINISHED
+        assertTrue(message.matches(".*" + LogMessages.INPUT_IN_FIELD_FINISHED
                 + "Input arguments are: \\[0; 2; \\]"));
         message = viewModel.getLog().get(2);
-        assertTrue(message.matches(".*" + LogMessages.EDITING_FINISHED
+        assertTrue(message.matches(".*" + LogMessages.INPUT_IN_FIELD_FINISHED
                 + "Input arguments are: \\[0; 2; 1\\]"));
     }
 }
