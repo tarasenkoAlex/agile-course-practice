@@ -82,6 +82,7 @@ public class ViewModelTests {
         fillFields("bad input");
 
         assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.BAD_FORMAT.toString(), viewModel.getStatus().toString());
     }
 
     @Test
@@ -152,6 +153,7 @@ public class ViewModelTests {
         viewModel.solve();
 
         assertEquals("No Solutions", viewModel.resultProperty().get());
+        assertEquals("No Solutions", viewModel.getResult().toString());
     }
 
     @Test
@@ -175,7 +177,7 @@ public class ViewModelTests {
         viewModel.solve();
         String message = viewModel.getLog().get(0);
 
-        assertTrue(message.matches(".*" + LogsMessages.SOLVE_WAS_PRESSED + ".*"));
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.SOLVE_WAS_PRESSED + ".*"));
     }
 
     @Test
@@ -202,7 +204,7 @@ public class ViewModelTests {
         fillFields("a");
         viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
         String message = viewModel.getLog().get(1);
-        assertTrue(message.matches(".*" + LogsMessages.INCORRECT_INPUT));
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.INCORRECT_INPUT));
     }
 
     @Test
@@ -219,7 +221,7 @@ public class ViewModelTests {
         viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
 
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.INPUT_IN_FIELD_FINISHED
                 + "Input coefficients are: \\[0; 2; 1\\]"));
     }
 
@@ -232,13 +234,13 @@ public class ViewModelTests {
         fillFields("0", "2", "1");
         viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.INPUT_IN_FIELD_FINISHED
                 + "Input coefficients are: \\[0; ; \\]"));
         message = viewModel.getLog().get(1);
-        assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.INPUT_IN_FIELD_FINISHED
                 + "Input coefficients are: \\[0; 2; \\]"));
         message = viewModel.getLog().get(2);
-        assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.INPUT_IN_FIELD_FINISHED
                 + "Input coefficients are: \\[0; 2; 1\\]"));
     }
 
@@ -257,5 +259,19 @@ public class ViewModelTests {
         viewModel.onFocusFieldChanged(Boolean.FALSE, Boolean.TRUE);
         fillFields("a2");
         assertEquals(0, viewModel.getLog().size());
+    }
+
+    @Test
+    public void createViewModelWihtoutLogger() {
+        ViewModel viewModel = new ViewModel();
+        assertEquals(Status.WAITING.toString(), viewModel.getStatus().toString());
+    }
+
+    @Test
+    public void repeatInputInFieldSameValue() {
+        fillFields("1");
+        viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
+        fillFields("1");
+        assertEquals(1, viewModel.getLog().size());
     }
 }

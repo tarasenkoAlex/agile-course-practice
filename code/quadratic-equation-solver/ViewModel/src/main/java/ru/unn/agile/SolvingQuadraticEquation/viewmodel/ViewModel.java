@@ -215,6 +215,11 @@ public class ViewModel {
             previousValue = currentValue;
         }
     }
+    public static final class LogsMessages {
+        public static final String SOLVE_WAS_PRESSED = "Solved. ";
+        public static final String INPUT_IN_FIELD_FINISHED = "Updated input. ";
+        public static final String INCORRECT_INPUT = "Entered coefficients are incorrect! ";
+    }
 }
 
 enum Status {
@@ -230,11 +235,4 @@ enum Status {
     public String toString() {
         return name;
     }
-}
-
-final class LogsMessages {
-    public static final String SOLVE_WAS_PRESSED = "Solved. ";
-    public static final String INPUT_IN_FIELD_FINISHED = "Updated input. ";
-    public static final String INCORRECT_INPUT = "Entered coefficients are incorrect! ";
-    private LogsMessages() { }
 }
