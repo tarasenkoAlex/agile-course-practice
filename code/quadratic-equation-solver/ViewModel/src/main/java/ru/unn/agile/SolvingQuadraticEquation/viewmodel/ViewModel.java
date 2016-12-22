@@ -147,7 +147,7 @@ public class ViewModel {
         resultProperty.set(buildResultString(roots));
         statusProperty.set(Status.SUCCESS.toString());
 
-        StringBuilder messageToLog = new StringBuilder(LogMessages.SOLVE_WAS_PRESSED);
+        StringBuilder messageToLog = new StringBuilder(LogsMessages.SOLVE_WAS_PRESSED);
         messageToLog.append("Arguments")
                 .append(": a = ").append(aProperty.get())
                 .append("; b = ").append(bProperty.get())
@@ -163,7 +163,7 @@ public class ViewModel {
 
         for (ValueChangeListener listener : valueChangedListeners) {
             if (listener.isChanged()) {
-                StringBuilder message = new StringBuilder(LogMessages.INPUT_IN_FIELD_FINISHED);
+                StringBuilder message = new StringBuilder(LogsMessages.INPUT_IN_FIELD_FINISHED);
                 message.append("Input arguments are: [")
                         .append(aProperty.get()).append("; ")
                         .append(bProperty.get()).append("; ")
@@ -173,7 +173,7 @@ public class ViewModel {
 
                 if (statusProperty.get().equals(Status.BAD_FORMAT.toString())) {
                     message = new StringBuilder("Error: ");
-                    message.append(LogMessages.INCORRECT_INPUT);
+                    message.append(LogsMessages.INCORRECT_INPUT);
                     logger.makeLog(message.toString());
                     logUpdate();
                 }
@@ -234,9 +234,9 @@ enum Status {
     }
 }
 
-final class LogMessages {
-    public static final String SOLVE_WAS_PRESSED = "Calculate. ";
+final class LogsMessages {
+    public static final String SOLVE_WAS_PRESSED = "Solved. ";
     public static final String INPUT_IN_FIELD_FINISHED = "Updated input. ";
     public static final String INCORRECT_INPUT = "Entered coefficients are incorrect! ";
-    private LogMessages() { }
+    private LogsMessages() { }
 }

@@ -8,7 +8,7 @@ public class ViewModelWithTxtLoggerTests extends ViewModelTests {
     @Override
     public void setUp() {
         FileLogger logger =
-                new FileLogger("./ViewModel_with_TxtLogger_Tests-lab3.makeLog");
+                new FileLogger("./ViewModel_with_FileLogger_Tests-quadraticEquationSolver.makeLog");
         super.setExteriorlViewModel(new ViewModel(logger));
     }
 }

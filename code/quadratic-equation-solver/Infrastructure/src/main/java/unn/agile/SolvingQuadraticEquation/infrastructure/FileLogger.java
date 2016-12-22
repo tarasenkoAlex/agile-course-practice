@@ -17,7 +17,7 @@ public class FileLogger implements IQuadraticEquationSolverLogger {
     private final BufferedWriter fileWriter;
     private final String fileName;
 
-    private static String nowTime() {
+    private static String getNowTime() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
         return simpleDateFormat.format(calendar.getTime());
@@ -38,7 +38,7 @@ public class FileLogger implements IQuadraticEquationSolverLogger {
     @Override
     public void makeLog(final String s) {
         try {
-            fileWriter.write("[" + nowTime() + "] > " + s);
+            fileWriter.write("[" + getNowTime() + "] > " + s);
             fileWriter.newLine();
             fileWriter.flush();
         } catch (Exception e) {

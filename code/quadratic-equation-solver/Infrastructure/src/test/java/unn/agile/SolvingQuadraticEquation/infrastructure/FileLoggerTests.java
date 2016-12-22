@@ -19,17 +19,17 @@ import static junit.framework.TestCase.assertNotNull;
 public class FileLoggerTests {
     private Pattern messagePattern;
     private Matcher messageMatcher;
-    private static final String FILE_NAME_FOR_LOG = "./TxtLogger_Tests-lab3.makeLog";
-    private FileLogger logger;
+    private static final String FILE_NAME_FOR_LOG = "./TxtLogger_Tests-quadraticEquationSolver.makeLog";
+    private FileLogger fileLogger;
 
     @Before
     public void setUp() {
-        logger = new FileLogger(FILE_NAME_FOR_LOG);
+        fileLogger = new FileLogger(FILE_NAME_FOR_LOG);
     }
 
     @Test
     public void makeLoggerWithFileName() {
-        assertNotNull(logger);
+        assertNotNull(fileLogger);
     }
 
     @Test
@@ -42,25 +42,26 @@ public class FileLoggerTests {
     }
 
     @Test
-    public void writeLogMessage() {
+    public void writeOneLogMessage() {
         String testMessage = "message";
 
-        logger.makeLog(testMessage);
+        fileLogger.makeLog(testMessage);
 
-        String message = logger.getLog().get(0);
+        String messageFromFile = fileLogger.getLog().get(0);
         messagePattern = Pattern.compile(".*" + testMessage + "$");
-        messageMatcher = messagePattern.matcher(message);
+        messageMatcher = messagePattern.matcher(messageFromFile);
         assertTrue(messageMatcher.matches());
     }
 
     @Test
-    public void writeSeveralLogMessage() {
-        String[] messages = {"message 1", "message 2"};
+    public void writeSeveralLogMessages() {
+        String[] messages = {"message 1", "message 2", "message 3"};
 
-        logger.makeLog(messages[0]);
-        logger.makeLog(messages[1]);
+        fileLogger.makeLog(messages[0]);
+        fileLogger.makeLog(messages[1]);
+        fileLogger.makeLog(messages[2]);
 
-        List<String> actualMessages = logger.getLog();
+        List<String> actualMessages = fileLogger.getLog();
         for (int i = 0; i < actualMessages.size(); i++) {
             messagePattern = Pattern.compile(".*" + messages[i] + "$");
             messageMatcher = messagePattern.matcher(actualMessages.get(i));
@@ -72,9 +73,9 @@ public class FileLoggerTests {
     public void checkLogContainDateAndTime() {
         String messageForTest = "message";
 
-        logger.makeLog(messageForTest);
+        fileLogger.makeLog(messageForTest);
 
-        String message = logger.getLog().get(0);
+        String message = fileLogger.getLog().get(0);
         messagePattern = Pattern.compile("^\\[\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\] > .*");
         messageMatcher = messagePattern.matcher(message);
         assertTrue(messageMatcher.matches());

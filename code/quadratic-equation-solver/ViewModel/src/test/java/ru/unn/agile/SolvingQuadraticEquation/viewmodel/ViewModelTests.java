@@ -174,7 +174,7 @@ public class ViewModelTests {
         viewModel.solve();
         String message = viewModel.getLog().get(0);
 
-        assertTrue(message.matches(".*" + LogMessages.SOLVE_WAS_PRESSED + ".*"));
+        assertTrue(message.matches(".*" + LogsMessages.SOLVE_WAS_PRESSED + ".*"));
     }
 
     @Test
@@ -183,7 +183,7 @@ public class ViewModelTests {
 
         viewModel.solve();
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + "Calculate. Arguments: a = 0; b = 2; c = 1."));
+        assertTrue(message.matches(".*" + "Solved. Arguments: a = 0; b = 2; c = 1."));
     }
 
     @Test
@@ -201,7 +201,7 @@ public class ViewModelTests {
         fillFields("a");
         viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
         String message = viewModel.getLog().get(1);
-        assertTrue(message.matches(".*" + LogMessages.INCORRECT_INPUT));
+        assertTrue(message.matches(".*" + LogsMessages.INCORRECT_INPUT));
     }
 
     @Test
@@ -218,7 +218,7 @@ public class ViewModelTests {
         viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
 
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + LogMessages.INPUT_IN_FIELD_FINISHED
+        assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
                 + "Input arguments are: \\[0; 2; 1\\]"));
     }
 
@@ -231,13 +231,13 @@ public class ViewModelTests {
         fillFields("0", "2", "1");
         viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + LogMessages.INPUT_IN_FIELD_FINISHED
+        assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
                 + "Input arguments are: \\[0; ; \\]"));
         message = viewModel.getLog().get(1);
-        assertTrue(message.matches(".*" + LogMessages.INPUT_IN_FIELD_FINISHED
+        assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
                 + "Input arguments are: \\[0; 2; \\]"));
         message = viewModel.getLog().get(2);
-        assertTrue(message.matches(".*" + LogMessages.INPUT_IN_FIELD_FINISHED
+        assertTrue(message.matches(".*" + LogsMessages.INPUT_IN_FIELD_FINISHED
                 + "Input arguments are: \\[0; 2; 1\\]"));
     }
 }
