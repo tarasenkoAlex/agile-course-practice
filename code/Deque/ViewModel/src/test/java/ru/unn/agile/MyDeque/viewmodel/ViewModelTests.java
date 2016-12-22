@@ -274,6 +274,19 @@ public class ViewModelTests {
         assertTrue(viewmodel.getLog().isEmpty());
     }
 
+    @Test
+    public void newValueNotEqualOldValue() {
+        viewmodel.setValue("777");
+        String message = viewmodel.getLog().get(viewmodel.getLog().size() - 1);
+        assertTrue(message.matches(".*" + EDITING_FINISHED + "oldValue = .*"));
+    }
+
+    @Test
+    public void setIncorrectOperation() {
+        viewmodel.setValue("");
+        assertTrue(viewmodel.getLog().isEmpty());
+    }
+
     private void setInputData() {
         viewmodel.setValue("4");
         viewmodel.setOperation(PUSH_HEAD);

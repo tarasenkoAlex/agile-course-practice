@@ -58,15 +58,8 @@ public class ViewModel {
         if (value.equals(this.value)) {
             return;
         }
-        valueChanged(this.value, value);
+        logger.log(LogMess.EDITING_FINISHED + "oldValue = " + this.value + " newValue = " + value);
         this.value = value;
-    }
-
-    public void valueChanged(final String oldValue, final String newValue) {
-        if (oldValue.equals(newValue)) {
-            return;
-        }
-        logger.log(LogMess.EDITING_FINISHED + "oldValue = " + oldValue + " newValue = " + newValue);
     }
 
     public void textFieldKey(final int codeKey) {
