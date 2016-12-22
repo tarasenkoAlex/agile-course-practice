@@ -15,11 +15,11 @@ import static unn.agile.SolvingQuadraticEquation.infrastructure.RegexMatcher.mat
 
 public class TxtLoggerTests {
     private static final String FILE_NAME_FOR_LOG = "./TxtLogger_Tests-lab3.makeLog";
-    private TxtLogger logger;
+    private FileLogger logger;
 
     @Before
     public void setUp() {
-        logger = new TxtLogger(FILE_NAME_FOR_LOG);
+        logger = new FileLogger(FILE_NAME_FOR_LOG);
     }
 
     @Test

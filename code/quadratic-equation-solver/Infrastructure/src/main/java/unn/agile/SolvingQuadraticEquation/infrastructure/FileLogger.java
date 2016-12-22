@@ -12,18 +12,18 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class TxtLogger implements ILogger {
-    private static final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
+public class FileLogger implements ILogger {
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private final BufferedWriter fileWriter;
     private final String fileName;
 
-    private static String now() {
+    private static String nowTime() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT_NOW, Locale.ENGLISH);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
         return simpleDateFormat.format(calendar.getTime());
     }
 
-    public TxtLogger(final String fileName) {
+    public FileLogger(final String fileName) {
         this.fileName = fileName;
 
         BufferedWriter logWriter = null;
@@ -38,7 +38,7 @@ public class TxtLogger implements ILogger {
     @Override
     public void makeLog(final String s) {
         try {
-            fileWriter.write(now() + " > " + s);
+            fileWriter.write(nowTime() + " > " + s);
             fileWriter.newLine();
             fileWriter.flush();
         } catch (Exception e) {

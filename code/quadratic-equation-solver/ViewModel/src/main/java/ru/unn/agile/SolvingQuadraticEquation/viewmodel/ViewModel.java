@@ -171,6 +171,13 @@ public class ViewModel {
                 logger.makeLog(message.toString());
                 logUpdate();
 
+                if (statusProperty.get().equals(Status.BAD_FORMAT.toString())) {
+                    message = new StringBuilder("Error: ");
+                    message.append(LogMessages.INCORRECT_INPUT);
+                    logger.makeLog(message.toString());
+                    logUpdate();
+                }
+
                 listener.cache();
                 break;
             }
@@ -230,6 +237,6 @@ enum Status {
 final class LogMessages {
     public static final String SOLVE_WAS_PRESSED = "Calculate. ";
     public static final String INPUT_IN_FIELD_FINISHED = "Updated input. ";
-
+    public static final String INCORRECT_INPUT = "Entered coefficients are incorrect! ";
     private LogMessages() { }
 }

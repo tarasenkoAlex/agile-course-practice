@@ -197,6 +197,14 @@ public class ViewModelTests {
     }
 
     @Test
+    public void checkErrorMessage() {
+        fillFields("a");
+        viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
+        String message = viewModel.getLog().get(1);
+        assertTrue(message.matches(".*" + LogMessages.INCORRECT_INPUT));
+    }
+
+    @Test
     public void solveIsNotCalledWhenButtonIsDisabled() {
         viewModel.solve();
 
