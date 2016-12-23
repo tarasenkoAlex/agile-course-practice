@@ -82,7 +82,7 @@ public class ViewModel {
         result.set(Converter.convert(number.get(),
                 fromNotation.get().name(), toNotation.get().name()));
         status.set(Status.SUCCESS.toString());
-        StringBuilder message = new StringBuilder(LogMessages.CALCULATE_WAS_PRESSED);
+        StringBuilder message = new StringBuilder("Calculate. ");
         message.append("Arguments")
                 .append(": Number = ").append(number.get())
                 .append("; From notaition = ").append(fromNotation.get().name())
@@ -175,7 +175,7 @@ public class ViewModel {
         if (oldValue.equals(newValue)) {
             return;
         }
-        StringBuilder message = new StringBuilder(LogMessages.FROM_NOTATION_WAS_CHANGED);
+        StringBuilder message = new StringBuilder("From notation was changed to ");
         message.append(newValue.toString());
         positionalNotationLogger.writeLog(message.toString());
         updatePositionalNotationLogs();
@@ -185,7 +185,7 @@ public class ViewModel {
         if (oldValue.equals(newValue)) {
             return;
         }
-        StringBuilder message = new StringBuilder(LogMessages.TO_NOTATION_WAS_CHANGED);
+        StringBuilder message = new StringBuilder("To notation was changed to ");
         message.append(newValue.toString());
         positionalNotationLogger.writeLog(message.toString());
         updatePositionalNotationLogs();
@@ -198,7 +198,7 @@ public class ViewModel {
 
         for (ValueCachingChangeListener listener : valueChangedListeners) {
             if (listener.isChanged()) {
-                StringBuilder messageLog = new StringBuilder(LogMessages.EDITING_FINISHED);
+                StringBuilder messageLog = new StringBuilder("Updated input. ");
                 messageLog.append("Input argument are: [")
                         .append(number.get()).append("]");
                 positionalNotationLogger.writeLog(messageLog.toString());
@@ -218,15 +218,6 @@ public class ViewModel {
         }
         logs.set(record);
     }
-
-    private class StatusChangeListener implements ChangeListener<String> {
-        @Override
-        public void changed(final ObservableValue<? extends String> observable,
-                            final String oldValue, final String newValue) {
-            status.set(getInputStatus().toString());
-        }
-    }
-
 }
 
 enum Status {
@@ -242,13 +233,4 @@ enum Status {
     public String toString() {
         return name;
     }
-}
-
-final class LogMessages {
-    public static final String CALCULATE_WAS_PRESSED = "Calculate. ";
-    public static final String FROM_NOTATION_WAS_CHANGED = "From notation was changed to ";
-    public static final String TO_NOTATION_WAS_CHANGED = "To notation was changed to ";
-    public static final String EDITING_FINISHED = "Updated input. ";
-
-    private LogMessages() { }
 }

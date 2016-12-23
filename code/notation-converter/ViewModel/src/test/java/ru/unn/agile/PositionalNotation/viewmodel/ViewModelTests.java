@@ -161,7 +161,7 @@ public class ViewModelTests {
         viewModel.toNotationProperty().setValue(Notation.OCTAL);
         viewModel.convert();
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + LogMessages.CALCULATE_WAS_PRESSED + ".*"));
+        assertTrue(message.matches(".*Calculate. .*"));
     }
 
     @Test
@@ -226,7 +226,7 @@ public class ViewModelTests {
         viewModel.fromNotationChanged(Notation.DECIMAL, Notation.BINARY);
 
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + LogMessages.FROM_NOTATION_WAS_CHANGED + "binary.*"));
+        assertTrue(message.matches(".*From notation was changed to binary.*"));
     }
 
     @Test
@@ -237,7 +237,7 @@ public class ViewModelTests {
         viewModel.toNotationChanged(Notation.BINARY, Notation.DECIMAL);
 
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + LogMessages.TO_NOTATION_WAS_CHANGED + "decimal.*"));
+        assertTrue(message.matches(".*To notation was changed to decimal.*"));
     }
 
     @Test
@@ -265,7 +265,7 @@ public class ViewModelTests {
         viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
 
         String message = viewModel.getLog().get(0);
-        assertTrue(message.matches(".*" + LogMessages.EDITING_FINISHED
+        assertTrue(message.matches(".*Updated input. "
                 + "Input argument are: \\["
                 + viewModel.numberProperty().get() + "\\]"));
     }
@@ -289,5 +289,12 @@ public class ViewModelTests {
 
     public void setExternalViewModel(final ViewModel viewModel) {
         this.viewModel = viewModel;
+    }
+
+    @Test
+    public void doLogSameParametersWithPartialInput() {
+        viewModel.numberProperty().setValue("11");
+        viewModel.onFocusChanged(Boolean.FALSE, Boolean.TRUE);
+        assertEquals(0, viewModel.getLog().size());
     }
 }
