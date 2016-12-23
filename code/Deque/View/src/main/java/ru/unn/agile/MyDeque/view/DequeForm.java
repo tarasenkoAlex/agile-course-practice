@@ -1,12 +1,12 @@
 package ru.unn.agile.MyDeque.view;
 
+import ru.unn.agile.MyDeque.infrastructure.TxtLogger;
 import ru.unn.agile.MyDeque.viewmodel.ViewModel;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 public final class DequeForm {
 
@@ -18,6 +18,8 @@ public final class DequeForm {
     private JComboBox<ViewModel.Operations> cbOperationChoice;
     private JLabel lbStatus;
     private JTextField txtResult;
+    private JLabel log;
+    private JList<String> jlstLog;
 
     private DequeForm(final ViewModel viewmodel) {
         this.viewmodel = viewmodel;
@@ -25,13 +27,10 @@ public final class DequeForm {
 
         getOperationsList();
 
-        acceptButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent actionEvent) {
-                bind();
-                viewmodel.accept();
-                backBind();
-            }
+        acceptButton.addActionListener(actionEvent -> {
+            bind();
+            viewmodel.accept();
+            backBind();
         });
 
         cbOperationChoice.addActionListener(actionEvent -> {
@@ -51,10 +50,18 @@ public final class DequeForm {
 
     public static void main(final String[] args) {
         JFrame frame = new JFrame("DequeForm");
-        frame.setContentPane(new DequeForm(new ViewModel()).mainPanel);
+        frame.setResizable(false);
+        TxtLogger logger = new TxtLogger("./TxtLogger-lab3.log");
+        frame.setContentPane(new DequeForm(new ViewModel(logger)).mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    private void getLog() {
+        List<String> log = viewmodel.getLog();
+        String[] str = log.toArray(new String[log.size()]);
+        jlstLog.setListData(str);
     }
 
     private void bind() {
@@ -72,6 +79,7 @@ public final class DequeForm {
 
         txtResult.setText(viewmodel.getResult());
         lbStatus.setText(viewmodel.getStatus());
-    }
 
+        getLog();
+    }
 }

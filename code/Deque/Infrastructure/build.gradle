@@ -1,6 +1,6 @@
 dependencies {
     compile project(':Yevtushin-Valery-ViewModel')
-	compile project(':Deque-Infrastructure')
+    testCompile project(':Yevtushin-Valery-ViewModel').sourceSets.test.output
 }
 
 sourceSets {

@@ -4,6 +4,10 @@ import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.util.List;
+
+import static ru.unn.agile.MyDeque.viewmodel.ViewModel.LogMess.*;
 import static ru.unn.agile.MyDeque.viewmodel.ViewModel.Status.*;
 import static ru.unn.agile.MyDeque.viewmodel.ViewModel.Operations.*;
 
@@ -13,9 +17,13 @@ public class ViewModelTests {
 
     private ViewModel viewmodel;
 
+    public void setExternalViewModel(final ViewModel viewModel) {
+        this.viewmodel = viewModel;
+    }
+
     @Before
     public void setUp() {
-        viewmodel = new ViewModel();
+        viewmodel = new ViewModel(new FakeLogger());
     }
 
     @After
@@ -171,4 +179,123 @@ public class ViewModelTests {
         assertEquals("7", viewmodel.getResult());
     }
 
+    @Test
+    public void viewModelConstructorThrowsExceptionWithNullLogger() {
+        try {
+            new ViewModel(null);
+            fail("Exception is not thrown");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("Logger parameter can not be null", ex.getMessage());
+        } catch (Exception ex) {
+            fail("Invalid exception type");
+        }
+    }
+
+    @Test
+    public void logIsEmptyInTheBeginning() {
+        List<String> logList = viewmodel.getLog();
+
+        assertTrue(logList.isEmpty());
+    }
+
+    @Test
+    public void logContainsProperMessageAfterAction() {
+        setInputData();
+        viewmodel.accept();
+        String message = viewmodel.getLog().get(1);
+
+        assertTrue(message.matches(".*" + ViewModel.LogMess.ACTION_WAS_STARTED + ".*"));
+    }
+
+    @Test
+    public void logContainsInputArgumentsAfterAction() {
+        setInputData();
+
+        viewmodel.accept();
+
+        String message = viewmodel.getLog().get(1);
+        assertTrue(message.matches(".*" + viewmodel.getValue() + ".*"));
+    }
+
+    @Test
+    public void argumentsInfoIssProperlyFormatted() {
+        setInputData();
+
+        viewmodel.accept();
+
+        String message = viewmodel.getLog().get(1);
+        assertTrue(message.matches(".*; Value = " + viewmodel.getValue() + ".*"));
+    }
+
+    @Test
+    public void operationTypeIsMentionedInTheLog() {
+        setInputData();
+
+        viewmodel.accept();
+
+        String message = viewmodel.getLog().get(1);
+        assertTrue(message.matches(".*Push head.*"));
+    }
+
+    @Test
+    public void canPutSeveralLogMessages() {
+        setInputData();
+
+        viewmodel.accept();
+        viewmodel.accept();
+        viewmodel.accept();
+
+        assertEquals(4, viewmodel.getLog().size());
+    }
+
+    @Test
+    public void canSeeOperationChangeInLog() throws IOException {
+        setInputData();
+
+        viewmodel.onOperationChanged(PUSH_HEAD, PUSH_TAIL);
+
+        String message = viewmodel.getLog().get(1);
+        assertTrue(message.matches(".*" + OPERATION_WAS_CHANGED + "Push tail.*"));
+    }
+
+    @Test
+    public void operationIsNotLoggedIfNotChanged() throws IOException {
+        viewmodel.onOperationChanged(PUSH_HEAD, PUSH_TAIL);
+
+        viewmodel.onOperationChanged(PUSH_TAIL, PUSH_TAIL);
+
+        assertEquals(1, viewmodel.getLog().size());
+    }
+
+    @Test
+    public void actIsNotCalledWhenButtonIsDisabled() {
+        viewmodel.accept();
+
+        assertTrue(viewmodel.getLog().isEmpty());
+    }
+
+    @Test
+    public void newValueNotEqualOldValue() {
+        viewmodel.setValue("777");
+        String message = viewmodel.getLog().get(viewmodel.getLog().size() - 1);
+        assertTrue(message.matches(".*" + EDITING_FINISHED + "oldValue = .*"));
+    }
+
+    @Test
+    public void setIncorrectOperation() {
+        viewmodel.setValue("");
+        assertTrue(viewmodel.getLog().isEmpty());
+    }
+
+    @Test
+    public void enterPressedTest() {
+        viewmodel.setValue("11");
+        viewmodel.textFieldKey(KeyboardsKeys.ENTER);
+        assertEquals(SUCCESS, viewmodel.getStatus());
+    }
+
+    private void setInputData() {
+        viewmodel.setValue("4");
+        viewmodel.setOperation(PUSH_HEAD);
+    }
 }
