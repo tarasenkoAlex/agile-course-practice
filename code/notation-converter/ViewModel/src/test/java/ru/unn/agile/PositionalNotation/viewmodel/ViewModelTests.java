@@ -29,6 +29,7 @@ public class ViewModelTests {
 
     @Test
     public void canCreateViewModelWithoutLogger() {
+        viewModel = new ViewModel();
         assertNotNull(viewModel);
     }
 
@@ -305,6 +306,6 @@ public class ViewModelTests {
         viewModel.fromNotationProperty().setValue(Notation.BINARY);
         viewModel.toNotationProperty().setValue(Notation.DECIMAL);
         viewModel.convert();
-        assertEquals(2, viewModel.getLog().size());
+        assertNotNull(viewModel.logsProperty().getValue());
     }
 }
