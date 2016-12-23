@@ -6,6 +6,8 @@ import org.junit.After;
 import ru.unn.agile.vector3d.model.Vector3D;
 import ru.unn.agile.vector3d.viewmodel.ViewModel.OperationTab;
 
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 public class ViewModelTest {
@@ -13,9 +15,14 @@ public class ViewModelTest {
     private final String validVectorString = "-5.6, 8, +0.003";
     private final String invalidVectorString = "-5.6, 8, 5dcfd";
 
+    public void setViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        TestLoggerImpl logger = new TestLoggerImpl();
+        viewModel = new ViewModel(logger);
     }
 
     @After
@@ -508,5 +515,131 @@ public class ViewModelTest {
     @Test
     public void canAccessButtonDisabledProperty() {
         assertNotNull(viewModel.buttonDisabledProperty());
+    }
+
+    @Test
+    public void testCreateWithFakeLogger() {
+        try {
+            ViewModel vm = new ViewModel();
+        } catch (Exception e) {
+            fail("Exception on empty ViewModel creration");
+        }
+    }
+
+    @Test
+    public void testNullIteratorWithFakeLogger() {
+        ViewModel vm = new ViewModel();
+        assertNull(vm.getLogger().iterator());
+    }
+
+    @Test
+    public void testSetLogger() {
+        ViewModel vm = new ViewModel();
+        TestLoggerImpl logger = new TestLoggerImpl();
+        vm.setLogger(logger);
+        assertEquals(logger, vm.getLogger());
+    }
+
+    @Test
+    public void testCreateViewModelWithLogger() {
+        TestLoggerImpl logger = new TestLoggerImpl();
+        ViewModel vm = new ViewModel(logger);
+
+        assertNotNull(vm);
+    }
+
+    @Test
+    public void testCreateViewModelWithNullLogger() {
+        try {
+            ViewModel vm = new ViewModel(null);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Logger can't be null", e.getMessage());
+        } catch (Exception ex) {
+            fail("Invalid exception type");
+        }
+    }
+
+    @Test
+    public void testLoggerAfterInit() {
+        findRequiredText(viewModel.getLogger(), ViewModel.LogMessages.INIT_END);
+    }
+
+    @Test
+    public void testLoggerAfterNormCalculate() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setActiveTab(OperationTab.NORM);
+        viewModel.calculate();
+        findRequiredText(viewModel.getLogger(), ViewModel.LogMessages.NORM_CALCULATE);
+    }
+
+    @Test
+    public void testLoggerAfterNormalizationCalculate() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setActiveTab(OperationTab.NORMALIZATION);
+        viewModel.calculate();
+        findRequiredText(viewModel.getLogger(), ViewModel.LogMessages.NORMALIZE_CALCULATE);
+    }
+
+    @Test
+    public void testLoggerAfterDotProductCalculate() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setDotProductOperandText(validVectorString);
+        viewModel.setActiveTab(OperationTab.DOTPRODUCT);
+        viewModel.calculate();
+        findRequiredText(viewModel.getLogger(), ViewModel.LogMessages.DOT_CALCULATE);
+    }
+
+    @Test
+    public void testLoggerAfterCrossProductCalculate() {
+        viewModel.setVectorText(validVectorString);
+        viewModel.setCrossProductOperandText(validVectorString);
+        viewModel.setActiveTab(OperationTab.CROSSPRODUCT);
+        viewModel.calculate();
+        findRequiredText(viewModel.getLogger(), ViewModel.LogMessages.CROSS_CALCULATE);
+    }
+
+    @Test
+    public void testGetLogItems() {
+        assertFalse(viewModel.logsItems().isEmpty());
+    }
+
+    @Test
+    public void testOperationTabFromIndex() {
+        assertNull(OperationTab.fromIndex(-1));
+    }
+
+    @Test
+    public void testLogMessagesConstructor() {
+        ViewModel.LogMessages lm = new ViewModel.LogMessages();
+        assertNotNull(lm);
+    }
+
+    @Test
+    public void testRemoveLogListener() {
+        AbstractLogger.LoggerListener listener = new AbstractLogger.LoggerListener() {
+            @Override
+            public void onLogAdded(final String message) {
+                // do nothing
+            }
+        };
+
+        viewModel.getLogger().addListener(listener);
+        int count = viewModel.getLogger().getListeners().size();
+        viewModel.getLogger().removeListener(listener);
+        assertEquals(count - 1, viewModel.getLogger().getListeners().size());
+    }
+
+    protected void findRequiredText(final AbstractLogger logger, final String requiredText) {
+        boolean textFound = false;
+
+        Iterator<String> it = logger.iterator();
+        while (it.hasNext()) {
+            if (requiredText.equals(it.next())) {
+                textFound = true;
+                break;
+            }
+        }
+
+        assertTrue(textFound);
     }
 }

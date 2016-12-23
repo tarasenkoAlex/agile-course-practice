@@ -1,11 +1,13 @@
 package ru.unn.agile.vector3d.view;
 
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import ru.unn.agile.vector3d.infrastructure.FileLogger;
 import ru.unn.agile.vector3d.viewmodel.ViewModel;
 
 public class Controller {
@@ -21,16 +23,19 @@ public class Controller {
     private TextField crossProductOperandTextField;
     @FXML
     private Button calculateButton;
+    @FXML
+    private ListView<String> logsList;
 
     @FXML
     void initialize() {
+        viewModel.setLogger(new FileLogger("./vector3d.log"));
         calculateButton.setOnAction(
-            new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(final ActionEvent event) {
-                    viewModel.calculate();
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(final ActionEvent event) {
+                        viewModel.calculate();
+                    }
                 }
-            }
         );
 
         viewModel.activeTabIndexProperty()
@@ -45,5 +50,6 @@ public class Controller {
             .bindBidirectional(viewModel.dotProductOperandTextProperty());
         crossProductOperandTextField.textProperty()
             .bindBidirectional(viewModel.crossProductOperandTextProperty());
+        logsList.setItems(viewModel.logsItems());
     }
 }
