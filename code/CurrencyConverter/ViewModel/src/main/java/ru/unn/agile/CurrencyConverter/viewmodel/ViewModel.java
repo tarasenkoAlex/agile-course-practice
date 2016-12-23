@@ -35,7 +35,7 @@ public class ViewModel {
 
     public final void setLogger(final ILogger logger) {
         if (logger == null) {
-            throw new IllegalArgumentException("Logger parameter can't be null");
+            throw new IllegalArgumentException("Logger can't be null");
         }
         this.logger = logger;
     }
@@ -83,7 +83,7 @@ public class ViewModel {
         if (oldValue.equals(newValue)) {
             return;
         }
-        logger.logIt("Value changed to " + amount.get());
+        logger.logNewMessage("Value changed to " + amount.get());
         updateLogs();
     }
 
@@ -92,7 +92,7 @@ public class ViewModel {
         if (oldValue.equals(newValue)) {
             return;
         }
-        logger.logIt("FromCurrency changed to " + fromCurrency.get().toString());
+        logger.logNewMessage("FromCurrency changed to " + fromCurrency.get().toString());
         updateLogs();
     }
 
@@ -101,7 +101,7 @@ public class ViewModel {
         if (oldValue.equals(newValue)) {
             return;
         }
-        logger.logIt("ToCurrency changed to " + toCurrency.get().toString());
+        logger.logNewMessage("ToCurrency changed to " + toCurrency.get().toString());
         updateLogs();
     }
 
@@ -170,7 +170,7 @@ public class ViewModel {
         String result = String.valueOf(converter.execute(amountValue, fromCurr, toCurr));
         resultingValue.set(result);
         message.set(MessageStatus.SUCCESS.getValue());
-        logger.logIt("Converted " + amount.get() + " "
+        logger.logNewMessage("Converted " + amount.get() + " "
                 + fromCurrency.get().toString() + " to "
                 + resultingValue.get() + " " + toCurrency.get().toString());
         updateLogs();

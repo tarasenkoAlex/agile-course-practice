@@ -28,8 +28,8 @@ public class TxtLogger implements ILogger {
     }
 
     @Override
-    public void logIt(final String s) throws IOException {
-        writer.write(now() + " > " + s);
+    public void logNewMessage(final String s) throws IOException {
+        writer.write(now() + " >> " + s);
         writer.newLine();
         writer.flush();
     }
@@ -37,13 +37,13 @@ public class TxtLogger implements ILogger {
     @Override
     public List<String> getLog() throws IOException {
         BufferedReader reader;
-        ArrayList<String> log = new ArrayList<>();
+        ArrayList<String> txtlog = new ArrayList<>();
         reader = new BufferedReader(new FileReader(filename));
         String line = reader.readLine();
         while (line != null) {
-            log.add(line);
+            txtlog.add(line);
             line = reader.readLine();
         }
-        return log;
+        return txtlog;
     }
 }

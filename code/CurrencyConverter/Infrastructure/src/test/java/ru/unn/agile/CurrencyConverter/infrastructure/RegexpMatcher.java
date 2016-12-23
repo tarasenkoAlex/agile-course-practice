@@ -12,12 +12,12 @@ public class RegexpMatcher extends BaseMatcher {
     }
 
     public boolean matches(final Object obj) {
-        return ((String) item).matches(regexp);
+        return ((String) obj).matches(regexp);
     }
 
     public void describeTo(final Description description) {
         description.appendText("matches regex = ");
-        description.appendText(regex);
+        description.appendText(regexp);
     }
 
     public static Matcher<? super String> matchesPattern(final String regexp) {

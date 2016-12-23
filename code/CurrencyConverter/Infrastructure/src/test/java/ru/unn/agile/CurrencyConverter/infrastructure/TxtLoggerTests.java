@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
-import static ru.unn.agile.CurrencyConverter.infrastructure.RegexMatcher.matchesPattern;
+import static ru.unn.agile.CurrencyConverter.infrastructure.RegexpMatcher.matchesPattern;
 
 public class TxtLoggerTests {
     private TxtLogger txtLogger;
@@ -40,23 +40,23 @@ public class TxtLoggerTests {
     @Test
     public void checkMessage() throws IOException {
         String message = "Test message";
-        txtLogger.logIt(message);
+        txtLogger.logNewMessage(message);
         assertThat(txtLogger.getLog().get(0), matchesPattern(".*" + message + "$"));
     }
 
     @Test
     public void checkData() throws IOException {
         String message = "Test message";
-        txtLogger.logIt(message);
+        txtLogger.logNewMessage(message);
         assertThat(txtLogger.getLog().get(0),
-                matchesPattern("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
+                matchesPattern("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} >> .*"));
     }
 
     @Test
     public void checkSeveralMessages() throws IOException {
         String[] messages = {"Test message 1", "Test message 2"};
-        txtLogger.logIt(messages[0]);
-        txtLogger.logIt(messages[1]);
+        txtLogger.logNewMessage(messages[0]);
+        txtLogger.logNewMessage(messages[1]);
         List<String> actualMessages = txtLogger.getLog();
         for (int i = 0; i < actualMessages.size(); i++) {
             assertThat(actualMessages.get(i), matchesPattern(".* " + messages[i] + "$"));
