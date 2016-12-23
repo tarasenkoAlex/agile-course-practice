@@ -141,19 +141,20 @@ public class ViewModelTests {
     }
 
     @Test
-    public void logIsEmptyInTheBeginning() {
-        List<String> log = viewModel.getLog();
+    public void EmptyLogInTheBeginning() {
+        List<String> logList = viewModel.getLog();
 
-        assertTrue(log.isEmpty());
+        assertTrue(logList.isEmpty());
     }
 
     @Test
-    public void logContainsProperMessageAfterCalculation() {
+    public void logListContainsProperMessageAfterCalc() {
         setInputData();
-        viewModel.calculate();
-        String message = viewModel.getLog().get(0);
 
-        assertTrue(message.matches(".*" + LogMessages.CALCULATE_WAS_PRESSED + ".*"));
+        viewModel.calculate();
+        String logMessage = viewModel.getLog().get(0);
+
+        assertTrue(logMessage.matches(".*" + LogMessages.CALCULATE_WAS_PRESSED + ".*"));
     }
 
     @Test
