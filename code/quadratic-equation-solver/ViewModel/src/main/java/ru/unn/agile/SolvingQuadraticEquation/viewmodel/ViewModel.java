@@ -19,9 +19,40 @@ public class ViewModel {
     private final BooleanProperty solvingDisabled = new SimpleBooleanProperty();
     private final StringProperty resultProperty = new SimpleStringProperty();
     private final StringProperty statusProperty = new SimpleStringProperty();
+    private final StringProperty logs = new SimpleStringProperty();
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
+    private IQuadraticEquationSolverLogger logger;
 
     public ViewModel() {
+        init();
+    }
+
+    public final void setUpLogger(final IQuadraticEquationSolverLogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger parameter must be not null");
+        }
+        this.logger = logger;
+    }
+
+    public ViewModel(final IQuadraticEquationSolverLogger logger) {
+        setUpLogger(logger);
+        init();
+    }
+
+    private void logUpdate() {
+        List<String> fullLog = logger.getLog();
+        String record = new String();
+        for (String log : fullLog) {
+            record += log + "\n";
+        }
+        logs.set(record);
+    }
+
+    public final List<String> getLog() {
+        return logger.getLog();
+    }
+
+    private void init() {
         aProperty.set("");
         bProperty.set("");
         cProperty.set("");
@@ -50,6 +81,7 @@ public class ViewModel {
         }
     }
 
+
     public Property<String> aCoefProperty() {
         return aProperty;
     }
@@ -65,7 +97,12 @@ public class ViewModel {
     public final boolean getSolvingDisabled() {
         return solvingDisabled.get();
     }
-
+    public StringProperty logsProperty() {
+        return logs;
+    }
+    public final String getLogs() {
+        return logs.get();
+    }
     public StringProperty resultProperty() {
         return resultProperty;
     }
@@ -109,6 +146,43 @@ public class ViewModel {
                 .calc(aProperty.get(), bProperty.get(), cProperty.get());
         resultProperty.set(buildResultString(roots));
         statusProperty.set(Status.SUCCESS.toString());
+
+        StringBuilder messageToLog = new StringBuilder(LogsMessages.SOLVE_WAS_PRESSED);
+        messageToLog.append("Arguments")
+                .append(": a = ").append(aProperty.get())
+                .append("; b = ").append(bProperty.get())
+                .append("; c = ").append(cProperty.get()).append(".");
+        logger.makeLog(messageToLog.toString());
+        logUpdate();
+    }
+
+    public void onFocusFieldChanged(final Boolean prevValue, final Boolean nextValue) {
+        if (!prevValue && nextValue) {
+            return;
+        }
+
+        for (ValueChangeListener listener : valueChangedListeners) {
+            if (listener.isBeenChanged()) {
+                StringBuilder messageToLog =
+                        new StringBuilder(LogsMessages.INPUT_IN_FIELD_FINISHED);
+                messageToLog.append("Input coefficients are: [")
+                        .append(aProperty.get()).append("; ")
+                        .append(bProperty.get()).append("; ")
+                        .append(cProperty.get()).append("]");
+                logger.makeLog(messageToLog.toString());
+                logUpdate();
+
+                if (statusProperty.get().equals(Status.BAD_FORMAT.toString())) {
+                    messageToLog = new StringBuilder("Error: ");
+                    messageToLog.append(LogsMessages.INCORRECT_INPUT);
+                    logger.makeLog(messageToLog.toString());
+                    logUpdate();
+                }
+
+                listener.doCache();
+                break;
+            }
+        }
     }
 
     private String buildResultString(final double[] roots) {
@@ -126,11 +200,28 @@ public class ViewModel {
     }
 
     private class ValueChangeListener implements ChangeListener<String> {
+        private String previousValue = new String();
+        private String currentValue = new String();
         @Override
         public void changed(final ObservableValue<? extends String> observable,
-                            final String oldValue, final String newValue) {
+                            final String prevValue, final String nextValue) {
+            if (prevValue.equals(nextValue)) {
+                return;
+            }
             statusProperty.set(getInputStatus().toString());
+            currentValue = nextValue;
         }
+        public boolean isBeenChanged() {
+            return !previousValue.equals(currentValue);
+        }
+        public void doCache() {
+            previousValue = currentValue;
+        }
+    }
+    public static final class LogsMessages {
+        public static final String SOLVE_WAS_PRESSED = "Solved. ";
+        public static final String INPUT_IN_FIELD_FINISHED = "Updated input. ";
+        public static final String INCORRECT_INPUT = "Entered coefficients are incorrect! ";
     }
 }
 

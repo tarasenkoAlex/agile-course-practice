@@ -4,13 +4,17 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.Before;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class ViewModelTests {
 
     private ViewModel viewModel;
+
+    public void setExteriorlViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
 
     private void fillFields(final String a, final String b, final String c) {
         viewModel.aCoefProperty().setValue(a);
@@ -32,7 +36,8 @@ public class ViewModelTests {
 
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        FakeQuadraticEquationSolverLogger logger = new FakeQuadraticEquationSolverLogger();
+        viewModel = new ViewModel(logger);
     }
 
     @After
@@ -77,6 +82,7 @@ public class ViewModelTests {
         fillFields("bad input");
 
         assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.BAD_FORMAT.toString(), viewModel.getStatus().toString());
     }
 
     @Test
@@ -96,6 +102,7 @@ public class ViewModelTests {
         fillFields("not a number");
 
         assertTrue(viewModel.solvingDisabledProperty().get());
+        assertTrue(viewModel.getSolvingDisabled());
     }
 
     @Test
@@ -146,5 +153,129 @@ public class ViewModelTests {
         viewModel.solve();
 
         assertEquals("No Solutions", viewModel.resultProperty().get());
+        assertEquals("No Solutions", viewModel.getResult().toString());
+    }
+
+    @Test
+    public void createLoggerOnViewModel() {
+        FakeQuadraticEquationSolverLogger logger = new FakeQuadraticEquationSolverLogger();
+        ViewModel viewModelLogged = new ViewModel(logger);
+
+        assertNotNull(viewModelLogged);
+    }
+
+    @Test
+    public void logIsEmptyOnStart() {
+        List<String> log = viewModel.getLog();
+
+        assertTrue(log.isEmpty());
+    }
+
+    @Test
+    public void logContainsMessageAfterSolve() {
+        fillFields("0", "0", "1");
+        viewModel.solve();
+        String message = viewModel.getLog().get(0);
+
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.SOLVE_WAS_PRESSED + ".*"));
+    }
+
+    @Test
+    public void checkLogMessageFormatWhenPressSolve() {
+        fillFields("0", "2", "1");
+
+        viewModel.solve();
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + "Solved. Arguments: a = 0; b = 2; c = 1."));
+    }
+
+    @Test
+    public void canPutSeveralLogMessages() {
+        fillFields("0", "2", "1");
+
+        viewModel.solve();
+        viewModel.solve();
+
+        assertEquals(2, viewModel.getLog().size());
+    }
+
+    @Test
+    public void checkErrorMessage() {
+        fillFields("a");
+        viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
+        String message = viewModel.getLog().get(1);
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.INCORRECT_INPUT));
+    }
+
+    @Test
+    public void solveIsNotCalledWhenButtonIsDisabled() {
+        viewModel.solve();
+
+        assertTrue(viewModel.getLog().isEmpty());
+        assertEquals("StringProperty [value: null]", viewModel.logsProperty().toString());
+    }
+
+    @Test
+    public void checkLogMessageFormatWhenInputArguments() {
+        fillFields("0", "2", "1");
+
+        viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
+
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.INPUT_IN_FIELD_FINISHED
+                + "Input coefficients are: \\[0; 2; 1\\]"));
+        message = viewModel.getLogs();
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.INPUT_IN_FIELD_FINISHED
+                + "Input coefficients are: \\[0; 2; 1\\]" + "\n"));
+    }
+
+    @Test
+    public void checkLogMessageFormatWhenManyActions() {
+        fillFields("0");
+        viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
+        fillFields("0", "2");
+        viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
+        fillFields("0", "2", "1");
+        viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.INPUT_IN_FIELD_FINISHED
+                + "Input coefficients are: \\[0; ; \\]"));
+        message = viewModel.getLog().get(1);
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.INPUT_IN_FIELD_FINISHED
+                + "Input coefficients are: \\[0; 2; \\]"));
+        message = viewModel.getLog().get(2);
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.INPUT_IN_FIELD_FINISHED
+                + "Input coefficients are: \\[0; 2; 1\\]"));
+    }
+
+    @Test
+    public void createViewModelWithNullLogger() {
+        try {
+            new ViewModel(null);
+        } catch (IllegalArgumentException ex) {
+            assertEquals("Logger parameter must be not null", ex.getMessage());
+        }
+    }
+
+    @Test
+    public void inputWithoutChangeField() {
+        fillFields("a");
+        viewModel.onFocusFieldChanged(Boolean.FALSE, Boolean.TRUE);
+        fillFields("a2");
+        assertEquals(0, viewModel.getLog().size());
+    }
+
+    @Test
+    public void createViewModelWihtoutLogger() {
+        ViewModel viewModel = new ViewModel();
+        assertEquals(Status.WAITING.toString(), viewModel.getStatus().toString());
+    }
+
+    @Test
+    public void repeatInputInFieldSameValue() {
+        fillFields("1");
+        viewModel.onFocusFieldChanged(Boolean.TRUE, Boolean.FALSE);
+        fillFields("1");
+        assertEquals(1, viewModel.getLog().size());
     }
 }
