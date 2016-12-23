@@ -137,13 +137,13 @@ public class ViewModelTests {
     }
 
     @Test
-    public void viewModelConstructorThrowsExceptionWithNullLogger() {
+    public void viewModelConstructorThrowsExceptionWithNullPositionalNotationLogger() {
         try {
             new ViewModel(null);
             fail("Exception wasn't thrown");
-        } catch (IllegalArgumentException ex) {
-            assertEquals("Logger parameter can't be null", ex.getMessage());
-        } catch (Exception ex) {
+        } catch (IllegalArgumentException exep) {
+            assertEquals("Logger parameter can't be null", exep.getMessage());
+        } catch (Exception exep) {
             fail("Invalid exception type");
         }
     }
