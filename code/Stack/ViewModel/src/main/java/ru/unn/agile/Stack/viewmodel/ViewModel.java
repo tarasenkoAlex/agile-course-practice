@@ -11,6 +11,8 @@ public class ViewModel {
 
     private final Stack stk;
 
+    private ILogger logger;
+
     public StringProperty txtinputProperty() {
         return txtinput;
     }
@@ -39,6 +41,13 @@ public class ViewModel {
         return txttop.get();
     }
 
+    public final void setLogger(final ILogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger parameter can't be null");
+        }
+        this.logger = logger;
+    }
+
     public ViewModel() {
         txtinput.set("");
         txtprint.set("");
@@ -49,7 +58,9 @@ public class ViewModel {
 
     public void push() {
         try {
-            stk.push(Integer.parseInt(txtinput.get()));
+            int number = Integer.parseInt(txtinput.get());
+            stk.push(number);
+            logger.log(LogMessages.PUSHED + String.valueOf(number));
         } catch (NumberFormatException e) {
             txtlog.set("Bad input!");
         }
