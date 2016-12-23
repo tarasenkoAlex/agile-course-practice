@@ -1,8 +1,6 @@
-apply from:   rootDir.getAbsolutePath() + '/code/config/scripts/javafx.plugin'
-
 dependencies {
     compile project(':color-converter-viewmodel')
-    compile project(':color-converter-Infrastructure')
+    testCompile project(':color-converter-viewmodel').sourceSets.test.output
 }
 
 sourceSets {
