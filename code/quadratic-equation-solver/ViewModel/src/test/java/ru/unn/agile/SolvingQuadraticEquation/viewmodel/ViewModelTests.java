@@ -212,6 +212,7 @@ public class ViewModelTests {
         viewModel.solve();
 
         assertTrue(viewModel.getLog().isEmpty());
+        assertEquals("StringProperty [value: null]", viewModel.logsProperty().toString());
     }
 
     @Test
@@ -223,6 +224,9 @@ public class ViewModelTests {
         String message = viewModel.getLog().get(0);
         assertTrue(message.matches(".*" + ViewModel.LogsMessages.INPUT_IN_FIELD_FINISHED
                 + "Input coefficients are: \\[0; 2; 1\\]"));
+        message = viewModel.getLogs();
+        assertTrue(message.matches(".*" + ViewModel.LogsMessages.INPUT_IN_FIELD_FINISHED
+                + "Input coefficients are: \\[0; 2; 1\\]" +"\n"));
     }
 
     @Test
