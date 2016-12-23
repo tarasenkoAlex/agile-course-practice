@@ -306,6 +306,7 @@ public class ViewModelTests {
         viewModel.fromNotationProperty().setValue(Notation.BINARY);
         viewModel.toNotationProperty().setValue(Notation.DECIMAL);
         viewModel.convert();
-        assertNotNull(viewModel.logsProperty().getValue());
+        String value = viewModel.logsProperty().getValue();
+        assertNotNull(value);
     }
 }
