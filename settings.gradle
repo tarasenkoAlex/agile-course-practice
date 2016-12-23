@@ -318,5 +318,6 @@ project(":code/TreeSort/ViewModel").name = "TreeSort-ViewModel"
 include "code/TreeSort/View"
 project(":code/TreeSort/View").name = "TreeSort-View"
 
-
+include "code/Polynomial/Infrastructure"
+project(":code/Polynomial/Infrastructure").name = "Polynomial-Infrastructure"
 

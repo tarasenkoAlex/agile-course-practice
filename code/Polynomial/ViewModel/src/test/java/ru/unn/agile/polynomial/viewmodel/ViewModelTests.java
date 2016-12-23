@@ -3,7 +3,12 @@ package ru.unn.agile.polynomial.viewmodel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
+
 import ru.unn.agile.polynomial.viewmodel.ViewModel.Operation;
+import ru.unn.agile.polynomial.viewmodel.ViewModel.Status;
+import ru.unn.agile.polynomial.viewmodel.ViewModel.LogMessages;
 
 import static org.junit.Assert.*;
 
@@ -13,9 +18,22 @@ public class ViewModelTests {
     private String correctSecondPolynomialOperandString = "x";
     private String correctSecondExponentOperandString = "3";
 
+    private String correctFirstPolynomialOperandRegex = "5.3\\*x\\^9 \\+ 0.5\\*x\\^3 \\+ 55\\*x";
+    private String correctSecondPolynomialOperandRegex = "x";
+
+    protected void setExternalViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    private void setInputData() {
+        viewModel.setFirstOperandString(correctFirstPolynomialOperandString);
+        viewModel.setSecondOperandString(correctSecondPolynomialOperandString);
+        viewModel.setOperation(Operation.ADD);
+    }
+
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        viewModel = new ViewModel(new FakeLogger());
     }
 
     @After
@@ -279,5 +297,111 @@ public class ViewModelTests {
     @Test
     public void canConvertOperationToString() {
         assertNotNull(viewModel.getOperation().toString());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void viewModelConstructorThrowsExceptionWithNullLogger() {
+        new ViewModel(null);
+    }
+
+    @Test
+    public void canGetAccessLogProperty() {
+        viewModel.setOperation(Operation.SUBTRACT);
+        String log = viewModel.logsProperty().get();
+        assertFalse(log.isEmpty());
+    }
+
+    @Test
+    public void logIsEmptyInTheBeginning() {
+        List<String> log = viewModel.getLog();
+        assertTrue(log.isEmpty());
+    }
+
+    @Test
+    public void logContainsProperMessageAfterCalculation() {
+        setInputData();
+        viewModel.calculate();
+        String message = viewModel.getLogs();
+        assertTrue(message.matches("(?s).*" + LogMessages.CALCULATE_WAS_PRESSED.toString() + ".*"));
+    }
+
+    @Test
+    public void logContainsInputArgumentsAfterCalculation() {
+        setInputData();
+
+        viewModel.calculate();
+
+        String message = viewModel.getLogs();
+        assertTrue(message.matches("(?s).*" + correctFirstPolynomialOperandRegex
+                + ".*" + correctSecondPolynomialOperandRegex + ".*"));
+    }
+
+    @Test
+    public void argumentsInfoIssProperlyFormatted() {
+        setInputData();
+
+        viewModel.calculate();
+
+        String message = viewModel.getLogs();
+        assertTrue(message.matches("(?s).*Arguments"
+                + ": First = " + correctFirstPolynomialOperandRegex
+                + "; Second = " + correctSecondPolynomialOperandRegex + ".*"));
+    }
+
+    @Test
+    public void operationTypeIsMentionedInTheLog() {
+        setInputData();
+
+        viewModel.calculate();
+
+        String message = viewModel.getLogs();
+        assertTrue(message.matches("(?s).*Add.*"));
+    }
+
+    @Test
+    public void canPutSeveralLogMessages() {
+        setInputData();
+
+        viewModel.calculate();
+        viewModel.calculate();
+        viewModel.calculate();
+
+        assertEquals(3, viewModel.getLog().size());
+    }
+
+    @Test
+    public void canSeeOperationChangeInLog() {
+        viewModel.setOperation(Operation.MULTIPLY);
+        String message = viewModel.getLogs();
+        assertTrue(message.matches("(?s).*" + LogMessages.OPERATION_WAS_CHANGED + "Multiply.*"));
+    }
+
+    @Test
+    public void operationIsNotLoggedIfNotChanged() {
+        viewModel.setOperation(Operation.MULTIPLY);
+        viewModel.setOperation(Operation.MULTIPLY);
+        assertEquals(1, viewModel.getLog().size());
+    }
+
+    @Test
+    public void argumentsAreCorrectlyLogged() {
+        setInputData();
+        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        String message = viewModel.getLogs();
+
+        assertTrue(message.matches("(?s).*" + LogMessages.EDITING_FINISHED.toString()
+                + "Input arguments are: \\["
+                + correctFirstPolynomialOperandRegex + "; "
+                + correctSecondPolynomialOperandRegex + "].*"));
+    }
+
+    @Test
+    public void doNotLogSameParametersTwiceWithPartialInput() {
+        viewModel.firstOperandStringProperty().set("x");
+        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        viewModel.firstOperandStringProperty().set("x");
+        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+
+        assertEquals(1, viewModel.getLog().size());
     }
 }

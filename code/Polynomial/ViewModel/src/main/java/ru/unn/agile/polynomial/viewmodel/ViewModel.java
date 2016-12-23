@@ -13,6 +13,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ru.unn.agile.polynomial.model.Polynomial;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ViewModel {
     private final StringProperty firstOperandString = new SimpleStringProperty();
     private final StringProperty secondOperandString = new SimpleStringProperty();
@@ -20,12 +23,12 @@ public class ViewModel {
     private final StringProperty statusString = new SimpleStringProperty();
     private final ObjectProperty<Operation> operation = new SimpleObjectProperty<>();
     private final ObjectProperty<ObservableList<Operation>> operations =
-        new SimpleObjectProperty<>(FXCollections.observableArrayList(Operation.values()));
+            new SimpleObjectProperty<>(FXCollections.observableArrayList(Operation.values()));
     private final BooleanProperty calculationDisabled = new SimpleBooleanProperty();
+    private final StringProperty logs = new SimpleStringProperty();
+    private List<ValueCachingChangeListener> valueChangedListeners;
 
-    private final ValueChangeListener firstOperandListener = new ValueChangeListener();
-    private final ValueChangeListener secondOperandListener = new ValueChangeListener();
-    private final OperationChangeListener operationChangeListener = new OperationChangeListener();
+    private ILogger logger;
 
     public ViewModel() {
         firstOperandString.set("");
@@ -34,10 +37,24 @@ public class ViewModel {
         statusString.set(Status.WAIT.toString());
         operation.set(Operation.ADD);
 
+        final List<StringProperty> vals = new ArrayList<StringProperty>() {
+            {
+                add(firstOperandString);
+                add(secondOperandString);
+            }
+        };
+        valueChangedListeners = new ArrayList<>();
+        for (StringProperty val : vals) {
+            final ValueCachingChangeListener listener = new ValueCachingChangeListener();
+            val.addListener(listener);
+            valueChangedListeners.add(listener);
+        }
+
         BooleanBinding cantCalculate = new BooleanBinding() {
             {
                 super.bind(firstOperandString, secondOperandString, operation);
             }
+
             @Override
             protected boolean computeValue() {
                 return getStatus() != Status.READY;
@@ -45,9 +62,21 @@ public class ViewModel {
         };
         calculationDisabled.bind(cantCalculate);
 
-        firstOperandString.addListener(firstOperandListener);
-        secondOperandString.addListener(secondOperandListener);
-        operation.addListener(operationChangeListener);
+        firstOperandString.addListener((observable, oldValue, newValue) ->
+                statusString.set(getStatus().toString()));
+        secondOperandString.addListener((observable, oldValue, newValue) ->
+                statusString.set(getStatus().toString()));
+        operation.addListener((observable, oldValue, newValue) -> {
+            statusString.set(getStatus().toString());
+
+            logger.log(LogMessages.OPERATION_WAS_CHANGED.toString() + newValue.toString());
+            updateLogs();
+        });
+    }
+
+    public ViewModel(final ILogger logger) {
+        this();
+        setLogger(logger);
     }
 
     public StringProperty firstOperandStringProperty() {
@@ -80,6 +109,34 @@ public class ViewModel {
 
     public BooleanProperty calculationDisabledProperty() {
         return calculationDisabled;
+    }
+
+    public StringProperty logsProperty() {
+        return logs;
+    }
+
+    public final String getLogs() {
+        return logs.get();
+    }
+
+    public final void setLogger(final ILogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger parameter can't be null");
+        }
+        this.logger = logger;
+    }
+
+    public final List<String> getLog() {
+        return logger.getLog();
+    }
+
+    private void updateLogs() {
+        List<String> fullLog = logger.getLog();
+        String record = "";
+        for (String log : fullLog) {
+            record += log + "\n";
+        }
+        logs.set(record);
     }
 
     public void setFirstOperandString(final String firstOperandString) {
@@ -149,22 +206,34 @@ public class ViewModel {
     public void calculate() {
         Polynomial firstOperand = Polynomial.fromString(firstOperandString.get());
         resultString.set(operation.get().apply(firstOperand, getSecondOperand()).toString());
+
+        String message = LogMessages.CALCULATE_WAS_PRESSED.toString()
+                + "Arguments"
+                + ": First = " + firstOperandString.get()
+                + "; Second = " + secondOperandString.get()
+                + " Operation: " + operation.get().toString()
+                + ".";
+        logger.log(message);
+        updateLogs();
     }
 
-    private class ValueChangeListener implements ChangeListener<String> {
-        @Override
-        public void changed(final ObservableValue<? extends String> observable,
-                            final String oldValue, final String newValue) {
-            statusString.set(getStatus().toString());
-        }
-    }
+    public void onFocusChanged(final Boolean oldValue, final Boolean newValue) {
+        if (oldValue && !newValue) {
+            for (ValueCachingChangeListener listener : valueChangedListeners) {
+                if (listener.isChanged()) {
+                    String message = LogMessages.EDITING_FINISHED.toString()
+                            + "Input arguments are: ["
+                            + firstOperandString.get() + "; "
+                            + secondOperandString.get() + "]";
+                    logger.log(message);
+                    updateLogs();
 
-    private class OperationChangeListener implements ChangeListener<Operation> {
-        @Override
-        public void changed(final ObservableValue<? extends Operation> observable,
-                            final Operation oldValue, final Operation newValue) {
-            statusString.set(getStatus().toString());
+                    listener.cache();
+                    break;
+                }
+            }
         }
+
     }
 
     public enum Operation {
@@ -207,21 +276,62 @@ public class ViewModel {
             return name;
         }
     }
-}
 
-enum Status {
-    WAIT("Please input operands"),
-    BAD("Incorrect input"),
-    READY("Can calculate");
+    private class ValueCachingChangeListener implements ChangeListener<String> {
+        private String prevValue = "";
+        private String curValue = "";
 
-    private final String name;
+        @Override
+        public void changed(final ObservableValue<? extends String> observable,
+                            final String oldValue, final String newValue) {
+            if (!oldValue.equals(newValue)) {
+                statusString.set(getStatus().toString());
+                curValue = newValue;
+            }
+        }
 
-    Status(final String name) {
-        this.name = name;
+        public boolean isChanged() {
+            return !prevValue.equals(curValue);
+        }
+
+        public void cache() {
+            prevValue = curValue;
+        }
     }
 
-    @Override
-    public String toString() {
-        return name;
+    public enum Status {
+        WAIT("Please input operands"),
+        BAD("Incorrect input"),
+        READY("Can calculate");
+
+        private final String name;
+
+        Status(final String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    public enum LogMessages {
+        CALCULATE_WAS_PRESSED("Calculate. "),
+        OPERATION_WAS_CHANGED("Operation was changed to "),
+        EDITING_FINISHED("Updated input. ");
+
+        private final String name;
+
+        LogMessages(final String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 }
+
+
