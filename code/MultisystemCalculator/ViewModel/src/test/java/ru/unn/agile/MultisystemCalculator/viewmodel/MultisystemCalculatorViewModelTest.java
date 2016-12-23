@@ -5,18 +5,22 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.unn.agile.MultisystemCalculator.Model.Format;
 
-import static org.junit.Assert.assertEquals;
+import java.io.IOException;
+import java.util.List;
 
+import static org.junit.Assert.*;
+import static ru.unn.agile.MultisystemCalculator.viewmodel.CalculatorViewModel.LogMessages.*;
 
-/**
- * Created by Дарья on 01.12.2016.
- */
 public class MultisystemCalculatorViewModelTest {
     private CalculatorViewModel viewModel;
 
     @Before
-    public void setUp() {
-        viewModel = new CalculatorViewModel();
+    public void setUp() throws IOException {
+        viewModel = new CalculatorViewModel(new FakeLogger());
+    }
+
+    public void setExternalViewModel(final CalculatorViewModel viewModel) {
+        this.viewModel = viewModel;
     }
 
     @After
@@ -29,7 +33,12 @@ public class MultisystemCalculatorViewModelTest {
         assertEquals("", viewModel.firstArgProperty().get());
         assertEquals("", viewModel.secondArgProperty().get());
         assertEquals(Operation.ADDITION, viewModel.selectedOperationProperty().get());
-        assertEquals("", viewModel.resultProperty().get());
+        assertEquals("Please provide input data", viewModel.resultProperty().get());
+    }
+
+    @Test
+    public void canCreateObjectWithDefaultConstructor() {
+        assertNotNull(new CalculatorViewModel());
     }
 
     @Test
@@ -118,6 +127,137 @@ public class MultisystemCalculatorViewModelTest {
         viewModel.calculate();
 
         assertEquals("0o-20", viewModel.resultProperty().get());
+    }
+
+    @Test
+    public void viewModelConstructorThrowsExceptionWithNullLogger() {
+        try {
+            new CalculatorViewModel(null);
+            fail("Exception wasn't thrown");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("Logger parameter can't be null", ex.getMessage());
+        } catch (Exception ex) {
+            fail("Invalid exception type");
+        }
+    }
+
+    @Test
+    public void logIsEmptyInTheBeginning() throws IOException {
+        List<String> log = viewModel.getLog();
+
+        assertTrue(log.isEmpty());
+    }
+
+    @Test
+    public void logContainsProperMessageAfterCalculation() throws IOException {
+        setInputData();
+        viewModel.calculate();
+        String message = viewModel.getLog().get(0);
+
+        assertTrue(message.matches(".*" + CALCULATE_WAS_PRESSED + ".*"));
+    }
+
+    @Test
+    public void logContainsInputArgumentsAfterCalculation() throws IOException {
+        setInputData();
+
+        viewModel.calculate();
+
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + ".*" + viewModel.firstArgProperty().get()
+                + ".*" + viewModel.secondArgProperty().get() + ".*"));
+    }
+
+    @Test
+    public void argumentsInfoIssProperlyFormatted() throws IOException {
+        setInputData();
+
+        viewModel.calculate();
+
+        String message = viewModel.getLog().get(0);
+        System.out.print(message);
+        assertTrue(message.matches(".*Arguments"
+                + ": first argument = " + viewModel.firstArgProperty().get()
+                + "; second argument = " + viewModel.secondArgProperty().get() + ".*"));
+    }
+
+    @Test
+    public void operationTypeIsMentionedInTheLog() throws IOException {
+        setInputData();
+
+        viewModel.calculate();
+
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*ADDITION.*"));
+    }
+
+    @Test
+    public void canPutSeveralLogMessages() throws IOException {
+        setInputData();
+
+        viewModel.calculate();
+        viewModel.calculate();
+        viewModel.calculate();
+
+        assertEquals(3, viewModel.getLog().size());
+    }
+
+    @Test
+    public void canSeeOperationChangeInLog() throws IOException {
+        setInputData();
+
+        viewModel.onOperationChanged(Operation.ADDITION, Operation.DIVISION);
+
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + OPERATION_WAS_CHANGED + "DIVISION.*"));
+    }
+
+    @Test
+    public void operationIsNotLoggedIfNotChanged() throws IOException {
+        viewModel.onOperationChanged(Operation.ADDITION, Operation.DIVISION);
+
+        viewModel.onOperationChanged(Operation.ADDITION, Operation.ADDITION);
+
+        assertEquals(1, viewModel.getLog().size());
+    }
+
+    @Test
+    public void argumentsAreCorrectlyLogged() throws IOException {
+        setInputData();
+
+        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + EDITING_FINISHED
+                + "Input arguments are: \\["
+                + viewModel.firstArgProperty().get() + "; "
+                + viewModel.secondArgProperty().get() + "]"));
+    }
+
+    @Test
+    public void calculateIsNotCalledWhenButtonIsDisabled() throws IOException {
+        viewModel.calculate();
+
+        assertTrue(viewModel.getLog().isEmpty());
+    }
+
+    @Test
+    public void doNotLogSameParametersTwiceWithPartialInput() throws IOException {
+        viewModel.firstArgProperty().set("0b01");
+        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        viewModel.firstArgProperty().set("0b01");
+        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+
+        assertEquals(1, viewModel.getLog().size());
+    }
+
+
+
+    private void setInputData() {
+        viewModel.firstArgProperty().set("0b01");
+        viewModel.secondArgProperty().set("0b11");
+        viewModel.selectedOperationProperty().set(Operation.ADDITION);
+        viewModel.selectedFormatProperty().set(Format.BIN);
     }
 
 }
