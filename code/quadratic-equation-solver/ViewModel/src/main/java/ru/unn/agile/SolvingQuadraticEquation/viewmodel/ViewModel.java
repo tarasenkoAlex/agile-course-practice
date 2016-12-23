@@ -19,7 +19,7 @@ public class ViewModel {
     private final BooleanProperty solvingDisabled = new SimpleBooleanProperty();
     private final StringProperty resultProperty = new SimpleStringProperty();
     private final StringProperty statusProperty = new SimpleStringProperty();
-    private final StringProperty log = new SimpleStringProperty();
+    private final StringProperty logs = new SimpleStringProperty();
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
     private IQuadraticEquationSolverLogger logger;
 
@@ -45,7 +45,7 @@ public class ViewModel {
         for (String log : fullLog) {
             record += log + "\n";
         }
-        log.set(record);
+        logs.set(record);
     }
 
     public final List<String> getLog() {
@@ -97,8 +97,11 @@ public class ViewModel {
     public final boolean getSolvingDisabled() {
         return solvingDisabled.get();
     }
+    public StringProperty logsProperty() {
+        return logs;
+    }
     public final String getLogs() {
-        return log.get();
+        return logs.get();
     }
     public StringProperty resultProperty() {
         return resultProperty;

@@ -13,7 +13,7 @@
       <ViewModel fx:id="viewModel" />
    </fx:define>
    <children>
-      <AnchorPane layoutX="6.0" prefHeight="324.0" prefWidth="432.0">
+      <AnchorPane layoutX="6.0" prefHeight="364.0" prefWidth="432.0">
          <children>
             <TextField fx:id="txtAcoef" layoutX="59.0" layoutY="43.0" prefHeight="25.0" prefWidth="33.0" />
             <Label layoutX="92.0" layoutY="46.0" text=" X">
@@ -61,7 +61,7 @@
             </Label>
             <TextArea fx:id="lbStatus" editable="false" layoutX="69.0" layoutY="95.0" prefHeight="43.0" prefWidth="296.0" text="${viewModel.status}" />
             <TextField fx:id="lbResult" editable="false" layoutX="69.0" layoutY="143.0" prefHeight="25.0" prefWidth="296.0" text="${viewModel.result}" />
-            <TextArea editable="false" layoutX="14.0" layoutY="187.0" prefHeight="123.0" prefWidth="401.0" text="${viewModel.logs}" />
+            <TextArea  editable="false" layoutX="17.0" layoutY="177.0" prefHeight="178.0" prefWidth="395.0" text="${viewModel.logs}" />
          </children></AnchorPane>
    </children>
 </AnchorPane>
