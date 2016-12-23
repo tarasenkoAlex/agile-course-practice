@@ -286,4 +286,15 @@ public class ViewModelTest {
         assertTrue(viewModel.getLog().get(0).matches(message));
     }
 
+    @Test
+    public void logNothingChangesSpace() throws IOException {
+        viewModel.getToColorSpace().set(LAB);
+        viewModel.onColorSpaceChanged(ColorSpaces.LAB, viewModel.getToColorSpace().getValue(),
+                Boolean.TRUE);
+        assertTrue(viewModel.getLog().isEmpty());
+    }
+
+
+
+
 }

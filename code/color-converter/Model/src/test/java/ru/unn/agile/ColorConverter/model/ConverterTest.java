@@ -17,6 +17,18 @@ public class ConverterTest {
     }
 
     @Test
+    public void convertFromHSVToLABWithH3() {
+        double[] hsv = Converter.convert(HSV, LAB, new double[]{3, 0, 0});
+        assertEquals(true, Arrays.equals(new double[]{0, 0, 0}, hsv));
+    }
+
+    @Test
+    public void convertFromHSVToLABWithH4() {
+        double[] hsv = Converter.convert(HSV, LAB, new double[]{4, 0, 0});
+        assertEquals(true, Arrays.equals(new double[]{0, 0, 0}, hsv));
+    }
+
+    @Test
     public void convert2FromHSVToLAB() {
         double[] hsv = Converter.convert(HSV, LAB, new double[]{360, 100, 100});
         assertEquals(true, Arrays.equals(new double[]{53.233, 80.109, 67.22}, hsv));
