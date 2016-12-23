@@ -28,6 +28,11 @@ public class ViewModelTests {
     }
 
     @Test
+    public void canCreateViewModelWithoutLogger() {
+        assertNotNull(viewModel);
+    }
+
+    @Test
     public void canSetDefaultValues() {
         assertEquals("", viewModel.numberProperty().get());
         assertEquals("", viewModel.resultProperty().get());
@@ -46,6 +51,16 @@ public class ViewModelTests {
     public void calculateButtonIsEnabledWithIncorrectInput() {
         viewModel.numberProperty().setValue("0");
         assertTrue(viewModel.converterDisabledProperty().get());
+    }
+
+    @Test
+    public void convert10BinaryToDecimalWhenInputAgain() {
+        viewModel.numberProperty().setValue("10");
+        viewModel.numberProperty().setValue("10");
+        viewModel.fromNotationProperty().setValue(Notation.BINARY);
+        viewModel.toNotationProperty().setValue(Notation.DECIMAL);
+        viewModel.convert();
+        assertEquals("2", viewModel.resultProperty().get());
     }
 
     @Test

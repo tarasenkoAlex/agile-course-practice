@@ -95,9 +95,6 @@ public class ViewModel {
     public BooleanProperty converterDisabledProperty() {
         return converterDisabled;
     }
-    public final boolean getConverterDisabled() {
-        return converterDisabled.get();
-    }
 
     public StringProperty numberProperty() {
         return number;
@@ -109,16 +106,9 @@ public class ViewModel {
     public StringProperty statusProperty() {
         return status;
     }
-    public final String getStatus() {
-        return status.get();
-    }
 
     public StringProperty logsProperty() {
         return logs;
-    }
-
-    public ObjectProperty<ObservableList<Notation>> notationsProperty() {
-        return notations;
     }
 
     public final ObservableList<Notation> getNotations() {
