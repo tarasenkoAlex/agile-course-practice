@@ -177,7 +177,6 @@ public class ViewModel {
 
     public void calculate() {
         if (status == Status.READY) {
-            logger.log(calculateLogMessage());
             mortrageDataBuilder = new MortrageDataBuilder();
             MortrageData mortrageData = mortrageDataBuilder
                     .setDebt(parseInput(debt))
@@ -187,6 +186,7 @@ public class ViewModel {
             totalSum = goToOutputFormat(MortrageCalculator.countTotalSum(mortrageData));
             payment = goToOutputFormat(MortrageCalculator.countPayment(mortrageData));
             overPayment = goToOutputFormat(MortrageCalculator.countOverpayment(mortrageData));
+            logger.log(calculateLogMessage());
             status = Status.SUCCESS;
         }
     }
@@ -197,6 +197,9 @@ public class ViewModel {
                         + ": Debt = " + debt
                         + "; Years = " + years
                         + "; Percents = " + percents
+                        + "; Total Sum = " + totalSum
+                        + "; Payment = " + payment
+                        + "; Overpayment = " + overPayment
                         + ".";
 
         return message;
