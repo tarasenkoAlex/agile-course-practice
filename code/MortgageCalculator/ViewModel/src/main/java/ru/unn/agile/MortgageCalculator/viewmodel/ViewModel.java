@@ -17,7 +17,7 @@ public class ViewModel {
     private String totalSum;
     private String payment;
     private String overPayment;
-    private String status;
+    private Status status;
     private final StringProperty logs = new SimpleStringProperty();
     private boolean isCalcButtonEnabled;
     private boolean isInputChanged;
@@ -43,10 +43,6 @@ public class ViewModel {
         isInputChanged = true;
     }
 
-    public ViewModel() {
-        init();
-    }
-
     public ViewModel(final ILogger logger) {
         setLogger(logger);
         init();
@@ -54,14 +50,6 @@ public class ViewModel {
 
     public final List<String> getLog() {
         return logger.getLogList();
-    }
-
-    public StringProperty logsProperty() {
-        return logs;
-    }
-
-    public final String getLogs() {
-        return logs.get();
     }
 
     public String getDebt() {
@@ -88,7 +76,7 @@ public class ViewModel {
         return overPayment;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
@@ -119,14 +107,15 @@ public class ViewModel {
     void changeStatus() {
         clearResultFields();
         try {
-            if (!debt.isEmpty()) {
-                parseInput(debt);
+            if (!debt.isEmpty() && parseInput(debt) < 0) {
+                throw new Exception();
             }
-            if (!years.isEmpty()) {
-                parseInput(years);
+            if (!years.isEmpty() && parseInput(years) < 0) {
+                throw new Exception();
             }
-            if (!percents.isEmpty()) {
-                parseInput(percents);
+            if (!percents.isEmpty() && (parseInput(percents) < 0
+                    || parseInput(percents) > MortrageDataBuilder.PERCENT_MAX)) {
+                throw new Exception();
             }
         } catch (Exception e) {
             status = Status.BAD_FORMAT;
@@ -137,25 +126,10 @@ public class ViewModel {
             status = Status.WAITING;
             isCalcButtonEnabled = false;
             return;
-        } else if (checkNegativeNumberInput()) {
-            status = Status.BAD_FORMAT;
-            isCalcButtonEnabled = false;
-            return;
         } else {
             status = Status.READY;
             isCalcButtonEnabled = true;
         }
-    }
-
-    boolean checkNegativeNumberInput() {
-        if (parseInput(debt) < 0) {
-            return true;
-        } else if (parseInput(years) < 0) {
-            return true;
-        } else if (parseInput(percents) < 0) {
-            return true;
-        }
-        return parseInput(percents) > MortrageDataBuilder.PERCENT_MAX;
     }
 
     double parseInput(final String input) {
@@ -213,6 +187,7 @@ public class ViewModel {
             totalSum = goToOutputFormat(MortrageCalculator.countTotalSum(mortrageData));
             payment = goToOutputFormat(MortrageCalculator.countPayment(mortrageData));
             overPayment = goToOutputFormat(MortrageCalculator.countOverpayment(mortrageData));
+            status = Status.SUCCESS;
         }
     }
 
@@ -235,13 +210,21 @@ public class ViewModel {
     public boolean isCalcButtonEnabled() {
         return isCalcButtonEnabled;
     }
+}
 
-    public final class Status {
-        public static final String WAITING = "Please provide input data";
-        public static final String READY = "Press 'Calculate'";
-        public static final String BAD_FORMAT = "Bad format";
+enum Status {
+    WAITING("Please provide input data"),
+    READY("Press 'Calculate' or Enter"),
+    BAD_FORMAT("Bad format"),
+    SUCCESS("Success");
+    private final String name;
 
-        private Status() { }
+    Status(final String name) {
+        this.name = name;
+    }
+
+    public String toString() {
+        return name;
     }
 }
 

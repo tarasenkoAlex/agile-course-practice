@@ -79,7 +79,7 @@ public final class MortgageCalc {
         paymentTextField.setText(viewModel.getPayment());
         overPaymentTextField.setText(viewModel.getOverPayment());
 
-        statusLabel.setText(viewModel.getStatus());
+        statusLabel.setText(String.valueOf(viewModel.getStatus()));
 
         List<String> log = viewModel.getLog();
         String[] logsArray = log.toArray(new String[log.size()]);

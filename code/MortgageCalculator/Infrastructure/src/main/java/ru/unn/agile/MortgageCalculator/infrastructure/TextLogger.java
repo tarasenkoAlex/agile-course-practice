@@ -31,7 +31,7 @@ public class TextLogger implements ILogger {
             FileWriter fileWriter = new FileWriter(fileName);
             logsWriter = new BufferedWriter(fileWriter);
         } catch (Exception exc) {
-            exc.printStackTrace();
+                exc.printStackTrace();
         }
         this.logsWriter = logsWriter;
     }
