@@ -115,22 +115,22 @@ public class ViewModelTests {
     }
 
     @Test
-    public void viewModelConstructorThrowsExceptionWithNullLogger() {
+    public void viewModelThrowsExceptionWithNullParamInConstructor() {
         try {
             new ViewModel(null);
-            fail("Exception wasn't thrown");
-        } catch (IllegalArgumentException ex) {
-            assertEquals("Logger parameter can't be null", ex.getMessage());
-        } catch (Exception ex) {
-            fail("Invalid exception type");
+            fail("No Exception was thrown!");
+        } catch (IllegalArgumentException exc) {
+            assertEquals("Logger parameter can't be null", exc.getMessage());
+        } catch (Exception exc) {
+            fail("Wrong exception");
         }
     }
 
     @Test
-    public void logIsEmptyInTheBeginning() {
-        List<String> log = viewModel.getLog();
+    public void emptyLogInTheBeginning() {
+        List<String> logList = viewModel.getLog();
 
-        assertTrue(log.isEmpty());
+        assertTrue(logList.isEmpty());
     }
 
     @Test

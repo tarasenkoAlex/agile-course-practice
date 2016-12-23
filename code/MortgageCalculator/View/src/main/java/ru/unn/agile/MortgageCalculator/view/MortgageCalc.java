@@ -1,7 +1,7 @@
 package ru.unn.agile.MortgageCalculator.view;
 
 import ru.unn.agile.MortgageCalculator.viewmodel.ViewModel;
-import ru.unn.agile.MortgageCalculator.infrastructure.TxtLogger;
+import ru.unn.agile.MortgageCalculator.infrastructure.TextLogger;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -21,8 +21,8 @@ public final class MortgageCalc {
     private JList<String> lstLog;
 
     public static void main(final String[] args) {
-        JFrame frame = new JFrame("Calculator");
-        TxtLogger logger = new TxtLogger("./TxtLogger-lab3.log");
+        JFrame frame = new JFrame("Mortgage Calculator");
+        TextLogger logger = new TextLogger("./TxtLogger-lab3.log");
         ViewModel viewModel = new ViewModel(logger);
         frame.setContentPane(new MortgageCalc(viewModel).mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,8 +66,6 @@ public final class MortgageCalc {
         persentsTextField.addFocusListener(focusLostListener);
     }
 
-
-
     private void bind() {
         viewModel.setDebt(deptTextField.getText());
         viewModel.setYears(yearsTextField.getText());
@@ -80,9 +78,11 @@ public final class MortgageCalc {
         totalSumTextField.setText(viewModel.getTotalSum());
         paymentTextField.setText(viewModel.getPayment());
         overPaymentTextField.setText(viewModel.getOverPayment());
+
         statusLabel.setText(viewModel.getStatus());
+
         List<String> log = viewModel.getLog();
-        String[] items = log.toArray(new String[log.size()]);
-        lstLog.setListData(items);
+        String[] logsArray = log.toArray(new String[log.size()]);
+        lstLog.setListData(logsArray);
     }
 }

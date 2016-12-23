@@ -12,17 +12,18 @@ public class RegexMatcher extends BaseMatcher {
     }
 
     public boolean matches(final Object o) {
-        return ((String) o).matches(regex);
+        return o.toString().matches(regex);
     }
 
     public void describeTo(final Description description) {
-        description.appendText("matches regex = ");
-        description.appendText(regex);
+        description.appendText("matches regex = " + regex);
     }
 
-    public static Matcher<? super String> matchesPattern(final String regex) {
+    public static Matcher<? super String> matchesTemplate(final String regex) {
         RegexMatcher matcher = new RegexMatcher(regex);
+
         @SuppressWarnings (value = "unchecked")
+
         Matcher<? super String> castedMatcher = (Matcher<? super String>)   matcher;
         return castedMatcher;
     }

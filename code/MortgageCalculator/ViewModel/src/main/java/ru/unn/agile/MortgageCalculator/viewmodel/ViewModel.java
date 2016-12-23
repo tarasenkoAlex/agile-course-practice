@@ -53,7 +53,7 @@ public class ViewModel {
     }
 
     public final List<String> getLog() {
-        return logger.getLog();
+        return logger.getLogList();
     }
 
     public StringProperty logsProperty() {
