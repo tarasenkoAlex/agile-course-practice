@@ -208,7 +208,7 @@ public class ViewModel {
     }
 
 
-    public void convert() throws IOException {
+    public void performConversion() throws IOException {
         if (convertingDisabled.get()) {
             return;
         }
@@ -242,7 +242,8 @@ public class ViewModel {
         return stringBuilder.toString();
     }
 
-    public void onFocusChanged(final Boolean oldValue, final Boolean newValue) throws IOException {
+    public void onFocusChangedEvent(final Boolean oldValue, final Boolean newValue) throws
+            IOException {
         if (!oldValue && newValue) {
             return;
         }

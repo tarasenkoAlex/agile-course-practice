@@ -41,7 +41,7 @@ public class ColorConverter {
             public void changed(final ObservableValue<? extends Boolean> observable,
                                 final Boolean oldValue, final Boolean newValue) {
                 try {
-                    viewModel.onFocusChanged(oldValue, newValue);
+                    viewModel.onFocusChangedEvent(oldValue, newValue);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -82,9 +82,9 @@ public class ColorConverter {
         });
         convertButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(final ActionEvent event) {
+            public void handle(final ActionEvent actionEvent) {
                 try {
-                    viewModel.convert();
+                    viewModel.performConversion();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

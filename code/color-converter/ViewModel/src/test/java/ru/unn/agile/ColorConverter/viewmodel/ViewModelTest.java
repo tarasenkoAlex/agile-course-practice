@@ -62,7 +62,7 @@ public class ViewModelTest {
     public void canMessageWaitingFormatWithEmptyColorSpaceValues() {
         ViewModel testViewModel = new ViewModel();
         try {
-            testViewModel.convert();
+            testViewModel.performConversion();
             assertEquals(WAITING.toString(), testViewModel.statusMessageProperty().get());
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class ViewModelTest {
     @Test
     public void canMessageSuccessFormatAfterConvert() {
         try {
-            viewModel.convert();
+            viewModel.performConversion();
             assertEquals(SUCCESS.toString(), viewModel.statusMessageProperty().get());
         } catch (IOException e) {
             e.printStackTrace();
@@ -157,7 +157,7 @@ public class ViewModelTest {
     @Test
     public void checkDisabledButtonAfterConvert() {
         try {
-            viewModel.convert();
+            viewModel.performConversion();
             assertFalse(viewModel.convertingDisabledProperty().get());
         } catch (IOException e) {
             e.printStackTrace();
@@ -172,7 +172,7 @@ public class ViewModelTest {
         viewModel.getFromColorSpace().set(LAB);
         viewModel.getToColorSpace().set(HSV);
         try {
-            viewModel.convert();
+            viewModel.performConversion();
             assertEquals("16.0", viewModel.firstValueResultProperty().get());
             assertEquals("80.851", viewModel.secondValueResultProperty().get());
             assertEquals("36.863", viewModel.thirdValueResultProperty().get());
@@ -200,7 +200,7 @@ public class ViewModelTest {
     @Test
     public void checkStringResultingValue() {
         try {
-            viewModel.convert();
+            viewModel.performConversion();
             assertEquals("210.0", viewModel.getFirstValueResult());
             assertEquals("8.0", viewModel.getSecondValueResult());
             assertEquals("9.804", viewModel.getThirdValueResult());
@@ -212,7 +212,7 @@ public class ViewModelTest {
     @Test
     public void checkStringMessage() {
         try {
-            viewModel.convert();
+            viewModel.performConversion();
             assertEquals(SUCCESS.toString(), viewModel.getStatusMessage());
         } catch (IOException e) {
             e.printStackTrace();
@@ -247,7 +247,7 @@ public class ViewModelTest {
         viewModel.firstValueProperty().set("3");
         viewModel.secondValueProperty().set("");
         viewModel.thirdValueProperty().set("");
-        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        viewModel.onFocusChangedEvent(Boolean.TRUE, Boolean.FALSE);
         String message = ".*" + EDITING_FINISHED + "Input values are: \\[3; ; \\] Status: Please "
                 + "enter " + "coefficients of color space.*";
         assertTrue(viewModel.getLog().get(0).matches(message));
@@ -258,7 +258,7 @@ public class ViewModelTest {
     @Test
     public void logAfterSetAllValue() throws IOException {
         viewModel.firstValueProperty().set("3");
-        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        viewModel.onFocusChangedEvent(Boolean.TRUE, Boolean.FALSE);
         String message = ".*" + EDITING_FINISHED + "Input values are: \\[3; 24; 25\\] Status: "
                 + "Press " + "'Convert' " + "for " + "converting.*";
         assertTrue(viewModel.getLog().get(0).matches(message));
@@ -271,7 +271,7 @@ public class ViewModelTest {
         viewModel.thirdValueProperty().set("1");
         viewModel.getFromColorSpace().set(LAB);
         viewModel.getToColorSpace().set(HSV);
-        viewModel.convert();
+        viewModel.performConversion();
         String message = ".*" + CONVERT_WAS_PRESSED + "Input values are: \\[3;"
                 + " 2; 1\\] Output: \\[0.0; 43.75; 6.275\\].*";
         assertTrue(viewModel.getLog().get(0).matches(message));
