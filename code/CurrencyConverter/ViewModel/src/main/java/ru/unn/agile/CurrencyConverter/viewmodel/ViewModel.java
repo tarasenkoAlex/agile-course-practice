@@ -83,7 +83,7 @@ public class ViewModel {
         if (oldValue.equals(newValue)) {
             return;
         }
-        logger.log("Value changed to " + amount.get());
+        logger.logIt("Value changed to " + amount.get());
         updateLogs();
     }
 
@@ -92,7 +92,7 @@ public class ViewModel {
         if (oldValue.equals(newValue)) {
             return;
         }
-        logger.log("FromCurrency changed to " + fromCurrency.get().toString());
+        logger.logIt("FromCurrency changed to " + fromCurrency.get().toString());
         updateLogs();
     }
 
@@ -101,7 +101,7 @@ public class ViewModel {
         if (oldValue.equals(newValue)) {
             return;
         }
-        logger.log("ToCurrency changed to " + toCurrency.get().toString());
+        logger.logIt("ToCurrency changed to " + toCurrency.get().toString());
         updateLogs();
     }
 
@@ -170,7 +170,7 @@ public class ViewModel {
         String result = String.valueOf(converter.execute(amountValue, fromCurr, toCurr));
         resultingValue.set(result);
         message.set(MessageStatus.SUCCESS.getValue());
-        logger.log("Converted " + amount.get() + " "
+        logger.logIt("Converted " + amount.get() + " "
                 + fromCurrency.get().toString() + " to "
                 + resultingValue.get() + " " + toCurrency.get().toString());
         updateLogs();

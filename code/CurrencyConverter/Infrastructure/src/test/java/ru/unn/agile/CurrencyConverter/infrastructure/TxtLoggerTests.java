@@ -40,14 +40,14 @@ public class TxtLoggerTests {
     @Test
     public void checkMessage() throws IOException {
         String message = "Test message";
-        txtLogger.log(message);
+        txtLogger.logIt(message);
         assertThat(txtLogger.getLog().get(0), matchesPattern(".*" + message + "$"));
     }
 
     @Test
     public void checkData() throws IOException {
         String message = "Test message";
-        txtLogger.log(message);
+        txtLogger.logIt(message);
         assertThat(txtLogger.getLog().get(0),
                 matchesPattern("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
     }
@@ -55,8 +55,8 @@ public class TxtLoggerTests {
     @Test
     public void checkSeveralMessages() throws IOException {
         String[] messages = {"Test message 1", "Test message 2"};
-        txtLogger.log(messages[0]);
-        txtLogger.log(messages[1]);
+        txtLogger.logIt(messages[0]);
+        txtLogger.logIt(messages[1]);
         List<String> actualMessages = txtLogger.getLog();
         for (int i = 0; i < actualMessages.size(); i++) {
             assertThat(actualMessages.get(i), matchesPattern(".* " + messages[i] + "$"));

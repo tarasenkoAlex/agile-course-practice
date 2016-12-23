@@ -28,7 +28,7 @@ public class TxtLogger implements ILogger {
     }
 
     @Override
-    public void log(final String s) throws IOException {
+    public void logIt(final String s) throws IOException {
         writer.write(now() + " > " + s);
         writer.newLine();
         writer.flush();

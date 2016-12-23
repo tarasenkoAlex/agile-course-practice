@@ -4,15 +4,15 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
-public class RegexMatcher extends BaseMatcher {
-    private final String regex;
+public class RegexpMatcher extends BaseMatcher {
+    private final String regexp;
 
-    public RegexMatcher(final String regex) {
-        this.regex = regex;
+    public RegexpMatcher(final String regexp) {
+        this.regexp = regexp;
     }
 
-    public boolean matches(final Object item) {
-        return ((String) item).matches(regex);
+    public boolean matches(final Object obj) {
+        return ((String) item).matches(regexp);
     }
 
     public void describeTo(final Description description) {
@@ -20,8 +20,8 @@ public class RegexMatcher extends BaseMatcher {
         description.appendText(regex);
     }
 
-    public static Matcher<? super String> matchesPattern(final String regex) {
-        RegexMatcher matcher = new RegexMatcher(regex);
+    public static Matcher<? super String> matchesPattern(final String regexp) {
+        RegexpMatcher matcher = new RegexpMatcher(regexp);
         @SuppressWarnings(value = "unchecked")
         Matcher<? super String> castedMatcher = (Matcher<? super String>) matcher;
         return castedMatcher;
