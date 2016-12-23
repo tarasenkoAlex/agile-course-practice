@@ -34,6 +34,7 @@ public class ConverterTest {
         assertEquals(true, Arrays.equals(new double[]{53.233, 80.109, 67.22}, hsv));
     }
 
+
     @Test
     public void convert3FromHSVToLAB() {
         double[] hsv = Converter.convert(HSV, LAB, new double[]{157, 14.8, 0.5});
@@ -64,6 +65,23 @@ public class ConverterTest {
         assertEquals(true, Arrays.equals(new double[]{255, 250, 251}, hsv));
     }
 
+    @Test
+    public void convertFromHSVToRGBWithH1() {
+        double[] hsv = Converter.convert(HSV, RGB, new double[]{1, 0, 0});
+        assertEquals(true, Arrays.equals(new double[]{0, 0, 0}, hsv));
+    }
+
+    @Test
+    public void convertFromHSVToRGBWithH3() {
+        double[] hsv = Converter.convert(HSV, RGB, new double[]{3, 0, 0});
+        assertEquals(true, Arrays.equals(new double[]{0, 0, 0}, hsv));
+    }
+
+    @Test
+    public void convertFromHSVToRGBWithH4() {
+        double[] hsv = Converter.convert(HSV, RGB, new double[]{4, 0, 0});
+        assertEquals(true, Arrays.equals(new double[]{0, 0, 0}, hsv));
+    }
     @Test
     public void convert2FromHSVToRGB() {
         double[] hsv = Converter.convert(HSV, RGB, new double[]{360, 100, 100});
@@ -143,5 +161,11 @@ public class ConverterTest {
     public void convert4FromRGBToLAB() {
         double[] hsv = Converter.convert(RGB, LAB, new double[]{255, 255, 255});
         assertEquals(true, Arrays.equals(new double[]{100, 0.005, -0.01}, hsv));
+    }
+
+    @Test
+    public void convertFromRGBToRGB() {
+        double[] rgb = Converter.convert(RGB, RGB, new double[]{0, 0, 0});
+        assertEquals(true, Arrays.equals(new double[]{0, 0, 0}, rgb));
     }
 }
