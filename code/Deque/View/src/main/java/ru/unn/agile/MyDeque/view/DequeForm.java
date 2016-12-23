@@ -6,8 +6,6 @@ import ru.unn.agile.MyDeque.viewmodel.ViewModel;
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public final class DequeForm {
@@ -20,13 +18,11 @@ public final class DequeForm {
     private JComboBox<ViewModel.Operations> cbOperationChoice;
     private JLabel lbStatus;
     private JTextField txtResult;
-
-    private final List<String> lstLog;
+    private JLabel log;
+    private JList<String> jlstLog;
 
     private DequeForm(final ViewModel viewmodel) {
         this.viewmodel = viewmodel;
-        viewmodel.setLogger(new TxtLogger("./TxtLogger-lab3.log"));
-        lstLog = new ArrayList<>();
         backBind();
 
         getOperationsList();
@@ -54,7 +50,9 @@ public final class DequeForm {
 
     public static void main(final String[] args) {
         JFrame frame = new JFrame("DequeForm");
-        frame.setContentPane(new DequeForm(new ViewModel()).mainPanel);
+        frame.setResizable(false);
+        TxtLogger logger = new TxtLogger("./TxtLogger-lab3.log");
+        frame.setContentPane(new DequeForm(new ViewModel(logger)).mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -63,7 +61,7 @@ public final class DequeForm {
     private void getLog() {
         List<String> log = viewmodel.getLog();
         String[] str = log.toArray(new String[log.size()]);
-        lstLog.addAll(Arrays.asList(str));
+        jlstLog.setListData(str);
     }
 
     private void bind() {
@@ -84,5 +82,4 @@ public final class DequeForm {
 
         getLog();
     }
-
 }
