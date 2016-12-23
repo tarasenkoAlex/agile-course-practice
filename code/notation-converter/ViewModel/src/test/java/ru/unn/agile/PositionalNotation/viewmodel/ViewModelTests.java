@@ -297,4 +297,14 @@ public class ViewModelTests {
         viewModel.onFocusChanged(Boolean.FALSE, Boolean.TRUE);
         assertEquals(0, viewModel.getLog().size());
     }
+
+    @Test
+    public void logIsNotEmptyAfterInputParameters() {
+        viewModel.numberProperty().setValue("11");
+        viewModel.onFocusChanged(Boolean.TRUE, Boolean.FALSE);
+        viewModel.fromNotationProperty().setValue(Notation.BINARY);
+        viewModel.toNotationProperty().setValue(Notation.DECIMAL);
+        viewModel.convert();
+        assertEquals(2, viewModel.getLog().size());
+    }
 }
