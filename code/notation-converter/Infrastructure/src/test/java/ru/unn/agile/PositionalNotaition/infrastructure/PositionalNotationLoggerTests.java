@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class PositionalNotationLoggerTests {
-    private static final String FILENAME = "./PositionalNotationLog.writeLog";
+    private static final String FILENAME = "./PositionalNotationLog.log";
     private PositionalNotationLogger positionalNotationLogger;
 
     @Before
@@ -38,7 +38,7 @@ public class PositionalNotationLoggerTests {
     public void canWriteLogMessage() {
         String testMessage = "Test message";
         positionalNotationLogger.writeLog(testMessage);
-        String message = positionalNotationLogger.readLog().get(0);
+        String message = positionalNotationLogger.readLogs().get(0);
         assertTrue(message.matches(".*Test message.*"));
     }
 
@@ -47,7 +47,8 @@ public class PositionalNotationLoggerTests {
         String[] messages = {"Test message 1", "Test message 2"};
         positionalNotationLogger.writeLog(messages[0]);
         positionalNotationLogger.writeLog(messages[1]);
-        List<String> listLog = positionalNotationLogger.readLog();
+        List<String> listLog = positionalNotationLogger.readLogs();
+
         assertTrue(listLog.get(0).matches(".*Test message 1.*"));
         assertTrue(listLog.get(1).matches(".*Test message 2.*"));
     }
@@ -56,7 +57,8 @@ public class PositionalNotationLoggerTests {
     public void doesLogContainDateAndTime() {
         String testMessage = "Test message";
         positionalNotationLogger.writeLog(testMessage);
-        String message = positionalNotationLogger.readLog().get(0);
+        String message = positionalNotationLogger.readLogs().get(0);
+
         assertTrue(message.matches("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
     }
 }

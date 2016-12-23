@@ -164,7 +164,7 @@ public class ViewModel {
     }
 
     public final List<String> getLog() {
-        return positionalNotationLogger.readLog();
+        return positionalNotationLogger.readLogs();
     }
 
     public void fromNotationChanged(final Notation oldValue, final Notation newValue) {
@@ -207,7 +207,7 @@ public class ViewModel {
     }
 
     private void updatePositionalNotationLogs() {
-        List<String> fullLog = positionalNotationLogger.readLog();
+        List<String> fullLog = positionalNotationLogger.readLogs();
         String record = new String();
         for (String log : fullLog) {
             record += log + "\n";

@@ -8,5 +8,5 @@ import java.util.List;
 public interface ILogger {
     void writeLog(String s);
 
-    List<String> readLog();
+    List<String> readLogs();
 }

@@ -23,15 +23,9 @@ public class ViewModelTests {
     }
 
     @After
-    public void tearDown() {
+    public void cleanUp() {
         viewModel = null;
     }
-
-    /*@Test
-    public void canCreateViewModelWithoutLogger() {
-        viewModel = new ViewModel();
-        assertNotNull(viewModel);
-    }*/
 
     @Test
     public void canSetDefaultValues() {
@@ -51,6 +45,7 @@ public class ViewModelTests {
     @Test
     public void calculateButtonIsEnabledWithIncorrectInput() {
         viewModel.numberProperty().setValue("0");
+
         assertTrue(viewModel.converterDisabledProperty().get());
     }
 
@@ -60,13 +55,16 @@ public class ViewModelTests {
         viewModel.numberProperty().setValue("10");
         viewModel.fromNotationProperty().setValue(Notation.BINARY);
         viewModel.toNotationProperty().setValue(Notation.DECIMAL);
+
         viewModel.convert();
+
         assertEquals("2", viewModel.resultProperty().get());
     }
 
     @Test
     public void calculateButtonIsEnabledWithCorrectInput() {
         viewModel.numberProperty().setValue("10");
+
         assertFalse(viewModel.converterDisabledProperty().get());
     }
 
@@ -84,13 +82,16 @@ public class ViewModelTests {
          viewModel.numberProperty().setValue("1b");
          viewModel.fromNotationProperty().setValue(Notation.HEX);
          viewModel.toNotationProperty().setValue(Notation.OCTAL);
+
          viewModel.convert();
+
          assertEquals("33", viewModel.resultProperty().get());
      }
 
     @Test
     public void statusIsWaitingWhenConvertWithEmptyNumber() {
         viewModel.convert();
+
         assertEquals(Status.WAIT.toString(), viewModel.statusProperty().get());
     }
 
@@ -98,6 +99,7 @@ public class ViewModelTests {
     public void statusIsErrorWhenIncorrectBinaryNumber() {
         viewModel.fromNotationProperty().setValue(Notation.BINARY);
         viewModel.numberProperty().setValue("20");
+
         assertEquals(Status.ERROR.toString(), viewModel.statusProperty().get());
     }
 
@@ -105,6 +107,7 @@ public class ViewModelTests {
     public void statusIsErrorWhenIncorrectDecimalNumber() {
         viewModel.fromNotationProperty().setValue(Notation.DECIMAL);
         viewModel.numberProperty().setValue("0");
+
         assertEquals(Status.ERROR.toString(), viewModel.statusProperty().get());
     }
 
@@ -118,6 +121,7 @@ public class ViewModelTests {
     public void statusIsErrorWhenIncorrectHexNumber() {
         viewModel.fromNotationProperty().setValue(Notation.HEX);
         viewModel.numberProperty().setValue("g");
+
         assertEquals(Status.ERROR.toString(), viewModel.statusProperty().get());
     }
 
@@ -125,6 +129,7 @@ public class ViewModelTests {
     public void statusIsReadyWhenCorrectNumber() {
         viewModel.fromNotationProperty().setValue(Notation.HEX);
         viewModel.numberProperty().setValue("1b");
+
         assertEquals(Status.READY.toString(), viewModel.statusProperty().get());
     }
 
@@ -134,6 +139,7 @@ public class ViewModelTests {
         viewModel.toNotationProperty().setValue(Notation.OCTAL);
         viewModel.numberProperty().setValue("1b");
         viewModel.convert();
+
         assertEquals(Status.SUCCESS.toString(), viewModel.statusProperty().get());
     }
 
@@ -152,6 +158,7 @@ public class ViewModelTests {
     @Test
     public void iInTheBeginningLogIsEmpty() {
         List<String> logs = viewModel.getLog();
+
         assertTrue(logs.isEmpty());
 }
 
@@ -161,7 +168,9 @@ public class ViewModelTests {
         viewModel.fromNotationProperty().setValue(Notation.BINARY);
         viewModel.toNotationProperty().setValue(Notation.OCTAL);
         viewModel.convert();
+
         String message = viewModel.getLog().get(0);
+
         assertTrue(message.matches(".*Calculate. .*"));
     }
 
@@ -296,6 +305,7 @@ public class ViewModelTests {
     public void doLogSameParametersWithPartialInput() {
         viewModel.numberProperty().setValue("11");
         viewModel.onFocusChanged(Boolean.FALSE, Boolean.TRUE);
+
         assertEquals(0, viewModel.getLog().size());
     }
 
@@ -306,7 +316,9 @@ public class ViewModelTests {
         viewModel.fromNotationProperty().setValue(Notation.BINARY);
         viewModel.toNotationProperty().setValue(Notation.DECIMAL);
         viewModel.convert();
+
         String value = viewModel.logsProperty().getValue();
+
         assertNotNull(value);
     }
 
@@ -316,7 +328,7 @@ public class ViewModelTests {
         viewModel.numberProperty().setValue("10");
         viewModel.fromNotationProperty().setValue(Notation.DECIMAL);
         viewModel.toNotationProperty().setValue(Notation.DECIMAL);
-        //viewModel.convert();
+
         assertTrue(viewModel.resultProperty().get().isEmpty());
     }
 }

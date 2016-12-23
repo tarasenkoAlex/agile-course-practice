@@ -7,7 +7,7 @@ public class ViewModelWithPositionalNotationLogger extends ViewModelTests {
     @Override
     public void setUp() {
         PositionalNotationLogger realLogger =
-                new PositionalNotationLogger("./ViewModel_with_PositionalNotationLogger.writeLog");
+                new PositionalNotationLogger("./ViewModel_with_PositionalNotationLogger.log");
         super.setExternalViewModel(new ViewModel(realLogger));
     }
 }

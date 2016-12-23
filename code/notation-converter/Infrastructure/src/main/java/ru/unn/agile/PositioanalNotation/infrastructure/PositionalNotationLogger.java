@@ -46,7 +46,7 @@ public class PositionalNotationLogger implements ILogger {
     }
 
     @Override
-    public List<String> readLog() {
+    public List<String> readLogs() {
         BufferedReader readerBuff;
         ArrayList<String> logs = new ArrayList<String>();
         try {
