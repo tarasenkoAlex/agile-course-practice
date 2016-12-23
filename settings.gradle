@@ -133,6 +133,8 @@ include "code/Stack/ViewModel"
 project(":code/Stack/ViewModel").name = "Stack-ViewModel"
 include "code/Stack/View"
 project(":code/Stack/View").name = "Stack-View"
+include "code/Stack/Infrastructure"
+project(":code/Stack/Infrastructure").name = "Stack-Infrastructure"
 
 // Кудрявцев Никита
 include "code/triangle/Model"

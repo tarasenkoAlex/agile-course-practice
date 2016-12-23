@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import ru.unn.agile.Stack.viewmodel.ViewModel;
+import ru.unn.agile.Stack.infrastructure.TxtLogger;
 
 public class Stack {
     @FXML
@@ -21,9 +22,12 @@ public class Stack {
     private TextField txtinput;
     @FXML
     private Button isemptybutton;
+    @FXML
+    private TextArea log;
 
     @FXML
     void initialize() {
+        viewModel.setLogger(new TxtLogger("./TxtLogger-lab3.log"));
         txtinput.textProperty().bindBidirectional(viewModel.txtinputProperty());
 
         popbutton.setOnAction(new EventHandler<ActionEvent>() {
