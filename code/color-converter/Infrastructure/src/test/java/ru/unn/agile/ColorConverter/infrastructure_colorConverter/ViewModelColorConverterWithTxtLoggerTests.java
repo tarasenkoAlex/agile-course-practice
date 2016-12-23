@@ -9,5 +9,6 @@ public class ViewModelColorConverterWithTxtLoggerTests extends ViewModelTest {
         ColorConverterLogger realLogger =
                 new ColorConverterLogger("./ViewModel_with_TxtLogger_ColorConverter.log");
         super.setExternalViewModel(new ViewModel(realLogger));
+        setValues();
     }
 }

@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ru.unn.agile.ColorConverter.model.Converter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +34,13 @@ public class ViewModel {
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
 
 
+    private final StringProperty logs = new SimpleStringProperty();
+    private IColorConverterLogger colorConverterLogger;
+
     public ViewModel() {
         init();
     }
+
 
     public ViewModel(final IColorConverterLogger logger) {
         setLogger(logger);
@@ -43,11 +48,10 @@ public class ViewModel {
     }
 
     public final void setLogger(final IColorConverterLogger logger) {
-        IColorConverterLogger log;
         if (logger == null) {
             throw new IllegalArgumentException("Logger parameter can't be null");
         }
-        log = logger;
+        colorConverterLogger = logger;
     }
 
     private void init() {
@@ -85,6 +89,7 @@ public class ViewModel {
             field.addListener(listener);
             valueChangedListeners.add(listener);
         }
+
     }
 
 
@@ -203,7 +208,7 @@ public class ViewModel {
     }
 
 
-    public void convert() {
+    public void convert() throws IOException {
         if (convertingDisabled.get()) {
             return;
         }
@@ -217,14 +222,104 @@ public class ViewModel {
         secondValueResult.set(String.valueOf(roots[1]));
         thirdValueResult.set(String.valueOf(roots[2]));
         statusMessage.set(Status.SUCCESS.toString());
+        StringBuilder logMessage = new StringBuilder(LogMessages.CONVERT_WAS_PRESSED);
+        logMessage.append("Input values are: ")
+                .append(printVector(firstValue, secondValue, thirdValue))
+                .append(" Output: ")
+                .append(printVector(firstValueResult, secondValueResult, thirdValueResult));
+        colorConverterLogger.log(logMessage.toString());
+        updateLogs();
+
+    }
+
+    private String printVector(final StringProperty v1, final StringProperty v2,
+                               final StringProperty v3) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[")
+                .append(v1.get()).append("; ")
+                .append(v2.get()).append("; ")
+                .append(v3.get()).append("]");
+        return stringBuilder.toString();
+    }
+
+    public void onFocusChanged(final Boolean oldValue, final Boolean newValue) throws IOException {
+        if (!oldValue && newValue) {
+            return;
+        }
+
+        for (ValueChangeListener valueCachingChangeListener : valueChangedListeners) {
+            if (valueCachingChangeListener.isChanged()) {
+                StringBuilder message = new StringBuilder(LogMessages.EDITING_FINISHED);
+                message.append("Input values are: [")
+                        .append(firstValue.get()).append("; ")
+                        .append(secondValue.get()).append("; ")
+                        .append(thirdValue.get()).append("]")
+                        .append(" Status: ").append(getInputStatus());
+                colorConverterLogger.log(message.toString());
+                updateLogs();
+
+                valueCachingChangeListener.cache();
+                break;
+            }
+        }
+    }
+
+    public void onColorSpaceChanged(final ColorSpaces oldValue, final ColorSpaces newValue,
+                                    final Boolean source)
+            throws IOException {
+        if (oldValue.equals(newValue)) {
+            return;
+        }
+        StringBuilder message = new StringBuilder((source ? "Source" : "Destination")
+                + LogMessages.COLOR_SPACE_WAS_CHANGED);
+        message.append("from ").append(oldValue.toString()).append(" to ")
+                .append(newValue.toString());
+        colorConverterLogger.log(message.toString());
+        updateLogs();
     }
 
     private class ValueChangeListener implements ChangeListener<String> {
+        private String previousValueParam = new String();
+        private String currentValueParam = new String();
+
         @Override
-        public void changed(final ObservableValue<? extends String> observable,
-                            final String oldValue, final String newValue) {
+        public void changed(final ObservableValue<? extends String> observableValue,
+                            final String oldValueParam, final String newValueParam) {
             statusMessage.set(getInputStatus().toString());
+            if (oldValueParam.equals(newValueParam)) {
+                return;
+            }
+            currentValueParam = newValueParam;
         }
+
+        public boolean isChanged() {
+            return !previousValueParam.equals(currentValueParam);
+        }
+
+        public void cache() {
+            previousValueParam = currentValueParam;
+        }
+    }
+
+    public String getLogs() {
+        return logs.get();
+    }
+
+    public StringProperty logsProperty() {
+        return logs;
+    }
+
+    public final List<String> getLog() throws IOException {
+        return colorConverterLogger.getLog();
+    }
+
+    private void updateLogs() throws IOException {
+        List<String> fullLog = colorConverterLogger.getLog();
+        String record = new String();
+        for (String log : fullLog) {
+            record += log + "\n";
+        }
+        logs.set(record);
     }
 
     enum Status {
@@ -241,6 +336,16 @@ public class ViewModel {
 
         public String toString() {
             return name;
+        }
+    }
+
+    final class LogMessages {
+        public static final String CONVERT_WAS_PRESSED = "Convert button was pressed. ";
+        public static final String COLOR_SPACE_WAS_CHANGED = " color space was changed ";
+        public static final String EDITING_FINISHED = "Updated input. ";
+
+        private LogMessages() {
+
         }
     }
 }
