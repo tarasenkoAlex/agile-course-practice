@@ -15,12 +15,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static ru.unn.agile.Fraction.infrastructure.RegMatcher.matchesPattern;
 
 public class FractionLoggerTests {
-    private static final String FILENAME = "./TxtLogger_Tests.log";
+    private static final String LOGFILENAME = "./TxtLogger_Tests.log";
     private FractionLogger fractionLogger;
 
     @Before
     public void setUp() throws IOException {
-        fractionLogger = new FractionLogger(FILENAME);
+        fractionLogger = new FractionLogger(LOGFILENAME);
     }
 
     @Test
@@ -29,11 +29,11 @@ public class FractionLoggerTests {
     }
 
     @Test
-    public void canCreateLogFileOnDisk() {
+    public void canCreateLogTextFileOnHardDisk() {
         try {
-            new BufferedReader(new FileReader(FILENAME));
-        } catch (FileNotFoundException e) {
-            fail("File " + FILENAME + " wasn't found!");
+            new BufferedReader(new FileReader(LOGFILENAME));
+        } catch (FileNotFoundException exc) {
+            fail("File " + LOGFILENAME + " wasn't found!");
         }
     }
 
