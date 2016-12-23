@@ -70,12 +70,12 @@ public class ViewModelTests {
     }
 
      @Test
-    public void canConvert10BinaryToDecimal() {
-         viewModel.numberProperty().setValue("10");
+    public void canConvert1111BinaryToDecimal() {
+         viewModel.numberProperty().setValue("1111");
          viewModel.fromNotationProperty().setValue(Notation.BINARY);
          viewModel.toNotationProperty().setValue(Notation.DECIMAL);
          viewModel.convert();
-         assertEquals("2", viewModel.resultProperty().get());
+         assertEquals("15", viewModel.resultProperty().get());
      }
 
      @Test
