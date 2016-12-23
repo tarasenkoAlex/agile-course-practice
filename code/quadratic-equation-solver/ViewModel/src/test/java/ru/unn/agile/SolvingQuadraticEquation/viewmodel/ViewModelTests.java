@@ -226,7 +226,7 @@ public class ViewModelTests {
                 + "Input coefficients are: \\[0; 2; 1\\]"));
         message = viewModel.getLogs();
         assertTrue(message.matches(".*" + ViewModel.LogsMessages.INPUT_IN_FIELD_FINISHED
-                + "Input coefficients are: \\[0; 2; 1\\]" +"\n"));
+                + "Input coefficients are: \\[0; 2; 1\\]" + "\n"));
     }
 
     @Test
