@@ -162,12 +162,12 @@ public class ViewModel {
         private String currentValue = "";
         @Override
         public void changed(final ObservableValue<? extends String> observable,
-                            final String oldValue, final String newValue) {
-            if (oldValue.equals(newValue)) {
+                            final String valueOld, final String valueNew) {
+            if (valueOld.equals(valueNew)) {
                 return;
             }
             status.set(getInputStatus().toString());
-            currentValue = newValue;
+            currentValue = valueNew;
         }
         public boolean isChanged() {
             return !previusValue.equals(currentValue);
