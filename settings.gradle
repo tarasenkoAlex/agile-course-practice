@@ -219,12 +219,14 @@ include "code/sovrasov-vlad"
 project(":code/sovrasov-vlad").name = "sovrasov-vlad"
 
 // Соловьев Дмитрий
-include "code/Fraction/Model"
-project(":code/Fraction/Model").name = "Fraction-Model"
-include "code/Fraction/ViewModel"
-project(":code/Fraction/ViewModel").name = "Fraction-ViewModel"
-include "code/Fraction/View"
-project(":code/Fraction/View").name = "Fraction-View"
+include "code/FractionWithLogger/Model"
+project(":code/FractionWithLogger/Model").name = "Fraction-Model"
+include "code/FractionWithLogger/ViewModel"
+project(":code/FractionWithLogger/ViewModel").name = "Fraction-ViewModel"
+include "code/FractionWithLogger/View"
+project(":code/FractionWithLogger/View").name = "Fraction-View"
+include "code/FractionWithLogger/Infrastructure"
+project(":code/FractionWithLogger/Infrastructure").name = "Fraction-Infrastructure"
 
 // Старлытов Евгений
 // Степыкин Илья
