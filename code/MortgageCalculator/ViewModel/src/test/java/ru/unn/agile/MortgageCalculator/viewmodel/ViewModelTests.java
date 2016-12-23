@@ -141,7 +141,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void EmptyLogInTheBeginning() {
+    public void emptyLogInTheBeginning() {
         List<String> logList = viewModel.getLog();
 
         assertTrue(logList.isEmpty());
