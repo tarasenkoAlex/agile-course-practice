@@ -28,10 +28,6 @@ public class ViewModel {
 
     private final StringProperty logs = new SimpleStringProperty();
 
-    public ViewModel() {
-        init();
-    }
-
     public ViewModel(final ILogger positionalNotationLogger) {
         setPositionalNotationLogger(positionalNotationLogger);
         init();

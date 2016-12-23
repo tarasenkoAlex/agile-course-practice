@@ -27,11 +27,11 @@ public class ViewModelTests {
         viewModel = null;
     }
 
-    @Test
+    /*@Test
     public void canCreateViewModelWithoutLogger() {
         viewModel = new ViewModel();
         assertNotNull(viewModel);
-    }
+    }*/
 
     @Test
     public void canSetDefaultValues() {
@@ -308,5 +308,15 @@ public class ViewModelTests {
         viewModel.convert();
         String value = viewModel.logsProperty().getValue();
         assertNotNull(value);
+    }
+
+    @Test
+    public void canConvertDecimalToDecimal() {
+        viewModel.numberProperty().setValue("10");
+        viewModel.numberProperty().setValue("10");
+        viewModel.fromNotationProperty().setValue(Notation.DECIMAL);
+        viewModel.toNotationProperty().setValue(Notation.DECIMAL);
+        //viewModel.convert();
+        assertTrue(viewModel.resultProperty().get().isEmpty());
     }
 }
